@@ -16,15 +16,12 @@ description: >-
 
 Когато използваме модела мост този модел ще изглежда по следния начин
 
-{% code title="Color.java" lineNumbers="true" %}
 ```java
 public interface Color {
     public void applyColor();
 }
 ```
-{% endcode %}
 
-{% code title="Shape.java" lineNumbers="true" %}
 ```java
 public abstract class Shape {
 	//Composition - implementor
@@ -38,11 +35,9 @@ public abstract class Shape {
 	abstract public void applyColor();
 }
 ```
-{% endcode %}
 
 Забележете моста между абстракциите и използването на композиция при прилагането на  модела мост.
 
-{% code title="Triangle.java" lineNumbers="true" %}
 ```java
 public class Triangle extends Shape{
 
@@ -56,9 +51,7 @@ public class Triangle extends Shape{
 	} 
 }
 ```
-{% endcode %}
 
-{% code title="Pentagon.java" lineNumbers="true" %}
 ```java
 public class Pentagon extends Shape{
 
@@ -72,9 +65,6 @@ public class Pentagon extends Shape{
 	} 
 }
 ```
-{% endcode %}
-
-{% code title="RedColor.java" lineNumbers="true" %}
 ```java
 public class RedColor implements Color{
 
@@ -83,9 +73,7 @@ public class RedColor implements Color{
 	}
 }
 ```
-{% endcode %}
 
-{% code title="GreenColor.java" lineNumbers="true" %}
 ```java
 public class GreenColor implements Color{
 
@@ -94,9 +82,7 @@ public class GreenColor implements Color{
 	}
 }
 ```
-{% endcode %}
 
-{% code title="Application.java" lineNumbers="true" %}
 ```java
 public class Application {
 
