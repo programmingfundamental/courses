@@ -2,9 +2,9 @@
 
 * [Обектно-ориентирано програмиране - 1 част](docs/obektno-orientirano-programirane-1-chast/README.md)
   * [Лабораторно упражнение 1](docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/README.md)
-    * [Основи на програмирането с Java за начинаещи‎](docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/osnovi-na-programiraneto-s-java-za-nachinaeshi/README.md)
+    * [Основи на програмирането с Java за начинаещи](docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/osnovi-na-programiraneto-s-java-za-nachinaeshi/README.md)
       * [Oбщи термини в Java](docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/osnovi-na-programiraneto-s-java-za-nachinaeshi/vvedenie-v-java.md)
-      * [Основни характеристики на JAVA‎](docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/osnovi-na-programiraneto-s-java-za-nachinaeshi/osnovni-kharakteristiki-na-java.md)
+      * [Основни характеристики на JAVA](docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/osnovi-na-programiraneto-s-java-za-nachinaeshi/osnovni-kharakteristiki-na-java.md)
       * [Инсталиране на JDK](docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/osnovi-na-programiraneto-s-java-za-nachinaeshi/instalirane-na-jdk.md)
       * [Инсталиране на Intellij](docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/osnovi-na-programiraneto-s-java-za-nachinaeshi/instalirane-na-intellij.md)
     * [Първа програма в Java](docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/prva-programa-v-java.md)

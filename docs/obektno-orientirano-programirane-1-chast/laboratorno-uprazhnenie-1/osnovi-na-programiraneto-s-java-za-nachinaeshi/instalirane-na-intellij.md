@@ -1,4 +1,11 @@
-# Инсталиране на Intellij
+---
+layout: default
+title: Инсталиране на IntelliJ
+parent: Основи на програмирането с Java за начинаещи
+nav_order: 5
+---
+
+# Инсталиране на IntelliJ
 
 Като интедрирана среда за разработка може да ползвате Intellij
 
