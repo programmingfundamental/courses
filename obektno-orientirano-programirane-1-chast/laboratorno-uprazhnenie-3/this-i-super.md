@@ -18,7 +18,7 @@
 
 ·         се предаде като аргумент на конструктор
 
-{% code title="Subject.java" lineNumbers="true" %}
+
 ```java
 public class Subject {
     String name;
@@ -57,13 +57,12 @@ public class Subject {
 
 }
 ```
-{% endcode %}
 
 ### &#x20;Запазена дума – super
 
 &#x20;Запазената дума супер сочи към супер класа (родителския клас) на обекта. Използва се, за да се извикват атрибути,методи и конструктор наследени от родителския клас.
 
-{% code title="Anima.java" lineNumbers="true" %}
+
 ```java
 class Animal { // Superclass (parent)
   public void animalSound() {
@@ -71,9 +70,7 @@ class Animal { // Superclass (parent)
   }
 }
 ```
-{% endcode %}
 
-{% code title="Animal.java" lineNumbers="true" %}
 ```java
 class Dog extends Animal { // Subclass (child)
   public void animalSound() {
@@ -82,9 +79,7 @@ class Dog extends Animal { // Subclass (child)
   }
 }
 ```
-{% endcode %}
 
-{% code title="Main.java" lineNumbers="true" %}
 ```java
 public class Main {
   public static void main(String args[]) {
@@ -93,4 +88,3 @@ public class Main {
   }
 }
 ```
-{% endcode %}

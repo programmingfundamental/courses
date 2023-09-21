@@ -4,7 +4,6 @@
 
 С помощта на дебъгера проследете изпълнението на програмата.
 
-{% code title="Application.java" lineNumbers="true" %}
 ```java
 package bg.tu_varna.sit;
 
@@ -16,9 +15,7 @@ public class Application {
     }
 }
 ```
-{% endcode %}
 
-{% code title="Calculator," lineNumbers="true" %}
 ```java
 package bg.tu_varna.sit;
 
@@ -33,7 +30,6 @@ public class Calculator {
     }
 }
 ```
-{% endcode %}
 
 * Спрете изпълнението на цикъла при всяко число, чиято цяла част е четна.
 
@@ -51,7 +47,7 @@ public class Calculator {
 
 "INC 0 END" "ADD 1323134 421315521 END" "DEC 57314183" "MLA 252621 324532 EN"
 
-{% code title="Calculator.java" lineNumbers="true" %}
+
 ```java
 package bg.tu_varna.sit;
 
@@ -92,9 +88,7 @@ public class Calculator {
 }
 
 ```
-{% endcode %}
 
-{% code title="Application.java" lineNumbers="true" %}
 ```java
 package bg.tu_varna.sit;
 
@@ -107,4 +101,3 @@ public class Application {
     }
 }
 ```
-{% endcode %}

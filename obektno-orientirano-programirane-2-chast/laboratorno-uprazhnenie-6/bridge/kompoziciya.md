@@ -4,7 +4,6 @@
 
 Композицията на Java се постига чрез използване на променливи на екземпляри, които препращат към други обекти. Например, човек има работа. Нека видим това с примерен код за съставяне на Java.
 
-{% code title="Job.java" lineNumbers="true" %}
 ```java
 public class Job {
     private String role;
@@ -30,9 +29,7 @@ public class Job {
         this.id = id;
     }java
 ```
-{% endcode %}
 
-{% code title="Person.java" lineNumbers="true" %}
 ```java
 public class Person {
 
@@ -49,4 +46,3 @@ public class Person {
 
 }
 ```
-{% endcode %}
