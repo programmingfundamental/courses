@@ -4,8 +4,8 @@
 
 Но какъв ще е изхода от следния пример:
 
-{% tabs %}
-{% tab title="Пример" %}
+
+Пример
 ```
 public class Application {
     public static void main(String args[]) {
@@ -17,23 +17,21 @@ public class Application {
     }
 }
 ```
-{% endtab %}
 
-{% tab title="Second Tab" %}
+
+Second Tab
 ```
 Не са едни и същи
 ```
-
-{% hint style="info" %}
+info
 Тъй като x и y се отнасят до различни обекти, получаваме изхода като "Не са едни и същи"
-{% endhint %}
-{% endtab %}
-{% endtabs %}
+
+
 
 Но какъв може да се обясни изхода от следния пример:
 
-{% tabs %}
-{% tab title="Пример" %}
+
+Пример
 ```
 public class Application {
     public static void main(String args[]) {
@@ -45,23 +43,22 @@ public class Application {
     }
 }
 ```
-{% endtab %}
 
-{% tab title="Резултат" %}
+
+Резултат
 ```
 Едни и същи
 ```
 
-{% hint style="info" %}
+info
 В Java стойностите от -128 до 127 се кешират, така че същите обекти се връщат. Използването на valueOf() използва кеширани обекти, ако стойността е между -128 до 127.
-{% endhint %}
-{% endtab %}
-{% endtabs %}
+
+
 
 Ако изрично създадем нови обекти с помощта на оператор new, получаваме изхода като "Не са едни и същи". Вижте следната Java програма където не се използва valueOf().
 
-{% tabs %}
-{% tab title="Пример" %}
+
+Пример
 ```
 public class Application {
     public static void main (String args[]) {
@@ -73,19 +70,19 @@ public class Application {
     }
 }
 ```
-{% endtab %}
 
-{% tab title="Резултат" %}
+
+Резултат
 ```
 Не са едни и същи
 ```
-{% endtab %}
-{% endtabs %}
+
+
 
 С получената информация до тук, какъв ще е изхода от следния пример, защо?
 
-{% tabs %}
-{% tab title="Пример" %}
+
+Пример
 ```
 public class Application {
     public static void main(String[] args) {
@@ -96,17 +93,17 @@ public class Application {
     }
 }
 ```
-{% endtab %}
 
-{% tab title="Second Tab" %}
+
+Second Tab
 ```
 false
 ```
 
-{% hint style="info" %}
+info
 Тук ще бъдат създадени два обекта. Първият обект, който е насочен от X поради използването оператор new и втори обект, ще бъде създаден заради autoboxing.
-{% endhint %}
-{% endtab %}
-{% endtabs %}
+
+
+
 
 \

@@ -21,8 +21,8 @@ Test<int> obj = new Test<int>(20);
 ArrayList<int[]> a = нов ArrayList<>();
 ```
 
-{% tabs %}
-{% tab title="Пример" %}
+
+Пример
 ```
 class Test<T> {
 	// An object of type T is declared
@@ -47,15 +47,15 @@ class Main {
 }
 
 ```
-{% endtab %}
 
-{% tab title="Резултат" %}
+
+Резултат
 error:
 
 &#x20;incompatible types:
 
 &#x20;Test cannot be converted to Test
-{% endtab %}
-{% endtabs %}
+
+
 
 Въпреки че iObj и sObj са от тип Test, те са препратки към различни типове, тъй като техните параметри на типа се различават. По този начин генериците добавят безопасност на типа и предотвратяват грешки.

@@ -1,8 +1,7 @@
 # Обектно-ориентирано програмиране - 2 част
 
-{% hint style="info" %}
+info
 Примерни проекти: [https://github.com/theVelislavKolesnichenko/DesignPrinciples](https://github.com/theVelislavKolesnichenko/DesignPrinciples)
-{% endhint %}
 
 **Дизайнерските модели** са типични решения на често срещани проблеми в софтуерния дизайн. Те са като предварително направени чертежи, които могат да се персонализират, за да се разрешат повтарящи се проблеми с дизайна в програмния код.
 
