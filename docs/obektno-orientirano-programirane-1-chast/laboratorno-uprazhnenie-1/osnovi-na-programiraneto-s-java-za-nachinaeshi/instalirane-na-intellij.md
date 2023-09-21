@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Инсталиране на IntelliJ
-parent: Основи на програмирането с Java за начинаещи
-nav_order: 5
+parent: Основни характеристики на JAVA
+nav_order: 2
 ---
 
 # Инсталиране на IntelliJ
