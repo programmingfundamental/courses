@@ -2,7 +2,7 @@
 
 Преди да започнете да пишете програми на Java, е нужно да инсталирате JDK. Може да го изтеглите от:&#x20;
 
-{% embed url="https://tuvarnabg-my.sharepoint.com/:u:/g/personal/vkolesnichenko_tu-varna_bg/ET92nCILMK9MpO_krBzE8RkBYg90A97t1NTBC-aor3a26A?e=e6PcXa" %}
+https://tuvarnabg-my.sharepoint.com/:u:/g/personal/vkolesnichenko_tu-varna_bg/ET92nCILMK9MpO_krBzE8RkBYg90A97t1NTBC-aor3a26A?e=e6PcXa
 
 или [https://www.oracle.com/java/technologies/downloads/](https://www.oracle.com/java/technologies/downloads/)
 

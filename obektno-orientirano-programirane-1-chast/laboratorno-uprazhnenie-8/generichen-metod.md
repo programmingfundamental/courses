@@ -4,8 +4,8 @@
 
 Можем също да напишем генерични методи, които да бъдат извиквани с различни типове аргументи въз основа на типа аргументи, предадени на генеричния метод.
 
-{% tabs %}
-{% tab title="First Tab" %}
+
+First Tab
 ```
 class Test {
 	// A Generic method example
@@ -30,14 +30,14 @@ class Test {
 }
 
 ```
-{% endtab %}
 
-{% tab title="Second Tab" %}
+
+Second Tab
 java.lang.Integer = 11
 
 java.lang.String = TU-Varna
 
 java.lang.Double = 1.0
-{% endtab %}
-{% endtabs %}
+
+
 
