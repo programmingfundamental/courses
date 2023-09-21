@@ -1,3 +1,11 @@
+---
+layout: default
+title: Обектно-ориентирано програмиране - 2 част
+nav_order: 2
+has_children: true
+permalink: /docs/obektno-orientirano-programirane-2-chast
+---
+
 # Обектно-ориентирано програмиране - 2 част
 
 info
