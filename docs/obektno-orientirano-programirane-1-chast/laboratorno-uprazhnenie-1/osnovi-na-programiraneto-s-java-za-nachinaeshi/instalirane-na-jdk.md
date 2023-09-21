@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Инсталиране на JDK
-parent: Основи на програмирането с Java за начинаещи
-nav_order: 4
+parent: Основни характеристики на JAVA
+nav_order: 1
 ---
 
 # Инсталиране на JDK
