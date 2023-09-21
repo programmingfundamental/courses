@@ -2,6 +2,7 @@
 layout: default
 title: Инсталиране на IntelliJ
 parent: Основни характеристики на JAVA
+grand_parent: Лабораторно упражнение 1
 nav_order: 2
 ---
 
