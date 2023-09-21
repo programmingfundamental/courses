@@ -2,6 +2,7 @@
 layout: default
 title: Инсталиране на JDK
 parent: Основни характеристики на JAVA
+parent: Лабораторно упражнение 1
 nav_order: 1
 ---
 
