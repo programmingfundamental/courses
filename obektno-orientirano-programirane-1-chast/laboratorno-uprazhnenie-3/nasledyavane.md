@@ -12,7 +12,6 @@ Super/parent class– родителски клас, неговите атриб
 
 Sub/child class– клас наследник. Той приема всички характеристики на родителския клас и може да добави собствени атрибути. Също така приема поведението на родителския клас и може да добави ново поведение.
 
-{% code title="Anima.java" lineNumbers="true" %}
 ```java
 class Animal { 
     void eat(){
@@ -20,9 +19,7 @@ class Animal {
     } 
 } 
 ```
-{% endcode %}
 
-{% code title="Dog.java" lineNumbers="true" %}
 ```java
 class Dog extends Animal jav{ 
     void bark(){
@@ -30,7 +27,6 @@ class Dog extends Animal jav{
     } 
 }
 ```
-{% endcode %}
 
 <pre class="language-java" data-title="BabyDog.java" data-line-numbers><code class="lang-java">class BabyDog extends Dog { 
     void weep(){
@@ -39,7 +35,7 @@ class Dog extends Animal jav{
 }
 </code></pre>
 
-{% code title="Main.java" lineNumbers="true" %}
+
 ```java
 class Main { 
     public static void main(String args[]){ 
@@ -50,4 +46,3 @@ class Main {
     }
 } 
 ```
-{% endcode %}

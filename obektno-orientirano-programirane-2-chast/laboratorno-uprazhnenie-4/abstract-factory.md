@@ -6,7 +6,6 @@ Abstract Factory не използва условен блок, за да съз
 
 #### Първо ще е необходим абстрактен клас
 
-{% code title="Computer.java" %}
 ```java
 public abstract class Computer {
      
@@ -20,13 +19,11 @@ public abstract class Computer {
     }
 }
 ```
-{% endcode %}
 
 Класа ще съдържа абстрактни методи за компонентите на всеки компонент
 
 #### Следващата стъпка е да създадем фактическия клас наследник на абстрактния
 
-{% code title="DvaesktopComputer.java" %}
 ```java
 public class DvaesktopComputer extends Computer {
  
@@ -56,9 +53,7 @@ public class DvaesktopComputer extends Computer {
  
 }
 ```
-{% endcode %}
 
-{% code title="ServerComputer.java" %}
 ```java
 public class ServerComputer extends Computer {
  
@@ -88,7 +83,6 @@ public class ServerComputer extends Computer {
  
 }
 ```
-{% endcode %}
 
 В тези класове само имплементираме абстрактните методи от родителския клас
 
@@ -96,17 +90,14 @@ public class ServerComputer extends Computer {
 
 Abstract Factory може да бъде интерфейс или абстрактен клас&#x20;
 
-{% code title="ComputerAbstractFactory.java" %}
 ```java
 public interface ComputerAbstractFactory {
 	public Computer createComputer();
 }
 ```
-{% endcode %}
 
 Методът createComputer връща екземпляр на супер класа Computer. Сега фабричните класове ще реализират този интерфейс и ще върнат съответния подклас.
 
-{% code title="DvaesktopComputerFactory.java" %}
 ```java
 public class DvaesktopComputerFactory implements ComputerAbstractFactory {
 
@@ -126,9 +117,7 @@ public class DvaesktopComputerFactory implements ComputerAbstractFactory {
 
 }
 ```
-{% endcode %}
 
-{% code title="ServerComputerFactory.java" %}
 ```java
 public class ServerComputerFactory implements ComputerAbstractFactory {
 
@@ -149,11 +138,9 @@ public class ServerComputerFactory implements ComputerAbstractFactory {
 
 }
 ```
-{% endcode %}
 
 #### Сега следва да се  създаде Factory клас, който ще осигури входната точка за създаване на подкласове.
 
-{% code title="ComputerFactory.java" %}
 ```java
 public class ComputerFactory {
 
@@ -162,11 +149,9 @@ public class ComputerFactory {
 	}
 }
 ```
-{% endcode %}
 
 Tова е клас с метод който приема аргумент и връща  обект. На този етап изпълнението трябва да стане ясно. Нека да напишем прост метод за тестване и да видим как да използваме абстрактната фабрика, за да получим инстанцията на подкласовете.
 
-{% code title="Application.java" %}
 ```java
 public class Application {
 
@@ -182,7 +167,6 @@ public class Application {
 	}
 }
 ```
-{% endcode %}
 
 #### Предимства <a href="#abstract-factory-design-pattern-benefits" id="abstract-factory-design-pattern-benefits"></a>
 
