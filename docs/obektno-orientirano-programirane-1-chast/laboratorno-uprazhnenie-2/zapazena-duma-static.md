@@ -1,3 +1,10 @@
+---
+layout: default
+title: Запазена дума static
+parent: Лабораторно упражнение 2
+grand_parent: Обектно-ориентирано програмиране - 1 част
+nav_order: 4
+---
 # Запазена дума static
 
 Запазена дума –static
