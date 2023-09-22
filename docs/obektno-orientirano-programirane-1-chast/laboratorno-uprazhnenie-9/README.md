@@ -1,3 +1,11 @@
+---
+layout: default
+title: Лабораторно упражнение 9
+parent: Обектно-ориентирано програмиране - 1 част
+has_children: true
+nav_order: 9
+permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-9
+---
 # Лабораторно упражнение 9
 
 ## Колекции

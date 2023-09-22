@@ -1,3 +1,11 @@
+---
+layout: default
+title: Разлика 5
+parent: Лабораторно упражнение 6
+grand_parent: Обектно-ориентирано програмиране - 1 част
+has_children: true
+nav_order: 5
+---
 # Разлика 5
 
 Абстрактният клас може да има protected и public абстрактни методи
