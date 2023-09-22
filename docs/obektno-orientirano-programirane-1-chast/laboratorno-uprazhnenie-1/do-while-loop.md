@@ -1,3 +1,11 @@
+---
+layout: default
+title: Оператор за цикъл Do-while
+parent: Лабораторно упражнение 1
+grand_parent: Обектно-ориентирано програмиране - 1 част
+nav_order: 9
+---
+
 # Do-while loop
 
 Цикъл със след условие
