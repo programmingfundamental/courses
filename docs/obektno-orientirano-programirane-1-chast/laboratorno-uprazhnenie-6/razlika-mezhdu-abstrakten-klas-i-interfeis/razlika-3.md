@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Разлика 3
-parent: Лабораторно упражнение 6
-grand_parent: Обектно-ориентирано програмиране - 1 част
+parent: Разлика между Абстрактен клас и Интерфейс
+grand_parent: Лабораторно упражнение 6
 has_children: true
 nav_order: 3
 ---
