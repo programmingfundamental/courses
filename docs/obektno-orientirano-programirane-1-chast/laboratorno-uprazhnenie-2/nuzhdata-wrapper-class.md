@@ -1,3 +1,10 @@
+---
+layout: default
+title: Нуждата Wrapper Class
+parent: Лабораторно упражнение 2
+grand_parent: Обектно-ориентирано програмиране - 1 част
+nav_order: 5
+---
 # Нуждата Wrapper Class
 
 Въпреки, че има примитивни типове в java има нуждата от Wrapper Class, заради допълнителните функционалности който са реализирани в Wrapper Class.
