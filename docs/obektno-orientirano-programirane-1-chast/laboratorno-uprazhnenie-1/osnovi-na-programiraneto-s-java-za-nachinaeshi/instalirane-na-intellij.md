@@ -4,8 +4,7 @@ title: Инсталиране на IntelliJ
 parent: Лабораторно упражнение 1
 grand_parent: Обектно-ориентирано програмиране - 1 част
 has_children: true
-nav_order: 2
-permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/osnovi-naprogramiraneto-s-java-za-nachinaeshi
+nav_order: 3
 ---
 
 # Инсталиране на IntelliJ
