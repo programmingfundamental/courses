@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Обектно-ориентирано програмиране - 2 част
-nav_order: 2
+nav_order: 3
 has_children: true
 permalink: /docs/obektno-orientirano-programirane-2-chast
 ---
