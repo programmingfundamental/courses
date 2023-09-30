@@ -16,6 +16,6 @@
 
 Опишете предвидените точки за достъп в таблицата по-долу.
 
-<figure><img src="../../assets/image (152).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../assets/image (152).png" alt=""><figcaption></figcaption></figure>
 
 В качеството на repository слой използвайте singleton с предвидена в него подходяща колекция. Данните на добавените задачи да се съхраняват в xml файл, от който да се изчитат при стартиране на приложението.

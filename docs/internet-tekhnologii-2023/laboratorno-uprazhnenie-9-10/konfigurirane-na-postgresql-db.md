@@ -2,15 +2,15 @@
 
 1. В pgAdmin създайте потребител и база от данни
 
-<figure><img src="../../assets/image (120).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../assets/image (120).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../assets/image (116).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../assets/image (116).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../assets/image (142).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../assets/image (142).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../assets/image (100).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../assets/image (100).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../assets/image (113).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../assets/image (113).png" alt=""><figcaption></figcaption></figure>
 
 За да активирате JPA в Spring Boot приложението, се нуждаем от зависимостта _spring-boot-starter-data-jpa_. Необходимо е да се добави и зависимост към JDBC драйвер, специфичен за базата данни, в нашия случай драйвера на PostgreSQL. Spring boot конфигурира Hibernate като JPA провайдер по подрабиране.
 
@@ -53,16 +53,16 @@ spring.jpa.hibernate.ddl-auto=update
 
 Data Source e местоположението на данните на вашето приложение. &#x20;
 
-<figure><img src="../../assets/image (125).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../assets/image (125).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../assets/image (124).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../assets/image (124).png" alt=""><figcaption></figcaption></figure>
 
 Тестваме връзката:
 
-<figure><img src="../../assets/image (90).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../assets/image (90).png" alt=""><figcaption></figcaption></figure>
 
 В прозореца Persistence:
 
-<figure><img src="../../assets/image (160).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../assets/image (160).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../assets/image (165).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../assets/image (165).png" alt=""><figcaption></figcaption></figure>

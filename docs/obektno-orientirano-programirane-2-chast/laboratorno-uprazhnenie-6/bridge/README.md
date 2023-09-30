@@ -10,7 +10,7 @@ description: >-
 
 Да разгледаме следния пример с интерфейсите Shape и Color, където двата интерфейса се имплементират от няколко класа.
 
-<figure><img src="../../../assets/image (95).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../assets/image (95).png" alt=""><figcaption></figcaption></figure>
 
 Забележете, че класовете който имплементират интерфейса Color се инстанцират директно в  класовете Triangie, Pentagon.
 

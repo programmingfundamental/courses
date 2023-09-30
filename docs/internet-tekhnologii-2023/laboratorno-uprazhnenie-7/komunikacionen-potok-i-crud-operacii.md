@@ -2,7 +2,7 @@
 
 Следната диаграма демонстрира потока, свързан с обработката на заявка и отговор в REST API в Spring Boot приложение.
 
-<figure><img src="../../assets/image (97).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../assets/image (97).png" alt=""><figcaption></figcaption></figure>
 
 1\.      Потребителят извиква REST точка на достъп, която се управлява от REST контролера.
 
