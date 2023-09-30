@@ -14,21 +14,21 @@
     \
 
 
-    <figure><img src="../../.gitbook/assets/image (145).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../assets/image (145).png" alt=""><figcaption></figcaption></figure>
 2.  От иконата Run в лентата с номерацията на редовете, като изберете опцията Debug;\
     \
 
 
-    <figure><img src="../../.gitbook/assets/image (107).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../assets/image (107).png" alt=""><figcaption></figcaption></figure>
 3.  От контекстното меню\
     \
 
 
-    <figure><img src="../../.gitbook/assets/image (109).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../assets/image (109).png" alt=""><figcaption></figcaption></figure>
 
 Можете да редактирате конфигурацията за изпълнение, за да добавите опции за виртуална машина или да подадете аргументи на програмата.
 
-<figure><img src="../../.gitbook/assets/image (76).png" alt=""><figcaption><p>конфигурация за изпълнение</p></figcaption></figure>
+<figure><img src="../../assets/image (76).png" alt=""><figcaption><p>конфигурация за изпълнение</p></figcaption></figure>
 
 ### Точки на прекъсване
 
@@ -38,13 +38,13 @@
 \
 
 
-<figure><img src="../../.gitbook/assets/image (108).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../assets/image (108).png" alt=""><figcaption></figcaption></figure>
 
 При натискане с десен бутон се отваря диалогов прозорец, където може да се зададе условиe кога да спре изпълнението на програмата. Ако условието върне true, избраното действие се изпълнява. В противен случай точката на прекъсване се игнорира.\
 \
 
 
-<figure><img src="../../.gitbook/assets/image (48).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../assets/image (48).png" alt=""><figcaption></figcaption></figure>
 
 ### Прозорец за отстраняване на грешки
 
@@ -58,7 +58,7 @@
 
 ·       Variables - показва състоянието на обектите.
 
-<figure><img src="../../.gitbook/assets/image (72).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../assets/image (72).png" alt=""><figcaption></figcaption></figure>
 
 ### Постъпково изпълнение на програмата
 
@@ -79,5 +79,5 @@
 
 Можете да възобновите изпълнението на програмата, като щракнете върху _Възобновяване на програмата_ или като използвате клавишната комбинация F9. За да рестартирате програмата в режим на отстраняване на грешки, изберете _Повторно изпълнение_. Можете да спрете отстраняването на грешки във вашата програма по всяко време, като използвате иконата _Stop ._
 
-<figure><img src="../../.gitbook/assets/image (60).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../assets/image (60).png" alt=""><figcaption></figcaption></figure>
 

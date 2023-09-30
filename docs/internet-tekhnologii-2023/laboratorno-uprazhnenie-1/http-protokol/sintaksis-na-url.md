@@ -1,6 +1,6 @@
 # Синтаксис на URL
 
-<figure><img src="../../../.gitbook/assets/URL (1).jpg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../assets/URL (1).jpg" alt=""><figcaption></figcaption></figure>
 
 #### 1.      Схема или протокол
 

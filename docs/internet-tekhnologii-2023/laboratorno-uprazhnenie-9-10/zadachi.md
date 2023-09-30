@@ -21,7 +21,7 @@
 
 Опишете предвидените точки за достъп в таблицата по-долу.
 
-<figure><img src="../../.gitbook/assets/image (166).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../assets/image (166).png" alt=""><figcaption></figcaption></figure>
 
 3. Създайте методи за:
 

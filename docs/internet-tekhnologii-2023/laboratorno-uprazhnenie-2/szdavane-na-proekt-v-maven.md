@@ -8,48 +8,48 @@ File > New > Maven Project
 
 За нуждите на проекта използваме папката по подразбиране на избраното от нас работно пространство.
 
-![](../../.gitbook/assets/0.png)
+![](../../assets/0.png)
 
 При създаване на проектите Maven използва archetypes. Archetype е шаблон, опростен прототип на проекта, който желаем да създадем. Тъй като в случая изграждаме уеб приложение, избираме архетипа maven-archetype-webapp.
 
-![](<../../.gitbook/assets/1 (1).png>)
+![](<../../assets/1 (1).png>)
 
 При следващата стъпка задаваме:
 
 * Идентификатор на групата, от която е част проекта (groupId). GroupId е един от ключовите идентификатори на проекта и обикновено се основава като пълното квалифицирано име на домейн на организация. Например (bg.tu.varna.sit)
 * Идентификатор на проекта/артефакт (artifactId) - уникалното базово име на основния артефакт, генериран от този проект. Основният артефакт за проект обикновено е JAR файл. Останалите артефакти в проекта използват името на основния артефакт, за да образуват своите.
 
-![](../../.gitbook/assets/2.png)
+![](../../assets/2.png)
 
 2\. Ако в проекта по подразбиране е предвидена Java, различна от версия 8, са необходими допълнителни настройки
 
 Десен бутон върху създадения проект > Properties
 
-![](<../../.gitbook/assets/3 (1).png>)
+![](<../../assets/3 (1).png>)
 
 В Java Build Path задаваме пътя до инсталирания JDK 8, следвайки инструкциите по-долу.
 
-![](../../.gitbook/assets/4.png)
+![](../../assets/4.png)
 
-![](../../.gitbook/assets/5.png)
+![](../../assets/5.png)
 
-![](<../../.gitbook/assets/6 (1).png>)
+![](<../../assets/6 (1).png>)
 
-![](<../../.gitbook/assets/7 (1).png>)
+![](<../../assets/7 (1).png>)
 
-![](<../../.gitbook/assets/8 (1).png>)
+![](<../../assets/8 (1).png>)
 
-![](../../.gitbook/assets/9.png)
+![](../../assets/9.png)
 
 Редактираме версията на Java в Java Compiler и Project Facets.
 
-![](../../.gitbook/assets/10.png)
+![](../../assets/10.png)
 
-![](../../.gitbook/assets/11.png)
+![](../../assets/11.png)
 
 Отваряме pom.xml и нанасяме последни редакции в тагове \<maven.compiler.source> и \<maven.compiler.target>.
 
-![](../../.gitbook/assets/12.png)
+![](../../assets/12.png)
 
 3\. В pom.xml добавяме dependency към jakarta.servlet-api
 
@@ -64,28 +64,28 @@ File > New > Maven Project
 </dependency>
 ```
 
-![](../../.gitbook/assets/pom.jpg)
+![](../../assets/pom.jpg)
 
 Десен бутон върху pom.xml > Run As > Maven Build. Задаваме Goals “clean install”.
 
-![](../../.gitbook/assets/14.png)
+![](../../assets/14.png)
 
 Ако след преминаване на стъпките по-горе все още се извежда съобщение за грешка: десен бутон върху проекта > Maven > Update project (или клавишна комбинация Alt + F5)
 
 4\. Настройване на сървъра
 
-![](../../.gitbook/assets/15.png)
+![](../../assets/15.png)
 
-![](../../.gitbook/assets/tomcat1.jpg)
+![](../../assets/tomcat1.jpg)
 
-![](../../.gitbook/assets/tomcat2.jpg)
+![](../../assets/tomcat2.jpg)
 
-![](../../.gitbook/assets/18.png)
+![](../../assets/18.png)
 
 5\. Стартиране на проекта
 
 Десен бутон на проекта > Run As > Run on Server
 
-![](../../.gitbook/assets/19.png)
+![](../../assets/19.png)
 
-![](../../.gitbook/assets/20.png)
+![](../../assets/20.png)

@@ -10,7 +10,7 @@
 * ProviderManager - най-често срещаната реализация на AuthenticationManager.
 * AuthenticationProvider - използва се от ProviderManager за извършване на определен тип удостоверяване.
 
-<figure><img src="../../../.gitbook/assets/image (157).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../assets/image (157).png" alt=""><figcaption></figcaption></figure>
 
 ### Authentication Manager
 

@@ -256,4 +256,4 @@ http.exceptionHandling(exception -> exception.authenticationEntryPoint (authenti
 
 5. Изпробвайте функционалността с Postman. Полученият при вписването токен се добавя към заявката към последващ ресурс посредством опцията Bearer token.
 
-<figure><img src="../../.gitbook/assets/image (163).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../assets/image (163).png" alt=""><figcaption></figcaption></figure>
