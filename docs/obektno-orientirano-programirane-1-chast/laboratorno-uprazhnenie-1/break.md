@@ -7,9 +7,9 @@ nav_order: 11
 ---
 # Break
 
-Прекратява оператора който се изпълнява в момента:
+Прекратява оператора, който се изпълнява в момента:
 
-### Пример за break в while loop
+### Пример за break в while-loop
 
 ```
 public class BreakExample1 {
@@ -38,7 +38,7 @@ Value of variable is: 2
 Out of while-loop
 ```
 
-### Пример за break в for loop
+### Пример за break във for-loop
 
 ```
 public class BreakExample2 {
