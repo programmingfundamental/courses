@@ -14,7 +14,7 @@ http://www.example.com:80/path/to/myfile.html?key1=value1\&key2=value2
 
 &#x20;Пример за GET заявка:
 
-<figure><img src="../../../assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 Други характеристики на GET заявките са:
 
@@ -46,7 +46,7 @@ HTTP методът POST изпраща данни към сървъра. Тип
 
 
 
-<figure><img src="../../../assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 Други характеристики на POST заявките са:
 

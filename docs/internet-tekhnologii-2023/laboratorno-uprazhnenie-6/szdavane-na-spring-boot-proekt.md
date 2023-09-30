@@ -4,7 +4,7 @@
 
 Има много начини за създаване на Spring Boot приложение. Най-лесният начин е с помощта на Spring Initializr на https://start.spring.io/, онлайн генератор на приложения за Spring Boot.
 
-<figure><img src="../../assets/image (50).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../assets/image (50).png" alt=""><figcaption></figcaption></figure>
 
 1\.    Изберете Maven Project и версия на Spring Boot
 

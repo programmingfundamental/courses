@@ -63,6 +63,6 @@ public class SpringBootAppDemoApplication {
 
 Spring Boot приложението се стартира като използвате статичния метод run() на класа SpringApplication. Въпреки че използването на статичния метод run() е полезно, Spring Boot допълнително ви позволява да създадете екземпляр на клас SpringApplication, за да персонализирате режима за стартиране на приложението. Например, ако знаете типа на приложението, можете директно да го зададете в екземпляра SpringApplication, както е показано по-долу.
 
-<figure><img src="../../../assets/image (65).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../assets/image (65).png" alt=""><figcaption></figcaption></figure>
 
 SpringApplication също така предоставя няколко метода за настройка, така че можете да контролирате различни функции на Spring Boot, като например задаване на допълнителни Spring профили или задаване на средство за зареждане на ресурси.
