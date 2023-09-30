@@ -18,7 +18,7 @@ permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhneni
 
 &#x20;
 
-![](<../../.gitbook/assets/image (118).png>)
+![](<../../assets/image (118).png>)
 
 &#x20;
 
@@ -86,7 +86,7 @@ _Пример за използване на байтов поток:_
 
 &#x20;
 
-![](<../../.gitbook/assets/image (105).png>)
+![](<../../assets/image (105).png>)
 
 **Символни потоци. CharacterStream класове**
 
@@ -132,9 +132,9 @@ _Примери за използване на символни потоци:_
 
 &#x20;
 
-![](<../../.gitbook/assets/image (92).png>)
+![](<../../assets/image (92).png>)
 
-![](<../../.gitbook/assets/image (133).png>)
+![](<../../assets/image (133).png>)
 
 **Клас Scanner**
 
@@ -174,13 +174,13 @@ _Примери за използване на клас Scanner_:
 
 &#x20;
 
-![](<../../.gitbook/assets/image (138).png>)
+![](<../../assets/image (138).png>)
 
 Следващият пример чете от файл и сумира дробните числа, записани в него (пропуска данните от всички други типове, които се съдържат в този файл).
 
 &#x20;
 
-![](<../../.gitbook/assets/image (114).png>)
+![](<../../assets/image (114).png>)
 
 **Стандартни потоци. Клас Console**
 
@@ -202,7 +202,7 @@ _Пример за използване на стандартни потоци:_
 
 &#x20;
 
-![](<../../.gitbook/assets/image (86).png>)
+![](<../../assets/image (86).png>)
 
 &#x20;
 
@@ -236,6 +236,6 @@ _Пример за използване на даннови потоци:_
 
 Примерът прочита файл чрез RandomAccessFile и запълва колекция от обекти. Файлът съдържа по един обект на ред.
 
-![](<../../.gitbook/assets/image (134).png>)
+![](<../../assets/image (134).png>)
 
-![](<../../.gitbook/assets/image (117).png>)
+![](<../../assets/image (117).png>)

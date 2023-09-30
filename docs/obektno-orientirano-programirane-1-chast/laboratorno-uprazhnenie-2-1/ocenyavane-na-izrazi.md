@@ -15,17 +15,17 @@ IntelliJ IDEA предоставя възможност по време на с�
 
 #### &#x20;
 
-<figure><img src="../../.gitbook/assets/image (67).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../assets/image (67).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (32).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../assets/image (32).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (45).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../assets/image (45).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (68).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../assets/image (68).png" alt=""><figcaption></figcaption></figure>
 
 При натискане на символа + се разкриват повече подробности за обекта.
 
-<figure><img src="../../.gitbook/assets/image (27).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../assets/image (27).png" alt=""><figcaption></figcaption></figure>
 
 Методът не може да се използва за оценяване, при което се извикват методи.
 
@@ -35,7 +35,7 @@ IntelliJ IDEA предоставя възможност по време на с�
 
 Поставете курсора върху израза или маркирайте тази част от него, която искате да бъде оценена.
 
-<figure><img src="../../.gitbook/assets/image (43).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../assets/image (43).png" alt=""><figcaption></figcaption></figure>
 
 Изберете от менюто  Run > Debugging Actions > Quick Evaluate Expression (клавишна комбинация Ctrl+Alt+F8) или задръжте Alt и кликнете върху селекцията.
 
@@ -49,8 +49,8 @@ IntelliJ IDEA предоставя възможност по време на с�
 
 Ако искате да започнете с някакъв израз или променлива, която в момента е пред вас (например в редактора или в раздела Променливи), го селектирайте.
 
-<figure><img src="../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../assets/image (23).png" alt=""><figcaption></figcaption></figure>
 
 Изберете Run > Debugging Actions > Evaluate Expression (клавишна комбинация Alt+F8). В диалога Evaluate, полето Code fragment модифицирайте избрания израз и въведете нов (полето се разширява с помощта на клавишна комбинация Shift+Enter). Ако искате да се изпълни, натиснете Evaluate.
 
-<figure><img src="../../.gitbook/assets/image (74).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../assets/image (74).png" alt=""><figcaption></figcaption></figure>

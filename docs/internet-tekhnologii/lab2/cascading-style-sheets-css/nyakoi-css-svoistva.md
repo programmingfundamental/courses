@@ -55,4 +55,4 @@
 * padding: 5px 10px;    /\* top/bottom  left/right \*/
 * padding: 20px;     /\* top/bottom/left/right \*/
 
-![](<../../../.gitbook/assets/image (55).png>)
+![](<../../../assets/image (55).png>)

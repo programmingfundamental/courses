@@ -25,18 +25,18 @@ https://tuvarnabg-my.sharepoint.com/:u:/g/personal/vkolesnichenko_tu-varna_bg/ET
 
 Или в windows search търсите: Edit the system environment variables
 
-![](<../../../.gitbook/assets/2 (1).png>) ![](../../../.gitbook/assets/3.png)
+![](<../../../assets/2 (1).png>) ![](../../../assets/3.png)
 
 Променливата Path се редактира и към нея се добавя пътят до папка bin в инсталационната папка на JDK
 
-![](<../../../.gitbook/assets/4 (1).png>)
+![](<../../../assets/4 (1).png>)
 
 Добавя се нова системна променлива JAVA\_HOME, указваща пътя до инсталационната папка на JDK
 
-![](<../../../.gitbook/assets/5 (1).png>)
+![](<../../../assets/5 (1).png>)
 
 Пътят до съответните папки може лесно да бъде копиран в Windows Explorer (десен бутон върху пътя на съответната папка)
 
-![](../../../.gitbook/assets/6.png)
+![](../../../assets/6.png)
 
 За проверка дали Java е инсталирана успешно, рестартирайте и стартирайте Command prompt и впишете в командния ред командата java -version.
