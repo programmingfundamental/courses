@@ -1,4 +1,11 @@
-# Continue
+---
+layout: default
+title: Оператор Continue
+parent: Лабораторно упражнение 1
+grand_parent: Обектно-ориентирано програмиране - 1 част
+nav_order: 10
+---
+# Оператор Continue
 
 Прескача итерациите в изълнението на цикъл.
 

@@ -1,3 +1,10 @@
+---
+layout: default
+title: Оператор за цикъл while
+parent: Лабораторно упражнение 1
+grand_parent: Обектно-ориентирано програмиране - 1 част
+nav_order: 8
+---
 # While loop
 
 ## Цикъл с пред условие:

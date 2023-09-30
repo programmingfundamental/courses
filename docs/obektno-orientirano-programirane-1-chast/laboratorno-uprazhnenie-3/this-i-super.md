@@ -1,4 +1,11 @@
-# this и super
+---
+layout: default
+title: Ключовите думи this и super
+parent: Лабораторно упражнение 3
+grand_parent: Обектно-ориентирано програмиране - 1 част
+nav_order: 2
+---
+# Ключовите думи this и super
 
 **this** и **super** не могат да се използват в статичен контекст.
 

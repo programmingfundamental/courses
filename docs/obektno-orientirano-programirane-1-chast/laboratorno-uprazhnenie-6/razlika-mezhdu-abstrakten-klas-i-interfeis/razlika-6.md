@@ -1,8 +1,14 @@
+---
+layout: default
+title: Разлика 6
+parent: Разлика между Абстрактен клас и Интерфейс
+grand_parent: Лабораторно упражнение 6
+has_children: true
+nav_order: 6
+---
 # Разлика 6
 
 Абстрактният клас може да има static, final или static final променливи с всеки спецификатор за достъп
-
-
 
 ```
 abstract class Example1{

@@ -1,8 +1,15 @@
+---
+layout: default
+title: Оператор Break
+parent: Лабораторно упражнение 1
+grand_parent: Обектно-ориентирано програмиране - 1 част
+nav_order: 11
+---
 # Break
 
-Прекратява оператора който се изпълнява в момента:
+Прекратява оператора, който се изпълнява в момента:
 
-### Пример за break в while loop
+### Пример за break в while-loop
 
 ```
 public class BreakExample1 {
@@ -31,7 +38,7 @@ Value of variable is: 2
 Out of while-loop
 ```
 
-### Пример за break в for loop
+### Пример за break във for-loop
 
 ```
 public class BreakExample2 {
