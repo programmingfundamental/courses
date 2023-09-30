@@ -24,7 +24,7 @@ Ultimate - версия с комерсиален лиценз. Допълнит
 * 2.5 GB hard disk space, SSD recommended
 * 1024x768 minimum screen resolution
 
-Следвате стандартните стъпки за инсталация. Като изберете .java файловете да се обработват от Intellij&#x20;
+Следвате стандартните стъпки за инсталация, като изберете .java файловете да се обработват от Intellij.
 
 За по слаби машини може да използвате Eclipse. [Линк за изтегляне](https://www.eclipse.org/downloads/packages/release/2021-09/r/eclipse-ide-java-developers)
 
