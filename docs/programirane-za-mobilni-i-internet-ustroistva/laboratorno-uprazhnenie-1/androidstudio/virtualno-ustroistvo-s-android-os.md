@@ -4,8 +4,7 @@ title: Виртуално устройство с Android OS
 parent: Среда за разработване
 grand_parent: Лабораторно упражнение 1
 has_children: true
-nav_order: 2
-permalink: /docs/programirane-za-mobilni-i-internet-ustroistva/laboratorno-uprazhnenie-1/androidstudio
+nav_order: 1
 ---
 
 # Виртуално устройство с Android OS

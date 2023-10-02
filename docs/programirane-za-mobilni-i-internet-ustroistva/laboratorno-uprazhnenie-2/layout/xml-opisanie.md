@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Layout
+title: XML описание
 parent: Лабораторно упражнение 2
 grand_parent: Програмиране за мобилни и Интернет устройства
 has_children: true
