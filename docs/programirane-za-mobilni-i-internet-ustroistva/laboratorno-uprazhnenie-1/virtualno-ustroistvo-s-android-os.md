@@ -3,7 +3,6 @@ layout: default
 title: Виртуално устройство с Android OS
 parent: Лабораторно упражнение 1
 grand_parent: Програмиране за мобилни и Интернет устройства
-has_children: true
 nav_order: 1
 ---
 

@@ -9,3 +9,10 @@ permalink: /docs/programirane-za-mobilni-i-internet-ustroistva/laboratorno-upraz
 
 # Лабораторно упражнение 1
 
+# Среда за разработване
+
+Проектирането на Android приложения, изисква използването на среда за проектиране (IDE) и програмния език JAVA, който на свой ред се нуждае от наличието на JDK.
+
+Стандартната среда за проектиране на Android приложения е Android Studio, то е свободно за изтегляне от: [https://developer.android.com/studio/](https://developer.android.com/studio/)
+
+При инсталирането следвайте стъпките в помощника за инсталация.
