@@ -5,7 +5,7 @@ parent: Лабораторно упражнение 1
 grand_parent: Програмиране за мобилни и Интернет устройства
 has_children: true
 nav_order: 1
-permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/osnovi-naprogramiraneto-s-java-za-nachinaeshi
+permalink: /docs/programirane-za-mobilni-i-internet-ustroistva/laboratorno-uprazhnenie-1/androidstudio
 ---
 
 # Среда за разработване

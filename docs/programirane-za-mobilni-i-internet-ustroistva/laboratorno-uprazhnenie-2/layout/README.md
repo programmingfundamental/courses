@@ -1,3 +1,12 @@
+---
+layout: default
+title: Layout
+parent: Лабораторно упражнение 2
+grand_parent: Програмиране за мобилни и Интернет устройства
+has_children: true
+nav_order: 1
+permalink: /docs/programirane-za-mobilni-i-internet-ustroistva/laboratorno-uprazhnenie-1/layout
+---
 # Layout
 
 Layout в ресурс за оформление, който дефинира изгледа на Activity или на компонент. Името на Layout се използва като идентификатор (ID) за достъп до ресурса.
