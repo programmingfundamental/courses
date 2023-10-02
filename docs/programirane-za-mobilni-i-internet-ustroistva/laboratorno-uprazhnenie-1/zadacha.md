@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Задача
-parent: Програмиране за мобилни и Интернет устройства
+parent: Лабораторно упражнение 1
+grand_parent: Програмиране за мобилни и Интернет устройства
 nav_order: 2
-permalink: /docs/programirane-za-mobilni-i-internet-ustroistva/laboratorno-uprazhnenie-1
 ---
 
 # Задача

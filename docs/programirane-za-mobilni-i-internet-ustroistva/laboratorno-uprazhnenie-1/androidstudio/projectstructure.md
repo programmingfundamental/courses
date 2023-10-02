@@ -1,3 +1,12 @@
+---
+layout: default
+title: Структора на проект
+parent: Среда за разработване
+grand_parent: Лабораторно упражнение 1
+has_children: true
+nav_order: 4
+permalink: /docs/programirane-za-mobilni-i-internet-ustroistva/laboratorno-uprazhnenie-1/androidstudio
+---
 # Структора на проект
 
 Проектите в Android Studio използва Gradle за изграждане на приложенията. В Gradle скрипта се оказват минималната и целевата версия на Android за които се разработва програмата. Зависимите библиотеки към приложението.

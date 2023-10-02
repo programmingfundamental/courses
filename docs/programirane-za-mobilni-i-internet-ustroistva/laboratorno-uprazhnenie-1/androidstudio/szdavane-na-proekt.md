@@ -1,3 +1,12 @@
+---
+layout: default
+title: Създаване на проект
+parent: Среда за разработване
+grand_parent: Лабораторно упражнение 1
+has_children: true
+nav_order: 3
+permalink: /docs/programirane-za-mobilni-i-internet-ustroistva/laboratorno-uprazhnenie-1/androidstudio
+---
 # Създаване на проект
 
 От началния прозорец избирате "New Android Studio project"
