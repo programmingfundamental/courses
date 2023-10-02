@@ -3,7 +3,6 @@ layout: default
 title: Създаване на проект
 parent: Лабораторно упражнение 1
 grand_parent: Програмиране за мобилни и Интернет устройства
-has_children: true
 nav_order: 2
 ---
 # Създаване на проект
