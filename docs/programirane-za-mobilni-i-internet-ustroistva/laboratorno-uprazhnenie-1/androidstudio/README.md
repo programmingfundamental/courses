@@ -1,3 +1,13 @@
+---
+layout: default
+title: Среда за разработване
+parent: Лабораторно упражнение 1
+grand_parent: Програмиране за мобилни и Интернет устройства
+has_children: true
+nav_order: 1
+permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/osnovi-naprogramiraneto-s-java-za-nachinaeshi
+---
+
 # Среда за разработване
 
 Проектирането на Android приложения, изисква използването на среда за проектиране (IDE) и програмния език JAVA, който на свой ред се нуждае от наличието на JDK.
