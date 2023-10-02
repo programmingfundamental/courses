@@ -4,7 +4,7 @@ title: Лабораторно упражнение 2
 parent: Програмиране за мобилни и Интернет устройства
 has_children: true
 nav_order: 2
-permalink: /docs/programirane-za-mobilni-i-internet-ustroistva/laboratorno-uprazhnenie-1
+permalink: /docs/programirane-za-mobilni-i-internet-ustroistva/laboratorno-uprazhnenie-2
 ---
 # Лабораторно упражнение 2
 
