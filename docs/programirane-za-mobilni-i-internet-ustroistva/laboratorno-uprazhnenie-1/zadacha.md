@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Лабораторно упражнение 1
-parent: Обектно-ориентирано програмиране - 1 част
+title: Задача
+parent: Програмиране за мобилни и Интернет устройства
 nav_order: 2
 permalink: /docs/programirane-za-mobilni-i-internet-ustroistva/laboratorno-uprazhnenie-1
 ---
