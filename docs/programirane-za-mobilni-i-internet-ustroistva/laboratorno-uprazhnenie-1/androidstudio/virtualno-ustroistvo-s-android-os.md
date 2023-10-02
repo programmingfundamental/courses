@@ -1,3 +1,13 @@
+---
+layout: default
+title: Среда за разработване
+parent: Лабораторно упражнение 1
+grand_parent: Програмиране за мобилни и Интернет устройства
+has_children: true
+nav_order: 2
+permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/osnovi-naprogramiraneto-s-java-za-nachinaeshi
+---
+
 # Виртуално устройство с Android OS
 
 Емулатора на Android устройства позволява да се тестват и дебъгват приложения преди качването им на реални устройства.
