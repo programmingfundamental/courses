@@ -1,5 +1,10 @@
-# Задача
-
+---
+layout: default
+title: Задачa
+parent: Лабораторно упражнение 3
+grand_parent: Програмиране за мобилни и Интернет устройства
+nav_order: 4
+---
 ## Задачa
 
 Съставете приложения с три Аctivity, кито да наследяват абстрактен клас BaseActivity, наследяващ AppCompatActivity
