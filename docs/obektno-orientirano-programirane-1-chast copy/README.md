@@ -1,6 +1,6 @@
 ---
 layout: default
-title: object-oriented Programming - 1 part
+title: Object-oriented Programming - 1 part
 nav_order: 2
 has_children: true
 permalink: /docs/object-oriented-programming-1-part
