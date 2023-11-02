@@ -1,5 +1,5 @@
 ---
-layout: defaul
+layout: default
 title: Laboratory exercise 10
 parent: Object-oriented Programming - 1 part
 has_children: true
