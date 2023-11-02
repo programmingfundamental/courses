@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Обектно-ориентирано програмиране - 1 част
+title: object-oriented Programming - 1 part
 nav_order: 2
 has_children: true
 permalink: /docs/object-oriented-programming-1-part
