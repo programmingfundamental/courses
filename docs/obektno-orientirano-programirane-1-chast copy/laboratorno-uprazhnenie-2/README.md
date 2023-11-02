@@ -1,11 +1,10 @@
 ---
 layout: default
-title: Лабораторно упражнение 2
-parent: Обектно-ориентирано програмиране - 1 част
+title: Laboratory exercise 2
+parent: Object-oriented Programming - 1 part
 has_children: true
 nav_order: 2
-permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-2
+permalink: /docs/object-oriented-programming-1-part/laboratory-exercise-2
 ---
-# Лабораторно упражнение 2
 
-Класовете и обектите са основни понятия за Обектно ориентирано програмиране, които описват реалните житейски обекти.
+# Laboratory exercise 2

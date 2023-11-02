@@ -1,10 +1,12 @@
 ---
 layout: default
-title: Лабораторно упражнение 3
-parent: Обектно-ориентирано програмиране - 1 част
+title: Laboratory exercise 3
+parent: Object-oriented Programming - 1 part
 has_children: true
 nav_order: 3
-permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-3
+permalink: /docs/object-oriented-programming-1-part/laboratory-exercise-3
 ---
-# Лабораторно упражнение 3
+
+# Laboratory exercise 3
+
 

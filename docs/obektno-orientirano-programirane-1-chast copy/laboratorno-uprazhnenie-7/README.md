@@ -1,10 +1,11 @@
 ---
 layout: default
-title: Лабораторно упражнение 7
-parent: Обектно-ориентирано програмиране - 1 част
+title: Laboratory exercise 7
+parent: Object-oriented Programming - 1 part
 has_children: true
 nav_order: 7
-permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-7
+permalink: /docs/object-oriented-programming-1-part/laboratory-exercise-7
 ---
-# Лабораторно упражнение 7
+
+# Laboratory exercise 7
 
