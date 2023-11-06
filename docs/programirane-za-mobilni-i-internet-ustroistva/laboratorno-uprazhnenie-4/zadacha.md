@@ -1,3 +1,10 @@
+---
+layout: default
+title: Задача
+parent: Лабораторно упражнение 4
+grand_parent: Програмиране за мобилни и Интернет устройства
+nav_order: 2
+---
 # Задача
 
 Създайте абстрактен клас BaseActivity, наследяващ AppCompatActivity и имплементиращ OnClickListener﻿&#x20;
