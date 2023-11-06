@@ -1,3 +1,10 @@
+---
+layout: default
+title: DialogFragment
+parent: Лабораторно упражнение 6
+grand_parent: Програмиране за мобилни и Интернет устройства
+nav_order: 2
+---
 # DialogFragment
 
 DialogFragment е фрагмент, използван за показване нс модален прозорец в рамките на Activity, която стой над останалата част от съдържанието.
