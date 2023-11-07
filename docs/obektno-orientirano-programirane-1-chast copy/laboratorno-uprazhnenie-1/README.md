@@ -205,7 +205,8 @@ public boolean equals(Object o) {
 }
 ```
 
-Keyword "new"
+
+**Keyword "new"**
 
 Keyword "new" in Java:
 
@@ -221,7 +222,8 @@ Person secondPerson = new Person(“Plamen”, 20);
 
 ####
 
-Object
+
+**Object**
 
 Object is an instance created by a class definition. When a class is created according to a particular class definition, it's said that the object is from "class name" type.
 
@@ -231,7 +233,9 @@ Object is the basic unit in OOP. Usually an OOP-program contains many objects th
     Behaviour - defined by object's methods;
     Identifier - gives unique name to the object and makes possible the interaction with other objects.
 
-Object initialization
+    
+
+**Object initialization**
 
 A class is initialized when an object of this type is created. All instances of a class share the same attributes and behaviour, but the values of the attributes are unique for each object. Given class could have countless instances.
 
@@ -241,7 +245,8 @@ public static void main(String[] args)
     System.out.println(tuffy.toString());
 }
 
-Object comparison
+
+**Object comparison**
 
 There are two ways of comparing objects - by reference and by value.
 
@@ -252,6 +257,7 @@ k9 == rex;
 Value comparison checks and compares value parity of class attributes:
 
 k9.equals(rex);
+
 
 
 **Keyword "static"**
@@ -275,6 +281,7 @@ Static variable is stored only once in the memory of the class-area when memory 
 
 · Nested classes:
 
+```
 class Student{ 
    static String college ="ITS"; // static variable
    int fn;
@@ -302,5 +309,5 @@ public class Main{
  System.out.println(Student.college);
  } 
 } 
-
+```
 
