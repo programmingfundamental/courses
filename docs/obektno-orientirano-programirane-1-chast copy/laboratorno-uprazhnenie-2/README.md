@@ -120,7 +120,6 @@ public class Subject {
 
 *Keyword "super"*
 
-Запазената дума супер сочи към супер класа (родителския клас) на обекта. Използва се, за да се извикват атрибути,методи и конструктор наследени от родителския клас.
 The keyword "super" points to the parent (super) class of the current object. It's used for calling attributes, methods and constructor, inherited from its parent.
 
 ```
