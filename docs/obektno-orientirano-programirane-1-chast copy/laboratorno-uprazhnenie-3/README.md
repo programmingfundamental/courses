@@ -171,7 +171,7 @@ abstract class A {
 
 ### Difference between *abstract* and *concrete* class
 
-In the ecample above, Animal is abstract class, but Cat, Dog & Lion are concrete classes.
+In the example above, Animal is abstract class, but Cat, Dog & Lion are concrete classes.
 
 Differences:
 
@@ -258,8 +258,4 @@ Empty interfaces, with no methods or constants declared inside, are known as mar
 5. Interface could not be declared as private or protected.
 6. By default, all methods in interface are abstract and public.
 7. Properties, declared in interface, are public, static and final by default, i.e. they are constants.
-
-
-
-###
 
