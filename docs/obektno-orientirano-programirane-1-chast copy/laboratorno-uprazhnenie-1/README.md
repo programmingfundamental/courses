@@ -262,7 +262,6 @@ k9.equals(rex);
 
 **Keyword "static"**
 
-Запазената дума static в Java се използва основно за управление на паметта. Static принадлежи повече на класа отколкото на инстанцията на класа. Можем да прилагаме „static“ на:
 The keyword "static" is used mainly for memory management in Java. The word could be used for:
 
 · Variables;
