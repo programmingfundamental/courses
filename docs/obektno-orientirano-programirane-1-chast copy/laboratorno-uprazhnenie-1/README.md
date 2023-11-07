@@ -260,6 +260,7 @@ k9.equals(rex);
 
 
 
+
 **Keyword "static"**
 
 The keyword "static" is used mainly for memory management in Java. The word could be used for:
