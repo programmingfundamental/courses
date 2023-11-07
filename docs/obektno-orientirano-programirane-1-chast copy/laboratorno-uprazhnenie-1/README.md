@@ -8,13 +8,7 @@ permalink: /docs/object-oriented-programming-1-part/laboratory-exercise-1
 ---
 
 # Laboratory exercise 1
----
-layout: default
-title: Клас
-parent: Лабораторно упражнение 2
-grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 2
----
+
 
 # Class
 
