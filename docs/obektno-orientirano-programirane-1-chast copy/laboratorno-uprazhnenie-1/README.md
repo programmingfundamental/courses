@@ -205,6 +205,102 @@ public boolean equals(Object o) {
 }
 ```
 
+Keyword "new"
+
+Keyword "new" in Java:
+
+    Used for new instance creation;
+    Reserves memory in runtime;
+    Reserves memory in the heap and returns reference to it;
+    Calls the object's constructor.
+
+Person firstPerson = new Person();
+
+Person secondPerson = new Person(“Plamen”, 20);
 
 
-#### &#x20;
+####
+
+Object
+
+Object is an instance created by a class definition. When a class is created according to a particular class definition, it's said that the object is from "class name" type.
+
+Object is the basic unit in OOP. Usually an OOP-program contains many objects that interacts through method calls. An object is defined by:
+
+    State - represents objects' properties;
+    Behaviour - defined by object's methods;
+    Identifier - gives unique name to the object and makes possible the interaction with other objects.
+
+Object initialization
+
+A class is initialized when an object of this type is created. All instances of a class share the same attributes and behaviour, but the values of the attributes are unique for each object. Given class could have countless instances.
+
+public static void main(String[] args)
+{
+    Dog tuffy = new Dog("tuffy","papillon", 5, "white");
+    System.out.println(tuffy.toString());
+}
+
+Object comparison
+
+There are two ways of comparing objects - by reference and by value.
+
+Reference comparison checks the objects addresses in the memory:
+
+k9 == rex;
+
+Value comparison checks and compares value parity of class attributes:
+
+k9.equals(rex);
+
+
+**Keyword "static"**
+
+Запазената дума static в Java се използва основно за управление на паметта. Static принадлежи повече на класа отколкото на инстанцията на класа. Можем да прилагаме „static“ на:
+The keyword "static" is used mainly for memory management in Java. The word could be used for:
+
+· Variables;
+
+§ Static variables are used for common property between all objects.
+Example: COmpany name for all of its employees.
+Static variable is stored only once in the memory of the class-area when memory for the class is reserved.
+
+· Methods;
+
+§ Static methods could not use non-static attributes or to call non-static methods.
+
+· Blocks;
+
+§ Static blocks are executed before the main method, during the classes' load.
+
+· Nested classes:
+
+class Student{ 
+   static String college ="ITS"; // static variable
+   int fn;
+   String name; 
+   public Student(int num, String n){ 
+   fn = num; 
+   name = n; 
+   }
+  static void changeCollegeName(String newName){  // static method
+     college = newName; 
+  }    
+   void display (){
+System.out.println(name + ": " + fn );
+} 
+} 
+ 
+public class Main{ 
+ public static void main(String args[]){ 
+ Student s1 = new Student(123, "Plamen"); 
+ Student s2 = new Student(124, "Gergana"); 
+ s1.display(); 
+ s2.display(); 
+ System.out.println(Student.college);//invoke static variable
+ Student.changeCollegeName("TU Varna"); //invoke static method
+ System.out.println(Student.college);
+ } 
+} 
+
+
