@@ -259,3 +259,24 @@ Empty interfaces, with no methods or constants declared inside, are known as mar
 6. By default, all methods in interface are abstract and public.
 7. Properties, declared in interface, are public, static and final by default, i.e. they are constants.
 
+
+**PRACTICE**
+Define interface *Movement*: 
+-Method *move()* – returns type of movement as text; 
+
+Define abstract class *Animal*: 
+-Implements interface Movement; 
+-Attributes for *name*, *age* and *weight* that are visible only in this class; 
+-Parameterized constructor; 
+-Abstract method *sound()* – returns type of sound as text; 
+-Abstract method *type()* – returns wild/pet as text; 
+-Method *toString()*; 
+
+Define classes *Dog*, *Cat*, *Bird* and *Lion*, and implement all required methods.  
+
+Define class *Application* with main function, where: 
+-Create an array with all types of animals; 
+-For each animal, print to the console the way it moves and its sound; 
+-Calculate and display to the console how many of the animals are wild; 
+-Calculate and display to the console the average age of all animals; 
+-Calculate and display to the console the weight of all animals from the array. 
