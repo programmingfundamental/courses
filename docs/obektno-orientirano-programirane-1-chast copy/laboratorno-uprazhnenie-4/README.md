@@ -37,6 +37,13 @@ Interface:
 
 **Practice**
 
-**Task 1**: Define class Shape with abstract method *calculateSurface()*, *getName()* and *toString()* which returns name and area of a shape, and has properties *width* and *height*. Define classes Triangle and Rectangle as a children of Shape. The method *calculateSurface()* should return the rectangle's area as (height*_width) and triangle's area as (height*_width/2). Define class Circle where both properties are initialized with the same value (radius) and implement the abstract method. Define class with main function, create an array with shapes and display information about each shape.
+**Task 1**: Define class Shape with abstract method *calculateSurface()*, *getName()* and *toString()* which returns name and area of a shape, and has properties *width* and *height*. Define classes Triangle and Rectangle as a children of Shape. The method *calculateSurface()* should return the rectangle's area as (height x width) and triangle's area as ((height x width)/2). Define class Circle where both properties are initialized with the same value (radius) and implement the abstract method. Define class with main function, create an array with shapes and display information about each shape.
 
-**Task 2**: Define interface Movement with method move, that returns movement type as text. Define classes Dog, Bird and Fish and implement the interface. Define class with main function, create array with dogs, birds and fishes and display information for each animal.
+**Task 2**: Define interface Movement with method *move()*, that returns movement type as text. Define classes Dog, Bird and Fish and implement the interface. Define class with main function, create array with dogs, birds and fishes and display information for each animal.
+
+**Task 3**: 
+Define interface Movement with method *move()*, that returns movement type as text.
+Define interfaces Pet and Wild.
+Define abstract class Animal that implements interface Movement, has attributes for name and age, abstract method *sound()* and method for textual representation.
+Define children of Animal - Dog, Bird and Fish. Implement interface and abstract class' methods.
+Define class with main function, create an array with animals and display their movement. Display information about pets and wild animals present.
