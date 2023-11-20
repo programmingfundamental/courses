@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Задача
+title: RecyclerView
 parent: Лабораторно упражнение 7
 grand_parent: Програмиране за мобилни и Интернет устройства
 nav_order: 1

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Задача
+title: Примерна употреба
 parent: Лабораторно упражнение 7
 grand_parent: Програмиране за мобилни и Интернет устройства
 nav_order: 2
