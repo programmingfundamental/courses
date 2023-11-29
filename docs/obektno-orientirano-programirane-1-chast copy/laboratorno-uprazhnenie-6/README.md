@@ -170,3 +170,26 @@ public class Example {
     }
 }
 ```
+
+
+### Practice 
+
+Create program for blog.
+
+You need to define:
+
+- class Version with attributes createdBy and modifiedBy, which store the names of the author and the last person who edited an article from the blog. Follow encapsulation principle;
+- class VersionException; this class has to be used when setting values for attributes and to be thrown when there is null or empty value and to be with messages "Created by cannot be null" and "Modified by cannot be null";
+- class Comment, which inherits Version and has attribute for comment and follows encapsulation principle;
+- class CommentException; this class has to be used when setting value and to be thrown when there is null or empty value and to bewith message "Comment cannot be empty";
+- class Article, which inherits Version and has attributes for title, content, commentArray with 50 elements and follows encapsulation principle;
+- class ArticleException; this class has to be used when setting values for attributes and to be thrown when there is null or empty value and to be with messages "Article title cannot be null", "Article content cannot be null" and "Article comments cannot be null";
+- class Blog with static array with 1000 articles and authorName. The class has:
+  - constructor by author's name;
+  - method addArticle(Article article), that passes the exceptions from class Article;
+  - method addComment(String title, String comment); if there is no article with the name given, then should throw exception with message "Missing article", and to pass the exceptions from class Comment.
+ 
+In the main method create two different objects from class Blog and add articles and comments. The exceptions should be processed and the error messages to be printed in the console.
+
+
+
