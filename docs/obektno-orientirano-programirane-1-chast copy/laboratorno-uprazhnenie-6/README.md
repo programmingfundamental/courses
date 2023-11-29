@@ -190,6 +190,3 @@ You need to define:
   - method addComment(String title, String comment); if there is no article with the name given, then should throw exception with message "Missing article", and to pass the exceptions from class Comment.
  
 In the main method create two different objects from class Blog and add articles and comments. The exceptions should be processed and the error messages to be printed in the console.
-
-
-
