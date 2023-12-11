@@ -1,6 +1,6 @@
 ---
 layout: default
-title: ThreadPoolExecutor
+title: Задача
 parent: Лабораторно упражнение 8
 grand_parent: Програмиране за мобилни и Интернет устройства
 nav_order: 3
