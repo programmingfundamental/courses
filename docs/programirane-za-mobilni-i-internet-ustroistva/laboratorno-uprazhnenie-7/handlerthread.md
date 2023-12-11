@@ -1,3 +1,11 @@
+---
+layout: default
+title: HandlerThread
+parent: Лабораторно упражнение 8
+grand_parent: Програмиране за мобилни и Интернет устройства
+nav_order: 1
+---
+
 # HandlerThread
 
 HandlerThread  е удобен клас за стартиране на нова работна нишка, която **последователно изпълнява задачи.**&#x20;
