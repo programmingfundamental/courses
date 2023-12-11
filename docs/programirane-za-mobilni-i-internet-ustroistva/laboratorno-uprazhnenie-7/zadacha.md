@@ -1,3 +1,11 @@
+---
+layout: default
+title: ThreadPoolExecutor
+parent: Лабораторно упражнение 8
+grand_parent: Програмиране за мобилни и Интернет устройства
+nav_order: 3
+---
+
 # Задача
 
 Създайте Activity с поле за въвеждане на имейл, прогрес контрол и бутон.
