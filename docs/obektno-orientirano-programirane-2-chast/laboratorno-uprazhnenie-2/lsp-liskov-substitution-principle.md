@@ -1,3 +1,11 @@
+---
+layout: default
+title: LSP - Liskov Substitution Principle
+parent: Лабораторно упражнение 2
+grand_parent: Обектно-ориентирано програмиране - 2 част
+nav_order: 1
+---
+
 # LSP - Liskov Substitution Principle
 
 Барбара Лисков, дефинира принципа през 1988 г., като:

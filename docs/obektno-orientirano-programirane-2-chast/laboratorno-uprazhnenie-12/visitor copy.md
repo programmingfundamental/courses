@@ -1,13 +1,9 @@
 ---
 layout: default
-title: Задачи
+title: Mediator
 parent: Лабораторно упражнение 12
 grand_parent: Обектно-ориентирано програмиране - 2 част
-nav_order: 3
+nav_order: 2
 ---
 
-# Задачи
-
-### Задача 1
-
-Създайте ппрограмапрограма
+# Mediator

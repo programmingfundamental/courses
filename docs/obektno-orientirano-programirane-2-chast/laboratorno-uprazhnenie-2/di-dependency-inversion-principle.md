@@ -1,3 +1,11 @@
+---
+layout: default
+title: DI - Dependency Inversion Principle
+parent: Лабораторно упражнение 2
+grand_parent: Обектно-ориентирано програмиране - 2 част
+nav_order: 3
+---
+
 # DI - Dependency Inversion Principle
 
 Принципът на инверсия на зависимостта (DIP) представлява част от обектно ориентираните принципи SOLID

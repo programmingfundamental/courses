@@ -1,3 +1,11 @@
+---
+layout: default
+title: Singleton
+parent: Лабораторно упражнение 3
+grand_parent: Обектно-ориентирано програмиране - 2 част
+nav_order: 2
+---
+
 # Singleton
 
 Singleton е шаблон за проектиране, който спада към групата на шаблоните за създаване.

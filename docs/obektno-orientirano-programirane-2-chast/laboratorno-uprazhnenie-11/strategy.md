@@ -1,13 +1,9 @@
 ---
 layout: default
-title: Задачи
+title: Strategy
 parent: Лабораторно упражнение 11
 grand_parent: Обектно-ориентирано програмиране - 2 част
-nav_order: 4
+nav_order: 1
 ---
 
-# Задачи
-
-### Задача 1
-
-Създайте ппрограмапрограма
+# Strategy

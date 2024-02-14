@@ -1,3 +1,11 @@
+---
+layout: default
+title: SRP - Single Responsibility Principle
+parent: Лабораторно упражнение 1
+grand_parent: Обектно-ориентирано програмиране - 2 част
+nav_order: 1
+---
+
 # SRP - Single Responsibility Principle
 
 ### **Единна отговорност**

@@ -1,3 +1,11 @@
+---
+layout: default
+title: Abstract Factory
+parent: Лабораторно упражнение 4
+grand_parent: Обектно-ориентирано програмиране - 2 част
+nav_order: 2
+---
+
 # Abstract Factory
 
 Abstract Factory не използва условен блок, за да създаде обектите, вместо това използва factory клас за всеки подклас. Abstract Factory клас, връща подкласа въз основа на factory клас на входа.

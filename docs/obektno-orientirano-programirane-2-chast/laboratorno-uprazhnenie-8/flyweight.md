@@ -1,13 +1,9 @@
 ---
 layout: default
-title: Proxy
+title: Fyweight
 parent: Лабораторно упражнение 8
 grand_parent: Обектно-ориентирано програмиране - 2 част
-nav_order: 3
+nav_order: 1
 ---
 
-# Задачи
-
-### Задача 1
-
-Създайте ппрограмапрограма
+# Fyweight
