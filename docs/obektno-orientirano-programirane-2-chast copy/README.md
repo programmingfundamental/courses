@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Обектно-ориентирано програмиране - 2 част
-nav_order: 3
+title: Object-oriented Programming - 2 part
+nav_order: 2
 has_children: true
-permalink: /docs/obektno-orientirano-programirane-2-chast
+permalink: /docs/object-oriented-programming-2-part
 ---
 
-# Обектно-ориентирано програмиране - 2 част
+# Object-oriented Programming - 2 part
 
 info
 Примерни проекти: [https://github.com/theVelislavKolesnichenko/DesignPrinciples](https://github.com/theVelislavKolesnichenko/DesignPrinciples)
