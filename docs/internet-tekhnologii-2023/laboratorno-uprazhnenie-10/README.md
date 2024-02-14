@@ -1,3 +1,12 @@
+---
+layout: default
+title: Лабораторно упражнение 10
+parent: Интернет технологии
+has_children: true
+nav_order: 10
+permalink: /docs/internet-tehnologii-2023/laboratorno-uprazhnenie-10
+---
+
 # Лабораторно упражнение 9-10
 
 Java Persistence API (JPA) е ORM рамка, която е част от платформата Java EE. JPA опростява внедряването на слоя за достъп до данни, като позволява на разработчиците да работят с обектно-ориентиран API, вместо да пишат SQL заявки от ръка. Най-популярните реализации на JPA са Hibernate, EclipseLink и OpenJPA.

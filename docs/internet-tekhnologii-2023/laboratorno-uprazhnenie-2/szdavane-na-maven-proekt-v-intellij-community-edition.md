@@ -1,6 +1,12 @@
+---
+layout: default
+title: Създаване на Maven проект в IntelliJ Community Edition
+parent: Лабораторно упражнение 2
+grand_parent: Интернет технологии
+nav_order: 4
+---
+
 # Създаване на Maven проект в IntelliJ Community Edition
-
-
 
 1. Добавяне на плъгин Smart Tomcat в IntelliJ (еднократно)\
 
@@ -28,7 +34,7 @@
 
 <figure><img src="../../../assets/image (58).png" alt=""><figcaption></figcaption></figure>
 
-&#x20;4\. Презареждане на проекта
+4\. Презареждане на проекта
 
 <figure><img src="../../../assets/image (34).png" alt=""><figcaption></figcaption></figure>
 
@@ -40,9 +46,9 @@
 
 ![](<../../../assets/image (30).png>)
 
-&#x20;7\. Конфигуриране на Tomcat
+7\. Конфигуриране на Tomcat
 
-&#x20;Избираме "Add configuration"&#x20;
+Избираме "Add configuration"
 
 <figure><img src="../../../assets/image (85).png" alt=""><figcaption></figcaption></figure>
 

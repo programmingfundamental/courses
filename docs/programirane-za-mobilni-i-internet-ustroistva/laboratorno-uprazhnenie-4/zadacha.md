@@ -7,7 +7,7 @@ nav_order: 2
 ---
 # Задача
 
-Създайте абстрактен клас BaseActivity, наследяващ AppCompatActivity и имплементиращ OnClickListener﻿&#x20;
+Създайте абстрактен клас BaseActivity, наследяващ AppCompatActivity и имплементиращ OnClickListener﻿
 
 * Дефинира защитено поле за съхранение на Intent
 * OnClick метода отваря активити по зададения Intent или логва грешка ако променливата от тип Intent е със стойност null

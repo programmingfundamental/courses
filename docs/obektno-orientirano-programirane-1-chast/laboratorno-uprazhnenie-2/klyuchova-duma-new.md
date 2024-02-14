@@ -9,13 +9,13 @@ nav_order: 3
 
 Запазена дума – new
 
-&#x20;Запазената дума в Java „new“ :
+Запазената дума в Java „new“ :
 
 * Използва се при създаване на инстанции на клас;
 * Заделя памет по време на изпълнение на програмата (runtime);
 * Запазва памет в heap-а и връща референция към тази памет;
 * Извиква конструктора на обекта.
 
-&#x20;Person firstPerson  = new Person();
+Person firstPerson  = new Person();
 
 Person secondPerson = new Person(“Plamen”, 20);

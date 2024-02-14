@@ -40,7 +40,7 @@ MyJava12345
 
 **2. Инсталация на Eclipse**
 
-За създаване на JavaServer Pages и Servlet е необходимо да бъде използван Eclipse IDE for **Enterprise** Java Developers. Той може да бъде инсталиран посредством предвидения от разработчика инсталатор или изтеглен като portable version:&#x20;
+За създаване на JavaServer Pages и Servlet е необходимо да бъде използван Eclipse IDE for **Enterprise** Java Developers. Той може да бъде инсталиран посредством предвидения от разработчика инсталатор или изтеглен като portable version:
 
 [http://www.eclipse.org/downloads/packages/](http://www.eclipse.org/downloads/packages/)
 

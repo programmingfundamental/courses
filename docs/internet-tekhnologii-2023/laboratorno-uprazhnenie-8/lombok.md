@@ -1,8 +1,16 @@
+---
+layout: default
+title: Lombok
+parent: Лабораторно упражнение 8
+grand_parent: Интернет технологии
+nav_order: 3
+---
+
 # Lombok
 
-Проектът Lombok е базирана на анотации Java библиотека, която ви позволява да намалите шаблонния код. Lombok предлага различни анотации, насочени към замяна на Java код, който е шаблонен, повтарящ се или досаден за писане. Като използвате Lombok можете да избегнете писането на конструктори без аргументи, `toString()`, `equals()` и `hashCode()` методи като добавите няколко анотации. По време на компилиране  библиотеката инжектира байт кода, представляващ желания шаблонен код в _.class_ файловете. &#x20;
+Проектът Lombok е базирана на анотации Java библиотека, която ви позволява да намалите шаблонния код. Lombok предлага различни анотации, насочени към замяна на Java код, който е шаблонен, повтарящ се или досаден за писане. Като използвате Lombok можете да избегнете писането на конструктори без аргументи, `toString()`, `equals()` и `hashCode()` методи като добавите няколко анотации. По време на компилиране  библиотеката инжектира байт кода, представляващ желания шаблонен код в _.class_ файловете. 
 
-&#x20;Добавяне на библиотеката:
+Добавяне на библиотеката:
 
 ```xml
 <dependency>
@@ -159,7 +167,7 @@ public class Author {
 
 #### @Data
 
-`@Data` е анотация, която събира в едно цяло анотациите [`@ToString`](https://translate.google.com/website?sl=en\&tl=bg\&hl=en\&client=webapp\&u=https://projectlombok.org/features/ToString), [`@Getter`](https://translate.google.com/website?sl=en\&tl=bg\&hl=en\&client=webapp\&u=https://projectlombok.org/features/GetterSetter), [`@Setter`](https://translate.google.com/website?sl=en\&tl=bg\&hl=en\&client=webapp\&u=https://projectlombok.org/features/GetterSetter), [`@EqualsAndHashCode`](https://translate.google.com/website?sl=en\&tl=bg\&hl=en\&client=webapp\&u=https://projectlombok.org/features/EqualsAndHashCode) и [`@RequiredArgsConstructor`](https://translate.google.com/website?sl=en\&tl=bg\&hl=en\&client=webapp\&u=https://projectlombok.org/features/constructor). По този начин генерира всички шаблони, необходими за POJO клас.  А именно: гетъри за всички полета, сетъри за всички non-final полета, имплементации на `toString`, `equals` и `hashCode`, включващи всички полета от класа и конструктор за всички полета, изискващи специална обработка.&#x20;
+`@Data` е анотация, която събира в едно цяло анотациите [`@ToString`](https://translate.google.com/website?sl=en\&tl=bg\&hl=en\&client=webapp\&u=https://projectlombok.org/features/ToString), [`@Getter`](https://translate.google.com/website?sl=en\&tl=bg\&hl=en\&client=webapp\&u=https://projectlombok.org/features/GetterSetter), [`@Setter`](https://translate.google.com/website?sl=en\&tl=bg\&hl=en\&client=webapp\&u=https://projectlombok.org/features/GetterSetter), [`@EqualsAndHashCode`](https://translate.google.com/website?sl=en\&tl=bg\&hl=en\&client=webapp\&u=https://projectlombok.org/features/EqualsAndHashCode) и [`@RequiredArgsConstructor`](https://translate.google.com/website?sl=en\&tl=bg\&hl=en\&client=webapp\&u=https://projectlombok.org/features/constructor). По този начин генерира всички шаблони, необходими за POJO клас.  А именно: гетъри за всички полета, сетъри за всички non-final полета, имплементации на `toString`, `equals` и `hashCode`, включващи всички полета от класа и конструктор за всички полета, изискващи специална обработка.
 
 ```java
 @Data

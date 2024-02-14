@@ -1,3 +1,11 @@
+---
+layout: default
+title: Създаване на Maven проект в IntelliJ Ultimate Edition
+parent: Лабораторно упражнение 2
+grand_parent: Интернет технологии
+nav_order: 3
+---
+
 # Създаване на Maven проект в IntelliJ Ultimate Edition
 
 1. Създаване на Maven проект в Intellij

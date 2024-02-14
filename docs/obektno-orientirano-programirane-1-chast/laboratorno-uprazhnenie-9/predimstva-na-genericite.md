@@ -7,7 +7,7 @@ nav_order: 5
 ---
 # Предимства на генериците
 
-Програмите, които използват генерици, имат много предимства пред негенеричния код.&#x20;
+Програмите, които използват генерици, имат много предимства пред негенеричния код.
 
 **1. Повторно използване на код:** Можем да напишем метод/клас/интерфейс веднъж и да го използваме за всеки тип, който пожелаем.
 
@@ -42,9 +42,9 @@ class Test
 Изход
 Exception in thread "main" java.lang.ClassCastException:
 
-&#x20;  java.lang.Integer cannot be cast to java.lang.String
+  java.lang.Integer cannot be cast to java.lang.String
 
-&#x20;   at Test.main(Test.java:19)
+   at Test.main(Test.java:19)
 
 
 
@@ -79,7 +79,7 @@ class Test
 Изод
 15: error: no suitable method found for add(int)
 
-&#x20;       al.add(10);
+       al.add(10);
 
 
 

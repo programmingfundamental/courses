@@ -222,7 +222,7 @@ Create program for company employees.
 Define:
 
 * class Employee with properties for first, middle and last name; access methods for all fields and method for textual description (returns full name of employee)
-* клас Фирма, който да описва фирмата с нейните служители и имена. В конструктор който приема броя на служителите във фирмата, инициализирайте масива. Създайте два метода&#x20;
+* клас Фирма, който да описва фирмата с нейните служители и имена. В конструктор който приема броя на служителите във фирмата, инициализирайте масива. Създайте два метода
 * class Company which describes all its employees. Define constructor with number of employees and inside initialize an array of employees. Class Company has following methods:
   * getInfo() - returns information for all employees, uses concatenation
   * getInformation() - returns information for all employees, uses StringBuffer

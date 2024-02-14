@@ -76,7 +76,7 @@ _Output:_
 
 _java.lang.ArrayIndexOutOfBoundsException: 5_
 
-&#x20;       _at bg.tu\_varna.sit.examples.contr.Example.main(Example.java:7)_
+       _at bg.tu\_varna.sit.examples.contr.Example.main(Example.java:7)_
 
 
 The order of catch-clauses is very important; it starts from child to the parent because of the wrapper nature of the exceptions. As a rule, most common exception should be in the last clause. If the order is incorrect, there will be compilation error.

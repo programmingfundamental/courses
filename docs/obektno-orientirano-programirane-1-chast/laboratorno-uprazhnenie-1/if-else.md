@@ -44,7 +44,7 @@ public class IfStatementExample {
 number is less than 100
 ```
 
-Вложен израз на if в Java&#x20;
+Вложен израз на if в Java
 
 Когато има оператор if в друг оператор if, той се нарича вложен оператор if. Структурата на вложения if изглежда така:
 

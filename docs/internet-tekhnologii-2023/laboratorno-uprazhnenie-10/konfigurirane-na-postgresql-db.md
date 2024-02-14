@@ -1,3 +1,11 @@
+---
+layout: default
+title: Конфигуриране на PostgreSQL DB
+parent: Лабораторно упражнение 10
+grand_parent: Интернет технологии
+nav_order: 1
+---
+
 # Конфигуриране на PostgreSQL DB
 
 1. В pgAdmin създайте потребител и база от данни
@@ -51,7 +59,7 @@ spring.jpa.hibernate.ddl-auto=update
 
 3\.      Добавете Data Source в Database (за IntelliJ IDEA Ultimate)
 
-Data Source e местоположението на данните на вашето приложение. &#x20;
+Data Source e местоположението на данните на вашето приложение. 
 
 <figure><img src="../../../assets/image (125).png" alt=""><figcaption></figcaption></figure>
 

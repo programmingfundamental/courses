@@ -1,3 +1,11 @@
+---
+layout: default
+title: Data transfer object (DTO)
+parent: Лабораторно упражнение 8
+grand_parent: Интернет технологии
+nav_order: 2
+---
+
 # Data transfer object (DTO)
 
 Data Transfer Object Design Pattern е често използван шаблон за проектиране. Основно се използва за предаване на данни с множество атрибути в една заявка от клиент към сървър, за да се избегнат множество повиквания към отдалечения сървър.
