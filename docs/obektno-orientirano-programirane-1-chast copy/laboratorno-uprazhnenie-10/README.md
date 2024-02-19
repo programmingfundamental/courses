@@ -241,3 +241,75 @@ The example reads a file using RandomAccessFile and populates a collection of ob
 ![](<../../../assets/image (134).png>)
 
 ![](<../../../assets/image (117).png>)
+
+
+
+**Task**
+
+
+Create program for real estate agency.
+
+Define:
+-	Interface **PriceCalculator** with method calculatePrice();
+  
+-	Enumeration **PropertyType** with FOR_RENT and FOR_SALE values;
+  
+-	Enumeration **Exposure** with all possible values 9east, west, etc.);
+  
+-	Abstract class **Property**:
+  
+  •	Implements PriceCalculator and Comparable;
+  
+  •	Properties for type, exposure, area, pricePerSquareMeter and address that follow encapsulation principle;
+  
+  •	Parameterized constructor by all fields;
+  
+  •	Methods: getters, equals (by address) and hashCode;
+  
+  •	Interface methods: one returns area multiplied by price per square meter, the other compares by area;
+  
+-	Class **Apartment**:
+
+  •	Extends Property with fields floor and hasParkingPlace that follow encapsulation principle;
+  
+  •	Parameterized constructor by all fields;
+  
+  •	Methods: getters and toString;
+  
+  •	Interface method returns the price increased with 10% if the apartment has parking place and is up to 3rd floor, and with 15% if the apartment is for sale;
+  
+-	Class **House**:
+  
+  •	Extends Property with field hasGarden that follow encapsulation principle;
+  
+  •	Parameterized constructor by all fields;
+  
+  •	Methods: getter and toString;
+  
+  •	Interface method returns price increased with 20% if there is garden;
+  
+-	Class **RealEstateAgency**:
+  
+  •	Field for properties – collection of unique properties that follow encapsulation principle;
+  
+  •	Parameterized constructor by file name - reads and loads the collection;
+  
+  •	Methods:
+  
+    o	addProperty – adds property passed as parameter to the existing collection;
+    
+    o	printCollection – writes collection passed as parameter to another file;
+    
+    o	sortByArea – orders collection by property’s area and prints it to the console;
+    
+    o	sortByPricePerSquareMeter – orders collection by price per square meter and prints it to the console;
+    
+    o	sortByAddress – orders alphabetically collection by property’s address and displays it to the console;
+    
+    o	calculateAveragePropertyPrice – calculates and returns the average price for the available properties;
+    
+    o	getPropertiesForRentNumber – finds and returns the number of available properties for rent;
+    
+    o	getPropertiesByExposure – finds and returns list of available properties with given exposure (passed as method parameter)
+    
+-	Class **Application** with main function that writes results from defined methods to a file.
