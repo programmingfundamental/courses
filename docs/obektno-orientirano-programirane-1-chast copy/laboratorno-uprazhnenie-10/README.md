@@ -19,7 +19,7 @@ A Java application uses an input stream to read data from a source and an output
 
 
 
-![](<../../../assets/image (118).png>)
+![](<../../assets/image (118).png>)
 
 
 
@@ -87,7 +87,7 @@ _Example of byte strean:_
 
 
 
-![](<../../../assets/image (105).png>)
+![](<../../assets/image (105).png>)
 
 **Symbol streams. CharacterStream classes**
 
@@ -134,9 +134,9 @@ The two examples shown perform the same task: they read from one file and write 
 
 
 
-![](<../../../assets/image (92).png>)
+![](<../../assets/image (92).png>)
 
-![](<../../../assets/image (133).png>)
+![](<../../assets/image (133).png>)
 
 **Class Scanner**
 
@@ -176,13 +176,13 @@ The example below reads an input string and then outputs each word on a separate
 
 
 
-![](<../../../assets/image (138).png>)
+![](<../../assets/image (138).png>)
 
 Next example reads from file and sums double numbers (skips any other type of data).
 
 
 
-![](<../../../assets/image (114).png>)
+![](<../../assets/image (114).png>)
 
 **Standard streams. Class Console**
 
@@ -204,7 +204,7 @@ _Example:_
 
 
 
-![](<../../../assets/image (86).png>)
+![](<../../assets/image (86).png>)
 
 
 
@@ -238,9 +238,9 @@ _Examples:_
 
 The example reads a file using RandomAccessFile and populates a collection of objects. Each line in the file contains one object.
 
-![](<../../../assets/image (134).png>)
+![](<../../assets/image (134).png>)
 
-![](<../../../assets/image (117).png>)
+![](<../../assets/image (117).png>)
 
 
 
