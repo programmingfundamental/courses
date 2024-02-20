@@ -6,11 +6,11 @@ grand_parent: Обектно-ориентирано програмиране - 2
 nav_order: 3
 ---
 
-# Задачи SRP
+# Задачи OSP
 
 ### Задача 1
 
-Преглеждайки правилото за Open-Closed и представения пример. Виждате ли възможни пробойни на това правило в примера в упражнението. Обосновете се какви са те и какво е решението за тяхното преодоляване.
+Разгледайте примера от упражнението от гледна точка на Open-Closed принципа. Виждате ли несъответствия с това правило в примера в упражнението? Обосновете се какви са те и какво е решението за тяхното преодоляване.
 
 ### Задача 2
 
@@ -35,35 +35,34 @@ public double radius;
 ```
 public class Application {
 // Returning the total volume of the geometric objects
-public double get_total_volume(Cuboid[] c_geo_objects,
-							Sphere[] s_geo_objects)
+public double getTotalVolume(Cuboid[] cGeoObjects, Sphere[] sGeoObjects)
 {
 	// Variable used to store total volume
-	double vol_sum = 0;
+	double volSum = 0;
 
 	// Iteratively calculating the volume of each Cuboid
 	// and adding it to the total volume
 
 	// Iterating using for each loop to
 	// calculate the volume of a cuboid
-	for (Cuboid geo_obj : c_geo_objects) {
+	for (Cuboid geoObj : cGeoObjects) {
 
-		vol_sum += geo_obj.length * geo_obj.breadth
-				* geo_obj.height;
+		volSum += geoObj.length * geoObj.breadth
+				* geoObj.height;
 	}
 
 	// Iterating using for each loop to
 	// calculate the volume of a cuboid
-	for (Sphere geo_obj : s_geo_objects) {
+	for (Sphere geoObj : sGeoObjects) {
 
 		// Iteratively calculating the volume of each
 		// Sphere and adding it to the total volume
-		vol_sum += (4 / 3) * Math.PI * geo_obj.radius
-				* geo_obj.radius * geo_obj.radius;
+		volSum += (4 / 3) * Math.PI * geoObj.radius
+				* geoObj.radius * geoObj.radius;
 	}
 
 	// Returning the to total volume
-	return vol_sum;
+	return volSum;
 }
 }
 ```
@@ -94,10 +93,10 @@ public static void main(String args[])
 	cb3.height = 15;
 
 	// Initializing and declaring an array of cuboids
-	Cuboid[] c_arr = new Cuboid[3];
-	c_arr[0] = cb1;
-	c_arr[1] = cb2;
-	c_arr[2] = cb3;
+	Cuboid[] cArr = new Cuboid[3];
+	cArr[0] = cb1;
+	cArr[1] = cb2;
+	cArr[2] = cb3;
 
 	// Initializing a sphere one as well as declaring
 	// its dimension.
@@ -115,17 +114,17 @@ public static void main(String args[])
 	sp3.radius = 3;
 
 	// Initializing and declaring an array of spheres
-	Sphere[] s_arr = new Sphere[3];
-	s_arr[0] = sp1;
-	s_arr[1] = sp2;
-	s_arr[2] = sp3;
+	Sphere[] sArr = new Sphere[3];
+	sArr[0] = sp1;
+	sArr[1] = sp2;
+	sArr[2] = sp3;
 
 	// Initializing Application class
 	Application app = new Application();
 
 	// Getting the total volume
 	// using get_total_volume
-	double vol = app.get_total_volume(c_arr, s_arr);
+	double vol = app.getTotalVolume(cAarr, sArr);
 
 	// Print and display the total volume
 	System.out.println("The total volume is " + vol);
@@ -133,7 +132,7 @@ public static void main(String args[])
 }
 ```
 
-Така създадения клас отговаряли на OCP?
+Така създадения клас отговаря ли на OCP?
 
 Какво бихте направили, за да подобрите този клас?
 
@@ -141,7 +140,7 @@ public static void main(String args[])
 
 ### Задача 3
 
-Как ще реализирате програма за кафе машини, който имат базови функционалностти и премиум такива.
+Как ще реализирате програма за кафе машини, които имат базови функционалности и премиум такива.
 
 От какви класове ще имате нужда?
 
@@ -151,11 +150,11 @@ public static void main(String args[])
 
 Реализирайте решението.
 
-# Задачи OCP
+# Задачи SRP
 
 ### Задача 1
 
-Преглеждайки правилотро за еденична отговорност и представения пример. Виждате ли възможни пробойни на това правило в примера в упражнението. Обосновете се какви са те и какво е решението за тяхното преодоляване.
+Преглеждайки правилотро за единична отговорност и представения пример. Виждате ли възможни пробойни на това правило в примера в упражнението? Обосновете се какви са те и какво е решението за тяхното преодоляване.
 
 ### Задача 2
 
@@ -213,7 +212,7 @@ public class TextManipulator {
 
 ### Задача 3
 
-Как се разделите функционалностите в приложение за доставка на храна, което приема поръчки на храна, изчислява сметката и я доставя на клиентите.
+Как ще разделите функционалностите в приложение за доставка на храна, което приема поръчки на храна, изчислява сметката и я доставя на клиентите.
 
 От колко класа ще имате нужда?
 
