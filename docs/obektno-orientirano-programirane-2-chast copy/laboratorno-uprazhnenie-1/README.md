@@ -1,21 +1,27 @@
-# Лабораторно упражнение 1
+# Laboratory lesson 1
 
-### Принципите SOLID
+### SOLID principles
 
-Принципите SOLID са въведени от Робърт Ч. Мартин в неговия труд от 2000 г. "Принципи на дизайна и модели на дизайна". Това понятие по-късно са надградено от Майкъл Пера, който въвежда акронима SOLID. През последните 20 години тези пет принципа революционизираха света на обектно-ориентираното програмиране, променяйки начина, по който се пише софтуер.
+The SOLID principles were introduced by Robert C. Martin in his work from 2000, "Design Principles and Design Patterns". This concept was later refined by Michael Feathers, who introduced the acronym SOLID. Over the past 20 years, these five principles have revolutionized the world of object-oriented programming, changing the way software is written.
 
-Какво е **SOLID** и как ни помага да напишем по-добър код?
+What is SOLID, and how does it help in writing better code?
 
-Казано по-просто, дизайнерските принципи на Мартин и Перата **ни насърчават да създаваме по-поддържаем, разбираем и гъвкав софтуер.** Следователно, въпреки **неизбежноста от това, че нашите приложения растат по размер, ние можем да намалим тяхната сложност** и да си спестим много главоболия по пътя на разработване!
+Put simply, Martin's and Feather's design principles encourage the creation of software that is easier to maintain, understand, and flexible. Therefore, despite the inevitability of applications growing in size, their complexity decreases!
 
-Нека да разгледаме следния пример:
+The SOLID principles indicate how functions and data structures should be arranged in classes and how these classes should be interconnected.
 
-Когато една сграда се строи с лоши тухли, архитектурата на сградата няма голямо значение. От друга страна ако не знаем как да редим тухлите бъркотията също може да е голяма.
+The use of the term "class" does not mean that these principles only apply to object-oriented programming. A class is simply a related grouping of functions and data. Every software system has such groupings, whether they are called classes or not. The SOLID principles apply to these groups of functions and data, and even to a lower level such as a function or data structure, which we will refer to as elements of the software.
 
-Ако разгледаме примера в програмирането това е мястото къдто влизат принципите на SOLID. Принципите на SOLID ни казват как да подредим нашите функции и структури от данни в класове и как тези класове трябва да бъдат свързани помежду си.
+The following five concepts constitute the SOLID principles: 
 
-Използването на Думата „клас” не означава, че тези принципи са приложими само към обектно-ориентираното програмиране. Класът е просто свързано групиране на функции и данни. Всяка софтуерна система има такива групи, независимо дали се наричат класове или не. Принципите на SOLID се прилагат за тези групи от функции и данни и дори до по ниско ниво като функция или структура от данни, които ще наричаме елементи/елементи на софтуера
+**S** Single Responsibility principle
 
-Следните пет понятия съставляват **SOLID** принципите:
+**O** Open-Closed principle
 
-<table><thead><tr><th width="119.4">Инициал</th><th width="188">Акроними</th><th>Концепция</th></tr></thead><tbody><tr><td>S</td><td>SRP - <strong>Single Responsibility Principle</strong></td><td><strong>Принцип за единствена отговорност</strong><br>Това ще рече, че всеки елемент на софтуера има една работа и само една причина за промяна.</td></tr><tr><td>O</td><td>OCP - <strong>Open-Closed Principle</strong></td><td><p><strong>Принципът отворено-затворено</strong></p><p>Същността е, че за да бъдат лесни за промяна всички елемент на софтуера,  трябва да бъдат проектирани така, че да позволяват поведението на елементите да бъде променено чрез добавяне на нов код, а не промяна на съществуващ код.</p></td></tr><tr><td>L</td><td>LSP - <strong>Liskov Substitution Principle</strong></td><td><p><strong>Принцип на заместване на Лисков</strong></p><p>Всеки наследник (подтип) трябва лесно да заменя всичките си базови типове.</p></td></tr><tr><td>I</td><td>ISP - <strong>Interface Segregation Principle</strong></td><td><p><strong>Принцип за разделяне на интерфейсите</strong></p><p>Много на брой малки интерфейси е по-добре от един голям общ интерфейс. Това означава, че не е нужно да зависим от неща които не ползваме</p></td></tr><tr><td>D</td><td>DIP - <strong>Dependency Inversion Principle</strong></td><td><p><strong>Принцип на обръщане на зависимостите</strong></p><p>Всички класове от високо ниво трябва да дефинират абстракции и нито един не трябва да зависи от конкретен клас. Класовете от ниско ниво, може да зависят от абстракциите.</p></td></tr></tbody></table>
+**L** Liskov Substitution principle
+
+**I** Interface Segregation principle
+
+**D** Dependency Inversion principle
+
+
