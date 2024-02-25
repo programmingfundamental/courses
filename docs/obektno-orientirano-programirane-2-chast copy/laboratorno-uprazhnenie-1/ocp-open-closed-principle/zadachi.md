@@ -1,12 +1,20 @@
-# Задачи
+---
+layout: default
+title: Задачи
+parent: Лабораторно упражнение 1
+grand_parent: Обектно-ориентирано програмиране - 2 част
+nav_order: 3
+---
 
-### Задача 1
+# OCP tasks
 
-Преглеждайки правилото за Open-Closed и представения пример. Виждате ли възможни пробойни на това правило в примера в упражнението. Обосновете се какви са те и какво е решението за тяхното преодоляване.
+### Task 1
 
-### Задача 2
+Consider the calculator example that follows OCP from the lesson. What else could be done to optimize the code?
 
-Разгледайте следния пример:
+### Task 2
+
+Look at the following code:
 
 ```
 public class Cuboid {
@@ -27,35 +35,34 @@ public double radius;
 ```
 public class Application {
 // Returning the total volume of the geometric objects
-public double get_total_volume(Cuboid[] c_geo_objects,
-							Sphere[] s_geo_objects)
+public double getTotalVolume(Cuboid[] cGeoObjects, Sphere[] sGeoObjects)
 {
 	// Variable used to store total volume
-	double vol_sum = 0;
+	double volSum = 0;
 
 	// Iteratively calculating the volume of each Cuboid
 	// and adding it to the total volume
 
 	// Iterating using for each loop to
 	// calculate the volume of a cuboid
-	for (Cuboid geo_obj : c_geo_objects) {
+	for (Cuboid geoObj : cGeoObjects) {
 
-		vol_sum += geo_obj.length * geo_obj.breadth
-				* geo_obj.height;
+		volSum += geoObj.length * geoObj.breadth
+				* geoObj.height;
 	}
 
 	// Iterating using for each loop to
 	// calculate the volume of a cuboid
-	for (Sphere geo_obj : s_geo_objects) {
+	for (Sphere geoObj : sGeoObjects) {
 
 		// Iteratively calculating the volume of each
 		// Sphere and adding it to the total volume
-		vol_sum += (4 / 3) * Math.PI * geo_obj.radius
-				* geo_obj.radius * geo_obj.radius;
+		volSum += (4 / 3) * Math.PI * geoObj.radius
+				* geoObj.radius * geoObj.radius;
 	}
 
 	// Returning the to total volume
-	return vol_sum;
+	return volSum;
 }
 }
 ```
@@ -86,10 +93,10 @@ public static void main(String args[])
 	cb3.height = 15;
 
 	// Initializing and declaring an array of cuboids
-	Cuboid[] c_arr = new Cuboid[3];
-	c_arr[0] = cb1;
-	c_arr[1] = cb2;
-	c_arr[2] = cb3;
+	Cuboid[] cArr = new Cuboid[3];
+	cArr[0] = cb1;
+	cArr[1] = cb2;
+	cArr[2] = cb3;
 
 	// Initializing a sphere one as well as declaring
 	// its dimension.
@@ -107,17 +114,17 @@ public static void main(String args[])
 	sp3.radius = 3;
 
 	// Initializing and declaring an array of spheres
-	Sphere[] s_arr = new Sphere[3];
-	s_arr[0] = sp1;
-	s_arr[1] = sp2;
-	s_arr[2] = sp3;
+	Sphere[] sArr = new Sphere[3];
+	sArr[0] = sp1;
+	sArr[1] = sp2;
+	sArr[2] = sp3;
 
 	// Initializing Application class
 	Application app = new Application();
 
 	// Getting the total volume
 	// using get_total_volume
-	double vol = app.get_total_volume(c_arr, s_arr);
+	double vol = app.getTotalVolume(cArr, sArr);
 
 	// Print and display the total volume
 	System.out.println("The total volume is " + vol);
@@ -125,20 +132,72 @@ public static void main(String args[])
 }
 ```
 
-Така създадения клас отговаряли на OCP?
+Does it follow the OCP?
 
-Какво бихте направили, за да подобрите този клас?
+What should be done?
 
-Реализирайте решението.
+Implement the solution.
 
-### Задача 3
+### Task 3
 
-Как ще реализирате програма за кафе машини, който имат базови функционалностти и премиум такива.
+Create a program for coffee machines with basic and premium functions. The code have to follow the OCP.
 
-От какви класове ще имате нужда?
+# SRP tasks
 
-Каква ще е тяхната отговорност?
+### Task 1
 
-Кои ще са тези класове?
+Look at the following code:
 
-Реализирайте решението.
+```
+public class TextManipulator { 
+    private String text;
+    
+    public TextManipulator(String text) {
+        this.text = text;
+    }
+    
+    public String getText() {
+        return text;
+    }
+    
+    public void appendText(String newText) {
+        text = text.concat(newText);
+    }
+    
+    public String findWordAndReplace(String word, String replacementWord) {
+        if (text.contains(word)) {
+            text = text.replace(word, replacementWord);
+        }
+        return text;
+    }
+    
+    public String findWordAndDelete(String word) {
+        if (text.contains(word)) {
+            text = text.replace(word, "");
+        }
+        return text;
+    }
+    
+    public void printText() {
+        System.out.println(text);
+    }
+
+    public void printOutEachWordOfText() {
+        System.out.println(Arrays.toString(text.split(" ")));
+    }
+
+    public void printRangeOfCharacters(int startingIndex, int endIndex) {
+        System.out.println(text.substring(startingIndex, endIndex));
+    }
+}
+```
+
+Does it follow the SRP?
+
+What should be done?
+
+Implement the solution.
+
+### Task 2
+
+Create application for food delivery that accepts orders, calculates the bill and deliver the order. Follow SRP while implementing the code.
