@@ -1,8 +1,16 @@
+---
+layout: default
+title: OCP - Open-Closed Principle
+parent: Лабораторно упражнение 1
+grand_parent: Обектно-ориентирано програмиране - 2 част
+nav_order: 2
+---
+
 # OCP - Open-Closed Principle
 
-**Както подсказва името, този принцип гласи, че софтуерните обекти трябва да бъдат отворени за разширение, но затворени за модификация.** В резултат на това, когато бизнес изискванията се променят (условието на задачата се надгради) тогава обектът може да бъде разширен, но не и модифициран.
+As the name suggests, this principle states that **software objects should be open for extension but closed for modification**. As a result, when business requirements change, the object can be extended but not modified.
 
-Нека да разгледаме следния пример:
+Example:
 
 ```
 public class Guitar {
@@ -14,11 +22,12 @@ public class Guitar {
 }
 ```
 
-Започваме с класическа итара, но след някоплко месеца решаваме, че една китара брандирана с пламаци ще изглежда по-рокендрол
+In the beginning, this class describes classic guitar, but later decoration should be added.
 
-В този момент може да е съблазнително просто да отворим класа _"Китара_" и да добавим поле за пламъка — но кой знае какви грешки може да доведе това в нашия клас.
+One way to do this is simply adding *decoration* property to the existing class _Guitar_, but this will require additional modifications.
 
-Вместо това нека **се придържаме към принципа на отворените за разширение класове и просто да разширим класа си **_**Китара**_:
+Instead, it's better to extend class _Guitar_:
+
 
 ```
 public class SuperCoolGuitarWithFlames extends Guitar {
@@ -29,21 +38,20 @@ public class SuperCoolGuitarWithFlames extends Guitar {
 }
 ```
 
-Разширявайки класа Китара, сме сигурни, досегашното ни приложениое няма да бъде засегнато, а това за което трябва да мислим е само новата функционалност.
+Written like that, existing application won't be affected, there will be only additional functionality.
 
-**Ще разгледаме как интерфейсите са един от начините да следвате на този принцип**
+**One way to follow this principle is using interfaces.**
 
-### **1.** Несъответствие
+### **1.** Example not following OCP
 
-**Нека разгледаме изграждането на приложение за калкулатор, което може да има няколко операции, като например добавяне и изваждане.**
+**Addition and Subtraction Calculator.**
 
-На първо място, ще определим интерфейс от най-високо ниво – _CalculatorOperation_:
 
 ```
 public interface CalculatorOperation {}
 ```
 
-**Нека създадем клас **_**"Добавяне**_**", който би събрал две числа и би разшерил **_**CalculatorOperation**_**:**
+**Class **_**"Addition**_**", which sums two numbers and implements **_**CalculatorOperation**_**:**
 
 ```java
 public class Addition implements CalculatorOperation {
@@ -61,7 +69,7 @@ public class Addition implements CalculatorOperation {
 }
 ```
 
-От сега имаме само един клас _Добавяне,_ така че трябва да определим друг клас на име _Изваждане_:
+We also need class _Subtraction_:
 
 ```java
 public class Subtraction implements CalculatorOperation {
@@ -78,7 +86,7 @@ public class Subtraction implements CalculatorOperation {
 }
 ```
 
-**Нека сега определим нашия основен клас, който ще изпълни нашите калкулаторни операции:**
+**Execution class:**
 
 ```java
 public class Calculator {
@@ -99,23 +107,19 @@ public class Calculator {
 }
 ```
 
-**Въпреки че това може да изглежда добре, това не е добър пример за OCP.** Когато влезе ново изискване за добавяне на умножение или функционалност за разделяне, нямаме начин освен да променим метода на _изчисляване_ на клас _Калкулатор_.
+Although this code looks fine, this is not good example of OCP. Adding new operation will require refactoring of already existing method _calculate_, meaning the code breaks OCP.
 
-**Оттук можем да кажем, че този код не е съвместим с OCP.**
+### 2. Same example following OCP
 
-### 2. Съвместими с OCP
+In order to follow OCP, the method _calculate_ will be placed on a higher level of abstraction.
 
-Както видяхме нашето приложение за калкулатор все още не е съвместимо с OCP. Кодът в метода _на изчисляване_ ще се промени с всяко входящо ново искане за поддръжка на операция. Така че, трябва да извлечем този код и да го сложим в абстракционен слой.
-
-Едно решение е всяка операция да бъде делегирана в съответния им клас:
+Possible solution is each operation to be defined in a class:
 
 ```java
 public interface CalculatorOperation {
     void perform();
 }
 ```
-
-**В резултат на това класът **_**"Добавяне"**_** би могъл да внедри логиката на добавяне на два номера:**
 
 ```java
 public class Addition implements CalculatorOperation {
@@ -132,7 +136,7 @@ public class Addition implements CalculatorOperation {
 }
 ```
 
-По същия начин актуализиран клас _на Изваждане_ би имал подобна логика. И подобно на _Добавяне_ и _Изваждане_, като настъпи нова задача за промяна, бихме могли да внедрим логиката на _разделението_:
+Adding new operation means simply creating new class and implementing the same interface:
 
 ```java
 public class Division implements CalculatorOperation {
@@ -150,7 +154,8 @@ public class Division implements CalculatorOperation {
 }
 ```
 
-**И накрая, нашият клас **_**Калкулатор**_** няма нужда да прилага нова логика, когато въвеждаме нови оператори:**
+**With such organization, there will be no need of method modification when new operation is added:**
+
 
 ```java
 public class Calculator {
@@ -163,9 +168,9 @@ public class Calculator {
     }
 }
 ```
+In this way, the class is _closed_ for modification but _open_ for extension.
 
-Така класът е _затворен_ за модификация, но _отворен_ за разширение.
 
-### 3. Заключение
+### 3. Conclusion
 
-Принципа на отворени за разширение и затворени за модификация обекти, подобрава работата върху проектите, като намалява грешките, който могат да възникнат при модифициране на класове и улеснява тестването като капсолира вече съществуващата логика и предоставя възможност за концентрация върху новата логика на приложениет.
+The principle of open for extension and closed for modification objects improves work on projects by reducing errors that may arise when modifying classes and facilitates testing by encapsulating existing logic and providing the opportunity to focus on the new logic of the application.
