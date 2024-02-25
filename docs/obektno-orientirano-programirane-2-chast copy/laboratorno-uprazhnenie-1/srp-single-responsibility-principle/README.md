@@ -1,19 +1,25 @@
+---
+layout: default
+title: SRP - Single Responsibility Principle
+parent: Лабораторно упражнение 1
+grand_parent: Обектно-ориентирано програмиране - 2 част
+nav_order: 1
+---
+
 # SRP - Single Responsibility Principle
 
-### **Единна отговорност**
 
-Този принцип гласи, че **един елемент трябва да има само една отговорност. Освен това тя следва да има само една причина да се промени, тази причина е промяна в изискването, какво се изисква от този елемент да изпълнява.**
+This principle states that **an element should have only one responsibility**. Furthermore, it should have only one reason to change, which is a change in the requirement for that element to fulfill.
 
-**Този принцип помага да и се раздели по-добър софтуер, като ни позволява по лесно да**:
+Applying this principle allows:
 
-1. **Тестваме** – Клас с една отговорност ще има много по-малко тестови случаи.
-2. **По-малко връзки** – По-малко функционалност в един клас ще има по-малко зависимости.
-3. **Организация** – По-малките, добре организирани класове са по-лесни за разбиране от монолитните.
+*Easier Testing* - A class with a single responsibility will have far fewer test cases.
 
-Да започнем от следния пример, най-вероятно сте чували принципа: **Една функция трябва да прави едно и само едно нещо.** Ние използваме този принцип, когато рефакторираме (преработка на код, с цел да се подобри неговото качество, без да се промени крайния резултат) големи функции в по-малки функции; използва се на най-ниските нива.
+*Fewer Connections* - Less functionality in one class will result in fewer dependencies.
 
-Въпреки това, вярвам че се е случвало да пишете подобен код:\
+*Better Organization* - Smaller, well-organized classes are easier to understand than monolithic ones.
 
+The principle that "a function should do one and only one thing" is used when refactoring large functions into smaller ones; it is used at the lowest levels.
 
 ```java
 public static void calculateSum() {
@@ -28,66 +34,49 @@ public static void calculateSum() {
 }
 ```
 
-Така написана функцията, дали може да получава числа от, файл, база данни, фруга функция, сензоро?
+Written in this way, such function cannot accept arguments from different sources, e.g. file, database, another function, sensors, etc. 
 
-Според вас тази функция изпълнява ли повече от едно нещо?
 
-SOLID принципа за единна отговорност (SRP), много прилича на принципа по горе но е и различен. Докато принципа "**Една функция, една отговорност**" е приложим на ниско ниво, по колкото по нагоре се отива толкова по трудно става разпознаването на отговорностите.
+The SOLID principle of Single Responsibility (SRP) is similar to the principle mentioned above, but it also has its differences. While the principle "One function, one responsibility" applies at a low level, the higher you go (towards higher levels of abstraction), the more challenging it becomes to recognize responsibilities.
 
-Всеки клас може да съдържа повече от един метод или поле, в тази ситуация не може да се приложи директно подхода както при функциите, а трябва да се мисли за средата в която това обединение от методи и променливи ще намери приложение.
+Every class may contain more than one method or field/attribute. In such situation, the approach cannot be applied directly as with functions. Instead, the context must be considered, where this combination of methods and variables will find application.
 
-Може да се разбере този принцип, като се разгледат симптомите/начините по които се нарушава.
+This principle can be understood and realized by considering various ways in which it can be violated.
 
-СИМПТОМ 1: СЛУЧАЙНО ДУБЛИРАНЕ
+Example: 
 
-Като пример може да разгледаме приложение за заплати в което присъства клас Employee,  тои има три метода: calculatePay(), reportHours() и save().
+Let's consider salary application, where we have classс Employee with three methods: calculatePay(), reportHours() и save().
 
 ```java
 public class Employee {
      public void calculatePay() {
-          //код на метода
+          //method body
      }
      public void reportHours() {
-          //код на метода
+          //method body
      }
      public void save() {
-          //код на метода
+          //method body
      }
 }
 ```
 
-Метода calculatePay() изчислява заплатата необходима за счетоводния отдел
+Method calculatePay() calculates salary for accounting department employee.
 
-Метода reportHours() е специфичен и се отнася към отдела за човешки ресурси
+Method reportHours() is for human resources department.
 
-Метода save() се отнася до администраторите на Базата даннищ
+Method save() is for database admin.
 
-Да предположим, че функцията calculatePay() и reportHours() споделят общ алгоритъм за изчисляване на часове без извънреден труд.
+Let's assume functions calculatePay() and reportHours() has common calculating algorithm for working hours with no overtime.
 
-Как бихте организирали когда си?
+How the code should be organized?
 
-Логично е да поставим този алгоритъм във функция, предимството ще е че няма да се дублира код, с името regularHours()
+It will be logical to put this common algorithm in a function *regularHours()*, avoiding repeating code.
 
-Обединяването на тези 3 метода в един клас може да доведе до следното:
+Combining these 3 methods into one class can lead to interdependencies between different departments. This can cause the actions of one department to affect those of another, which is not always necessary.
 
-Свързване на счетоводния отдел, човешки ресурси, администраторите помежду им. Това обединение може да може накара действията на счетоводния отдел да повлияят на нещо, от който отдел човешки ресурси зависи.
+Example:
 
-Например, нека разгледаме един клас, за да представим една проста книга:
-
-```java
-public class Book {
-
-    private String name;
-    private String author;
-    private String text;
-
-    //constructor, getters and setters
-}
-```
-
-В този код съхраняваме името, автора и текста, свързани с екземпляр на _Книга_.
-
-Нека сега добавим няколко метода за обработка на текста:
 
 ```java
 public class Book {
@@ -109,11 +98,9 @@ public class Book {
 }
 ```
 
-Сега нашият клас _Book_ работи добре и можем да съхраняваме толкова книги, колкото ни харесва в нашето приложение.
+In this code fragment there are properties and two methods declared in a class called _Book_. The code works properly and could store as many books in application as necessary.
 
-Но каква полза е съхраняването на информацията, ако не можем да изведем текста в нашата конзола и да я прочетем?
-
-Нека оставим предпазливоста на страна и да добавим метод за печат:
+Later appears requirement to display book information, which leads to some refactoring:
 
 ```java
 public class Book {
@@ -125,11 +112,11 @@ public class Book {
 }
 ```
 
-Този метод ще има достъп до системните ресурси за извеждане, което ще добави нова зависимост в него. Освен да съхранява информацията за книгата, класа знае и къде да я презентира.
+This method will have access to the system output resources that will introduce new dependency - the class will store information about a book and will present this information.
 
-Това какво виждате нарушава принципа на единната отговорност, който очертахме по-рано.
+This will break single responsibility principle since the class will have more than one functionality.
 
-За да оправим бъркотията си, трябва да внедрим отделен клас, който се занимава само с отпечатване на нашите текстове:
+In order to follow SRP a new class should be introduced with the only resposibility of presenting book information:
 
 ```java
 public class BookPrinter {
@@ -145,13 +132,10 @@ public class BookPrinter {
 }
 ```
 
-Не само сме разработили клас, който обслужва _Book_ на нейните задължения за печат, но и можем да използваме нашия клас _BookPrinter_, за да изпратим текста си на други медии.
+Since there is single class for printing information, the printing could be done in different places and sources.
 
-Независимо дали става дума за имейл, сеч, или нещо друго, имаме отделен клас, посветен на тази грижа.
+**In order to follow SRP in a program is necessary to know the responsibility of each class.**
 
-**Трикът за внедряване на SRP в нашия софтуер е познаването на отговорността** на всеки клас.
+Following the SRP principle, classes will adhere to a single functionality. The purpose of methods and data will be clear. This means that the code will exhibit high cohesion, as well as resistance to changes, which together reduce errors.
 
-Следвайки принципа SRP, нашите класове ще се придържат към една функционалност. Техните методи и данни ще бъдат загрижени с една ясна цел. Това означава **високо кохерентност,** както и **устойчивост на промени, които заедно намаляват грешките**.
-
-Въпреки че името на принципа е саморазяснително, можем да видим колко лесно е да се приложи неправилно. Уверете се, че ще разграничите отговорността на всеки клас при разработването на проект и обърнете допълнително внимание на кохерентността.
-
+Although the name of the principle is indicative, its application is not always easy. When developing a project, it is necessary to correctly delineate the responsibilities of each class and pay attention to cohesion.
