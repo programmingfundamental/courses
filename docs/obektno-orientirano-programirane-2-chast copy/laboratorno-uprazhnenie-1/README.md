@@ -338,6 +338,8 @@ In this way, the class is _closed_ for modification but _open_ for extension.
 The principle of open for extension and closed for modification objects improves work on projects by reducing errors that may arise when modifying classes and facilitates testing by encapsulating existing logic and providing the opportunity to focus on the new logic of the application.
 
 
+
+
 **PRACTICE**
 
 # OCP tasks
