@@ -337,3 +337,202 @@ In this way, the class is _closed_ for modification but _open_ for extension.
 
 The principle of open for extension and closed for modification objects improves work on projects by reducing errors that may arise when modifying classes and facilitates testing by encapsulating existing logic and providing the opportunity to focus on the new logic of the application.
 
+
+**PRACTICE**
+
+# OCP tasks
+
+### Task 1
+
+Consider the calculator example that follows OCP from the lesson. What else could be done to optimize the code?
+
+### Task 2
+
+Look at the following code:
+
+```
+public class Cuboid {
+// Member variables of this class
+public double length;
+public double breadth;
+public double height;
+}
+```
+
+```
+public class Sphere {
+// Storing radius of a sphere
+public double radius;
+}
+```
+
+```
+public class Application {
+// Returning the total volume of the geometric objects
+public double getTotalVolume(Cuboid[] cGeoObjects, Sphere[] sGeoObjects)
+{
+	// Variable used to store total volume
+	double volSum = 0;
+
+	// Iteratively calculating the volume of each Cuboid
+	// and adding it to the total volume
+
+	// Iterating using for each loop to
+	// calculate the volume of a cuboid
+	for (Cuboid geoObj : cGeoObjects) {
+
+		volSum += geoObj.length * geoObj.breadth
+				* geoObj.height;
+	}
+
+	// Iterating using for each loop to
+	// calculate the volume of a cuboid
+	for (Sphere geoObj : sGeoObjects) {
+
+		// Iteratively calculating the volume of each
+		// Sphere and adding it to the total volume
+		volSum += (4 / 3) * Math.PI * geoObj.radius
+				* geoObj.radius * geoObj.radius;
+	}
+
+	// Returning the to total volume
+	return volSum;
+}
+}
+```
+
+```
+public class GFG {
+public static void main(String args[])
+{
+	// Initializing a cuboid one as well as declaring
+	// its dimensions.
+	Cuboid cb1 = new Cuboid();
+	cb1.length = 5;
+	cb1.breadth = 10;
+	cb1.height = 15;
+
+	// Initializing a cuboid two as well as declaring
+	// its dimensions.
+	Cuboid cb2 = new Cuboid();
+	cb2.length = 2;
+	cb2.breadth = 4;
+	cb2.height = 6;
+
+	////Initializing a cuboid three as well as declaring
+	/// its dimensions.
+	Cuboid cb3 = new Cuboid();
+	cb3.length = 3;
+	cb3.breadth = 12;
+	cb3.height = 15;
+
+	// Initializing and declaring an array of cuboids
+	Cuboid[] cArr = new Cuboid[3];
+	cArr[0] = cb1;
+	cArr[1] = cb2;
+	cArr[2] = cb3;
+
+	// Initializing a sphere one as well as declaring
+	// its dimension.
+	Sphere sp1 = new Sphere();
+	sp1.radius = 5;
+
+	// Initializing a sphere two as well as declaring
+	// its dimension.
+	Sphere sp2 = new Sphere();
+	sp2.radius = 2;
+
+	// Initializing a sphere three as well as declaring
+	// its dimension.
+	Sphere sp3 = new Sphere();
+	sp3.radius = 3;
+
+	// Initializing and declaring an array of spheres
+	Sphere[] sArr = new Sphere[3];
+	sArr[0] = sp1;
+	sArr[1] = sp2;
+	sArr[2] = sp3;
+
+	// Initializing Application class
+	Application app = new Application();
+
+	// Getting the total volume
+	// using get_total_volume
+	double vol = app.getTotalVolume(cArr, sArr);
+
+	// Print and display the total volume
+	System.out.println("The total volume is " + vol);
+}
+}
+```
+
+Does it follow the OCP?
+
+What should be done?
+
+Implement the solution.
+
+### Task 3
+
+Create a program for coffee machines with basic and premium functions. The code have to follow the OCP.
+
+# SRP tasks
+
+### Task 1
+
+Look at the following code:
+
+```
+public class TextManipulator { 
+    private String text;
+    
+    public TextManipulator(String text) {
+        this.text = text;
+    }
+    
+    public String getText() {
+        return text;
+    }
+    
+    public void appendText(String newText) {
+        text = text.concat(newText);
+    }
+    
+    public String findWordAndReplace(String word, String replacementWord) {
+        if (text.contains(word)) {
+            text = text.replace(word, replacementWord);
+        }
+        return text;
+    }
+    
+    public String findWordAndDelete(String word) {
+        if (text.contains(word)) {
+            text = text.replace(word, "");
+        }
+        return text;
+    }
+    
+    public void printText() {
+        System.out.println(text);
+    }
+
+    public void printOutEachWordOfText() {
+        System.out.println(Arrays.toString(text.split(" ")));
+    }
+
+    public void printRangeOfCharacters(int startingIndex, int endIndex) {
+        System.out.println(text.substring(startingIndex, endIndex));
+    }
+}
+```
+
+Does it follow the SRP?
+
+What should be done?
+
+Implement the solution.
+
+### Task 2
+
+Create application for food delivery that accepts orders, calculates the bill and deliver the order. Follow SRP while implementing the code.
+
