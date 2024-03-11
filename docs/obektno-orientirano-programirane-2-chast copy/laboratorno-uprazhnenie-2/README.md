@@ -274,3 +274,12 @@ Implement class Paytm with following behaviour:
 ### Task 1
 
 Create two implementations of the PrintInfoToMedia interface, where one implementation prints to the console and the other to a file. Execute the program once with the implementation for console output and once with the file output. Make it so that the two implementations can be switched by just changing the package.
+
+
+
+# Bonus task
+Apply the SOLID principles when writing a program that creates new text files. When an error occur, they are handled and written to a file named 'LocalErrors.txt'.
+There are two types of files - those with textual content and those with metadata (the metadata includes the author).
+Text files are stored in the 'base' directory, while files with metadata are stored in the 'meta' directory.
+If the text of the file starts with 'Author', a metadata file is created.
+Each file should be able to be opened for reading.
