@@ -112,19 +112,13 @@ String xsdFile = this.getClass().getClassLoader().getResource("xml/person.xsd").
 ```
 
 ```
-public void writeToXMLFile(Writer writer, Group group) {
+public void writeToXML(Writer writer, Group group) {
 
     // Създаване на JAXB контекст
     JAXBContext context = JAXBContext.newInstance(Group.class);
     // Създаване на marshaller инстанция
     Marshaller m = context.createMarshaller();
     m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-
-    //Валидиране с xsd
-    SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-    Schema schema = sf.newSchema(new File(xsdFile));
-    jaxbUnmarshaller.setSchema(schema);
-
     // Записване в поток
     m.marshal(group, writer);
 
@@ -136,14 +130,19 @@ public void writeToXMLFile(Writer writer, Group group) {
 ### Трансформиране в XML
 
 ```
-public Group readerFromXMLFile(String xml) {
+public Group readerFromXML(String xml) {
 
     // Създаване на JAXB контекст
     JAXBContext context = JAXBContext.newInstance(Group.class);
     // Създаване на unmarshaller инстанция
     Unmarshaller um = context.createUnmarshaller();
-    Group group = (Group) um.unmarshal(new StringReader(xml));
 
-    return group
+    //Валидиране с xsd
+    SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+    Schema schema = sf.newSchema(new File(xsdFile));
+    um.setSchema(schema);
+
+    Group group = (Group) um.unmarshal(new StringReader(xml));
+    return group;
 }
 ```
