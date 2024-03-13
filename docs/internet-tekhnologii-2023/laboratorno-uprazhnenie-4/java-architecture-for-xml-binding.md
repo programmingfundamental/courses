@@ -20,19 +20,7 @@ JAXB осигурява бърз и удобен начин за обвързв�
 
 ### JAXB библиотека
 
-```
-<dependency>
-    <groupId>javax.xml.bind</groupId>
-    <artifactId>jaxb-api</artifactId>
-    <version>2.2.8</version>
-</dependency>
-<!--ЗА РАБОТА С JAXB от JAVA 9 нагоре-->
-<dependency>
-  <groupId>org.glassfish.jaxb</groupId>
-  <artifactId>jaxb-runtime</artifactId>
-  <version>2.3.1</version>
-</dependency>
-```
+https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime
 
 ### Дефиниране на клас, моделиращ данните в XML файла
 
@@ -117,36 +105,44 @@ public class Group {
 }
 ```
 
-### Запис в XML файл
+### Трансформиране от XML
 
 ```
-public void writeToXMLFile(String xmlFile, Group group) {
+String xsdFile = this.getClass().getClassLoader().getResource("xml/person.xsd").getPath();
+```
+
+```
+public void writeToXMLFile(Writer writer, Group group) {
 
     // Създаване на JAXB контекст
     JAXBContext context = JAXBContext.newInstance(Group.class);
     // Създаване на marshaller инстанция
     Marshaller m = context.createMarshaller();
     m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-    // Записване в System.out
-    m.marshal(group, System.out);
-    // Записване във файл
-    m.marshal(group, new File(xmlFile));
+
+    //Валидиране с xsd
+    SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+    Schema schema = sf.newSchema(new File(xsdFile));
+    jaxbUnmarshaller.setSchema(schema);
+
+    // Записване в поток
+    m.marshal(group, writer);
 
 }
 ```
 
 ###
 
-### Записване от XML файл
+### Трансформиране в XML
 
 ```
-public Group readerFromXMLFile(String xmlFile) {
+public Group readerFromXMLFile(String xml) {
 
     // Създаване на JAXB контекст
     JAXBContext context = JAXBContext.newInstance(Group.class);
     // Създаване на unmarshaller инстанция
     Unmarshaller um = context.createUnmarshaller();
-	Group group = (Group) um.unmarshal(new FileReader(xmlFile));
+    Group group = (Group) um.unmarshal(new StringReader(xml));
 
     return group
 }
