@@ -60,3 +60,33 @@ XML форматът е относително многословен, т.е. а
 | javax.activation.DataHandler            | xs:base64Binary  |
 | javax.xml.transform.Source              | xs:base64Binary  |
 | java.util.UUID                          | xs:string        |
+
+2. XML елементи се валидират с XSD схема.
+
+Схемата съдържа описание на синтаксиса на XML файла. Имената на елементите, техните дъщерни елементи типовете данни, който могат да бъдат стойности на елементите.
+
+Примерна схема за валидиране на XML файл с обект person
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="person">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="name"/>
+                <xs:element ref="age"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="name" type="xs:string"/>
+    <xs:element name="age" type="xs:integer"/>
+</xs:schema>
+```
+
+2.1. Генериране на схема в resources
+
+- Създавате XML входен файл
+- Избирате меню Tools -> XML Actions -> Generate XSD Schema from XML file
+- Резултатния файл поставяте в директория resources
+
+
