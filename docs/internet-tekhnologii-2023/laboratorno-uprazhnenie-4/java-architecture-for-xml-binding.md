@@ -105,7 +105,7 @@ public class Group {
 }
 ```
 
-### Трансформиране от XML
+### Трансформиране в XML
 
 ```
 String xsdFile = this.getClass().getClassLoader().getResource("xml/person.xsd").getPath();
@@ -128,7 +128,7 @@ public void writeToXML(Writer writer, Group group) {
 
 ###
 
-### Трансформиране в XML
+### Трансформиране от XML
 
 ```
 public Group readerFromXML(String xml) {
