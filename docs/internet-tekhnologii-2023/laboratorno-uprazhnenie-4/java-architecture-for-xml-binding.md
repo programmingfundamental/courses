@@ -119,6 +119,12 @@ public void writeToXML(Writer writer, Group group) {
     // Създаване на marshaller инстанция
     Marshaller m = context.createMarshaller();
     m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+    //Валидиране с xsd
+    SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+    Schema schema = sf.newSchema(new File(xsdFile));
+    m.setSchema(schema);
+
     // Записване в поток
     m.marshal(group, writer);
 
@@ -136,11 +142,6 @@ public Group readerFromXML(String xml) {
     JAXBContext context = JAXBContext.newInstance(Group.class);
     // Създаване на unmarshaller инстанция
     Unmarshaller um = context.createUnmarshaller();
-
-    //Валидиране с xsd
-    SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-    Schema schema = sf.newSchema(new File(xsdFile));
-    um.setSchema(schema);
 
     Group group = (Group) um.unmarshal(new StringReader(xml));
     return group;
