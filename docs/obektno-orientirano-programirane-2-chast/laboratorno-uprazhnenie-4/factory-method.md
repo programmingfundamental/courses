@@ -102,6 +102,32 @@ public class PushNotification implements Notification {
 }
 ```
 
+### Factory
+
 Създаването на обектите от конкретните класове ще минава през фактори клас
+
+```
+public class SMSNotificationFactory {
+    public SMSNotification create() {
+        return new SMSNotification();
+    }
+}
+```
+
+```
+public class EmailNotificationFactory {
+    public EmailNotification create() {
+        return new EmailNotification();
+    }
+}
+```
+
+```
+public class PushNotificationFactory {
+    public PushNotification create() {
+         return new PushNotification();
+    }
+}
+```
 
 Самото създаване на обекти минава през фактори метода по следния начин
