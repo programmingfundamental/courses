@@ -315,3 +315,12 @@ Create program for cars creation:
   * creates SUV
 * Main function where three types cars are build.
 
+
+
+BONUS TASK
+
+Implement Singleton and Builder to create a real estate agents program.
+
+Each agent has their own name, contact phone, and uses a shared list of real estate properties. They can add and remove properties from this list.
+
+Each property has characteristics such as type (house, apartment, or office), area, price, number of rooms, furnished or not, availability of garage/parking space, and garden.
