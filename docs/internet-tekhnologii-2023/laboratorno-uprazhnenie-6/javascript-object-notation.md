@@ -48,38 +48,3 @@ JSON е текстово базиран отворен стандарт, съз�
     ]
 }
 ```
-
-### GSON
-
-#### Добавяне на библиотека
-
-Добавяме в pom.xml dependency за работа с библиотеката.
-
-```
-    <dependency>
-        <groupId>com.google.code.gson</groupId>
-        <artifactId>gson</artifactId>
-        <version>2.8.2</version>
-    </dependency>
-```
-
-**Пример**
-
-```
-//Прочита текстовото съдържанието на заявката
-StringBuilder sb = new StringBuilder();
-String s;
-while ((s = request.getReader().readLine()) != null) {
-    sb.append(s);
-}
-
-UserBean newUser = (UserBean) gson.fromJson(sb.toString(), UserBean.class);
-```
-
-```
-//Връщане на резултата като json
-response.setContentType("application/json;charset=UTF-8");
-PrintWriter out = response.getWriter();
-out.println(gson.toJson(result)); //result обекта който щесе върне като резултат
-out.flush();
-```
