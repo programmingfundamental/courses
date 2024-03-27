@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Избрани анотации
+title: Docker
 parent: Лабораторно упражнение 6
 grand_parent: Интернет технологии
 nav_order: 1
