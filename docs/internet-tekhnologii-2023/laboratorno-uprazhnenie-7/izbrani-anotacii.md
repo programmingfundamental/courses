@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Избрани анотации
-parent: Лабораторно упражнение 7
+parent: Лабораторно упражнение 6
 grand_parent: Интернет технологии
-nav_order: 1
+nav_order: 4
 ---
 
 # Избрани анотации
