@@ -52,6 +52,10 @@ COPY build/libs/*.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
 ```
 
+Създаване на image
+```
+docker build -t demo .
+```
 Добавете compose.yaml файл за описание на контейнер за оставяне на изображението на проекта.
 
 ```
