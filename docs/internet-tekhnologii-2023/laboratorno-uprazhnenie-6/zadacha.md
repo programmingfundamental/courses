@@ -47,7 +47,7 @@ docker cp <път до ресурса>\students.war d266c8fb5dec:<път до we
 Добавете Dockerfile за създаване на image със Spring boot проект.
 
 ```
-FROM amazoncorretto:latest
+FROM eclipse-temurin:latest
 COPY build/libs/*.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
 ```
