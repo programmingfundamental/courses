@@ -14,7 +14,7 @@ nav_order: 3
 
 <figure><img src="../../../assets/image (50).png" alt=""><figcaption></figcaption></figure>
 
-1\.    Изберете Gradle - Grrovy Project и версия на Spring Boot
+1\.    Изберете Gradle - Groovy Project и версия на Spring Boot
 
 2\.     Въведете подробностите за проекта Gradle - Groovy, както следва:
 
