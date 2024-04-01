@@ -12,29 +12,8 @@ nav_order: 3
 
 Добавяне на библиотеката:
 
-```xml
-<dependency>
-   <groupId>org.projectlombok</groupId>
-   <artifactId>lombok</artifactId>
-   <optional>true</optional>
-</dependency>
-```
-
-За изключване на Lombok от крайния jar файл:
-
-```xml
-<plugin>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-maven-plugin</artifactId>
-    <configuration>
-        <excludes>
-            <exclude>
-                <groupId>org.project-lombok</groupId>
-                <artifactId>lombok</artifactId>
-            </exclude>
-        </excludes>
-    </configuration>
-</plugin>
+```compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 ```
 
 ### Най-често използвани анотации
