@@ -22,7 +22,6 @@ configurations {
 		extendsFrom annotationProcessor
 	}
 }
-
 ```
 ### Най-често използвани анотации
 
