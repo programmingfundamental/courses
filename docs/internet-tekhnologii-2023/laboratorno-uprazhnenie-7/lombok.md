@@ -12,8 +12,9 @@ nav_order: 3
 
 Добавяне на библиотеката:
 
-```compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
+```
+compileOnly 'org.projectlombok:lombok'
+annotationProcessor 'org.projectlombok:lombok'
 ```
 
 ### Най-често използвани анотации
