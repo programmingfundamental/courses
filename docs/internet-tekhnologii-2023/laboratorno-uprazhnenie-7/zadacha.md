@@ -1,4 +1,4 @@
-![image](https://github.com/programmingfundamental/courses/assets/10382663/2d79e8aa-fdb8-4ffc-a329-be01bd987794)---
+---
 layout: default
 title: Задача
 parent: Лабораторно упражнение 7
