@@ -62,7 +62,7 @@ public interface SocketAdapter {
 There are two adapter types - class adapter and object adapter, although both types give the same result.
 
 1. **Class Adapter** – uses **inheritance** and extends the source interface, Socket class in out case;
-2. **Обектен адаптер** - uses **composition** and contain the output object.
+2. **Object Adapter** - uses **composition** and contain the output object.
 
 #### Solution with class adapter
 
