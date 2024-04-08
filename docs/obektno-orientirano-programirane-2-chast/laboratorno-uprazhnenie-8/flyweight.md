@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Flyweight
+title: Proxy
 parent: Лабораторно упражнение 8
 grand_parent: Обектно-ориентирано програмиране - 2 част
-nav_order: 1
+nav_order: 2
 ---
 
 # Flyweight
