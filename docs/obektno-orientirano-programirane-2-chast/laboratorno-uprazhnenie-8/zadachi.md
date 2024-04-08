@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Proxy
+title: Задачи
 parent: Лабораторно упражнение 8
 grand_parent: Обектно-ориентирано програмиране - 2 част
 nav_order: 3
