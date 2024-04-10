@@ -45,6 +45,7 @@ public class CustomMapper extends ModelMapper {
 ```
 
 2. Създаваме entity клас:
+   
 ```java
 @Getter
 @Setter
@@ -60,6 +61,7 @@ public class User {
  
 ```
 3. Създаваме DTO клас:
+   
 ```java
 @Setter
 @Getter
