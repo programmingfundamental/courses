@@ -37,11 +37,11 @@ CityService.java
 
 ```java
 @Service
-public class CityService implements ICityService {
+public class CityServiceImpl implements CityService {
 
     private final CityRepository cityRepository;
 
-    public CityService(CityRepository cityRepository) {
+    public CityServiceImpl(CityRepository cityRepository) {
         this.cityRepository = cityRepository;
     }
 
@@ -65,6 +65,16 @@ public class CityNotFoundException extends RuntimeException {
 }
 ```
 
+ErrorDetails.java
+
+```java
+public class ErrorDetails {
+    private Date time;
+    private String message;
+//+ полета за други необходими данни
+}
+```
+
 GlobalExceptionHandler.java
 
 ```java
@@ -72,14 +82,10 @@ GlobalExceptionHandler.java
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(CityNotFoundException.class)
-    public ResponseEntity<Object> handleCityNotFoundException(
-        CityNotFoundException ex, WebRequest request) {
-
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", "City not found");
-
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+  public ResponseEntity<ErrorDetails> handleResourceNotFoundException(CityNotFoundException exception) {
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage());
+        return  new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+        }
     }
 }
 ```
@@ -90,9 +96,9 @@ CityController.java
 @RestController
 public class CityController {
 
-    private final ICityService cityService;
+    private final CityService cityService;
 
-    public CityController(ICityService cityService) {
+    public CityController(CityService cityService) {
         this.cityService = cityService;
     }
 
