@@ -22,7 +22,6 @@ ModelMapper e библиотека, която се използва за пре
 
 ```xml
 implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.1.1'
-
 ```
 
 За автоматичното конфигуриране на bean можете да предприемете една от двете стъпки:
@@ -52,7 +51,6 @@ public class CustomMapper extends ModelMapper {
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-
  	private int id;
  	private String name;
     	private String email;
@@ -76,8 +74,7 @@ public class UserDto {
 **UserService.java**
 
 ```java
-public interface UserService {  
- 
+public interface UserService {   
     public UserDto createUser(UserDto userDto);
     public UserDto getUser(int userId);
 }
