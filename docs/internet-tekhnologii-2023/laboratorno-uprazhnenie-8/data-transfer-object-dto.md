@@ -74,7 +74,8 @@ public class UserDto {
 **UserService.java**
 
 ```java
-public interface UserService {   
+public interface UserService {
+
     public UserDto createUser(UserDto userDto);
     public UserDto getUser(int userId);
 }
