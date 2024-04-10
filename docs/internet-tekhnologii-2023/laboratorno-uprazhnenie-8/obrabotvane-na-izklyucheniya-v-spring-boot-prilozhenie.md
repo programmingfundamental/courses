@@ -35,7 +35,7 @@ public class GlobalExceptionHandler {
 
 CityService.java
 
-```
+```java
 @Service
 public class CityService implements ICityService {
 
@@ -67,7 +67,7 @@ public class CityNotFoundException extends RuntimeException {
 
 GlobalExceptionHandler.java
 
-```
+```java
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
