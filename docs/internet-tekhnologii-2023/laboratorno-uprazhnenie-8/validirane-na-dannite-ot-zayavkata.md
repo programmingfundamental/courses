@@ -17,10 +17,7 @@ Hibernate Validator е референтна имплементация на сп
 За да използвате Jakarta Bean validation с Hibernate Validator, трябва да добавите следната зависимост към вашия проект Maven. Това ще добави пакетите  jakarta.validation-api-VERSION.jar и hibernate-validator-VERSION.jar към проекта.
 
 ```xml
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-validation</artifactId>
-</dependency>
+  implementation 'org.springframework.boot:spring-boot-starter-validation'
 ```
 
 ### Основи на валидирането на Bean
@@ -87,7 +84,7 @@ class ValidateRequestBodyController {
 }
 ```
 
-Ние просто добавихме `@Valid` анотацията към параметъра `Input input` , който е анотиран r с `@RequestBody,` за да отбележи, че трябва да бъде прочетен от тялото на заявката. Правейки това, ние казваме на Spring да предаде обекта на валидатор, преди да направи нещо друго.
+Ние просто добавихме `@Valid` анотацията към параметъра `Input input` , който е анотиран и с `@RequestBody,` за да отбележи, че трябва да бъде прочетен от тялото на заявката. Правейки това, ние казваме на Spring да предаде обекта на валидатор, преди да направи нещо друго.
 
 Ако проверката е неуспешна, тя ще задейства `MethodArgumentNotValidException`. По подразбиране Spring ще преведе това изключение в HTTP статус 400 (Bad request).
 
@@ -132,7 +129,7 @@ class ValidateParametersController {
 
 ```java
 @ControllerAdvice
-public class ControllerAdvisor extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
  
 ***
     @Override
