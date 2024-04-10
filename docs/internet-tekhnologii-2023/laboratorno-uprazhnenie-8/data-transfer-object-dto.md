@@ -52,8 +52,8 @@ public class CustomMapper extends ModelMapper {
 @AllArgsConstructor
 public class User {
 
- private int id;
- private String name;
+ 	private int id;
+ 	private String name;
     	private String email;
     	private String password;
 }
@@ -65,9 +65,9 @@ public class User {
 @Getter
 @NoArgsConstructor
 public class UserDto {
-    private int id;
-    private String name;   	
-private String email;
+	private int id;
+	private String name;   	
+	private String email;
 }
 ```
 
