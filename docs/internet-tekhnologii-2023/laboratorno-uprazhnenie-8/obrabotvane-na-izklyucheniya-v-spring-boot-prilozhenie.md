@@ -65,11 +65,11 @@ public class CityNotFoundException extends RuntimeException {
 }
 ```
 
-ControllerAdvisor.java
+GlobalExceptionHandler.java
 
 ```
 @ControllerAdvice
-public class ControllerAdvisor extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(CityNotFoundException.class)
     public ResponseEntity<Object> handleCityNotFoundException(
