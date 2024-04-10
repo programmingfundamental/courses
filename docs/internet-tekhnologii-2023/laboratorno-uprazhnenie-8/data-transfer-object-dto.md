@@ -21,16 +21,13 @@ ModelMapper e библиотека, която се използва за пре
 1. Добавяме библиотеката ModelMapper
 
 ```xml
-<dependency>
-    <groupId>org.modelmapper</groupId>
-    <artifactId>modelmapper</artifactId>
-    <version>3.1.1</version>
-</dependency>
+implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.1.1'
+
 ```
 
 За автоматичното конфигуриране на bean можете да предприемете една от двете стъпки:
 
-* в Main класа добавете следния метод, анотиран с @Bean:
+* в проекта добавете следния метод, анотиран с @Bean:
 
 ```java
 @Bean
@@ -48,46 +45,45 @@ public class CustomMapper extends ModelMapper {
 ```
 
 2. Създаваме entity клас:
-
-<pre class="language-java"><code class="lang-java">@Getter
+```java
+@Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
 
-<strong>        private int id;
-</strong>   	private String name;
+ private int id;
+ private String name;
     	private String email;
     	private String password;
 }
-</code></pre>
-
+ 
+```
 3. Създаваме DTO клас:
-
-<pre class="language-java"><code class="lang-java">@Setter
+```java
+@Setter
 @Getter
 @NoArgsConstructor
 public class UserDto {
     private int id;
     private String name;   	
-<strong>    private String email;
-</strong>}
-
-</code></pre>
+private String email;
+}
+```
 
 **UserService.java**
 
 ```java
 public interface UserService {  
  
-    public User createUser(UserDto userDto);
+    public UserDto createUser(UserDto userDto);
     public UserDto getUser(int userId);
 }
 ```
 
 **UserServiceImpl.java**
-
-<pre class="language-java"><code class="lang-java">@Service
+```java
+@Service
 public class UserServiceImpl implements UserService {
   
     private UserRepository userRepository;
@@ -97,11 +93,11 @@ public class UserServiceImpl implements UserService {
 	                       ModelMapper modelMapper){
 	this.userRepository = userRepository;
 	this. modelMapper = modelMapper;
-<strong>    }
-</strong>      
+}
+
     @Override
     public User createUser(UserDto userDto) {
-	Use user = modelMapper.map(userDto, User.class);
+	User user = modelMapper.map(userDto, User.class);
         User userSavedToDB = userRepository.save(user);
 	UserDto userResponse = modelMapper.map(userSavedToDB, UserDto.class);
         return userResponse;
@@ -115,7 +111,7 @@ public class UserServiceImpl implements UserService {
         return userDto;
     }
 }
-</code></pre>
+```
 
 **UserController.java**
 
