@@ -3,7 +3,7 @@ layout: default
 title: Data transfer object (DTO)
 parent: Лабораторно упражнение 8
 grand_parent: Интернет технологии
-nav_order: 2
+nav_order: 1
 ---
 
 # Data transfer object (DTO)
