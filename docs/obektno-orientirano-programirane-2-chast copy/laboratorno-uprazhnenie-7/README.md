@@ -134,7 +134,7 @@ The Bridge design pattern is a structural pattern used to separate abstraction f
 
 Let's consider example with two interfaces, Shape and Color, where both has few implementations.
 
-<figure><img src="../../../../assets/image (95).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../assets/image (95).png" alt=""><figcaption></figcaption></figure>
 
 The code will be:
 
