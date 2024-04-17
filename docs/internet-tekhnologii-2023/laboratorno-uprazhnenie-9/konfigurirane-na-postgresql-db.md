@@ -6,41 +6,56 @@ grand_parent: Интернет технологии
 nav_order: 1
 ---
 
-# Конфигуриране на PostgreSQL DB
+# Конфигуриране на Docker контейнери
 
-1. В pgAdmin създайте потребител и база от данни
+1. Коригирайте compose.yml, като включите конфигурационните данни на контейнер, който ще осигури нужната среда за базата от данни на приложението:
 
-<figure><img src="../../../assets/image (120).png" alt=""><figcaption></figcaption></figure>
+```
+version: "3.8"
 
-<figure><img src="../../../assets/image (116).png" alt=""><figcaption></figcaption></figure>
+services:
+  app:
+    platform: linux/x86_64
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "6280:8080"
 
-<figure><img src="../../../assets/image (142).png" alt=""><figcaption></figcaption></figure>
+  db:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: P@ssw0rd
+      POSTGRES_USER: padawan
+      POSTGRES_DB: tasks
+```
 
-<figure><img src="../../../assets/image (100).png" alt=""><figcaption></figcaption></figure>
+2. Актуализирайте конфигурацията за стартиране на приложението в контейнерна среда, както следва: 
+- добавете контейнер за нуждите на Postgres
 
-<figure><img src="../../../assets/image (113).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../assets/2photo_2024-04-17_22-18-45.jpg" alt=""><figcaption></figcaption></figure>
+
+- задайте добавеният контейнер да се стартира преди стартиране на контейнера с приложението
+
+<figure><img src="../../../assets/1photo_2024-04-17_22-18-32.jpg" alt=""><figcaption></figcaption></figure>
+
+# Добавяне на библиотеки и конфигурации на проекта
 
 За да активирате JPA в Spring Boot приложението, се нуждаем от зависимостта _spring-boot-starter-data-jpa_. Необходимо е да се добави и зависимост към JDBC драйвер, специфичен за базата данни, в нашия случай драйвера на PostgreSQL. Spring boot конфигурира Hibernate като JPA провайдер по подрабиране.
 
-```xml
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <scope>runtime</scope>
-    </dependency>
+```
+  	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'org.postgresql:postgresql'
 ```
 
 2. В application.properties добавете следните конфигурации:
 
 ```
-spring.datasource.url=jdbc:postgresql://localhost:5432/tasks-db
-spring.datasource.username=myadmin
-spring.datasource.password=mypassword
+spring.datasource.url=jdbc:postgresql://localhost:5432/tasks
+spring.datasource.username=padawan
+spring.datasource.password=P@ssw0rd
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 
 # Hibernate ddl auto (create, create-drop, validate, update)
@@ -61,16 +76,5 @@ spring.jpa.hibernate.ddl-auto=update
 
 Data Source e местоположението на данните на вашето приложение. 
 
-<figure><img src="../../../assets/image (125).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../assets/3db.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../../assets/image (124).png" alt=""><figcaption></figcaption></figure>
-
-Тестваме връзката:
-
-<figure><img src="../../../assets/image (90).png" alt=""><figcaption></figcaption></figure>
-
-В прозореца Persistence:
-
-<figure><img src="../../../assets/image (160).png" alt=""><figcaption></figcaption></figure>
-
-<figure><img src="../../../assets/image (165).png" alt=""><figcaption></figcaption></figure>
