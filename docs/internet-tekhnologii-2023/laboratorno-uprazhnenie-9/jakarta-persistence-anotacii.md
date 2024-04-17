@@ -217,17 +217,17 @@ public class PhoneNumber {
 @Entity
 @Table(name="customers")
 public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     
     ***
     
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "CUST_PHONES",
-        joinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "phone_id", referencedColumnName = "id"))
-    private Set<PhoneNumber> phones;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "CUST_PHONES",
+	joinColumns = @JoinColumn(name = "customer_id", referencedColumnName = "id"),
+	inverseJoinColumns = @JoinColumn(name = "phone_id", referencedColumnName = "id"))
+private Set<PhoneNumber> phones;
 }
 
 @Entity
