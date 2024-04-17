@@ -19,7 +19,7 @@ public interface CityRepository extends JpaRepository<City, Long> {
 
 С това се постигат две цели:
 
-·        Първо, чрез разширяване на JpaRepository ние получаваме набор от общи CRUD методи за нашия тип, който позволява запазване на градове, изтриването им и т.н., без да се налага да разписваме тяхната имплементация
+·        Първо, чрез разширяване на JpaRepository, ние получаваме набор от общи CRUD методи за нашия тип, който позволява запазване на градове, изтриването им и т.н., без да се налага да разписваме тяхната имплементация
 
 ·        Второ, с помощта на инфраструктурата на хранилището на Spring Data JPA този интерфейс автоматично ще бъде сканиран.
 
@@ -104,8 +104,8 @@ List<Dog> findByAgeLessThanOrHeightGreaterThan(Integer age, double height);
 Освен объркващия външен вид, подадена по този начин заявката ще бъде по-бавна за изпълнение. За разрешаване на този проблем можем да използваме анотацията @Query.
 
 Примери:
-
-<pre class="language-java"><code class="lang-java">@Query("SELECT t FROM Tutorial t")
+```
+@Query("SELECT t FROM Tutorial t")
 List&#x3C;Tutorial> findAll();
 
 @Query("SELECT u FROM User u WHERE u.emailAddress = ?1")
@@ -124,8 +124,8 @@ List&#x3C;Tutorial> findByLevelBetween(
 <strong>                @Param("end") int end, 
 </strong>                @Param("isPublished") boolean isPublished
                 );
-</code></pre>
-
+ 
+```
 
 Да разгледаме пример, при който се създава семпло приложение със списък на курсове за обучение. Нека да създадем POJO клас Course, който описва курсовете с полета като id, name, category, rating и description.
 
@@ -143,8 +143,8 @@ public class Course {
 ```
 
 Да дефинираме интерфейс CourseRepository, с помощта на който ще управляваме курсовете в базата от данни. Интерфейсът разширява JpaRepository и дефинира потребителски метод findAllByCategory(), който извежда всички курсове от дадена категория.
-
-<pre class="language-java"><code class="lang-java">@Repository
+```java
+@Repository
 public interface CourseRepository extends JpaRepository&#x3C;Course, Long> {
 
 <strong>    //Обичайните методи за осъществяване на CRUD операциите се наследяват от интерфейса JpaRepository
@@ -152,7 +152,7 @@ public interface CourseRepository extends JpaRepository&#x3C;Course, Long> {
     //потребителски метод
     List&#x3C;Course> findAllByCategory(String category);
 }
-</code></pre>
+```
 
 Нека сега да създадем сервизния слой на приложението. Дефинираме го с интерфейс, който съдържа операциите, поддържани в приложението.
 
@@ -169,11 +169,12 @@ public interface CourseService {
 
 Съставете конкретен клас CourseServiceImpl, който изпълнява тези операции.
 
-<pre class="language-java"><code class="lang-java">// Анотиран с @Service, за да индикира, че е клас, 
+```
+// Анотиран с @Service, за да индикира, че е клас, 
 // който реализира бизнес логика 
 @Service
-<strong>public class CourseServiceImpl implements CourseService {
-</strong>
+public class CourseServiceImpl implements CourseService {
+
     private CourseRepository courseRepository;
 
     public CourseServiceImpl(CourseRepository courseRepository) {
@@ -192,14 +193,14 @@ public interface CourseService {
     return courseRepository.findAllByCategory(category);
     }
 }
-
-</code></pre>
+```
 
 Класът CourseServiceImpl е анотиран с анотация @Service, за да покаже, че е сервизен клас и съдържа бизнес логика. Той използва CourseRepository за извършване на необходимите операции с базата от данни.
 
 Сега ни остава да дефинираме CourseController, който дефинира крайните точки на REST. Spring контролерът съдържа една или повече крайни точки и приема заявки от клиента. След това използва услугите, предлагани от сервизния слой, и генерира отговор. RestContoller-ът свързва резултата с тялото на отговора и го споделя със заявителя на крайната точка
 
-<pre class="language-java"><code class="lang-java">@RestController
+```
+@RestController
 @RequestMapping("/courses/")
 public class CourseController {
 
@@ -209,8 +210,8 @@ public class CourseController {
         this. courseService = courseService;
         }
 
-<strong>    @PostMapping
-</strong>    public ResponseEntity&#x3C;Course> createCourse(@RequestBody Course course) {
+    @PostMapping
+    public ResponseEntity&#x3C;Course> createCourse(@RequestBody Course course) {
         Course course = courseService.createCourse(course);
         return new ResponseEntity&#x3C;>(course, HttpStatus.CREATED); 
     }
@@ -224,5 +225,4 @@ public class CourseController {
         return new ResponseEntity&#x3C;>(courseList, HttpStatus.OK); 
     }
 }
-
-</code></pre>
+```
