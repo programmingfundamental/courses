@@ -72,7 +72,7 @@ spring.jpa.hibernate.ddl-auto=update
 
 ·       update - Hibernate автоматично генерира схемата според предоставените Java entity. Работи на принципа на добавяне на нови изменения. Не се препоръчва да се използва при вече работещи приложения.
 
-3\.      Добавете Data Source в Database (за IntelliJ IDEA Ultimate)
+3\.      Добавете Data Source в Database
 
 Data Source e местоположението на данните на вашето приложение. 
 
