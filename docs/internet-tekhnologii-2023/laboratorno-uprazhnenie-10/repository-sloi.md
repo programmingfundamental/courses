@@ -1,10 +1,10 @@
 ---
----
 layout: default
 title: Repository слой
 parent: Лабораторно упражнение 10
 grand_parent: Интернет технологии
 nav_order: 3
+---
 
 
 # Repository слой
