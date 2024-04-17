@@ -1,10 +1,11 @@
 ---
+---
 layout: default
 title: Конфигуриране на PostgreSQL DB
 parent: Лабораторно упражнение 10
 grand_parent: Интернет технологии
 nav_order: 1
----
+
 
 # Конфигуриране на PostgreSQL DB
 
