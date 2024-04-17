@@ -1,11 +1,10 @@
 ---
----
-
 layout: default
 title: Jakarta Persistence анотации
 parent: Лабораторно упражнение 10
 grand_parent: Интернет технологии
 nav_order: 2
+---
 
 # Jakarta Persistence анотации
 
