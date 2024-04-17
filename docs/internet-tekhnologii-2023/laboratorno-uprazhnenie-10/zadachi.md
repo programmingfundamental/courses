@@ -1,10 +1,11 @@
 ---
+---
 layout: default
 title: Задачи
 parent: Лабораторно упражнение 10
 grand_parent: Интернет технологии
 nav_order: 4
----
+
 
 # Задачи
 
