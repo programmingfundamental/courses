@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Лабораторно упражнение 10
-parent: Интернет технологии
+parent: Интернет технологии - скрито
 has_children: true
 nav_order: 10
 permalink: /docs/internet-tehnologii-2023/laboratorno-uprazhnenie-10
