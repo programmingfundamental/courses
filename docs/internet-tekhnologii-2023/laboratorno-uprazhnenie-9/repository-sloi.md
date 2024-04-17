@@ -106,20 +106,20 @@ List<Dog> findByAgeLessThanOrHeightGreaterThan(Integer age, double height);
 Примери:
 ```
 @Query("SELECT t FROM Tutorial t")
-List&#x3C;Tutorial> findAll();
+List<Tutorial> findAll();
 
 @Query("SELECT u FROM User u WHERE u.emailAddress = ?1")
 User findByEmailAddress(String emailAddress);
 
 @Query("SELECT * FROM tutorials t WHERE t.title LIKE %?1%")
-List&#x3C;Tutorial> findByTitleAndSort(String title, Sort sort);
+List<Tutorial> findByTitleAndSort(String title, Sort sort);
 
 @Query("SELECT MAX(eventId) AS eventId FROM Event")
 Long lastProcessedEvent();
 
 @Query("SELECT t FROM Tutorial t 
 WHERE t.published=:isPublished AND t.level BETWEEN :start AND :end")
-List&#x3C;Tutorial> findByLevelBetween(
+List<Tutorial> findByLevelBetween(
 		@Param("start") int start, 
 <strong>                @Param("end") int end, 
 </strong>                @Param("isPublished") boolean isPublished
@@ -145,12 +145,12 @@ public class Course {
 Да дефинираме интерфейс CourseRepository, с помощта на който ще управляваме курсовете в базата от данни. Интерфейсът разширява JpaRepository и дефинира потребителски метод findAllByCategory(), който извежда всички курсове от дадена категория.
 ```java
 @Repository
-public interface CourseRepository extends JpaRepository&#x3C;Course, Long> {
+public interface CourseRepository extends JpaRepository<Course, Long> {
 
 <strong>    //Обичайните методи за осъществяване на CRUD операциите се наследяват от интерфейса JpaRepository
 </strong>
     //потребителски метод
-    List&#x3C;Course> findAllByCategory(String category);
+    List<Course> findAllByCategory(String category);
 }
 ```
 
@@ -189,7 +189,7 @@ public class CourseServiceImpl implements CourseService {
 <strong>    //+ всички останали методи, касаещи CRUD операциите
 </strong>
 <strong>    @Override
-</strong>    public List&#x3C;Course> getCoursesByCategory(String category) {
+</strong>    public List<Course> getCoursesByCategory(String category) {
     return courseRepository.findAllByCategory(category);
     }
 }
@@ -213,16 +213,16 @@ public class CourseController {
     @PostMapping
     public ResponseEntity&#x3C;Course> createCourse(@RequestBody Course course) {
         Course course = courseService.createCourse(course);
-        return new ResponseEntity&#x3C;>(course, HttpStatus.CREATED); 
+        return new ResponseEntity<>(course, HttpStatus.CREATED); 
     }
 
     //  + Точки на достъп за останалите операции
         
     @GetMapping("category/{name}")
-    public ResponseEntity&#x3C;List&#x3C;Course>> getCourseByCategory(
+    public ResponseEntity<List<Course>> getCourseByCategory(
     @PathVariable("name") String category) {
-        List&#x3C;Course> courseList = courseService.getCoursesByCategory(category);
-        return new ResponseEntity&#x3C;>(courseList, HttpStatus.OK); 
+        List<Course> courseList = courseService.getCoursesByCategory(category);
+        return new ResponseEntity<>(courseList, HttpStatus.OK); 
     }
 }
 ```
