@@ -12,24 +12,33 @@ nav_order: 1
 
 ```
 version: "3.8"
+networks:
+  jedi:
 
 services:
   app:
+    container_name: padawan-6156-app
     platform: linux/x86_64
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "6280:8080"
+    networks:
+      - jedi
 
   db:
+    container_name: padawan-6156-db
     image: postgres:latest
     ports:
       - 5432:5432
     environment:
-      POSTGRES_PASSWORD: P@ssw0rd
+      POSTGRES_PASSWORD: R2D2c3p0
       POSTGRES_USER: padawan
       POSTGRES_DB: tasks
+    networks:
+      - jedi
+
 ```
 
 2. Актуализирайте конфигурацията за стартиране на приложението в контейнерна среда, както следва: 
@@ -55,7 +64,7 @@ runtimeOnly 'org.postgresql:postgresql'
 ```
 spring.datasource.url=jdbc:postgresql://localhost:5432/tasks
 spring.datasource.username=padawan
-spring.datasource.password=P@ssw0rd
+spring.datasource.password=R2D2c3p0
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 
 # Hibernate ddl auto (create, create-drop, validate, update)
