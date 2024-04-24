@@ -111,7 +111,7 @@ List<Tutorial> findAll();
 @Query("SELECT u FROM User u WHERE u.emailAddress = ?1")
 User findByEmailAddress(String emailAddress);
 
-@Query("SELECT * FROM tutorials t WHERE t.title LIKE %?1%")
+@Query("SELECT t FROM tutorials t WHERE t.title LIKE %?1%")
 List<Tutorial> findByTitleAndSort(String title, Sort sort);
 
 @Query("SELECT MAX(eventId) AS eventId FROM Event")
