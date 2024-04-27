@@ -3,7 +3,7 @@ layout: default
 title: Задача
 parent: Лабораторно упражнение 11
 grand_parent: Интернет технологии
-nav_order: 4
+nav_order: 7
 ---
 
 # Задача
