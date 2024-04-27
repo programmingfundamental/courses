@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Spring Security
+title: Конфигуриране на филтри
 parent: Лабораторно упражнение 11
 grand_parent: Интернет технологии
 nav_order: 4
