@@ -33,17 +33,17 @@ HttpSession session = request.getSession();
 
 Интерфейсът HttpServletRequest предоставя два метода за получаване на обект на HttpSession:
 
-* public HttpSession getSession() - Връща текущата сесия, свързана с тази заявка, или ако заявката няма сесия, създава такава.
-* public HttpSession getSession(boolean create) Връща текущата HttpSession, свързана с тази заявка или, ако няма текуща сесия и параметъра е true, връща нова сесия.
+* public HttpSession getSession() - връща текущата сесия, свързана с тази заявка, или ако заявката няма сесия, създава такава.
+* public HttpSession getSession(boolean create) - връща текущата HttpSession, свързана с тази заявка или, ако няма текуща сесия и параметъра е true, връща нова сесия.
 
 Методи на HttpSession интерфейса:
 
-* public String getId() - Връща низ, съдържащ стойността на уникалния идентификатор.
-* public long getCreationTime() - Връща времето, когато е създадена тази сесия, измерено в милисекунди от полунощ на 1 януари 1970 г. GMT.
-* public long getLastAccessedTime() - Връща последния път, когато клиентът изпрати заявка, свързана с тази сесия, като броя на милисекундите от полунощ на 1 януари 1970 г. GMT.
-* public void invalidate() - Прави сесията недействителна и след това развързва всички свързани с нея обекти.
-* public void setAttribute(String name, Object value) - Този метод поставя обект към тази сесия, като използва посоченото име.
-* public Object getAttribute(String name) - Този метод връща обекта, свързан с посоченото име в тази сесия, или null, ако никой обект не е обвързан под името.
+* public String getId() - връща низ, съдържащ стойността на уникалния идентификатор.
+* public long getCreationTime() - връща времето, когато е създадена тази сесия, измерено в милисекунди от полунощ на 1 януари 1970 г. GMT.
+* public long getLastAccessedTime() - връща последния път, когато клиентът изпрати заявка, свързана с тази сесия, като броя на милисекундите от полунощ на 1 януари 1970 г. GMT.
+* public void invalidate() - прави сесията недействителна и след това развързва всички свързани с нея обекти.
+* public void setAttribute(String name, Object value) - този метод поставя обект към тази сесия, като използва посоченото име.
+* public Object getAttribute(String name) - този метод връща обекта, свързан с посоченото име в тази сесия, или null, ако никой обект не е обвързан под името.
 * public int getMaxInactiveInterval() - извлича времето в секунди до изтичане на сесията
-* public void setMaxInactiveInterval(int interval) - Този метод задава времето, в секунди, между клиентски заявки преди контейнер servlet ще анулира тази сесия.
-* public void removeAttribute(String name) - Този метод премахва променлива от сесията
+* public void setMaxInactiveInterval(int interval) - този метод задава времето, в секунди, между клиентски заявки преди контейнер servlet ще анулира тази сесия.
+* public void removeAttribute(String name) - този метод премахва променлива от сесията
