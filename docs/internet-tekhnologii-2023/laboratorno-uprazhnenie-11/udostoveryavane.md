@@ -72,7 +72,7 @@ UserDetailsService е основен интерфейс в Spring Security frame
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(
-                        "User not found with username or email" + username ));
+                        "Not valid username or password"));
 
         Set<GrantedAuthority> authorities = user
                 .getRoles()
