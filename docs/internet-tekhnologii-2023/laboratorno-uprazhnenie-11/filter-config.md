@@ -25,6 +25,10 @@ nav_order: 4
                         auth
                                 .requestMatchers("api/auth/**")
                                 .permitAll()
+                                .requestMatchers("api/admin/**")
+                                .hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.DELETE)
+                                .hasRole("ADMIN")
                                 .anyRequest()
                                 .authenticated())
                 .sessionManagement(session ->
