@@ -27,6 +27,9 @@ nav_order: 4
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated())
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(
+                                SessionCreationPolicy.IF_REQUIRED))
                 .logout(logout -> logout
                         .logoutUrl("api/auth/logout")
                         .invalidateHttpSession(true));
