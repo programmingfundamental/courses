@@ -17,33 +17,20 @@ nav_order: 4
 
 Новият начин за сигурност, който се поддържа от Spring, е да използваме нашите персонализирани http филтри за сигурност (във веригата на филтъра за сигурност), вместо да ги конфигурираме чрез клас, който трябва да разшири WebSecurityConfigurerAdapter. По същество Spring ни позволява да конфигурираме нашия HttpSecurity с помощта на bean метод, който изгражда и връща нашата персонализирана реализация на интерфейса SecurityFilterChain.
 
-```
-@Bean
-SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-http.csrf().disable()
-.authorizeHttpRequests()
+```java
+    @Bean
+    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth ->
+                        auth
+                                .requestMatchers("api/auth/**")
+                                .permitAll()
+                                .anyRequest()
+                                .authenticated())
+                .logout(logout -> logout
+                        .logoutUrl("api/auth/logout")
+                        .invalidateHttpSession(true));
 
-.requestMatchers("/auth/**").permitAll()
-
-.requestMatchers(HttpMethod.GET, "/api/somepath/**").permitAll()
-
-.requestMatchers("/api/delete/**").hasAnyRole("ROLE_ADMIN")
-
-.anyRequest().authenticated()
-
-//Конфигурира вписването в приложението
-.and().formLogin()
-.and().httpBasic();
-
-//Конфигурира изхода от приложението
-http.logout(logout -> logout.logoutUrl("api/auth/logout")
-.invalidateHttpSession(true));
-
-//Задава политика за управление на сесията   
-http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
-
-//и т.н.
-return http.build();
-}
-
+        return http.build();
+    }
 ```
