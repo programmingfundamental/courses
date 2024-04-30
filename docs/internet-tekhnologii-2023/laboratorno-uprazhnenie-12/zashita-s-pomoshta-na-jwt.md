@@ -8,28 +8,13 @@ nav_order: 2
 
 # Защита с помощта на JWT
 
-JWT е компактен начин за прилагане на удостоверяване в модерни уеб приложения. За да го приложим, ще използваме библиотеката jjwt, която е JWT библиотека за Java и Android и се използва за създаване и анализиране на JWT. Трябва да добавим следните зависимости в pom.xml.
+JWT е компактен начин за прилагане на удостоверяване в модерни уеб приложения. За да го приложим, ще използваме библиотеката jjwt, която е JWT библиотека за Java и Android и се използва за създаване и анализиране на JWT. Трябва да добавим следните зависимости.
 
 ```xml
-<dependency>
-<groupId>io.jsonwebtoken</groupId>
-<artifactId>jjwt-api</artifactId>
-<version>0.11.5</version>
-</dependency>
-
-<dependency>
-<groupId>io.jsonwebtoken</groupId>
-<artifactId>jjwt-impl</artifactId>
-<version>0.11.5</version>
-<scope>runtime</scope>
-</dependency>
-
-<dependency>
-<groupId>io.jsonwebtoken</groupId>
-<artifactId>jjwt-jackson</artifactId>
-<version>0.11.5</version>
-<scope>runtime</scope>
-</dependency>
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
 ```
 
 Следващите стъпки демонстрират как да активирате JWT удостоверяване и упълномощаване  в бекенда. За реализацията им са необходимо от предходното упражнение да сте предвидили:
@@ -47,47 +32,121 @@ JWT е компактен начин за прилагане на удостов
 1\.      Към application.properties добавете свойства, задаващи тайния ключ (secret) на токена и продължителността на неговата валидност в милисекунди. За криптиране на ключа можете да използвате инструмента: [https://emn178.github.io/online-tools/sha256.html](https://emn178.github.io/online-tools/sha256.html), а за изчисляване на продължителността на валидност на токена в милисекунди - https://www.convertworld.com/en/time/milliseconds.html.
 
 ```
-jwt.secret=2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b
-jwt.expiration-milliseconds=604800000
+security.jwt.secret-key=3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
+# 1h in millisecond
+security.jwt.expiration-time=3600000
 ```
 
 2. Създайте клас с метод за генериране на токен след успешно удостоверяване на потребителя.
 
 ```java
-@Component
-public class JWTTokenProvider {
+@Service
+public class JwtService {
+    @Value("${security.jwt.secret-key}")
+    private String secretKey;
 
-    @Value("${jwt.secret}")
-    private String JWTSecret;
+    @Value("${security.jwt.expiration-time}")
+    private long jwtExpiration;
 
-    @Value("${jwt.expiration-milliseconds}")
-    private int JWTExpirationDate;
+    public String extractUsername(String token) {
+        return extractClaim(token, Claims::getSubject);
+    }
 
-    public String generateToken(Authentication authentication) {
-        String userName = authentication.getName();
-        Date currentDate = new Date();
-        Date expireDate = new Date(currentDate.getTime()+JWTExpirationDate);
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
+        return claimsResolver.apply(claims);
+    }
 
-        String token = Jwts.builder()
-                .setSubject(userName)
-                .setIssuedAt(new Date())
-                .setExpiration(expireDate)
-                .signWith(key())
-                .compact();
-        return  token;
-    }
+    public String generateToken(UserDetails userDetails) {
+        return generateToken(new HashMap<>(), userDetails);
+    }
 
-    private Key key() {
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(JWTSecret));
-    }
+    private String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+        return buildToken(extraClaims, userDetails, jwtExpiration);
+    }
+
+    private String buildToken(Map<String, Object> extraClaims, UserDetails userDetails, long expiration) {
+        return Jwts
+                .builder()
+                .claims(extraClaims)
+                .subject(userDetails.getUsername())
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + expiration))
+                .signWith(getSignInKey())
+                .compact();
+    }
+
+    private SecretKey getSignInKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+        return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        final String username = extractUsername(token);
+        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+    }
+
+    private boolean isTokenExpired(String token) {
+        return extractExpiration(token).before(new Date());
+    }
+
+    public Date extractExpiration(String token) {
+        return extractClaim(token, Claims::getExpiration);
+    }
+
+    private Claims extractAllClaims(String token) {
+        return Jwts.parser()
+                .decryptWith(getSignInKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
+
+    public long getExpirationTime() {
+        return jwtExpiration;
+    }
 }
 ```
 
 3. В персонализирана реализация на SecurityFilterChain допълнете правилата с изискване сесия да не бъде създавана или използвана от Spring Security.
 
 ```java
-http.sessionManagement(session -> 
-    session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+@Configuration
+@EnableWebSecurity
+public class SecurityConfiguration {
+    private final AuthenticationProvider authenticationProvider;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    public SecurityConfiguration(
+            JwtAuthenticationFilter jwtAuthenticationFilter,
+            AuthenticationProvider authenticationProvider
+    ) {
+        this.authenticationProvider = authenticationProvider;
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth ->
+                                auth
+                                        .requestMatchers("/auth/**")
+                                        .permitAll()
+                                        .requestMatchers("api/admin/**")
+                                        .hasRole("ADMIN")
+                                        .requestMatchers(HttpMethod.DELETE)
+                                        .hasRole("ADMIN")
+                                        .anyRequest()
+                                        .authenticated()
+                        )
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }
+}
 ```
 
 4. В метода за вписване заменете добавянето на данните на вписания потребител към сесийния обект с логика по създаване на токен. Нека методът за връща създадения токен като текст.
@@ -117,25 +176,49 @@ public String login(LoginDto loginDto) {
 5. Добавете клас, с помощта на който създаденият токен да бъде върнат като отговор на клиента.
 
 ```java
-@NoArgsConstructor
-@AllArgsConstructor
-@Setter
 @Getter
-public class JWTAuthResponse {
-    private String accessToken;
-    private String tokenType = "Bearer";
+@Builder
+public class TokenDto {
+    private String token;
+
+    private long expiresIn;
 }
 ```
 
 6. По отношение на точката за достъп за вписване на потребителя задайте отговорът да включва генерирания токен.
 
 ```java
-@PostMapping("/login")
-public ResponseEntity<JWTAuthResponse> login(@RequestBody LoginDto loginDto) {
-    String token = authService.login(loginDto);
-    JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
-    jwtAuthResponse.setAccessToken(token);
-    return new ResponseEntity<>(jwtAuthResponse, HttpStatus.OK);
+@RestController
+@RequestMapping("/auth")
+public class AuthenticationController {
+    private final JwtService jwtService;
+    private final AuthenticationService authenticationService;
+
+    public AuthenticationController(JwtService jwtService, AuthenticationService authenticationService) {
+        this.jwtService = jwtService;
+        this.authenticationService = authenticationService;
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<UserDetails> register(@RequestBody RegisterUserDto registerUserDto) {
+        UserDetails registeredUser = authenticationService.signup(registerUserDto);
+
+        return ResponseEntity.ok(registeredUser);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<TokenDto> authenticate(@RequestBody LoginUserDto loginUserDto) {
+        UserDetails authenticatedUser = authenticationService.authenticate(loginUserDto);
+
+        String jwtToken = jwtService.generateToken(authenticatedUser);
+
+        TokenDto loginResponse = TokenDto.builder()
+                .token(jwtToken)
+                .expiresIn(jwtService.getExpirationTime())
+                .build();
+
+        return ResponseEntity.ok(loginResponse);
+    }
 }
 ```
 
@@ -162,7 +245,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 }
 ```
 
-2\.      Допълнете класа JWTTokenProvider с методи за:
+2.      Допълнете класа JWTTokenProvider с методи за:
 
 a.      връщане на потребителско име от подаден токен;
 
@@ -213,40 +296,58 @@ public class JWTTokenProvider {
 ```java
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    private JWTTokenProvider jwtTokenProvider;
-    private UserDetailsService userDetailsService;
+    private final HandlerExceptionResolver handlerExceptionResolver;
 
-    public JwtAuthenticationFilter(JWTTokenProvider jwtTokenProvider, UserDetailsService userDetailsService) {
-        this.jwtTokenProvider = jwtTokenProvider;
+    private final JwtService jwtService;
+    private final UserDetailsService userDetailsService;
+
+    public JwtAuthenticationFilter(
+            JwtService jwtService,
+            UserDetailsService userDetailsService,
+            HandlerExceptionResolver handlerExceptionResolver
+    ) {
+        this.jwtService = jwtService;
         this.userDetailsService = userDetailsService;
+        this.handlerExceptionResolver = handlerExceptionResolver;
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String token = getTokenFromRequest(request);
-        if(StringUtils.hasText(token) && jwtTokenProvider.validateToken(token)) {
-            String username = jwtTokenProvider.getUsername(token);
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                    userDetails,
-                    null,
-                    userDetails.getAuthorities()
-            );
-            authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain
+    ) throws ServletException, IOException {
+        final String authHeader = request.getHeader("Authorization");
 
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            filterChain.doFilter(request, response);
+            return;
         }
-        filterChain.doFilter(request,response);
-    }
 
-    private String getTokenFromRequest(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-        if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7, bearerToken.length());
+        try {
+            final String jwt = authHeader.substring(7);
+            final String userEmail = jwtService.extractUsername(jwt);
+
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+            if (userEmail != null && authentication == null) {
+                UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
+
+                if (jwtService.isTokenValid(jwt, userDetails)) {
+                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                            userDetails,
+                            null,
+                            userDetails.getAuthorities()
+                    );
+
+                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(authToken);
+                }
+            }
+
+            filterChain.doFilter(request, response);
+        } catch (Exception exception) {
+            handlerExceptionResolver.resolveException(request, response, null, exception);
         }
-        return null;
     }
-}j
+}
 ```
 
 4. Включете филтъра в SecurityFilterChain метода. Нека той да се изпълнява непосредствено преди UsernamePasswordAuthenticationFilter. Добавете и JwtAuthenticationEntryPoint като ресурс, отговарящ за обработка на изключения, свързани с оторизацията.
