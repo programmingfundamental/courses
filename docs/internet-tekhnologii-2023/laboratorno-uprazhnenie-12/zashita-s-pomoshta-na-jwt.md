@@ -40,70 +40,32 @@ security.jwt.expiration-time=3600000
 2. Създайте клас с метод за генериране на токен след успешно удостоверяване на потребителя.
 
 ```java
-@Service
-public class JwtService {
+@Component
+public class JWTTokenProvider {
+
     @Value("${security.jwt.secret-key}")
-    private String secretKey;
+    private String JWTSecret;
 
     @Value("${security.jwt.expiration-time}")
-    private long jwtExpiration;
+    private int JWTExpirationDate;
 
-    public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
-    }
+    //промяна
+    public String generateToken(Authentication authentication) {
+        Date currentDate = new Date();
+        Date expireDate = new Date(currentDate.getTime() + JWTExpirationDate);
 
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
-    }
-
-    public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
-    }
-
-    private String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
-        return buildToken(extraClaims, userDetails, jwtExpiration);
-    }
-
-    private String buildToken(Map<String, Object> extraClaims, UserDetails userDetails, long expiration) {
-        return Jwts
-                .builder()
-                .claims(extraClaims)
-                .subject(userDetails.getUsername())
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(getSignInKey())
+        String token = Jwts.builder()
+                .subject(authentication.getName())
+                .issuedAt(currentDate)
+                .expiration(expireDate)
+                .signWith(key())
                 .compact();
+        return token;
     }
 
-    private SecretKey getSignInKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+    private SecretKey key() {
+        byte[] keyBytes = Decoders.BASE64.decode(JWTSecret);
         return Keys.hmacShaKeyFor(keyBytes);
-    }
-
-    public boolean isTokenValid(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
-    }
-
-    private boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
-    }
-
-    public Date extractExpiration(String token) {
-        return extractClaim(token, Claims::getExpiration);
-    }
-
-    private Claims extractAllClaims(String token) {
-        return Jwts.parser()
-                .decryptWith(getSignInKey())
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
-    }
-
-    public long getExpirationTime() {
-        return jwtExpiration;
     }
 }
 ```
@@ -111,48 +73,14 @@ public class JwtService {
 3. В персонализирана реализация на SecurityFilterChain допълнете правилата с изискване сесия да не бъде създавана или използвана от Spring Security.
 
 ```java
-@Configuration
-@EnableWebSecurity
-public class SecurityConfiguration {
-    private final AuthenticationProvider authenticationProvider;
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
-
-    public SecurityConfiguration(
-            JwtAuthenticationFilter jwtAuthenticationFilter,
-            AuthenticationProvider authenticationProvider
-    ) {
-        this.authenticationProvider = authenticationProvider;
-        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-    }
-
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth ->
-                                auth
-                                        .requestMatchers("/auth/**")
-                                        .permitAll()
-                                        .requestMatchers("api/admin/**")
-                                        .hasRole("ADMIN")
-                                        .requestMatchers(HttpMethod.DELETE)
-                                        .hasRole("ADMIN")
-                                        .anyRequest()
-                                        .authenticated()
-                        )
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
-        return http.build();
-    }
-}
+http.sessionManagement(session -> 
+    session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 ```
 
 4. В метода за вписване заменете добавянето на данните на вписания потребител към сесийния обект с логика по създаване на токен. Нека методът за връща създадения токен като текст.
 
 ```java
-public String login(LoginDto loginDto) {
+ public String login(LoginDto loginDto) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -162,11 +90,11 @@ public String login(LoginDto loginDto) {
         SecurityContext sc = SecurityContextHolder.getContext();
         sc.setAuthentication(authentication);
 
-	//Добавяне
-        String token = jwtTokenProvider.generateToken(authentication); 
-	return token;
+        //Добавяне
+        String token = jwtTokenProvider.generateToken(authentication);
+        return token;
 
-	//Премахване
+        //Премахване
        /* HttpSession session = req.getSession(true);
          session.setAttribute(SPRING_SECURITY_CONTEXT_KEY, sc);
          return "User logged-in successfully!";*/
@@ -176,49 +104,25 @@ public String login(LoginDto loginDto) {
 5. Добавете клас, с помощта на който създаденият токен да бъде върнат като отговор на клиента.
 
 ```java
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
 @Getter
-@Builder
-public class TokenDto {
-    private String token;
-
-    private long expiresIn;
+public class AuthResponse {
+    private String accessToken;
+    private String tokenType = "Bearer";
 }
 ```
 
 6. По отношение на точката за достъп за вписване на потребителя задайте отговорът да включва генерирания токен.
 
 ```java
-@RestController
-@RequestMapping("/auth")
-public class AuthenticationController {
-    private final JwtService jwtService;
-    private final AuthenticationService authenticationService;
-
-    public AuthenticationController(JwtService jwtService, AuthenticationService authenticationService) {
-        this.jwtService = jwtService;
-        this.authenticationService = authenticationService;
-    }
-
-    @PostMapping("/signup")
-    public ResponseEntity<UserDetails> register(@RequestBody RegisterUserDto registerUserDto) {
-        UserDetails registeredUser = authenticationService.signup(registerUserDto);
-
-        return ResponseEntity.ok(registeredUser);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<TokenDto> authenticate(@RequestBody LoginUserDto loginUserDto) {
-        UserDetails authenticatedUser = authenticationService.authenticate(loginUserDto);
-
-        String jwtToken = jwtService.generateToken(authenticatedUser);
-
-        TokenDto loginResponse = TokenDto.builder()
-                .token(jwtToken)
-                .expiresIn(jwtService.getExpirationTime())
-                .build();
-
-        return ResponseEntity.ok(loginResponse);
-    }
+@PostMapping("/login")
+public ResponseEntity<AuthResponse> login(@RequestBody LoginDto loginDto) {
+    String token = authService.login(loginDto);
+    AuthResponse authResponse = new AuthResponse();
+    authResponse.setAccessToken(token);
+    return new ResponseEntity<>(authResponse, HttpStatus.OK);
 }
 ```
 
@@ -257,35 +161,34 @@ public class JWTTokenProvider {
     
  //Предходно съдържание
 
-        public String getUsername(String token) {
-            Claims claims = Jwts.parserBuilder()
-                    .setSigningKey(key())
-                    .build()
-                    .parseClaimsJws(token)
-                    .getBody();
-            String username = claims.getSubject();
-            return username;
-        }
+   public String getUsername(String token) {
+       Claims claims =  Jwts.parser()
+                .verifyWith(key())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+        return claims.getSubject();
+    }
 
-       public boolean validateToken(String token) {
+     public boolean validateToken(String token) {
         try {
-            Jwts.parserBuilder()
-                    .setSigningKey(key())
+            Jwts.parser()
+                    .verifyWith(key())
                     .build()
                     .parse(token);
             return true;
         }
         catch (MalformedJwtException ex) {
-            throw new ApiException(HttpStatus.BAD_REQUEST, "Invalid JWT token");
+            throw new TaskApiException("Invalid JWT token");
         }
         catch (ExpiredJwtException ex) {
-            throw new ApiException(HttpStatus.BAD_REQUEST, "Expired JWT token");
+            throw new TaskApiException("Expired JWT token");
         }
         catch (UnsupportedJwtException ex) {
-            throw new ApiException(HttpStatus.BAD_REQUEST, "Unsupported JWT token");
+            throw new TaskApiException("Unsupported JWT token");
         }
         catch (IllegalArgumentException ex) {
-            throw new ApiException(HttpStatus.BAD_REQUEST, "JWT string claims is empty");
+            throw new TaskApiException("JWT string claims is empty");
         }
     }
 }
@@ -296,56 +199,38 @@ public class JWTTokenProvider {
 ```java
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    private final HandlerExceptionResolver handlerExceptionResolver;
+    private JWTTokenProvider jwtTokenProvider;
+    private UserDetailsService userDetailsService;
 
-    private final JwtService jwtService;
-    private final UserDetailsService userDetailsService;
-
-    public JwtAuthenticationFilter(
-            JwtService jwtService,
-            UserDetailsService userDetailsService,
-            HandlerExceptionResolver handlerExceptionResolver
-    ) {
-        this.jwtService = jwtService;
+    public JwtAuthenticationFilter(JWTTokenProvider jwtTokenProvider, UserDetailsService userDetailsService) {
+        this.jwtTokenProvider = jwtTokenProvider;
         this.userDetailsService = userDetailsService;
-        this.handlerExceptionResolver = handlerExceptionResolver;
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain
-    ) throws ServletException, IOException {
-        final String authHeader = request.getHeader("Authorization");
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        String token = getToken(request);
+        if(token!=null && !token.isEmpty() && jwtTokenProvider.validateToken(token)) {
+            String username = jwtTokenProvider.getUsername(token);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                    userDetails,
+                    null,
+                    userDetails.getAuthorities()
+            );
+            authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            filterChain.doFilter(request, response);
-            return;
         }
+        filterChain.doFilter(request,response);
+    }
 
-        try {
-            final String jwt = authHeader.substring(7);
-            final String userEmail = jwtService.extractUsername(jwt);
-
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-            if (userEmail != null && authentication == null) {
-                UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
-
-                if (jwtService.isTokenValid(jwt, userDetails)) {
-                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                            userDetails,
-                            null,
-                            userDetails.getAuthorities()
-                    );
-
-                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(authToken);
-                }
-            }
-
-            filterChain.doFilter(request, response);
-        } catch (Exception exception) {
-            handlerExceptionResolver.resolveException(request, response, null, exception);
+    private String getToken(HttpServletRequest request) {
+        String bearerToken = request.getHeader("Authorization");
+        if(bearerToken != null && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7);
         }
+        return null;
     }
 }
 ```
@@ -353,16 +238,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 4. Включете филтъра в SecurityFilterChain метода. Нека той да се изпълнява непосредствено преди UsernamePasswordAuthenticationFilter. Добавете и JwtAuthenticationEntryPoint като ресурс, отговарящ за обработка на изключения, свързани с оторизацията.
 
 ```
-private JwtAuthenticationEntryPoint authenticationEntryPoint;
-private JwtAuthenticationFilter authenticationFilter;
+    private JwtAuthenticationEntryPoint authenticationEntryPoint;
+    private JwtAuthenticationFilter authenticationFilter;
 
 ***
 
 http.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
-http.exceptionHandling(exception -> exception.authenticationEntryPoint (authenticationEntryPoint))
+http.exceptionHandling(exception -> exception.authenticationEntryPoint (authenticationEntryPoint));
 
 ```
 
 5. Изпробвайте функционалността с Postman. Полученият при вписването токен се добавя към заявката към последващ ресурс посредством опцията Bearer token.
 
-<figure><img src="../../../assets/image (163).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../assets/image (163).png" alt=""><figcaption></figcaption></figure>
