@@ -237,7 +237,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 4. Включете филтъра в SecurityFilterChain метода. Нека той да се изпълнява непосредствено преди UsernamePasswordAuthenticationFilter. Добавете и JwtAuthenticationEntryPoint като ресурс, отговарящ за обработка на изключения, свързани с оторизацията.
 
-```
+```java
     private JwtAuthenticationEntryPoint authenticationEntryPoint;
     private JwtAuthenticationFilter authenticationFilter;
 
