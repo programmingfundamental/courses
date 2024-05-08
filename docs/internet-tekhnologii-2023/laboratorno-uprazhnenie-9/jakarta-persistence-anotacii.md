@@ -192,7 +192,7 @@ public class Customer {
     
      ***
      
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="Cust_phones")
     private Set<PhoneNumber> phones;
 }
@@ -206,7 +206,7 @@ public class PhoneNumber {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToMany(mappedBy="phones")
+    @ManyToMany(mappedBy="phones", fetch = FetchType.EAGER)
     private Set<Customer> customers;
 }
 ```
