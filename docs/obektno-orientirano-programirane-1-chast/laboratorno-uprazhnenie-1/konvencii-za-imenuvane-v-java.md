@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Лабораторно упражнение 1
+title: Конвенции за именуване в Java
 parent: Обектно-ориентирано програмиране - 1 част
 has_children: true
 nav_order: 2
