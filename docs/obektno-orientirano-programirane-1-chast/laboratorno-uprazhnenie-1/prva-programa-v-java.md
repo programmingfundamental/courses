@@ -3,7 +3,7 @@ layout: default
 title: Първа програма в Java
 parent: Лабораторно упражнение 1
 grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 2
+nav_order: 3
 ---
 
 # Първа програма в Java

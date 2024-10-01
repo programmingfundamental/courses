@@ -3,7 +3,7 @@ layout: default
 title: Оператори
 parent: Лабораторно упражнение 1
 grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 5
+nav_order: 6
 ---
 
 # Оператори

@@ -3,7 +3,7 @@ layout: default
 title: Задачи
 parent: Лабораторно упражнение 1
 grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 13
+nav_order: 14
 ---
 # Задачи
 

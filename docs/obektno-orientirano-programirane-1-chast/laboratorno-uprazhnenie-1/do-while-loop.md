@@ -3,7 +3,7 @@ layout: default
 title: Оператор за цикъл Do-while
 parent: Лабораторно упражнение 1
 grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 9
+nav_order: 10
 ---
 
 # Do-while loop
