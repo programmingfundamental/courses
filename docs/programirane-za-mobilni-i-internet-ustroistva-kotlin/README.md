@@ -6,5 +6,5 @@ has_children: true
 permalink: /docs/programirane-za-mobilni-i-internet-ustroistva-kotlin
 ---
 
-# Програмиране за мобилни и Интернет устройства
+# Програмиране за мобилни и Интернет устройства Kotlin
 
