@@ -14,6 +14,7 @@ Kotlin не преобразува имплицитно между числов�
 
 Проверете със следните примери:
 
+```kotlin
 val i: Int = 6
 val b1 = i.toByte()
 println(b1)
@@ -26,11 +27,13 @@ val i1: Int = b2
 val i2: String = b2
 
 val i3: Double = b2
+```
 
 Защо се получиха такива резултати
 
 Променете примера:
 
+```kotlin
 val i4: Int = b2.toInt() 
 println(i4)
 
@@ -39,29 +42,34 @@ println(i5)
 
 val i6: Double = b2.toDouble()
 println(i6)
+```
 
 Kotlin поддържа два вида променливи: изменяеми и не неизменяеми
 
 Неизменяеми с ```val``` можете да зададете стойност веднъж. Ако се опитате да зададете нещо отново, ще получите грешка.
 
-Изменящи се с var можете да зададете стойност, след което да промените стойността по-късно в програмата.
+Изменящи се с ```var``` можете да зададете стойност, след което да промените стойността по-късно в програмата.
 
 Проверете следния пример:
 
+```kotlin
 var fish = 1
 fish = 2
 val aquarium = 1
 aquarium = 2
+```
 
 Низовете в Kotlin работят почти като низове във всеки друг език за програмиране. " - се използват за низове, ' - се използва за еденични символи, + - обедидение, $ - служи за създаване на шаблони, {} - използва се за изрази в шаблон
 
 Проверете примера:
 
+```kotlin
 val numberOfFish = 5
 val numberOfPlants = 12
 "I have $numberOfFish fish" + " and $numberOfPlants plants"
 
 "I have ${numberOfFish + numberOfPlants} fish and plants"
+```
 
 ## Сравняване
 
@@ -69,6 +77,7 @@ val numberOfPlants = 12
 
 Пример:
 
+```kotlin
 val numberOfFish = 50
 val numberOfPlants = 23
 if (numberOfFish > numberOfPlants) {
@@ -76,16 +85,19 @@ if (numberOfFish > numberOfPlants) {
 } else {
     println("Unhealthy ratio")
 }
+```
 
 Израс с диапазон
 
+```kotlin
 val fish = 50
 if (fish in 1..100) {
     println(fish)
 }
+```
 
 Допълнителни условия
-
+```kotlin
 if (numberOfFish == 0) {
     println("Empty tank")
 } else if (numberOfFish < 40) {
@@ -93,14 +105,15 @@ if (numberOfFish == 0) {
 } else {
     println("That's a lot of fish!")
 }
-
+```
 Твърдение:
-
+```kotlin
 when (numberOfFish) {
     0  -> println("Empty tank")
     in 1..39 -> println("Got fish!")
     else -> println("That's a lot of fish!")
 }
+```
 
 ## Nullabel
 
@@ -108,46 +121,60 @@ when (numberOfFish) {
 
 Проверете с примера:
 
+```kotlin
 var rocks: Int = null
+```
 
 Използвайте оператора за въпросителен знак след типа, за да покажете, че променливата може да бъде нула
 
+```kotlin
 var marbles: Int? = null
+```
 
 Оператор ?
 
 Пример:
 
+```kotlin
 var fishFoodTreats = 6
 if (fishFoodTreats != null) {
     fishFoodTreats = fishFoodTreats.dec()
 }
 
+Оператор  ?:
+
+```kotlin
 var fishFoodTreats = 6
 fishFoodTreats = fishFoodTreats?.dec()
 
-Оператор  ?:
-
 fishFoodTreats = fishFoodTreats?.dec() ?: 0
+```kotlin
 
 Оператор !!
 
+```kotlin
 val len = s!!.length
+```kotlin
 
 ## Колекции
 
 Дефиниране на списък с listOf
 
+```kotlin
 val school = listOf("mackerel", "trout", "halibut")
 println(school)
+```
 
 Дефиниране на списък с mutableListOf
 
+```kotlin
 val myList = mutableListOf("tuna", "salmon", "shark")
 myList.remove("shark")
+```
 
 Дефиниране на масив с arrayOf, intArrayOf
 
+```kotlin
 val school = arrayOf("shark", "salmon", "minnow")
 println(java.util.Arrays.toString(school))
 
@@ -155,27 +182,36 @@ val mix = arrayOf("fish", 2)
 
 val numbers = intArrayOf(1,2,3)
 
+```
+
 Оператор +
 
+```kotlin
 val numbers = intArrayOf(1,2,3)
 val numbers3 = intArrayOf(4,5,6)
 val foo2 = numbers3 + numbers
 println(foo2[5])
+```
 
 Изпробвайте различни комбинации от вложени масиви и списъци. Както и в други езици, можете да влагате масиви и списъци. Тоест, когато поставите масив в масив, имате масив от масиви, а не сплескан масив от съдържанието на двете. Елементите на масива също могат да бъдат списъци, а елементите на списъците могат да бъдат масиви.
 
+```kotlin
 val numbers = intArrayOf(1, 2, 3)
 val oceans = listOf("Atlantic", "Pacific")
 val oddList = listOf(numbers, oceans, "salmon")
 println(oddList)
+```
 
 Инициализиране на масив 
 
+```kotlin
 val array = Array (5) { it * 2 }
 println(java.util.Arrays.toString(array))
+```
 
 ## Обхождане на масив
 
+```kotlin
 val school = arrayOf("shark", "salmon", "minnow")
 for (element in school) {
     print(element + " ")
@@ -197,6 +233,7 @@ var bubbles = 0
 while (bubbles < 50) {
     bubbles++
 }
+
 println("$bubbles bubbles in the water\n")
 
 do {
@@ -207,9 +244,11 @@ println("$bubbles bubbles in the water\n")
 repeat(2) {
     println("A fish is swimming")
 }
+```
 
 ## Функциии
 
+```kotlin
 fun main(args: Array<String>) {
     println("Hello, world!")
 }
@@ -219,15 +258,18 @@ fun printHello() {
 }
 
 printHello()
+```
 
 ## Предаване на аргоменти в main
 
+```kotlin
 fun main(args: Array<String>) {
     println("Hello, ${args[0]}")
 }
+```
 
 Примерни функции
-
+```kotlin
 fun feedTheFish() {
     val day = randomDay()
     val food = "pellets"
@@ -288,15 +330,19 @@ fun fishFood (day : String) : String {
         else -> "nothing"
     }
 }
+```
 
 ## Стойност по подразбиране
 
+```kotlin
 fun swim(speed: String = "fast") {
    println("swimming $speed")
 }
+```
 
 ## Задължителни параметри
 
+```kotlin
 fun shouldChangeWater (day: String, temperature: Int = 22, dirty: Int = 20): Boolean {
     return when {
         temperature > 30 -> true
@@ -312,9 +358,11 @@ fun feedTheFish() {
     println ("Today is $day and the fish eat $food")
     println("Change water: ${shouldChangeWater(day)}")
 }
+```
 
 ## Компактни функции
 
+```kotlin
 fun isTooHot(temperature: Int) = temperature > 30
 
 fun isDirty(dirty: Int) = dirty > 30
@@ -329,6 +377,7 @@ fun shouldChangeWater (day: String, temperature: Int = 22, dirty: Int = 20): Boo
         else  -> false
     }
 }
+```
 
 ## Филтри
 
@@ -336,14 +385,17 @@ fun shouldChangeWater (day: String, temperature: Int = 22, dirty: Int = 20): Boo
 
 Да дефинираме колекция:
 
+```kotlin
 val decorations = listOf ("rock", "pagoda", "plastic plant", "alligator", "flowerpot")
+```
 
-Как може да отпечатаме само стойностите с 'p'
+<span style="color:blue">Как може да отпечатаме само стойностите с 'p'<span>
 
 ## Нетърпеливи и мързеливи филтри
 
 Филтрите по подразбиране на нетърпеливи, това означава, че всеки път когато се изполват се създава колекция.
 
+```kotlin
 fun main() {
     val decorations = listOf ("rock", "pagoda", "plastic plant", "alligator", "flowerpot")
 
@@ -351,17 +403,21 @@ fun main() {
     val eager = decorations.filter { it [0] == 'p' }
     println("eager: $eager")
 }
+```
 
 За да бъде един филтър мързелив трябва да се дефинира с asSequence
 
+```kotlin
 val filtered = decorations.asSequence().filter { it[0] == 'p' }
     println("filtered: $filtered")
 
 val newList = filtered.toList()
     println("new list: $newList")
+```
 
 ## Трансформиране на елементи
 
+```kotlin
 val lazyMap = decorations.asSequence().map {
         println("access: $it")
         it
@@ -372,16 +428,18 @@ println("-----")
 println("first: ${lazyMap.first()}")
 println("-----")
 println("all: ${lazyMap.toList()}")
+```
 
 Пример 2:
 
+```kotlin
 val lazyMap2 = decorations.asSequence().filter {it[0] == 'p'}.map {
         println("access: $it")
         it
     }
     println("-----")
     println("filtered: ${lazyMap2.toList()}")
-
+```
 
 ## Ламбди
 
@@ -389,13 +447,17 @@ val lazyMap2 = decorations.asSequence().filter {it[0] == 'p'}.map {
 
 Пример
 
+```kotlin
 var dirtyLevel = 20
 val waterFilter = { dirty : Int -> dirty / 2}
 println(waterFilter(dirtyLevel))
+```
 
 Дефиниране на Ламбда
 
+```kotlin
 val waterFilter: (Int) -> Int = { dirty -> dirty / 2 }
+```
 
 Направете променлива, наречена waterFilter
 waterFilter може да бъде всяка функция, която приема Int и връща Int
@@ -404,21 +466,26 @@ waterFilter може да бъде всяка функция, която при�
 
 ## Функции приемащи Ламбда параметър
 
+```kotlin
 fun updateDirty(dirty: Int, operation: (Int) -> Int): Int {
    return operation(dirty)
 }
 
 val waterFilter: (Int) -> Int = { dirty -> dirty / 2 }
 println(updateDirty(30, waterFilter))
+```
 
 Предаване на именна функция
 
+```kotlin
 fun increaseDirty( start: Int ) = start + 1
 
 println(updateDirty(15, ::increaseDirty))
+```
 
 Пример
-
+```kotlin
 var dirtyLevel = 19;
 dirtyLevel = updateDirty(dirtyLevel) { dirtyLevel -> dirtyLevel + 23}
 println(dirtyLevel)
+```
