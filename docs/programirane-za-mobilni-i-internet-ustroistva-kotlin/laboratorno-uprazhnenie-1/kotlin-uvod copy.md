@@ -140,6 +140,7 @@ var fishFoodTreats = 6
 if (fishFoodTreats != null) {
     fishFoodTreats = fishFoodTreats.dec()
 }
+```
 
 Оператор  ?:
 
@@ -148,13 +149,15 @@ var fishFoodTreats = 6
 fishFoodTreats = fishFoodTreats?.dec()
 
 fishFoodTreats = fishFoodTreats?.dec() ?: 0
-```kotlin
+```
+
+
 
 Оператор !!
 
 ```kotlin
 val len = s!!.length
-```kotlin
+```
 
 ## Колекции
 
