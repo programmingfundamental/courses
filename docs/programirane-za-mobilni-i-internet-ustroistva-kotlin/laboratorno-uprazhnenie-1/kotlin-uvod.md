@@ -2,7 +2,7 @@
 layout: default
 title: Пример за Kotlin код
 parent: Лабораторно упражнение 1
-grand_parent: Програмиране за мобилни и Интернет устройства
+grand_parent: Програмиране за мобилни и Интернет устройства Kotlin
 nav_order: 1
 ---
 
