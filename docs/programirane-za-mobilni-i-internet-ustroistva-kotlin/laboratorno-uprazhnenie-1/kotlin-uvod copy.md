@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Пример за Kotlin код
+title: Въведение в Kotlin
 parent: Лабораторно упражнение 1
 grand_parent: Програмиране за мобилни и Интернет устройства Kotlin
 nav_order: 2
@@ -153,7 +153,7 @@ fishFoodTreats = fishFoodTreats?.dec() ?: 0
 
 
 
-Оператор !!
+Оператор !! - Потвърждава на компилатора, че обекта не е null
 
 ```kotlin
 val len = s!!.length
