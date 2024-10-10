@@ -41,12 +41,15 @@ fun main() {
 ```kotlin
 
 class Customer {
-    private val id: Int
-        get() = this.id
+
+    constructor(email: String) {
+        this.email = email
+    }
+
     private var email: String
         get() = this.email
-        set(value) { 
-            this.email = value
+        set(value) {
+            this.email = field
         }
 }
 
