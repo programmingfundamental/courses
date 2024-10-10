@@ -13,9 +13,9 @@ nav_order: 2
 
 Версии:
 
-Community - версия със свободен лиценз, за разработка с Java SDK. Тази версия е напълно достатъчна за курс по ООП. [Директен линк](https://download.jetbrains.com/idea/ideaIC-2021.2.2.exe?\_gl=1\*1qtwwxf\*\_ga\*MjEwNTE2Nzc2NS4xNjMxOTcyNzgy\*\_ga\_V0XZL7QHEB\*MTYzMzM2NDU5My4xLjEuMTYzMzM2NTAwMS4w&\_ga=2.7634226.1690500309.1633364595-2105167765.1631972782)
+Community - версия със свободен лиценз, за разработка с Java SDK. Тази версия е напълно достатъчна за курс по ООП. [Директен линк](https://www.jetbrains.com/idea/download/?section=windows)
 
-Ultimate - версия с комерсиален лиценз. Допълнително включва Web и enterprise приложения. Може да използвате с акауните си в @onlineedu.tu-varna.bg. [Директен линк](https://download.jetbrains.com/idea/ideaIU-2021.2.2.exe?\_gl=1\*78hxj8\*\_ga\*MjEwNTE2Nzc2NS4xNjMxOTcyNzgy\*\_ga\_V0XZL7QHEB\*MTYzMzM2NDU5My4xLjEuMTYzMzM2NTA0NS4w&\_ga=2.7634226.1690500309.1633364595-2105167765.1631972782)
+Ultimate - версия с комерсиален лиценз. Допълнително включва Web и enterprise приложения. Може да използвате с акауните си в @onlineedu.tu-varna.bg. [Директен линк](https://www.jetbrains.com/shop/eform/students)
 
 Изисквания
 
