@@ -10,3 +10,11 @@ nav_order: 2
 ## Задача 1
 
 ![alt text](image-1.png)
+
+## Задача 2
+
+![alt text](image-2.png)
+
+## Задача 3
+
+![alt text](image.png)
