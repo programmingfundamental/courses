@@ -129,6 +129,74 @@ fun main() {
 }
 ```
 
+# Абстрактни класове
+
+Подобно на Java, ключовата дума се използва за деклариране на абстрактни класове в Kotlin e abstract. Абстрактен клас не може да бъде инициализиран. Въпреки това, можете да наследи. Членовете на абстрактния клас не са абстрактни, освен ако изрично не използвате ключова дума abstract, за да ги направите абстрактни.
+
+```kotlin
+abstract class Person(name: String) {
+
+    init {
+        println("My name is $name.")
+    }
+
+    fun displaySSN(ssn: Int) {
+        println("My SSN is $ssn.")
+    }
+
+    abstract fun displayJob(description: String)
+}
+
+class Teacher(name: String): Person(name) {
+
+    override fun displayJob(description: String) {
+        println(description)
+    }
+}
+
+fun main(args: Array<String>) {
+    val jack = Teacher("Jack Smith")
+    jack.displayJob("I'm a mathematics teacher.")
+    jack.displaySSN(23123)
+}
+```
+
+# Интерфейси
+
+Интерфейсите в Kotlin са подобни на интерфейсите в Java 8. Те могат да съдържат дефиниции на абстрактни методи, както и реализации на неабстрактни методи. Те обаче не могат да съдържат никакво състояние. Това означава, че интерфейсът може да има свойство, но трябва да бъде абстрактено или да предоставя имплементации на достъп.
+
+```kotlin
+interface Animal {
+
+    val name: String
+
+    fun move() : String
+
+    fun hello() {
+        println("Hello, I am ${this.name}")
+    }
+}
+
+class Fish : Animal {
+
+    override val name: String = "Dory"
+    override fun move() = "just swim"
+
+}
+
+fun main(args: Array<String>) {
+    val dory = Fish()
+
+    println("name = ${dory.name}")
+    print("Calling hello(): ")
+
+    dory.hello()
+
+    print("Calling and printing move(): ")
+    println(dory.move())
+}
+```
+
 # Класове данни
 
 Класове данни улесняват създаването на класове, които се използват за съхраняване на стойности. Такива класове автоматично се предоставят с методи за копиране, получаване на представяне на низове и използване на екземпляри в колекции. Можете да замените тези методи с вашите собствени реализации в декларацията на класа.
