@@ -28,19 +28,20 @@ class Animal {
 ```
 
 ```java
-class Dog extends Animal jav{ 
+class Dog extends Animal { 
     void bark(){
     System.out.println("barking...");
     } 
 }
 ```
 
-<pre class="language-java" data-title="BabyDog.java" data-line-numbers><code class="lang-java">class BabyDog extends Dog { 
+```java
+class BabyDog extends Dog { 
     void weep(){
-<strong>        System.out.println("weeping...");
-</strong>        } 
+    System.out.println("weeping...");
+    } 
 }
-</code></pre>
+```
 
 
 ```java
