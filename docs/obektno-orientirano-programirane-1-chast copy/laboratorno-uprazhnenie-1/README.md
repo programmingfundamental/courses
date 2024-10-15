@@ -311,3 +311,10 @@ public class Main{
 } 
 ```
 
+
+**Tasks**
+
+Task 1. Create class Item to describe an item with attributes type, quantity, price and expiration days. The object will have as behaviour read and write methods.
+Create class ItemArray with attribute an array of items. Class ItemArray has as behaviour calculateAveragePrice method which returns the average price of all included items.
+Define class Apllication with main method and test created functionalities.
+
