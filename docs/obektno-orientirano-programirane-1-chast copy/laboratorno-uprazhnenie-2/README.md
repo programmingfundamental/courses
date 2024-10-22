@@ -177,3 +177,10 @@ The purpose of access modifiers is to define what visibility has the element, as
 · public – visible from everywhere.
 
 If there is no modifier specified, the visibility - by default - is within the package.
+
+
+**Tasks**
+
+*Task 1* Create class **Machine** with private attribute price. Machine is inherited by class **Printer** with private attribute for number of pages, printed per minute.
+
+Both classes has accessors and mutators.
