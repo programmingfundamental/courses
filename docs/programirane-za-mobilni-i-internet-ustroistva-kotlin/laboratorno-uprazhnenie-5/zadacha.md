@@ -30,3 +30,7 @@ nav_order: 2
 ## Задача 6
 
 Подравнете текста и елементите на потребителския изглед с padding, verticalArrangement , align и textAlign 
+
+## Задача 7
+
+https://tuvarnabg.sharepoint.com/:u:/s/msteams_230e9b/EXtfPyFQ_3tAnBwEYE7-4XgB3w6hd6boqpZEw_RJEj-sgg?e=HW2dfN
