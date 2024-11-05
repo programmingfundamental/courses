@@ -47,3 +47,17 @@ Define interfaces Pet and Wild.
 Define abstract class Animal that implements interface Movement, has attributes for name and age, abstract method *sound()* and method for textual representation.
 Define children of Animal - Dog, Bird and Fish. Implement interface and abstract class' methods.
 Define class with main function, create an array with animals and display their movement. Display information about pets and wild animals present.
+
+**Task 4**:
+
+Create program for account interest.
+
+Define interface InterestCalculator with method that calculates and returns the interest of given account, *calculateInterest()*.
+
+Define abstract class Acount that implements the interface and has properties for accountId and balance, parameterized constructor, get methods and method for textual description.
+
+Define class DepositAccount which inherits the abstract class with property for currency ("EUR" or "USD") and has method for textual description. The interest is 2% for USD and 3% for EUR, 0 for other currencies.
+
+Define class SavingsAccount which inherits the abstract class with property for saving period in months and has method for textual description. The interest is 5% for period up to half year, 7% for perid up to year and 10% in other cases.
+
+Define class with main function, declare array with accounts and test defined methods. Calculate and display the average interest.
