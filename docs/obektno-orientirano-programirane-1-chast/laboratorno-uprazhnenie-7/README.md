@@ -42,8 +42,7 @@ Java използва 16-битовата таблица за символи UNI
 * чрез присвояване стойността на друг символен низ Присвояването на стойността е еквивалентно на насочване на String променлива към друга променлива от същия тип. Пример за това е следният фрагмент:
 
   ```java
-  String source = "Some source";
-  
+  String source = "Some source";  
   String assigned = source;
   ```
 
@@ -54,7 +53,6 @@ Java използва 16-битовата таблица за символи UNI
 
 ```java
 String email = "some@email.bg";
-
 String info = "My mail is: " + email + "."; // My mail is: some@email.bg.
 ```
 
@@ -76,6 +74,8 @@ System.out.printf("Hello, %s, have a nice reading!", name);
 Ако искаме да използваме кавички в съдържанието, тогава трябва да поставим наклонена черта преди тях за указание на компилатора. 
 ```java
 String quote = "Book’s title is \"Intro to Java\""; // Book's title is "Intro to Java"
+```
+
 Кавичките този път са част от текста. В променливата те са добавени чрез поставянето им след екраниращия знак (escaping character) обратна наклонена черта. По този начин компилаторът разбира, че кавичките не служат за начало или край на символен низ, а са част от данните. Наклонената черта се използва за символи, които играят специална роля в текста (в случая кавичките) или за дефиниране на действие, което не може да се изрази със символ. Пример за втория случай са обозначаването на символ за нов ред (\n), табулация (\t), избор на символ по неговия Unicode (\uXXXX, където с X се обозначава кодът) и др.
 
 * \’ - Единична кавичка
@@ -90,7 +90,6 @@ String quote = "Book’s title is \"Intro to Java\""; // Book's title is "Intro 
 ```java
 String word1 = "Java";
 String word2 = "JAVA";
-
 System.out.println(word1.equals(word2)); // false
 System.out.println(word1.equalsIgnoreCase(word2)); // true
 ```
@@ -105,10 +104,8 @@ compareTo(…) връща положително число, отрицател�
 ```java
 String str1= "abc";
 String str2 = "aBcd";
-
 System.out.println(str1.compareTo(str2)); //32
 System.out.println(str2.compareTo(str1)); //-32
-
 System.out.println(str1.compareToIgnoreCase(str2)); //-1
 System.out.println(str2.compareToIgnoreCase(str1)); //1
 ```
@@ -121,7 +118,6 @@ System.out.println(str2.compareToIgnoreCase(str1)); //1
 ```java
 String greet = "Hello, ";
 String name = "reader!";
-
 String result = greet.concat(name); // Hello, reader!
 ```
 
@@ -134,7 +130,6 @@ String result = greet.concat(name); // Hello, reader!
 ```java
 String greet = "Hello, ";
 String name = "reader!";
-
 String result = greet + name; // Hello, reader!
 ```
 
@@ -144,9 +139,7 @@ String result = greet + name; // Hello, reader!
 
 ```java
 String str = "First java class";
-
 int index = str.indexOf("java");
-
 System.out.println(index); // index = 6 (starts from 0)
 ```
 
@@ -163,9 +156,7 @@ String subStr = str.substring(11, 16); // subStr = "class"
 
 ```java
 String listOfAnimals = "dog, cat, lion, pork";
-
 String[] animalsArr = listOfAnimals.split("\[ ,]");
-
 for(String animal : animalsArr) {
   if(!animal.equals("")) {
       System.out.println(animal);
@@ -177,9 +168,7 @@ for(String animal : animalsArr) {
 
 ```java
 String helloWorld = "Hello, java.";
-
 String fixedGreeting = helloWorld.replace("java", " world");
-
 System.out.println(fixedGreeting);
 ```
 
@@ -187,9 +176,7 @@ System.out.println(fixedGreeting);
 
 ```java
 String helloWorld = "Hello, java.";
-
 System.out.println(helloWorld.toLowerCase());
-
 System.out.println(helloWorld.toUpperCase());
 ```
 
@@ -197,9 +184,7 @@ System.out.println(helloWorld.toUpperCase());
 
 ```java
 String helloWorld = "Hello, java. ";
-
 String withoutWhiteSpace = helloWorld.trim();
-
 System.out.println(helloWorld.length());
 System.out.println(withoutWhiteSpace.length());
 ```
