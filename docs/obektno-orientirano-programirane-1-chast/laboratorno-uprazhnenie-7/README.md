@@ -35,25 +35,45 @@ Java използва 16-битовата таблица за символи UNI
 Създаването на променлива на клас (познато още като инстанциране) е процес, свързан със заделянето на област в динамичната памет. Инициализиране променливи:
 
 * чрез символна константа
+
   ```java
   String helloWorld = "Hello, world!";
   ```
 * чрез присвояване стойността на друг символен низ Присвояването на стойността е еквивалентно на насочване на String променлива към друга променлива от същия тип. Пример за това е следният фрагмент:
-* String source = "Some source";
-* String assigned = source;
+
+  ```java
+  String source = "Some source";
+  String assigned = source;
+  ```
 
 ![](<../../assets/image (1).png>)
 
 * Променливата assigned приема стойността на source. Тъй като класът String е референтен тип, "Some source" е записано в динамичната памет (heap, хийп), сочено от първата променлива. Така двата обекта имат една и съща стойност:
-* чрез предаване стойността на операция, връщаща символен низ. Това може да бъде резултат от метод, който валидира данни; събиране на стойностите на няколко константи и променливи, преобразуване на съществуваща променлива и др. Пример за израз, връщащ символен низ след конкатенация: String email = "some@email.bg"; String info = "My mail is: " + email + "."; // My mail is: some@email.bg.
+* чрез предаване стойността на операция, връщаща символен низ. Това може да бъде резултат от метод, който валидира данни; събиране на стойностите на няколко константи и променливи, преобразуване на съществуваща променлива и др. Пример за израз, връщащ символен низ след конкатенация:
+
+```java
+String email = "some@email.bg";
+String info = "My mail is: " + email + "."; // My mail is: some@email.bg.
 
 #### Отпечатване на символни низове
 
-Извеждането на данни се извършва чрез изходния поток System.out: System.out.println("Your name is: " + name); Използвайки метода println(…) извеждаме съобщението: Your name is:, придружено със стойността на променливата name. След края на съобщението се добавя символ за нов ред, като следващото съобщение ще бъде изведено на следващия ред на конзолата. Ако искаме да избегнем символа за нов ред и съобщенията да се извеждат на един и същ, тогава прибягваме към метода print(…). В случай, че ни трябва по-прецизен форматиран изход, на помощ идва методът printf(…): System.out.printf("Hello, %s, have a nice reading!", name);
+Извеждането на данни се извършва чрез изходния поток System.out:
+
+```java
+System.out.println("Your name is: " + name);
+```
+Използвайки метода println(…) извеждаме съобщението: Your name is:, придружено със стойността на променливата name. След края на съобщението се добавя символ за нов ред, като следващото съобщение ще бъде изведено на следващия ред на конзолата. Ако искаме да избегнем символа за нов ред и съобщенията да се извеждат на един и същ, тогава прибягваме към метода print(…). В случай, че ни трябва по-прецизен форматиран изход, на помощ идва методът printf(…): 
+
+```java
+System.out.printf("Hello, %s, have a nice reading!", name);
+```
 
 #### Escaping при символните низове
 
-Ако искаме да използваме кавички в съдържанието, тогава трябва да поставим наклонена черта преди тях за указание на компилатора. String quote = "Book’s title is "Intro to Java""; // Book's title is "Intro to Java" Кавичките този път са част от текста. В променливата те са добавени чрез поставянето им след екраниращия знак (escaping character) обратна наклонена черта (). По този начин компилаторът разбира, че кавичките не служат за начало или край на символен низ, а са част от данните. Наклонената черта се използва за символи, които играят специална роля в текста (в случая кавичките) или за дефиниране на действие, което не може да се изрази със символ. Пример за втория случай са обозначаването на символ за нов ред (\n), табулация (\t), избор на символ по неговия Unicode (\uXXXX, където с X се обозначава кодът) и др.
+Ако искаме да използваме кавички в съдържанието, тогава трябва да поставим наклонена черта преди тях за указание на компилатора. 
+```java
+String quote = "Book’s title is \"Intro to Java\""; // Book's title is "Intro to Java"
+Кавичките този път са част от текста. В променливата те са добавени чрез поставянето им след екраниращия знак (escaping character) обратна наклонена черта. По този начин компилаторът разбира, че кавичките не служат за начало или край на символен низ, а са част от данните. Наклонената черта се използва за символи, които играят специална роля в текста (в случая кавичките) или за дефиниране на действие, което не може да се изрази със символ. Пример за втория случай са обозначаването на символ за нов ред (\n), табулация (\t), избор на символ по неговия Unicode (\uXXXX, където с X се обозначава кодът) и др.
 
 * \’ - Единична кавичка
 * \”- Двойна кавичка
@@ -62,41 +82,107 @@ Java използва 16-битовата таблица за символи UNI
 #### Сравнение за еднаквост
 
 * equals() – прави разлика между малки и главни букви
-* equalsIgnoreCase() – пренебрегва регистъра, сравнява само съдържанието на стринга. String word1 = "Java"; String word2 = "JAVA"; System.out.println(word1.equals(word2)); // false System.out.println(word1.equalsIgnoreCase(word2)); // true
+* equalsIgnoreCase() – пренебрегва регистъра, сравнява само съдържанието на стринга.
+
+```java
+String word1 = "Java";
+String word2 = "JAVA";
+System.out.println(word1.equals(word2)); // false
+System.out.println(word1.equalsIgnoreCase(word2)); // true
+```
 
 #### Сравнение на низове по азбучен ред
 
 * compareTo(…) – сравнява като прави разлика между малки главни букви.
-* compareToIgnoreCase(…) – сравнява като пренебрегва регистъра. compareTo(…) връща положително число, отрицателно число или 0 в зависимост от лексикографската подредба на символните низове, които сравняваме. Изчислението се извършва като взимаме уникалния код от Unicode таблицата за всеки символ и изчисляваме разликата. String str1= "abc"; String str2 = "aBcd"; System.out.println(str1.compareTo(str2)); //32 System.out.println(str2.compareTo(str1)); //-32 System.out.println(str1.compareToIgnoreCase(str2)); //-1 System.out.println(str2.compareToIgnoreCase(str1)); //1
+* compareToIgnoreCase(…) – сравнява като пренебрегва регистъра.
+
+compareTo(…) връща положително число, отрицателно число или 0 в зависимост от лексикографската подредба на символните низове, които сравняваме. Изчислението се извършва като взимаме уникалния код от Unicode таблицата за всеки символ и изчисляваме разликата. 
+
+```java
+String str1= "abc";
+String str2 = "aBcd";
+
+System.out.println(str1.compareTo(str2)); //32
+System.out.println(str2.compareTo(str1)); //-32
+System.out.println(str1.compareToIgnoreCase(str2)); //-1
+System.out.println(str2.compareToIgnoreCase(str1)); //1
+```
 
 #### Долепване на низове (конкатенация)
 
-* Долепването на символни низове и получаването на нов низ се нарича конкатенация. То може да бъде извършено по 2 начина: чрез метода concat(…): String greet = "Hello, "; String name = "reader!"; String result = greet.concat(name); // Hello, reader! Извиквайки метода, ще долепим променливата name, която е подадена като аргумент, към променливата greet. Резултатният низ ще има стойност "Hello, reader!". Вторият вариант за конкатенация е чрез операторите + и +=. Горния пример може да реализираме без проблем и по двата начина, например: String greet = "Hello, "; String name = "reader!"; String result = greet + name; // Hello, reader! Всички долепвания до низове не променят съществуващите променливи, а връщат нова променлива като резултат.
+Долепването на символни низове и получаването на нов низ се нарича конкатенация. То може да бъде извършено по 2 начина:
+* чрез метода concat(…):
+
+```java
+String greet = "Hello, ";
+String name = "reader!";
+String result = greet.concat(name); // Hello, reader!
+```
+
+Извиквайки метода, ще долепим променливата name, която е подадена като аргумент, към променливата greet. Резултатният низ ще има стойност "Hello, reader!". 
+
+* чрез операторите + и +=.
+
+Горния пример може да реализираме без проблем и по двата начина, например: 
+
+```java
+String greet = "Hello, ";
+String name = "reader!";
+String result = greet + name; // Hello, reader!
+```
+
+Всички долепвания до низове не променят съществуващите променливи, а връщат нова променлива като резултат.
 
 #### Търсене в символен низ
 
-*   String str = "First java class";
-
-    int index = str.indexOf("java");
-
-    System.out.println(index); // index = 6 (starts from 0)
+```java
+String str = "First java class";
+int index = str.indexOf("java");
+System.out.println(index); // index = 6 (starts from 0)
+```
 
 #### Извличане на част от низ
 
-String str = "First java class"; String subStr = str.substring(11, 16); // subStr = " class " Извикването на метода substring(index1, index2) извлича подниз на дадена променлива, който се намира между index1 и (index2– 1) включително. Символът на посочената позиция – index2– не се взима предвид! Aко посочим substring(11, 16), ще бъдат извлечени символите между индекс 10 и 15 включително, а не между 10 и 16!
+```java
+String str = "First java class";
+String subStr = str.substring(11, 16); // subStr = "class"
+```
+
+Извикването на метода substring(index1, index2) извлича подниз на дадена променлива, който се намира между index1 и (index2– 1) включително. Символът на посочената позиция – index2– не се взима предвид! Aко посочим substring(11, 16), ще бъдат извлечени символите между индекс 10 и 15 включително, а не между 10 и 16!
 
 #### Разцепване на низ по разделител
 
-String listOfAnimals = "dog, cat, lion, pork"; String\[] animalsArr = listOfAnimals.split("\[ ,]"); for(String animal : animalsArr) { if(!animal.equals("")) { System.out.println(animal); } }
+```java
+String listOfAnimals = "dog, cat, lion, pork";
+String[] animalsArr = listOfAnimals.split("\[ ,]");
+for(String animal : animalsArr) {
+  if(!animal.equals("")) {
+      System.out.println(animal);
+  }
+}
+```
 
 #### Замяна на подниз с друг
 
-String helloWorld = "Hello, java."; String fixedGreeting = helloWorld.replace("java", " world"); System.out.println(fixedGreeting);
+```java
+String helloWorld = "Hello, java.";
+String fixedGreeting = helloWorld.replace("java", " world");
+System.out.println(fixedGreeting);
+```
 
 #### Преминаване към главни и малки букви
 
-String helloWorld = "Hello, java."; System.out.println(helloWorld.toLowerCase()); System.out.println(helloWorld.toUpperCase());
+```java
+String helloWorld = "Hello, java.";
+System.out.println(helloWorld.toLowerCase());
+System.out.println(helloWorld.toUpperCase());
+```
 
 #### Премахване на празно пространство в края на низ
 
-String helloWorld = "Hello, java. ";; String withoutWhiteSpace = helloWorld.trim(); System.out.println(helloWorld.length()); System.out.println(withoutWhiteSpace.length());
+```java
+String helloWorld = "Hello, java. ";
+String withoutWhiteSpace = helloWorld.trim();
+System.out.println(helloWorld.length());
+System.out.println(withoutWhiteSpace.length());
+```
