@@ -43,6 +43,7 @@ Java използва 16-битовата таблица за символи UNI
 
   ```java
   String source = "Some source";
+  
   String assigned = source;
   ```
 
@@ -53,7 +54,9 @@ Java използва 16-битовата таблица за символи UNI
 
 ```java
 String email = "some@email.bg";
+
 String info = "My mail is: " + email + "."; // My mail is: some@email.bg.
+```
 
 #### Отпечатване на символни низове
 
@@ -87,6 +90,7 @@ String quote = "Book’s title is \"Intro to Java\""; // Book's title is "Intro 
 ```java
 String word1 = "Java";
 String word2 = "JAVA";
+
 System.out.println(word1.equals(word2)); // false
 System.out.println(word1.equalsIgnoreCase(word2)); // true
 ```
@@ -104,6 +108,7 @@ String str2 = "aBcd";
 
 System.out.println(str1.compareTo(str2)); //32
 System.out.println(str2.compareTo(str1)); //-32
+
 System.out.println(str1.compareToIgnoreCase(str2)); //-1
 System.out.println(str2.compareToIgnoreCase(str1)); //1
 ```
@@ -116,6 +121,7 @@ System.out.println(str2.compareToIgnoreCase(str1)); //1
 ```java
 String greet = "Hello, ";
 String name = "reader!";
+
 String result = greet.concat(name); // Hello, reader!
 ```
 
@@ -128,6 +134,7 @@ String result = greet.concat(name); // Hello, reader!
 ```java
 String greet = "Hello, ";
 String name = "reader!";
+
 String result = greet + name; // Hello, reader!
 ```
 
@@ -137,7 +144,9 @@ String result = greet + name; // Hello, reader!
 
 ```java
 String str = "First java class";
+
 int index = str.indexOf("java");
+
 System.out.println(index); // index = 6 (starts from 0)
 ```
 
@@ -154,7 +163,9 @@ String subStr = str.substring(11, 16); // subStr = "class"
 
 ```java
 String listOfAnimals = "dog, cat, lion, pork";
+
 String[] animalsArr = listOfAnimals.split("\[ ,]");
+
 for(String animal : animalsArr) {
   if(!animal.equals("")) {
       System.out.println(animal);
@@ -166,7 +177,9 @@ for(String animal : animalsArr) {
 
 ```java
 String helloWorld = "Hello, java.";
+
 String fixedGreeting = helloWorld.replace("java", " world");
+
 System.out.println(fixedGreeting);
 ```
 
@@ -174,7 +187,9 @@ System.out.println(fixedGreeting);
 
 ```java
 String helloWorld = "Hello, java.";
+
 System.out.println(helloWorld.toLowerCase());
+
 System.out.println(helloWorld.toUpperCase());
 ```
 
@@ -182,7 +197,9 @@ System.out.println(helloWorld.toUpperCase());
 
 ```java
 String helloWorld = "Hello, java. ";
+
 String withoutWhiteSpace = helloWorld.trim();
+
 System.out.println(helloWorld.length());
 System.out.println(withoutWhiteSpace.length());
 ```
