@@ -7,7 +7,7 @@ nav_order: 4
 permalink: /docs/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-4
 ---
 
-# Лабораторно упражнение 5
+# Лабораторно упражнение 4
 
 <!-- ## Панел за проектиране в Android Studio
 
