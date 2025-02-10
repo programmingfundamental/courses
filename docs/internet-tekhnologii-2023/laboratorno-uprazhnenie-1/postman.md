@@ -182,3 +182,53 @@ Postman автоматично изчислява времето в милисе
 ### Размер на отговора
 
 Postman показва приблизителния размер на отговора. Задръжте курсора на мишката над размера на отговора, за да получите разбивка по размери на тялото и заглавието.
+
+# Тестване с Postman
+
+В Postman можете да добавяте тестове към заявки, колекции и папки в колекция.  За да добавите тест, отворете заявката, колекцията или папката и въведете своя код в раздела Scripts > Post-response. Можете да напишете свой собствен JavaScript или да отворите страничния панел до редактора на код и да изберете фрагмент. Тестовете се изпълняват, след като заявката се изпълни и се получи отговор от API. Резултатът се появява в раздела Test results на отговора.
+
+Примери: 
+
+```JavaScript
+pm.test("Status test", function () {
+    pm.response.to.have.status(200);
+});
+```
+
+```JavaScript
+pm.test("Отговорът трябва да съдържа поле 'success'", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData.success).to.be.true;
+});
+```
+![request-test-tab-v11 23](https://github.com/user-attachments/assets/85fdc3c7-d353-444f-a66f-d2c2dd85b080)
+
+Post-response скриптовете могат да използват динамични променливи с различен обхват - глобални, променливи на средата (Environment), локални и променливи на колекция.  
+
+### Създаване на променливи: 
+
+```JavaScript
+pm.globals.set("baseUrl", "https://api.example.com");
+pm.environment.set("token", "abc123");
+pm.collectionVariables.set("userId", "12345");
+```
+
+### Използване на променливи в заявки: 
+
+```JavaScript
+{% raw %}{{baseUrl}}{% endraw %}/users
+{% raw %}{{token}}{% endraw %} в хедъри за аутентикация
+```
+
+### Автоматично задаване на променливи от отговор:
+
+```JavaScript
+var jsonData = pm.response.json();
+pm.environment.set("userToken", jsonData.token);
+```
+Пример: 
+
+![image](https://github.com/user-attachments/assets/dab55f88-842b-4342-b6e7-9706ce2284b5)
+
+![image](https://github.com/user-attachments/assets/211f711f-c9fd-4dc8-9a57-749ed3485337)
+
