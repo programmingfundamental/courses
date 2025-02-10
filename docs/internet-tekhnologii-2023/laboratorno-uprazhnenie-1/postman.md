@@ -208,16 +208,18 @@ Post-response скриптовете могат да използват дина
 ### Създаване на променливи: 
 
 ```JavaScript
-pm.globals.set("baseUrl", "https://api.example.com");
-pm.environment.set("token", "abc123");
-pm.collectionVariables.set("userId", "12345");
+pm.globals.set("baseUrl", "https://postman-echo.com");  //глобална променлива
+pm.environment.set("token", "abc123");                  //променлива на средата
+pm.collectionVariables.set("userId", "12345");          //променлива на колекция
+pm.variables.set("variable_key", "variable_value");     //локална променлива
 ```
 
 ### Използване на променливи в заявки: 
 
 ```JavaScript
-{% raw %}{{baseUrl}}{% endraw %}/users
-{% raw %}{{token}}{% endraw %} в хедъри за аутентикация
+https://postman-echo.com/get?user_id={{userId}}
+{{baseUrl}}/get?user_id={{userId}}
+{{token}} //в хедъри за аутентикация
 ```
 
 ### Автоматично задаване на променливи от отговор:
@@ -229,6 +231,7 @@ pm.environment.set("userToken", jsonData.token);
 Пример: 
 
 ![image](https://github.com/user-attachments/assets/dab55f88-842b-4342-b6e7-9706ce2284b5)
+
 
 ![image](https://github.com/user-attachments/assets/211f711f-c9fd-4dc8-9a57-749ed3485337)
 
