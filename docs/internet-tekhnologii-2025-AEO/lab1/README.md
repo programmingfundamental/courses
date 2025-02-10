@@ -1,9 +1,10 @@
 ---
 layout: default
-title: Интернет технологии
-nav_order: 5
+title: Лабораторно упражнение 1
+parent: Интернет технологии
 has_children: true
-permalink: /docs/internet-tehnologii-2025-AEO
+nav_order: 1
+permalink: /docs/internet-tehnologii-2025-AEO/laboratorno-uprazhnenie-1
 ---
 
-# Internet Technologies
+# Laboratory exercise 1
