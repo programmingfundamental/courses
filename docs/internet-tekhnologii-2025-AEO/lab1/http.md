@@ -8,191 +8,188 @@ permalink: /docs/internet-tehnologii-2025-AEO/lab1
 ---
 
 
-# HTTP протокол
+# HTTP protocol
 
-Hypertext Transfer Protocol (HTTP) е протокол на ниво приложен слой за предаване на хипермедийни документи като HTML. Проектиран е за комуникация между уеб браузър и уеб сървър, но може да се използва и за други цели. HTTP следва класическия модел клиент-сървър, като клиентът отваря връзка, за да направи заявка, след което чака, докато получи отговор. HTTP е протокол без състояние, което означава, че сървърът не пази никакви данни (състояние) между две заявки.
+Hypertext Transfer Protocol (HTTP) is an application-layer protocol for transmitting hypermedia documents such as HTML. It is designed for communication between a web browser and a web server, but can also be used for other purposes. HTTP follows the classic client-server model, with the client opening a connection to make a request and then waiting for a response. HTTP is a stateless protocol, meaning that the server does not keep any data (state) between requests.
 
-Целта на HTTP заявката се нарича "ресурс", който може да бъде документ, изображение и т.н. Всеки ресурс се идентифицира чрез Uniform Resource Identifier (URI). Най-често срещаната форма на URI е Uniform Resource Locator (URL), който е известен като уеб адрес.
+The target of an HTTP request is called a "resource", which can be a document, an image, etc. Each resource is identified by a Uniform Resource Identifier (URI). The most common form of a URI is the Uniform Resource Locator (URL), which is known as a web address.
 
-# Синтаксис на URL
+# URL syntax
 
 <figure><img src="../../../assets/URL (1).jpg" alt=""><figcaption></figcaption></figure>
 
-#### 1.      Схема или протокол
+#### 1.      Scheme or protocol
 
-Първият елемент на URL показва кой протокол следва да използва браузърът. Обикновено това е HTTP протоколът или неговата защитена версия, HTTPS. Мрежата изисква използването на един от тези два протокола, но браузърите могат да работят и с други протоколи като mailto: (за отваряне на пощенски клиент), ftp: (за обработка на прехвърляне на файлове) и т.н.
+The first element of a URL indicates which protocol the browser should use. This is usually the HTTP protocol or its secure version, HTTPS. The web requires the use of one of these two protocols, but browsers can also work with other protocols such as mailto: (to open an email client), ftp: (to handle file transfers), and so on.
 
-#### 2.      Домейн
+#### 2.      Domain
 
-www.example.com е името на домейна. Той показва кой уеб сървър е заявен. Като алтернатива е възможно директно да се използва IP адрес, но поради неудобството си не се използва често в мрежата.
+www.example.com is the domain name. It indicates which web server is requested. Alternatively, it is possible to use an IP address directly, but due to its inconvenience, it is not often used on the web.
 
-#### 3.      Порт
+#### 3.      Port
 
-Портът посочва техническата "врата", използвана за достъп до ресурсите на уеб сървъра. Обикновено се пропуска, ако уеб сървърът използва стандартните портове на HTTP протокола (80 за HTTP и 443 за HTTPS), за да предостави достъп до своите ресурси. В противен случай посочването му е задължително.
+The port specifies the technical "gateway" used to access the web server's resources. It is usually omitted if the web server uses the standard HTTP protocol ports (80 for HTTP and 443 for HTTPS) to provide access to its resources. Otherwise, its specification is mandatory.
 
 #### 4.      Path
 
-/path/to/myfile.html е пътят до ресурса на уеб сървъра. В ранните дни на мрежата път като този е представлявал физическото местоположение на файл на уеб сървъра. В наши дни съдържа предимно абстракция.
+/path/to/myfile.html is the path to the resource on the web server. In the early days of the web, a path like this represented the physical location of a file on the web server. These days, it's mostly an abstraction.
 
 #### 5.      Query
 
-?key1=value1\&key2=value2 са допълнителни параметри, подадени към уеб сървъра. Тези параметри са списък от двойки ключ/стойност, разделени със символа &. Уеб сървърът може да използва тези параметри за реализация на определена логика, преди да върне ресурса на потребителя.
+?key1=value1\&key2=value2 are additional parameters passed to the web server. These parameters are a list of key/value pairs separated by the & symbol. The web server can use these parameters to implement certain logic before returning the resource to the user.
 
-#### 6.      Фрагмент
+#### 6.      Fragment
 
-\#SomewhereInTheDocument е котва към друга част от самия ресурс. Котвата представлява отметка вътре в ресурса, която дава на браузъра указания за показване на съдържанието, разположено на това маркирано място. На HTML документ, например, браузърът ще превърти до точката, където е дефинирана котвата; на видео или аудио документ, браузърът ще се опита да отиде до времето, което представлява котвата. Частта след #, известна още като идентификатор на фрагмент, никога не се изпраща до сървъра със заявката.
+\#SomewhereInTheDocument is an anchor to another part of the resource itself. An anchor is a markup within the resource that tells the browser to display the content located at that marked location. On an HTML document, for example, the browser will scroll to the point where the anchor is defined; on a video or audio document, the browser will try to go to the time that the anchor represents. The part after the #, also known as the fragment identifier, is never sent to the server with the request.
 
-# HTTP съобщения
+# HTTP messages
 
-HTTP съобщенията са начинът, по който се обменят данни между сървър и клиент. Има два типа съобщения: **заявка**, изпратена от клиента за стартиране на действие от сървъра (request) и **отговор** от сървъра (response).
+HTTP messages are the way data is exchanged between a server and a client. There are two types of messages: a **request** sent by the client to initiate an action from the server (request), and a **response** from the server (response).
 
-HTTP съобщенията са съставени от текстова информация, кодирана в ASCII, и са разположени в последователност от редове. В HTTP/1.1 и по-ранните версии на протокола тези съобщения се изпращат открито през връзката. В HTTP/2 съобщението, което някога е било четимо от човека, сега е разделено в HTTP фреймове, осигурявайки оптимизация и подобрения в производителността.
+HTTP messages are composed of text information encoded in ASCII and arranged in a sequence of lines. In HTTP/1.1 and earlier versions of the protocol, these messages were sent openly over the connection. In HTTP/2, the message, which was once human-readable, is now divided into HTTP frames, providing optimization and performance improvements.
 
-HTTP заявките и отговорите споделят подобна структура и се състоят от:
+HTTP requests and responses share a similar structure and consist of:
 
-·        Начален ред (start line), описващ заявката, която трябва да бъде изпълнена, или статус за успех или неуспех по отношение на получени отговор. Тази начална линия винаги е разположена на един ред.
+· A start line, describing the request to be executed, or the success or failure status of the response received. This start line is always on a single line.
 
-·        Опционален набор от HTTP хедъри, уточняващи заявката или описващи тялото, включено в съобщението.
+· An optional set of HTTP headers specifying the request or describing the body included in the message.
 
-·        Празен ред, указващ, че цялата метаинформация на заявката е изпратена.
+· An empty line indicating that all request metadata has been sent.
 
-·        Незадължително тяло, съдържащо данни, свързани със заявката (като съдържание на HTML формуляр), или документа, свързан с отговора. Наличието на тялото и неговият размер се определят от началния ред и HTTP заглавките.
+· An optional body containing data related to the request (such as the content of an HTML form) or the document associated with the response. The presence of the body and its size are determined by the start line and HTTP headers.
 
-Началният ред и хедърите на съобщението са общо известни като head на заявката, докато неговият payload е известен като body.
+The initial line and headers of the message are collectively known as the request head, while its payload is known as the body.
 
 <figure><img src="../../../assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
-### Структура  на заявка
+### Request structure
 
 <figure><img src="../../../assets/image (36).png" alt=""><figcaption></figcaption></figure>
 
-Заявките се състоят от следните елементи:
+Requests consist of the following elements:
 
-·        HTTP метод, обикновено глагол като GET, POST или съществително като OPTIONS или HEAD, който дефинира операцията, която клиентът иска да изпълни. Обикновено клиентът иска да извлече ресурс (чрез GET) или да публикува данни от HTML формуляр (чрез POST).
+· An HTTP method, usually a verb like GET, POST or a noun like OPTIONS or HEAD, that defines the operation the client wants to perform. Typically, the client wants to retrieve a resource (via GET) or post data from an HTML form (via POST).
 
-·        Пътят на ресурса за извличане; URL адресът на ресурса, лишен от елементи, които са очевидни от контекста, например без протокола (http://), домейна (тук developer.mozilla.org), или TCP порта (тук 80).
+· The path of the resource to retrieve; the URL of the resource, stripped of elements that are obvious from the context, such as the protocol (http://), domain (here developer.mozilla.org), or TCP port (here 80).
 
-·        Версията на HTTP протокола.
+· The version of the HTTP protocol.
 
-·        Незадължителни хедъри, които предават допълнителна информация за сървърите.
+· Optional headers that convey additional information about servers.
 
-·        Тяло за някои методи като POST, които съдържат изпратения ресурс.
+· Body for some methods such as POST, which contains the resource being sent.
 
-### Структура на отговор
+### Response structure
 
 <figure><img src="../../../assets/image.png" alt=""><figcaption></figcaption></figure>
 
-Отговорите се състоят от следните елементи:
+The responses consist of the following elements:
 
-·            Версията на HTTP протокола, който следват.
+· The version of the HTTP protocol they follow.
 
-·            Код на състоянието, показващ дали заявката е била успешна или не и защо.
+· A status code indicating whether the request was successful or not and why.
 
-·            Съобщение за състояние, кратко описание на кода за състояние.
+· Status message, a short description of the status code.
 
-·            HTTP хедъри, подобни на тези на заявките.
+· HTTP headers, similar to those of requests.
 
-·            Опционално тяло, съдържащо извлечения ресурс.
+· An optional body containing the extracted resource.
 
-# Методи за HTTP заявка
+# Methods per HTTP request
 
-HTTP дефинира набор от методи за заявка, за да посочи желаното действие, което да бъде извършено за даден ресурс. Всеки от тях изпълнява различна семантика, но някои общи характеристики се споделят от група от тях: напр. метод на заявка може да бъде безопасен, идемпотентен или кеширащ.
+HTTP defines a set of request methods to specify the desired action to be performed on a given resource. Each of them implements different semantics, but some common characteristics are shared by a group of them: e.g. a request method can be safe, idempotent, or cacheable.
 
 ### GET
 
-Методът GET изисква предоставяне на посочия ресурс. Заявките, използващи GET, трябва да извличат само данни.
+The GET method requires the specified resource to be provided. Requests using GET should only retrieve data.
 
-Твърди се, че това е безопасен метод, тъй като не променя състоянието на ресурса. Методът GET е идемпотентен. Следователно извикването на този метод многократно винаги ще дава същия резултат.
+This is said to be a safe method because it does not change the state of the resource. The GET method is idempotent. Therefore, calling this method multiple times will always produce the same result.
 
-GET e методът на заявка по подразбиране. При него данните се изпращат посредством заглавната част на заявката. Двойките name-value, съдържащи предаваните данни, се добавят към URL адреса като query string.
+GET is the default request method. It sends data via a request header. The name-value pairs containing the data being passed are appended to the URL as a query string.
 
 http://www.example.com:80/path/to/myfile.html?key1=value1\&key2=value2
 
-Пример за GET заявка:
+Example for GET request:
 
 <figure><img src="../../../assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
-Други характеристики на GET заявките са:
+Other characteristics of GET requests are:
 
-·        Остават в историята на браузъра;
+· Remain in the browser history;
 
-·        Могат да се добавят в „отбелязани“ (bookmarked);
+· Can be added to "bookmarked";
 
-·        Могат да се кешират;
+· Can be cached;
 
-·        Имат ограничения за дължината на предаваните параметри;
+· They have limitations on the length of the parameters passed;
 
-·        Никога не трябва да се използват при работа с чувствителни данни;
+· They should never be used when working with sensitive data;
 
-·        Трябва да се използват само за извличане на данни.
+· Should only be used for data retrieval.
 
 ### POST
 
-Методът POST изпраща обект на посочения ресурс, често причинявайки промяна в състоянието или странични ефекти на сървъра.
+The POST method sends an object to the specified resource, often causing a state change or side effects on the server.
 
-HTTP методът POST изпраща данни към сървъра. Типът на тялото на заявката се определя от хедъра Content-Type. Разликата между PUT и POST е, че PUT е идемпотентен: извикването му веднъж или няколко пъти последователно има същия ефект, докато последователните идентични POST могат да имат допълнителни ефекти, като например създаване на поръчка многократно. POST заявката обикновено се изпраща чрез HTML форма и води до промяна на сървъра. В този случай типът съдържанието се избира чрез поставяне на подходящатата стойност на атрибута enctype на елемента \<form> или атрибута formenctype на елементите \<input> или \<button>:
+The HTTP POST method sends data to the server. The type of the request body is determined by the Content-Type header. The difference between PUT and POST is that PUT is idempotent: calling it once or several times in a row has the same effect, while successive identical POSTs can have additional effects, such as creating an order multiple times. A POST request is usually sent via an HTML form and results in a change on the server. In this case, the content type is selected by setting the appropriate value to the enctype attribute of the \<form> element or the formenctype attribute of the \<input> or \<button> elements:
 
-·        application/x-www-form-urlencoded: ключовете и стойностите са кодирани в двойки ключ-стойност, разделени с '&', с '=' между ключ и стойност. Небуквено-цифровите знаци и в ключовете, и в стойностите са процентно кодирани: това е причината този тип да не е подходящ за използване с двоични данни (вместо това използвайте multipart/form-data)
+· application/x-www-form-urlencoded: keys and values ​​are encoded in key-value pairs separated by '&', with '=' between key and value. Non-alphanumeric characters in both keys and values ​​are percent-encoded: this is why this type is not suitable for use with binary data (use multipart/form-data instead)
 
-·        multipart/form-data: всяка стойност се изпраща като блок от данни, с дефиниран от потребителския агент разделител, разделящ всяка част.
+· multipart/form-data: each value is sent as a block of data, with a user agent-defined delimiter separating each part.
 
-·        text/plain
+· text/plain
 
-При този метод двойките име-стойност, съдържащи предаваните данни, се изпращат посредством тялото на заявката.
-
+In this method, the name-value pairs containing the transmitted data are sent via the request body.
 
 <figure><img src="../../../assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
-Други характеристики на POST заявките са:
+Other characteristics of POST requests are:
 
-·        Не могат да бъдат отметнати (bookmarked);
+· Cannot be bookmarked;
 
-·        Нямат ограничения за дължина на данните;
+· No data length restrictions;
 
-·        Не се кешират;
+· They are not cached;
 
-·        Не се запазват в историята на браузъра
+· Not saved in browser history.
 
 ### PUT
-
-Методът за заявка PUT създава нов ресурс или замества целевия ресурс с пренасяните от заявката данни. Разликата между PUT и POST е, че PUT е идемпотентен: извикването му веднъж или няколко пъти последователно има същия ефект, докато последователните идентични POST заявки могат да имат допълнителни ефекти, подобни на пускането на поръчка няколко пъти.
+The PUT request method creates a new resource or replaces the target resource with the data carried by the request. The difference between PUT and POST is that PUT is idempotent: calling it once or multiple times in succession has the same effect, while consecutive identical POST requests can have additional effects, similar to placing an order multiple times.
 
 ### DELETE
 
-Методът DELETE се използва за изтриване на посочения ресурс.
+The DELETE method is used to delete the specified resource.
 
 ### PATCH
 
-Методът PATCH прилага частични модификации към ресурс. Заявка за PATCH се счита за набор от инструкции как да се модифицира ресурс, за разлика от PUT, който пълно представя ресурса.
+The PATCH method applies partial modifications to a resource. A PATCH request is considered a set of instructions on how to modify a resource, unlike PUT, which fully represents the resource.
 
-PATCH не е непременно идемпотентен, въпреки че може да бъде. За разлика от PUT, който винаги е идемпотентен. Думата "идемпотентен" означава, че произволен брой повтарящи се идентични заявки ще оставят ресурса в същото състояние. Например, ако автоматично увеличаващо се поле за брояч е неразделна част от ресурса, тогава PUT естествено ще го презапише (тъй като презаписва всичко), но не е задължително да е така за PATCH. PATCH (като POST) може да има странични ефекти върху други ресурси. 
+PATCH is not necessarily idempotent, although it can be. Unlike PUT, which is always idempotent. The word "idempotent" means that any number of repeated identical requests will leave the resource in the same state. For example, if an auto-incrementing counter field is an integral part of the resource, then PUT will naturally overwrite it (since it overwrites everything), but this is not necessarily the case for PATCH. PATCH (like POST) can have side effects on other resources.
 
 ### HEAD
 
-Методът HEAD иска отговор, идентичен на GET заявка, но без тялото на отговора.
+The HEAD method requests a response identical to a GET request, but without the response body.
 
-HEAD изисква хедърите, които биха били върнати, ако URL адресът на заявката HEAD е поискан с метода GET. Например, ако URL може да доведе до изтегляне с голям обем, заявка HEAD може да прочете заглавката си Content-Length, за да провери размера на файла, без действително да го изтегли.
+HEAD requires the headers that would be returned if the URL in the HEAD request were requested with the GET method. For example, if a URL could result in a large download, a HEAD request might read its Content-Length header to check the size of the file without actually downloading it.
 
 ### CONNECT
 
-Методът CONNECT установява тунел към сървъра, идентифициран от целевия ресурс.
+The CONNECT method establishes a tunnel to the server identified by the target resource.
 
-CONNECT стартира двупосочна комуникация с искания ресурс. Може да се използва например за достъп до уебсайтове, които използват SSL (HTTPS). Клиентът иска от HTTP прокси сървър да тунелира TCP връзката до желаната дестинация. След това сървърът продължава да осъществява връзката от името на клиента. След като връзката бъде установена от сървъра, прокси сървърът продължава да проксира TCP потока към и от клиента.
+CONNECT initiates two-way communication with the requested resource. It can be used, for example, to access websites that use SSL (HTTPS). The client asks the HTTP proxy server to tunnel the TCP connection to the desired destination. The server then proceeds to make the connection on behalf of the client. Once the connection is established by the server, the proxy server continues to proxy the TCP stream to and from the client.
 
 ### OPTIONS
 
-Методът OPTIONS описва комуникационните опции за целевия ресурс.
+The OPTIONS method describes the communication options for the target resource.
 
-Изисква разрешени опции за комуникация за даден URL или сървър. Клиентът може да посочи URL адрес с този метод или астерикс (\*), за да посочи целия сървър.
+Requires enabled communication options for a given URL or server. The client can specify a URL with this method or an asterisk (\*) to specify the entire server.
 
 ### TRACE
 
-Методът TRACE извършва тест за обратна връзка на съобщението по пътя до целевия ресурс, осигурявайки полезен механизъм за отстраняване на грешки. 
+The TRACE method performs a feedback test of the message along the path to the target resource, providing a useful debugging mechanism.
 
+# HTTP response status codes
 
-# Кодове за състояние на HTTP отговор
-
-Кодовете за състояние на HTTP отговор показват дали конкретна HTTP заявка е изпълнена успешно. Отговорите са групирани в пет класа:
+HTTP response status codes indicate whether a particular HTTP request was completed successfully. Responses are grouped into five classes:
 
 ·        Information responses (100 – 199)
 
@@ -206,26 +203,27 @@ CONNECT стартира двупосочна комуникация с иска
 
 Някои по-важни кодове за състояние:
 
-| Код                          | Описание                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Code                          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Successful responses**     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| 200 OK        | Заявката е успешна. Резултатното значение на "успех" зависи от HTTP метода: GET: Ресурсът е извлечен и предаден в тялото на съобщението. HEAD: репрезентационните хедъри са включени в отговора без никакво тяло на съобщението. PUT или POST: Ресурсът, описващ резултата от действието, се предава в тялото на съобщението. TRACE: Основният текст на съобщението съдържа съобщението за заявка, получено от сървъра. |
-| 201 Created | Заявката е успешна и в резултат на това е създаден нов ресурс. Това обикновено е отговорът, изпратен след POST заявки или някои PUT заявки.                                                                                                                                                                                                                                                                                                                                                |
+| 200 OK        | The request was successful. The resulting meaning of "success" depends on the HTTP method: GET: The resource is retrieved and passed in the message body. HEAD: The representation headers are included in the response without any message body. PUT or POST: The resource describing the result of the action is passed in the message body. TRACE: The message body contains the request message received from the server. |
+| 201 Created | The request was successful and a new resource was created as a result. This is usually the response sent after POST requests or some PUT requests.                                                                                                                                                                                                                                                                                                                                               |
 | **Redirection messages**     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| 301 Moved Permanently        | URL адресът на искания ресурс е променен за постоянно. Новият URL е даден в отговора.                                                                                                                                                                                                                                                                                                                                                                                                      |
-| 302 Found                    | Този код на отговор означава, че URI на искания ресурс е променен временно. Допълнителни промени в URI може да бъдат направени в бъдеще. Следователно същият URI трябва да се използва от клиента в бъдещи заявки.                                                                                                                                                                                                                                                                         |
-| 304 Not Modified             | Това се използва за целите на кеширането. Той казва на клиента, че отговорът не е бил променен, така че клиентът може да продължи да използва същата кеширана версия на отговора.                                                                                                                                                                                                                                                                                                          |
+| 301 Moved Permanently        | The URL of the requested resource has been permanently changed. The new URL is provided in the response.                                                                                                                                                                                                                                                                                                                                                                                                      |
+| 302 Found                    | This response code means that the URI of the requested resource has changed temporarily. Additional changes to the URI may be made in the future. Therefore, the same URI should be used by the client in future requests.                                                                                                                                                                                                                                                                         |
+| 304 Not Modified             | This is used for caching purposes. It tells the client that the response has not been modified, so the client can continue to use the same cached version of the response.                                                                                                                                                                                                                                                                                                        |
 | **Client error responses**   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| 400 Bad Request              | Сървърът не може или няма да обработи заявката поради нещо, което се възприема като клиентска грешка (напр. неправилен синтаксис на заявка, невалидно рамкиране на съобщение на заявка или измамно маршрутизиране на заявка).                                                                                                                                                                                                                                                              |
-| 401 Unauthorized             | Показва, че клиентската заявка не е завършена, защото липсват валидни идентификационни данни за заявения ресурс.                                                                                                                                                                                                                                                                                                                                                                           |
-| 403 Forbidden                | Клиентът няма права за достъп до съдържанието, така че сървърът отказва да предостави искания ресурс. За разлика от 401 Unauthorized, самоличността на клиента е известна на сървъра.                                                                                                                                                                                                                                                                                                      |
-| 404 Not Found | Сървърът не може да намери искания ресурс. В браузъра това означава, че URL адресът не е разпознат. В API това може също да означава, че крайната точка е валидна, но самият ресурс не съществува. Сървърите могат също да изпратят този отговор вместо 403 Забранено, за да скрият съществуването на ресурс от неоторизиран клиент. Този код за отговор е може би най-известният поради честото му появяване в мрежата.                                                                   |
-| 405 Method Not Allowed       | Методът на заявката е известен на сървъра, но не се поддържа от целевия ресурс. Например API може да не позволява извикване на DELETE за премахване на ресурс.                                                                                                                                                                                                                                                                                                                             |
+| 400 Bad Request              | The server cannot or will not process the request due to something perceived as a client error (e.g., incorrect request syntax, invalid request message framing, or fraudulent request routing).                                                                                                                                                                                                                                                           |
+| 401 Unauthorized             | Indicates that the client request was not completed because valid credentials for the requested resource are missing.                                                                                                                                                                                                                                                                                                                                                                        |
+| 403 Forbidden                | The client does not have permission to access the content, so the server refuses to provide the requested resource. Unlike 401 Unauthorized, the client's identity is known to the server.                                                                                                                                                                                                                                                                                                      |
+| 404 Not Found | The server cannot find the requested resource. In a browser, this means that the URL is not recognized. In an API, this can also mean that the endpoint is valid, but the resource itself does not exist. Servers can also send this response instead of a 403 Forbidden to hide the existence of a resource from an unauthorized client. This response code is perhaps the most well-known due to its frequent occurrence on the web.                                                                   |
+| 405 Method Not Allowed       | The request method is known to the server, but is not supported by the target resource. For example, the API may not allow a DELETE call to remove a resource.                                                                                                                                                                                                                                                                                                                             |
 | **Server error responses**   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| 500 Internal Server Error    | Сървърът е изпаднал в ситуация, с която не знае как да се справи.                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| 501 Not Implemented          | Методът на заявка не се поддържа от сървъра и не може да бъде обработен. Единствените методи, които сървърите трябва да поддържат (и следователно не трябва да връщат този код), са GET и HEAD.                                                                                                                                                                                                                                                                                            |
-| 502 Bad Gateway              | Този отговор за грешка означава, че сървърът, докато работи като gateway за получаване на отговор, необходим за обработка на заявката, е получил невалиден отговор.                                                                                                                                                                                                                                                                                                                        |
-| 503 Service Unavailable      | Сървърът не е готов да обработи заявката. Често срещаните причини са сървър, който не работи за поддръжка или е претоварен.                                                                                                                                                                                                                                                                                                                                                                |
+| 500 Internal Server Error    | The server has found itself in a situation it doesn't know how to handle.
+                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 501 Not Implemented          | The request method is not supported by the server and cannot be processed. The only methods that servers should support (and therefore should not return this code) are GET and HEAD.                                                                                                                                                                                                                                                                                            |
+| 502 Bad Gateway              | This error response means that the server, while acting as a gateway to receive a response needed to process the request, received an invalid response.                                                                                                                                                                                                                                                                                                                      |
+| 503 Service Unavailable      | The server is not ready to process the request. Common causes are a server that is down for maintenance or overloaded.                                                                                                                                                                                                                                                                                                                                                               |
 |                              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 
 
