@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Лабораторно упражнение 1
+title: HTTP protocol
 parent: Internet Technologies
 has_children: true
 nav_order: 2
