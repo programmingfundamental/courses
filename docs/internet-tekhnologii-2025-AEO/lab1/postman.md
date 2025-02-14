@@ -10,186 +10,187 @@ permalink: /docs/internet-tehnologii-2025-AEO/lab1
 
 # Postman
 
-Postman е приложение, използвано за тестване на API. Това е HTTP клиент, който тества HTTP заявки, използвайки графичен потребителски интерфейс, чрез който получаваме различни типове отговори, които впоследствие могат да бъдат валидирани.
+Postman is an application used for API testing. It is an HTTP client that tests HTTP requests using a graphical user interface through which we receive different types of responses that can subsequently be validated.
 
-Може да бъде ползван директно в уеб пространството на адрес [go.postman.co/home](https://go.postman.co/home) или инсталиран като десктоп приложение. [Линк за изтегляне](https://www.postman.com/downloads/).
+It can be used directly on the web at [go.postman.co/home](https://go.postman.co/home) or installed as a desktop application. [Download link](https://www.postman.com/downloads/).
 
-# Изпращане на заявка с Postman
+# Sending a request with Postman
 
-Можете да изпращате заявки в Postman за свързване с API, с които работите. Вашите заявки могат да извличат, добавят, изтриват и актуализират данни.  Могат да бъдат изпращани параметри, подробности за оторизация и всякакви основни данни, които изисквате.
+You can send requests in Postman to connect to the APIs you are working with. Your requests can retrieve, add, delete, and update data. Parameters, authorization details, and any basic data you require can be sent.
 
-Когато изпратите заявка, Postman показва отговора, получен от API сървъра, по начин, който ви позволява да го прегледате, визуализирате и, ако е необходимо, да отстраните проблема.
+When you send a request, Postman displays the response received from the API server in a way that allows you to review it, visualize it, and, if necessary, troubleshoot the problem.
 
 ![](<../../../assets/image (6).png>)
 
-## Създаване на заявки
+## Creating requests
 
-Можете да създадете нова заявка от началния екран на Postman, като използвате New > HTTP Request или като изберете +, за да отворите нов раздел.
+You can create a new request from the Postman home screen by using New > HTTP Request or by selecting + to open a new tab.
 
 ![](<../../../assets/image (31).png>)
 
-Изберете Save, за да създадете вашата заявка. Можете да дадете на заявката си име и описание и да изберете или създадете колекция, в която да я запазите.
+Select Save to create your query. You can give your query a name and description, and select or create a collection to save it to.
 
-След като новият ви раздел е отворен, можете да посочите детайлите, от които се нуждаете за вашата заявка.
+Once your new tab is open, you can provide the details you need for your request.
 
 ![](<../../../assets/image (57).png>)
-### Добавяне на детайли на заявката
 
-Ако имате заявка, която искате да изпълните, е необходимо да знаете URL адреса, метода и други незадължителни детайли като параметри и данни за удостоверяване.
+### Add request details
 
-За първоначално тестване изпращането на заявка в Postman, можете да зададете URL адреса на примерната крайна точка на API на Postman Echo https://postman-echo.com/get и метода GET, след което изберете Send.
+If you have a request that you want to execute, you need to know the URL, the method, and other optional details like parameters and authentication data.
 
-**Задаване на URL на заявката**
+To initially test sending a request in Postman, you can set the URL of the Postman Echo API sample endpoint to https://postman-echo.com/get and the GET method, then select Send.
 
-Всяка заявка, която изпращате в Postman, изисква URL адрес, представляващ крайната точка на API, с която работите.
+**Set the request URL**
 
-Всяка операция, която можете да извършите с помощта на API, обикновено е свързана с крайна точка. Всяка крайна точка в API е достъпна на определен URL адрес. Това е, което въвеждате в Postman за достъп до API.
+Every request you send in Postman requires a URL representing the API endpoint you are working with.
 
-Postman автоматично ще добави http:// в началото на Вашия URL адрес, ако не посочите протокол.
+Every operation you can perform using an API is usually associated with an endpoint. Each endpoint in an API is accessible at a specific URL. This is what you enter into Postman to access the API.
 
-По желание можете да въведете параметри на заявката в полето за URL адрес или можете да ги въведете в раздела Params. Ако вашата заявка използва параметри на пътя, можете да ги въведете директно в полето за URL адрес.
+Postman will automatically add http:// to the beginning of your URL if you don't specify a protocol.
 
-**Избор на метод на заявката**
+Optionally, you can enter query parameters in the URL field, or you can enter them in the Params tab. If your query uses path parameters, you can enter them directly in the URL field.
 
-По подразбиране Postman ще избере методът GET за нова заявка. Можете да използвате различни други методи за изпращане на данни към вашите API.
+**Selecting a request method**
+
+By default, Postman will choose the GET method for a new request. You can use various other methods to send data to your APIs.
 
 <img src="../../../assets/image (64).png" alt="" data-size="original">
 
-**Изпращане на параметри**
+**Sending parameters**
 
-Можете да изпращате path и query параметри, като използвате полето URL и раздела Params.
+You can send path and query parameters using the URL field and the Params tab.
 
-Query параметрите се добавят в края на URL адреса на заявката, след ?, изброени в двойки ключ-стойност и разделени от & чрез следния синтаксис:
+Query parameters are added to the end of the request URL, after ?, listed in key-value pairs and separated by & using the following syntax:
 
 ?id=1\&type=new
 
-Path параметрите формират част от URL адреса на заявката и се посочват с помощта на контейнери, предхождани от :, както в следния пример: /customer/:id
+Path parameters form part of the request URL and are specified using containers preceded by :, as in the following example: /customer/:id
 
-За да изпратите query параметър, добавете го директно към URL адреса или отворете Params и въведете името и стойността. Когато въведете параметрите на вашата заявка в полетата URL или Params, тези стойности ще се актуализират навсякъде, където се използват в Postman.
+To send a query parameter, add it directly to the URL or open Params and enter the name and value. When you enter your query parameters in the URL or Params fields, those values ​​will update wherever they are used in Postman.
 
-За да изпратите path параметър, въведете името на параметъра в полето URL след двоеточие, например :id. Когато въведете параметър на пътя, Postman ще го попълни в раздела Params, където можете също да го редактирате.
+To send a path parameter, enter the parameter name in the URL field after a colon, for example :id. When you enter a path parameter, Postman will populate it in the Params tab, where you can also edit it.
 
 <figure><img src="../../../assets/image (28).png" alt=""><figcaption></figcaption></figure>
 
-**Изпращане на параметри посредством тялото на заявката**
+**Sending parameters via the request body**
 
-Изпращанe на параметри посредством тялото на заявката се налага в случаите, когато трябва да добавите или актуализирате структурирани данни с PUT, POST или PATCH заявки. За целта е предвиден разделът Body в Postman.
+Sending parameters via the request body is necessary when you need to add or update structured data with PUT, POST, or PATCH requests. The Body section in Postman is provided for this purpose.
 
-Изберете типа данни, от който се нуждаете за тялото на вашата заявка – form data, URL-encoded, raw, binary или GraphQL. По подразбиране Postman ще избере None — оставете го избрано, ако не е необходимо да изпращате тяло със заявката си.
+Select the data type you need for your request body – form data, URL-encoded, raw, binary, or GraphQL. By default, Postman will choose None — leave it selected if you don't need to send a body with your request.
 
 * **Form data**
 
-Формите на уебсайтове често изпращат данни към API като `multipart/form-data`. Можете да повторите това в Postman, като използвате опцията `form-data`. Позволява изпращането на двойки ключ-стойност и указване на типа на съдържанието.
+Website forms often send data to the API as `multipart/form-data`. You can replicate this in Postman using the `form-data` option. It allows sending key-value pairs and specifying the content type.
 
 ![](<../../../assets/image (63).png>)
 
 * **URL-encoded**
 
-URL кодираните данни използват същото кодиране като URL параметрите. Ако вашият API изисква url-encoded данни, изберете x-www-form-urlencoded в раздела Body. Въведете своите двойки ключ-стойност, които да изпратите със заявката и Postman ще ги кодира преди изпращане.
+URL-encoded data uses the same encoding as URL parameters. If your API requires url-encoded data, select x-www-form-urlencoded in the Body section. Enter your key-value pairs to send with the request and Postman will encode them before sending.
 
 * **Raw data**
 
-С помощта на тази опция можете да изпращате вашите данни в суров вид под формата на текст. Използвайте отметката raw и тип от падащия списък, за да посочите формата на вашите данни (**Text**, **JavaScript**, **JSON**, **HTML** или **XML**) и Postman ще активира подчертаване на синтаксиса, както и ще се погрижи за добавяне на съответните хедъри към вашата заявка.
+With this option you can send your data in raw text format. Use the raw checkbox and the type from the drop-down list to specify the format of your data (**Text**, **JavaScript**, **JSON**, **HTML** or **XML**) and Postman will enable syntax highlighting and take care of adding the appropriate headers to your request.
 
 ![](<../../../assets/image (14).png>)
 
 * **Binary data**
 
-Можете да използвате двоични данни, за да изпратите информация, която не можете да въведете ръчно в редактора на Postman с тялото на вашата заявка, като изображения, аудио и видео файлове (можете също да изпращате текстови файлове).
+You can use binary data to send information that you can't manually enter into the Postman editor with the body of your request, such as images, audio, and video files (you can also send text files).
 
 * **GraphQL**
 
-Можете да изпращате GraphQL заявки с помощта на опцията GraphQL.
+You can send GraphQL queries using the GraphQL option.
 
-**Заявки, изискващи автентикация**
+**Requests requiring authentication**
 
-Някои API изискват данни за удостоверяване. Автентикацията включва потвърждаване на самоличността на клиента, изпращащ заявка, а оторизацията включва потвърждение, че клиентът има разрешение да извърши операцията на крайната точка. Конфигурирането на данните за достъп се извършва в раздела Authorization.
+Some APIs require authentication credentials. Authentication involves verifying the identity of the client making the request, and authorization involves confirming that the client has permission to perform the operation on the endpoint. Configuring access credentials is done in the Authorization tab.
 
 ![](<../../../assets/image (33).png>)
 
-**Конфигуриране на хедърите на заявката**
+**Configuring request headers**
 
-Някои API изискват да изпращането на конкретни хедъри заедно със заявките, обикновено за предоставяне на повече метаданни за операцията, която извършвате. Можете да ги настроите в раздела Headers. Въведете всички двойки ключ-стойност, от които се нуждаете, и Postman ще ги изпрати заедно с вашата заявка. Докато въвеждате текст, Postman ви подканва с общи опции, които можете да използвате, за да завършите автоматично настройката си, като Content-Type.
+Some APIs require that you send specific headers with your requests, usually to provide more metadata about the operation you are performing. You can set these up in the Headers tab. Enter any key-value pairs you need, and Postman will send them along with your request. As you enter text, Postman prompts you with common options that you can use to automatically complete your setup, such as Content-Type.
 
 ![](<../../../assets/image (69).png>)
 
-Postman автоматично добавя определени хедъри към вашите заявки въз основа на избора и настройките на вашата заявка. Те могат да бъдат скрити или показани при избор на алтернативите Hidden/Hide auto-generated headers.
+Postman automatically adds certain headers to your requests based on your request selections and settings. These can be hidden or shown by selecting the Hidden/Hide auto-generated headers options.
 
-**Използване на бисквитки**
+**Using cookies**
 
-Postman позволява използването на бисквитки при изпращането на заявка. За целта изберете **Cookies (намира се под бутона Send).**
+Postman allows the use of cookies when sending a request. To do this, select **Cookies (located below the Send button).**
 
 ![](<../../../assets/image (22).png>)
 
-# Получаване на отговор
+# Getting a response
 
-Прегледът на отговорите на Postman ви помага да визуализирате и проверите коректността на отговорите на API. Отговорът на API се състои от тяло на отговора, хедъри и HTTP код на състоянието.
+Postman's response viewer helps you visualize and verify the correctness of API responses. An API response consists of a response body, headers, and an HTTP status code.
 
-### **Тяло на отговора**
+### **Response body**
 
-Разделът Body предоставя няколко изгледа на отговора: Pretty, Raw, Preview и Visualize.
+The Body tab provides several views of the response: Pretty, Raw, Preview, and Visualize.
 
 #### **Pretty**
 
-Изгледът Pretty форматира JSON или XML отговорите, така че да са по-лесни за преглед. Хипервръзките в изгледа Pretty са маркирани и избирането им може да зареди GET заявка в Postman с URL адреса на връзката.
+The Pretty view formats JSON or XML responses so that they are easier to view. Hyperlinks in the Pretty view are highlighted and selecting them can load a GET request in Postman with the URL of the link.
 
 ![](<../../../assets/image (29).png>)
 
 #### **Raw**
 
-Суровият изглед е голяма текстова област с тялото на отговора. Може да покаже дали вашият отговор е минифициран.
+The raw view is a large text area with the body of the response. It can show whether your response is minified.
 
 ![](<../../../assets/image (21).png>)
 
 #### **Preview**
 
-Изгледът за визуализация изобразява отговора в iframe sandbox. Някои уеб framework по подразбиране връщат HTML грешки и Preview може да бъде особено полезен за отстраняване на грешки в тези случаи.
+The preview view renders the response in an iframe sandbox. Some web frameworks return HTML errors by default, and Preview can be especially useful for debugging in these cases.
 
-Поради ограниченията на iframe sandbox, JavaScript и изображенията са изключени. За типове двоични отговори можете да изберете „Изпращане и изтегляне“, за да запазите отговора локално. След това можете да го прегледате с помощта на подходящия визуализатор. Това ви дава гъвкавостта да тествате аудио файлове, PDF файлове, zip файлове или всякакви други типове файлове, които API връща.
+Due to iframe sandbox restrictions, JavaScript and images are disabled. For binary response types, you can select "Send and Download" to save the response locally. You can then preview it using the appropriate viewer. This gives you the flexibility to test audio files, PDF files, zip files, or any other file type that the API returns.
 
 ![](<../../../assets/image (10).png>)
 
 #### **Visualize**
 
-Изгледът Visualize изобразява данните в отговора на API според кода за визуализация, добавен към тестовете на заявките.
+The Visualize view renders the data in the API response according to the visualization code added to the query tests.
 
-### **Бисквитки**
+### **Cookies**
 
-Можете да проверите бисквитките, изпратени от сървъра, в раздела **Cookies**. Записът на бисквитката включва нейното име, стойност, свързаните домейн и път, както и друга информация за бисквитката.
+You can check the cookies sent by the server in the **Cookies** tab. The cookie record includes its name, value, associated domain and path, and other information about the cookie.
 
-### **Хедъри**
+### **Headers**
 
-Хедърите се показват като двойки ключ-стойност в раздела **Headers**. Задръжте курсора на мишката над иконата за информация.
+Headers are displayed as key-value pairs in the **Headers** tab. Hover over the information icon.
 
-### **Мрежова информация**
+### **Network information**
 
-Postman показва мрежова информация, когато вашият API върне отговор. Задръжте курсора на мишката върху иконата на мрежата ![](<../../../../assets/image (37).png>), за да получите локалния и отдалечения IP адрес за заявката, която сте изпратили.
+Postman displays network information when your API returns a response. Hover over the network icon ![](<../../../../assets/image (37).png>), to get the local and remote IP address for the request you sent.
 
-Когато направите https заявка, иконата на мрежата включва катинар. Когато задържите курсора на мишката върху иконата, мрежовата информация ще покаже повече информация, включително подробности за проверка на сертификата.
+When you make an https request, the network icon includes a padlock. When you hover over the icon, the network information will show more information, including certificate verification details.
 
 ![](<../../../assets/image (71).png>)
 
-### Код на отговора
+### Response code
 
-Postman показва кода на отговора, върнат от API. Задръжте курсора на мишката върху кода за отговора, за да получите кратко описание.
+Postman displays the response code returned by the API. Hover over the response code to get a short description.
 
 ![](<../../../assets/image (7).png>)
 
-### Време за отговор
+### Response time
 
-Postman автоматично изчислява времето в милисекунди, необходимо на отговора да пристигне от сървъра. Тази информация може да бъде полезна за някои предварителни тестове на производителността. Задръжте курсора на мишката върху времето за реакция за графика с информация колко време е отнело всяко събитие в процеса.
+Postman automatically calculates the time in milliseconds it takes for a response to arrive from the server. This information can be useful for some preliminary performance testing. Hover over the response time for a graph showing how long each event in the process took.
 
 ![](<../../../assets/image (13).png>)
 
-### Размер на отговора
+### Response size
 
-Postman показва приблизителния размер на отговора. Задръжте курсора на мишката над размера на отговора, за да получите разбивка по размери на тялото и заглавието.
+Postman shows the approximate size of the response. Hover over the response size to get a breakdown by body and header sizes.
 
-# Тестване с Postman
+# Testing with Postman
 
-В Postman можете да добавяте тестове към заявки, колекции и папки в колекция.  За да добавите тест, отворете заявката, колекцията или папката и въведете своя код в раздела Scripts > Post-response. Можете да напишете свой собствен JavaScript или да отворите страничния панел до редактора на код и да изберете фрагмент. Тестовете се изпълняват, след като заявката се изпълни и се получи отговор от API. Резултатът се появява в раздела Test results на отговора.
+In Postman, you can add tests to requests, collections, and folders within a collection. To add a test, open the request, collection, or folder and enter your code in the Scripts > Post-response tab. You can write your own JavaScript, or open the sidebar next to the code editor and select a snippet. Tests are run after the request is executed and a response is received from the API. The result appears in the Test results tab of the response.
 
-Примери: 
+Examples: 
 
 ```JavaScript
 pm.test("Status test", function () {
@@ -205,9 +206,9 @@ pm.test("Отговорът трябва да съдържа поле 'success'"
 ```
 ![request-test-tab-v11 23](https://github.com/user-attachments/assets/85fdc3c7-d353-444f-a66f-d2c2dd85b080)
 
-Post-response скриптовете могат да използват динамични променливи с различен обхват - глобални, променливи на средата (Environment), локални и променливи на колекция.  
+Post-response scripts can use dynamic variables with different scopes - global, environment, local, and collection variables.
 
-### Създаване на променливи: 
+### Creating variables: 
 
 ```JavaScript
 pm.globals.set("baseUrl", "https://postman-echo.com");  //глобална променлива
@@ -216,7 +217,7 @@ pm.collectionVariables.set("userId", "12345");          //променлива �
 pm.variables.set("variable_key", "variable_value");     //локална променлива
 ```
 
-### Използване на променливи в заявки: 
+### Using variables in requests: 
 
 ```JavaScript
 https://postman-echo.com/get?user_id={{userId}}
@@ -224,13 +225,13 @@ https://postman-echo.com/get?user_id={{userId}}
 {{token}} //в хедъри за аутентикация
 ```
 
-### Автоматично задаване на променливи от отговор:
+### Automatically assign variables from response:
 
 ```JavaScript
 var jsonData = pm.response.json();
 pm.environment.set("userToken", jsonData.token);
 ```
-Пример: 
+Example: 
 
 ![image](https://github.com/user-attachments/assets/dab55f88-842b-4342-b6e7-9706ce2284b5)
 
