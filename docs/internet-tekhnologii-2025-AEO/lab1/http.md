@@ -1,10 +1,12 @@
 ---
 layout: default
-title: HTTP протокол
-parent: Лабораторно упражнение 1
-grand_parent: Интернет технологии
-nav_order: 1
+title: Лабораторно упражнение 1
+parent: Internet Technologies
+has_children: true
+nav_order: 2
+permalink: /docs/internet-tehnologii-2025-AEO/lab1
 ---
+
 
 # HTTP протокол
 
