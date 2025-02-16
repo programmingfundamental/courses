@@ -219,11 +219,9 @@ pm.variables.set("variable_key", "variable_value");     //локална про�
 
 ### Using variables in requests: 
 
-```JavaScript
 https://postman-echo.com/get?user_id={{userId}}
 {{baseUrl}}/get?user_id={{userId}}
 {{token}} //в хедъри за аутентикация
-```
 
 ### Automatically assign variables from response:
 
