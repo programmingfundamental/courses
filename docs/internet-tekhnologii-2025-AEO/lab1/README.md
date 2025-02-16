@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Лабораторно упражнение 1
+title: Laboratory excercise 1
 parent: Internet Technologies
 has_children: true
 nav_order: 1
