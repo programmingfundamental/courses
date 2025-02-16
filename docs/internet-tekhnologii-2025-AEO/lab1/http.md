@@ -8,7 +8,7 @@ permalink: /docs/internet-tehnologii-2025-AEO/lab1
 ---
 
 
-# HTTP protocol 
+# HTTP protocol
 
 Hypertext Transfer Protocol (HTTP) is an application-layer protocol for transmitting hypermedia documents such as HTML. It is designed for communication between a web browser and a web server, but can also be used for other purposes. HTTP follows the classic client-server model, with the client opening a connection to make a request and then waiting for a response. HTTP is a stateless protocol, meaning that the server does not keep any data (state) between requests.
 
