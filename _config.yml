@@ -1,7 +1,7 @@
 title: Programming fundamental
 description: Start in programming with Java!
-theme: just-the-docs
-
+#theme: just-the-docs
+remote_theme: just-the-docs/just-the-docs
 # url: https://just-the-docs.github.io
 
 # aux_links:
