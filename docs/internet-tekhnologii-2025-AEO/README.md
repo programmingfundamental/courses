@@ -6,4 +6,5 @@ has_children: true
 permalink: /docs/internet-tehnologii-2025-AEO
 ---
 
-# Laboratory exercise  
+# Internet technologies 
+# Laboratory exercises  
