@@ -8,7 +8,7 @@ permalink: /docs/internet-tehnologii-2025-AEO/lab1
 ---
 
 
-# Postman
+# Postman 
 
 Postman is an application used for API testing. It is an HTTP client that tests HTTP requests using a graphical user interface through which we receive different types of responses that can subsequently be validated.
 
