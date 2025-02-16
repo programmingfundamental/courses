@@ -1,10 +1,9 @@
 ---
 layout: default
 title: HTTP protocol
-parent: Internet Technologies
-has_children: true
+parent: Laboratory excercise 1
+grand_parent: Internet Technologies
 nav_order: 2
-permalink: /docs/internet-tehnologii-2025-AEO/lab1
 ---
 
 
