@@ -1,11 +1,11 @@
 ---
 layout: default
 title: Postman
-parent: Internet Technologies
-has_children: true
+parent: Laboratory excercise 1
+grand_parent: Internet Technologies
 nav_order: 3
-permalink: /docs/internet-tehnologii-2025-AEO/lab1
 ---
+
 
 
 # Postman 
