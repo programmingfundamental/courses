@@ -49,7 +49,7 @@ In the request body, specify the following parameters:
 
 4\.     The following series of tasks aims to access an application that manages student data at TU-Varna. The stored data for each student includes their faculty number (fn), first name (firstName), and last name (lastName). 
 
-The destination URL [http://195.216.228.13:8080/manage](http://195.216.228.13:8080/manage).
+The destination URL is [http://195.216.228.13:8080/manage](http://195.216.228.13:8080/manage).
 
 For each of the executed requests, test whether the status code received in response corresponds to expectations for success for the respective method.
 
