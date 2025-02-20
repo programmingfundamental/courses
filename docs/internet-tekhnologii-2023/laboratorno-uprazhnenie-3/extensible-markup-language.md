@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Extensible Markup Language
-parent: Лабораторно упражнение 4
+parent: Лабораторно упражнение 3
 grand_parent: Интернет технологии
 nav_order: 1
 ---
