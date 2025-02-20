@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Java Servlets
-parent: Лабораторно упражнение 3
+parent: Лабораторно упражнение 2
 grand_parent: Интернет технологии
-nav_order: 1
+nav_order: 6
 ---
 
 # Java Servlets
