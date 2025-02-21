@@ -7,66 +7,43 @@ nav_order: 5
 ---
 
 
-# Създаване на Maven проект в IntelliJ Community Edition
+# Creating a Maven project in IntelliJ Ultimate Edition
 
-1. Добавяне на плъгин Smart Tomcat в IntelliJ (еднократно)\
+1. Creating a Maven project in Intellij
 
+![](<../../../assets/create_maven_project.png>)
 
-<figure><img src="../../../assets/1.png" alt=""><figcaption></figcaption></figure>
+2\. Adding jakarta.servlet  [https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api](https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api)
 
-2. Създаване на Maven проект
+![](<../../../assets/image (135).png>)
 
-<figure><img src="../../../assets/image (82).png" alt=""><figcaption></figcaption></figure>
+3\. Reload the project
 
-<figure><img src="../../../assets/image (40).png" alt=""><figcaption></figcaption></figure>
+![](<../../../assets/image (91).png>)
 
-<figure><img src="../../../assets/image (42).png" alt=""><figcaption></figcaption></figure>
+4\. Add Source directory
 
-3. В pom.xml добавяме servlet dependency
+![](<../../../assets/image (111).png>)
 
-```
-<dependency>
-    <groupId>jakarta.servlet</groupId>
-    <artifactId>jakarta.servlet-api</artifactId>
-    <version>6.0.0</version>
-    <scope>provided</scope>
-</dependency>
-```
+5\.  Selecting the Source directory
 
-<figure><img src="../../../assets/image (58).png" alt=""><figcaption></figcaption></figure>
+![](<../../../assets/image (79).png>)
 
-4\. Презареждане на проекта
+6\. Configuring Tomcat Server
 
-<figure><img src="../../../assets/image (34).png" alt=""><figcaption></figcaption></figure>
+![](<../../../assets/image (103).png>)
 
-5\. Добавяне на Source директория
+7\. Choosing a local server
 
-<figure><img src="../../../assets/image (51).png" alt=""><figcaption></figcaption></figure>
+![](<../../../assets/image (149).png>)
 
-6\.  Избор на Source директория
+8\. Choosing a deployment process
 
-![](<../../../assets/image (30).png>)
+![](<../../../assets/image (56).png>)
 
-7\. Конфигуриране на Tomcat
+9\. Result after the election
 
-Избираме "Add configuration"
+![](<../../../assets/image (89).png>)
 
-<figure><img src="../../../assets/image (85).png" alt=""><figcaption></figcaption></figure>
+10\. Build and launch the project
 
-Добавяме нова конфигурация, като избираме Smart Tomcat
-
-<figure><img src="../../../assets/image (41).png" alt=""><figcaption></figcaption></figure>
-
-Натискаме бутона Configure
-
-<figure><img src="../../../assets/image (24).png" alt=""><figcaption></figcaption></figure>
-
-Избираме директорията, в която е поставен Tomcat
-
-<figure><img src="../../../assets/image (47).png" alt=""><figcaption></figcaption></figure>
-
-Попълваме данните на проекта
-
-<figure><img src="../../../assets/image (54).png" alt=""><figcaption></figcaption></figure>
-
-14\. Билдваме и стартираме проекта
