@@ -1,15 +1,15 @@
 ---
 layout: default
-title: Java Servlets creation
+title: Creating servlets
 parent: Laboratory excercise 2
 grand_parent: Internet Technologies
 nav_order: 8
 ---
 
 
-# Създаване на сървлети
+# Creating servlets
 
-Сървлетите са Java програми, които обслужват HTTP заявки и имплементират jakarta.servlet.Servlet интерфейса. Разработчиците на уеб приложения създават сървлети като наследяват jakarta.servlet.http.HttpServlet класа - абстрактен клас, който имплементира Servlet интерфейса и е специално проектиран за обслужване на HTTP заявки.
+Servlets are Java programs that serve HTTP requests and implement the jakarta.servlet.Servlet interface. Web application developers create servlets by extending the jakarta.servlet.http.HttpServlet class - an abstract class that implements the Servlet interface and is specifically designed to serve HTTP requests.
 
 ```
 import java.io.IOException;
@@ -33,11 +33,11 @@ response) throws ServletException, IOException {
 }
 ```
 
-## Инсталиране на сървлет
+## Installing a servlet
 
-Според стандарта за структура и разположение, сървлетите се поставят в директорийната структура на `\WEB-INF\classes`. За да бъдат достъпен за клиентски заявки, сървлетът трябва да бъде деклариран в контекста на приложението. Това става по два начина - чрез описание в дескриптора на приложението `web.xml` или чрез анотацията `@WebServlet`.
+According to the standard for structure and placement, servlets are placed in the `\WEB-INF\classes` directory structure. To be accessible to client requests, the servlet must be declared in the context of the application. This is done in two ways - by describing it in the `web.xml` application descriptor or by using the `@WebServlet` annotation.
 
-### Декларация посредством web.xml
+### Declaration via web.xml
 
 ```
 <servlet>
@@ -51,12 +51,12 @@ response) throws ServletException, IOException {
 </servlet-mapping>
 ```
 
-Идеята на дескриптора е създаване на връзка между класа на сървлета и URL адреса, на който той ще отговаря. Това става на две стъпки:
+The idea behind the descriptor is to create a relationship between the servlet class and the URL it will respond to. This is done in two steps:
 
-* Първата е задаване на псевдоним на сървлета за конкретен клас
-* Втората е обвързване на този псевдоним с определен URL
+* The first is to assign an alias to the servlet for a specific class
+* The second is to bind this alias to a specific URL
 
-### Декларация посредством анотацията `@WebServlet`
+### Declaration using the `@WebServlet` annotation
 
 ```
 @WebServlet("/HelloJava")
@@ -65,9 +65,9 @@ public class HelloJava extends HttpServlet {
 }
 ```
 
-Тук сървлета „HelloJava“ е свързан с адреса /HelloJava. Имената на сървлетите и адресите могат да бъдат и най-често са напълно различни.
+Here the servlet "HelloJava" is associated with the address /HelloJava. The names of the servlets and the addresses can be, and most often are, completely different.
 
-#### Декларация на сървлет с повече от едно URL
+#### Servlet declaration with more than one URL
 
 ```
 @WebServlet(urlPatterns = {"/sendFile", "/uploadFile"})
@@ -76,7 +76,7 @@ public class UploadServlet extends HttpServlet {
 }
 ```
 
-#### Декларация на сървлет с допълнителна информация
+#### Servlet declaration with additional information
 
 ```
 @WebServlet(
@@ -89,7 +89,7 @@ public class MyServlet extends HttpServlet {
 }
 ```
 
-#### Декларация на сървлет с инициализиращи параметри
+#### Servlet declaration with initialization parameters
 
 ```
 @WebServlet(
