@@ -9,27 +9,27 @@ nav_order: 3
 
 # Maven
 
-Maven е инструмент за управление на проекти, който се занимава с изграждането на проекти (build), зависимости (dependency), дистрибуция, версии и т.н. Софтуерното изграждане е процеса на компилиране на програмния код до преобразуване в изпълнима форма. Maven улеснява работата в екип, документирането и разпространението на проекта.
+Maven is a project management tool that deals with building projects (build), dependencies (dependency), distribution, versions, etc. Software building is the process of compiling the program code to an executable form. Maven facilitates teamwork, documentation, and distribution of the project.
 
-Също така, Maven хранилището е директория на пакетиран JAR файл с pom.xml файл. Той има информация за конфигурацията за изграждане на проекта. Тук JAR е пакет, който комбинира множество Java класове файлове и свързани ресурси в един файл за разпространение.
+Also, a Maven repository is a directory of a packaged JAR file with a pom.xml file. It has information about the build configuration of the project. Here, a JAR is a package that combines multiple Java class files and related resources into a single file for distribution.
 
-### Конфигуриране на Mavеn
+### Configuring Maven
 
-Maven проектът се конфигурира посредством Project Object Model. POM е XML файл, който съдържа информация за проекта и подробности за конфигурация, използвани от Maven за изграждането на проекта. Общата конфигурация обхваща името на проекта, неговия собственик и неговите зависимости от други проекти (библиотеки). Разработчик може да конфигурира отделни фази от процеса на изграждане, които се реализират като приставки. Например, може да се конфигурира компилатор-плъгин, за да се използва Java версия 1.5 за компилация, или да се използва определена предходна версия на Java пакет, ако има грешки в текущата версия. По-големите проекти трябва да бъдат разделени на няколко модула или подпроекти, всеки със собствен POM. Чрез общ POM може да компилират всички модули с една команда. POM също може да наследява конфигурация от други POM конфигурации. Всички POM наследяват [Super POM](https://app.gitbook.com/s/-MUbVVR-jiMUx7iVRyw6/internet-technologies/lab2/pom.xml) това е конфигурация по подразбиране, която оказва директориите за съхранение на файловете в проекта, плъгини и др.
+A Maven project is configured using the Project Object Model. A POM is an XML file that contains information about the project and configuration details used by Maven to build the project. The general configuration includes the project name, its owner, and its dependencies on other projects (libraries). A developer can configure individual phases of the build process, which are implemented as plugins. For example, a compiler plugin can be configured to use Java version 1.5 for compilation, or to use a specific previous version of a Java package if there are errors in the current version. Larger projects should be divided into several modules or subprojects, each with its own POM. Using a general POM, all modules can be compiled with a single command. A POM can also inherit configuration from other POM configurations. All POMs inherit the Super POM - this is a default configuration that specifies the directories for storing project files, plugins, etc.
 
-### Минимален pom.xml
+### Minimal pom.xml
 
-Задължителните полета за конфигуриране на проект с Maven са:
+The required fields for configuring a Maven project are:
 
-·        Родителския XML таг (project)
+· The parent XML tag (project)
 
-·        Версия на обектния модел в POM (modelVersion) - Самата версия на модела се променя много рядко, но е задължителна, за да се гарантира стабилността на използването, ако и когато разработчиците на Maven считат за необходимо да променят модела.
+· The version of the object model in the POM (modelVersion) - The model version itself changes very rarely, but is required to ensure the stability of use if and when Maven developers consider it necessary to change the model.
 
-·        Идентификатор на групата, от която е част проекта (groupId) - Уникалния идентификатор на организацията или групата, създала проекта. GroupId е един от ключовите идентификатори на проекта и обикновено се основава като пълното квалифицирано име на домейн на организация. Например (bg.tu.varna.sit)
+· The group identifier of which the project is a part (groupId) - The unique identifier of the organization or group that created the project. GroupId is one of the key identifiers of the project and is usually based on the fully qualified domain name of an organization. For example (bg.tu.varna.sit)
 
-·        Идентификатор на проекта/артефакт (artifactId) - Уникалното базово име на основния артефакт, генериран от този проект. Основният артефакт за проект обикновено е JAR файл. Останалите артефакти в проекта използват името на основния артефакт, за да образуват своите.
+· The project/artifact identifier (artifactId) - The unique base name of the main artifact generated by this project. The main artifact for a project is usually a JAR file. The remaining artifacts in the project use the name of the main artifact to form their own.
 
-·        Версията на артефакта от посочената група (version) - Версията на артефакта, генериран от проекта. Maven подпомага развитието на проектите като уведомява за наличието на обновления.
+· The version of the artifact from the specified group (version) - The version of the artifact generated by the project. Maven supports project development by notifying about the availability of updates.
 
 ```
 <project>
@@ -40,13 +40,13 @@ Maven проектът се конфигурира посредством Projec
 </project>
 ```
 
-### Приставки
+### Plugins
 
-Плъгинът предоставя набор от цели, които могат да бъдат изпълнени с помощта на командата mvn \[plugin-name]:\[goal-name]. Например Java проект може да бъде компилиран с компилиращата цел, като се стартира mvn compiler:compile. Има плъгини за изграждане, тестване, управление на версиите, работа на уеб сървър, генериране на файлове на проект за Eclipse и много други.
+The plugin provides a set of goals that can be executed using the command mvn \[plugin-name]:\[goal-name]. For example, a Java project can be compiled with the compile goal by running mvn compiler:compile. There are plugins for building, testing, version control, running a web server, generating Eclipse project files, and many more.
 
-Плъгините се въвеждат и конфигурират във plugins-секцията на pom.xml файл. Някои основни плъгини са включени във всеки проект по подразбиране с настройки по подразбиране.
+Plugins are introduced and configured in the plugins section of the pom.xml file. Some basic plugins are included in every project by default with default settings.
 
-Изпълнението на целите за изграждане, тестване и пакетиране на софтуерен проект изисква ръчно изпълнение на всяка съответна цел:
+Executing the build, test, and package goals of a software project requires manually executing each corresponding goal:
 
 ```
 mvn compiler:compile
@@ -56,35 +56,35 @@ mvn jar:jar
 
 Концепцията за жизнения цикъл на Maven се справя с този проблем.
 
-### Жизнен цикъл за изграждане на проект (the Build Lifecycle)
+### The Build Lifecycle
 
-Maven се базира на основната концепция за жизнения цикъл на изграждане. Това означава, че процесът на изграждане и разпространение на определен артефакт (проект) е ясно дефиниран. Разработчик, изграждайки проект, е необходимо да се научи малък набор от команди за изграждане на Maven проект, а POM ще гарантира, че ще се получи желания резултат. Има три вградени цикъла на изграждане: default, clean and site.
+Maven is based on the basic concept of the build lifecycle. This means that the process of building and distributing a specific artifact (project) is clearly defined. A developer building a project needs to learn a small set of commands to build a Maven project, and the POM will ensure that the desired result is obtained. There are three built-in build cycles: default, clean and site.
 
-**default** - Жизненият цикъл по подразбиране обработва изграждането на проектa.
+**default** - The default build lifecycle handles building the project.
 
-**clean** - Жизнен цикъл за почистване се грижи за премахване на проекта файлове от предишно изграждане, с цел започне на ново изграждане с чист проект.
+**clean** - The cleanup lifecycle takes care of removing project files from a previous build, in order to start a new build with a clean project.
 
-**site** - Жизненият цикъл обработва създаването на документацията за проекта.
+**site** - The lifecycle handles creating the documentation for the project.
 
-Всеки от тези жизнени цикли на изграждане се дефинира от различен стъпки на фазите за изграждане, където фазата на изграждане представлява етап от жизнения цикъл. Например жизненият цикъл по подразбиране се състои от следните фази:
+Each of these build lifecycles is defined by different build phase steps, where the build phase represents a stage of the lifecycle. For example, the default lifecycle consists of the following phases:
 
-**validate** - проверява дали проекта е правилен и цялата необходима информация е налична
+**validate** - checks that the project is correct and all the necessary information is available
 
-**compile** - компилиране на програмния код
+**compile** - compiles the program code
 
-**test** - изпълнение на тествайте върху компилирания изходен код с помощта на подходяща рамка за тестване
+**test** - runs tests on the compiled source code using a suitable testing framework
 
-**package** - създаване на файлове за разпространиение (например .jar)
+**package** - creates distribution files (e.g. .jar)
 
-**verify** - стартиране и проверяване на резултатите от интегрираните тестове, за да се провери работата на изходния проект
+**verify** - runs and verifies the results of integrated tests to verify the operation of the source project
 
-**install** - инсталиране на изходните файлове в локално хранилище, за да се използват в други проекти
+**install** - installs the source files to a local repository for use in other projects
 
-**deploy** - внедряване в среда за изграждане, копира окончателния пакет в отдалечено хранилище за споделяне с други разработчици и проекти.
+**deploy** - deploys to a build environment, copies the final package to a remote repository for sharing with other developers and projects.
 
-Целите могат да бъдат свързани с различни фази от жизнения цикъл. Например по подразбиране целта "compiler:compile" се асоциира с фазата "compile", докато целта "surefire:test" е свързана с фазата "test". Когато командата mvn test се изпълнява, Maven изпълнява всички цели, свързани с фазите и така, изпълнява съответните цели асоциирани с фазите на жизнения цикъл по приоритета на изпълнение на фазите.
+Goals can be associated with different phases of the lifecycle. For example, by default, the "compiler:compile" goal is associated with the "compile" phase, while the "surefire:test" goal is associated with the "test" phase. When the mvn test command is executed, Maven executes all the goals associated with the phases and thus executes the corresponding goals associated with the lifecycle phases in the order of execution of the phases.
 
-Пример
+Example
 
 ```
 ...
@@ -104,11 +104,11 @@ Maven се базира на основната концепция за жизн
 ...
 ```
 
-### Зависимости
+### Dependencies
 
-Секцията за зависимости съдържа описание на външни проекти и библиотеки, който ще се използват в проекта.
+The dependencies section contains a description of external projects and libraries that will be used in the project.
 
-Пример
+Example
 
 ```
 ...
@@ -123,17 +123,17 @@ Maven се базира на основната концепция за жизн
 ...
 ```
 
-Maven съхранява зависимостите в хранилище. Хранилището се разполага на 3 нива локално, централно и отдалечено хранилище.
+Maven stores dependencies in a repository. The repository is arranged at 3 levels: local, central and remote.
 
-·        Локалното хранилище съхранява последната версия на библиотеките, който са изтеглени на машината за разработка.
+· The local repository stores the latest version of the libraries that have been downloaded to the development machine.
 
-·        Централното хранилище е отдалечен сървър за контрол на версиите при работа на екипи по общ софтуерен проект, то се достъпва през мрежата в която са свържани всички разработчици.
+· The central repository is a remote version control server when teams work on a common software project, it is accessed via the network to which all developers are connected.
 
-·        Отдалеченото хранилище се намира на обществен сървър поддържан от разработчици на библиотеки, достъпа до тези хранилища се осъществява по глобална мрежа.
+· The remote repository is located on a public server maintained by library developers, access to these repositories is via a global network.
 
-Когато се добави нова библиотека в проекта, Maven първо я търси в локалното хранилище, след това в централното и отдалеченото хранилище.
+When a new library is added to the project, Maven first searches for it in the local repository, then in the central and remote repositories.
 
-### Структура на Maven проект
+### Structure of a Maven project
 
 ```
 lab1-maven-app
