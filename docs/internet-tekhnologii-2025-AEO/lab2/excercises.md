@@ -7,20 +7,20 @@ nav_order: 10
 ---
 
 
-# Задачи за създаване на сървлети
+# Servlet creation problems
 
-### Задача 1
+### Problem 1
 
-Създайте част от приложение – органайзер на задачи за изпълнение. Да предоставя възможност за добавяне на задачи (id, заглавие, описание, краен срок за изпълнение), като данните се съхраняват в подходяща за целта колекция.
+Create a part of an application – a task organizer for execution. It should provide the ability to add tasks (id, title, description, deadline for execution), with the data stored in a collection suitable for the purpose.
 
-Създайте следните сървлети:
+Create the following servlets:
 
-·        Сървлет за добавяне на нова задача (AddTaskServlet). Да бъде достъпен на URL \<url на проекта>/tasks/add;
+· Servlet for adding a new task (AddTaskServlet). To be accessible at URL \<project url>/tasks/add;
 
-·        Сървлет за преглед на добавена задача по зададено id (ShowTaskServlet). Да бъде достъпен на URL \<url на проекта>/tasks/view;
+· Servlet for viewing an added task by a given id (ShowTaskServlet). To be accessible at URL \<project url>/tasks/view;
 
-·        Сървлет за преглед на всички добавени задачи (ShowAllTasksServlet). Да бъде достъпен на URL \<url на проекта>/tasks.
+· Servlet for viewing all added tasks (ShowAllTasksServlet). To be accessible at URL \<project url>/tasks.
 
-С помощта на Postman тествайте създадените функционалности.
+Test the created functionalities using Postman.
 
  
