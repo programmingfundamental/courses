@@ -1,9 +1,11 @@
 ---
 layout: default
 title: Създаване на Maven проект в Eclipse IDE
-parent:  
-grand_parent:  
+parent: Лабораторно упражнение 2
+grand_parent: Интернет технологии  
 nav_order: 5
+permalink: /скрито/
+published: false
 ---
 
 # Създаване на Maven проект в Eclipse IDE
