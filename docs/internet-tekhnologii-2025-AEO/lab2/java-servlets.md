@@ -8,14 +8,13 @@ nav_order: 6
 
 
 # Java Servlets
+Java Servlets are programs that run on a web server and act as a middle layer between requests from a web browser or other HTTP client and databases or applications located on or behind the server. Using Servlets provides various capabilities such as collecting information from users through web forms on pages, presenting records from a database or other source, and dynamically creating web pages.
 
-Java Servlets са програми, които се изпълняват на уеб сървър и действат като среден слой между заявките от уеб браузър или друг HTTP клиент и бази от данни или приложения разположени на или зад сървъра. Използването на Servlets предоставя различни възможности като събиране на информация от потребителите чрез уеб форми на страници, представяне на записи от база данни или друг източник и динамично създаване на уеб страници.
+Servlets provide a component-based, platform-independent method for building web-based applications. Servlets have access to the entire family of Java APIs, including the JDBC API for accessing databases.
 
-Сървлетите предоставят компонентно-базиран, платформено-независим метод за изграждане на уеб-базирани приложения. Сървлетите имат достъп до цялото семейство от Java API-си, включително JDBC API за достъп до базите от данни.
+### Servlets perform the following basic tasks:
 
-### Сървлетите изпълняват следните основни задачи:
-
-* четене на данни, изпратени от клиенти (браузъри). Това включва HTML форми на уеб страница, аплет или някакъв специфичен HTTP клиент, бисквитки (cookies), видове медии, схеми за компресиране и така нататък;
-* да обработва данните и да генерира резултати. Този процес може да изисква комуникация с база данни, изпълнение на RMI или CORBA повикване, използване на уеб услуга, или директно изчисляване на отговор.
-* изпращане на данни на клиентите (браузъри). Данните могат да бъдат в най-различни формати, включително текст (HTML или XML ), двоични (GIF изображения), Excel и т.н.
-* Изпращане на допълнителна мета информация на клиенти ( браузъри ). Това включва оказване на типа документ, който ще се връща (например HTML), създаване на бисквитки, кеширане на параметри и други.
+* read data sent by clients (browsers). This includes HTML forms on a web page, an applet or some specific HTTP client, cookies, media types, compression schemes, and so on;
+* process the data and generate results. This process may require communicating with a database, executing an RMI or CORBA call, using a web service, or directly computing a response.
+* send data to clients (browsers). The data can be in a variety of formats, including text (HTML or XML), binary (GIF images), Excel, and so on.
+* send additional meta information to clients (browsers). This includes rendering the type of document to be returned (e.g. HTML), creating cookies, caching parameters, and so on.
