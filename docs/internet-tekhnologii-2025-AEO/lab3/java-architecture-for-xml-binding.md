@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Java Servlets
+title: Java Architecture for XML Binding
 parent: Laboratory excercise 3
 grand_parent: Internet Technologies
 nav_order: 5
