@@ -8,68 +8,42 @@ nav_order: 5
 
 # Задача 1
 
-Изтеглете Tomcat image от Docker Hub:
+Създайте Spring boot проект с име task-manager.
 
-```
-docker pull tomcat:latest
-```
-
-Проверете в списъка с docker images наличен ли е Tomcat image?
-
-```
-docker images
-```
-
-Стартирайте контейнер с изображението на Tomcat във фонов режим
-
-```
-docker run -t -d --name '<име на контейнера>' -p <порт на хоста>:8080 <image id>?
-```
-
-Проверете наличните контейнери и вземете идентификатора на създадения контейнер с изображение на Tomcat
-
-```
-docker ps -а
-```
-
-Изтеглете [students.war](../../../assets/students.war) и го копирайте в webapps директорията на Tomcat
-
-```
-docker cp <път до ресурса>\students.war d266c8fb5dec:<път до webapps>/students.war
-```
-
-Изпълнете задачите от 1 упражнение.
+ - Добавете ехо крайна точка с метод GET.
+ - Добавете ехо крайна точка с метод POST.
+ - Добавете ехо крайна точка с метод DELETE.
+ - Добавете ехо крайна точка с метод PUT.
 
 # Задача 2
 
-Създайте Spring boot проект, с ехо крайна точка.
+Създайте конфигурация за изпълнение и проследяване на грешки в проекта от task-manager.
+За целта трябва да се модифицира compose.yml
 
-Добавете Dockerfile за създаване на image със Spring boot проект.
-
-```
-FROM eclipse-temurin:latest
-COPY build/libs/*.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
-```
-
-Създаване на image
-```
-docker build -t demo .
-```
-Добавете compose.yaml файл за описание на контейнер за оставяне на изображението на проекта.
+image: - секцията трябва да се замени с билдване на image:
 
 ```
-version: '3'
-services:
-
-  app:
-    image: <име на изображението>
-    ports:
-      - "<порт на хоста>:8080"
+    platform: linux/x86_64
+    build:
+      context: .
+      dockerfile: Dockerfile
 ```
+Избирате edit на конфигурацията за стартиране
 
-Стартирайте приложението в Docker:
+![image](https://github.com/programmingfundamental/courses/assets/10382663/b0d9ee3c-b025-4105-8d05-646ce4cbff44)
 
-docker compose up
+Избирате стартиране в docker-compose
 
-Отворете проекта и изпратете ехо съобщения.
+![image](https://github.com/programmingfundamental/courses/assets/10382663/2dcbe80a-e88c-4ef2-90e6-f0d1f030218a)
+
+Като файл за конфигуриране избирате compose.yml файла в проекта
+
+![image](https://github.com/programmingfundamental/courses/assets/10382663/988471d2-bf66-4752-a415-74f86c5a0443)
+
+Сървиса на проекта от compose файла и избирате напред.
+
+![image](https://github.com/programmingfundamental/courses/assets/10382663/ae74eb8c-526e-4e16-ad69-5c375779450b)
+
+След като се билдне изображението избирате напред. На последната стъпка избирае create.
+
+Избирате Run за да стартирате контейнера в Docker.
