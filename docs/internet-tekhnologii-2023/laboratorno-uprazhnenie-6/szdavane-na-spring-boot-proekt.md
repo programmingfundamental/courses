@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Създаване на Spring boot проект
-parent: Лабораторно упражнение 7
+parent: Лабораторно упражнение 6
 grand_parent: Интернет технологии
-nav_order: 3
+nav_order: 4
 ---
 
 # Създаване на Spring boot проект
