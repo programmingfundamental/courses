@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Spring Boot
-parent: Лабораторно упражнение 6
+parent: Лабораторно упражнение 7
 grand_parent: Интернет технологии
 nav_order: 1
 ---
