@@ -3,7 +3,7 @@ layout: default
 title: Реализация на HTTP комуникация
 parent: Лабораторно упражнение 6
 grand_parent: Интернет технологии
-nav_order: 5
+nav_order: 3
 ---
 
 # Реализация на HTTP комуникация
