@@ -3,7 +3,7 @@ layout: default
 title: Lombok
 parent: Лабораторно упражнение 7
 grand_parent: Интернет технологии
-nav_order: 3
+nav_order: 5
 ---
 
 # Lombok

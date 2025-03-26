@@ -3,7 +3,7 @@ layout: default
 title: ResponseEntity
 parent: Лабораторно упражнение 7
 grand_parent: Интернет технологии
-nav_order: 3
+nav_order: 4
 ---
 # ResponseEntity
 

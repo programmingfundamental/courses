@@ -3,7 +3,7 @@ layout: default
 title: JavaScript Object Notation
 parent: Лабораторно упражнение 7
 grand_parent: Интернет технологии
-nav_order: 1
+nav_order: 3
 ---
 
 # JavaScript Object Notation

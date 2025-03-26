@@ -3,7 +3,7 @@ layout: default
 title: Допълнителни задачи
 parent: Лабораторно упражнение 6
 grand_parent: Интернет технологии
-nav_order: 6
+nav_order: 7
 ---
 
 # Задача 1
