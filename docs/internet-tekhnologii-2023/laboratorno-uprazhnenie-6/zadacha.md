@@ -23,7 +23,7 @@ nav_order: 5
 
 ```
 FROM eclipse-temurin:latest
-COPY build/libs/*.jar app.jar
+COPY target/*.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
 ```
 
