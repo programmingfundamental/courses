@@ -14,9 +14,9 @@ nav_order: 4
 
 <figure><img src="../../../assets/image (50).png" alt=""><figcaption></figcaption></figure>
 
-1\.    Изберете Gradle - Groovy Project и версия на Spring Boot
+1\.    Изберете Maven и версия на Spring Boot
 
-2\.     Въведете подробностите за проекта Gradle - Groovy, както следва:
+2\.     Въведете подробностите за проекта Maven, както следва:
 
 a.     Група: bg.tu-varna.sit
 
@@ -36,50 +36,12 @@ f.      Език: Java
 
 Генерираната структура на Spring Boot проект е сравнително опростена и се състои само от компонентите, от които се нуждаете, за да продължите с разработването на приложението Spring Boot. Съдържа следните компоненти:
 
-* Файл build.gradle, който съдържа зависимостите, които сте избрали по време на генерирането на проекта.
-* Wrapper файл на Gradle, който ви позволява да изградите проекта, без да инсталирате Gradle на вашата локална машина.
+* Файл pom.xml, който съдържа зависимостите, които сте избрали по време на генерирането на проекта.
+* Wrapper файл на maven, който ви позволява да изградите проекта, без да инсталирате Maven на вашата локална машина.
 * Пакетна структура, която съдържа изходните и тестови Java файлове. Изходният пакет съдържа Java клас с main метод, а тестовият пакет има празен тестов клас.
 * Папка с ресурси за поддържане на допълнителни артефакти на проекта и празен файл application.properties.
 
 Нека обсъдим подробно ключовите компоненти на генерирания проект.
-
-### Файлът build.gradle
-
-Файлът build.gradle на генерирания проект е показан по-долу.
-
-```
-plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.2.4'
-	id 'io.spring.dependency-management' version '1.1.4'
-}
-
-group = 'bg.tu-varna.sit'
-version = '0.0.1-SNAPSHOT'
-
-java {
-	sourceCompatibility = '21'
-}
-
-repositories {
-	mavenCentral()
-}
-
-dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-
-tasks.named('test') {
-	useJUnitPlatform()
-}
-
-```
-
-Ще обърнем внимание на два момента:
-
-* Разделът на зависимостите
-* io.spring.dependency-management
 
 ### Spring Boot starter dependency
 
@@ -170,8 +132,10 @@ Spring Initializr генерира празен файл application.properties 
 
 За да видите файла application.properties на практика, можете да промените стойността на server.port в текущото приложение до различна стойност на HTTP порт (напр. до 9090). Ако стартирате приложението след тази модификация, можете да видите, че стартира на актуализирания HTTP порт.
 
-Ако не харесвате този файлов формат, можете алтернативно да използвате файловия формат YAML (https://yaml.org/spec/1.2.2/), за да конфигурирате свойствата на приложението. YAML ви позволява да дефинирате йерархично свойствата. Ако искате да използвате файловия формат YAML, можете да преименувате съществуващия файл application.properties на application.yml и да зададете свойствата във YAML формат. 
+В application.properties могат да бъдат конфигурирани:
 
-![](<../../../assets/image (38).png>)
+	- spring.application.name -> <име на проекта>
+	- server.port -> <порт на приложението>
+	- server.sevlet.context-path -> <основен път на проекта>
 
 Можете да откриете  списък на поддържаните свойства от application.properties  на уебсайта на Spring Boot ([https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html](https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html)).

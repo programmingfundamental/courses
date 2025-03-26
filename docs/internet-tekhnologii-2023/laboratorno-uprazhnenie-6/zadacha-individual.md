@@ -3,7 +3,7 @@ layout: default
 title: Допълнителни задачи
 parent: Лабораторно упражнение 6
 grand_parent: Интернет технологии
-nav_order: 5
+nav_order: 6
 ---
 
 # Задача 1
@@ -39,37 +39,3 @@ docker cp <път до ресурса>\students.war d266c8fb5dec:<път до we
 ```
 
 Изпълнете задачите от 1 упражнение.
-
-# Задача 2
-
-Създайте Spring boot проект, с ехо крайна точка.
-
-Добавете Dockerfile за създаване на image със Spring boot проект.
-
-```
-FROM eclipse-temurin:latest
-COPY build/libs/*.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
-```
-
-Създаване на image
-```
-docker build -t demo .
-```
-Добавете compose.yaml файл за описание на контейнер за оставяне на изображението на проекта.
-
-```
-version: '3'
-services:
-
-  app:
-    image: <име на изображението>
-    ports:
-      - "<порт на хоста>:8080"
-```
-
-Стартирайте приложението в Docker:
-
-docker compose up
-
-Отворете проекта и изпратете ехо съобщения.
