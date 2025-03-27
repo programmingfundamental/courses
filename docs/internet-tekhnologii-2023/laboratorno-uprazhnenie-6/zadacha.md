@@ -17,11 +17,17 @@ nav_order: 6
 
 # Задача 2
 
-Създайте Spring boot проект, с ехо крайна точка.
+Изграждане на проект с Maven
+
+```
+./mvnw clean
+./mvnw install
+./mvnw package 
+```
 
 Добавете Dockerfile за създаване на image със Spring boot проект.
 
-```
+```Dockerfile
 FROM eclipse-temurin:latest
 COPY target/*.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
@@ -33,10 +39,8 @@ docker build -t demo .
 ```
 Добавете compose.yaml файл за описание на контейнер за оставяне на изображението на проекта.
 
-```
-version: '3'
+```yml
 services:
-
   app:
     image: <име на изображението>
     ports:
@@ -56,8 +60,7 @@ docker compose up
 
 image: - секцията трябва да се замени с билдване на image:
 
-```
-    platform: linux/x86_64
+```yml
     build:
       context: .
       dockerfile: Dockerfile
