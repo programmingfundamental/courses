@@ -1,24 +1,11 @@
 ---
 layout: default
-title: Избрани анотации
-parent: Лабораторно упражнение 7
+title: Слой за бизнес логика
+parent: Лабораторно упражнение 9
 grand_parent: Интернет технологии
 nav_order: 4
 ---
 
-# Избрани анотации
-
-### @RestController
-
-Класическите контролери в Spring се обозначават с анотацията @Controller. Това е специализация на класа @Component, която ни позволява автоматично да откриваме класове за внедряване чрез сканиране на classpath-a.
-
-_@RestController_ е специализиран контролер, който включва освен _@Controller_ и анотацията _@ResponseBody_, която позволява автоматично сериализиране на върнатия обект в HttpResponse.
-
-```
-@RestController
-public class ProductServiceController { 
-}
-```
 
 ### @Service
 
@@ -31,9 +18,6 @@ public class CourseServiceImpl implements CourseService {
 
 ```
 
-### @Repository
-
-Използва се, за да индикира, че класът осигурява механизми за осъществяване на операции, свързани със съхранение, достъп, обновяване, изтриване и търсене на обекти.
 
 ### @RequestMapping
 

@@ -3,7 +3,8 @@ layout: default
 title: Обработване на изключения в Spring Boot приложение
 parent: Лабораторно упражнение 8
 grand_parent: Интернет технологии
-nav_order: 2
+nav_order: 1
+author: пренареждане
 ---
 
 # Обработване на изключения в Spring Boot приложение
@@ -50,7 +51,7 @@ public class CityServiceImpl implements CityService {
 
         return cityRepository.findById(id)
                 .orElseThrow(() -> new CityNotFoundException(id));
-    }
+    } 
 }
 ```
 

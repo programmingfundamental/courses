@@ -3,7 +3,7 @@ layout: default
 title: Задачи
 parent: Лабораторно упражнение 8
 grand_parent: Интернет технологии
-nav_order: 5
+nav_order: 3
 ---
 # Задачи
 

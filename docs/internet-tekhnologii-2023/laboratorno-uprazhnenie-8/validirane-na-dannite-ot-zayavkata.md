@@ -3,7 +3,7 @@ layout: default
 title: Валидиране на данните от заявката
 parent: Лабораторно упражнение 8
 grand_parent: Интернет технологии
-nav_order: 3
+nav_order: 2
 ---
 
 # Валидиране на данните от заявката
@@ -135,7 +135,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
               HttpHeaders headers, HttpStatusCode status,WebRequest request) {
-        Map<String, Object> body = new LinkedHashMap<>();
+        Map<String, Object> body = new LinkedHashMap<>(); //Лоша практика
         body.put("timestamp", LocalDate.now());
         body.put("status", status.value());
 

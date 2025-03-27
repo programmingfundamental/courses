@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Задачи
-parent: Лабораторно упражнение 9-10
+parent: Лабораторно упражнение 9
 grand_parent: Интернет технологии
-nav_order: 4
+nav_order: 5
 ---
 
 # Задачи
