@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Конфигуриране на PostgreSQL DB
-parent: Лабораторно упражнение 9-10
+parent: Лабораторно упражнение 9
 grand_parent: Интернет технологии
 nav_order: 1
 ---

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Лабораторно упражнение 9-10
+title: Лабораторно упражнение 9
 parent: Интернет технологии
 has_children: true
 nav_order: 9
