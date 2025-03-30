@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Excercises
+title: Spring boot
 parent: Laboratory excercise 6
 grand_parent: Internet Technologies
 nav_order: 3
