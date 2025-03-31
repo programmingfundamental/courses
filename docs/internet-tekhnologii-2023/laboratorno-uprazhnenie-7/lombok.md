@@ -10,19 +10,33 @@ nav_order: 5
 
 Проектът Lombok е базирана на анотации Java библиотека, която ви позволява да намалите шаблонния код. Lombok предлага различни анотации, насочени към замяна на Java код, който е шаблонен, повтарящ се или досаден за писане. Като използвате Lombok можете да избегнете писането на конструктори без аргументи, `toString()`, `equals()` и `hashCode()` методи като добавите няколко анотации. По време на компилиране  библиотеката инжектира байт кода, представляващ желания шаблонен код в _.class_ файловете. 
 
-Добавяне на библиотеката в gradle.build и конфигурацията:
+Добавяне на зависимост в pom.xml:
 
 ```
-compileOnly 'org.projectlombok:lombok'
-annotationProcessor 'org.projectlombok:lombok'
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.36</version>
+    <scope>provided</scope>
+</dependency>
 ```
+Добавяне на плъгин за компилация с annotation processor:
+
 ```
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-}
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <configuration>
+        <annotationProcessorPaths>
+            <path>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+            </path>
+        </annotationProcessorPaths>
+    </configuration>
+</plugin>
 ```
+
 ### Най-често използвани анотации
 
 #### @Getter, @Setter
