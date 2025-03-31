@@ -24,19 +24,3 @@ public class UserDto {
 	private String email;
 }
 ```
-
-<figure><img src="../../../assets/image (137).png" alt=""><figcaption></figcaption></figure>
-
-ModelMapper e библиотека, която се използва за преобразуване на entity обект в DTO и обратно.
-
-Стъпки за реализация:
-
-1. Добавяме зависимостта за ModelMapper в pom.xml:
-
-```xml
-<dependency>
-    <groupId>org.modelmapper</groupId>
-    <artifactId>modelmapper</artifactId>
-    <version>3.2.2</version>
-</dependency>
-```
