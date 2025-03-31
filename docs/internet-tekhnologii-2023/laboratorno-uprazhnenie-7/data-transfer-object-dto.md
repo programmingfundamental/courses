@@ -18,10 +18,14 @@ ModelMapper e библиотека, която се използва за пре
 
 Стъпки за реализация:
 
-1. Добавяме библиотеката ModelMapper
+1. Добавяме зависимостта за ModelMapper в pom.xml:
 
 ```xml
-implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.1.1'
+<dependency>
+    <groupId>org.modelmapper</groupId>
+    <artifactId>modelmapper</artifactId>
+    <version>3.2.2</version>
+</dependency>
 ```
 
 За автоматичното конфигуриране на bean можете да предприемете една от двете стъпки:
@@ -34,6 +38,8 @@ public ModelMapper modelMapper() {
 	return new ModelMapper();
 }
 ```
+
+За да работи @Bean, методът трябва да бъде в клас, анотиран с @Configuration или друг Spring компонент (@Component, @Service, @RestController), за да може Spring да го разпознае и управлява като Bean.
 
 * или създайте клас-наследник на ModelMapper, анотиран с @Component
 
@@ -86,8 +92,8 @@ public interface UserService {
 @Service
 public class UserServiceImpl implements UserService {
   
-    private UserRepository userRepository;
-    private ModelMapper modelMapper;
+    private final UserRepository userRepository;
+    private final ModelMapper modelMapper;
 
 	public UserServiceImpl(UserRepository userRepository, 
 	                       ModelMapper modelMapper){
@@ -96,14 +102,13 @@ public class UserServiceImpl implements UserService {
 }
 
     @Override
-    public User createUser(UserDto userDto) {
+    public UserDto createUser(UserDto userDto) {
 	User user = modelMapper.map(userDto, User.class);
         User userSavedToDB = userRepository.save(user);
 	UserDto userResponse = modelMapper.map(userSavedToDB, UserDto.class);
         return userResponse;
     }
   
-    // update it with UserDto
     @Override
     public UserDto getUser(int userId) {
         User user = userRepository.findById(userId).get();
@@ -120,7 +125,7 @@ public class UserServiceImpl implements UserService {
 @RequestMapping("/api/user")
 public class UserController {
       
-    private UserServiceImpl userServiceImpl;
+    private final UserServiceImpl userServiceImpl;
 
     public UserController(UserServiceImpl) {
         this.userServiceImpl = userServiceImpl;
@@ -129,13 +134,13 @@ public class UserController {
     @PostMapping("/create")
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
         UserDto userCreated = this.userServiceImpl.createUser(userDto);
-        return new ResponseEntity<UserDto>(userCreated, HttpStatus.CREATED);
+        return new ResponseEntity<>(userCreated, HttpStatus.CREATED);
     }
       
     @GetMapping("/get/{id}")
     public ResponseEntity<UserDto> getUser(@PathVariable("id") int userId){
         UserDto userDto = this.userServiceImpl.getUser(userId);
-        return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
+        return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 }
 ```
