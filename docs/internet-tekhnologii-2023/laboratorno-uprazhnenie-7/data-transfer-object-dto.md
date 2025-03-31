@@ -127,7 +127,7 @@ public class UserController {
       
     private final UserServiceImpl userServiceImpl;
 
-    public UserController(UserServiceImpl) {
+    public UserController(UserServiceImpl userServiceImpl) {
         this.userServiceImpl = userServiceImpl;
     }
       
