@@ -34,24 +34,16 @@ public class GlobalExceptionHandler {
 
 Пример:
 
-CityService.java
+CityController.java
 
 ```java
-@Service
-public class CityServiceImpl implements CityService {
+@RestController
+public class CityController {
 
-    private final CityRepository cityRepository;
-
-    public CityServiceImpl(CityRepository cityRepository) {
-        this.cityRepository = cityRepository;
+    @GetMapping("/{id}")
+    public ResponseEntity<CityResponseDto> getById(@PathVariable Long id) throws CityNotFoundException {
+        throw new CityNotFoundException(id);
     }
-
-    @Override
-    public City findById(Long id) {
-
-        return cityRepository.findById(id)
-                .orElseThrow(() -> new CityNotFoundException(id));
-    } 
 }
 ```
 
@@ -83,7 +75,7 @@ GlobalExceptionHandler.java
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(CityNotFoundException.class)
-  public ResponseEntity<ErrorDetails> handleResourceNotFoundException(CityNotFoundException exception) {
+  public ResponseEntity<ErrorDetails> handleCityNotFoundException(CityNotFoundException exception) {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage());
         return  new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
         }
@@ -91,22 +83,4 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 }
 ```
 
-CityController.java
 
-```java
-@RestController
-public class CityController {
-
-    private final CityService cityService;
-
-    public CityController(CityService cityService) {
-        this.cityService = cityService;
-    }
-
-    @GetMapping(value = "/cities/{id}")
-    public ResponseEntity<City> getCity(@PathVariable Long id) {
-        City city = cityService.findById(id);
-        return ResponseEntity.ok(city);
-    }
-}
-```
