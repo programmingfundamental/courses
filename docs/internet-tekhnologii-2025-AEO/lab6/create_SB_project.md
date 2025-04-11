@@ -82,10 +82,9 @@ In Maven, the <parent> element in pom.xml indicates that the current project (mo
 </parent>
 ```
 
-<parent> defines:
+It defines:
 
 - Dependency inheritance – written once.
-
 - Plugin inheritance and versions – can be set once in the parent.
 - Build settings – e.g. encoding, source/target version, etc.
 - Profile – defines common Maven profiles in the parent.
