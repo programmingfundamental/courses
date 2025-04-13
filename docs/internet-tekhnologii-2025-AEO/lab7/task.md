@@ -3,7 +3,7 @@ layout: default
 title: Task
 parent: Laboratory excercise 7
 grand_parent: Internet Technologies
-nav_order: 5
+nav_order: 6
 ---
 
 
