@@ -10,14 +10,13 @@ nav_order: 1
 
 1. Коригирайте compose.yml, като включите конфигурационните данни на контейнер, който ще осигури нужната среда за базата от данни на приложението:
 
-```
+```yaml
 networks:
   jedi:
 
 services:
   app:
     container_name: padawan-6156-app
-    platform: linux/x86_64
     build:
       context: .
       dockerfile: Dockerfile
@@ -30,7 +29,7 @@ services:
     container_name: padawan-6156-db
     image: postgres:latest
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: R2D2c3p0
       POSTGRES_USER: padawan
@@ -53,7 +52,7 @@ services:
 
 За да активирате JPA в Spring Boot приложението, се нуждаем от зависимостта _spring-boot-starter-data-jpa_. Необходимо е да се добави и зависимост към JDBC драйвер, специфичен за базата данни, в нашия случай драйвера на PostgreSQL. Spring boot конфигурира Hibernate като JPA провайдер по подрабиране.
 
-```
+```xml
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
@@ -71,8 +70,8 @@ services:
 
 2. В application.properties добавете следните конфигурации:
 
-```
-spring.datasource.url=jdbc:postgresql://localhost:5432/tasks
+```properties
+spring.datasource.url=jdbc:postgresql://db:5432/tasks
 spring.datasource.username=padawan
 spring.datasource.password=R2D2c3p0
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
