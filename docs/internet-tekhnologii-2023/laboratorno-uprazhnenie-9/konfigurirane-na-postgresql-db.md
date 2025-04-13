@@ -11,7 +11,6 @@ nav_order: 1
 1. Коригирайте compose.yml, като включите конфигурационните данни на контейнер, който ще осигури нужната среда за базата от данни на приложението:
 
 ```
-version: "3.8"
 networks:
   jedi:
 
@@ -55,8 +54,19 @@ services:
 За да активирате JPA в Spring Boot приложението, се нуждаем от зависимостта _spring-boot-starter-data-jpa_. Необходимо е да се добави и зависимост към JDBC драйвер, специфичен за базата данни, в нашия случай драйвера на PostgreSQL. Spring boot конфигурира Hibernate като JPA провайдер по подрабиране.
 
 ```
-implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-runtimeOnly 'org.postgresql:postgresql'
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
 ```
 
 2. В application.properties добавете следните конфигурации:
