@@ -3,7 +3,7 @@ layout: default
 title: ResponseEntity
 parent: Laboratory excercise 7
 grand_parent: Internet Technologies
-nav_order: 4
+nav_order: 3
 ---
 
 
