@@ -1,13 +1,13 @@
 ---
 layout: default
-title: JavaScript Object Notation
+title: Custom validator
 parent: Laboratory excercise 8
 grand_parent: Internet Technologies
 nav_order: 2
 ---
 
 
-# Personalized validator
+# Custom validator
 
 A custom validator in Spring is a mechanism for defining your own data validation rules that go beyond standard annotations such as @NotNull, @Size, @Email, and others.
 
