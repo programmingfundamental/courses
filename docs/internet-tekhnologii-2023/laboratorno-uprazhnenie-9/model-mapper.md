@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Слой за бизнес логика
+title: ModelMapper
 parent: Лабораторно упражнение 9
 grand_parent: Интернет технологии
-nav_order: 4
+nav_order: 5
 ---
 
 <figure><img src="../../../assets/image (137).png" alt=""><figcaption></figcaption></figure>
