@@ -60,6 +60,7 @@ public class User {
  	private String name;
     	private String email;
     	private String password;
+	private Role role;
 }
  
 ```
@@ -131,6 +132,16 @@ public class UserController {
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 }
+```
+
+# Работа с Enum типове в ModelMapper
+
+ModelMapper автоматично разпознава и мапва стойности от тип enum, когато имената съвпадат между изходния и целевия обект, но при несъвпадение между полета (напр. String ↔ Enum), може да се направи ръчна трансформация: 
+
+```java
+modelMapper.typeMap(UserDto.class, User.class).addMappings(mapper ->
+    mapper.map(src -> Role.valueOf(src.getRole()), User::setRole)
+);
 ```
 
 # ModelMapper позволява по-прецизна конфигурация при нужда, като например:
