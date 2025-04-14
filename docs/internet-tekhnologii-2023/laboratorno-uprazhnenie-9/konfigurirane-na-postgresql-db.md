@@ -29,7 +29,7 @@ services:
     container_name: padawan-6156-db
     image: postgres:latest
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: R2D2c3p0
       POSTGRES_USER: padawan
