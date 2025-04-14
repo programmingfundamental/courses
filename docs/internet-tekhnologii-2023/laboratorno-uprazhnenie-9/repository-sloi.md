@@ -106,7 +106,7 @@ List<Dog> findByAgeLessThanOrHeightGreaterThan(Integer age, double height);
 Освен объркващия външен вид, подадена по този начин заявката ще бъде по-бавна за изпълнение. За разрешаване на този проблем можем да използваме анотацията @Query.
 
 Примери:
-```
+```java
 @Query("SELECT t FROM Tutorial t")
 List<Tutorial> findAll();
 
@@ -139,6 +139,7 @@ public class Course {
     private String category;
     private int rating;
     private String description;
+    private CourseLevel level;
     
     //Конструктор, getters & setters...
 }
@@ -156,6 +157,18 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 }
 ```
 
+Да разширим интерфейса CourseRepository, като добавим потребителски методи за извличане на курсове според нивото на трудност (CourseLevel), както и комбинирана заявка по категория и ниво.
+
+```java
+ @Repository
+public interface CourseRepository extends JpaRepository<Course, Long> {
+	...
+     List<Course> findAllByLevel(CourseLevel level);
+     List<Course> findAllByCategoryAndLevel(String category, CourseLevel level);
+}
+```
+
+
 Нека сега да създадем сервизния слой на приложението. Дефинираме го с интерфейс, който съдържа операциите, поддържани в приложението.
 
 ```java
@@ -171,7 +184,7 @@ public interface CourseService {
 
 Съставете конкретен клас CourseServiceImpl, който изпълнява тези операции.
 
-```
+```java
 // Анотиран с @Service, за да индикира, че е клас, 
 // който реализира бизнес логика 
 @Service
@@ -201,7 +214,7 @@ public class CourseServiceImpl implements CourseService {
 
 Сега ни остава да дефинираме CourseController, който дефинира крайните точки на REST. Spring контролерът съдържа една или повече крайни точки и приема заявки от клиента. След това използва услугите, предлагани от сервизния слой, и генерира отговор. RestContoller-ът свързва резултата с тялото на отговора и го споделя със заявителя на крайната точка
 
-```
+```java
 @RestController
 @RequestMapping("/courses/")
 public class CourseController {
