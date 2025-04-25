@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Custom validator
+title: Service Layer
 parent: Laboratory excercise 9
 grand_parent: Internet Technologies
 nav_order: 4
