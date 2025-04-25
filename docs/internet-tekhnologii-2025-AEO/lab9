@@ -1,0 +1,8 @@
+---
+layout: default
+title: Laboratory excercise 9
+parent: Internet Technologies
+has_children: true
+nav_order: 9
+permalink: /docs/internet-tehnologii-2025-AEO/lab9
+---
