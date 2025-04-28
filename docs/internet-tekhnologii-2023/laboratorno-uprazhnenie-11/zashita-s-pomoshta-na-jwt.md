@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Защита с помощта на JWT
-parent: Лабораторно упражнение 12
+parent: Лабораторно упражнение 11
 grand_parent: Интернет технологии
 nav_order: 2
 ---
