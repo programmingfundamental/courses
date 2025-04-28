@@ -11,10 +11,34 @@ nav_order: 2
 JWT е компактен начин за прилагане на удостоверяване в модерни уеб приложения. За да го приложим, ще използваме библиотеката jjwt, която е JWT библиотека за Java и Android и се използва за създаване и анализиране на JWT. Трябва да добавим следните зависимости.
 
 ```xml
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
-    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
+<!-- Spring Security -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+
+    <!-- JJWT API -->
+    <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-api</artifactId>
+        <version>0.12.5</version>
+    </dependency>
+
+    <!-- JJWT Impl (runtime only) -->
+    <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-impl</artifactId>
+        <version>0.12.5</version>
+        <scope>runtime</scope>
+    </dependency>
+
+    <!-- JJWT Jackson (runtime only) -->
+    <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-jackson</artifactId>
+        <version>0.12.5</version>
+        <scope>runtime</scope>
+    </dependency>
 ```
 
 Следващите стъпки демонстрират как да активирате JWT удостоверяване и упълномощаване  в бекенда. За реализацията им са необходимо от предходното упражнение да сте предвидили:

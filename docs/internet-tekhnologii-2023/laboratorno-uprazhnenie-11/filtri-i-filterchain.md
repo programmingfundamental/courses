@@ -3,7 +3,7 @@ layout: default
 title: Филтри и FilterChain
 parent: Лабораторно упражнение 11
 grand_parent: Интернет технологии
-nav_order: 2
+nav_order: 3
 ---
 
 # Филтри и FilterChain

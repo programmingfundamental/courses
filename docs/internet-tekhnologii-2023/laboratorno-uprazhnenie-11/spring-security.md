@@ -3,7 +3,7 @@ layout: default
 title: Spring Security
 parent: Лабораторно упражнение 11
 grand_parent: Интернет технологии
-nav_order: 3
+nav_order: 1
 ---
 
 # Spring Security

@@ -1,9 +1,9 @@
 ---
 layout: default
 title: JSON Web Token
-parent: Лабораторно упражнение 12
+parent: Лабораторно упражнение 11
 grand_parent: Интернет технологии
-nav_order: 1
+nav_order: 2
 ---
 
 # JSON Web Token

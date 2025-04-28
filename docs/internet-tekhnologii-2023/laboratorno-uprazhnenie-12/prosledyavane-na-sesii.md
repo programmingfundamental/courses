@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Проследяване на сесии
-parent: Лабораторно упражнение 11
+parent: Лабораторно упражнение 12
 grand_parent: Интернет технологии
 nav_order: 1
 ---
