@@ -7,5 +7,4 @@ nav_order: 12
 permalink: /docs/internet-tehnologii-2025-AEO/lab12
 ---
 
-
 # Laboratory exercise 12
