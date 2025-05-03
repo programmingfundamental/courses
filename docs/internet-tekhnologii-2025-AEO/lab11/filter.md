@@ -32,9 +32,6 @@ The Filter implementation must implement three methods (init(), doFilter() and d
 
 <figure><img src="../../../assets/image (164).png" alt=""><figcaption></figcaption></figure>
 
-Trite filtŭrni metoda sa razgledani po-dolu: · Init(..) se izvikva ot ueb konteĭnera, za da ukazhe na filtŭra, che e pusnat v eksploatatsiya. · doFilter(..) e osnovniyat metod, pri koĭto se izvŭrshva deĭstvitelnoto funktsionirane na filtŭra. Toĭ ima dostŭp do zayavkata, otgovora i obektite FilterChain. FilterChain pozvolyava na tekushtiya filtŭr da izvika sledvashtiya filtŭr vŭv verigata, sled kato obrabotkata mu priklyuchi. · Destroy() se izvikva, kogato konteĭnerŭt izvadi filtŭra ot rabota. FilterChain e drug komponent, osiguren ot konteĭnera na sŭrvleta, koĭto predostavya izgled vŭv verigata za izvikvane na filtrirana zayavka. Figurata po-dolu pokazva primerna filtŭrna veriga. Filtrite izpolzvat FilterChain, za da izvikat sledvashtiya filtŭr vŭv verigata ili deĭstvitelniya resurs (napr. sŭrvleta), ako filtŭrŭt e posledniyat vŭv verigata. FilterChain ima samo edin metod, narechen doFilter(). Metodŭt doFilter() v interfeĭsa na filtŭra ima dostŭp do FilterChain zaedno s obektite ServletRequest i ServletResponse. Po tozi nachin filtŭrŭt mozhe da izpŭlni vŭzlozhenata mu zadacha i da poluchi dostŭp do FilterChain, za da izvika sledvashtiya filtŭr vŭv verigata.
-Show more
-1,170 / 5,000
 The three filter methods are discussed below:
 
 · Init(..) is called by the web container to indicate to the filter that it is in service.
