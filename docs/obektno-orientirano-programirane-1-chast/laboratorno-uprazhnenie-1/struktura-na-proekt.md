@@ -3,7 +3,7 @@ layout: default
 title: Структура на проект 
 parent: Лабораторно упражнение 1
 grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 3
+nav_order: 4
 ---
 
 # Структура на Java проект
