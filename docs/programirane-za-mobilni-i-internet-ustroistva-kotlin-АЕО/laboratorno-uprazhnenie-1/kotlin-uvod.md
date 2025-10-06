@@ -6,11 +6,11 @@ grand_parent: Програмиране за мобилни и Интернет �
 nav_order: 1
 ---
 
-# Пример за Kotlin код
+# Kotlin code example
 
-Кодът, написан на Kotlin, може да бъде много кратък и езикът е проектиран да елиминира шаблонен код като гетери и сетери.
+Kotlin code could be short since the language eliminates code like getters & setters.
 
-### Клас за аквариум в Java
+### Aquarium class - Java
 
 ```java
 public class Aquarium {
@@ -36,7 +36,7 @@ public class Aquarium {
 }
 ```
 
-### Калс за аквариум в Kotlin
+### Aquarium class - Kotlin
 
 ```kotlin
 data class Aquarium (var temperature: Int = 0)
