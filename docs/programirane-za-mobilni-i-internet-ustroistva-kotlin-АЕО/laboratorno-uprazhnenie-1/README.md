@@ -7,20 +7,18 @@ nav_order: 1
 permalink: /docs/programirane-za-mobilni-i-internet-ustroistva-kotlin-аео/laboratorno-uprazhnenie-1
 ---
 
-# Лабораторно упражнение 1
+# Laboratory lesson 1
 
-## Накратко за котлин
+## Short info
 
-Kotlin е нов, модерен език за програмиране, създаден от програмисти, за програмисти. Той е фокусиран върху яснотата, сбитостта и безопасността на кода.
+Kotlin programming language is focused on clear definitions, brevity and safety.
 
-## Стабилен код
+Kotlin creatores considered various design decisions in order to help programmers in robust code creation. For example, null-pointer exceptions could cause financial losses and serious computer crashes, leading to countless hours of debugging. So Kotlin distinguishes between nullable and non-nullable data types, which helps catch more errors at compile time. Kotlin is strongly typed and includes lambdas, co-programs, and properties, which allow writing less code with fewer errors.
 
-Създателите на Kotlin взеха различни дизайнерски решения за езика, за да помогнат на програмистите да създадат стабилен код. Например, изключенията от нулева точка в софтуера са причинили финансови загуби и зрелищни компютърни сривове и са довели до безброй часове отстраняване на грешки. Така че Kotlin прави разлика между нулируеми и ненулируеми типове данни, което помага да се хванат повече грешки по време на компилацията. Kotlin е силно типизиран включва ламбди, копрограми и свойства, които позволяват да пишете по-малко код с по-малко грешки.
 
-## Зряла платформа
+Kotlin has been in development since 2011 and was released as an open source project in 2012. Version 1.0 was released in 2016, and Kotlin has been an officially supported language for building Android applications since 2017. It is included in IntelliJ IDEA as well as Android Studio.
 
-Kotlin се разработва от 2011 г. пуснат е като проект с отворен код през 2012 г. Версия 1.0 е пусната през 2016 г., а от 2017 г. Kotlin е официално поддържан език за изграждане на приложения за Android. Той е включен в IntelliJ IDEA, както и в Android Studio.
 
-## Оперативно съвместим с Java
+Kotlin code compiles so that Java and Kotlin code could be used side by side and it's possible to still use Java libraries. Kotlin code could be added to an existing Java program, or if the program should be completely migrated, IntelliJ IDEA and Android Studio include tools for this.
 
-Kotlin кодът се компилира така, че да можете да използвате Java и Kotlin кода рамо до рамо и да продължите да използвате любимите си Java библиотеки. Можете да добавите Kotlin код към съществуваща Java програма или ако искате да мигрирате програмата си напълно, IntelliJ IDEA и Android Studio включват инструменти за мигриране на съществуващ Java код към Kotlin код.
+
