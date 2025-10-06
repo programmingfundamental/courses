@@ -6,13 +6,13 @@ grand_parent: Програмиране за мобилни и Интернет �
 nav_order: 2
 ---
 
-## Оператори и типоведанни
+## Operators and data types
 
-Както при другите езици, Kotlin използва + , - и *, / p. Kotlin също така поддържа различни типове числа, Int, Long, Double, Float
+As other programming languages, Kotlin uses + , - and *, / p. Kotlin also supports different numeric types: Int, Long, Double, Float.
 
-Kotlin не преобразува имплицитно между числови типове.
+There is no implicit conversion between numeric types in Kotlin.
 
-Проверете със следните примери:
+Above statement could be checkd with following examples:
 
 ```kotlin
 val i: Int = 6
@@ -29,9 +29,9 @@ val i2: String = b2
 val i3: Double = b2
 ```
 
-Защо се получиха такива резултати
+Consider obtained results.
 
-Променете примера:
+Change the example:
 
 ```kotlin
 val i4: Int = b2.toInt() 
@@ -44,13 +44,12 @@ val i6: Double = b2.toDouble()
 println(i6)
 ```
 
-Kotlin поддържа два вида променливи: изменяеми и не неизменяеми
+There are two types of variable in Kotlin: mutable and immutable.
+Immutable variables: with ```val``` a value could be once declared. There will be an error when trying to chnage that value.
 
-Неизменяеми с ```val``` можете да зададете стойност веднъж. Ако се опитате да зададете нещо отново, ще получите грешка.
+Mutable variables: with ```var``` a value could be declared and later that value could be changed.
 
-Изменящи се с ```var``` можете да зададете стойност, след което да промените стойността по-късно в програмата.
-
-Проверете следния пример:
+Condier following example:
 
 ```kotlin
 var fish = 1
@@ -59,9 +58,9 @@ val aquarium = 1
 aquarium = 2
 ```
 
-Низовете в Kotlin работят почти като низове във всеки друг език за програмиране. " - се използват за низове, ' - се използва за еденични символи, + - обедидение, $ - служи за създаване на шаблони, {} - използва се за изрази в шаблон
+Working with strings in Kotlin is similar to other programming languages. " - is used for strings, ' - is used for chars, + - concatenation, $ - pattern creation, {} - used for pattern expressions.
 
-Проверете примера:
+Example:
 
 ```kotlin
 val numberOfFish = 5
@@ -71,11 +70,11 @@ val numberOfPlants = 12
 "I have ${numberOfFish + numberOfPlants} fish and plants"
 ```
 
-## Сравняване
+## Comparison
 
-В тази задача научавате за булевите стойности и проверката на условията в езика за програмиране Kotlin. Подобно на други езици, Kotlin има булеви и булеви оператори като по-малко от, равно на, по-голямо от и т.н. (.<==>!=<=>=)
+Similar to other languages, Kotlin supports boolean operators like less than, equal to, greater than, etc. (.<==>!=<=>=)
 
-Пример:
+Example:
 
 ```kotlin
 val numberOfFish = 50
@@ -87,7 +86,7 @@ if (numberOfFish > numberOfPlants) {
 }
 ```
 
-Израс с диапазон
+Range expression
 
 ```kotlin
 val fish = 50
@@ -96,7 +95,7 @@ if (fish in 1..100) {
 }
 ```
 
-Допълнителни условия
+Nested conditions
 ```kotlin
 if (numberOfFish == 0) {
     println("Empty tank")
@@ -106,7 +105,7 @@ if (numberOfFish == 0) {
     println("That's a lot of fish!")
 }
 ```
-Твърдение:
+Conditional statement:
 ```kotlin
 when (numberOfFish) {
     0  -> println("Empty tank")
@@ -115,25 +114,23 @@ when (numberOfFish) {
 }
 ```
 
-## Nullabel
+## Nullable
 
-По подразбиране променливите не могат да бъдат null
+Varibles in Kotlin cannot be null by default.
 
-Проверете с примера:
+Try following code line:
 
 ```kotlin
 var rocks: Int = null
 ```
 
-Използвайте оператора за въпросителен знак след типа, за да покажете, че променливата може да бъде нула
+In order to define that variable could be null, quotation mark should be used after the data type.
 
 ```kotlin
 var marbles: Int? = null
 ```
 
-Оператор ?
-
-Пример:
+Example:
 
 ```kotlin
 var fishFoodTreats = 6
@@ -142,7 +139,7 @@ if (fishFoodTreats != null) {
 }
 ```
 
-Оператор  ?:
+Operator  (?:) - takes the right-hand value if the left-hand value is null.
 
 ```kotlin
 var fishFoodTreats = 6
@@ -153,29 +150,29 @@ fishFoodTreats = fishFoodTreats?.dec() ?: 0
 
 
 
-Оператор !! - Потвърждава на компилатора, че обекта не е null
+Operator !! - asserts that an expression is non-nullable.
 
 ```kotlin
 val len = s!!.length
 ```
 
-## Колекции
+## Collections
 
-Дефиниране на списък с listOf
+List definition with listOf:
 
 ```kotlin
 val school = listOf("mackerel", "trout", "halibut")
 println(school)
 ```
 
-Дефиниране на списък с mutableListOf
+List definition with mutableListOf:
 
 ```kotlin
 val myList = mutableListOf("tuna", "salmon", "shark")
 myList.remove("shark")
 ```
 
-Дефиниране на масив с arrayOf, intArrayOf
+Array definition with arrayOf, intArrayOf:
 
 ```kotlin
 val school = arrayOf("shark", "salmon", "minnow")
@@ -187,7 +184,7 @@ val numbers = intArrayOf(1,2,3)
 
 ```
 
-Оператор +
+Operator +
 
 ```kotlin
 val numbers = intArrayOf(1,2,3)
@@ -196,7 +193,7 @@ val foo2 = numbers3 + numbers
 println(foo2[5])
 ```
 
-Изпробвайте различни комбинации от вложени масиви и списъци. Както и в други езици, можете да влагате масиви и списъци. Тоест, когато поставите масив в масив, имате масив от масиви, а не сплескан масив от съдържанието на двете. Елементите на масива също могат да бъдат списъци, а елементите на списъците могат да бъдат масиви.
+Try different combinations of nested arrays ans lists. As in other programming languages, arrya elements could be lists and viceversa.
 
 ```kotlin
 val numbers = intArrayOf(1, 2, 3)
@@ -205,14 +202,14 @@ val oddList = listOf(numbers, oceans, "salmon")
 println(oddList)
 ```
 
-Инициализиране на масив 
+Arrays initialization:
 
 ```kotlin
 val array = Array (5) { it * 2 }
 println(java.util.Arrays.toString(array))
 ```
 
-## Обхождане на масив
+## Array iterations
 
 ```kotlin
 val school = arrayOf("shark", "salmon", "minnow")
@@ -249,7 +246,7 @@ repeat(2) {
 }
 ```
 
-## Функциии
+## Functions
 
 ```kotlin
 fun main(args: Array<String>) {
@@ -263,7 +260,7 @@ fun printHello() {
 printHello()
 ```
 
-## Предаване на аргоменти в main
+## Parameter passing in main method
 
 ```kotlin
 fun main(args: Array<String>) {
@@ -271,7 +268,7 @@ fun main(args: Array<String>) {
 }
 ```
 
-Примерни функции
+Examples:
 ```kotlin
 fun feedTheFish() {
     val day = randomDay()
@@ -335,7 +332,7 @@ fun fishFood (day : String) : String {
 }
 ```
 
-## Стойност по подразбиране
+## Default values
 
 ```kotlin
 fun swim(speed: String = "fast") {
@@ -343,7 +340,7 @@ fun swim(speed: String = "fast") {
 }
 ```
 
-## Задължителни параметри
+## Required parameters
 
 ```kotlin
 fun shouldChangeWater (day: String, temperature: Int = 22, dirty: Int = 20): Boolean {
@@ -363,7 +360,7 @@ fun feedTheFish() {
 }
 ```
 
-## Компактни функции
+## Compact functions
 
 ```kotlin
 fun isTooHot(temperature: Int) = temperature > 30
@@ -382,21 +379,21 @@ fun shouldChangeWater (day: String, temperature: Int = 22, dirty: Int = 20): Boo
 }
 ```
 
-## Филтри
+## Filters
 
-Филтрите са удобен начин да получите част от списък въз основа на някакво състояние.
+Filters are an easy way to get a part of list based on some condition (or state).
 
-Да дефинираме колекция:
+Let's define collection:
 
 ```kotlin
 val decorations = listOf ("rock", "pagoda", "plastic plant", "alligator", "flowerpot")
 ```
 
-<span style="color:blue">Как може да отпечатаме само стойностите с 'p'<span>
+<span style="color:blue">How to print symbols with 'p'<span>
 
-## Нетърпеливи и мързеливи филтри
+## Eager and lazy filters
 
-Филтрите по подразбиране на нетърпеливи, това означава, че всеки път когато се изполват се създава колекция.
+By default, filters are eager meaning every time a collection is created when filter is used.
 
 ```kotlin
 fun main() {
@@ -408,7 +405,7 @@ fun main() {
 }
 ```
 
-За да бъде един филтър мързелив трябва да се дефинира с asSequence
+In order to have a lazy filter, asSequence should be used for definition:
 
 ```kotlin
 val filtered = decorations.asSequence().filter { it[0] == 'p' }
@@ -418,7 +415,9 @@ val newList = filtered.toList()
     println("new list: $newList")
 ```
 
-## Трансформиране на елементи
+## Element transformers
+
+Example 1:
 
 ```kotlin
 val lazyMap = decorations.asSequence().map {
@@ -433,7 +432,7 @@ println("-----")
 println("all: ${lazyMap.toList()}")
 ```
 
-Пример 2:
+Example 2:
 
 ```kotlin
 val lazyMap2 = decorations.asSequence().filter {it[0] == 'p'}.map {
@@ -444,11 +443,11 @@ val lazyMap2 = decorations.asSequence().filter {it[0] == 'p'}.map {
     println("filtered: ${lazyMap2.toList()}")
 ```
 
-## Ламбди
+## Lambda expressions
 
-В допълнение към традиционните именувани функции, Kotlin поддържа ламбда. Ламбда е израз, който прави функция. Но вместо да декларирате именувана функция, вие декларирате функция, която няма име. Част от това, което прави това полезно, е, че ламбда изразът вече може да се предава като данни. В други езици ламбдите се наричат анонимни функции, функционални литерали или подобни имена.
+In addition to traditional functions, Kotlin supports lambdas. A lambda is an expression that performs a function, but instead of declaring a named function, unnamed function is declared. The lambda expression can be passed as data. In other programming languages, lambdas are called anonymous functions, function literals, or similar names.
 
-Пример
+Example:
 
 ```kotlin
 var dirtyLevel = 20
@@ -456,18 +455,15 @@ val waterFilter = { dirty : Int -> dirty / 2}
 println(waterFilter(dirtyLevel))
 ```
 
-Дефиниране на Ламбда
+Lambda definition:
 
 ```kotlin
 val waterFilter: (Int) -> Int = { dirty -> dirty / 2 }
 ```
 
-Направете променлива, наречена waterFilter
-waterFilter може да бъде всяка функция, която приема Int и връща Int
-Присвояване на ламбда на waterFilter
-Ламбда връща стойността на аргумента, разделена на dirty / 2
+In example above, variable waterFilter is created. This variable could be any function with int input and output. Lambda function is assigned to that variable, returning argument value divided by dirty/2.
 
-## Функции приемащи Ламбда параметър
+## Functions with Lambda parameter
 
 ```kotlin
 fun updateDirty(dirty: Int, operation: (Int) -> Int): Int {
@@ -478,7 +474,7 @@ val waterFilter: (Int) -> Int = { dirty -> dirty / 2 }
 println(updateDirty(30, waterFilter))
 ```
 
-Предаване на именна функция
+Named function passed
 
 ```kotlin
 fun increaseDirty( start: Int ) = start + 1
@@ -486,7 +482,7 @@ fun increaseDirty( start: Int ) = start + 1
 println(updateDirty(15, ::increaseDirty))
 ```
 
-Пример
+Example
 ```kotlin
 var dirtyLevel = 19;
 dirtyLevel = updateDirty(dirtyLevel) { dirtyLevel -> dirtyLevel + 23}
