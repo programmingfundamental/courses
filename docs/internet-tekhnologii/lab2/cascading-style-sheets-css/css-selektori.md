@@ -1,3 +1,11 @@
+---
+layout: default
+title: CSS селектори
+parent: Cascading Style Sheets (CSS)
+grand_parent: Лабораторно упражнение 2
+nav_order: 1
+---
+
 # CSS селектори
 
 С помощта на CSS селекторите се задава по отношение на кои HTML елементи да бъде приложено дадено стилизиране.

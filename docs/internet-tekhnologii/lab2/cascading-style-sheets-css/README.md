@@ -1,3 +1,11 @@
+---
+layout: default
+title: Cascading Style Sheets (CSS)
+parent: Лабораторно упражнение 2
+grand_parent: Интернет технологии Servlets
+nav_order: 1
+---
+
 # Cascading Style Sheets (CSS)
 
 CSS е опростен език, с помощта на който може да се опише начинът, по който да се визуализират HTML елементите от дадена уеб страница.

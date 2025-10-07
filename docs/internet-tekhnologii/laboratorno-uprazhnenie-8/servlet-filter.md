@@ -1,3 +1,11 @@
+---
+layout: default
+title: Servlet Filter
+parent: Лабораторно упражнение 8
+grand_parent: Интернет технологии Servlets
+nav_order: 1
+---
+
 # Servlet Filter
 
 Сървлет филтрите са Java класове, които могат да бъдат използвани в Java web програмирането за следните цели :

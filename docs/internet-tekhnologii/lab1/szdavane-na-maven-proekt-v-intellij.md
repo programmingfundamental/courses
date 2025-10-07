@@ -1,3 +1,11 @@
+---
+layout: default
+title: Създаване на Maven проект в IntelliJ 
+parent: Лабораторно упражнение 1
+grand_parent: Интернет технологии Servlets
+nav_order: 1
+---
+
 # Създаване на Maven проект в IntelliJ
 
 1. Суздаване на Mavan проект в Intellij

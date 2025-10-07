@@ -1,3 +1,11 @@
+---
+layout: default
+title: Fetch
+parent: JavaScript Object Notation
+grand_parent: Лабораторно упражнение 9
+nav_order: 1
+---
+
 # Fetch
 
 Fetch предоставя интерфейс на JavaScript за отправяне на заявки и получаване на отговори в HTTP. Той също така предоставя глобален метод fetch(), който осигурява лесен, логичен начин за извличане на ресурси, асинхронно от мрежата.

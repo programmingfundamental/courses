@@ -1,3 +1,11 @@
+---
+layout: default
+title: Задача 
+parent: Лабораторно упражнение 6
+grand_parent: Интернет технологии Servlets
+nav_order: 1
+---
+
 # Задачи
 
 1. Създайте аналогичен на профилната страница jsp файл за редактиране на профила (EditProfilePage.jsp).

@@ -1,3 +1,11 @@
+---
+layout: default
+title: HTML форми
+parent: Лабораторно упражнение 2
+grand_parent: Интернет технологии Servlets
+nav_order: 1
+---
+
 # HTML форми 
 
 ### Тага form

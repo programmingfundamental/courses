@@ -1,3 +1,11 @@
+---
+layout: default
+title: JavaBean 
+parent: Лабораторно упражнение 5
+grand_parent: Интернет технологии Servlets
+nav_order: 1
+---
+
 # JavaBean
 
 JavaBeans са класове, които капсулират много обекти в един обект (the bean). Това е java клас, който трябва да следва следните конвенции:

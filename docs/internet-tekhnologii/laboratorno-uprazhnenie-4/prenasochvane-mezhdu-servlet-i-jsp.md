@@ -1,3 +1,11 @@
+---
+layout: default
+title: Пренасочване между Servlet и JSP 
+parent: Лабораторно упражнение 4
+grand_parent: Интернет технологии Servlets
+nav_order: 1
+---
+
 # Пренасочване между Servlet и JSP
 
 ### Интерфейсът RequestDispatcher

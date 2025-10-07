@@ -1,3 +1,11 @@
+---
+layout: default
+title: Някои CSS свойства
+parent: Cascading Style Sheets (CSS)
+grand_parent: Лабораторно упражнение 2
+nav_order: 1
+---
+
 # Някои CSS свойства
 
 ### За форматиране на текст
