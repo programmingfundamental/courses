@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Лабораторно упражнение 1
-parent: Програмиране за мобилни и Интернет устройства Kotlin
+title: Lab 1
+parent: Mobile and Internet Programming Kotlin
 has_children: true
 nav_order: 1
 permalink: /docs/programirane-za-mobilni-i-internet-ustroistva-kotlin-аео/laboratorno-uprazhnenie-1

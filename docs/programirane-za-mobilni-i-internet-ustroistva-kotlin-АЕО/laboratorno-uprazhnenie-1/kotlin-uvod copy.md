@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Въведение в Kotlin
-parent: Лабораторно упражнение 1
-grand_parent: Програмиране за мобилни и Интернет устройства Kotlin
+title: Introduction
+parent: Lab 1
+grand_parent: Mobile and Internet Programming Kotlin
 nav_order: 2
 ---
 
