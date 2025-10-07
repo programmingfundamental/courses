@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Задача
-parent: Лабораторно упражнение 5
-grand_parent: Програмиране за мобилни и Интернет устройства Kotlin
+parent: lab 5
+grand_parent: Mobile and Internet Programming Kotlin
 nav_order: 2
 ---
 # Задачи
