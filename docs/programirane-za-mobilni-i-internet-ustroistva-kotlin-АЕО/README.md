@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Програмиране за мобилни и Интернет устройства Kotlin
+title: Mobile and Internet Programming Kotlin
 nav_order: 5
 has_children: true
 permalink: /docs/programirane-za-mobilni-i-internet-ustroistva-kotlin-аео
 ---
 
-# Програмиране за мобилни и Интернет устройства Kotlin
+# Mobile and Internet Programming Kotlin
 
