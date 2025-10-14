@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Task
-parent: Lab 1
+parent: Lab 2
 grand_parent: Mobile and Internet Programming Kotlin
 nav_order: 2
 ---
