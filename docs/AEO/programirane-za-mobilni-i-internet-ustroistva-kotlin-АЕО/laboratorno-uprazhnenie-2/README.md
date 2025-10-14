@@ -9,9 +9,9 @@ permalink: /docs/programirane-za-mobilni-i-internet-ustroistva-kotlin-аео/lab
 
 # Lab 2
 
-# Класове и обекти
+# Classes and objects
 
-Декларацията на клас се състои от името на класа, прототипа на класа (като се посочат параметрите на неговия тип, първичният конструктор и т.н.) и тялото на класа, заобиколено от къдрави скоби. Както заглавката, така и тялото не са задължителни; Ако класът няма тяло, къдравите скоби могат да бъдат пропуснати.
+A class declaration consists of the class name, the class prototype (specifying its type parameters, primary constructor, etc.), and the class body, surrounded by curly brackets. Both the header and body are optional; if the class does not have a body, the curly brackets can be skipped.
 
 ```kotlin
 class Customer                                  // 1
@@ -29,14 +29,14 @@ fun main() {
 }
 ```
 
-1. Декларира клас с име Customer без никакви свойства или дефинирани от потребителя конструктори. Непараметризиран конструктор по подразбиране се създава от Kotlin автоматично.
-2. Обявява клас с две свойства: val и var и конструктор с два параметъра
-3. Създава екземпляр на класа чрез конструктора по подразбиране. Имайте предвид, че в Kotlin няма ключова дума new
-4. Създава екземпляр на класа с помощта на конструктора с два аргумента.
-5. Достъп до свойството
-6. Актуализира стойността на свойството
+1. Class Customer without any constructor or properties is declared. Kotlin automatically declares default constructor;
+2. Class Contact with two properties (val and var) and constructor by that properties is declared;
+3. Creates class instance with default constructor (there is no keyword "new" in Kotlin);
+4. Creates class instance with parameterized constructor;
+5. Property accessor;
+6. Property modifier.
 
-# Свойства
+# Properties
 
 ```kotlin
 
@@ -55,19 +55,19 @@ class Customer {
 
 ```
 
-# Модификатори на видимост
+# Access modifiers
 
-Публичният (public) модификатор е модификаторът по подразбиране в Kotlin. Точно като публичния модификатор на Java, това означава, че декларацията се вижда навсякъде.
+Public modifier is a default access modifier in Kotlin, meaning such declaration could be accessed from everywhere.
 
-Защитен (protected) модификатор в Kotlin: НЕ МОЖЕ да се зададе на декларации от първо ниво. Декларациите, които са защитени в клас, могат да бъдат достъпни само в техните подкласове.
+Protected modifier in Kotlin declares access in the same class and its sub-classess.
 
-Internal е нов модификатор, наличен в Kotlin, който не съществува в Java. Задаването на декларация като вътрешна означава, че тя ще бъде налична само в същия модул. Под модул в Kotlin имаме предвид група от файлове, които са компилирани заедно.
+Internal modifier declares access on a module level, i.e. group of files compiled together.
 
-Частните (private) модификатори не позволяват декларациите да бъдат видими извън текущия обхват.
+Private modifier declares visibility within current class.
 
-# Наследяване
+# Inheritance
 
-Kotlin напълно поддържа традиционния обектно-ориентиран механизъм за наследяване.
+Kotlin supports traditional object-oriented approach of inheritance.
 
 ```kotlin
 open class Dog {                // 1
@@ -88,12 +88,12 @@ fun main() {
 }
 ```
 
-1. Kotlin класовете са окончателни по подразбиране. Ако искате да разрешите наследяването на класа, маркирайте класа с модификатора open.
-2. Методите на Kotlin също са окончателни по подразбиране. Както при класовете, модификаторът open позволява заместването им.
-3. Класът наследява суперклас, когато посочите името му след него. Празните скоби показват извикване на конструктора по подразбиране на суперкласа.
-4. Заместването на методи или атрибути изисква модификатора override
+1. Kotlin classes are final by default. If there is a need a class to be later extended, it should be declared with the keyword "open";
+2. Kotlin methods are also final by default and declaring them with "open" makes them extendable;
+3. Class extends super class when its name is present after declaration of the new class name. Empty brackets indicate default constructor call;
+4. Redefinition of methods should be preceeded with modifier "override".
 
-# Наследяване с параметризиран конструктор
+# Inheritance with parameterized constructor
 
 ```kotlin
 open class Tiger(val origin: String) {
@@ -110,9 +110,9 @@ fun main() {
 }
 ```
 
-Ако искате да използвате параметризиран конструктор на суперкласа, когато създавате подклас, предоставете аргументите на конструктора в декларацията на подкласа.
+If there is a need of parameterized constructor from the super class to be used, declaration of the sub-class should have the necessary parameters.
 
-# Предаване на аргументи на конструктора към суперклас
+# Passing arguments through paret class constructor
 
 ```kotlin
 open class Lion(val name: String, val origin: String) {
@@ -129,9 +129,9 @@ fun main() {
 }
 ```
 
-# Абстрактни класове
+# Abstract classes
 
-Подобно на Java, ключовата дума се използва за деклариране на абстрактни класове в Kotlin e abstract. Абстрактен клас не може да бъде инициализиран. Въпреки това, можете да наследи. Членовете на абстрактния клас не са абстрактни, освен ако изрично не използвате ключова дума abstract, за да ги направите абстрактни.
+Similar to Java, the keyword used to declare abstract classes in Kotlin is abstract. An abstract class cannot be initialized but can be extended. Members of an abstract class are not abstract unless there is explicit declaration.
 
 ```kotlin
 abstract class Person(name: String) {
@@ -161,9 +161,9 @@ fun main(args: Array<String>) {
 }
 ```
 
-# Интерфейси
+# Interfaces
 
-Интерфейсите в Kotlin са подобни на интерфейсите в Java 8. Те могат да съдържат дефиниции на абстрактни методи, както и реализации на неабстрактни методи. Те обаче не могат да съдържат никакво състояние. Това означава, че интерфейсът може да има свойство, но трябва да бъде абстрактено или да предоставя имплементации на достъп.
+Interfaces in Kotlin are similar to interfaces in Java 8. They can contain definitions of abstract methods as well as implementations of non-abstract methods. However, they cannot contain any state. This means that an interface can have a property, but it must be abstract or provide accessor implementations.
 
 ```kotlin
 interface Animal {
@@ -197,9 +197,9 @@ fun main(args: Array<String>) {
 }
 ```
 
-# Класове данни
+# Data classes
 
-Класове данни улесняват създаването на класове, които се използват за съхраняване на стойности. Такива класове автоматично се предоставят с методи за копиране, получаване на представяне на низове и използване на екземпляри в колекции. Можете да замените тези методи с вашите собствени реализации в декларацията на класа.
+Data classes make it easy to create classes that are used to store values. Such classes automatically provide methods for copying, getting string representations, and using instances in collections. These methods can be replaced with custom implementation in the class declaration.
 
 ```kotlin
 data class User(val name: String, val id: Int) {           // 1
@@ -232,20 +232,20 @@ fun main() {
 }
 ```
 
-1. Дефинира клас данни с модификатора data
-2. Заменете метода по подразбиране, като обявите потребителите за равни, ако имат еднакъви id
-3. Методът се генерира автоматично, което прави изхода да изглежда добре.
-4. Нашият обичай счита два случая за равни, ако техните ids са равни.
-5. Екземплярите на класове данни с точно съвпадащи атрибути имат същия hashCode
-6. Автоматично генерираната функция copy улеснява създаването на нов екземпляр.
-7. copy създава нов екземпляр, така че обектът и неговото копие да имат различни референции.
-8. Когато копирате, можете да променяте стойностите на определени свойства. copy приема аргументи в същия ред като конструктора на класа.
-9. Използвайте с именувани аргументи, за да промените стойността въпреки реда на свойствата в copy
-10. Автоматично генерираните функции componentN ви позволяват да получите стойностите на свойствата по реда на декларация.
+1. Declares data class with specific modifier;
+2. Replaces default method and users with same id a considered as equal;
+3. Automatic method generation;
+4. Such case consideres two instances equal when they have same id;
+5. Data classes with same attributes have same result from method hashCode();
+6. Automatically created function copy makes easier to create new instance;
+7. Using copy creates new instance so the references of such objects are different;
+8. When using copy, new values for class parameters could be used. The copy accepts arguments in the same order as declared constructor;
+9. Using named arguments could change value despite attribute order in the copy;
+10. Generated function componentN allows to get attribute values according declaration order.
 
-# Enum класове
+# Enum classes
 
-Enum класове се използват за моделиране на типове, които представляват краен набор от различни стойности, като посоки, състояния, модове и т.н.
+Enum classes are used to model types that represent a finite set of different values, such as directions, states, modes, etc.
 
 ```kotlin
 enum class State {
@@ -263,11 +263,11 @@ fun main() {
 }
 ```
 
-1. Дефинира клас enum с три enum константи. Броят на константите винаги е краен и всички те са различни.
-2. Осъществява достъп до enum константа чрез името на класа.
-3. При enums when може да заключи дали -изразът е изчерпателен, така че да не се нуждаете от else
+1. Declares enum class with three constants (should be different);
+2. Accesses enum value;
+3. When using enums, there is no need of else.
 
-# Enums могат да съдържат свойства и методи като други класове, отделени от списъка с enum константи с точка и запетая.
+# Enums can contain properties and methods like other classes, separated from the list of enum constants by a semicolon.
 
 ```kotlin
 enum class Color(val rgb: Int) {                      // 1
@@ -288,17 +288,18 @@ fun main() {
 }
 ```
 
-1. Дефинира enum клас със свойство и метод.
-2. Всяка enum константа трябва да предава аргумент за параметъра на конструктора.
-3. Членовете на класа enum са отделени от константните дефиниции с точка и запетая.
-4. По подразбиране връща името на константата, тук .toString"RED"
-5. Извиква метод върху enum константа.
-6. Извиква метод чрез име на клас enum.
-7. RGB стойностите на и споделят първите битове (), така че това отпечатва "true".REDYELLOWFF
+1. Defines an enum class with a property and a method.
+2. Each enum constant must pass a parameter argument to the constructor.
+3. Members of the enum class are separated from the constant definitions by a semicolon.
+4. By default, returns the name of the constant, here .toString"RED"
+5. Calls a method on an enum constant.
+6. Calls a method via an enum class name.
+7. The RGB values ​​of and share the first bits (), so this prints "true".REDYELLOWFF
 
-# Затворени класове
+# Sealed classes
 
-Затворените класове ограничават използването на наследството. След като обявите клас за затворен, той може да бъде подкласиран само от същия пакет, където е деклариран затворения клас. Той не може да бъде подкласиран извън опаковката, в която е деклариран затворения клас.
+Sealed classes restrict the use of inheritance. Once you declare a class as sealed, it can only be subclassed from the same package where the sealed class is declared. It cannot be subclassed outside the package where the sealed class is declared.
+Sealed classes are used when there is a fixed set of related types that have to be handeled exhaustively.
 
 ```kotlin
 
@@ -320,16 +321,16 @@ fun main() {
 
 ```
 
-1. Дефинира запечатан клас.
-2. Дефинира подкласове. Имайте предвид, че всички подкласове трябва да са в един и същ пакет.
-3. Използва екземпляр на запечатания клас като аргумент в израз.
-4. Извършва се смарткаст, замятане до .
-5. Извършва се смарткаст, замятане до .
-6. Тук не е необходим случаят -case, тъй като са обхванати всички възможни подкласове на запечатания клас. С незапечатан суперклас ще се изисква.
+1. Defines a sealed class.
+2. Defines subclasses. Note that all subclasses must be in the same package.
+3. Uses an instance of the sealed class as an argument in an expression.
+4. Performs a smartcast, casting to .
+5. Performs a smartcast, casting to .
+6. The -case is not needed here, since all possible subclasses of the sealed class are covered. With an unsealed superclass, it would be required.
 
-# Ключова дума за обект
+# Object keyword
 
-Класовете и обектите в Kotlin работят по същия начин, както в повечето обектно-ориентирани езици: класът е план, а обектът е екземпляр на клас. Обикновено дефинирате клас и след това създавате няколко екземпляра на този клас:
+Classes and objects in Kotlin work the same way as in most object-oriented languages: a class is a blueprint, and an object is an instance of a class. Typically, you define a class and then create multiple instances of that class:
 
 ```kotlin
 
@@ -352,20 +353,18 @@ fun main() {
 
 ```
 
-1. Дефинира чертеж.
-2. Дефинира метод.
-3. Създава екземпляри.
-4. Извиква метода на екземпляри.
+1. Defines a class.
+2. Defines a method.
+3. Creates instances.
+4. Calls the instance method.
 
 
-
-В Kotlin имате и Ключова дума обект. Използва се за получаване на тип данни с една реализация.
-Ако сте потребител на Java и искате да разберете какво означава "единичен", можете да се сетите за модела Singleton: Той ви гарантира, че е създаден само един екземпляр от този клас, дори ако 2 нишки се опитат да го създадат.
-За да постигнете това в Kotlin, трябва само да декларирате : няма клас, няма конструктор, само мързелив екземпляр. Защо мързелив? Защото ще бъде създаден веднъж при достъп до обекта. В противен случай дори няма да бъде създаден.
+In Kotlin there is also the keyword object. It is used to get a data type with a single implementation (similar to Singleton in Java).
+To achieve this in Kotlin, you just have to declare: no class, no constructor, just a lazy instance - meaning it will be created once when the object is accessed.
 
 # object Expression
 
-Ето една основна типична употреба на израз: проста структура обект/свойства. Не е необходимо да го правите в декларацията на класа: създавате един обект, декларирате членовете му и осъществявате достъп до него в рамките на една функция. Обекти като този често се създават в Java като анонимни екземпляри на класове.
+Here's a basic, typical use of an expression: a simple object/property structure. There is no need this to be done in the class declaration: there is single object creation with its members and what is the access written in a function. Objects like this are often created in Java as anonymous instances of classes.
 
 ```kotlin
 
@@ -389,15 +388,15 @@ fun main() {
 
 ```
 
-1. Създава функция с параметри.
-3. Създава обект, който да се използва при изчисляване на стойността на резултата.
-4. Осъществява достъп до свойствата на обекта.
-5. Отпечатва резултата.
-6. Извиква функцията. Това е моментът, в който обектът действително е създаден.
+1. Creates a function with parameters.
+3. Creates an object to use in calculating the result value.
+4. Accesses the object's properties.
+5. Prints the result.
+6. Calls the function. This is when the object is actually created.
 
 # object Declaration
 
-Можете също да използвате декларацията. Това не е израз и не може да се използва в присвояване на променлива. Трябва да го използвате за директен достъп до неговите членове:
+OBject declaration could be also used. This is not expression and cannot be assigned to variable. It is used for direct access to object members:
 
 ```kotlin
 
@@ -413,13 +412,14 @@ fun main(){
 
 ```
 
-1. Създава декларация на обект.
-2. Определя метода на обекта.
-3. Извиква метода. Това е моментът, в който обектът действително е създаден.
+1. Creates an object declaration.
+2. Defines the object's method.
+3. Calls the method. This is when the object is actually created.
 
 # Companion Objects
 
-Декларацията на обекта в клас дефинира друг полезен случай: придружаващия обект. Синтактично е подобно на статичните методи в Java: извиквате членове на обекта, като използвате името на класа му като квалификатор.
+The declaration of an object in a class defines another useful case: the companion object. It is syntactically similar to static methods in Java:  members of the object are called using its class name as a qualifier.
+Companion objects are used when there is a need of static methods, constants, or factory methods associated with a class.
 
 ```kotlin
 
@@ -439,7 +439,7 @@ fun main() {
 
 ```
 
-1. Дефинира клас.
-2. Определя спътник. Името му може да бъде пропуснато.
-3. Дефинира метод на придружаващ обект.
-4. Извиква метода придружаващ обект чрез името на класа.
+1. Defines a class.
+2. Defines a companion. Its name can be omitted.
+3. Defines a method on a companion object.
+4. Calls the companion object method using the class name.
