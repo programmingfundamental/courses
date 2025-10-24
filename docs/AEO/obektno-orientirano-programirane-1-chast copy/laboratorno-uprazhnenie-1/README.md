@@ -311,32 +311,28 @@ public class Main{
 } 
 ```
 
+# Tasks
 
-**Tasks**
+#### Task 1
 
-*Task 1.* Create class Item to describe an item with attributes type, quantity, price and expiration days. The object will have as behaviour read and write methods.
+Define class Cat. Its behaviour is defined by accessors and mutators for all attributes.
 
-Create class ItemArray with attribute an array of items. Class ItemArray has as behaviour **calculateAveragePrice** method which returns the average price of all included items.
+#### Task 2
 
-Define class Apllication with main method and test created functionalities.
+Create class that describes a room. Objects should be initialized with parameterized constructor. For room's behaviour declare accessors to all attributes.
 
-*Task 2.* Create class Car with attributes brand, registration number and mileage. Define parameterized constructor and accessors and method for textual representation as behaviour.
+#### Task 3
 
-Create class Autopark with array of cars. Declare method **getCarWithMinMileage** which finds and returns the car with minimal mileage.
+Create class House with attributes for area, number of rooms, address and price, which is initialized with parameterized constructor. Behaviour is described by method for textual description and method for equalty by area.
 
-Define class Apllication with main method and test created functionalities.
+#### Task 5
 
-*Task 3.* Create class Account with attributes account number, currency and balance. Define parameterized constructor and accessors and method for textual representation as behaviour.
+Create program for decimal to hexadecimal conversion and viceversa. Convert following numbers: 225, 10101, FF.
 
-Create class Bank with array of accounts. Declare method **calculateAverageBalanceByCurrency** which passes currency as parameter and returns the average available balance in that currency.
+#### Task 6
 
-Define class Apllication with main method and test created functionalities.
+Write program for validating if given password (at least 8 symbols) has at least one capital letter, one small letter and one digit. Use wrapper class Character for implementation. Test the program with following input: 12ROZOVIROZI, N4f2MRaa5, Fgllfa!psW.
 
-*Task 4.* Define class StudentGroup with attributes specialty, course, group and number of students in the group. Define parameterized constructor and accessors and method for textual representation as behaviour.
-
-Create class Faculty with array of student groups. Declare method **getGroupWithMaxStudentsByCourse** which passes course as parameter and returns the group of that course with most students.
-
-Define class Apllication with main method and test created functionalities.
 
 
 
