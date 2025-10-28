@@ -447,5 +447,4 @@ val url = https://i.imgur.com/DvpvklR.png
 
 Image( painter = rememberAsyncImagePainter(model = url), contentDescription = "Интернет изображение", modifier = Modifier .size(300.dp) .padding(8.dp), contentScale = ContentScale.Crop )
 
-
 Фигура 1. Диаграма на взаимодействието между Manifest, Gradle, Compose и ресурсите.
