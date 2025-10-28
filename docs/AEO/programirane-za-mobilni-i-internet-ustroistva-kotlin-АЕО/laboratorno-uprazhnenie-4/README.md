@@ -188,7 +188,7 @@ which activities, services, receivers and permissions are used;
 
 which activity starts first (Launcher Activity);
 
-какви ресурси и библиотеки са свързани с приложението.
+what resources and libraries are associated with the application.
 
 AndroidManifest.xml example
 
