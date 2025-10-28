@@ -19,7 +19,7 @@ It is based upon **IntelliJ IDEA** and has available all necessary tools for dev
 ### Main features of Android Studio:
 
 1. **Intelligent code editor (Code Editor)**  
-   - Supports **Java**, **Kotlin** и **C++**.  
+   - Supports **Java**, **Kotlin** and **C++**.  
    - Provides **automatic completion**, **refactor**, **synthax check** and **real-time suggestions**.  
    - Has embedded quality code analysis system (Lint) that detects potential errors and ineffective code.  
 
