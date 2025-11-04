@@ -1,6 +1,6 @@
 ---
 layout: default
-title: lab 5
+title: Lab 5
 parent: Mobile and Internet Programming Kotlin
 has_children: true
 nav_order: 5
