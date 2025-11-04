@@ -7,11 +7,11 @@ nav_order: 5
 permalink: /docs/programirane-za-mobilni-i-internet-ustroistva-kotlin-аео/laboratorno-uprazhnenie-5
 ---
 
-# Лабораторно упражнение 5
+# Laboratory exercise 5
 
-## Построяване на потребителски интерфейс
+## User interface development
 
-Потребителският интерфейс (UI) на приложението е това, което виждате на екрана: текст, изображения, бутони и много други видове елементи и как е разположен на екрана. Това е начинът, по който приложението показва нещата на потребителя и как потребителят взаимодейства с приложението.
+The application's user interface (UI) is what you see on the screen: text, images, buttons, and many other types of elements, and how they are arranged on the screen. It is the way the application presents things to the user and how the user interacts with the application.
 
 ![alt text](image.png)
 
@@ -19,36 +19,35 @@ permalink: /docs/programirane-za-mobilni-i-internet-ustroistva-kotlin-аео/lab
 
 ![alt text](image-2.png)
 
-Бутон с възможност за щракване, Текстово съобщение в картичка, Поле за въвеждане на текст
+Clickable button, Text message in a card, Text input field
 
-Всеки от тези елементи се нарича компонент на потребителския интерфейс. Почти всичко, което виждате на екрана на вашето приложение, е елемент на потребителския интерфейс (известен също като компонент на потребителския интерфейс). Те могат да бъдат интерактивни, като бутон с възможност за щракване или поле за въвеждане с възможност за редактиране, или могат да бъдат декоративни изображения.
+Each of these elements is called a UI component. Almost everything that is seen on application's screen is a UI element (also known as a UI component). They can be interactive, like a clickable button or an editable input field, or they can be decorative images.
 
 ## Jetpack Compose 
 
-Jetpack Compose е модерен инструментариум за изграждане на потребителски интерфейси за Android. Compose опростява и ускорява разработването на потребителски интерфейс на Android с по-малко код, мощни инструменти и интуитивни възможности на Kotlin. С Compose можете да изградите своя потребителски интерфейс, като дефинирате набор от функции, наречени компонуеми функции, които приемат данни и описват елементи на потребителския интерфейс.
+Jetpack Compose is a modern UI development toolkit for Android. Compose simplifies and speeds up Android UI development with less code, powerful tools, and the intuitive capabilities of Kotlin. With Compose, you can build your UI by defining a set of functions, called composable functions, that accept data and describe UI elements.
 
-## Composable функции
+## Composable functions
 
-Composable функции са основният градивен елемент на потребителския интерфейс в Compose. Компонуема функция:
+Composable functions are the basic building block of the user interface in Compose. A composable function:
 
-Описва част от вашия потребителски интерфейс.
-Не връща нищо.
-Взема някои входни данни и генерира това, което се показва на екрана.
+- Describes a part of your user interface.
+- Returns nothing.
+- Takes some input and generates what is displayed on the screen.
 
-# Мащабируеми пиксели
+# Scalable pixels
 
-Мащабируемите пиксели (SP) са мерна единица за размера на шрифта. Елементите на потребителския интерфейс в приложенията за Android използват две различни мерни единици: независими от плътността пиксели (DP), които по-късно използвате за оформлението, и мащабируеми пиксели (SP). По подразбиране SP модулът е със същия размер като DP модула, но се преоразмерява въз основа на предпочитания от потребителя размер на текста в настройките на телефона.
+Scalable pixels (SP) is a unit of measurement for font size. UI elements in Android apps use two different units of measurement: density-independent pixels (DP), which you later use for layout, and scalable pixels (SP). By default, the SP module is the same size as the DP module, but it resizes based on the user's preferred text size in the phone's settings.
 
-Библиотеката за AndroidX (разширение за Android) съдържа набор от библиотеки и класове, които помагат за ускоряване на разработването на приложенията, като ви предоставят основната функционалност. Можете да получите достъп до класовете, свойствата и други артефакти с помощта на androidx пакета.
+The AndroidX library (an extension for Android) contains a set of libraries and classes that help speed up application development by providing you with core functionality. You can access the classes, properties, and other artifacts using the androidx package.
 
-# Йерархия на потребителския интерфейс
+# User interface hierarchy
 
-Йерархията на потребителския интерфейс се основава на задържане, което означава, че един компонент може да съдържа един или повече компоненти, а понякога се използват термините родител и дете. Контекстът тук е, че родителските елементи на потребителския интерфейс съдържат елементи на дъщерния потребителски интерфейс, които от своя страна могат да съдържат елементи на дъщерния потребителски интерфейс. Трите основни, стандартни елемента на оформлението в Compose са Column, Row, и Box.
+The UI hierarchy is based on containment, meaning that a component can contain one or more components, and sometimes the terms parent and child are used. The context here is that parent UI elements contain child UI elements, which in turn can contain child UI elements. The three basic, standard layout elements in Compose are Column, Row, and Box.
 
 ![alt text](image-3.png)
 
-Column, Row, и Box са Compose функции, които приемат Compose съдържание като аргументи, така че можете да поставяте елементи в тези елементи на оформлението. Например, всеки дъщерен елемент в Compose елемент се поставя хоризонтално един до друг в редица.
-
+Column, Row, and Box are Compose functions that take Compose content as arguments, so you can place elements inside these layout elements. For example, each child element in a Compose element is placed horizontally next to each other in a row.
 Пример:
 
 ```kotlin
@@ -60,13 +59,13 @@ Row {
 
 ![alt text](image-4.png)
 
-В Compose функцията се използват къдрави () скоби вместо скоби. Това се нарича Trailing Lambda Syntax. Kotlin предлага специален синтаксис за предаване на функции като параметри към функции, когато последният параметър е функция.
+The Compose function uses curly {} braces instead of parentheses. This is called Trailing Lambda Syntax. Kotlin provides a special syntax for passing functions as parameters to functions when the last parameter is a function.
 
-Когато подадете функция като този параметър, можете да използвате крайния ламбда синтаксис. Вместо да поставяте функцията в скобите, можете да я поставите извън скобите във къдрави скоби. Това е препоръчителна и често срещана практика в Compose, така че трябва да сте запознати с това как изглежда кодът.
+When you pass a function as this parameter, you can use the trailing lambda syntax. Instead of putting the function inside the parentheses, you can put it outside the parentheses in curly braces. This is a recommended and common practice in Compose, so you should be familiar with how the code looks.
 
-Например, последният параметър в компонуемата функция е параметърът, функция, която описва дъщерните елементи на потребителския интерфейс. Да предположим, че искате да създадете ред, който съдържа три текстови елемента. Този код би свършил, но е много тромаво да се използва именуван параметър за крайната ламбда
+For example, the last parameter in a composable function is the parameter, a function that describes the child elements of the user interface. Let's say you want to create a row that contains three text elements. This code would work, but it's very cumbersome to use a named parameter for the trailing lambda
 
-Пример
+Example
 
 ```kotlin
 Row(
@@ -78,7 +77,7 @@ Row(
 )
 ```
 
-Тъй като параметърът е последният в сигнатурата на функцията и вие предавате стойността му като ламбда израз (засега е добре, ако не знаете какво е ламбда, просто се запознайте със синтаксиса), можете да премахнете параметъра и скобите, както следва:
+Since the parameter is the last one in the function signature and you are passing its value as a lambda expression (it's okay for now, if you don't know what a lambda is, just familiarize yourself with the syntax), you can remove the parameter and the parentheses as follows:
 
 ```kotlin
 Row {
@@ -88,30 +87,32 @@ Row {
 }
 ```
 
-## Оформление на елементите на потребителския изглед
+### Layout of user view elements
 
-Оформлението се извършва с обекта модификатор, който е колекция от елементи, които украсяват или променят поведението на елементите на потребителския интерфейс на Compose, като padding, align. Освен това всекиелемент на потребителския интерфеис приежава собсвени параметри за оформление fontSize, lineHeight, textAlign, verticalArrangement и други.
+Layout is done with the modifier object, which is a collection of elements that decorate or change the behavior of Compose UI elements, such as padding, align. In addition, each UI element has its own layout parameters fontSize, lineHeight, textAlign, verticalArrangement, and others.
 
-## Обработка на потребителски взаимодействия
+## User interactions control
 
-Компонентите на потребителския интерфейс дават обратна връзка на потребителя на устройството по начина, по който реагират на взаимодействията на потребителите. Всеки компонент има свой собствен начин да реагира на взаимодействия, което помага на потребителя да знае какво правят неговите взаимодействия. Например, ако потребител докосне бутон на сензорния екран на устройството, бутонът вероятно ще се промени по някакъв начин, може би чрез добавяне на цвят на подчертаване. Тази промяна уведомява потребителя, че е докоснал бутона. Ако потребителят не иска да го направи че те ще знаят да отдръпнат пръста си от бутона преди Освобождаване - в противен случай бутонът ще се активира.
+UI components provide feedback to the user of the device by the way they respond to user interactions. Each component has its own way of responding to interactions, which helps the user know what their interactions are doing. For example, if a user taps a button on the device’s touchscreen, the button will likely change in some way, perhaps by adding a highlight color. This change lets the user know that they have tapped the button. If the user doesn’t want to do that, they will know to lift their finger off the button before releasing it—otherwise the button will activate.
 
-В много случаи не е необходимо да знаете точно как вашият Compose компонент интерпретира потребителските взаимодействия. Например Button разчита на Modifier.clickable, за да разбере дали потребителят е щракнал върху бутона. Ако добавяте типичен бутон към приложението си, можете да дефинирате кода onClick на бутона и Modifier.clickable изпълнява този код, когато е подходящо. Това означава, че не е нужно да знаете дали потребителят е докоснал екрана или е избрал бутона с клавиатура; Modifier.clickable установява, че потребителят е извършил щракване и отговаря, като изпълнява вашия onClick код.
+In many cases, you don’t need to know exactly how your Compose component interprets user interactions. For example, a Button relies on Modifier.clickable to know whether the user has clicked the button. If you’re adding a typical button to your application, you can define the button’s onClick code, and Modifier.clickable executes that code when appropriate. This means you don’t need to know whether the user has tapped the screen or selected the button with a keyboard; Modifier.clickable detects that the user has clicked and responds by executing your onClick code.
 
-## Ресурси на приложението
+## Application resources
 
-Resource Manager слъжи за управление на ресурсите в проекта. Той може да се стртира от View > Tool Windows. От него могат да се добавят към проекта различни ресурси сред които и изображения. Ако един ресурс не е правилно интегриран с проекта той няма да може да се използва. Всички ресурси, които се добавят към приложението получават идентификатор, идентификаторите на ресурсите се генерират автоматично и са описани в автоматично генерирания класа R.
+Resource Manager is used to manage resources in the project. It can be started from View > Tool Windows. From it, various resources can be added to the project, including images. If a resource is not properly integrated with the project, it will not be able to be used. All resources that are added to the application receive an identifier, the resource identifiers are generated automatically and are described in the automatically generated class R.
 
-Извличането на ресурси става с Resource методите: stringResource, painterResource
+Resources are retrieved using the Resource methods: stringResource, painterResource
 
-## Динамичен потребителски интерфейс
+## Dynamic user interface
 
-Composables функциите са без състояние по подразбиране, което означава, че те не съдържат стойност и могат да бъдат прекомпозирани по всяко време от системата, което води до нулиране на стойността. Compose обаче предоставя удобен начин да избегнете това. Съставимите функции могат да съхраняват обект в паметта, използвайки запомнянето на съставяемия.
+Composable functions are stateless by default, which means they do not contain a value and can be recomposed at any time by the system, which will reset the value. However, Compose provides a convenient way to avoid this. Composable functions can store an object in memory using the composable's memory.
 
-За да пази състояние една променлива в Composables функция трябва да се дефинира като remember composable.
-Remember composable елемент изисква функция, която трябва да бъде предадена.
-Remember composable observable, за да следи промените на обекта и да уведомява потребителския интерфейс че трябва да се промени.
-Функцията която приема като параметър е управляващата функция след настъпване на промяна.
+To store state, a variable in a Composable function must be defined as remember composable.
+
+A remember composable element requires a function to be passed in.
+
+A remember composable observable to monitor changes to the object and notify the user interface that it needs to change.
+The function it takes as a parameter is the control function after a change occurs.
 
 
 
