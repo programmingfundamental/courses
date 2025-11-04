@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Задача
+title: Task
 parent: lab 5
 grand_parent: Mobile and Internet Programming Kotlin
 nav_order: 2
