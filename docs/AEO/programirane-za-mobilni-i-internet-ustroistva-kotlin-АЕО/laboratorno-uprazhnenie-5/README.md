@@ -95,6 +95,7 @@ Layout is done with the modifier object, which is a collection of elements that 
 
 UI components provide feedback to the user of the device by the way they respond to user interactions. Each component has its own way of responding to interactions, which helps the user know what their interactions are doing. For example, if a user taps a button on the device’s touchscreen, the button will likely change in some way, perhaps by adding a highlight color. This change lets the user know that they have tapped the button. If the user doesn’t want to do that, they will know to lift their finger off the button before releasing it—otherwise the button will activate.
 
+
 In many cases, you don’t need to know exactly how your Compose component interprets user interactions. For example, a Button relies on Modifier.clickable to know whether the user has clicked the button. If you’re adding a typical button to your application, you can define the button’s onClick code, and Modifier.clickable executes that code when appropriate. This means you don’t need to know whether the user has tapped the screen or selected the button with a keyboard; Modifier.clickable detects that the user has clicked and responds by executing your onClick code.
 
 ## Application resources
@@ -109,10 +110,39 @@ Composable functions are stateless by default, which means they do not contain a
 
 To store state, a variable in a Composable function must be defined as remember composable.
 
-A remember composable element requires a function to be passed in.
+Remember composable element requires a function to be passed in. Also, composable observable to monitor changes to the object and notify the user interface that it needs to change. The function it takes as a parameter is the control function after a change occurs.
 
-A remember composable observable to monitor changes to the object and notify the user interface that it needs to change.
-The function it takes as a parameter is the control function after a change occurs.
+
+
+# Tasks
+
+## Task 1
+
+Create a Composable function for greeting text GreetingText with parameters: message: String and modifier: Modifier = Modifier. Visualize the function in the design panel. With the message "Happy Birthday Android!"
+
+## Task 2
+
+Set fontSize = 100.sp check the result
+
+## Task 3
+
+Set lineHeight = 116.sp check the result
+
+## Task 4
+
+Add a new text element for the message from whom the greeting is, use fontSize = 36.sp
+
+## Task 5
+
+Arrange the text elements in a row and in a column. Choose an appropriate layout option.
+
+## Task 6
+
+Align text and user view elements with padding, verticalArrangement , align , and textAlign
+
+## Task 7
+
+https://tuvarnabg.sharepoint.com/:u:/s/msteams_230e9b/EXtfPyFQ_3tAnBwEYE7-4XgB3w6hd6boqpZEw_RJEj-sgg?e=HW2dfN
 
 
 
