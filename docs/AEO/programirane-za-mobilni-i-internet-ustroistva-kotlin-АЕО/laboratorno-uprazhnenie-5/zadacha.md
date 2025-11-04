@@ -5,32 +5,32 @@ parent: lab 5
 grand_parent: Mobile and Internet Programming Kotlin
 nav_order: 2
 ---
-# Задачи
+# Tasks
 
-## Задача 1
+## Task 1
 
-Създайте Composable функция за поздравителен текст GreetingText с параметри: message: String и modifier: Modifier = Modifier. Визуализирайте функцията в панел за проектиране. Със съобщение "Happy Birthday Android!"
+Create a Composable function for greeting text GreetingText with parameters: message: String and modifier: Modifier = Modifier. Visualize the function in the design panel. With the message "Happy Birthday Android!"
 
-## Задача 2
+## Task 2
 
-Поставете fontSize = 100.sp проверете резултата
+Set fontSize = 100.sp check the result
 
-## Задача 3
+## Task 3
 
-Поставете lineHeight = 116.sp проверете резултата
+Set lineHeight = 116.sp check the result
 
-## Задача 4
+## Task 4
 
-Добавете нов текстови елемен за съобщението от кого е поздрава използвайте fontSize = 36.sp
+Add a new text element for the message from whom the greeting is, use fontSize = 36.sp
 
-## Задача 5
+## Task 5
 
-Подредете текстовите елементи в ред и в колона. Изберете подходящ вариант за оформление.
+Arrange the text elements in a row and in a column. Choose an appropriate layout option.
 
-## Задача 6
+## Task 6
 
-Подравнете текста и елементите на потребителския изглед с padding, verticalArrangement , align и textAlign 
+Align text and user view elements with padding, verticalArrangement , align , and textAlign
 
-## Задача 7
+## Task 7
 
 https://tuvarnabg.sharepoint.com/:u:/s/msteams_230e9b/EXtfPyFQ_3tAnBwEYE7-4XgB3w6hd6boqpZEw_RJEj-sgg?e=HW2dfN
