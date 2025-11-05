@@ -308,7 +308,7 @@ And methods:
 
 #### Task 2:
 
-Create a class Manager that inherits the Worker class and has the following attributes:
+Create a class Manager that inherits the Employee class and has the following attributes:
 
 · Sector (private)
 
@@ -329,7 +329,7 @@ Methods:
 
 #### Task 3:
 
-Create a class Clerk with the following attributes:
+Create a class Clerk that extends Employee with the following attributes:
 
 · Additional percentage;
 
