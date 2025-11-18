@@ -1,88 +1,98 @@
-
-# Лабораторно упражнение 7
+---
+layout: default
+title: Laboratory exercise 5
+parent: Object-oriented Programming - 1 part
+has_children: true
+nav_order: 5
+permalink: /docs/object-oriented-programming-1-part/laboratory-exercise-5
+---
+# Laboratory exercise 5
 
 # String
 
-#### ASCII И UNICODE таблица ASCII е предшественика на UNICODE таблицата.
+#### ASCII AND UNICODE table ASCII is the predecessor of the UNICODE table
 
-В ASCII таблицата се записват 128 или 256 символа (7 или 8 битова) - цифри, малки и главни букви и специални символи. Когато е необходимо да се работи със символи, различни от латинските, няма как да се изпoлзва ASCII таблицата.
+The ASCII table stores 128 or 256 characters (7 or 8 bit) - numbers, uppercase and lowercase letters and special characters. When it is necessary to work with characters other than Latin, the ASCII table cannot be used.
 
-Java използва 16-битовата таблица за символи UNICODE, като в нея се съхраняват 216=65536 символа, а при комбиниране на 2 символа за получаване на специфичен нов знак можем да образуваме до 100 000 знака.
+Java uses the 16-bit UNICODE character table, storing 216=65536 characters, and when combining 2 characters to obtain a specific new character, we can form up to 100,000 characters.
 
 #### String
 
-Класът java.lang.String позволява обработка на символни низове в Java.
+The java.lang.String class allows for the manipulation of character strings in Java.
 
-Вътрешното предствяне на String класа представлява масив от символи(char).
+The internal representation of the String class is an array of characters (char).
 
-Класът String спазва принципите на обектно-ориентираното програмиране: стойностите се записват в динамичната памет, а променливите пазят препратка към паметта (референция към обект в динамичната памет). Той има важна особеност – последователностите от символи, записани в променлива от класа, са неизменими (immutable). Веднъж записано, съдържанието на променливата не се променя директно - ако опитаме да променим стойността, тя ще бъде записана на ново място в динамичната памет, а променливата ще започне да сочи към него. 
+The String class follows the principles of object-oriented programming: values ​​are stored in dynamic memory, and variables keep a reference to the memory (a reference to an object in dynamic memory). It has an important feature - sequences of characters stored in a variable of the class are immutable. Once stored, the contents of the variable are not changed directly - if we try to change the value, it will be stored in a new location in dynamic memory, and the variable will start pointing to it.
 
-Пр.: Ако няколко променливи сочат към една и съща област в паметта с дадена стойност, тази стойност не може да бъде директно променена. Промяната ще се отрази само на променливата, чрез която е редактирана стойността, тъй като това ще създаде нова стойност в динамичната памет и ще насочи въпросната променлива към нея, докато останалите променливи ще сочат на старото място.
+Example: If several variables point to the same area in memory with a given value, this value cannot be changed directly. The change will only affect the variable through which the value was edited, as this will create a new value in dynamic memory and point the variable in question to it, while the other variables will point to the old location.
 
-#### Деклариране на символен низ
+#### String declaration
 
-Можем да декларираме променливи от тип символен низ чрез класа java.lang.String: String str; Декларацията на символен низ представлява декларация на обект от класа String. Това не е еквивалентно на създаването на променлива и заделянето на памет за нея! С декларацията уведомяваме компилатора, че ще използваме променлива str и очакваният тип за нея е String. Ние не създаваме променливата в паметта и тя все още не е достъпна за обработки (има стойност null, което означава липса на стойност) и опитът за манипулация на такъв стринг ще генерира грешка (изключение за достъп до липсваща стойност NullPointerException)!
+A string declaration is a declaration of an object of the String class. This is not equivalent to creating a variable and allocating memory for it. With the declaration, the compiler is informed that it will use the variable name and the expected type for it is String. The variable is not created in memory and it is not yet available for processing (it has a null value, which means no value) and attempting to manipulate such a string will generate an error (a NullPointerException exception)!
 
-#### Деклариране, създаване и инициализиране на символен низ
+#### Declaration, creation and initialization
 
-За да може да обработваме декларираната променлива, трябва да я създадем и инициализираме.
+In order for a declared variable to be processed, it must be created and initialized.
 
-Създаването на променлива на клас (познато още като инстанциране) е процес, свързан със заделянето на област в динамичната памет. Инициализиране променливи:
+Creating a class variable (also known as instantiation) is the process of allocating a region in dynamic memory. Initializing variables:
 
-* чрез символна константа
+* via symbolic constant
 
   ```java
   String helloWorld = "Hello, world!";
   ```
-* чрез присвояване стойността на друг символен низ
+* by assigning the value to another string
 
-Присвояването на стойността е еквивалентно на насочване на String променлива към друга променлива от същия тип. Пример за това е следният фрагмент:
+Assigning a value is equivalent to pointing a String variable to another variable of the same type. An example of this is the following snippet:
 
   ```java
   String source = "Some source";  
   String assigned = source;
   ```
 
-![](<../../assets/image (1).png>)
 
-* Променливата assigned приема стойността на source. Тъй като класът String е референтен тип, "Some source" е записано в динамичната памет (heap, хийп), сочено от първата променлива. Така двата обекта имат една и съща стойност:
-* чрез предаване стойността на операция, връщаща символен низ. Това може да бъде резултат от метод, който валидира данни; събиране на стойностите на няколко константи и променливи, преобразуване на съществуваща променлива и др. Пример за израз, връщащ символен низ след конкатенация:
+* The assigned variable takes the value of source. Since the String class is a reference type, "Some source" is written to the heap, pointed to by the first variable. Thus, the two objects have the same value:
+  
+  ![](<../../assets/image (1).png>)
+  
+* by passing the value to an operation that returns a string. This can be the result of a method that validates data; collecting the values ​​of several constants and variables, converting an existing variable, etc. Example of an expression that returns a string after concatenation:
 
 ```java
 String email = "some@email.bg";
 String info = "My mail is: " + email + "."; // My mail is: some@email.bg.
 ```
 
-#### Отпечатване на символни низове
+#### Printing
 
-Извеждането на данни се извършва чрез изходния поток System.out:
+Data display is done through the System.out output stream.:
 
 ```java
 System.out.println("Your name is: " + name);
 ```
-Използвайки метода println(…) извеждаме съобщението: Your name is:, придружено със стойността на променливата name. След края на съобщението се добавя символ за нов ред, като следващото съобщение ще бъде изведено на следващия ред на конзолата. Ако искаме да избегнем символа за нов ред и съобщенията да се извеждат на един и същ, тогава прибягваме към метода print(…). В случай, че ни трябва по-прецизен форматиран изход, на помощ идва методът printf(…): 
+Using the println(…) method, we print the message: Your name is:, accompanied by the value of the variable name. After the end of the message, a newline character is added, and the next message will be displayed on the next line of the console. If we want to avoid the newline character and have the messages displayed on the same line, then we resort to the print(…) method. In case we need more precise formatted output, the printf(…) method comes to the rescue.: 
 
 ```java
 System.out.printf("Hello, %s, have a nice reading!", name);
 ```
 
-#### Escaping при символните низове
+#### Escaping 
 
-Ако искаме да използваме кавички в съдържанието, тогава трябва да поставим наклонена черта преди тях за указание на компилатора. 
+If we want to use quotes in the content, then we need to put a slash before them to instruct the compiler. 
+
 ```java
 String quote = "Book’s title is \"Intro to Java\""; // Book's title is "Intro to Java"
 ```
 
-Кавичките този път са част от текста. В променливата те са добавени чрез поставянето им след екраниращия знак (escaping character) обратна наклонена черта. По този начин компилаторът разбира, че кавичките не служат за начало или край на символен низ, а са част от данните. Наклонената черта се използва за символи, които играят специална роля в текста (в случая кавичките) или за дефиниране на действие, което не може да се изрази със символ. Пример за втория случай са обозначаването на символ за нов ред (\n), табулация (\t), избор на символ по неговия Unicode (\uXXXX, където с X се обозначава кодът) и др.
+The quotes this time are part of the text. In the variable, they are added by placing them after the escaping character, a backslash. This way, the compiler understands that the quotes do not serve as the beginning or end of a character string, but are part of the data. The slash is used for characters that play a special role in the text (in this case, the quotes) or to define an action that cannot be expressed with a symbol. Examples of the second case are the designation of a newline character (\n), tabulation (\t), selection of a character by its Unicode (\uXXXX, where X denotes the code), etc.
 
-* \’ - Единична кавичка
-* \”- Двойна кавичка
-* \ - Наклонена черта
+* \’ - Single quote
+* \”- Double quotation mark
+* \ - Slash
 
-#### Сравнение за еднаквост
+#### String equality methods
 
-* equals() – прави разлика между малки и главни букви
-* equalsIgnoreCase() – пренебрегва регистъра, сравнява само съдържанието на стринга.
+* equals() – differentiates between lowercase and uppercase letters
+* equalsIgnoreCase() – ignores case, compares only the contents of the string.
 
 ```java
 String word1 = "Java";
@@ -91,12 +101,12 @@ System.out.println(word1.equals(word2)); // false
 System.out.println(word1.equalsIgnoreCase(word2)); // true
 ```
 
-#### Сравнение на низове по азбучен ред
+#### Alphabetical string comparison
 
-* compareTo(…) – сравнява като прави разлика между малки главни букви.
-* compareToIgnoreCase(…) – сравнява като пренебрегва регистъра.
+* compareTo(…) – compares case-sensitively.
+* compareToIgnoreCase(…) – compares case-insensitively.
 
-compareTo(…) връща положително число, отрицателно число или 0 в зависимост от лексикографската подредба на символните низове, които сравняваме. Изчислението се извършва като взимаме уникалния код от Unicode таблицата за всеки символ и изчисляваме разликата. 
+compareTo(…) returns a positive number, a negative number, or 0 depending on the lexicographical order of the character strings being compared. The calculation is done by taking the unique code from the Unicode table for each character and calculating the difference. 
 
 ```java
 String str1= "abc";
@@ -107,10 +117,10 @@ System.out.println(str1.compareToIgnoreCase(str2)); //-1
 System.out.println(str2.compareToIgnoreCase(str1)); //1
 ```
 
-#### Долепване на низове (конкатенация)
+#### String concatenation
 
-Долепването на символни низове и получаването на нов низ се нарича конкатенация. То може да бъде извършено по 2 начина:
-* чрез метода concat(…):
+The process of joining strings together to form a new string is called concatenation. It can be done in two ways::
+* using concat(…):
 
 ```java
 String greet = "Hello, ";
@@ -118,11 +128,11 @@ String name = "reader!";
 String result = greet.concat(name); // Hello, reader!
 ```
 
-Извиквайки метода, ще долепим променливата name, която е подадена като аргумент, към променливата greet. Резултатният низ ще има стойност "Hello, reader!". 
+By calling the method, we will append the variable name, which is passed as an argument, to the variable greet. The resulting string will have the value "Hello, reader!". 
 
-* чрез операторите + и +=.
+* using operators + and +=.
 
-Горния пример може да реализираме без проблем и по двата начина, например: 
+The above example can be implemented without any problems in both ways, for example: 
 
 ```java
 String greet = "Hello, ";
@@ -130,9 +140,9 @@ String name = "reader!";
 String result = greet + name; // Hello, reader!
 ```
 
-Всички долепвания до низове не променят съществуващите променливи, а връщат нова променлива като резултат.
+All appends to strings do not change existing variables, but return a new variable as a result.
 
-#### Търсене в символен низ
+#### String search
 
 ```java
 String str = "First java class";
@@ -140,16 +150,16 @@ int index = str.indexOf("java");
 System.out.println(index); // index = 6 (starts from 0)
 ```
 
-#### Извличане на част от низ
+#### Substring
 
 ```java
 String str = "First java class";
 String subStr = str.substring(11, 16); // subStr = "class"
 ```
 
-Извикването на метода substring(index1, index2) извлича подниз на дадена променлива, който се намира между index1 и (index2– 1) включително. Символът на посочената позиция – index2– не се взима предвид! Aко посочим substring(11, 16), ще бъдат извлечени символите между индекс 10 и 15 включително, а не между 10 и 16!
+Calling the substring(index1, index2) method extracts a substring of a given variable that is between index1 and (index2– 1) inclusive. The character at the specified position – index2– is not taken into account! If we specify substring(11, 16), the characters between index 10 and 15 inclusive will be extracted, not between 10 and 16.!
 
-#### Разцепване на низ по разделител
+#### Split
 
 ```java
 String listOfAnimals = "dog, cat, lion, pork";
@@ -161,7 +171,7 @@ for(String animal : animalsArr) {
 }
 ```
 
-#### Замяна на подниз с друг
+#### Replace
 
 ```java
 String helloWorld = "Hello, java.";
@@ -169,7 +179,7 @@ String fixedGreeting = helloWorld.replace("java", " world");
 System.out.println(fixedGreeting);
 ```
 
-#### Преминаване към главни и малки букви
+#### Switching between uppercase and lowercase letters
 
 ```java
 String helloWorld = "Hello, java.";
@@ -177,7 +187,7 @@ System.out.println(helloWorld.toLowerCase());
 System.out.println(helloWorld.toUpperCase());
 ```
 
-#### Премахване на празно пространство в края на низ
+#### Trim
 
 ```java
 String helloWorld = "Hello, java. ";
@@ -185,3 +195,85 @@ String withoutWhiteSpace = helloWorld.trim();
 System.out.println(helloWorld.length());
 System.out.println(withoutWhiteSpace.length());
 ```
+
+
+#### StringBuilder
+
+StringBuilder is a class that is used to build and modify character strings. It overcomes the performance problems that arise when concatenating strings of type String. The class is built in the form of an array of characters and that. The information in it is not immutable - changes that are imposed on variables of type StringBuilder are made in the same area of ​​memory (buffer), which saves time and resources. To change the content, a new object is not created, but simply the current one is changed. 
+
+```java
+StringBuilder sb = new StringBuilder(15);
+sb.append("Hello, World! ");
+sb.append("It’s a great day!");
+```
+
+* capacity() – returns the size of the entire buffer (the total number of occupied and free characters)
+* length() – returns the length of the string stored in the variable
+* charAt(int index) – returns the character at the specified position
+* append(…) – appends a string, number, or other value after the last character written to the buffer
+* delete(int start, int end) – removes string at specified start and end position
+* insert(int offset, String str) – inserts a given string at a given position
+* replace(int start, int end, String str) – replaces the written string between the start and end positions with the value of the variable str
+* toString() – returns the information stored in the StringBuilder object as a result of type String, which can be stored in a String variable.
+
+#### StringBuffer
+
+StringBuffer in Java is a class that represents a mutable string. This class is part of the Java Standard Edition and provides the ability to manipulate strings through various operations such as adding characters, inserting, deleting, and others.
+
+StringBuffer vs StringBuilder:
+
+* Mutable vs Immutable:
+ 
+StringBuffer is part of the Java Standard Edition and is mutable. This means that you can change its contents after it is created. StringBuilder is also mutable and is a newer version of StringBuffer. It was introduced in Java 5 and is preferred in modern applications due to some optimizations and improvements..
+
+* Thread safety:
+
+StringBuffer is thread-safe, which means it is suitable for use in multithreaded applications because its methods are synchronized. StringBuilder is not synchronized, so it is faster, but should be used with caution in multithreaded environments..
+
+* Performance:
+    
+Due to its synchronization, StringBuffer can be slower than StringBuilder, especially in non-threaded applications where synchronization is not needed..
+
+* Methods:
+    
+Both classes provide similar methods for manipulating strings, such as append(), insert(), delete(), etc. The syntax and operation of these methods are similar between the two classes..
+
+* Usage:
+    
+If you are working in a multithreaded environment and need thread safety, you can use StringBuffer.
+If thread safety is not needed, StringBuilder is usually preferred as it is faster.
+
+
+# Tasks
+
+### Task 1
+
+Create a program for employees in a company.
+
+To do this, you will need:
+
+* Employee class, which will describe an employee and his three names, basic salary and position. Methods for accessing the class fields. Method for text representation. (The employee's full name)
+* Company class, which will describe the company with its employees and names. In a constructor that accepts the number of employees in the company, initialize the array. Create two methods
+* getInfo() - which will return as a result the information about the company with all employees of the company. Use string concatenation
+* getInformation() - which will return as a result the information about the company with all employees of the company. Use a string buffer
+* getEmployees(String name) - Returns a list of the names of employees in which the given name exists
+
+Check the execution of the methods for different numbers of employees in the company with System.out.println(java.time.LocalDateTime.now()); at the beginning and end of the execution of the methods is there a difference between String and StringBuilder?
+
+### Task 2
+
+Write a program for car parking:
+
+For this purpose you will need:
+
+* class Car with number, width and length
+* class Truck with number, width and length, load capacity
+* class Bus with number, width and length, number of seats
+
+Consider whether the classes should have a common parent class?
+
+* class Parking, with a list of 1000 vehicles.
+* constructor that accepts an input parameter, a formatted string
+* Car:В4747КК,4,6;Truck:В4747КК,4,6,3;Bus:В4747КК,4,6,59
+* Parse the string and for each type of vehicle create an object in the array
+* Text representation of the parking lot, use string concatenation or string buffer, depending on who performed better in the first task
