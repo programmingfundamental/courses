@@ -16,7 +16,7 @@ permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhneni
 
 Нека да разгледаме класа Box, който работи с обекти от всякакъв тип. Той съдържа два метода: set , който присвоява обект към полето, и get, който го извлича:
 
-```
+```java
 public class Box {
     private Object object;
 
