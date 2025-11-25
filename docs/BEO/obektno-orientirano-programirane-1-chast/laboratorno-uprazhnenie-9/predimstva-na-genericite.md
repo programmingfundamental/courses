@@ -15,7 +15,7 @@ nav_order: 5
 
 
 Пример
-```
+```java
 import java.util.*;
 class Test
 {
@@ -39,20 +39,21 @@ class Test
 ```
 
 
-Изход
+Изпълнение:
+```
 Exception in thread "main" java.lang.ClassCastException:
 
   java.lang.Integer cannot be cast to java.lang.String
 
    at Test.main(Test.java:19)
-
+```
 
 
 Когато дефинираме ArrayList, можем да посочим, че този списък може да приема само String обекти.
 
 
-Пример
-```
+Пример:
+```java
 import java.util.*;
 class Test
 {
@@ -76,16 +77,17 @@ class Test
 ```
 
 
-Изод
+Изпълнение:
+```
 15: error: no suitable method found for add(int)
 
        al.add(10);
-
+```
 
 
 **3. Не е необходимо индивидуално преобразуване на типове:** Ако не използваме генерици, тогава в горния пример всеки път, когато извличаме данни от ArrayList, трябва да ги преобразуваме. Преобразуването на типа при всяка операция по извличане е голямо главоболие. Ако вече знаем, че нашият списък съдържа само низови данни, не е необходимо да ги преобразуваме всеки път.
 
-```
+```java
 
                        class Test {
                       
@@ -112,7 +114,7 @@ class Test
 
 **4. Generics насърчава повторното използване на кода:** С помощта на генерици в Java можем да напишем код, който ще работи с различни типове данни. Например,
 
-```
+```java
 public <T> void genericsMethod (T данни) {...}
 ```
 
