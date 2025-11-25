@@ -11,7 +11,7 @@ nav_order: 2
 
 Генеричният клас се дефинира със следния формат:
 
-```
+```java
 class name<T1, T2, ..., Tn> { /* ... */ }
 ```
 
@@ -21,7 +21,7 @@ class name<T1, T2, ..., Tn> { /* ... */ }
 
 След тази промяна класът Box има следния вид:
 
-```
+```java
 public class Box<T> {
     // T stands for "Type"
     private T t;
@@ -36,13 +36,13 @@ public class Box<T> {
 
 За да създадем обекти от генеричен клас, използваме следния синтаксис.
 
-```
+```java
 BaseType <Type> obj = new BaseType <Type>();
 ```
 
 Пример за генеричния клас Box:
 
-```
+```java
 Box<Integer> integerBox = new Box<Integer>();
 ```
 
@@ -53,8 +53,8 @@ Box<Integer> integerBox = new Box<Integer>();
 Цялостен пример може да бъде разгледан и с помощта на класа Test, разписан по-долу.
 
 
-Пример
-```
+Пример:
+```java
 class Test<T> {
 	// An object of type T is declared
 	T obj;
@@ -78,18 +78,19 @@ class Main {
 ```
 
 
-Резултат
+Изпълнение:
+```java
 15
-
 TU-Varna
-
-
-
-В генеричните гласове можем да предадем повече от един параметър.
-
-
-Пр
 ```
+
+
+
+В генеричните класове можем да предадем повече от един параметър.
+
+
+Пример
+```java
  class Test<T, U>
 {
 	T obj1; // An object of type T
@@ -119,16 +120,14 @@ class Main
 		obj.print();
 	}
 }
-TU-Varna
-15
-
 ```
 
 
-Second Tab
+Изпълнение:
+```
 TU-Varna
-
 15
+````
 
 
 
