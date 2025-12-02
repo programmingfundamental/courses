@@ -7,13 +7,13 @@ nav_order: 9
 permalink: /docs/programirane-za-mobilni-i-internet-ustroistva-kotlin-аео/laboratorno-uprazhnenie-9
 ---
 
-# Лабораторно упражнение 9
+# Lab 9
 
 ## Lists and grids
 
-Много приложения трябва да показват колекции от елементи. Този документ обяснява как може ефективно да направи това в Jetpack Compose.
+Many applications need to display collections of items. This lab is dedicated to the way to do this efficiently in Jetpack Compose.
 
-Ако знаете, че вашият случай на употреба не изисква превъртане, може да използвайте Column или Row и излъчвайте съдържанието на всеки елемент чрез Итериране на списък по следния начин:
+If the use case that needs to be developed does not require scrolling, Column or Row could be used and emit the contents of each item by Iterating a List like this:
 
 ```koitlin
 @Composable
@@ -26,19 +26,19 @@ fun MessageList(messages: List<Message>) {
 }
 ```
 
-Можем да направим превъртане с помощта на модификатора verticalScroll()
+Scrolling is implemented via modifier verticalScroll()
 
-## Мързеливи списъци
+## Lazy lists
 
-Ако трябва да покажете голям брой елементи (или списък с неизвестна дължина), Използването на оформление Column може да причини проблеми с производителността, тъй като всички елементи ще бъдат съставени и подредени, независимо дали са видими или не.
+If there is a need to display large number of items (or a list of unknown length), using the Column layout can cause performance issues, as all items will be composed and arranged, whether they are visible or not.
 
-Compose предоставя набор от компоненти, които композират и подреждат само елементи, които се виждат в прозореца за изглед на компонента. Тези компоненти включват LazyColumn, LazyRow, LazyVerticalGrid, LazyHorizontalGrid
+Compose provides a set of components that compose and arrange only items that are visible in the component's viewport. These components include LazyColumn, LazyRow, LazyVerticalGrid, LazyHorizontalGrid
 
-Както подсказва името, разликата между тях е ориентацията, в която те подреждат своите елементи и превъртат.
+As the name suggests, the difference between them is the orientation in which they arrange their items and scroll.
 
-Компонентите на Lazy са различни от повечето оформления в Compose. Вместо приемане на параметър на блок с елементи на потребителския интерфейс, което позволява на приложенията директно да излъчват Composable елементи, компонентите на Lazy осигуряват LazyListScope блок. Този LazyListScope блок предлага DSL (специфичен за домейна език), който позволява на приложенията да описват съдържанието на елемента. След това мързеливият компонент е отговорен за добавянето на съдържанието на всеки елемент като се изисква от оформлението и позицията на превъртане.
+Lazy components are different from most layouts in Compose. Instead of taking a parameter to a block of UI elements, which allows applications to directly emit Composable elements, Lazy components provide a LazyListScope block. This LazyListScope block provides a DSL (domain-specific language) that allows applications to describe the contents of the element. The lazy component is then responsible for adding the contents of each item as required by the layout and scroll position.
 
-DSL на LazyListScope предоставя редица функции за описване на елементи в оформлението. В най-основния случай item() добавя един елемент, а items(Int) добавя множество елементи:
+The LazyListScope DSL provides a number of functions for describing items in the layout. In the most basic case, item() adds a single item, and items(Int) adds multiple items:
 
 ```kotlin
 LazyColumn {
@@ -59,7 +59,7 @@ LazyColumn {
 }
 ```
 
-Има и редица функции за разширение, които ви позволяват да добавяте колекции от елементи, като например списък. Тези разширения ни позволяват лесно да мигрираме нашия пример за колона отгоре:
+There are also a number of extension functions that allow addition to collections of items, such as a list. These extensions make possible to easily migrate the column example above.:
 
 ```kotlin
 LazyColumn {
@@ -69,15 +69,15 @@ LazyColumn {
 }
 ```
 
-Съществува и вариант на функцията за разширение items(), наречена itemsIndexed(), която предоставя индекса.
+There is also a variant of the items() extension function called itemsIndexed() that provides the index.
 
 ## Lazy grids
 
-Компонентите LazyVerticalGrid и LazyHorizontalGrid осигуряват поддръжка за показване на елементи в мрежа. Мързелива вертикална решетка ще показва елементите си във вертикално превъртащ се контейнер, разпръснат в множество колони, докато мързеливите хоризонтални решетки ще имат същото поведение на хоризонталната ос.
+The LazyVerticalGrid and LazyHorizontalGrid components provide support for displaying elements in a grid. A lazy vertical grid will display its elements in a vertically scrolling container spread across multiple columns, while lazy horizontal grids will have the same behavior on the horizontal axis.
 
-Мрежите имат същите мощни API възможности като списъците и също така използват много подобен DSL - LazyGridScope.() за описание на съдържанието.
+Grids have the same powerful API capabilities as lists and also use a very similar DSL - LazyGridScope.() to describe the content.
 
-Параметърът колони в LazyVerticalGrid и параметърът редове в LazyHorizontalGrid контролират как клетките се формират в колони или редове. Следният пример показва елементи в мрежа, като използва GridCells.Adaptive, за да настрои всяка колона да бъде поне 128.dp широка:
+The columns parameter in LazyVerticalGrid and the rows parameter in LazyHorizontalGrid control how the cells are formed into columns or rows. The following example displays elements in a grid, using GridCells.Adaptive to set each column to be at least 128.dp wide:
 
 ```kotlin
 LazyVerticalGrid(
@@ -89,11 +89,11 @@ LazyVerticalGrid(
 }
 ```
 
-LazyVerticalGrid ви позволява да зададете ширина за елементите и след това мрежата ще се побере във възможно най-много колони. Всяка оставаща ширина се разпределя по равно между колоните, след като се изчисли броят на колоните. Този адаптивен начин за оразмеряване е особено полезен за показване на набори от елементи на различни размери на екрана.
+LazyVerticalGrid make possible to specify a width for the elements, and then the grid will fit into as many columns as possible. Any remaining width is divided equally between the columns after the number of columns is calculated. This adaptive way of sizing is particularly useful for displaying sets of elements on different screen sizes.
 
-Ако знаете точния брой колони, които да се използват, можете вместо това да предоставите екземпляр на GridCells.Fixed, съдържащ броя на необходимите колони.
+If the exact number of columns to be used is known in advance, an instance of GridCells.Fixed could be used containing the number of columns needed.
 
-Ако вашият дизайн изисква само определени елементи да имат нестандартни размери, можете да използвате поддръжката на мрежата за предоставяне на персонализирани обхвати на колони за елементи. Посочете обхвата на колоната с параметъра за обхват на методите за елемент и елементи на LazyGridScope DSL. maxLineSpan, една от стойностите на обхвата на обхвата, е особено полезна, когато използвате адаптивно оразмеряване, тъй като броят на колоните не е фиксиран. Този пример показва как да предоставите пълен диапазон от редове:
+If the design requires only certain elements to have non-standard sizes, grid support can be used to provide custom column ranges for elements. Specifying the column range is done with the help of range parameter of the element and elements methods of the LazyGridScope DSL. maxLineSpan, one of the range values, is particularly useful when using adaptive sizing, since the number of columns is not fixed. This example shows how to provide a full range of rows:
 
 ```kotlin
 LazyVerticalGrid(
@@ -109,4 +109,32 @@ LazyVerticalGrid(
     // ...
 }
 ```
+
+
+# Task
+
+
+Create an application that outputs an image and text using different List and Grid
+
+1. Create string resources that will be used for text to the image 
+
+2. Add the images from lab9_images.zip to your project – res/drawable
+
+3. Create a Place class with attributes:
+- @StringRes val stringResourceId: Int,
+- @DrawableRes val drawableResourceId: Int
+
+4. Create a class and method that returns a list of Places.
+
+5. Create a function @Composable fun PlaceApp()
+
+6. Create a function @Composable fun PlaceCard(place: Place, modifier: Modifier = Modifier), which outputs an image (Image) and text (Text) to a Card
+
+7. Create a function @Composable fun PlaceColumn(places: List<Place>, modifier: Modifier = Modifier), which calls PlaceCard() in a LazyColumn on a green background.
+
+8. Create a function fun PlaceRow(places: List<Place>, modifier: Modifier = Modifier) ​​that calls PlaceCard() in a LazyRow on a blue background
+
+9. Create a function @Composable fun PlaceVerticalGrid(places: List<Place>, modifier: Modifier = Modifier) ​​that calls PlaceCard() in a LazyVerticalGrid on a purple background
+
+10. Create a function @Composable fun PlaceHorizontalGrid(places: List<Place>, modifier: Modifier = Modifier) ​​that calls PlaceCard() in a LazyHorizontalGrid on a purple background
 
