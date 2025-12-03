@@ -1,160 +1,157 @@
-<!-- ---
-layout: default
-title: Лабораторно упражнение 10
-parent: Обектно-ориентирано програмиране - 1 част
-has_children: true
-nav_order: 10
-permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-10
 ---
-# Лабораторно упражнение 10
+layout: default
+title: Laboratory exercise 7
+parent: Object-oriented Programming - 1 part
+has_children: true
+nav_order: 7
+permalink: /docs/object-oriented-programming-1-part/laboratory-exercise-7
+---
 
-## Колекции - част 1
+# Laboratory exercise 7
 
-### Структури от данни
+## Collections - part 1
 
-* Основни структури от данни:
-  * Масиви
-  * Свързани списъци
-  * Хеш таблици
-  * Дървета
+### Data structures
 
-* Основни операции за работа със структури:
-  * добавяне
-  * триене
-  * търсене
-  * обхождане
+* Main data structures:
+  * arrays
+  * linked lists
+  * hash tables
+  * trees
 
-Структурите от данни намират своята реализация в Java като Arrays, List, Set и Map.
+* Basic operations for working with structures:
+  * addition
+  * removal/erasure
+  * search
+  * iteration/crawling
 
-### Колекции
+Data structures are implemented in Java as Arrays, List, Set and Map.
 
-Колекциите в Java са част от Java Collections Framework (JCF), който представлява набор от интерфейси и класове, улесняващи работата с групи обекти.
+### Collections
+
+Collections in Java are part of the Java Collections Framework (JCF), which is a set of interfaces and classes that make it easier to work with groups of objects.
+
+The framework provides data structures and common operations on them such as adding, removing, searching, traversing, and sorting.
+
+Collections are:
+- dynamic
+- flexible
+- feature-rich
+- object-oriented (only work with objects)
 
 
-Фреймуъркът предоставя структури от данни и общи операции върху тях като добавяне, премахване, търсене, обхождане и сортиране.
 
+### Arrays vs collections
 
-Колекциите са:
--	динамични
--	гъвкави
--	с множество функционалности
--	обектно-ориентирани (работят само с обекти)
-
-
-
-### Масиви vs колекции
-
-| характеристика              | масиви                                    | колекции                       |
+| feature              		  | arrays                                    | collections                    |
 | --------------------------- | ----------------------------------------- | ------------------------------ |
-| размер                      | фиксиран								  | динамичен					   |
-| тип данни                   | примитиви и обекти                        | обекти                         |
-| дублиране на елементи       | позволява                                 | зависи от типа колекция        |
-| операции                    | ограничен набор, достъп по индекс         | широк набор                    |
-| структура                   | едномерни/многомерни                      | List, Set, Map                 |
-| гъвкавост                   | ниска                                     | висока                         |
+| size                        | fixed								      | dynamic					       |
+| data type                   | primitives and objects                    | objects                        |
+| duplication    	          | allows                                    | depends on collection type     |
+| operations                  | limited set, access by index              | vast set                       |
+| structure                   | one-dimensional/multidimensional          | List, Set, Map                 |
+| flexibility                 | low                                       | high                           |
 
 
-Масивите са подходящи за използване в ситуации, когато размерът е предварително известен или се изисква бърз достъп по индекс.
+Arrays are suitable for use in situations where the size is known in advance or fast access by index is required.
 
 
-От своя страна, колекциите са подходящи за използване когато размерът не е предварително известен, налага се извършване на множество добавяния или премахвания на елементи, както и се работи със сложни структури от данни.
+Collections, on the other hand, are suitable for use when the size is not known in advance, multiple additions or removals of elements are required, and complex data structures are being worked with.
 
 
-### List и Set
+### List and Set
 
 ![](<https://miro.medium.com/v2/resize:fit:2000/format:webp/1*3ETouv3NvjVqSGIOk0HEBw.png>)
 
-И двата интерфейса наследяват интерфейса Collection, който предоставя следните общи методи:
-
+Both interfaces inherit from the Collection interface, which provides the following common methods:
 ```
-//връща броя на елементите в колекцията
+//returns the number of elements in the collection
 int size()
-//проверява и връща дали е празна колекцията
+//checks and returns whether the collection is empty
 boolean isEmpty()
-//проверява и връща дали колекцията съдържа предавания като параметър елемент
+//checks and returns whether the collection contains broadcasts as a parameter element
 boolean contains(Object element)
-//добавя елемент в колекция (връща истина при успешно добавяне)
+//adds an item to a collection (returns true on successful addition)
 boolean add(E element)
-//премахва елемент от колекция (връща истина при успешно изтриване)
+//removes an item from a collection (returns true on successful deletion)
 boolean remove(Object element)
-//извлича и връща итератора на колекцията
+//retrieves and returns the collection iterator
 Iterator<E> iterator()
-//проверява и връща дали всички елементи се съдържат в колекцията
+//checks and returns whether all elements are contained in the collection
 boolean containsAll(Collection<?> c)
-//добавя всички обекти от списъка към колекцията
+//adds all objects from the list to the collection
 boolean addAll(Collection<? extends E> c)
-//премахва всички обекти от списъка към колекцията
+//removes all objects from the list to the collection
 boolean removeAll(Collection<?> c)
-//премахва всички елементи от колекцията, които не присъстват в подавания списък от елементи
+//removes all items from the collection that are not present in the supplied list of items
 boolean retainAll(Collection<?> c)
-//почиства паметта, към която сочи колекцията
+//cleans up the memory pointed to by the collection
 void clear()
-//преобразува колекцията в масив от класа Ojbect
+//converts the collection to an array of the Object class
 Object[] toArray() 
-//преобразува колекцията в масив от програмно дефиниран клас
+//converts the collection to an array of a programmatically defined class T
 <T> T[] toArray(T[] a) 
 ```
 
 
 **List**
 
-Колекция от тип List:
--	позволява дублиране на елементи;
--	елементите са подредени според реда на добавяне (метода add добавя предавания като параметър елемент винаги в края на списъка)
--	поддържа индекси и съответно достъп до елемент може да се осъществи по индекс както при масивите
--	подходяща за използване при решаване на проблеми, изискващи списъци, последователности или работни опашки.
+A List type collection:
+- allows duplication of elements;
+- elements are ordered by the order of addition (the add method always adds items as an element parameter at the end of the list)
+- supports indexes and, accordingly, an element can be accessed by index as in arrays
+- suitable for use in solving problems requiring lists, sequences or work queues.
+
+Some of the typical implementations of the List interface are:
+- ArrayList – provides fast access, slow operations in the middle
+- LinkedList – fast addition and/or removal of elements, slower access to them
+- Vector – obsolete implementation, synchronized list
 
   
-Някои от типичните имплементации на интерфейса List са:
--	ArrayList – предоставя бърз достъп, бавни операции в средата
--	LinkedList – бързо добавяне и/или премахване на елементи, по-бавен достъп до тях
--	Vector – остаряла имплементация, синхронизиран списък
-
 **Set**
 
-Колекция от тип Set:
--	не позволява дублиране на елементи
--	подредбата на елементите не е гарантирана, тъй като зависи от конкретната имплементация
--	не поддържа индекси 
--	подходяща при необходимост от работа с уникални елементи, филтриране или при търсене.
+A Set type collection:
+- does not allow duplicate elements
+- the ordering of the elements is not guaranteed, as it depends on the specific implementation
+- does not support indexes
+- suitable when working with unique elements, filtering or searching is needed.
 
-  
-Често използвани имплементации на Set са:
--	HashSet – най-бърз, няма подредба на елементите
--	LinkedHashSet – запазва реда на добавяне
--	TreeSet – поддържа автоматично сортиран ред.
+Commonly used implementations of Set are:
+- HashSet – fastest, no ordering of the elements
+- LinkedHashSet – preserves the order of addition
+- TreeSet – supports automatically sorted order.
 
 
-### Итератори
+### Iterators
 
-* Итераторите предоставят унифициран начин за обхождане на елементите на дадена колекция.
-* Колекциите (както и масивите) могат да се обхождат с foreach цикъл.
-* В java са дефинирани интерфейси, поведението на които се имплементира от всички колекции.
+* Iterators provide unified way to iterate over the elements of a collection.
+* Collections (as well as arrays) can be iterated over with a foreach loop.
+* Java defines interfaces whose behavior is implemented by all collections.
 
 ```
-//Интерфейси Iterable
+//Interfaces Iterable
 public interface Iterator<E> {
     boolean hasNext();
     E next();
     void remove();
 }
-//Интерфейси Iterable
+//Interfaces Iterable
 public interface Iterable<T> {
     Iterator<T> iterator();
 }
 ```
 
-* Методът next() връща следващия елемент в колекцията;
-* Методът remove() премахва от колекцията елемента, последно върнат от next();
-* Ако колекцията бъде модифицирана докато бъде итерирана, по какъвто и да е начин, различен от извикване на remove() на итератора, поведението на итератора е недефинирано и води до грешка (ConcurrentModificationException).
+* The next() method returns the next element in the collection;
+* The remove() method removes from the collection the element last returned by next();
+* If the collection is modified while it is being iterated, in any way other than by calling remove() on the iterator, the iterator's behavior is undefined and results in an error (ConcurrentModificationException).
 
-### Comparable и Comparator
+### Comparable and Comparator
 
-Това са два интерфейса, определящи реда на елементите в дадена колекция и се използват за сортиране.
+These are two interfaces that define the order of elements in a collection and are used for sorting.
 
-Използването на интерфейс Comparable дава възможност за дефиниране на естествен ред в контекста на конкретен обект, т.е. по какъв критерий ще бъдат подредени елементите при сортиране на колекция, съдържаща такива обекти.
+Using the Comparable interface make possible definition of natural order in the context of a specific object, i.e. by what criterion the elements will be sorted when sorting a collection containing such objects.
 
-Ако се налага използването на колекции от тип TreeSet или ще се използва Collections.sort(), базовия за конкретната колекция клас задължително трябва да имплементира интерфейса Comparable. Интерфейсният метод връща положителна стойност, отрицателна стойност или нула, което подсигурява подредба в естествен ред (възходящ).
+If there is a need to use TreeSet collections or Collections.sort(), the base class for the specific collection must implement the Comparable interface. The interface method returns a positive value, a negative value, or zero, which ensures sorting in a natural order (ascending).
 
 ```
 public class Book implements Comparable<Object> {
@@ -176,10 +173,10 @@ public class Book implements Comparable<Object> {
 ```
 
 
-Интерфейсът Comparator се използва за прилагане на външни правила за сравнение.
-За разлика от Comparable, интерфейсният метод compare(T o1, T o2) приема два обекта от един и същи тип и ги сравнява по зададения критерий.
-Използването на Comparator осигурява възможности за сортиране по различни критерии без да се налага промяна в базовия за колекцията клас.
-Примерът по-долу показва различни начини за сортиране на колекция от книги.
+The Comparator interface is used to implement external comparison rules.
+Unlike Comparable, the interface method compare(T o1, T o2) takes two objects of the same type and compares them according to the specified criterion.
+Using Comparator provides the ability to sort by different criteria without having to change the base class for the collection.
+The example below shows different ways to sort a collection of books.
 
 
 ```
@@ -206,7 +203,7 @@ public class Library {
     private List<Book> books = new ArrayList<>();
 
     public void sortByPublishingYear() {
-        Collections.sort(books); // използва критерия, зададен в метода compareTo
+        Collections.sort(books); // sorting by criteria defined in method compareTo
     }
 
     public void sortByAuthor() {
@@ -228,56 +225,62 @@ public class Library {
 }
 ```
 
-*Важно*: могат да бъдат сортирани само колекции от тип List.
+*Important*: Only List type collections can be sorted.
 
 
 ### Queue
 
-Queue (опашка) е структура от данни в Java Collections Framework, която следва принципа FIFO (First In, First Out).
+A Queue is a data structure in the Java Collections Framework that follows the FIFO (First In, First Out) principle.
 
-Елементите се добавят в края и се премахват от началото – точно както в опашка от хора.
+Elements are added at the end and removed from the beginning – just like in a queue of people.
+
+A Queue is used when:
+
+- tasks need to be processed in the order in which they arrived
+
+- a buffer implementation is required
+
+- an implementation of algorithms such as BFS (Breadth First Search)
+
+- a system with a queue is being modeled.
+
+The Queue interface inherits the Collection interface, but adds specialized methods: methods that throw exceptions on error and methods that return a special value (false, null).
 
 
-Queue се използва, когато:
+- Add
 
-- задачи трябва да се обработят в реда, в който са пристигнали
-- изисква се реализация на буфер
-- имплементация на алгоритми като BFS (Breadth First Search)
-- моделира се система с чакаща заявки.
+-- add(e) — throws an exception if the space is full
 
-
-Интерфейсът Queue наследява интерфейса Collection, но добавя специализирани методи: методи, които хвърлят изключения при грешка и методи, които връщат специална стойност (false, null).
-
-
-- Добавяне
-
-  -- add(e) — хвърля изключение, ако мястото е пълно
-  
-  -- offer(e) — връща false, ако елементът не може да бъде добавен в опашката
-
-  
-- Премахване
-  
-  -- remove() — хвърля изключение при празна опашка
-  
-  -- poll() — връща null при празна опашка
-
-  
-- Преглеждане на първия елемент (без премахване)
-  
-  -- element() — хвърля изключение ако няма такъв
-  
-  -- peek() — връща null при празна опашка
+-- offer(e) — returns false if the element cannot be added to the queue
 
 
 
-Най-често използваните имплементации на интерфейса Queue са:
-- LinkedList - най-често използвана имплементация на Queue; предоставя бързо добавяне/премахване от двата края; може да действа като Queue, Stack или Deque
-- PriorityQueue - не гарантира FIFO; сортира елементите според естествения им ред или чрез Comparator; използва се за алгоритми като Dijkstra
-- ArrayDeque - много бърза имплементация на Queue и Deque; по-добра от Stack и LinkedList в повечето случаи; няма капацитетни ограничения.
+- Remove
 
-Използването на интерфейс Queue е подходящо в следните случаи:
-- при задачи, които чакат обработка (producer-consumer)
-- при обработка на събития
+-- remove() — throws an exception if the queue is empty
+
+-- poll() — returns null if the queue is empty
+
+
+
+- View the first element (without removing)
+
+-- element() — throws an exception if there is none
+
+-- peek() — returns null if the queue is empty
+
+
+
+The most commonly used implementations of the Queue interface are:
+
+- LinkedList — the most commonly used implementation of Queue; provides fast addition/removal from both ends; can act as a Queue, Stack, or Deque
+
+- PriorityQueue — does not guarantee FIFO; sorts elements according to their natural order or by Comparator; used for algorithms like Dijkstra
+
+- ArrayDeque — very fast implementation of Queue and Deque; better than Stack and LinkedList in most cases; no capacity limitations.
+
+Using the Queue interface is appropriate in the following cases:
+- for tasks that are waiting to be processed (producer-consumer)
+- for event processing
 - при навигация на графи (BFS)
 - при управление на принтери, процеси, заявки, мрежови пакети -->
