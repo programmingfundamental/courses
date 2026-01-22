@@ -1,34 +1,37 @@
+---
+layout: default
+title: Въведение в JavaFX
+parent: Лабораторно упражнение 1
+grand-parent: Програмни системи
+nav_order: 2
+permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/instalirane-na-sreda/instalirane-na-jdk
+---
+
+
 # Инсталиране на JDK
 
 Преди да започнете да пишете програми на Java, е нужно да инсталирате JDK. Може да го изтеглите от:
 
-https://tuvarnabg-my.sharepoint.com/:u:/g/personal/vkolesnichenko_tu-varna_bg/ET92nCILMK9MpO_krBzE8RkBYg90A97t1NTBC-aor3a26A?e=e6PcXa
+[https://www.oracle.com/java/technologies/downloads/](https://www.oracle.com/java/technologies/downloads/)
 
-или [https://www.oracle.com/java/technologies/downloads/](https://www.oracle.com/java/technologies/downloads/)
-
-Стартирате инсталатора и следвате стъпките, препоръчително е да направите инсталацията в директориите по подразбиране.
-
-След като приключите с инсталацията е необходими да, настройте променливите на средата
+Стартирате инсталатора и следвате стъпките, препоръчително е да направите инсталацията в директориите по подразбиране. След като приключите с инсталацията е необходимo да настроите променливите на средата.
 
 Променливи на средата могат да бъдат зададени конзолно или като се следва следния път в графичния интерфейс на Windows:
 
-Този компютър /десен бутон/ -> Свойства -> Допълнителни системни настройки -> Променливи на средата
+Моят компютър /десен бутон/ -> Свойства -> Допълнителни системни настройки -> Променливи на средата
 
-Или в windows search търсите: Edit the system environment variables
+Или в windows search търсите: Edit the system environment variables     
 
-![](<../../../../assets/2 (1).png>) ![](../../../../assets/3.png)
+<img width="346" height="372" alt="Screenshot 2026-01-22 140654" src="https://github.com/user-attachments/assets/6a9b1ecf-7ea8-497b-a0a5-2747515dcb5e" /><br>     
 
-Променливата Path се редактира и към нея се добавя пътят до папка bin в инсталационната папка на JDK
+      
+Натиска се върху Environment variables ->     
+ - Променливата Path се редактира и към нея се добавя пътят до папка bin в инсталационната папка на JDK.
+ - Добавя се нова системна променлива JAVA\_HOME, указваща пътя до инсталационната папка на JDK
 
-![](<../../../../assets/4 (1).png>)
+<img width="746" height="217" alt="Screenshot 2026-01-22 141833" src="https://github.com/user-attachments/assets/d5b11211-c9f1-4dfc-8b4f-1f059405d9a5" /><br>
 
-Добавя се нова системна променлива JAVA\_HOME, указваща пътя до инсталационната папка на JDK
 
-![](<../../../../assets/5 (1).png>)
-
-Пътят до съответните папки може лесно да бъде копиран в Windows Explorer (десен бутон върху пътя на съответната папка)
-
-![](../../../../assets/6.png)
-
+Пътят до съответните папки може лесно да бъде копиран в File Explorer (десен бутон върху пътя на съответната папка).   
 За проверка дали Java е инсталирана успешно, рестартирайте и стартирайте Command prompt и впишете в командния ред командата java -version.
 
