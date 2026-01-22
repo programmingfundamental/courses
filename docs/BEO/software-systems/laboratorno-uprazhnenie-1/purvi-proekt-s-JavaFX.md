@@ -1,4 +1,3 @@
-
 ---
 layout: default
 title: Въведение в JavaFX
@@ -29,7 +28,6 @@ permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/purvi-proekt-s-J
  - Идентификатор на проекта/артефакт (artifactId) - уникалното базово име на основния артефакт, генериран от този проект. Основният артефакт за проект обикновено е JAR файл. Останалите артефакти в проекта използват името на основния артефакт, за да образуват своите.
 
 <br>
-<img width="572" height="363" alt="Screenshot 2026-01-22 181539" src="https://github.com/user-attachments/assets/d7e87539-de3e-4291-8a86-d65453f1dfef" />
-
+<img width="564" height="351" alt="Screenshot 2026-01-22 182907" src="https://github.com/user-attachments/assets/243d851b-dd81-4a02-867a-7cf7e7ae3a79" />
 
 
