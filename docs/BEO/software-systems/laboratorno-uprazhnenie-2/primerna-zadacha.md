@@ -6,21 +6,21 @@ grand_parent: Програмни системи
 nav_order: 1
 ---
 
-# Примерна задача: Създаване на "Dashboard" изглед с FXML и различни Контейнери за изглед\*\*
+# Примерна задача: Създаване на "Dashboard" изглед с FXML и различни Контейнери за изглед
 
 Ще създадем прост "Dashboard" изглед, който демонстрира как различни Контейнери за изглед могат да се комбинират за изграждане на сложен интерфейс. Всяка секция на дашборда ще използва различен Контейнер за изглед.
 
 ### 1. Създайте нов JavaFX проект в IntelliJ IDEA
 
-### 2. Променете файловете на вашия проект
+### 2. Създайте нов пакет и класове
 
-Първо, преименувайте `hello-view.fxml` на `dashboard-view.fxml` и `HelloApplication` на `DashboardApplication`.
+Създайте новия пакет `bg.tu_varna.sit.ps.sample_task`. В него създайте класовете `DashboardApplication`, `Dashboard` и `Launcher`.
 
-- **`src/main/java/bg/tu_varna/sit/ps/lab2/DashboardApplication.java`** (Основен клас):
+- **`src/main/java/bg/tu_varna/sit/ps/sample_task/DashboardApplication.java`** (Основен клас):
   Този клас ще стартира приложението и ще зареди нашия FXML файл.
 
   ```java
-  package bg.tu_varna.sit.ps.lab2;
+  package bg.tu_varna.sit.ps.sample_task;`
 
   import javafx.application.Application;
   import javafx.fxml.FXMLLoader;
@@ -33,8 +33,12 @@ nav_order: 1
       @Override
       public void start(Stage stage) throws IOException {
           // Зареждаме нашия FXML файл
-          FXMLLoader fxmlLoader = new FXMLLoader(DashboardApplication.class.getResource("dashboard-view.fxml")); // Създаваме графична сцена с корена от FXML
-          Scene scene = new Scene(fxmlLoader.load(), 800, 600); // 800x600 е размерът по подразбиране
+          FXMLLoader fxmlLoader = new FXMLLoader(DashboardApplication.class.getResource("dashboard-view.fxml"));
+
+          Parent root = fxmlLoader.load();
+          new Dashboard(root);
+
+          Scene scene = new Scene(root, 800, 600);
           stage.setTitle("Dashboard Application"); // Заглавие на прозореца
           stage.setScene(scene); // Задаваме графичната сцена на прозореца
           stage.show(); // Показваме прозореца
@@ -42,7 +46,53 @@ nav_order: 1
   }
   ```
 
-- **`src/main/resources/bg/tu_varna/sit/ps/lab2/dashboard-view.fxml`** (FXML файл):
+- **`src/main/java/bg/tu_varna/sit/ps/sample_task/Dashboard.java`**
+  Този клас ще служи добавяне на интерактивност за нашия FXML файл. В момента няма да добавяме логика, но той е необходим за свързване на FXML с Java кода.
+
+  ```java
+  package bg.tu_varna.sit.ps.sample_task;
+
+  import javafx.scene.Parent;
+  import javafx.scene.control.Label;
+
+  public class Dashboard {
+      private final Label headerLabel;
+      private final Label navigationLabel;
+
+      public Dashboard(Parent root) {
+          headerLabel = (Label) root.lookup("#headerLabel");
+          navigationLabel = (Label) root.lookup("#navigationLabel");
+
+          init();
+      }
+
+      private void init() {
+          headerLabel.setText("Dashboard");
+          navigationLabel.setText("Home > Dashboard");
+      }
+  }
+  ```
+
+- **`src/main/java/bg/tu_varna/sit/ps/sample_task/Launcher.java`** (Клас за стартиране):
+  Този клас съдържа основния метод за стартиране на приложението.
+
+  ```java
+  package bg.tu_varna.sit.ps.sample_task;
+
+  import javafx.application.Application;
+
+  public class Launcher {
+      public static void main(String[] args) {
+          Application.launch(DashboardApplication.class, args);
+      }
+  }
+  ```
+
+### 3. Създайте FXML файл за изгледа на дашборда
+
+Създайте нова директория `resources/bg/tu_varna/sit/ps/sample_task/` и в нея създайте FXML файл с името `dashboard-view.fxml`.
+
+- **`src/main/resources/bg/tu_varna/sit/ps/sample_task/dashboard-view.fxml`** (FXML файл):
   Това е мястото, където ще дефинираме нашия потребителски интерфейс, използвайки комбинация от Контейнери за изглед.
 
   ```xml
@@ -56,7 +106,7 @@ nav_order: 1
               prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
       <top>
           <HBox alignment="CENTER" prefHeight="50.0" BorderPane.alignment="CENTER">
-              <Label text="Dashboard Header">
+              <Label text="Dashboard Header" fx:id="headerLabel">
                   <font>
                       <Font name="System Bold" size="24.0"/>
                   </font>
@@ -66,7 +116,7 @@ nav_order: 1
       <left>
           <VBox prefWidth="150.0" spacing="10.0" style="-fx-background-color: #E0E0E0; -fx-padding: 10;"
                 BorderPane.alignment="CENTER">
-              <Label text="Navigation"/>
+              <Label text="Navigation" fx:id="navigationLabel"/>
               <Button maxWidth="1.7976931348623157E308" text="Section 1"/>
               <Button maxWidth="1.7976931348623157E308" text="Section 2"/>
               <Button maxWidth="1.7976931348623157E308" text="Section 3"/>
@@ -118,7 +168,7 @@ nav_order: 1
 - **`StackPane` (Наслагващ контейнер):** Използван в `center`. В момента има само един `VBox` в него, но ако добавим още елементи, те ще се наслагват един върху друг в центъра.
 - **`FlowPane` (Поточен контейнер):** Използван в `right` региона за "Quick Links". С `orientation="VERTICAL"`, бутоните се подреждат вертикално и "преливат" на нов ред, ако няма достатъчно място. `hgap` и `vgap` задават разстояния между елементите.
 
-### 3. Добавяне на `GridPane` и `AnchorPane` към центъра на `StackPane`
+### 4. Добавяне на `GridPane` и `AnchorPane` към центъра на `StackPane`
 
 За да демонстрираме и другите Контейнери за изглед, ще променим съдържанието на `StackPane` в централния регион. Представете си, че искаме да покажем две различни секции: една с форма (GridPane) и една с информация (AnchorPane), които биха могли да се сменят. За целите на това упражнение ще ги направим видими едновременно, но ще са в `StackPane`.
 
@@ -184,6 +234,6 @@ nav_order: 1
   - `Label` е закачен горе вляво, `TextArea` е закачен от всички страни (с отстояние), а `Button` е закачен долу вдясно.
 - **`visible="false"`:** В примера е зададено `visible="false"` на `GridPane` и `AnchorPane`, така че само приветствието да се вижда първоначално. За да ги видите, променете `visible="true"` за съответната контрола. В реално приложение, това би било управлявано от Java код въз основа на избор от навигацията.
 
-### 4. Стартиране на приложението
+### 5. Стартиране на приложението
 
 Стартирайте `Launcher.java` (десен бутон -> `Run 'Launcher.main()'`). Трябва да видите прозореца на приложението с всички дефинирани Контейнери за изглед. Експериментирайте с размера на прозореца, за да видите как Контейнерите за изглед реагират на промяната.
