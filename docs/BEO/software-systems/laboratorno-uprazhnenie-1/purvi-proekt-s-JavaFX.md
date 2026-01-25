@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Въведение в JavaFX
+title: Първи проект с JavaFx
 parent: Лабораторно упражнение 1
 grand-parent: Програмни системи
 nav_order: 2
@@ -24,10 +24,109 @@ permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/purvi-proekt-s-J
  - Идентификатор на проекта/артефакт (Artifact) - уникалното базово име на основния артефакт, генериран от този проект. Основният артефакт за проект обикновено е JAR файл. Останалите артефакти в проекта използват името на основния артефакт, за да образуват своите.
 
 След като са избрани нужните опции, се натиска бутона Next като не се променя нищо в следващия прозорец и се натиска бутона Create. Изчаква се проектът да зареди. 
+
+## Конфигурация 
  
 Тъй като проектите, създадени чрез JavaFX генератора, по подразбиране използват модулна структура, в проекта се създава файл module-info.java, съдържащ описанието на използваните JavaFX модули. В следващите няколко стъпки ще се промени структурата от модулна към монолитна с цел улесняване на процеса на обучение и фокусиране върху основните концепции на езика и технологията.
 
-1.Изтриване на файла module-info.java - Десен бутон върху файла -> Delete
-2.Промяна на конфигурацията в pom.xml
+
+ - Изтриване на файла module-info.java - Десен бутон върху файла -> Delete    
+
+ - Промяна на конфигурацията в pom.xml
+
+След като е изтрит файла module-info.java, проектът вече няма да използва модулна система. За да се стартира JavaFX приложението правилно в монолитна структура, е необходимо да се направят няколко промени в `pom.xml`.
+
+### **1. Отваряне на pom.xml - Намира се в основната директория на проекта.**
+
+<img width="728" height="527" alt="Screenshot 2026-01-25 235807" src="https://github.com/user-attachments/assets/0acfc5ff-3a11-47be-8bb8-00d0e42a3312" />
+
+ - Намират се таговете `<build>` → `<plugins>` → `<plugin>` за javafx-maven-plugin.
+
+Текуща конфигурация: 
+
+```xml
+<plugin>
+    <groupId>org.openjfx</groupId>
+    <artifactId>javafx-maven-plugin</artifactId>
+    <version>0.0.8</version>
+    <executions>
+        <execution>
+            <id>default-cli</id>
+            <configuration>
+                <mainClass>bg.tu_varna.sit.ps.demo1/bg.tu_varna.sit.ps.demo1.HelloApplication</mainClass>
+                <launcher>app</launcher>
+                <jlinkZipName>app</jlinkZipName>
+                <jlinkImageName>app</jlinkImageName>
+                <noManPages>true</noManPages>
+                <stripDebug>true</stripDebug>
+                <noHeaderFiles>true</noHeaderFiles>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+```
 
 
+### **2. Редакция на таговете:**
+
+ Текущата структура има двойно посочване на пакети (bg.tu_varna.sit.ps.demo1/bg.tu_varna.sit.ps.demo1.HelloApplication), което е специфично за модулни проекти.
+
+**2.1. Променя се `<mainClass>` като се посочва пълното име на класа с пакета:**      
+
+ `<mainClass>bg.tu_varna.sit.ps.myfirstjavafxproject.HelloApplication</mainClass>`
+
+
+**2.2. Коментират се или се изтриват ненужните тагове:**
+
+Таговете `<launcher>`, `<jlinkZipName>`, `<jlinkImageName>`, `<noManPages>`, `<stripDebug>`, `<noHeaderFiles>` са специфични за модулен проект и jlink.
+
+За монолитен проект не са нужни и могат да бъдат закоментирани (обгражда се съдържанието с <!-- и -->): 
+
+```xml
+<!--
+<launcher>app</launcher>
+<jlinkZipName>app</jlinkZipName>
+<jlinkImageName>app</jlinkImageName>
+<noManPages>true</noManPages>
+<stripDebug>true</stripDebug>
+<noHeaderFiles>true</noHeaderFiles>
+-->
+```
+
+**2.3. Добавяне на таг `<options>`**
+
+Целта е да се добавят JVM аргументи, с които ще се даде достъп на проекта до пакети на Java, които иначе са блокирани от модулната система.  
+
+```xml
+<options>
+    <option>--add-opens</option>
+    <option>java.base/java.lang=ALL-UNNAMED</option>
+</options>
+```
+
+Това казва на JVM да „отвори“ пакета `java.lang` за всички класове в монолитния проект, което гарантира, че приложението ще стартира правилно без `module-info.java`.
+
+
+### 3. Създаване на пакет и основни класове
+
+След като проектът вече е монолитен и pom.xml е конфигуриран, следва да се създаде структурата за Java код и основните класове за стартиране на JavaFX приложението.
+
+**3.1. Създаване на пакет**
+ - В панела Project, навигирайте до src/main/java.
+ - Десен бутон → New → Package.
+ - Въвежда се името на пакета:
+
+ `bg.tu_varna.sit.ps.lab1`
+
+ **3.2. Създаване на основен клас HelloApplication**
+ - Десен бутон върху пакета lab1 → New → Java Class.
+ - Име на класа: HelloApplication.
+
+ Идеята на този клас е да съдържа кода за JavaFX интерфейса. Методът start(Stage stage) в него да създава прозореца и контролите.
+
+**3.3. По същия начин се създава и клас Launcher**
+
+Този клас ще служи за безопасно стартиране на JavaFX приложението. Тук се поставя main(), който ще стартира HelloApplication.
+
+
+ 
