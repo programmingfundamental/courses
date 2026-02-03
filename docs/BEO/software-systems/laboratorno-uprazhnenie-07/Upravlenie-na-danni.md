@@ -38,7 +38,7 @@ H2 може да работи във файл, което означава, че
 <dependency>
     <groupId>com.h2database</groupId>
     <artifactId>h2</artifactId>
-    <version>2.2.224</version>
+    <version>2.4.240</version>
 </dependency>
 ```
 
