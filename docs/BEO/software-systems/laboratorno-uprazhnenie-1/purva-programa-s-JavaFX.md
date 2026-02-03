@@ -30,7 +30,6 @@ public class HelloApplication extends Application {
         // Тук ще се изгради графичният интерфейс
     }
 }
-
 ```
 
 ## 2. Създаване на графичните компоненти
