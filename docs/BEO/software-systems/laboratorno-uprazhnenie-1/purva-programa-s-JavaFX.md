@@ -9,12 +9,12 @@ permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/purva-programa-s
 
 # Създаване на първа JavaFX програма – Калкулатор
 
-  След конфигурирането на проекта и създаването на основните класове в предния раздел, следва реализирането на първото JavaFX приложение. За пример ще бъде създаден прост калкулатор, който извършва събиране на две числа и визуализира резултата в графичен интерфейс.    
+  След конфигурирането на проекта и създаването на основните класове, следва реализирането на първото JavaFX приложение. За пример ще бъде създаден калкулатор, който извършва събиране на две числа и визуализира резултата в графичен интерфейс.    
 
 
 ## 1. Наследяване на класа Application
 
-  Класът HelloApplication трябва да наследява класа Application от JavaFX. Това е задължително, защото Application управлява жизнения цикъл на JavaFX приложението и позволява създаването на графичен прозорец. Без това наследяване приложението не може да бъде стартирано като JavaFX приложение.      
+  Класът CalculateApplication трябва да наследява класа Application от JavaFX. Това е задължително, защото Application управлява жизнения цикъл на JavaFX приложението и позволява създаването на графичен прозорец. Без това наследяване приложението не може да бъде стартирано като JavaFX приложение.      
 
 
 ```java
@@ -23,7 +23,7 @@ package bg.tu_varna.sit.ps.lab1;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class HelloApplication extends Application {
+public class CalculateApplication extends Application {
 
     @Override
     public void start(Stage stage) {
@@ -68,11 +68,13 @@ calculateButton.setOnAction(event -> {
 
 ## 4. Подреждане на компонентите (Layout)
 
-За подреждане на компонентите се използва layout контейнер от тип VBox. Layout контейнерите са необходими, тъй като JavaFX не позволява директно позициониране на елементите без контейнер. VBox подрежда компонентите вертикално, което е удобно за прост интерфейс като калкулатора.    
+За подреждане на компонентите се използва layout контейнер от тип VBox. Layout контейнерите са необходими, тъй като JavaFX не позволява директно позициониране на елементите без контейнер. VBox подрежда компонентите вертикално, което е удобно за прост интерфейс като калкулатора.      
 
  
 ```java
-VBox layout = new VBox(10);
+VBox layout = new VBox(12);
+layout.setAlignment(Pos.CENTER);
+layout.setPadding(new Insets(20));
 layout.getChildren().addAll(
         number1Field,
         number2Field,
@@ -81,14 +83,16 @@ layout.getChildren().addAll(
 );
 ```
 
-## 5. Създаване на сцена и показване на прозореца
+Контейнерът VBox подрежда всички компоненти един под друг в реда, в който са добавени. Стойността 12 задава разстоянието между отделните елементи. Чрез setAlignment(Pos.CENTER) всички компоненти се подравняват в центъра на прозореца, което подобрява визуалния изглед. Методът setPadding(new Insets(20)) добавя вътрешно отстояние между компонентите и краищата на прозореца, като предотвратява „залепването“ им до ръбовете.
 
-След като интерфейсът е изграден, той се поставя в обект от тип Scene. Сцената се асоциира с основния прозорец (Stage), задава се заглавие и чрез извикване на метода show() приложението се визуализира на екрана.     
+## 5. Създаване на декор и показване на прозореца
+
+След като интерфейсът е изграден, той се поставя в обект от тип Scene. Дисплеят се асоциира с основния прозорец (Stage), задава се заглавие и чрез извикване на метода show() приложението се визуализира на екрана.     
 
 ```java
-Scene scene = new Scene(layout, 300, 200);
+ Scene scene = new Scene(layout, 320, 240);
 
-stage.setTitle("Прост калкулатор");
+stage.setTitle("Kалкулатор за събиране");
 stage.setScene(scene);
 stage.show();
 ```
@@ -96,7 +100,7 @@ stage.show();
 
 ## 6. Стартиране на приложението чрез класа Launcher
 
-За безопасно стартиране на JavaFX приложението се използва отделен клас Launcher, който съдържа метода main(). В него се извиква статичният метод launch(), който стартира JavaFX средата и извиква метода start() на класа HelloApplication.
+За безопасно стартиране на JavaFX приложението се използва отделен клас Launcher, който съдържа метода main(). В него се извиква статичният метод launch(), който стартира JavaFX средата и извиква метода start() на класа CalculateApplication.
 
 ```java
 package bg.tu_varna.sit.ps.lab1;
@@ -105,10 +109,13 @@ import javafx.application.Application;
 
 public class Launcher {
     public static void main(String[] args) {
-        Application.launch(HelloApplication.class, args);
+        Application.launch(CalculateApplication.class, args);
     }
 }
 ```
 
+При успешно стартиране трябва да се визуализира следния прозорец:     
+<br>
+<img width="402" height="339" alt="Screenshot 2026-02-03 151410" src="https://github.com/user-attachments/assets/41735391-83c5-4049-9247-73e193b2e7dd" />
 
 
