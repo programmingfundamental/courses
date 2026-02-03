@@ -36,6 +36,8 @@ permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/purvi-proekt-s-J
 
 След като е изтрит файла module-info.java, проектът вече няма да използва модулна система. За да се стартира JavaFX приложението правилно в монолитна структура, е необходимо да се направят няколко промени в `pom.xml`.
 
+[Въведение в XML](https://programmingfundamental.github.io/courses/docs/BEO/software-systems/laboratorno-uprazhnenie-1/failut-xml)
+
 ### **1. Отваряне на pom.xml - Намира се в основната директория на проекта.**
 
 <img width="728" height="527" alt="Screenshot 2026-01-25 235807" src="https://github.com/user-attachments/assets/0acfc5ff-3a11-47be-8bb8-00d0e42a3312" />
