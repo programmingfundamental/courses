@@ -95,7 +95,7 @@ permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/purvi-proekt-s-J
 
 **2.3. Добавяне на таг `<options>`**
 
-Целта е да се добавят JVM аргументи, с които ще се даде достъп на проекта до пакети на Java, които иначе са блокирани от модулната система.  
+Целта е да се добавят JVM аргументи, с които ще се даде достъп на проекта до пакети на Java, които иначе са блокирани от модулната система.      
 
 ```xml
 <options>
@@ -127,6 +127,10 @@ permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/purvi-proekt-s-J
 **3.3. По същия начин се създава и клас Launcher**
 
 Този клас ще служи за безопасно стартиране на JavaFX приложението. Тук се поставя main(), който ще стартира HelloApplication.
+
+### 4. Създаване на първа програма
+
+[Отвори раздел за създаване на първа програма с JavaFx.](https://programmingfundamental.github.io/courses/docs/BEO/software-systems/laboratorno-uprazhnenie-1/purva-programa-s-JavaFX)
 
 
  
