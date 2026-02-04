@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Лабораторно упражнение 2
+title: Лабораторно упражнение 3
 parent: Програмни системи
 has_children: true
 nav_order: 3
@@ -207,4 +207,3 @@ public void initialize() {
     // код за инициализация
 }
 ```
-
