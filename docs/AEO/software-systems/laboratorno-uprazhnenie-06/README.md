@@ -1,0 +1,39 @@
+---
+layout: default
+title: Laboratory Exercise 6
+parent: Software Systems
+has_children: true
+nav_order: 6
+permalink: /docs/software-systems/laboratorno-uprazhnenie-6
+---
+
+# Упражнение #6
+
+JavaFX използва CSS (Cascading Style Sheets) за отделяне на визуалното оформление от логиката на приложението, подобно на уеб разработката. JavaFX CSS се базира на спецификацията CSS 2.1 с някои елементи от CSS 3.
+
+**1. Специфики на JavaFX CSS:**
+
+- Префикс -fx-: Всички специфични за JavaFX свойства започват с префикса -fx- (напр. -fx-background-color вместо background-color).
+
+- Файлове: Обикновено се използват външни файлове с разширение .css.
+
+- Default Style: По подразбиране JavaFX приложенията използват темата Modena.
+
+**1.2. Селектори:**
+
+- Типов селектор: Прилага се за всички елементи от даден тип (напр. .button за всички бутони).
+
+- ID селектор: Прилага се за конкретен графичен елемент чрез неговия ID (дефиниран с setId() в Java или fx:id във FXML). В CSS се използва символът # (напр. #login-button).
+
+- Стилов клас (Style Class): Позволява прилагане на стил към група елементи. В CSS се използва символът . (напр. .main-label).
+
+**3. Нива на приложение на стиловете (по приоритет):**
+
+1. **Inline styles (директно в кода):** Използва се методът setStyle("-fx-property: value;"). (Най-висок приоритет).
+
+2. **External CSS (външен файл):** Добавя се към графичната сцена или конкретен контейнер: scene.getStylesheets().add("style.css");.
+
+3. **User Agent Stylesheet:** Системната тема (Modena).
+
+**4. Псевдо-класове:**
+JavaFX поддържа състояния като :hover (при посочване с мишка), :pressed (при натискане) и :focused (когато елементът е на фокус).
