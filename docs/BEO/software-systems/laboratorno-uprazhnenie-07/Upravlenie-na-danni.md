@@ -3,7 +3,7 @@ layout: default
 title: Управление на данни
 parent: Лабораторно упражнение 7
 grand-parent: Програмни системи
-nav_order: 2
+nav_order: 1
 permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-07/Upravlenie-na-danni
 ---
 

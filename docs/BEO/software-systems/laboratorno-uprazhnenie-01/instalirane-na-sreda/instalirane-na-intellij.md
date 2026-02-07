@@ -2,7 +2,7 @@
 layout: default
 title: Инсталиране на IntelliJ
 parent: Инсталиране на среда
-grand-parent: Програмни системи
+grand_parent: Програмни системи
 nav_order: 2
 permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/ide/instalirane-na-sreda/instalirane-na-intellij
 ---

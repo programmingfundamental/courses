@@ -2,7 +2,7 @@
 layout: default
 title: Въведение в JavaFX
 parent: Лабораторно упражнение 1
-grand-parent: Програмни системи
+grand_parent: Програмни системи
 nav_order: 1
 permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/Vuvedenie
 ---

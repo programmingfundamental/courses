@@ -2,7 +2,7 @@
 layout: default
 title: Файлът XML
 parent: Лабораторно упражнение 1
-grand-parent: Програмни системи
+grand_parent: Програмни системи
 nav_order: 2
 permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/failut-xml
 ---
