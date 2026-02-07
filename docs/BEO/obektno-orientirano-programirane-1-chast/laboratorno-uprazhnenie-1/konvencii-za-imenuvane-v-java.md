@@ -2,6 +2,7 @@
 layout: default
 title: Конвенции за именуване в Java
 parent: Лабораторно упражнение 1
+grand_parent: Обектно-ориентирано програмиране - 1 част
 nav_order: 4
 permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1
 ---
