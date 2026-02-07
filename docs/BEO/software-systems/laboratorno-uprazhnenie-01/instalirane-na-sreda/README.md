@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Инсталиране на среда
-parent: Лабораторно упражнение 1
+parent: Лабораторно упражнение 1 (Програмни системи)
 #grand_parent: Програмни системи
 has_children: true
 nav_order: 1
