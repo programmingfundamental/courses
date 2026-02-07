@@ -3,7 +3,7 @@ layout: default
 title: Първа програма с JavaFx
 parent: Лабораторно упражнение 1
 grand-parent: Програмни системи
-nav_order: 2
+nav_order: 4
 permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/purva-programa-s-JavaFX
 ---
 

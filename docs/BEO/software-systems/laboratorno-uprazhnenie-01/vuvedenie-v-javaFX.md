@@ -3,11 +3,12 @@ layout: default
 title: Въведение в JavaFX
 parent: Лабораторно упражнение 1
 grand-parent: Програмни системи
-nav_order: 2
+nav_order: 1
 permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/Vuvedenie
 ---
 
 # Въведение в JavaFX
+
 JavaFX е модерна Java библиотека за изграждане на графични потребителски интерфейси (GUI) за десктоп приложения. С нейна помощ можете да създавате прозорци, контроли (бутони, текстови полета и др.), графики, анимации и мултимедийни елементи. JavaFX е проектирана да работи на устройства, които поддържат Java, включително Windows, macOS и Linux.
 
 ## Архитектура на JavaFX
