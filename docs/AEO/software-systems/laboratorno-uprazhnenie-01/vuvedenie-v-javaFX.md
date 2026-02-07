@@ -4,7 +4,7 @@ title: Introduction to JavaFX
 parent: Laboratory Exercise 1
 grand_parent: Software Systems
 nav_order: 1
-permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/Vuvedenie
+#permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/Vuvedenie
 ---
 
 # Въведение в JavaFX

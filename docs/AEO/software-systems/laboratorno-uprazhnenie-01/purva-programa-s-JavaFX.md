@@ -4,7 +4,7 @@ title: First Program with JavaFX
 parent: Laboratory Exercise 1
 grand_parent: Software Systems
 nav_order: 4
-permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/purva-programa-s-JavaFX
+#permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/purva-programa-s-JavaFX
 ---
 
 # Създаване на първа JavaFX програма – Калкулатор

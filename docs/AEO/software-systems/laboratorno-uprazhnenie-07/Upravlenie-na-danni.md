@@ -4,7 +4,7 @@ title: Data Management
 parent: Laboratory Exercise 7
 grand-parent: Software Systems
 nav_order: 1
-permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-07/Upravlenie-na-danni
+#permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-07/Upravlenie-na-danni
 ---
 
 # Управление на данни с JavaFX

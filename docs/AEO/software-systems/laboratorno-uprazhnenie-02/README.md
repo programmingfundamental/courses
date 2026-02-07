@@ -4,7 +4,7 @@ title: Laboratory Exercise 2
 parent: Software Systems
 has_children: true
 nav_order: 2
-permalink: /docs/software-systems/laboratorno-uprazhnenie-2
+#permalink: /docs/software-systems/laboratorno-uprazhnenie-2
 ---
 
 # Упражнение #2

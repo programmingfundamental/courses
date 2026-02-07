@@ -4,7 +4,7 @@ title: Laboratory Exercise 6
 parent: Software Systems
 has_children: true
 nav_order: 6
-permalink: /docs/software-systems/laboratorno-uprazhnenie-6
+#permalink: /docs/software-systems/laboratorno-uprazhnenie-6
 ---
 
 # Упражнение #6

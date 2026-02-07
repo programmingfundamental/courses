@@ -4,7 +4,7 @@ title: First Project with JavaFX
 parent: Laboratory Exercise 1
 grand_parent: Software Systems
 nav_order: 3
-permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/purvi-proekt-s-JavaFX
+#permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/purvi-proekt-s-JavaFX
 ---
 
 # Създаване на първи JavaFX проект в Intellij IDE.

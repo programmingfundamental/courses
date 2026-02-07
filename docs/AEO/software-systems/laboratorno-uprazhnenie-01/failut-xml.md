@@ -4,7 +4,7 @@ title: The XML File
 parent: Laboratory Exercise 1
 grand_parent: Software Systems
 nav_order: 2
-permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/failut-xml
+#permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/failut-xml
 ---
 
 # Въведение в XML

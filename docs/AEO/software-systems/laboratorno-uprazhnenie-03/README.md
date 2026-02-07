@@ -4,7 +4,7 @@ title: Laboratory Exercise 3
 parent: Software Systems
 has_children: true
 nav_order: 3
-permalink: /docs/software-systems/laboratorno-uprazhnenie-3
+#permalink: /docs/software-systems/laboratorno-uprazhnenie-3
 ---
 
 # Лабораторно упражнение 3
