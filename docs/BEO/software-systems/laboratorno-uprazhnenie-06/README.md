@@ -19,6 +19,8 @@ JavaFX използва CSS (Cascading Style Sheets) за отделяне на 
 
 - Default Style: По подразбиране JavaFX приложенията използват темата Modena.
 
+- [Списък на стилове](https://programmingfundamental.github.io/courses/docs/BEO/software-systems/laboratorno-uprazhnenie-06/css-stilove) - Подробен преглед на CSS стиловете в JavaFX.
+
 **1.2. Селектори:**
 
 - Типов селектор: Прилага се за всички елементи от даден тип (напр. .button за всички бутони).

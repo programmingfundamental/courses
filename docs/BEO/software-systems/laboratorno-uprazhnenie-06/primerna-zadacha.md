@@ -3,7 +3,7 @@ layout: default
 title: Примерна задача
 parent: Лабораторно упражнение 6
 grand_parent: Програмни системи
-nav_order: 1
+nav_order: 2
 ---
 
 # Примерна задача: Стилизиране на профилна карта (Profile Card)
