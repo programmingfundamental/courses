@@ -76,7 +76,67 @@ nav_order: 2
 </VBox>
 ```
 
-### 4. Създайте нов основен клас `ProfileApplication` (`src/main/java/bg/tu_varna/sit/ps/lab6/ProfileApplication.java`)
+### 4. Създайте CSS файл `style.css` (`src/main/resources/bg/tu_varna/sit/ps/lab6/style.css`)
+
+```css
+/* Основен контейнер за изглед (Карта) */
+.card {
+  -fx-background-color: white;
+  -fx-background-radius: 15;
+  -fx-border-radius: 15;
+  -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 5);
+  -fx-padding: 30;
+  -fx-pref-width: 300;
+}
+
+/* Етикети */
+.name-label {
+  -fx-font-size: 20px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #2c3e50;
+}
+
+.title-label {
+  -fx-font-size: 14px;
+  -fx-text-fill: #7f8c8d;
+}
+
+/* Бутони */
+.primary-button {
+  -fx-background-color: #3498db;
+  -fx-text-fill: white;
+  -fx-background-radius: 20;
+  -fx-padding: 8 20;
+}
+
+.primary-button:hover {
+  -fx-background-color: #2980b9;
+  -fx-cursor: hand;
+}
+
+.secondary-button {
+  -fx-background-color: transparent;
+  -fx-border-color: #3498db;
+  -fx-border-width: 2;
+  -fx-border-radius: 20;
+  -fx-text-fill: #3498db;
+  -fx-padding: 8 20;
+}
+
+.secondary-button:hover {
+  -fx-background-color: #ecf0f1;
+}
+
+.profile-image {
+  -fx-fill: #ecf0f1;
+  -fx-stroke: #3498db;
+  -fx-stroke-width: 3;
+  -fx-stroke-type: outside;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 2);
+}
+```
+
+### 5. Създайте нов основен клас `ProfileApplication` (`src/main/java/bg/tu_varna/sit/ps/lab6/ProfileApplication.java`)
 
 ```java
   package bg.tu_varna.sit.ps.lab6;
@@ -105,4 +165,4 @@ nav_order: 2
   }
 ```
 
-### 5. Променете в класа `Launcher` основния клас на приложението на `ProfileApplication` и стартирайте приложението
+### 6. Променете в класа `Launcher` основния клас на приложението на `ProfileApplication` и стартирайте приложението
