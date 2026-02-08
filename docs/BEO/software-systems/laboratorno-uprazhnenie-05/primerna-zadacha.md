@@ -12,133 +12,72 @@ nav_order: 1
 
 ### 1. Създайте нов JavaFX проект в IntelliJ IDEA
 
-### 2. Създайте контролер клас `LicenseController` (`src/main/java/bg/tu_varna/sit/ps/lab5/LicenseController.java`)
+### 2. Създайте контролер клас `ProjectController` (`src/main/java/bg/tu_varna/sit/ps/lab5/ProjectController.java`)
 
 ```java
 package bg.tu_varna.sit.ps.lab5;
 
-import javafx.concurrent.Task;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.paint.Color;
-import javafx.util.Duration;
+
 import java.time.LocalDate;
 import java.util.Optional;
 
-public class LicenseController {
-    @FXML private TextField userNameField;
-    @FXML private ComboBox<String> licenseCombo;
-    @FXML private CheckBox termsCheckBox;
-    @FXML private DatePicker startDatePicker;
-    @FXML private Slider usersSlider;
-    @FXML private Label usersCountLabel;
-    @FXML private ToggleGroup versionGroup;
-    @FXML private ColorPicker themeColorPicker;
-    @FXML private ProgressBar progressBar;
-    @FXML private ProgressIndicator progressIndicator;
+public class ProjectController {
+    @FXML private ComboBox<String> priorityCombo;
+    @FXML private ListView<String> modulesListView;
+    @FXML private DatePicker deadlinePicker;
+    @FXML private ColorPicker projectColorPicker;
 
     @FXML
     public void initialize() {
-        // Инициализация на ComboBox
-        licenseCombo.getItems().addAll("Личен", "Бизнес", "Академичен");
-        licenseCombo.getSelectionModel().selectFirst();
+        // 1. Работа с ComboBox
+        priorityCombo.getItems().addAll("Нисък", "Среден", "Висок", "Критичен");
+        priorityCombo.getSelectionModel().select(1);
 
-        // Настройка на DatePicker (текуща дата по подразбиране)
-        startDatePicker.setValue(LocalDate.now());
+        // 2. Работа с ListView и селекция
+        ObservableList<String> availableModules = FXCollections.observableArrayList(
+                "База данни", "Потребителски интерфейс", "Сигурност", "API интеграция", "Логиране");
+        modulesListView.setItems(availableModules);
+        modulesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        // Свързване на стойността на Slider-а с етикета за брой потребители
-        usersSlider.valueProperty().addListener((obs, oldVal, newVal) ->
-                usersCountLabel.setText(String.valueOf(newVal.intValue())));
+        // 3. Добавяне на ContextMenu към ListView
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem infoItem = new MenuItem("Виж информация за модула");
+        infoItem.setOnAction(e -> {
+            String selected = modulesListView.getSelectionModel().getSelectedItem();
+            if (selected != null) {
+                showDialog(Alert.AlertType.INFORMATION, "Инфо", "Детайли за: " + selected);
+            }
+        });
+        contextMenu.getItems().add(infoItem);
+        modulesListView.setContextMenu(contextMenu);
 
-        // Подсказки
-        Tooltip checkTooltip = new Tooltip("Трябва да се съгласите с условията");
-        checkTooltip.setShowDelay(Duration.millis(500));
-        termsCheckBox.setTooltip(checkTooltip);
-
-        // Начално състояние на прогреса
-        progressBar.setProgress(0);
-        progressIndicator.setProgress(0);
+        deadlinePicker.setValue(LocalDate.now().plusMonths(1));
     }
 
     @FXML
-    protected void handleRegister() {
-        if (!termsCheckBox.isSelected()) {
-            showDialog(Alert.AlertType.WARNING, "Предупреждение", "Приемете условията!");
+    protected void handleSaveProject() {
+        ObservableList<String> selectedModules = modulesListView.getSelectionModel().getSelectedItems();
+
+        if (selectedModules.isEmpty()) {
+            showDialog(Alert.AlertType.WARNING, "Внимание", "Моля, изберете поне един модул!");
             return;
         }
 
-        String user = userNameField.getText();
-        if (user == null || user.trim().isEmpty()) {
-            showDialog(Alert.AlertType.ERROR, "Грешка", "Въведете име!");
-            return;
-        }
-
-        // Вземане на данни от новите контроли
-        Alert confirm = getConfirm(user);
-
-        ((Button) confirm.getDialogPane().lookupButton(ButtonType.OK)).setText("Да");
-        ((Button) confirm.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Отказ");
+        // Използване на CONFIRMATION диалог
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Потвърждение");
+        confirm.setHeaderText("Запис на проект");
+        confirm.setContentText(String.format("Избрани модули: %d\nПриоритет: %s\nКраен срок: %s\nЖелаете ли да продължите?",
+                selectedModules.size(), priorityCombo.getValue(), deadlinePicker.getValue()));
 
         Optional<ButtonType> result = confirm.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            simulateVerification();
+            showDialog(Alert.AlertType.INFORMATION, "Успех", "Проектът е запазен успешно!");
         }
-    }
-
-    private Alert getConfirm(String user) {
-        LocalDate date = startDatePicker.getValue();
-        int users = (int) usersSlider.getValue();
-        RadioButton selectedVersion = (RadioButton) versionGroup.getSelectedToggle();
-        String version = selectedVersion.getText();
-        Color themeColor = themeColorPicker.getValue();
-
-        // Диалог за потвърждение с обобщена информация
-        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
-        confirm.setTitle("Потвърждение");
-        confirm.setHeaderText("Регистрация за: " + user);
-        confirm.setContentText(String.format(
-                "Тип: %s\nНачало: %s\nПотребители: %d\nВерсия: %s\nЦвят: %s\n\nЖелаете ли да продължите?",
-                licenseCombo.getValue(), date, users, version, themeColor
-        ));
-
-        return confirm;
-    }
-
-    private void simulateVerification() {
-        // Симулация на процес на проверка чрез ProgressBar (използва се Task за паралелност)
-        Task<Void> task = new Task<>() {
-            @Override
-            protected Void call() throws Exception {
-                for (int i = 0; i <= 10; i++) {
-                    updateProgress(i, 10);
-                    Thread.sleep(200); // Симулираме забавяне
-                }
-                return null;
-            }
-        };
-
-        progressBar.progressProperty().bind(task.progressProperty());
-        progressIndicator.progressProperty().bind(task.progressProperty());
-
-        task.setOnSucceeded(e -> {
-            progressBar.progressProperty().unbind();
-            progressIndicator.progressProperty().unbind();
-            showDialog(Alert.AlertType.INFORMATION, "Успех", "Лицензът е активиран!");
-        });
-
-        new Thread(task).start();
-    }
-
-    @FXML
-    protected void handleClear() {
-        userNameField.clear();
-        termsCheckBox.setSelected(false);
-        licenseCombo.getSelectionModel().selectFirst();
-        startDatePicker.setValue(LocalDate.now());
-        usersSlider.setValue(1);
-        themeColorPicker.setValue(Color.WHITE);
-        progressBar.setProgress(0);
-        progressIndicator.setProgress(0);
     }
 
     private void showDialog(Alert.AlertType type, String title, String content) {
@@ -151,70 +90,48 @@ public class LicenseController {
 }
 ```
 
-### 3. Създайте FXML файл `license_view.fxml` (`src/main/resources/bg/tu_varna/sit/ps/lab5/license_view.fxml` )
+### 3. Създайте FXML файл `project-view.fxml` (`src/main/resources/bg/tu_varna/sit/ps/lab5/project-view.fxml` )
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:controller="bg.tu_varna.sit.ps.lab5.LicenseController"
-          xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10">
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="bg.tu_varna.sit.ps.lab5.ProjectController" prefWidth="400">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <Label text="Система за управление на лицензи"
-           style="-fx-font-size: 18px; -fx-font-weight: bold;"
-           GridPane.columnSpan="3" GridPane.halignment="CENTER"/>
+    <Label text="Конфигурация на нов проект" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
 
-    <!-- Име -->
-    <Label text="Потребител:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-    <TextField fx:id="userNameField" GridPane.rowIndex="1" GridPane.columnIndex="1" GridPane.columnSpan="2"/>
+    <Label text="Приоритет на проекта:"/>
+    <ComboBox fx:id="priorityCombo" maxWidth="Infinity"/>
 
-    <!-- Тип лиценз -->
-    <Label text="Тип:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-    <ComboBox fx:id="licenseCombo" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="150"/>
+    <Label text="Избор на модули (задръжте Ctrl за многократен избор):"/>
+    <ListView fx:id="modulesListView" prefHeight="120">
+        <tooltip>
+            <Tooltip text="Десен бутон за допълнителни опции"/>
+        </tooltip>
+    </ListView>
 
-    <!-- Дата -->
-    <Label text="Валиден от:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-    <DatePicker fx:id="startDatePicker" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-
-    <!-- Брой потребители (Slider) -->
-    <Label text="Потребители:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-    <Slider fx:id="usersSlider" min="1" max="50" value="1" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
-    <Label fx:id="usersCountLabel" text="1" GridPane.rowIndex="4" GridPane.columnIndex="2"/>
-
-    <!-- Версия (RadioButton) -->
-    <Label text="Версия:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-    <HBox spacing="10" GridPane.rowIndex="5" GridPane.columnIndex="1">
-        <fx:define>
-            <ToggleGroup fx:id="versionGroup"/>
-        </fx:define>
-        <RadioButton text="Стабилна" toggleGroup="$versionGroup" selected="true"/>
-        <RadioButton text="Бета" toggleGroup="$versionGroup"/>
+    <HBox spacing="10">
+        <VBox HBox.hgrow="ALWAYS">
+            <Label text="Краен срок:"/>
+            <DatePicker fx:id="deadlinePicker" maxWidth="Infinity"/>
+        </VBox>
+        <VBox>
+            <Label text="Цвят на проекта:"/>
+            <ColorPicker fx:id="projectColorPicker" maxWidth="Infinity"/>
+        </VBox>
     </HBox>
 
-    <!-- Цвят на темата -->
-    <Label text="Цвят на тема:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
-    <ColorPicker fx:id="themeColorPicker" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+    <Separator/>
 
-    <!-- Условия -->
-    <CheckBox fx:id="termsCheckBox" text="Приемам условията на ползване"
-              GridPane.rowIndex="7" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
-
-    <!-- Прогрес -->
-    <ProgressBar fx:id="progressBar" prefWidth="200" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
-    <ProgressIndicator fx:id="progressIndicator" GridPane.rowIndex="8" GridPane.columnIndex="2"/>
-
-    <!-- Бутони -->
-    <HBox spacing="10" alignment="CENTER_RIGHT" GridPane.rowIndex="9" GridPane.columnIndex="1" GridPane.columnSpan="2">
-        <Button text="Регистрирай" onAction="#handleRegister" />
-        <Button text="Изчисти" onAction="#handleClear"/>
-    </HBox>
-</GridPane>
+    <Button text="Запази конфигурацията" onAction="#handleSaveProject"
+            maxWidth="Infinity" style="-fx-padding: 10;"/>
+</VBox>
 ```
 
 ### 4. Променете зареждания изглед в основния клас на приложението `HelloApplication` (`src/main/java/bg/tu_varna/sit/ps/lab5/HelloApplication.java`)
@@ -232,7 +149,7 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("license-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("project-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 450, 550);
         stage.setTitle("Hello!");
         stage.setScene(scene);
