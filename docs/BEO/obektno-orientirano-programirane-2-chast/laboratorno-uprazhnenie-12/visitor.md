@@ -15,7 +15,7 @@ nav_order: 1
 ```
 public interface ItemElement {
 
-	public int accept(ShoppingCartVisitor visitor);
+	int accept(ShoppingCartVisitor visitor);
 }
 ```
 
@@ -44,7 +44,6 @@ public class Book implements ItemElement {
 	public int accept(ShoppingCartVisitor visitor) {
 		return visitor.visit(this);
 	}
-
 }
 ```
 
@@ -65,7 +64,6 @@ public class Fruit implements ItemElement {
 		return pricePerKg;
 	}
 
-
 	public int getWeight() {
 		return weight;
 	}
@@ -78,7 +76,6 @@ public class Fruit implements ItemElement {
 	public int accept(ShoppingCartVisitor visitor) {
 		return visitor.visit(this);
 	}
-
 }
 ```
 
@@ -102,20 +99,19 @@ public class ShoppingCartVisitorImpl implements ShoppingCartVisitor {
 	public int visit(Book book) {
 		int cost=0;
 		//apply 5$ discount if book price is greater than 50
-		if(book.getPrice() > 50){
+		if (book.getPrice() > 50){
 			cost = book.getPrice()-5;
-		}else cost = book.getPrice();
-		System.out.println("Book ISBN::"+book.getIsbnNumber() + " cost ="+cost);
+		} else {
+			cost = book.getPrice();
+		}
 		return cost;
 	}
 
 	@Override
 	public int visit(Fruit fruit) {
-		int cost = fruit.getPricePerKg()*fruit.getWeight();
-		System.out.println(fruit.getName() + " cost = "+cost);
-		return cost;
+		int cost = fruit.getPricePerKg() * fruit.getWeight();
+		return (fruit.getName() + " cost = " + cost);
 	}
-
 }
 ```
 
@@ -123,34 +119,27 @@ public class ShoppingCartVisitorImpl implements ShoppingCartVisitor {
 public class ShoppingCartClient {
 
 	public static void main(String[] args) {
-		ItemElement[] items = new ItemElement[]{new Book(20, "1234"),new Book(100, "5678"),
-				new Fruit(10, 2, "Banana"), new Fruit(5, 5, "Apple")};
+		List<ItemElement> items = new ArrayList<>();
+		items.add(new Book(20, "1234"));
+		items.add(new Book(100, "5678"));
+		items.add(new Fruit(10, 2, "Banana"));
+		items.add(new Fruit(5, 5, "Apple"));
 		
 		int total = calculatePrice(items);
-		System.out.println("Total Cost = "+total);
+		System.out.println("Total Cost = " + total);
 	}
 
-	private static int calculatePrice(ItemElement[] items) {
+	private static int calculatePrice(List<ItemElement> items) {
 		ShoppingCartVisitor visitor = new ShoppingCartVisitorImpl();
-		int sum=0;
-		for(ItemElement item : items){
+		int sum = 0;
+		for (ItemElement item : items) {
 			sum = sum + item.accept(visitor);
 		}
 		return sum;
 	}
-
 }
 ```
 
-Когато тичаме над клиентската програма на посетителския модел, получаваме следния изход.
-
-```
-Book ISBN::1234 cost =20
-Book ISBN::5678 cost =95
-Banana cost = 20
-Apple cost = 25
-Total Cost = 160
-```
 
 Забележете, че имплементацията, ако методът accept() във всички елементи е еднакъв, но може да бъде различен, например може да има логика да се провери дали елементът е свободен, след което изобщо не се обаждайте на метода visit().
 
