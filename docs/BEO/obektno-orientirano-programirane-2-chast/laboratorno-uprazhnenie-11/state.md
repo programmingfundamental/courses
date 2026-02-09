@@ -21,11 +21,11 @@ public class TVRemoteBasic {
 		this.state=state;
 	}
 	
-	public void doAction(){
-		if(state.equalsIgnoreCase("ON")){
-			System.out.println("TV is turned ON");
-		}else if(state.equalsIgnoreCase("OFF")){
-			System.out.println("TV is turned OFF");
+	public String doAction(){
+		if (state.equalsIgnoreCase("ON")){
+			return "TV is turned ON";
+		} else if(state.equalsIgnoreCase("OFF")){
+			return "TV is turned OFF";
 		}
 	}
 
@@ -33,10 +33,10 @@ public class TVRemoteBasic {
 		TVRemoteBasic remote = new TVRemoteBasic();
 		
 		remote.setState("ON");
-		remote.doAction();
+		System.out.println(remote.doAction());
 		
 		remote.setState("OFF");
-		remote.doAction();
+		System.out.println(remote.doAction());
 	}
 
 }
@@ -49,7 +49,7 @@ public class TVRemoteBasic {
 ```
 public interface State {
 
-	public void doAction();
+	String doAction();
 }
 ```
 
@@ -59,8 +59,8 @@ public interface State {
 public class TVStartState implements State {
 
 	@Override
-	public void doAction() {
-		System.out.println("TV is turned ON");
+	public String doAction() {
+		return "TV is turned ON";
 	}
 
 }
@@ -70,8 +70,8 @@ public class TVStartState implements State {
 public class TVStopState implements State {
 
 	@Override
-	public void doAction() {
-		System.out.println("TV is turned OFF");
+	public String doAction() {
+		return "TV is turned OFF";
 	}
 
 }
@@ -93,8 +93,8 @@ public class TVContext implements State {
 	}
 
 	@Override
-	public void doAction() {
-		this.tvState.doAction();
+	public String doAction() {
+		return this.tvState.doAction();
 	}
 
 }
@@ -113,12 +113,11 @@ public class TVRemote {
 		State tvStopState = new TVStopState();
 		
 		context.setState(tvStartState);
-		context.doAction();
+		System.out.println(context.doAction());
 		
 		
 		context.setState(tvStopState);
-		context.doAction();
-		
+		System.out.println(context.doAction());
 	}
 
 }
