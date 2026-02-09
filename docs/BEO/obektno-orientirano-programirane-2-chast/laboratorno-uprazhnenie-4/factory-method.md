@@ -12,7 +12,7 @@ nav_order: 2
 
 ### Проблема
 
-Представете си, че създавате приложение за управление на логистиката. Първата версия на приложението ви може да се справи само с транспортирането с камиони, така че основната част от кода ви бъде в този клас.
+Представете си, че създавате приложение за управление на логистика. Първата версия на приложението ви може да се справи само с транспортирането с камиони, така че основната част от кода ви бъде в този клас.
 
 След известно време приложението ви става доста популярно. Всеки ден получавате десетки заявки от фирми за морски превози за включване на морска логистика в приложението.
 
@@ -63,7 +63,7 @@ Factory предполага, че замествате преките пови�
 
 ```
 public interface Notification {
-    void notifyUser();
+    String notifyUser();
 }
 ```
 
@@ -73,9 +73,9 @@ public interface Notification {
 public class SMSNotification implements Notification {
  
     @Override
-    public void notifyUser()
+    public String notifyUser()
     {
-        System.out.println("Sending an SMS notification");
+        return "Sending an SMS notification";
     }
 }
 ```
@@ -84,9 +84,9 @@ public class SMSNotification implements Notification {
 public class EmailNotification implements Notification {
  
     @Override
-    public void notifyUser()
+    public String notifyUser()
     {
-        System.out.println("Sending an e-mail notification");
+        return "Sending an e-mail notification";
     }
 }
 ```
@@ -95,9 +95,9 @@ public class EmailNotification implements Notification {
 public class PushNotification implements Notification {
  
     @Override
-    public void notifyUser()
+    public String notifyUser()
     {
-        System.out.println("Sending a push notification");
+        return "Sending a push notification";
     }
 }
 ```
