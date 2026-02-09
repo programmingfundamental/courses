@@ -15,21 +15,21 @@ nav_order: 1
 ```
 public interface Subject {
 
-	public void register(Observer obj);
-	public void unregister(Observer obj);
+	void register(Observer obj);
+	void unregister(Observer obj);
 
-	public void notifyObservers();
+	String notifyObservers();
 
-	public Object getUpdate(Observer obj);	
+	Object getUpdate(Observer obj);	
 }
 ```
 
 След това ще създадем договор за наблюдателя, ще има метод за прикачване на субекта към наблюдателя и друг метод, който да се използва от субекта за уведомяване за всяка промяна.
 
 <pre><code>public interface Observer {
-<strong>	public void update();
+<strong>	String update();
 </strong>
-	public void setSubject(Subject sub);
+	void setSubject(Subject sub);
 }
 </code></pre>
 
@@ -38,18 +38,20 @@ public interface Subject {
 ```
 public class Topic implements Subject {
 
-	private List<Observer> observers;
+	private Set<Observer> observers;
 	private String message;
 	private boolean changed;
 	
 	public Topic(){
-		this.observers=new ArrayList<>();
+		this.observers = new HashSet<>();
 	}
+
 	@Override
 	public void register(Observer obj) {
-		if(obj == null) throw new NullPointerException("Null Observer");
-		
-		if(!observers.contains(obj)) observers.add(obj);
+		if (obj == null) {
+			throw new NullPointerException("Null Observer");
+		}		
+		observers.add(obj);
 	}
 
 	@Override
@@ -58,16 +60,17 @@ public class Topic implements Subject {
 	}
 
 	@Override
-	public void notifyObservers() {
-		List<Observer> observersLocal = null;
+	public String notifyObservers() {
+		StringBuilder result = new StringBuilder();
+		List<Observer> observersLocal;
 			if (!changed)
-				return;
+				result.append("");
 			observersLocal = new ArrayList<>(this.observers);
-			this.changed=false;
+			this.changed = false;
 		for (Observer obj : observersLocal) {
-			obj.update();
+			result.append(obj.update()).append("\n");
 		}
-
+		return result.toString();
 	}
 
 	@Override
@@ -75,40 +78,39 @@ public class Topic implements Subject {
 		return this.message;
 	}
 	
-	//method to post message to the topic
-	public void postMessage(String msg){
-		System.out.println("Message Posted to Topic:"+msg);
-		this.message=msg;
-		this.changed=true;
-		notifyObservers();
+	//method that posts message to the topic
+	public String postMessage(String msg){
+		this.message = msg;
+		this.changed = true;
+		return notifyObservers();
 	}
 
 }
 ```
 
-Реализацията на метода за регистриране и дерегистриране на наблюдател е много проста, допълнителният метод е postMessage(), който ще се използва от клиентското приложение за публикуване на String съобщение в темата. Забележете булевата променлива за проследяване на промяната в състоянието на темата и използвана при уведомяване на наблюдатели. Тази променлива е необходима, така че ако няма актуализация и някой извика метод notifyObservers(), той не изпраща фалшиви известия до наблюдателите. Забележете също използването на синхронизация в метода notifyObservers(), за да сте сигурни, че известието се изпраща само до наблюдателите, регистрирани преди съобщението да бъде публикувано в темата. Ето изпълнението на Наблюдатели, които ще наблюдават темата.
+Реализацията на метода за регистриране и отписване на наблюдател е много проста, допълнителният метод е postMessage(), който ще се използва от клиентското приложение за публикуване на String съобщение в темата. Забележете булевата променлива за проследяване на промяната в състоянието на темата и използвана при уведомяване на наблюдатели. Тази променлива е необходима, така че ако няма актуализация и някой извика метод notifyObservers(), той не изпраща фалшиви известия до наблюдателите. Забележете също използването на синхронизация в метода notifyObservers(), за да сте сигурни, че известието се изпраща само до наблюдателите, регистрирани преди съобщението да бъде публикувано в темата. Ето изпълнението на Наблюдатели, които ще наблюдават темата.
 
 ```
 public class TopicSubscriber implements Observer {
 	
 	private String name;
-	private Subject topic;
+	private Subject subject;
 	
 	public TopicSubscriber(String nm){
 		this.name=nm;
 	}
 	@Override
-	public void update() {
-		String msg = (String) topic.getUpdate(this);
-		if(msg == null){
-			System.out.println(name+":: No new message");
-		}else
-		System.out.println(name+":: Consuming message::"+msg);
+	public String update() {
+		String msg = (String) subject.getUpdate(this);
+		if (msg == null){
+			return (name + ":: No new message");
+		} else
+		return (name + ":: Consuming message ::" + msg);
 	}
 
 	@Override
-	public void setSubject(Subject sub) {
-		this.topic=sub;
+	public void setSubject(Subject subject) {
+		this.subject = subject;
 	}
 
 }
@@ -121,7 +123,7 @@ public class Application{
 
 	public static void main(String[] args) {
 		//create subject
-		Topic topic = new MyTopic();
+		Topic topic = new Topic();
 		
 		//create observers
 		Observer obj1 = new TopicSubscriber("Obj1");
@@ -138,11 +140,11 @@ public class Application{
 		obj2.setSubject(topic);
 		obj3.setSubject(topic);
 		
-		//check if any update is available
-		obj1.update();
+		//check if any update is available for given susbscriber
+		System.out.println(obj1.update());
 		
-		//now send message to subject
-		topic.postMessage("New Message");
+		//now send message to all registered observers
+		System.out.println(topic.postMessage("New Message"));
 	}
 
 }
