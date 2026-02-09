@@ -33,26 +33,26 @@ public class SingletonClass {
         }
         return singletonInstance;
     }
-    public void printClass() {
-        System.out.println("Instance of SingletonClass");
+    public String printClass() {
+        return "Instance of SingletonClass";
     }
 }
 
 public class Main {
     public static void main(String[] args) {
         SingletonClass singletonClass = SingletonClass.getInstance();
-        singletonClass.printClass();
+        System.out.println(singletonClass.printClass());
     }
 }
 ```
 
-Ако желаем да се убедим, че всеки път се извиква един и същи обект, бихме могли да добавим извеждане на съобщение в метода getInstance():
+Ако желаем да се убедим, че всеки път се извиква един и същи обект, бихме могли да добавим извеждане на съобщение в метода getInstance() (само с илюстративна цел, System.out.println() няма място в логиката на кода):
 
 ```
 public static SingletonClass getInstance() {
     if (singletonInstance == null) {
         singletonInstance = new SingletonClass();
-        System.out.println("Creating instance");
+        System.out.println("Creating instance"); 
     }
     return singletonInstance;
 }
@@ -60,11 +60,11 @@ public static SingletonClass getInstance() {
 public class Main {
     public static void main(String[] args) {
         SingletonClass singletonClass = SingletonClass.getInstance();
-        singletonClass.printClass();
+        System.out.println(singletonClass.printClass());
         SingletonClass anotherSingletonClass = SingletonClass.getInstance();
-        anotherSingletonClass.printClass();
+        System.out.println(anotherSingletonClass.printClass());
         SingletonClass oneMoreSingletonClass = SingletonClass.getInstance();
-        oneMoreSingletonClass.printClass();
+        System.out.println(oneMoreSingletonClass.printClass());
     }
 }
 ```
