@@ -26,7 +26,7 @@ description: >-
 
 ```java
 public interface Color {
-    public void applyColor();
+    public String applyColor();
 }
 ```
 
@@ -40,7 +40,7 @@ public abstract class Shape {
 		this.color=c;
 	}
 	
-	abstract public void applyColor();
+	public abstract String applyColor();
 }
 ```
 
@@ -54,8 +54,8 @@ public class Triangle extends Shape{
 	}
 
 	@Override
-	public void applyColor() {
-		color.applyColor();
+	public String applyColor() {
+		return color.applyColor();
 	} 
 }
 ```
@@ -68,16 +68,16 @@ public class Pentagon extends Shape{
 	}
 
 	@Override
-	public void applyColor() {
-		color.applyColor();
+	public String applyColor() {
+		return color.applyColor();
 	} 
 }
 ```
 ```java
 public class RedColor implements Color{
 
-	public void applyColor(){
-		System.out.println("red.");
+	public String applyColor(){
+		return "red";
 	}
 }
 ```
@@ -85,8 +85,8 @@ public class RedColor implements Color{
 ```java
 public class GreenColor implements Color{
 
-	public void applyColor(){
-		System.out.println("green.");
+	public String applyColor(){
+		return "green";
 	}
 }
 ```
@@ -96,10 +96,10 @@ public class Application {
 
 	public static void main(String[] args) {
 		Shape tri = new Triangle(new RedColor());
-		tri.applyColor();
+		System.out.println(tri.applyColor());
 		
 		Shape pent = new Pentagon(new GreenColor());
-		pent.applyColor();
+		System.out.println(pent.applyColor());
 	}
 
 }
