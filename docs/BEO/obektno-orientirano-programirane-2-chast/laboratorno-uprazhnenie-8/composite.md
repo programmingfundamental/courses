@@ -27,7 +27,7 @@ nav_order: 1
 
 public interface Shape {
 	
-	public void draw(String fillColor);
+	public String draw(String fillColor);
 }
 ```
 
@@ -41,8 +41,8 @@ public interface Shape {
 public class Triangle implements Shape {
 
 	@Override
-	public void draw(String fillColor) {
-		System.out.println("Drawing Triangle with color "+fillColor);
+	public String draw(String fillColor) {
+		return "Drawing Triangle with color " + fillColor;
 	}
 
 }
@@ -56,8 +56,8 @@ public class Triangle implements Shape {
 public class Circle implements Shape {
 
 	@Override
-	public void draw(String fillColor) {
-		System.out.println("Drawing Circle with color "+fillColor);
+	public String draw(String fillColor) {
+		return "Drawing Circle with color " + fillColor;
 	}
 
 }
@@ -79,11 +79,13 @@ public class Drawing implements Shape{
 	private List<Shape> shapes = new ArrayList<Shape>();
 	
 	@Override
-	public void draw(String fillColor) {
+	public String draw(String fillColor) {
+		StringBuilder result = new StringBuilder();
 		for(Shape sh : shapes)
 		{
-			sh.draw(fillColor);
+			result.append(sh.draw(fillColor)).append("\n");
 		}
+		return result.toString();
 	}
 	
 	
@@ -98,7 +100,6 @@ public class Drawing implements Shape{
 	
 	
 	public void clear(){
-		System.out.println("Clearing all the shapes from drawing");
 		this.shapes.clear();
 	}
 }
@@ -117,13 +118,14 @@ public class Application {
 		drawing.add(tri1);
 		drawing.add(cir);
 		
-		drawing.draw("Red");
-		
+		System.out.println(drawing.draw("Red"));
+
+		System.out.println("Clearing all the shapes from drawing");
 		drawing.clear();
 		
 		drawing.add(tri);
 		drawing.add(cir);
-		drawing.draw("Green");
+		System.out.println(drawing.draw("Green"));
 	}
 
 }
