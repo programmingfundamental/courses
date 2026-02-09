@@ -21,7 +21,7 @@ nav_order: 2
 ```
 public interface StudentInformation {
 
-    void display();
+    String display();
 }
 ```
 
@@ -63,8 +63,8 @@ public class BachelorStudent implements StudentInformation{
     }
 
     @Override
-    public void display() {
-        System.out.println(this);
+    public String display() {
+        return this;
     }
 }
 ```
@@ -105,8 +105,8 @@ public class MasterStudent implements StudentInformation{
     }
 
     @Override
-    public void display() {
-        System.out.println(this);
+    public String display() {
+        return this;
     }
 }
 ```
@@ -150,9 +150,9 @@ public class Application {
         StudentInformation secondStudent = StudentFactory.getInfo("master", "112233", "Jane", "Doe");
         StudentInformation thirdStudent = StudentFactory.getInfo("master", "123456", "Jake", "Doe");
 
-        firstStudent.display();
-        secondStudent.display();
-        thirdStudent.display();
+        System.out.println(firstStudent.display());
+        System.out.println(secondStudent.display());
+        System.out.println(thirdStudent.display());
 
         System.out.println(StudentFactory.getStudentsNumber());
     }
