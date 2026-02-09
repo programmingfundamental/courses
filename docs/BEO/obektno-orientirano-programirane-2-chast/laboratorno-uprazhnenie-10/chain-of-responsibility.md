@@ -38,7 +38,7 @@ public interface DispenseChain {
 
 	void setNextChain(DispenseChain nextChain);
 	
-	void dispense(Currency cur);
+	String dispense(Currency cur);
 }
 ```
 
@@ -55,14 +55,17 @@ public class Dollar50Dispenser implements DispenseChain {
 	}
 
 	@Override
-	public void dispense(Currency cur) {
+	public String dispense(Currency cur) {
 		if(cur.getAmount() >= 50){
 			int num = cur.getAmount()/50;
 			int remainder = cur.getAmount() % 50;
-			System.out.println("Dispensing "+num+" 50$ note");
-			if(remainder !=0) this.chain.dispense(new Currency(remainder));
-		}else{
-			this.chain.dispense(cur);
+			if(remainder == 0) {
+				return ("Dispensing " + num + " 50$ note");
+			} else {
+				return this.chain.dispense(new Currency(remainder));
+			}
+		} else {
+			return this.chain.dispense(cur);
 		}
 	}
 
@@ -80,13 +83,16 @@ public class Dollar20Dispenser implements DispenseChain{
 	}
 
 	@Override
-	public void dispense(Currency cur) {
+	public String dispense(Currency cur) {
 		if(cur.getAmount() >= 20){
 			int num = cur.getAmount()/20;
 			int remainder = cur.getAmount() % 20;
-			System.out.println("Dispensing "+num+" 20$ note");
-			if(remainder !=0) this.chain.dispense(new Currency(remainder));
-		}else{
+			if(remainder == 0) {
+				return ("Dispensing " + num + " 20$ note");
+			} else {
+				return this.chain.dispense(new Currency(remainder));
+			}
+		} else {
 			this.chain.dispense(cur);
 		}
 	}
@@ -105,13 +111,16 @@ public class Dollar10Dispenser implements DispenseChain {
 	}
 
 	@Override
-	public void dispense(Currency cur) {
+	public String dispense(Currency cur) {
 		if(cur.getAmount() >= 10){
 			int num = cur.getAmount()/10;
 			int remainder = cur.getAmount() % 10;
-			System.out.println("Dispensing "+num+" 10$ note");
-			if(remainder !=0) this.chain.dispense(new Currency(remainder));
-		}else{
+			if(remainder == 0) {
+				return ("Dispensing " + num + " 10$ note");
+			} else {
+				return this.chain.dispense(new Currency(remainder));
+			}
+		} else {
 			this.chain.dispense(cur);
 		}
 	}
@@ -119,9 +128,9 @@ public class Dollar10Dispenser implements DispenseChain {
 }
 ```
 
-Важното, е да се отбележи, че прилагането на метода на дозиране. Всяка реализация се опитва да обработи заявката и въз основа на сумата може да обработи част или цялата. Ако някой от веригата не може да я обработи напълно, той изпраща заявката до следващия процесор във веригата, за да обработи оставащата заявка. Ако процесорът не може да обработи нищо, той просто препраща същата заявка към следващата част от верига.
+Важното, е да се отбележи, че при прилагането на метода на дозирани всяка реализация се опитва да обработи заявката и въз основа на сумата може да обработи част или цялата. Ако даден процесор от веригата не може да я обработи напълно, той изпраща заявката към следващия процесор, за да обработи оставащата заявка. Ако процесорът не може да обработи нищо, той просто препраща същата заявка към следващата част от построената верига.
 
-Веригата трябва да се създаде внимателно, в противен случай процесорът може да не получи никаква заявка. Например, в нашата реализация, ако запазим първата процесорна верига като и след това, тогава заявката никога няма да бъде препратена към втория процесор и веригата ще стане безполезна. Ето реализацията на банкомат за обработка на заявената от потребителя сума.
+Веригата трябва да се създаде внимателно, в противен случай процесорът може да не получи никаква заявка. Например, в горепосочената реализация, ако запазим първата процесорна верига като и след това, тогава заявката никога няма да бъде препратена към втория процесор и веригата ще стане безполезна. Ето реализацията на банкомат за обработка на заявената от потребителя сума.
 
 ```
 public class ATMDispenseChain {
@@ -151,7 +160,7 @@ public class ATMDispenseChain {
 				return;
 			}
 			// process the request
-			atmDispenser.c1.dispense(new Currency(amount));
+			System.out.println(atmDispenser.c1.dispense(new Currency(amount)));
 		}
 
 	}
@@ -167,6 +176,6 @@ public class ATMDispenseChain {
 
 Всеки обект във веригата трябва да има препратка към следващия обект във веригата, към който да препрати заявката, постигната чрез java композиция.
 
-Внимателното създаване на веригата е много важно, в противен случай може да има случай, че заявката никога няма да бъде препратена към конкретен процесор или няма обекти във веригата, които да могат да обработват заявката.
+Внимателното създаване на веригата е много важно, в противен случай може да има случай, в който заявката никога няма да бъде препратена към конкретен процесор или няма обекти във веригата, които да могат да обработват заявката.
 
 Шаблонът за проектиране на веригата на отговорността е добър за решаване на проблема за загуба на свързване, но идва с компромиса от наличието на много класове за внедряване и проблеми с поддръжката, ако по-голямата част от кода е общ във всички реализации.
