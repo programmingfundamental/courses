@@ -8,121 +8,229 @@ nav_order: 3
 
 # State
 
-Моделът на проектиране на състоянието се използва, когато обектът променя поведението си въз основа на вътрешното си състояние.
+Моделът на проектиране на състоянието позволява промяна на поведението на обект при промяна на неговото вътрешно състояние. Обикновено различните състояния са обособени в отделни класове и поведението се делегира на текущото състояние.
 
-Ако трябва да променим поведението на даден обект въз основа на неговото състояние, можем да имаме променлива на състоянието в обекта. След това използвайте **if-else** condition block, за да извършите различни действия въз основа на състоянието. Моделът на състоянието се използва, за да осигури систематичен и свободно свързан начин за постигане на това чрез и реализации. **Контекст** на State модел е класът, който има State препратка към една от конкретните реализации на State. Контекстът препраща искането към State обект за обработка. Нека разберем това с един прост пример. Да предположим, че искаме да внедрим дистанционно за телевизор с прост бутон за извършване на действие. Ако State е включена, тя ще включи телевизора и ако State е изключена, ще изключи телевизора. Можем да го приложим, като използваме if-else условие като по-долу
+State елиминира условната логика чрез полиморфизъм. Неговото използване спестява писането на множество условни конструкции, силно разклонена логика и нарушаването на OCP.
+
+За реализация на шаблона State са необходими контекст (обект, чието поведение се променя), състояние (описвано чрез интерфейс, дефиниращ поведението на контекста) и конкретни състояния (представляващи реализации на дадено състояние).
+
+Основни характеристики на State:
+
+- поведението на обекта варира според състоянието
+
+- преходите между различните състояния могат да бъдат контролирани или от самите състояния, или от контекста (съществуват различни имплементации)
+
+- използва композиция и полиморфизъм
+
+- намалява присъствието на условна логика.
+
+
+Нека разгледаме пример за билет, който може да бъде резервиран, закупен и отказан. Реализацията по-долу е без използване на шаблона State.
 
 ```
-public class TVRemoteBasic {
 
-	private String state="";
-	
-	public void setState(String state){
-		this.state=state;
-	}
-	
-	public String doAction(){
-		if (state.equalsIgnoreCase("ON")){
-			return "TV is turned ON";
-		} else if(state.equalsIgnoreCase("OFF")){
-			return "TV is turned OFF";
-		}
-	}
+public class Ticket {
 
-	public static void main(String args[]){
-		TVRemoteBasic remote = new TVRemoteBasic();
-		
-		remote.setState("ON");
-		System.out.println(remote.doAction());
-		
-		remote.setState("OFF");
-		System.out.println(remote.doAction());
-	}
+    private String ticketState;
+    private int ticketId;
 
+    public Ticket(int ticketId) {
+        this.ticketState = "available";
+        this.ticketId = ticketId;
+    }
+
+    public String book() {
+        if (ticketState.equalsIgnoreCase("available")) {
+            ticketState = "booked";
+            return "Ticket with id = " + this.ticketId + " has been booked";
+        } else if (ticketState.equalsIgnoreCase("booked")) {
+            return "Ticket with id = " + this.ticketId + " has been already booked";
+        } else if (ticketState.equalsIgnoreCase("sold")) {
+            return "Ticket with id = " + this.ticketId + " has been already sold";
+        }
+        return "Unrecognized state";
+    }
+
+    public String buy() {
+        if (ticketState.equalsIgnoreCase("available") ||
+				ticketState.equalsIgnoreCase("booked")) {
+            ticketState = "sold";
+            return "Ticket with id = " + this.ticketId + " has been sold";
+        } else if (ticketState.equalsIgnoreCase("sold")) {
+            return "Ticket with id = " + this.ticketId + " has been already sold";
+        }
+        return "Unrecognized state";
+    }
+
+    public String cancel() {
+        if (ticketState.equalsIgnoreCase("available")) {
+            return "Available ticket cannot be cancelled";
+        } else if (ticketState.equalsIgnoreCase("booked")) {
+            ticketState = "available";
+            return "Ticket with id = " + this.ticketId + " has been cancelled";
+        } else if (ticketState.equalsIgnoreCase("sold")) {
+            return "Sold ticket cannot be cancelled";
+        }
+        return "Unrecognized state";
+    }
+
+}
+
+public class Application {
+
+    public static void main(String[] args) {
+        Ticket ticket = new Ticket(123);
+        System.out.println(ticket.book());
+        System.out.println(ticket.cancel());
+        System.out.println(ticket.buy());
+        System.out.println(ticket.cancel());
+
+    }
+}
+
+```
+
+Полученият резултат от изпълнението на горния пример е:
+
+```
+Ticket with id = 123 has been booked
+Ticket with id = 123 has been cancelled
+Ticket with id = 123 has been sold
+Sold ticket cannot be cancelled
+
+```
+
+
+По-долу е показан същия пример, но реализиран с използване на шаблона State:
+
+
+```
+public interface TicketState {
+
+    String bookTicket(Ticket ticket);
+
+    String buyTicket(Ticket ticket);
+
+    String cancelTicket(Ticket ticket);
+}
+```
+Интерфейсът описва възможните състояния на контекста (Ticket).
+
+Всяко състояние представлява отделен клас.
+
+```
+public class AvailableTicket implements TicketState {
+
+    @Override
+    public String bookTicket(Ticket ticket) {
+        ticket.setTicketState(new BookedTicket());
+        return "Ticket with id = " + ticket.getTicketId() + " has been booked";
+    }
+
+    @Override
+    public String buyTicket(Ticket ticket) {
+        ticket.setTicketState(new SoldTicket());
+        return "Ticket with id = " + ticket.getTicketId() + " has been sold";
+    }
+
+    @Override
+    public String cancelTicket(Ticket ticket) {
+        return "No ticket to be cancelled";
+    }
 }
 ```
 
-Забележете, че клиентският код трябва да знае конкретните стойности, които да използва за задаване на състоянието на дистанционното. Освен това, ако броят на State се увеличи, тогава тясното свързване между имплементацията и клиентския код ще бъде много трудно да се поддържа и разширява. Сега ще използваме модела на състоянието, за да приложим горния пример за дистанционно управление на телевизора.
-
-На първо място ще създадем State интерфейс, който ще дефинира метода, който трябва да бъде реализиран от различни конкретни състояния и контекстен клас
-
 ```
-public interface State {
+public class BookedTicket implements TicketState {
+    @Override
+    public String bookTicket(Ticket ticket) {
+        return "Ticket with id = " + ticket.getTicketId() + " is already booked";
+    }
 
-	String doAction();
+    @Override
+    public String buyTicket(Ticket ticket) {
+        ticket.setTicketState(new SoldTicket());
+        return "Ticket with id = " + ticket.getTicketId() + " has been sold";
+    }
+
+    @Override
+    public String cancelTicket(Ticket ticket) {
+        ticket.setTicketState(new AvailableTicket());
+        return "Ticket with id = " + ticket.getTicketId() + " has been cancelled";
+    }
 }
 ```
 
-В нашия пример можем да имаме две състояния - едно за включване на телевизора и друго, за да го изключим. Така че ще създадем две конкретни State реализации за тези поведения
-
 ```
-public class TVStartState implements State {
+public class SoldTicket implements TicketState {
+    @Override
+    public String bookTicket(Ticket ticket) {
+        return "Sold ticket cannot be booked";
+    }
 
-	@Override
-	public String doAction() {
-		return "TV is turned ON";
-	}
+    @Override
+    public String buyTicket(Ticket ticket) {
+        return "Sold ticket cannot be sold";
+    }
 
+    @Override
+    public String cancelTicket(Ticket ticket) {
+        return "Sold ticket cannot be cancelled";
+    }
 }
 ```
 
+Контекстният обект ще изглежда така:
+
 ```
-public class TVStopState implements State {
+public class Ticket {
 
-	@Override
-	public String doAction() {
-		return "TV is turned OFF";
-	}
+    private TicketState ticketState = new AvailableTicket();
+    private int ticketId;
 
+    public Ticket(int ticketId) {
+        this.ticketId = ticketId;
+    }
+
+    public int getTicketId() {
+        return ticketId;
+    }
+
+    public void setTicketState(TicketState ticketState) {
+        this.ticketState = ticketState;
+    }
+
+    public String book() {
+        return ticketState.bookTicket(this);
+    }
+
+    public String buy() {
+        return ticketState.buyTicket(this);
+    }
+
+    public String cancel() {
+        return ticketState.cancelTicket(this);
+    }
 }
-```
-
-Сега сме готови да реализираме нашия Контекстен обект, който ще промени поведението си въз основа на вътрешното си състояние.
 
 ```
-public class TVContext implements State {
 
-	private State tvState;
+Тестването и резултата от реализирания код изглеждат по напълно идентичен начин.
 
-	public void setState(State state) {
-		this.tvState=state;
-	}
+Реализираният със State пример представя ясно разделение на ролите и при него състоянието не пази вътрешни данни.
 
-	public State getState() {
-		return this.tvState;
-	}
+Важно е да се отбележи, че State не е универсално решение за премахване на всякаква условна логика.
 
-	@Override
-	public String doAction() {
-		return this.tvState.doAction();
-	}
 
-}
-```
 
-Забележете, че контекстът също така изпълнява State и поддържа справка за текущото му състояние и препраща искането до изпълнението на State.
+В заключение, използването на шаблона State е подходящо при решаване на задачи, при които:
 
-Сега нека да напишем проста програма, за да тестваме нашия State модел на изпълнение на TV Remote.
+- има ясно разграничени състояния
 
-```
-public class TVRemote {
+- поведението на обекта се променя
 
-	public static void main(String[] args) {
-		TVContext context = new TVContext();
-		State tvStartState = new TVStartState();
-		State tvStopState = new TVStopState();
-		
-		context.setState(tvStartState);
-		System.out.println(context.doAction());
-		
-		
-		context.setState(tvStopState);
-		System.out.println(context.doAction());
-	}
+- наблюдават се преходи между различни състояния
 
-}
-```
+- не желаем условна логика в контекста.
 
-Изходът на горната програма е същият като основната реализация на TV Remote, без да се използва модел на състояние
 
-Ползите от използването на State модел за прилагане на полиморфно поведение са ясно видими. Шансовете за грешка са по-малки и е много лесно да добавите повече състояния за допълнително поведение. По този начин правим нашия код по-здрав, лесно поддържан и гъвкав. Също така State модел помогна да се избегне условната логика if-else или switch-case в този сценарий.
