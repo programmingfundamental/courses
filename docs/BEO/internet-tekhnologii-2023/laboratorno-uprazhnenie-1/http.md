@@ -58,11 +58,11 @@ HTTP заявките и отговорите споделят подобна с
 
 Началният ред и хедърите на съобщението са общо известни като head на заявката, докато неговият payload е известен като body.
 
-<figure><img src="../../../assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../assets/image (8).png" alt=""><figcaption></figcaption></figure>
 
 ### Структура  на заявка
 
-<figure><img src="../../../assets/image (36).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../assets/image (36).png" alt=""><figcaption></figcaption></figure>
 
 Заявките се състоят от следните елементи:
 
@@ -78,7 +78,7 @@ HTTP заявките и отговорите споделят подобна с
 
 ### Структура на отговор
 
-<figure><img src="../../../assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../assets/image.png" alt=""><figcaption></figcaption></figure>
 
 Отговорите се състоят от следните елементи:
 
@@ -108,7 +108,7 @@ http://www.example.com:80/path/to/myfile.html?key1=value1\&key2=value2
 
 Пример за GET заявка:
 
-<figure><img src="../../../assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 Други характеристики на GET заявките са:
 
@@ -139,7 +139,7 @@ HTTP методът POST изпраща данни към сървъра. Тип
 При този метод двойките име-стойност, съдържащи предаваните данни, се изпращат посредством тялото на заявката.
 
 
-<figure><img src="../../../assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 Други характеристики на POST заявките са:
 
