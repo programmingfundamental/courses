@@ -114,21 +114,35 @@ public class VolumeDecorator extends BookDecorator {
 public class Main {
     public static void main(String[] args) {
         Book book = new BookImpl();
-        Book firstBook = new HardCoverDecorator(book);
-        System.out.println("First " + firstBook.decorateBook() + "\n");
-        Book secondBook = new HardCoverDecorator(new CoverIllustrationsDecorator(book));
-        System.out.println("Second " + secondBook.decorateBook() + "\n");
-        Book thirdBook = new VolumeDecorator(new HardCoverDecorator(new BookIllustrationsDecorator(book)));
-        System.out.println("Third " + thirdBook.decorateBook() + "\n");
-        Book fourthBook = new VolumeDecorator(new VolumeDecorator(book));
-        System.out.println("Fourth " + fourthBook.decorateBook());
+        book = new HardCoverDecorator(book);
+        book = new BookIllustrationsDecorator(book);
+        System.out.println("First " + book.decorateBook());
+
+        Book secondBook = new BookImpl();
+        secondBook = new HardCoverDecorator(secondBook);
+        secondBook = new CoverIllustrationDecorator(secondBook);
+        secondBook = new VolumeDecorator(secondBook);
+        System.out.println("Second " + secondBook.decorateBook());
     }
 }
 ```
 
-Вижда се, че създаването на книги може да става с различни комбинации от декларираните декоратори, както и повече от едно извикване на един и същи декоратор.
+Вижда се, че създаването на книги може да става с различни комбинации от декларираните декоратори, като е възможно повече от едно извикване на един и същи декоратор (не е приложимо в контекста на конкретния пример).
 
 Резултатът е следния:
+
+```
+
+First Book has 
+ hard cover
+ book illustrations
+Second Book has 
+ hard cover
+ cover illustration
+ more than one volume
+
+```
+
 
 Кога се използва декоратор:
 
@@ -138,7 +152,7 @@ public class Main {
 
 Предимства от използването на шаблон Декоратор:
 
-* Предоставя по-голяма гъвкавост в сравнение със статичното наследяване;\\
+* Предоставя по-голяма гъвкавост в сравнение със статичното наследяване;
 * Разширява и променя поведението на обекта без използване на подкласове/наследници;
 * Дава възможност за комбиниране на различни функционалности чрез обгръщане на дадения клас с различни декоратори (последните три обекта в горния пример).
 
