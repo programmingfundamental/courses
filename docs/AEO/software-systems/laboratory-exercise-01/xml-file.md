@@ -4,7 +4,7 @@ title: The XML File
 parent: Laboratory Exercise 1
 grand_parent: Software Systems
 nav_order: 2
-#permalink: /docs/AEO/software-systems/laboratory-exercise-1/xml-file
+#permalink: /docs/AEO/software-systems/laboratory-exercise-01/xml-file
 ---
 
 # Introduction to XML
