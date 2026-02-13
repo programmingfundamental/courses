@@ -4,7 +4,7 @@ title: Introduction to JavaFX
 parent: Laboratory Exercise 1
 grand_parent: Software Systems
 nav_order: 1
-#permalink: /docs/AEO/software-systems/laboratory-exercise-1/introduction
+#permalink: /docs/AEO/software-systems/laboratory-exercise-01/introduction
 ---
 
 # Introduction to JavaFX
