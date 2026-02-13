@@ -53,17 +53,56 @@ Label resultLabel = new Label("Резултат:");
 
 ## 3. Обработка на събития
 
-  Към бутона се добавя обработка на събитие, която се изпълнява при неговото натискане. В този код се прочитат стойностите от текстовите полета, преобразуват се в числа, извършва се аритметичното изчисление и резултатът се извежда на екрана. Това показва как се задава поведение на приложението при взаимодействие с потребителския интерфейс.    
+  След създаването на графичните компоненти е необходимо да се дефинира поведение на приложението при взаимодействие с потребителя. В случая това означава да се зададе действие, което да се изпълнява при натискане на бутона „Изчисли“.
 
+В JavaFX обработката на събития се реализира чрез интерфейса EventHandler<T>, където T е типът на събитието. При натискане на бутон се генерира събитие от тип ActionEvent. Поради това се създава отделен клас, който имплементира EventHandler<ActionEvent>.  
+
+### 3.1. Свързване на бутона с обработчика
+
+В метода start() се създава инстанция на обработчика и тя се подава на метода setOnAction():
 
 ```java
-calculateButton.setOnAction(event -> {
-    double num1 = Double.parseDouble(number1Field.getText());
-    double num2 = Double.parseDouble(number2Field.getText());
-    double result = num1 + num2;
+calculateButton.setOnAction(
+        new CalculateButtonHandler(number1Field, number2Field, resultLabel)
+);
+```
 
-    resultLabel.setText("Резултат: " + result);
-});
+### 3.2. Реализация на класа за обработка на събитието
+
+Външният клас CalculateButtonHandler представлява обработчик на събития за бутона „Изчисли“. Той имплементира интерфейса EventHandler<ActionEvent>, което позволява да се зададе какво се случва при натискане на бутона.
+
+В конструктора на класа се подават съществуващите компоненти от интерфейса – двете текстови полета и етикетът за резултата. В метода handle() се извършва следното:   
+- Четат се числата от текстовите полета.
+- Извършва се събиране на двете числа.
+- Резултатът се показва в Label.
+
+```java
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+
+public class CalculateButtonHandler implements EventHandler<ActionEvent> {
+
+    private final TextField number1Field;
+    private final TextField number2Field;
+    private final Label resultLabel;
+
+    public CalculateButtonHandler(TextField number1Field, TextField number2Field, Label resultLabel) {
+        this.number1Field = number1Field;
+        this.number2Field = number2Field;
+        this.resultLabel = resultLabel;
+    }
+
+    @Override
+    public void handle(ActionEvent event) {
+        double num1 = Double.parseDouble(number1Field.getText());
+        double num2 = Double.parseDouble(number2Field.getText());
+        double result = num1 + num2;
+
+        resultLabel.setText("Резултат: " + result);
+    }
+}
 ```
 
 ## 4. Подреждане на компонентите (Layout)
@@ -75,6 +114,7 @@ calculateButton.setOnAction(event -> {
 VBox layout = new VBox(12);
 layout.setAlignment(Pos.CENTER);
 layout.setPadding(new Insets(20));
+layout.setSpacing(10);
 layout.getChildren().addAll(
         number1Field,
         number2Field,
@@ -83,7 +123,7 @@ layout.getChildren().addAll(
 );
 ```
 
-Контейнерът VBox подрежда всички компоненти един под друг в реда, в който са добавени. Стойността 12 задава разстоянието между отделните елементи. Чрез setAlignment(Pos.CENTER) всички компоненти се подравняват в центъра на прозореца, което подобрява визуалния изглед. Методът setPadding(new Insets(20)) добавя вътрешно отстояние между компонентите и краищата на прозореца, като предотвратява „залепването“ им до ръбовете.
+Контейнерът VBox подрежда всички компоненти един под друг в реда, в който са добавени. Стойността 12 задава разстоянието между отделните елементи. Чрез setAlignment(Pos.CENTER) всички компоненти се подравняват в центъра на прозореца, което подобрява визуалния изглед. Методът setPadding(new Insets(20)) добавя вътрешно отстояние между компонентите и краищата на прозореца, като предотвратява „залепването“ им до ръбовете.setSpacing(10) задава допълнително разстояние между отделните компоненти.
 
 ## 5. Създаване на декор и показване на прозореца
 
@@ -116,6 +156,6 @@ public class Launcher {
 
 При успешно стартиране трябва да се визуализира следния прозорец:     
 <br>
-<img width="402" height="339" alt="Screenshot 2026-02-03 151410" src="https://github.com/user-attachments/assets/41735391-83c5-4049-9247-73e193b2e7dd" />
+<img width="402" height="339" alt="Screenshot 2026-02-13 235747" src="https://github.com/user-attachments/assets/87f6dbff-523a-4e2b-97ae-726483e83fbf" />
 
 
