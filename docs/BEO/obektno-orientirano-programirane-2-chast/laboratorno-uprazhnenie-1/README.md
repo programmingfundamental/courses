@@ -115,6 +115,23 @@ public class ProjectDocumentation {
 
 ```
 
+Ето и как изглеждат UML-диаграмите на трите посочени примера:
+
+
+<img width="176" height="233" alt="classicComposition" src="https://github.com/user-attachments/assets/23ab1905-0fd2-4514-82ec-066756dde617" />
+
+
+
+<img width="370" height="217" alt="multipleComposition" src="https://github.com/user-attachments/assets/2b5a9c55-5df7-4ed4-ae67-2ed3d2f7b8b5" />
+
+
+
+<img width="406" height="234" alt="controlledComposition" src="https://github.com/user-attachments/assets/20068d34-7a35-46f4-89ab-9591f766f145" />
+
+
+
+
+
 ## Агрегация
 
 Агрегацията се използва в случаи, в които връзката между обектите е по-слаба и частта може да съществува самостоятелно извън контекста на сложния обект. Обект, който е използван като част от сложен такъв, може да бъде споделян между различни сложни обекти и в различни контексти, като по този начин той е независим от тяхното съществуване.
@@ -295,6 +312,41 @@ public class LoanBook {
 }
 
 ```
+
+UML-диаграмите на всеки един от примерите са посочени по-долу (следват реда на дефиниране):
+
+<img width="187" height="185" alt="simpleAggregation" src="https://github.com/user-attachments/assets/943f83f1-acd8-4f40-9500-a7a726a24eac" />
+
+
+
+
+
+<img width="216" height="234" alt="unidirectionalAggregation" src="https://github.com/user-attachments/assets/a945ce35-c9ba-4f7a-810b-b367d5bb5d13" />
+
+
+
+
+
+<img width="202" height="234" alt="bDirectionalAgg" src="https://github.com/user-attachments/assets/1de35aa1-f1e4-4cfa-baf0-1a6fc8e82a13" />
+
+
+
+
+
+<img width="278" height="250" alt="aggregationWithMediator" src="https://github.com/user-attachments/assets/7d607427-3755-4695-a110-8595b2a8d99f" />
+
+
+
+
+
+<img width="278" height="201" alt="associativeAggregation" src="https://github.com/user-attachments/assets/6cc9f9c9-56cc-4fa2-9a19-19e3ea6cf56b" />
+
+
+
+
+
+
+
 
 ## Композиция vs Агрегация
 
