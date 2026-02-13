@@ -4,7 +4,7 @@ title: First Project with JavaFX
 parent: Laboratory Exercise 1
 grand_parent: Software Systems
 nav_order: 3
-#permalink: /docs/AEO/software-systems/laboratory-exercise-1/first-javafx-project
+#permalink: /docs/AEO/software-systems/laboratory-exercise-01/first-javafx-project
 ---
 
 # Creating the First JavaFX Project in IntelliJ IDE
