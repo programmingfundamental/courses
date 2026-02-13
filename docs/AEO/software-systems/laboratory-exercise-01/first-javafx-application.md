@@ -4,7 +4,7 @@ title: First Application with JavaFX
 parent: Laboratory Exercise 1
 grand_parent: Software Systems
 nav_order: 4
-#permalink: /docs/AEO/software-systems/laboratory-exercise-1/first-javafx-application
+#permalink: /docs/AEO/software-systems/laboratory-exercise-01/first-javafx-application
 ---
 
 # Creating the First JavaFX Application – Calculator
