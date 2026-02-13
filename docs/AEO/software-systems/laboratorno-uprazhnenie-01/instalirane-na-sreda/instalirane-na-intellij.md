@@ -5,23 +5,24 @@ parent: Environment Setup
 grand_parent: Laboratory Exercise 1
 ancestor: Software Systems
 nav_order: 2
-#permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-1/ide/instalirane-na-sreda/instalirane-na-intellij
+#permalink: /docs/AEO/software-systems/laboratory-exercise-1/ide-installation/intellij
 ---
 
-# Инсталиране на IntelliJ
+# Installing IntelliJ
 
-Като интегрирана среда за разработка ще използваме Intellij.
+As the integrated development environment (IDE), we will use IntelliJ.
 
-Версии:
- - Community - версия със свободен лиценз, за разработка с Java SDK. Тази версия е напълно достатъчна за курс по ООП. [Директен линк](https://www.jetbrains.com/idea/download/?section=windows)
+Versions:
 
- - Ultimate - версия с комерсиален лиценз. Допълнително включва Web и enterprise приложения. Може да използвате с акауните си в @onlineedu.tu-varna.bg. [Директен линк](https://www.jetbrains.com/shop/eform/students)
+* **Community** - free version for Java SDK development. This version is fully sufficient for an OOP course. [Direct link](https://www.jetbrains.com/idea/download/?section=windows)
 
-Изисквания
+* **Ultimate** - commercial version. Includes additional support for web and enterprise applications. You can use it with your @onlineedu.tu-varna.bg accounts. [Direct link](https://www.jetbrains.com/shop/eform/students)
 
-* 64-bit versions of Microsoft Windows 10, 8
-* 2 GB RAM minimum, 8 GB RAM recommended
+Requirements:
+
+* 64-bit versions of Microsoft Windows 10 or 8
+* Minimum 2 GB RAM, 8 GB RAM recommended
 * 2.5 GB hard disk space, SSD recommended
-* 1024x768 minimum screen resolution
+* Minimum screen resolution 1024x768
 
-Следвате стандартните стъпки за инсталация, като изберете .java файловете да се обработват от Intellij.
+Follow the standard installation steps, making sure to associate .java files with IntelliJ.
