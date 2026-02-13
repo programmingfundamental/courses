@@ -5,7 +5,7 @@ parent: Environment Setup
 grand_parent: Laboratory Exercise 1
 ancestor: Software Systems
 nav_order: 2
-#permalink: /docs/AEO/software-systems/laboratory-exercise-1/ide-installation/intellij
+#permalink: /docs/AEO/software-systems/laboratory-exercise-01/ide-installation/intellij
 ---
 
 # Installing IntelliJ
