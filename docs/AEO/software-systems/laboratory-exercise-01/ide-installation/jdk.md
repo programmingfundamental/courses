@@ -6,7 +6,7 @@ parent: Environment Setup
 grand_parent: Laboratory Exercise 1
 ancestor: Software Systems
 nav_order: 1
-#permalink: /docs/AEO/software-systems/laboratory-exercise-1/ide-installation/jdk
+#permalink: /docs/AEO/software-systems/laboratory-exercise-01/ide-installation/jdk
 ---
 
 # Installing JDK
