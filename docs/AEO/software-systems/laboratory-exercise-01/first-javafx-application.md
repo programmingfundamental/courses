@@ -50,17 +50,71 @@ Label resultLabel = new Label("Result:");
 
 ## 3. Event Handling
 
-Add an event handler to the button, which executes when the button is clicked. This code reads the values from the text fields, converts them to numbers, performs the arithmetic operation, and displays the result. This demonstrates how to define application behavior in response to user interface interactions.
+After creating the graphical components, it is necessary to define the
+application's behavior when the user interacts with it. In this case,
+this means assigning an action that will be executed when the
+**"Calculate"** button is pressed.
 
-```java
-calculateButton.setOnAction(event -> {
-    double num1 = Double.parseDouble(number1Field.getText());
-    double num2 = Double.parseDouble(number2Field.getText());
-    double result = num1 + num2;
+In JavaFX, event handling is implemented through the `EventHandler<T>`
+interface, where `T` is the type of the event. When a button is pressed,
+an event of type `ActionEvent` is generated. For this reason, a separate
+class is created that implements `EventHandler<ActionEvent>`.
 
-    resultLabel.setText("Result: " + result);
-});
+### 3.1. Connecting the Button to the Handler
+
+In the `start()` method, an instance of the handler is created and
+passed to the `setOnAction()` method:
+
+``` java
+calculateButton.setOnAction(
+        new CalculateButtonHandler(number1Field, number2Field, resultLabel)
+);
 ```
+
+### 3.2. Implementation of the Event Handler Class
+
+The external class `CalculateButtonHandler` represents an event handler
+for the **"Calculate"** button. It implements the
+`EventHandler<ActionEvent>` interface, which allows defining what
+happens when the button is pressed.
+
+In the constructor of the class, the existing UI components are passed
+-- the two text fields and the result label. In the `handle()` method,
+the following steps are performed:
+
+-   The numbers are read from the text fields.
+-   The two numbers are added.
+-   The result is displayed in the `Label`.
+
+``` java
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+
+public class CalculateButtonHandler implements EventHandler<ActionEvent> {
+
+    private final TextField number1Field;
+    private final TextField number2Field;
+    private final Label resultLabel;
+
+    public CalculateButtonHandler(TextField number1Field, TextField number2Field, Label resultLabel) {
+        this.number1Field = number1Field;
+        this.number2Field = number2Field;
+        this.resultLabel = resultLabel;
+    }
+
+    @Override
+    public void handle(ActionEvent event) {
+        double num1 = Double.parseDouble(number1Field.getText());
+        double num2 = Double.parseDouble(number2Field.getText());
+        double result = num1 + num2;
+
+        resultLabel.setText("Result: " + result);
+    }
+}
+```
+
 
 ## 4. Arranging Components (Layout)
 
@@ -108,4 +162,6 @@ public class Launcher {
 }
 ```
 
-When launched successfully, the following window should appear: <br> <img width="402" height="339" alt="Screenshot 2026-02-03 151410" src="https://github.com/user-attachments/assets/41735391-83c5-4049-9247-73e193b2e7dd" />
+When launched successfully, the following window should appear:    
+<br>
+<img width="402" height="339" alt="Screenshot 2026-02-15 231615" src="https://github.com/user-attachments/assets/b5e0c6c1-7f3d-4f21-9b8b-165af477f61d" />
