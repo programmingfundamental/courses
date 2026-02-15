@@ -6,24 +6,25 @@ grand_parent: Software Systems
 nav_order: 1
 ---
 
-# Примерна задача: Създаване на "Dashboard" изглед с FXML и различни Контейнери за изглед
+# Sample Task: Creating a "Dashboard" View with FXML and Various Layout Containers
 
-Ще създадем прост "Dashboard" изглед, който демонстрира как различни Контейнери за изглед могат да се комбинират за изграждане на сложен интерфейс. Всяка секция на дашборда ще използва различен Контейнер за изглед.
+We will create a simple "Dashboard" view that demonstrates how different Layout Containers can be combined to build a complex interface. Each section of the dashboard will use a different Layout Container.
 
-### 1. Създайте нов JavaFX проект в IntelliJ IDEA
+### 1. Create a new JavaFX project in IntelliJ IDEA
 
-### 2. Създайте нов пакет и класове
+### 2. Create a new package and classes
 
-Създайте новия пакет `bg.tu_varna.sit.ps.sample_task`. В него създайте класовете `DashboardApplication`, `Dashboard` и `Launcher`.
+Create a new package `bg.tu_varna.sit.ps.sample_task`. Inside it, create the classes `DashboardApplication`, `Dashboard`, and `Launcher`.
 
-- **`src/main/java/bg/tu_varna/sit/ps/sample_task/DashboardApplication.java`** (Основен клас):
-  Този клас ще стартира приложението и ще зареди нашия FXML файл.
+- **`src/main/java/bg/tu_varna/sit/ps/sample_task/DashboardApplication.java`** (Main Class):
+  This class will start the application and load our FXML file.
 
   ```java
-  package bg.tu_varna.sit.ps.sample_task;`
+  package bg.tu_varna.sit.ps.sample_task;
 
   import javafx.application.Application;
   import javafx.fxml.FXMLLoader;
+  import javafx.scene.Parent;
   import javafx.scene.Scene;
   import javafx.stage.Stage;
 
@@ -32,22 +33,22 @@ nav_order: 1
   public class DashboardApplication extends Application {
       @Override
       public void start(Stage stage) throws IOException {
-          // Зареждаме нашия FXML файл
+          // Load our FXML file
           FXMLLoader fxmlLoader = new FXMLLoader(DashboardApplication.class.getResource("dashboard-view.fxml"));
 
           Parent root = fxmlLoader.load();
           new Dashboard(root);
 
-          Scene scene = new Scene(root, 800, 600);
-          stage.setTitle("Dashboard Application"); // Заглавие на прозореца
-          stage.setScene(scene); // Задаваме графичната сцена на прозореца
-          stage.show(); // Показваме прозореца
+          Scene scene = new Scene(root, 900, 650);
+          stage.setTitle("Dashboard Application"); // Window title
+          stage.setScene(scene); // Set the scene graph for the window
+          stage.show(); // Show the window
       }
   }
   ```
 
 - **`src/main/java/bg/tu_varna/sit/ps/sample_task/Dashboard.java`**
-  Този клас ще служи добавяне на интерактивност за нашия FXML файл. В момента няма да добавяме логика, но той е необходим за свързване на FXML с Java кода.
+  This class will serve to add interactivity to our FXML file. At the moment, we won't add logic, but it is necessary for linking the FXML with the Java code.
 
   ```java
   package bg.tu_varna.sit.ps.sample_task;
@@ -73,8 +74,8 @@ nav_order: 1
   }
   ```
 
-- **`src/main/java/bg/tu_varna/sit/ps/sample_task/Launcher.java`** (Клас за стартиране):
-  Този клас съдържа основния метод за стартиране на приложението.
+- **`src/main/java/bg/tu_varna/sit/ps/sample_task/Launcher.java`** (Startup Class):
+  This class contains the main method to start the application.
 
   ```java
   package bg.tu_varna.sit.ps.sample_task;
@@ -88,12 +89,12 @@ nav_order: 1
   }
   ```
 
-### 3. Създайте FXML файл за изгледа на дашборда
+### 3. Create the FXML file for the Dashboard view
 
-Създайте нова директория `resources/bg/tu_varna/sit/ps/sample_task/` и в нея създайте FXML файл с името `dashboard-view.fxml`.
+Create a new directory `resources/bg/tu_varna/sit/ps/sample_task/` and inside it create an FXML file named `dashboard-view.fxml`.
 
-- **`src/main/resources/bg/tu_varna/sit/ps/sample_task/dashboard-view.fxml`** (FXML файл):
-  Това е мястото, където ще дефинираме нашия потребителски интерфейс, използвайки комбинация от Контейнери за изглед.
+- **`src/main/resources/bg/tu_varna/sit/ps/sample_task/dashboard-view.fxml`** (FXML file):
+  This is where we define our user interface using a combination of Layout Containers.
 
   ```xml
   <?xml version="1.0" encoding="UTF-8"?>
@@ -103,7 +104,7 @@ nav_order: 1
   <?import javafx.scene.text.Font?>
 
   <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-              prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+              prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
       <top>
           <HBox alignment="CENTER" prefHeight="50.0" BorderPane.alignment="CENTER">
               <Label text="Dashboard Header" fx:id="headerLabel">
@@ -115,19 +116,19 @@ nav_order: 1
       </top>
       <left>
           <VBox prefWidth="150.0" spacing="10.0" style="-fx-background-color: #E0E0E0; -fx-padding: 10;"
-                BorderPane.alignment="CENTER">
+              BorderPane.alignment="CENTER">
               <Label text="Navigation" fx:id="navigationLabel"/>
               <Button maxWidth="1.7976931348623157E308" text="Section 1"/>
               <Button maxWidth="1.7976931348623157E308" text="Section 2"/>
-              <Button maxWidth="1.7976931348623157E308" text="Section 3"/>
-              <Region VBox.vgrow="ALWAYS"/> <!-- Разделител, който се разтяга -->
+              <ToggleButton fx:id="statusToggleButton" maxWidth="1.7976931348623157E308" text="Status"/>
+              <Region VBox.vgrow="ALWAYS"/>
               <Button maxWidth="1.7976931348623157E308" text="Settings"/>
           </VBox>
       </left>
       <center>
-          <StackPane BorderPane.alignment="CENTER">
-              <!-- Пример за съдържание, което ще се наслагва -->
-              <VBox alignment="CENTER" spacing="20.0">
+          <StackPane BorderPane.alignment="CENTER" style="-fx-padding: 10;">
+              <!-- Welcome VBox -->
+              <VBox alignment="CENTER" spacing="20.0" visible="true"> <!-- visible="true" by default -->
                   <Label text="Welcome to your Dashboard!"/>
                   <Label text="Select a section from the left."/>
               </VBox>
@@ -135,15 +136,15 @@ nav_order: 1
       </center>
       <bottom>
           <HBox alignment="CENTER_LEFT" prefHeight="30.0" style="-fx-background-color: #F0F0F0; -fx-padding: 5;"
-                BorderPane.alignment="CENTER">
+              BorderPane.alignment="CENTER">
               <Label text="Status: Ready"/>
-              <Region HBox.hgrow="ALWAYS"/> <!-- Разделител, който се разтяга -->
+              <Region HBox.hgrow="ALWAYS"/>
               <Label text="Version 1.0"/>
           </HBox>
       </bottom>
       <right>
           <FlowPane hgap="5.0" vgap="5.0" prefWidth="150.0" orientation="VERTICAL"
-                    style="-fx-background-color: #D0D0D0; -fx-padding: 10;" BorderPane.alignment="CENTER">
+                  style="-fx-background-color: #D0D0D0; -fx-padding: 10;" BorderPane.alignment="CENTER">
               <Label text="Quick Links"/>
               <Button text="Link A"/>
               <Button text="Link B"/>
@@ -155,59 +156,74 @@ nav_order: 1
   </BorderPane>
   ```
 
-**Обяснения на FXML файла:**
+**Explanations of the FXML file:**
 
-- **`BorderPane` (корен):** Използваме `BorderPane` като основен Контейнер за изглед, тъй като той е идеален за общата структура на едно приложение с хедър (горе), футър (долу), странични навигации (ляво/дясно) и централно съдържание.
-  - Регионът `top` съдържа `HBox` за заглавието.
-  - Регионът `left` съдържа `VBox` за навигационно меню.
-  - Регионът `center` съдържа `StackPane` за основното съдържание (в момента само приветствие).
-  - Регионът `bottom` съдържа друг `HBox` за статус бар.
-  - Регионът `right` съдържа `FlowPane` за бързи връзки.
-- **`HBox` (Хоризонтална кутия):** Използван в `top` и `bottom` за хоризонтално подреждане на елементи. Забележете `alignment="CENTER"` и `alignment="CENTER_LEFT"`. `Region HBox.hgrow="ALWAYS"` се използва като разделител, който заема цялото останало пространство, бутайки другите елементи към краищата.
-- **`VBox` (Вертикална кутия):** Използван в `left` за вертикално подреждане на бутоните за навигация. `spacing="10.0"` добавя 10px разстояние между бутоните. `Region VBox.vgrow="ALWAYS"` за да бутне "Settings" бутона най-отдолу.
-- **`StackPane` (Наслагващ контейнер):** Използван в `center`. В момента има само един `VBox` в него, но ако добавим още елементи, те ще се наслагват един върху друг в центъра.
-- **`FlowPane` (Поточен контейнер):** Използван в `right` региона за "Quick Links". С `orientation="VERTICAL"`, бутоните се подреждат вертикално и "преливат" на нов ред, ако няма достатъчно място. `hgap` и `vgap` задават разстояния между елементите.
+- **`BorderPane` (root):** We use `BorderPane` as the main Layout Container, as it is ideal for the general structure of an application with a header (top), footer (bottom), side navigation (left/right), and central content.
+  - The `top` region contains an `HBox` for the title.
+  - The `left` region contains a `VBox` for the navigation menu.
+  - The `center` region contains a `StackPane` for the main content (currently just a greeting).
+  - The `bottom` region contains another `HBox` for the status bar.
+  - The `right` region contains a `FlowPane` for quick links.
+- **`HBox` (Horizontal Box):** Used in `top` and `bottom` for horizontal arrangement of elements. Note `alignment="CENTER"` and `alignment="CENTER_LEFT"`. `Region HBox.hgrow="ALWAYS"` is used as a separator that occupies all remaining space, pushing other elements to the edges.
+- **`VBox` (Vertical Box):** Used in `left` for vertical arrangement of navigation buttons. `spacing="10.0"` adds a 10px distance between buttons. `Region VBox.vgrow="ALWAYS"` is used to push the "Settings" button to the very bottom.
+- **`StackPane` (Stacking Container):** Used in `center`. Currently it has only one `VBox` in it, but if we add more elements, they will stack on top of each other in the center.
+- **`FlowPane` (Flow Container):** Used in the `right` region for "Quick Links". With `orientation="VERTICAL"`, the buttons are arranged vertically and "overflow" to a new column if there isn't enough space. `hgap` and `vgap` set the distances between elements.
 
-### 4. Добавяне на `GridPane` и `AnchorPane` към центъра на `StackPane`
+### 4. Adding `GridPane` and `AnchorPane` to the center of the `StackPane`
 
-За да демонстрираме и другите Контейнери за изглед, ще променим съдържанието на `StackPane` в централния регион. Представете си, че искаме да покажем две различни секции: една с форма (GridPane) и една с информация (AnchorPane), които биха могли да се сменят. За целите на това упражнение ще ги направим видими едновременно, но ще са в `StackPane`.
+To demonstrate the other Layout Containers, we will change the content of the `StackPane` in the central region. Imagine we want to show two different sections: one with a form (GridPane) and one with information (AnchorPane), which could be swapped. For the purposes of this exercise, we will make them visible simultaneously, but they will reside within the `StackPane`.
 
-Можете да замените текущия `VBox` в `StackPane` със следния код:
+You can replace the current `VBox` in the `StackPane` with the following code:
 
 ```xml
 <!-- Welcome VBox -->
-<VBox alignment="CENTER" spacing="20.0" visible="true"> <!-- visible="true" по подразбиране -->
+<VBox alignment="CENTER" spacing="20.0" visible="true"> <!-- visible="true" by default -->
     <Label text="Welcome to your Dashboard!"/>
     <Label text="Select a section from the left."/>
 </VBox>
 
-<!-- Пример за GridPane: Форма за потребителски данни -->
+<!-- Example GridPane: User Data Form -->
 <GridPane alignment="CENTER" hgap="10.0" vgap="10.0" style="-fx-background-color: #FFFFFF; -fx-padding: 20;"
-          StackPane.alignment="CENTER"
-          visible="false"> <!-- Променете на visible="true", за да го видите -->
+            StackPane.alignment="CENTER"
+            visible="false"> <!-- Change to visible="true" to see it -->
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints minWidth="100.0" prefWidth="120.0"/>
+        <ColumnConstraints minWidth="200.0" prefWidth="250.0"/>
     </columnConstraints>
-    <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-    </rowConstraints>
-    <Label text="First Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-    <TextField GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-    <Label text="Last Name:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-    <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-    <TextField GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-    <Button maxWidth="1.7976931348623157E308" text="Submit" GridPane.columnSpan="2"
-            GridPane.halignment="CENTER" GridPane.rowIndex="3"/>
+
+    <Label text="User Registration" GridPane.columnSpan="2"
+            style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+
+    <Label text="Name:" GridPane.rowIndex="1"/>
+    <TextField promptText="Enter name" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+    <Label text="Password:" GridPane.rowIndex="2"/>
+    <PasswordField promptText="Enter password" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+    <Label text="Profile Type:" GridPane.rowIndex="3"/>
+    <HBox spacing="10.0" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="3">
+        <fx:define>
+            <ToggleGroup fx:id="accountGroup"/>
+        </fx:define>
+        <RadioButton fx:id="personalRadio" text="Personal" toggleGroup="$accountGroup"/>
+        <RadioButton text="Business" toggleGroup="$accountGroup"/>
+    </HBox>
+
+    <Label text="Subscription:" GridPane.rowIndex="4"/>
+    <CheckBox fx:id="newsletterCheckBox" text="Subscribe to newsletter" GridPane.columnIndex="1"
+                GridPane.rowIndex="4"/>
+
+    <Label text="Notes:" GridPane.rowIndex="5" GridPane.valignment="TOP"/>
+    <TextArea prefHeight="80.0" promptText="Enter additional info..." wrapText="true"
+                GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+    <Button maxWidth="Infinity" text="Submit" GridPane.columnIndex="1" GridPane.rowIndex="6"
+            defaultButton="true"/>
 </GridPane>
 
-<!-- Пример за AnchorPane: Детайлна информация -->
+<!-- Example AnchorPane: Detailed Information -->
 <AnchorPane style="-fx-background-color: #F8F8F8; -fx-padding: 20;" StackPane.alignment="CENTER"
-            visible="false"> <!-- Променете на visible="true", за да го видите -->
+            visible="false"> <!-- Change to visible="true" to see it -->
     <Label layoutX="14.0" layoutY="14.0" text="Detailed Information" AnchorPane.leftAnchor="10.0"
             AnchorPane.topAnchor="10.0">
         <font>
@@ -215,25 +231,25 @@ nav_order: 1
         </font>
     </Label>
     <TextArea editable="false" layoutX="14.0" layoutY="40.0" prefHeight="150.0" prefWidth="300.0"
-              text="This is a detailed information section. It can contain various types of content, images, or longer texts."
-              wrapText="true" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0"
-              AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0"/>
+                text="This is a detailed information section. It can contain various types of content, images, or longer texts."
+                wrapText="true" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0"
+                AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0"/>
     <Button layoutX="273.0" layoutY="210.0" mnemonicParsing="false" text="Close"
             AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0"/>
 </AnchorPane>
 ```
 
-**Пояснения за добавените графични елементи:**
+**Explanations for the added graphical elements:**
 
-- **`GridPane` (Мрежов контейнер):**
-  - Дефинирани са `columnConstraints` (ограничения за колони) и `rowConstraints` (ограничения за редове), за да управляваме ширината на колоните и височината на редовете.
-  - Всяка контрола е позиционирана с `GridPane.columnIndex` и `GridPane.rowIndex`.
-  - `GridPane.columnSpan` позволява на бутона "Submit" да заема две колони.
-- **`AnchorPane` (Закотвящ контейнер):**
-  - Използва `AnchorPane.topAnchor`, `AnchorPane.bottomAnchor`, `AnchorPane.leftAnchor`, `AnchorPane.rightAnchor` за закачане на контролите към страните на контейнера. Това осигурява адаптивно позициониране спрямо размера на `AnchorPane`.
-  - `Label` е закачен горе вляво, `TextArea` е закачен от всички страни (с отстояние), а `Button` е закачен долу вдясно.
-- **`visible="false"`:** В примера е зададено `visible="false"` на `GridPane` и `AnchorPane`, така че само приветствието да се вижда първоначално. За да ги видите, променете `visible="true"` за съответната контрола. В реално приложение, това би било управлявано от Java код въз основа на избор от навигацията.
+- **`GridPane` (Grid Container):**
+  - `columnConstraints` (column constraints) and `rowConstraints` (row constraints) are defined to manage column width and row height.
+  - Each control is positioned using `GridPane.columnIndex` and `GridPane.rowIndex`.
+  - `GridPane.columnSpan` allows the "Submit" button to occupy two columns.
+- **`AnchorPane` (Anchoring Container):**
+  - Uses `AnchorPane.topAnchor`, `AnchorPane.bottomAnchor`, `AnchorPane.leftAnchor`, `AnchorPane.rightAnchor` to anchor controls to the sides of the container. This ensures adaptive positioning relative to the size of the `AnchorPane`.
+  - The `Label` is anchored top-left, the `TextArea` is anchored on all sides (with an offset), and the `Button` is anchored bottom-right.
+- **`visible="false"`:** In the example, `visible="false"` is set for the `GridPane` and `AnchorPane` so that only the greeting is visible initially. To see them, change to `visible="true"` for the respective control. In a real application, this would be managed by Java code based on navigation selection.
 
-### 5. Стартиране на приложението
+### 5. Running the Application
 
-Стартирайте `Launcher.java` (десен бутон -> `Run 'Launcher.main()'`). Трябва да видите прозореца на приложението с всички дефинирани Контейнери за изглед. Експериментирайте с размера на прозореца, за да видите как Контейнерите за изглед реагират на промяната.
+Run `Launcher.java` (Right click -> `Run 'Launcher.main()'`). You should see the application window with all defined Layout Containers. Experiment with the window size to see how the Layout Containers react to changes.

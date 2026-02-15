@@ -7,33 +7,35 @@ nav_order: 6
 #permalink: /docs/software-systems/laboratorno-uprazhnenie-6
 ---
 
-# Упражнение #6
+# Exercise #6
 
-JavaFX използва CSS (Cascading Style Sheets) за отделяне на визуалното оформление от логиката на приложението, подобно на уеб разработката. JavaFX CSS се базира на спецификацията CSS 2.1 с някои елементи от CSS 3.
+JavaFX uses CSS (Cascading Style Sheets) to separate visual design from application logic, similar to web development. JavaFX CSS is based on the CSS 2.1 specification with some elements from CSS 3.
 
-**1. Специфики на JavaFX CSS:**
+**1. JavaFX CSS Specifics:**
 
-- Префикс -fx-: Всички специфични за JavaFX свойства започват с префикса -fx- (напр. -fx-background-color вместо background-color).
+- **Prefix -fx-:** All JavaFX-specific properties start with the -fx- prefix (e.g., `-fx-background-color` instead of `background-color`).
 
-- Файлове: Обикновено се използват външни файлове с разширение .css.
+- **Files:** External files with the `.css` extension are typically used.
 
-- Default Style: По подразбиране JavaFX приложенията използват темата Modena.
+- **Default Style:** By default, JavaFX applications use the Modena theme.
 
-**1.2. Селектори:**
+- [List of Styles](https://programmingfundamental.github.io/courses/docs/AEO/software-systems/laboratorno-uprazhnenie-06/css-stilove) - A detailed overview of CSS styles in JavaFX.
 
-- Типов селектор: Прилага се за всички елементи от даден тип (напр. .button за всички бутони).
+**1.2. Selectors:**
 
-- ID селектор: Прилага се за конкретен графичен елемент чрез неговия ID (дефиниран с setId() в Java или fx:id във FXML). В CSS се използва символът # (напр. #login-button).
+- **Type Selector:** Applied to all elements of a given type (e.g., `.button` for all buttons).
 
-- Стилов клас (Style Class): Позволява прилагане на стил към група елементи. В CSS се използва символът . (напр. .main-label).
+- **ID Selector:** Applied to a specific graphical element via its ID (defined with `setId()` in Java or `fx:id` in FXML). In CSS, the `#` symbol is used (e.g., `#login-button`).
 
-**3. Нива на приложение на стиловете (по приоритет):**
+- **Style Class:** Allows applying a style to a group of elements. In CSS, the `.` symbol is used (e.g., `.main-label`).
 
-1. **Inline styles (директно в кода):** Използва се методът setStyle("-fx-property: value;"). (Най-висок приоритет).
+**3. Style Application Levels (by priority):**
 
-2. **External CSS (външен файл):** Добавя се към графичната сцена или конкретен контейнер: scene.getStylesheets().add("style.css");.
+1. **Inline styles (directly in the code):** The method `setStyle("-fx-property: value;")` is used. (Highest priority).
 
-3. **User Agent Stylesheet:** Системната тема (Modena).
+2. **External CSS (external file):** Added to the scene graph or a specific container: `scene.getStylesheets().add("style.css");`.
 
-**4. Псевдо-класове:**
-JavaFX поддържа състояния като :hover (при посочване с мишка), :pressed (при натискане) и :focused (когато елементът е на фокус).
+3. **User Agent Stylesheet:** The system theme (Modena).
+
+**4. Pseudo-classes:**
+JavaFX supports states such as `:hover` (when hovering with the mouse), `:pressed` (when clicked), and `:focused` (when the element has focus).

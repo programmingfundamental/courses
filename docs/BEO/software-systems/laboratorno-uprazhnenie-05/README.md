@@ -31,7 +31,7 @@ permalink: /docs/software-systems/laboratorno-uprazhnenie-5
     ```
 
 - **`ListView` (Списъчен изглед):** Визуализира списък, в който се виждат няколко елемента едновременно.
-  - _Свойства:_ selectionMode (SINGLE или MULTIPLE).
+  - _Свойства:_ selectionMode (`SINGLE` или `MULTIPLE`).
 
   - _Употреба:_ Списък със съобщения, файлове в папка.
 

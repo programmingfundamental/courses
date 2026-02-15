@@ -4,7 +4,7 @@ title: Списък на стилове (CSS) в JavaFX
 parent: Лабораторно упражнение 6
 grand_parent: Програмни системи
 nav_order: 1
-permalink: /docs/software-systems/laboratorno-uprazhnenie-6/css-stilove
+permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-6/css-stilove
 ---
 
 ### 1. Фон и запълване (Backgrounds & Fills)
