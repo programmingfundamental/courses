@@ -4,7 +4,7 @@ title: List of Styles (CSS) in JavaFX
 parent: Laboratory Exercise 6
 grand_parent: Software Systems
 nav_order: 1
-permalink: /docs/software-systems/laboratorno-uprazhnenie-6/css-stilove
+permalink: /docs/AEO/software-systems/laboratorno-uprazhnenie-6/css-stilove
 ---
 
 ### 1. Backgrounds & Fills
