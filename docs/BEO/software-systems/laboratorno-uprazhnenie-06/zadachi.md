@@ -3,7 +3,7 @@ layout: default
 title: Задачи
 parent: Лабораторно упражнение 6
 grand_parent: Програмни системи
-nav_order: 2
+nav_order: 3
 ---
 
 # Самостоятелни задачи

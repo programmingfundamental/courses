@@ -38,7 +38,7 @@ nav_order: 1
           Parent root = fxmlLoader.load();
           new Dashboard(root);
 
-          Scene scene = new Scene(root, 800, 600);
+          Scene scene = new Scene(root, 900, 650);
           stage.setTitle("Dashboard Application"); // Заглавие на прозореца
           stage.setScene(scene); // Задаваме графичната сцена на прозореца
           stage.show(); // Показваме прозореца
@@ -103,7 +103,7 @@ nav_order: 1
   <?import javafx.scene.text.Font?>
 
   <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-              prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+              prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
       <top>
           <HBox alignment="CENTER" prefHeight="50.0" BorderPane.alignment="CENTER">
               <Label text="Dashboard Header" fx:id="headerLabel">
@@ -115,19 +115,19 @@ nav_order: 1
       </top>
       <left>
           <VBox prefWidth="150.0" spacing="10.0" style="-fx-background-color: #E0E0E0; -fx-padding: 10;"
-                BorderPane.alignment="CENTER">
+              BorderPane.alignment="CENTER">
               <Label text="Navigation" fx:id="navigationLabel"/>
               <Button maxWidth="1.7976931348623157E308" text="Section 1"/>
               <Button maxWidth="1.7976931348623157E308" text="Section 2"/>
-              <Button maxWidth="1.7976931348623157E308" text="Section 3"/>
-              <Region VBox.vgrow="ALWAYS"/> <!-- Разделител, който се разтяга -->
+              <ToggleButton fx:id="statusToggleButton" maxWidth="1.7976931348623157E308" text="Status"/>
+              <Region VBox.vgrow="ALWAYS"/>
               <Button maxWidth="1.7976931348623157E308" text="Settings"/>
           </VBox>
       </left>
       <center>
-          <StackPane BorderPane.alignment="CENTER">
-              <!-- Пример за съдържание, което ще се наслагва -->
-              <VBox alignment="CENTER" spacing="20.0">
+          <StackPane BorderPane.alignment="CENTER" style="-fx-padding: 10;">
+              <!-- Welcome VBox -->
+              <VBox alignment="CENTER" spacing="20.0" visible="true"> <!-- visible="true" по подразбиране -->
                   <Label text="Welcome to your Dashboard!"/>
                   <Label text="Select a section from the left."/>
               </VBox>
@@ -135,15 +135,15 @@ nav_order: 1
       </center>
       <bottom>
           <HBox alignment="CENTER_LEFT" prefHeight="30.0" style="-fx-background-color: #F0F0F0; -fx-padding: 5;"
-                BorderPane.alignment="CENTER">
+              BorderPane.alignment="CENTER">
               <Label text="Status: Ready"/>
-              <Region HBox.hgrow="ALWAYS"/> <!-- Разделител, който се разтяга -->
+              <Region HBox.hgrow="ALWAYS"/>
               <Label text="Version 1.0"/>
           </HBox>
       </bottom>
       <right>
           <FlowPane hgap="5.0" vgap="5.0" prefWidth="150.0" orientation="VERTICAL"
-                    style="-fx-background-color: #D0D0D0; -fx-padding: 10;" BorderPane.alignment="CENTER">
+                  style="-fx-background-color: #D0D0D0; -fx-padding: 10;" BorderPane.alignment="CENTER">
               <Label text="Quick Links"/>
               <Button text="Link A"/>
               <Button text="Link B"/>
@@ -183,26 +183,41 @@ nav_order: 1
 
 <!-- Пример за GridPane: Форма за потребителски данни -->
 <GridPane alignment="CENTER" hgap="10.0" vgap="10.0" style="-fx-background-color: #FFFFFF; -fx-padding: 20;"
-          StackPane.alignment="CENTER"
-          visible="false"> <!-- Променете на visible="true", за да го видите -->
+            StackPane.alignment="CENTER"
+            visible="false"> <!-- Променете на visible="true", за да го видите -->
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints minWidth="100.0" prefWidth="120.0"/>
+        <ColumnConstraints minWidth="200.0" prefWidth="250.0"/>
     </columnConstraints>
-    <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-    </rowConstraints>
-    <Label text="First Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-    <TextField GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-    <Label text="Last Name:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-    <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-    <TextField GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-    <Button maxWidth="1.7976931348623157E308" text="Submit" GridPane.columnSpan="2"
-            GridPane.halignment="CENTER" GridPane.rowIndex="3"/>
+
+    <Label text="User Registration" GridPane.columnSpan="2"
+            style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+
+    <Label text="Name:" GridPane.rowIndex="1"/>
+    <TextField promptText="Enter name" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+    <Label text="Password:" GridPane.rowIndex="2"/>
+    <PasswordField promptText="Enter password" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+    <Label text="Profile Type:" GridPane.rowIndex="3"/>
+    <HBox spacing="10.0" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="3">
+        <fx:define>
+            <ToggleGroup fx:id="accountGroup"/>
+        </fx:define>
+        <RadioButton fx:id="personalRadio" text="Personal" toggleGroup="$accountGroup"/>
+        <RadioButton text="Business" toggleGroup="$accountGroup"/>
+    </HBox>
+
+    <Label text="Subscription:" GridPane.rowIndex="4"/>
+    <CheckBox fx:id="newsletterCheckBox" text="Subscribe to newsletter" GridPane.columnIndex="1"
+                GridPane.rowIndex="4"/>
+
+    <Label text="Notes:" GridPane.rowIndex="5" GridPane.valignment="TOP"/>
+    <TextArea prefHeight="80.0" promptText="Enter additional info..." wrapText="true"
+                GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+    <Button maxWidth="Infinity" text="Submit" GridPane.columnIndex="1" GridPane.rowIndex="6"
+            defaultButton="true"/>
 </GridPane>
 
 <!-- Пример за AnchorPane: Детайлна информация -->
@@ -215,9 +230,9 @@ nav_order: 1
         </font>
     </Label>
     <TextArea editable="false" layoutX="14.0" layoutY="40.0" prefHeight="150.0" prefWidth="300.0"
-              text="This is a detailed information section. It can contain various types of content, images, or longer texts."
-              wrapText="true" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0"
-              AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0"/>
+                text="This is a detailed information section. It can contain various types of content, images, or longer texts."
+                wrapText="true" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0"
+                AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0"/>
     <Button layoutX="273.0" layoutY="210.0" mnemonicParsing="false" text="Close"
             AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0"/>
 </AnchorPane>
