@@ -3,40 +3,40 @@ layout: default
 title: Tasks
 parent: Laboratory Exercise 6
 grand_parent: Software Systems
-nav_order: 2
+nav_order: 3
 ---
 
-# Самостоятелни задачи
+# Independent Tasks
 
-### 1. Задача 1: Създаване на "Тъмна тема" (Dark Mode)
+### 1. Task 1: Creating a "Dark Mode"
 
-- Създайте копие на предходния CSS файл под името dark-style.css.
+- Create a copy of the previous CSS file under the name `dark-style.css`.
 
-- Променете цветовете така, че фонът на картата да бъде тъмно сив (#2d3436), а текстовете – светли (#dfe6e9).
+- Change the colors so that the card background is dark gray (`#2d3436`) and the text is light (`#dfe6e9`).
 
-- Променете цвета на сенките (dropshadow), за да изглеждат по-дискретни върху тъмен фон.
+- Modify the shadow color (`dropshadow`) to make it look more discreet on a dark background.
 
-- Приложете новия файл наблюдавайте разликите.
+- Apply the new file and observe the differences.
 
-### 2. Задача 2: Стилизиране на форма за вход по ID
+### 2. Task 2: Styling a Login Form by ID
 
-- Създайте форма за вход (Login) с два TextField и един Button.
+- Create a login form (Login) with two `TextField` nodes and one `Button`.
 
-- Във FXML файла задайте id="login-button" за бутона.
+- In the FXML file, set `id="login-button"` for the button.
 
-- В CSS файла използвайте ID селектор (#login-button), за да направите бутона ярко оранжев само в тази конкретна форма, без да променяте останалите бутони в приложението.
+- In the CSS file, use an ID selector (`#login-button`) to make the button bright orange only in this specific form, without changing the other buttons in the application.
 
-- Използвайте -fx-background-insets за добавяне на ефект на "вътрешна сянка" върху текстовите полета.
+- Use `-fx-background-insets` to add an "inner shadow" effect to the text fields.
 
-### 3. Задача 3: Работа със заоблени елементи
+### 3. Task 3: Working with Rounded Elements
 
-- Създайте графичен елемент HBox, който съдържа три бутона: "Начало", "Галерия", "Контакти".
+- Create an `HBox` graphical element containing three buttons: "Home", "Gallery", "Contacts".
 
-- Стилизирайте ги чрез CSS класове така, че:
-  - Само левият бутон да има заоблени ъгли отляво.
+- Style them using CSS classes so that:
+  - Only the left button has rounded corners on the left side.
 
-  - Само десният бутон да има заоблени ъгли отдясно.
+  - Only the right button has rounded corners on the right side.
 
-  - Средният бутон да остане с прави ъгли.
+  - The middle button remains with square corners.
 
-- Това се постига чрез свойството -fx-background-radius (приема четири стойности за всеки ъгъл).
+- This is achieved using the `-fx-background-radius` property (which accepts four values, one for each corner).

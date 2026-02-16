@@ -6,147 +6,138 @@ grand_parent: Software Systems
 nav_order: 1
 ---
 
-# Примерна задача: Система за регистрация на софтуерен лиценз
+# Sample Task: Software License Registration System
 
-Ще създадем форма, която събира данни от потребителя, използва различни видове контроли и показва диалогов прозорец за потвърждение.
+We will create a form that collects data from the user, uses various types of controls, and displays a confirmation dialog box.
 
-### 1. Създайте нов JavaFX проект в IntelliJ IDEA
+### 1. Create a new JavaFX project in IntelliJ IDEA
 
-### 2. Създайте контролер клас `LicenseController` (`src/main/java/bg/tu_varna/sit/ps/lab5/LicenseController.java`)
+### 2. Create the controller class `ProjectController` (`src/main/java/bg/tu_varna/sit/ps/lab5/ProjectController.java`)
 
 ```java
-  package bg.tu_varna.sit.ps.lab5;
+package bg.tu_varna.sit.ps.lab5;
 
-  import javafx.fxml.FXML;
-  import javafx.scene.control.*;
-  import javafx.util.Duration;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
 
-  import java.util.Optional;
+import java.time.LocalDate;
+import java.util.Optional;
 
-  public class LicenseController {
-      @FXML
-      private TextField userNameField;
-      @FXML
-      private ComboBox<String> licenseCombo;
-      @FXML
-      private CheckBox termsCheckBox;
+public class ProjectController {
+    @FXML private ComboBox<String> priorityCombo;
+    @FXML private ListView<String> modulesListView;
+    @FXML private DatePicker deadlinePicker;
+    @FXML private ColorPicker projectColorPicker;
 
-      @FXML
-      public void initialize() {
-          licenseCombo.getItems().addAll("Личен", "Бизнес", "Академичен");
-          licenseCombo.getSelectionModel().selectFirst();
+    @FXML
+    public void initialize() {
+        // 1. Working with ComboBox
+        priorityCombo.getItems().addAll("Low", "Medium", "High", "Critical");
+        priorityCombo.getSelectionModel().select(1);
 
-          Tooltip checkTooltip = new Tooltip("Трябва да се съгласите с условията, за да продължите");
-          checkTooltip.setShowDelay(Duration.millis(500));
+        // 2. Working with ListView and selection
+        ObservableList<String> availableModules = FXCollections.observableArrayList(
+                "Database", "User Interface", "Security", "API Integration", "Logging");
+        modulesListView.setItems(availableModules);
+        modulesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-          termsCheckBox.setTooltip(checkTooltip);
-      }
+        // 3. Adding a ContextMenu to the ListView
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem infoItem = new MenuItem("View module info");
+        infoItem.setOnAction(e -> {
+            String selected = modulesListView.getSelectionModel().getSelectedItem();
+            if (selected != null) {
+                showDialog(Alert.AlertType.INFORMATION, "Info", "Details for: " + selected);
+            }
+        });
+        contextMenu.getItems().add(infoItem);
+        modulesListView.setContextMenu(contextMenu);
 
-      @FXML
-      protected void handleRegister() {
-          if (!termsCheckBox.isSelected()) {
-              showDialog(Alert.AlertType.WARNING, "Предупреждение", "Трябва да приемете условията, за да продължите!");
-              return;
-          }
+        deadlinePicker.setValue(LocalDate.now().plusMonths(1));
+    }
 
-          String user = userNameField.getText();
-          String type = licenseCombo.getValue();
+    @FXML
+    protected void handleSaveProject() {
+        ObservableList<String> selectedModules = modulesListView.getSelectionModel().getSelectedItems();
 
-          if (user == null || user.trim().isEmpty()) {
-              showDialog(Alert.AlertType.ERROR, "Грешка", "Полето 'Потребителско име' не може да бъде празно!");
-          } else {
-              Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
-              confirm.setTitle("Потвърждение на регистрацията");
-              confirm.setHeaderText("Ще регистрирате лиценз на името на: " + user);
-              confirm.setContentText("Избран тип лиценз: " + type + ". Желаете ли да продължите?");
+        if (selectedModules.isEmpty()) {
+            showDialog(Alert.AlertType.WARNING, "Warning", "Please select at least one module!");
+            return;
+        }
 
-              ((Button) confirm.getDialogPane().lookupButton(ButtonType.OK)).setText("Да");
-              ((Button) confirm.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Отказ");
+        // Using a CONFIRMATION dialog
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Confirmation");
+        confirm.setHeaderText("Save Project");
+        confirm.setContentText(String.format("Selected modules: %d\nPriority: %s\nDeadline: %s\nDo you wish to continue?",
+                selectedModules.size(), priorityCombo.getValue(), deadlinePicker.getValue()));
 
-              Optional<ButtonType> result = confirm.showAndWait();
-              if (result.isPresent() && result.get() == ButtonType.OK) {
-                  showDialog(Alert.AlertType.INFORMATION, "Успех", "Лицензът беше регистриран успешно!");
-              }
-          }
-      }
+        Optional<ButtonType> result = confirm.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            showDialog(Alert.AlertType.INFORMATION, "Success", "Project saved successfully!");
+        }
+    }
 
-      @FXML
-      protected void handleClear() {
-          userNameField.clear();
-          termsCheckBox.setSelected(false);
-          licenseCombo.getSelectionModel().selectFirst();
-      }
-
-      private void showDialog(Alert.AlertType type, String title, String content) {
-          Alert alert = new Alert(type);
-          alert.setTitle(title);
-          alert.setHeaderText(null);
-          alert.setContentText(content);
-          alert.showAndWait();
-      }
-  }
-
+    private void showDialog(Alert.AlertType type, String title, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+}
 ```
 
-### 3. Създайте FXML файл `license_view.fxml` (`src/main/resources/bg/tu_varna/sit/ps/lab5/license_view.fxml` )
+### 3. Create the FXML file `project-view.fxml` (`src/main/resources/bg/tu_varna/sit/ps/lab5/project-view.fxml` )
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane fx:controller="bg.tu_varna.sit.ps.lab5.LicenseController"
-          xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10">
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="bg.tu_varna.sit.ps.lab5.ProjectController" prefWidth="400">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <Label text="Регистрация на софтуерен лиценз"
-           style="-fx-font-size: 18px; -fx-font-weight: bold;"
-           GridPane.columnSpan="2" GridPane.halignment="CENTER"/>
+    <Label text="New Project Configuration" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
 
-    <Label text="Потребителско име:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-    <TextField fx:id="userNameField" GridPane.rowIndex="1" GridPane.columnIndex="1">
+    <Label text="Project Priority:"/>
+    <ComboBox fx:id="priorityCombo" maxWidth="Infinity"/>
+
+    <Label text="Select modules (hold Ctrl for multiple selection):"/>
+    <ListView fx:id="modulesListView" prefHeight="120">
         <tooltip>
-            <Tooltip text="Въведете вашето пълно име"/>
+            <Tooltip text="Right click for additional options"/>
         </tooltip>
-    </TextField>
+    </ListView>
 
-    <Label text="Тип лиценз:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-    <ComboBox fx:id="licenseCombo" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="150">
-        <tooltip>
-            <Tooltip text="Изберете план, който отговаря на вашите нужди"/>
-        </tooltip>
-    </ComboBox>
-
-    <Label text="Приемам условията:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-    <CheckBox fx:id="termsCheckBox" GridPane.rowIndex="3" GridPane.columnIndex="1">
-        <tooltip>
-            <Tooltip text="Трябва да се съгласите с лицензионното споразумение"/>
-        </tooltip>
-    </CheckBox>
-
-    <HBox spacing="10" alignment="CENTER_RIGHT" GridPane.rowIndex="4" GridPane.columnIndex="1">
-        <Button text="Регистрирай" onAction="#handleRegister">
-            <tooltip>
-                <Tooltip text="Изпращане на данните за регистрация"/>
-            </tooltip>
-        </Button>
-        <Button text="Изчисти" onAction="#handleClear">
-            <tooltip>
-                <Tooltip text="Изчистване на всички полета във формата"/>
-            </tooltip>
-        </Button>
+    <HBox spacing="10">
+        <VBox HBox.hgrow="ALWAYS">
+            <Label text="Deadline:"/>
+            <DatePicker fx:id="deadlinePicker" maxWidth="Infinity"/>
+        </VBox>
+        <VBox>
+            <Label text="Project Color:"/>
+            <ColorPicker fx:id="projectColorPicker" maxWidth="Infinity"/>
+        </VBox>
     </HBox>
-</GridPane>
+
+    <Separator/>
+
+    <Button text="Save Configuration" onAction="#handleSaveProject"
+            maxWidth="Infinity" style="-fx-padding: 10;"/>
+</VBox>
 ```
 
-### 4. Променете зареждания изглед в основния клас на приложението `HelloApplication` (`src/main/java/bg/tu_varna/sit/ps/lab5/HelloApplication.java`)
+### 4. Change the loaded view in the main application class `HelloApplication` (`src/main/java/bg/tu_varna/sit/ps/lab5/HelloApplication.java`)
 
 ```java
-  package bg.tu_varna.sit.ps.lab5;
+package bg.tu_varna.sit.ps.lab5;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -158,13 +149,13 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("license-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 345, 200);
-        stage.setTitle("Hello!");
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("project-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 450, 550);
+        stage.setTitle("Project Management!");
         stage.setScene(scene);
         stage.show();
     }
 }
 ```
 
-### 5. Стартирайте приложението
+### 5. Start the application

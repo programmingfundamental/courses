@@ -7,30 +7,90 @@ nav_order: 5
 #permalink: /docs/software-systems/laboratorno-uprazhnenie-5
 ---
 
-# Упражнение #5
+# Exercise #5
 
-**1. Базови контроли (UI Controls):**
-Контролите са графични елементи, с които потребителят взаимодейства. Всички те наследяват класа Control и притежават характеристики като стилизиране, фокус и състояния.
+Controls are graphical elements with which the user interacts. All of them inherit the `Control` class and possess characteristics such as styling, focus, and states.
 
-- Текстови контроли: `Label` (само за четене), `TextField` (едноредов текст), `PasswordField` (скрит текст), `TextArea` (многоредов текст).
+**1. List Controls and Selectors**
 
-- Бутони: `Button` (стандартен), `ToggleButton` (превключващ), `CheckBox` (независим избор), `RadioButton` (избор от група – изисква `ToggleGroup`).
+These are used for selecting values from a predefined set.
 
-- Списъчни контроли: `ComboBox` (падащо меню), `ListView` (списък), `ChoiceBox`.
+- **`ComboBox` (Drop-down list):** A compact element that expands when clicked.
+  - _Properties:_ items (ObservableList with values), editable (allows the user to type their own value).
 
-**2. Обработка на действия (Event Handling):**
-Най-често използваният метод за обработка на взаимодействие е `setOnAction()`. В FXML това се дефинира чрез атрибута `onAction="#methodName"`, а методът се реализира в контролер класа с анотация `@FXML`.
+  - _Usage:_ Choosing a city, country, or category.
 
-**3. Popup контроли:**
-Това са елементи, които се появяват над основното съдържание:
+  - _Attributes:_
+    - `promptText` (text shown in the field when no value is selected).
+    - `value` (the current selection value).
+    - `editable`: Boolean value (`true`/`false`). Allows the user to enter text that is not in the list.
 
-- `Tooltip`: Кратка подсказка при задържане на мишката върху елемент.
+  - _Example:_
+    ```xml
+    <ComboBox fx:id="priorityCombo" promptText="Priority" editable="false" />
+    ```
 
-- `ContextMenu`: Меню, което се появява при десен бутон на мишката.
+- **`ListView` (List View):** Visualizes a list where several items are visible simultaneously.
+  - _Properties:_ selectionMode (`SINGLE` or `MULTIPLE`).
 
-**4. Диалогови форми (Dialogs):**
-JavaFX предоставя вградения клас Alert за стандартни съобщения и класа Dialog за персонализирани прозорци.
+  - _Usage:_ Message list, files in a folder.
 
-- Типове Alert: `INFORMATION`, `WARNING`, `ERROR`, `CONFIRMATION`.
+  - _Attributes:_
+    - `orientation`: Defines the direction of the list (`HORIZONTAL` or `VERTICAL`). Defaults to vertical.
 
-- Интерактивни диалози: `TextInputDialog` (за въвеждане на стринг) и `ChoiceDialog` (за избор от списък).
+    - `prefHeight` / `prefWidth`: Frequently used to limit the size of the visible area.
+
+  - _Configuration in Java (Controller):_ Unlike others, the selection mode is often configured here:
+
+    ```java
+    listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    ```
+
+  - _Example:_
+    ```xml
+    <ListView fx:id="fileList" prefHeight="200" prefWidth="300" />
+    ```
+
+- **`DatePicker` (Date Picker):** Combines a text field with a popup calendar.
+  - _Properties:_ value (LocalDate type object).
+
+  - _Usage:_ Date of birth, start/end date of an event.
+
+  - _Attributes:_
+    - `showWeekNumbers`: Boolean value for displaying week numbers.
+    - `promptText`: The expected date format (e.g., `"dd.mm.yyyy"`).
+
+  - _Example:_
+    ```xml
+    <DatePicker fx:id="deadlinePicker" promptText="Deadline" showWeekNumbers="true" />
+    ```
+
+- **`ColorPicker` (Color Picker):** A palette for choosing a color.
+  - _Properties:_ value (Color type object).
+
+  - _Usage:_ Setting the application theme, graphic editors.
+
+  - _Attributes:_
+    - `style`: Often used to set the base color via `-fx-color-label-visible`.
+
+  - _Example:_
+    ```xml
+    <ColorPicker fx:id="colorPicker" value="#ff0000" />
+    ```
+
+**2. Event Handling:**
+The most commonly used method for handling interaction is `setOnAction()`. In FXML, this is defined via the `onAction="#methodName"` attribute, and the method is implemented in the controller class with the `@FXML` annotation.
+
+**3. Popup Controls:**
+These are elements that appear over the main content:
+
+- **`Tooltip`**: A brief hint when hovering the mouse over an element.
+
+- **`ContextMenu`**: A menu that appears upon right-clicking.
+
+**4. Dialogs:**
+JavaFX provides the built-in `Alert` class for standard messages and the `Dialog` class for personalized windows.
+
+- Alert Types: `INFORMATION`, `WARNING`, `ERROR`, `CONFIRMATION`.
+
+- Interactive Dialogs: `TextInputDialog` (for string input) and `ChoiceDialog` (for list selection).
