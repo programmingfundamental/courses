@@ -3,7 +3,7 @@ layout: default
 title: LSP - Liskov Substitution Principle
 parent: Лабораторно упражнение 2
 grand_parent: Обектно-ориентирано програмиране - 2 част
-nav_order: 1
+nav_order: 3
 ---
 
 # LSP - Liskov Substitution Principle

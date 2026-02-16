@@ -1,7 +1,7 @@
 ---
 layout: default
 title: OCP - Open-Closed Principle
-parent: Лабораторно упражнение 1
+parent: Лабораторно упражнение 2
 grand_parent: Обектно-ориентирано програмиране - 2 част
 nav_order: 2
 ---
