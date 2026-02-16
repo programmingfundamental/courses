@@ -1,0 +1,74 @@
+---
+layout: default
+title: Лабораторно упражнение 2
+parent: Обектно-ориентирано програмиране - 2 част - проект
+has_children: true
+nav_order: 1
+permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1
+---
+
+# Лабораторно упражнение 2
+
+## Демонстрация на CLI
+
+Използване на netsh за мрежова диагностика и конфигурация
+
+### Стъпка 1: Стартиране
+
+```ps
+netsh
+```
+
+### Стъпка 2: Демонстрация на HELP система
+
+```ps
+help
+```
+
+### Стъпка 3: Команда без параметри
+
+```ps
+interface
+```
+
+### Стъпка 4: Диагностична команда
+
+```ps
+show interface
+```
+
+### Стъпка 5: Деактивиране на интерфейса
+
+```ps
+set interface name="Ethernet" admin=disabled
+```
+
+### Стъпка 6: Проверка на промяната
+
+```ps
+show interface
+```
+
+### Стъпка 7: Активиране обратно
+
+```ps
+set interface name="Ethernet" admin=enabled
+```
+
+### Стъпка 8: Финална проверка
+
+```ps
+show interface
+```
+
+### Стъпка 9: Връщане назад
+
+```ps
+..
+```
+
+### Стъпка 10: Изход
+
+```ps
+exit
+```
