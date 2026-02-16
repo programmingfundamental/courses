@@ -31,6 +31,9 @@ permalink: /docs/obektno-orientirano-programirane-2-chast/laboratorno-uprazhneni
 
 - класическа композиция, при която "частите" се създават в самия композитен обект
 
+  <img width="176" height="233" alt="classicComposition" src="https://github.com/user-attachments/assets/23ab1905-0fd2-4514-82ec-066756dde617" />
+  
+
 ```java
 public class Address {
 
@@ -55,6 +58,11 @@ public class Building {
 ```
 
 - композиция с множественост (1-to-many)
+
+
+<img width="370" height="217" alt="multipleComposition" src="https://github.com/user-attachments/assets/2b5a9c55-5df7-4ed4-ae67-2ed3d2f7b8b5" />
+
+
 
 ```java
 public class DocumentationChapter {
@@ -82,6 +90,11 @@ public class ProjectDocumentation {
 ```
 
 - композиция с контрол върху достъпа, при която частите са капсулирани и композитния обект не позволява външни модификации
+
+
+<img width="406" height="234" alt="controlledComposition" src="https://github.com/user-attachments/assets/20068d34-7a35-46f4-89ab-9591f766f145" />
+
+
 
 ```java
 public class DocumentationChapter {
@@ -115,21 +128,6 @@ public class ProjectDocumentation {
 
 ```
 
-Ето и как изглеждат UML-диаграмите на трите посочени примера:
-
-
-<img width="176" height="233" alt="classicComposition" src="https://github.com/user-attachments/assets/23ab1905-0fd2-4514-82ec-066756dde617" />
-
-
-
-<img width="370" height="217" alt="multipleComposition" src="https://github.com/user-attachments/assets/2b5a9c55-5df7-4ed4-ae67-2ed3d2f7b8b5" />
-
-
-
-<img width="406" height="234" alt="controlledComposition" src="https://github.com/user-attachments/assets/20068d34-7a35-46f4-89ab-9591f766f145" />
-
-
-
 
 
 ## Агрегация
@@ -139,6 +137,11 @@ public class ProjectDocumentation {
 Аналогично на композицията, според различната реализация съществуват няколко типа агрегация:
 
 - проста агрегация, при която частите се подават отвън и съществуват независимо от сложния обект
+
+
+<img width="187" height="185" alt="simpleAggregation" src="https://github.com/user-attachments/assets/943f83f1-acd8-4f40-9500-a7a726a24eac" />
+
+
 
 ```java
 
@@ -161,6 +164,10 @@ public class Library {
 ```
 
 - еднопосочна агрегация, при която само единия обект знае за другия
+
+
+<img width="216" height="234" alt="unidirectionalAggregation" src="https://github.com/user-attachments/assets/a945ce35-c9ba-4f7a-810b-b367d5bb5d13" />
+
 
 ```java
 
@@ -194,6 +201,10 @@ public class Reader {
 ```
 
 - двупосочна агрегация, при която и двете страни знаят една за друга
+
+
+<img width="202" height="234" alt="bDirectionalAgg" src="https://github.com/user-attachments/assets/1de35aa1-f1e4-4cfa-baf0-1a6fc8e82a13" />
+
 
 ```java
 
@@ -231,6 +242,10 @@ public class Reader {
 ```
 
 - множествена агрегация чрез посредник (в случая, библиотека), при която обектите остават независими един от друг и се подават отвън
+
+
+<img width="278" height="250" alt="aggregationWithMediator" src="https://github.com/user-attachments/assets/7d607427-3755-4695-a110-8595b2a8d99f" />
+
 
 ```java
 
@@ -275,6 +290,9 @@ public class Library {
 - агрегация чрез асоциативен клас (асоциативна агрегация), при която отново обектите са независими
 
 
+<img width="278" height="201" alt="associativeAggregation" src="https://github.com/user-attachments/assets/6cc9f9c9-56cc-4fa2-9a19-19e3ea6cf56b" />
+
+
 ```java
 
 public class Book {
@@ -312,40 +330,6 @@ public class LoanBook {
 }
 
 ```
-
-UML-диаграмите на всеки един от примерите са посочени по-долу (следват реда на дефиниране):
-
-<img width="187" height="185" alt="simpleAggregation" src="https://github.com/user-attachments/assets/943f83f1-acd8-4f40-9500-a7a726a24eac" />
-
-
-
-
-
-<img width="216" height="234" alt="unidirectionalAggregation" src="https://github.com/user-attachments/assets/a945ce35-c9ba-4f7a-810b-b367d5bb5d13" />
-
-
-
-
-
-<img width="202" height="234" alt="bDirectionalAgg" src="https://github.com/user-attachments/assets/1de35aa1-f1e4-4cfa-baf0-1a6fc8e82a13" />
-
-
-
-
-
-<img width="278" height="250" alt="aggregationWithMediator" src="https://github.com/user-attachments/assets/7d607427-3755-4695-a110-8595b2a8d99f" />
-
-
-
-
-
-<img width="278" height="201" alt="associativeAggregation" src="https://github.com/user-attachments/assets/6cc9f9c9-56cc-4fa2-9a19-19e3ea6cf56b" />
-
-
-
-
-
-
 
 
 ## Композиция vs Агрегация
