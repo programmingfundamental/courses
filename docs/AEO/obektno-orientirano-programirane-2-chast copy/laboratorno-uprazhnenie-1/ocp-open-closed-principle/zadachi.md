@@ -16,7 +16,7 @@ Consider the calculator example that follows OCP from the lesson. What else coul
 
 Look at the following code:
 
-```
+```java
 public class Cuboid {
 // Member variables of this class
 public double length;
@@ -25,14 +25,14 @@ public double height;
 }
 ```
 
-```
+```java
 public class Sphere {
 // Storing radius of a sphere
 public double radius;
 }
 ```
 
-```
+```java
 public class Application {
 // Returning the total volume of the geometric objects
 public double getTotalVolume(Cuboid[] cGeoObjects, Sphere[] sGeoObjects)
@@ -67,7 +67,7 @@ public double getTotalVolume(Cuboid[] cGeoObjects, Sphere[] sGeoObjects)
 }
 ```
 
-```
+```java
 public class GFG {
 public static void main(String args[])
 {
@@ -148,7 +148,7 @@ Create a program for coffee machines with basic and premium functions. The code 
 
 Look at the following code:
 
-```
+```java
 public class TextManipulator { 
     private String text;
     
