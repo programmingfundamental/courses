@@ -16,13 +16,13 @@ XML файлът трябва да е добре оформен. Това озн
 
 XML документ винаги започва с който описва XML файла. Този пролог може да бъде минимален, например:
 
-```
+```xml
 <?xml version="1.0"?>
 ```
 
 Но може да съдържа и друга информация, например кодирането
 
-```
+```xml
 <?xml version="1.0"?><?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 ```
 
@@ -67,7 +67,7 @@ XML форматът е относително многословен, т.е. а
 
 Примерна схема за валидиране на XML файл с обект person
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
     <xs:element name="person">

@@ -10,7 +10,7 @@ nav_order: 8
 
 Сървлетите са Java програми, които обслужват HTTP заявки и имплементират jakarta.servlet.Servlet интерфейса. Разработчиците на уеб приложения създават сървлети като наследяват jakarta.servlet.http.HttpServlet класа - абстрактен клас, който имплементира Servlet интерфейса и е специално проектиран за обслужване на HTTP заявки.
 
-```
+```java
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -38,7 +38,7 @@ response) throws ServletException, IOException {
 
 ### Декларация посредством web.xml
 
-```
+```xml
 <servlet>
     <servlet-name>HelloJava</servlet-name>
     <servlet-class>HelloJava</servlet-class>
@@ -57,7 +57,7 @@ response) throws ServletException, IOException {
 
 ### Декларация посредством анотацията `@WebServlet`
 
-```
+```java
 @WebServlet("/HelloJava")
 public class HelloJava extends HttpServlet {
     ...
@@ -68,7 +68,7 @@ public class HelloJava extends HttpServlet {
 
 #### Декларация на сървлет с повече от едно URL
 
-```
+```java
 @WebServlet(urlPatterns = {"/sendFile", "/uploadFile"})
 public class UploadServlet extends HttpServlet {
     ...
@@ -77,7 +77,7 @@ public class UploadServlet extends HttpServlet {
 
 #### Декларация на сървлет с допълнителна информация
 
-```
+```java
 @WebServlet(
     name = "MyServlet",
     description = "This is my first annotated servlet",
@@ -90,7 +90,7 @@ public class MyServlet extends HttpServlet {
 
 #### Декларация на сървлет с инициализиращи параметри
 
-```
+```java
 @WebServlet(
     urlPatterns = "/imageUpload",
     initParams =
