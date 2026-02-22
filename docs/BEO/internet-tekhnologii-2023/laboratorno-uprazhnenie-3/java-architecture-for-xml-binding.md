@@ -24,7 +24,7 @@ https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime
 
 ### Дефиниране на клас, моделиращ данните в XML файла
 
-```
+```java
 @XmlRootElement(name = "student")
 @XmlAccessorType(XmlAccessType.FIELD)
 // Не е задължително но ако искате, можете да определите реда, в който да се запишат полетата
@@ -65,7 +65,7 @@ public class Student {
 
 ### Създаване на клас за съдържанието на XML файла
 
-```
+```java
 //Тази анотация означава, че клас "Group.java" е основният елемент на файла
 @XmlRootElement(name = "group")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -107,11 +107,11 @@ public class Group {
 
 ### Трансформиране в XML
 
-```
+```java
 String xsdFile = this.getClass().getClassLoader().getResource("xml/person.xsd").getPath();
 ```
 
-```
+```java
 public void writeToXML(Writer writer, Group group) {
 
     // Създаване на JAXB контекст
@@ -130,7 +130,7 @@ public void writeToXML(Writer writer, Group group) {
 
 ### Трансформиране от XML
 
-```
+```java
 public Group readerFromXML(String xml) {
 
     // Създаване на JAXB контекст
