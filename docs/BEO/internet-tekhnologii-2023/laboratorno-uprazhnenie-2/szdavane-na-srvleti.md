@@ -10,6 +10,8 @@ nav_order: 8
 
 Сървлетите са Java програми, които обслужват HTTP заявки и имплементират jakarta.servlet.Servlet интерфейса. Разработчиците на уеб приложения създават сървлети като наследяват jakarta.servlet.http.HttpServlet класа - абстрактен клас, който имплементира Servlet интерфейса и е специално проектиран за обслужване на HTTP заявки.
 
+При обработка на заявката контейнерът подава на сървлета два обекта – `HttpServletRequest` и `HttpServletResponse`. Чрез обекта `request` се получават данните, изпратени от клиента, а чрез `response` се генерира отговорът, който ще бъде върнат към браузъра.
+
 ```java
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,6 +33,43 @@ response) throws ServletException, IOException {
     out.println("<h1> Hello Java </h1>");
 }
 ```
+
+Методът doGet() се извиква при HTTP GET заявка. Чрез response.setContentType() се указва типът на съдържанието, което ще бъде върнато към клиента. В случая това е HTML страница. Обектът PrintWriter се използва за записване на текста в HTTP отговора.
+
+## Получаване на параметри от заявката
+
+Данните, изпратени от клиента, се получават чрез обекта HttpServletRequest. Стойностите на параметрите се извличат чрез метода getParameter().
+
+При GET заявките параметрите се подават като част от URL адреса:
+
+```
+/greet?name=Ivan
+```
+
+При application/x-www-form-urlencoded данните се обработват автоматично от контейнера и се достъпват чрез request.getParameter(). При application/json и application/xml съдържанието се намира в тялото на заявката като структуриран текст и трябва да бъде прочетено чрез request.getReader() и допълнително обработено с подходяща библиотека.
+
+```java
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+                          throws IOException {
+
+        response.setContentType("text/html;charset=UTF-8");
+
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        PrintWriter out = response.getWriter();
+        out.println("<h2>Username: " + username + "</h2>");
+        out.println("<h2>Password: " + password + "</h2>");
+    }
+}
+```
+
+Сървлетът LoginServlet обработва POST заявка, изпратена от HTML форма. Данните от полетата username и password се изпращат в тялото на заявката във формат application/x-www-form-urlencoded. Контейнерът автоматично декодира тези параметри и те могат да се извлекат чрез request.getParameter("имеНаПараметър").
+
+Задаването на response.setContentType("text/html") указва на браузъра, че отговорът е HTML. С помощта на PrintWriter се генерира HTML съдържание, което се връща като отговор на клиента и показва въведените от потребителя данни.
 
 ## Инсталиране на сървлет
 
@@ -103,3 +142,6 @@ public class ImageUploadServlet extends HttpServlet {
     ...
 }
 ```
+
+
+
