@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
                           throws IOException {
 
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html");
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
