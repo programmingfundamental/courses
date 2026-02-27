@@ -13,28 +13,21 @@ nav_order: 8
 При обработка на заявката контейнерът подава на сървлета два обекта – `HttpServletRequest` и `HttpServletResponse`. Чрез обекта `request` се получават данните, изпратени от клиента, а чрез `response` се генерира отговорът, който ще бъде върнат към браузъра.
 
 ```java
-import java.io.IOException;
-import java.io.PrintWriter;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
 @WebServlet("/HelloJava")
 public class HelloJava extends HttpServlet {
-    
-    private static final long serialVersionUID = 1L;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse
-response) throws ServletException, IOException {
-    response.setContentType("text/html");
-    PrintWriter out = response.getWriter();
-    out.println("<h1> Hello Java </h1>");
+    @Override
+    protected void doGet(HttpServletRequest request,
+                         HttpServletResponse response)
+            throws ServletException, IOException {
+
+        PrintWriter out = response.getWriter();
+        out.println("Hello Java!");
+    }
 }
 ```
 
-Методът doGet() се извиква при HTTP GET заявка. Чрез response.setContentType() се указва типът на съдържанието, което ще бъде върнато към клиента. В случая това е HTML страница. Обектът PrintWriter се използва за записване на текста в HTTP отговора.
+Методът doGet() се извиква при HTTP GET заявка. Обектът PrintWriter се използва за записване на текст в отговора.
 
 ## Получаване на параметри от заявката
 
@@ -43,33 +36,30 @@ response) throws ServletException, IOException {
 При GET заявките параметрите се подават като част от URL адреса:
 
 ```
-/greet?name=Ivan
+/HelloJava?name=Ivan
 ```
 
-При application/x-www-form-urlencoded данните се обработват автоматично от контейнера и се достъпват чрез request.getParameter(). При application/json и application/xml съдържанието се намира в тялото на заявката като структуриран текст и трябва да бъде прочетено чрез request.getReader() и допълнително обработено с подходяща библиотека.
+При application/x-www-form-urlencoded данните се обработват автоматично от контейнера и се достъпват чрез request.getParameter(). При application/json, application/html и application/xml съдържанието се намира в тялото на заявката като структуриран текст и трябва да бъде прочетено чрез request.getReader() и допълнително обработено с подходяща библиотека.
 
 ```java
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/HelloJava")
+public class HelloJava extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-                          throws IOException {
+    @Override
+    protected void doGet(HttpServletRequest request,
+                         HttpServletResponse response)
+            throws ServletException, IOException {
 
-        response.setContentType("text/html;charset=UTF-8");
-
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+    
+        String name = request.getParameter("name");
 
         PrintWriter out = response.getWriter();
-        out.println("<h2>Username: " + username + "</h2>");
-        out.println("<h2>Password: " + password + "</h2>");
+        out.println("Hello, " + name);
     }
 }
 ```
 
-Сървлетът LoginServlet обработва POST заявка, изпратена от HTML форма. Данните от полетата username и password се изпращат в тялото на заявката във формат application/x-www-form-urlencoded. Контейнерът автоматично декодира тези параметри и те могат да се извлекат чрез request.getParameter("имеНаПараметър").
-
-Задаването на response.setContentType("text/html") указва на браузъра, че отговорът е HTML. С помощта на PrintWriter се генерира HTML съдържание, което се връща като отговор на клиента и показва въведените от потребителя данни.
+Сървлетът HelloJava обработва GET заявка, при която параметърът name се подава като част от URL адреса. Стойността му се извлича чрез request.getParameter("name") и се използва за генериране на текстов отговор.
 
 ## Инсталиране на сървлет
 
