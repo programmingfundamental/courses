@@ -156,10 +156,12 @@ public class Book {
             return this;
         }
         public Book build() {
-            return new Book();
+            return new Book(this);
         }
     }
-    private Book() {}
+    private Book(Builder builder) {
+        // асоциация на свойствата
+    }
     // getters, setters, toString, etc.
 }
 ```
