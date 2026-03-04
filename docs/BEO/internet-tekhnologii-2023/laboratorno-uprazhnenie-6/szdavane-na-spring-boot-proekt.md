@@ -12,7 +12,7 @@ nav_order: 2
 
 Има много начини за създаване на Spring Boot приложение. Най-лесният начин е с помощта на Spring Initializr на https://start.spring.io/, онлайн генератор на приложения за Spring Boot.
 
-<figure><img src="../../../assets/image (50).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../assets/image (50).png" alt=""><figcaption></figcaption></figure>
 
 1\.    Изберете Maven и версия на Spring Boot
 
@@ -154,7 +154,7 @@ public class SpringBootAppDemoApplication {
 
 Spring Initializr генерира празен файл application.properties в папката src/main/resources. Този файл със свойства ви позволява да зададете различни конфигурации на приложението (напр. подробности за сървъра или подробности за базата данни). Въпреки че има множество начини за задаване на properties на Spring Boot приложение, това е най-често използваният подход. Този файл със свойства ви позволява да укажете конфигурациите във формат на двойка ключ-стойност, където ключът е отделен от свързаната стойност със знак =. Следващата фигура показва примерна конфигурация в application.properties файл за конфигуриране на адреса на сървъра и порта на Spring Boot приложение.
 
-<figure><img src="../../../assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../assets/image (17).png" alt=""><figcaption></figcaption></figure>
 
 За да видите файла application.properties на практика, можете да промените стойността на server.port в текущото приложение до различна стойност на HTTP порт (напр. до 9090). Ако стартирате приложението след тази модификация, можете да видите, че стартира на актуализирания HTTP порт.
 

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Семестриална задача
-parent: Лабораторно упражнение 7
+parent: Лабораторно упражнение 6
 grand_parent: Интернет технологии
 nav_order: 1
 ---
