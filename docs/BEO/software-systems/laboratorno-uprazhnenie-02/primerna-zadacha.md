@@ -98,60 +98,107 @@ nav_order: 1
   ```xml
   <?xml version="1.0" encoding="UTF-8"?>
 
+  <?import javafx.geometry.Insets?>
   <?import javafx.scene.control.*?>
   <?import javafx.scene.layout.*?>
+  <?import javafx.scene.paint.Color?>
   <?import javafx.scene.text.Font?>
 
-  <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-              prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-      <top>
-          <HBox alignment="CENTER" prefHeight="50.0" BorderPane.alignment="CENTER">
-              <Label text="Dashboard Header" fx:id="headerLabel">
-                  <font>
-                      <Font name="System Bold" size="24.0"/>
-                  </font>
-              </Label>
-          </HBox>
-      </top>
-      <left>
-          <VBox prefWidth="150.0" spacing="10.0" style="-fx-background-color: #E0E0E0; -fx-padding: 10;"
-              BorderPane.alignment="CENTER">
-              <Label text="Navigation" fx:id="navigationLabel"/>
-              <Button maxWidth="1.7976931348623157E308" text="Section 1"/>
-              <Button maxWidth="1.7976931348623157E308" text="Section 2"/>
-              <ToggleButton fx:id="statusToggleButton" maxWidth="1.7976931348623157E308" text="Status"/>
-              <Region VBox.vgrow="ALWAYS"/>
-              <Button maxWidth="1.7976931348623157E308" text="Settings"/>
-          </VBox>
-      </left>
-      <center>
-          <StackPane BorderPane.alignment="CENTER" style="-fx-padding: 10;">
-              <!-- Welcome VBox -->
-              <VBox alignment="CENTER" spacing="20.0" visible="true"> <!-- visible="true" по подразбиране -->
-                  <Label text="Welcome to your Dashboard!"/>
-                  <Label text="Select a section from the left."/>
-              </VBox>
-          </StackPane>
-      </center>
-      <bottom>
-          <HBox alignment="CENTER_LEFT" prefHeight="30.0" style="-fx-background-color: #F0F0F0; -fx-padding: 5;"
-              BorderPane.alignment="CENTER">
-              <Label text="Status: Ready"/>
-              <Region HBox.hgrow="ALWAYS"/>
-              <Label text="Version 1.0"/>
-          </HBox>
-      </bottom>
-      <right>
-          <FlowPane hgap="5.0" vgap="5.0" prefWidth="150.0" orientation="VERTICAL"
-                  style="-fx-background-color: #D0D0D0; -fx-padding: 10;" BorderPane.alignment="CENTER">
-              <Label text="Quick Links"/>
-              <Button text="Link A"/>
-              <Button text="Link B"/>
-              <Button text="Link C"/>
-              <Button text="Link D"/>
-              <Button text="Link E"/>
-          </FlowPane>
-      </right>
+  <BorderPane prefHeight="600.0" prefWidth="850.0"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <HBox alignment="CENTER" prefHeight="50.0" BorderPane.alignment="CENTER">
+            <Label text="Dashboard Header" fx:id="headerLabel">
+                <font>
+                    <Font name="System Bold" size="24.0"/>
+                </font>
+            </Label>
+        </HBox>
+    </top>
+    <left>
+        <VBox prefWidth="150.0" spacing="10.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </padding>
+            <background>
+                <Background>
+                    <fills>
+                        <BackgroundFill>
+                            <fill>
+                                <Color red="0.878" green="0.878" blue="0.878"/>
+                            </fill>
+                        </BackgroundFill>
+                    </fills>
+                </Background>
+            </background>
+
+            <Label text="Navigation" fx:id="navigationLabel"/>
+            <Button maxWidth="Infinity" text="Section 1"/>
+            <Button maxWidth="Infinity" text="Section 2"/>
+            <ToggleButton fx:id="statusToggleButton" maxWidth="Infinity" text="Status"/>
+            <Region VBox.vgrow="ALWAYS"/>
+            <Button maxWidth="Infinity" text="Settings"/>
+        </VBox>
+    </left>
+    <center>
+        <StackPane BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </padding>
+            <!-- Welcome VBox -->
+            <VBox alignment="CENTER" spacing="20.0" visible="true">
+                <Label text="Welcome to your Dashboard!"/>
+                <Label text="Select a section from the left."/>
+            </VBox>
+        </StackPane>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER_LEFT" prefHeight="30.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            </padding>
+            <background>
+                <Background>
+                    <fills>
+                        <BackgroundFill>
+                            <fill>
+                                <Color red="0.941" green="0.941" blue="0.941"/>
+                            </fill>
+                        </BackgroundFill>
+                    </fills>
+                </Background>
+            </background>
+
+            <Label text="Status: Ready"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="Version 1.0"/>
+        </HBox>
+    </bottom>
+    <right>
+        <FlowPane hgap="5.0" vgap="5.0" prefWidth="150.0" orientation="VERTICAL" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </padding>
+            <background>
+                <Background>
+                    <fills>
+                        <BackgroundFill>
+                            <fill>
+                                <Color red="0.816" green="0.816" blue="0.816"/>
+                            </fill>
+                        </BackgroundFill>
+                    </fills>
+                </Background>
+            </background>
+
+            <Label text="Quick Links"/>
+            <Button text="Link A"/>
+            <Button text="Link B"/>
+            <Button text="Link C"/>
+            <Button text="Link D"/>
+            <Button text="Link E"/>
+        </FlowPane>
+    </right>
   </BorderPane>
   ```
 
@@ -176,22 +223,38 @@ nav_order: 1
 
 ```xml
 <!-- Welcome VBox -->
-<VBox alignment="CENTER" spacing="20.0" visible="true"> <!-- visible="true" по подразбиране -->
+<VBox alignment="CENTER" spacing="20.0" visible="true">
     <Label text="Welcome to your Dashboard!"/>
     <Label text="Select a section from the left."/>
 </VBox>
 
 <!-- Пример за GridPane: Форма за потребителски данни -->
-<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" style="-fx-background-color: #FFFFFF; -fx-padding: 20;"
-            StackPane.alignment="CENTER"
-            visible="false"> <!-- Променете на visible="true", за да го видите -->
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" StackPane.alignment="CENTER" visible="false">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+    <background>
+        <Background>
+            <fills>
+                <BackgroundFill>
+                    <fill>
+                        <Color fx:constant="WHITE"/>
+                    </fill>
+                </BackgroundFill>
+            </fills>
+        </Background>
+    </background>
+
     <columnConstraints>
         <ColumnConstraints minWidth="100.0" prefWidth="120.0"/>
         <ColumnConstraints minWidth="200.0" prefWidth="250.0"/>
     </columnConstraints>
 
-    <Label text="User Registration" GridPane.columnSpan="2"
-            style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+    <Label text="User Registration" GridPane.columnSpan="2">
+        <font>
+            <Font name="System Bold" size="16.0"/>
+        </font>
+    </Label>
 
     <Label text="Name:" GridPane.rowIndex="1"/>
     <TextField promptText="Enter name" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
@@ -221,8 +284,22 @@ nav_order: 1
 </GridPane>
 
 <!-- Пример за AnchorPane: Детайлна информация -->
-<AnchorPane style="-fx-background-color: #F8F8F8; -fx-padding: 20;" StackPane.alignment="CENTER"
-            visible="false"> <!-- Променете на visible="true", за да го видите -->
+<AnchorPane StackPane.alignment="CENTER" visible="false">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+    <background>
+        <Background>
+            <fills>
+                <BackgroundFill>
+                    <fill>
+                        <Color red="0.973" green="0.973" blue="0.973"/>
+                    </fill>
+                </BackgroundFill>
+            </fills>
+        </Background>
+    </background>
+
     <Label layoutX="14.0" layoutY="14.0" text="Detailed Information" AnchorPane.leftAnchor="10.0"
             AnchorPane.topAnchor="10.0">
         <font>
