@@ -169,7 +169,6 @@ FXML е XML базиран език, който служи за дефинира
       ```xml
       <AnchorPane>
           <Button text="Stay in corner" AnchorPane.topAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-
       </AnchorPane>
       ```
 
@@ -180,41 +179,301 @@ FXML е XML базиран език, който служи за дефинира
 Те служат за визуализация или въвеждане на текстова информация.
 
 - **`Label` (Етикет):** Неинтерактивен текст, използван за описание на други елементи.
-  - _Свойства:_ `text` (съдържание), `graphic` (може да съдържа икона/изображение), `wrapText` (пренасяне на нов ред), `alignment` (подравняване).
-
-  - _Употреба:_ Заглавия, инструкции към полета за въвеждане.
+  - _Свойства:_ `text` (съдържание), `wrapText` (пренасяне на нов ред), `alignment` (подравняване на текста).
+  - _Пример:_
+    - Без атрибути:
+      ```xml
+      <Label text="User Name:" />
+      ```
+    - С атрибути:
+      ```xml
+      <Label text="Welcome to the system" alignment="CENTER" textFill="#333333">
+          <font><Font name="Arial Bold" size="14.0"/></font>
+      </Label>
+      ```
 
 - **`TextField` (Текстово поле):** Едноредово поле за въвеждане на свободен текст.
-  - _Свойства:_ `promptText` (текст-подсказка вътре в полето), `text` (въведеният стринг), `editable` (дали е редактируемо).
-
-  - _Употреба:_ Име на потребител, имейл, търсене.
+  - _Свойства:_ `promptText` (текст-подсказка), `text` (въведеният стринг), `editable` (дали е редактируемо).
+  - _Пример:_
+    - Без атрибути:
+      ```xml
+      <TextField />
+      ```
+    - С атрибути:
+      ```xml
+      <TextField promptText="example@email.com" prefWidth="250.0" />
+      ```
 
 - **`PasswordField` (Поле за парола):** Специализиран `TextField`, който маскира въведените символи (обикновено с точки).
-  - _Употреба:_ Пароли и чувствителна информация.
+  - _Пример:_
+    - С атрибути:
+      ```xml
+      <PasswordField promptText="Enter password" />
+      ```
 
 - **`TextArea` (Текстова област):** Многоредово поле за въвеждане на дълги текстове.
-  - _Свойства:_ `prefRowCount`, `prefColumnCount`, `wrapText`.
-
-  - _Употреба:_ Коментари, описания, логове.
+  - _Свойства:_ `prefRowCount` (брой видими редове), `wrapText` (автоматично пренасяне).
+  - _Пример:_
+    - С атрибути:
+      ```xml
+      <TextArea promptText="Type your comments here..." wrapText="true" prefHeight="100.0" />
+      ```
 
 ### 3.2 Бутони и контроли за избор:
 
 Тези елементи задействат логика или позволяват на потребителя да направи избор.
 
 - **`Button` (Бутон):** Стандартен бутон за натискане.
-  - _Свойства:_ `defaultButton` (активира се при натискане на `Enter`), `cancelButton` (активира се при `Escape`).
+  - _Свойства:_ `defaultButton` (активира се при `Enter`), `cancelButton` (активира се при `Escape`), `maxWidth` (за разтягане).
+  - _Пример:_
+    - Без атрибути:
+      ```xml
+      <Button text="Click Me" />
+      ```
+    - С атрибути:
+      ```xml
+      <Button text="Save" defaultButton="true" maxWidth="Infinity" />
+      ```
 
-  - _Употреба:_ Потвърждение на форми, отваряне на нови прозорци.
+- **`CheckBox` (Флагче за избор):** Двупозиционен (или трипозиционен) избор. Позволява избор на **множество** опции едновременно.
+  - _Свойства:_ `selected` (дали е избран), `allowIndeterminate` (позволява трето състояние).
+  - _Пример:_
+    - С атрибути:
+      ```xml
+      <CheckBox text="I agree to terms" selected="false" />
+      ```
 
-- **`CheckBox` (Флагче):** Двупозиционен (или трипозиционен) избор.
-  - _Свойства:_ `selected` (`boolean`), `allowIndeterminate` (позволява трето състояние "неопределено").
-
-  - _Употреба:_ Приемане на общи условия, избор на множество опции.
-
-- **`RadioButton` (Радио бутон):** Избор на само една опция от дадена група.
-  - _Свойства:_ `toggleGroup` (всички бутони в една логическа група трябва да споделят една инстанция на `ToggleGroup`).
-
-  - _Употреба:_ Избор на пол, начин на плащане, ниво на трудност.
+- **`RadioButton` (Радио бутон):** Избор на **само една** опция от дадена група.
+  - _Свойства:_ `toggleGroup` (всички бутони в една логическа група трябва да сочат към една `ToggleGroup`).
+  - _Пример:_
+    - С дефиниция на група:
+      ```xml
+      <VBox>
+          <fx:define>
+              <ToggleGroup fx:id="myGroup"/>
+          </fx:define>
+          <RadioButton text="Option A" toggleGroup="$myGroup" selected="true"/>
+          <RadioButton text="Option B" toggleGroup="$myGroup"/>
+      </VBox>
+      ```
 
 - **`ToggleButton` (Превключващ бутон):** Бутон, който остава в състояние "натиснат" (`selected`), докато не бъде натиснат отново.
-  - _Употреба:_ Включване/изключване на режими (напр. `Bold`/`Italic` в текстов редактор).
+  - _Пример:_
+    - С атрибути:
+      ```xml
+      <ToggleButton text="ON / OFF" selected="true" />
+      ```
+
+## 4. Детайлен справочник на използваните FXML атрибути и компоненти
+
+Тук ще намерите описание и **конкретни примери** за най-често използваните атрибути, за да разберете къде и как да ги прилагате.
+
+### 4.1. Основни атрибути за оразмеряване и идентификация
+
+_Тези атрибути са валидни за почти всички елементи._
+
+- **`fx:id`**:
+  - _За какво е:_ Връзка с Java контролера.
+  - _Пример:_
+    ```xml
+    <Button fx:id="submitBtn" text="Вход" />
+    ```
+
+- **`prefHeight` / `prefWidth`**:
+  - _За какво е:_ Задава желания размер на елемента.
+  - _Пример:_
+    ```xml
+    <VBox prefWidth="300.0" prefHeight="200.0"> ... </VBox>
+    ```
+
+- **`minHeight` / `minWidth`**:
+  - _За какво е:_ Гарантира, че елементът няма да се свие твърде много.
+  - _Пример:_
+    ```xml
+    <!-- Страничното меню не може да бъде по-тясно от 150px -->
+    <VBox minWidth="150.0"> ... </VBox>
+    ```
+
+- **`maxHeight` / `maxWidth`**:
+  - _За какво е:_ Ограничава размера. Специалната стойност "Infinity" кара елемента да се разтегне до края.
+  - _Пример:_
+    ```xml
+    <!-- Бутон, който се разпъва по цялата ширина на родителя си -->
+    <Button text="Login" maxWidth="Infinity" />
+    ```
+
+### 4.2. Атрибути, специфични за Контейнери (Layout Parents)
+
+_Тези атрибути се слагат на самия контейнер._
+
+- **`alignment`**:
+  - _За какво е:_ Подравнява съдържанието вътре в контейнера (напр. центрира бутоните).
+  - _Пример:_
+    ```xml
+    <!-- Всички елементи вътре ще са в центъра -->
+    <VBox alignment="CENTER" spacing="10"> ... </VBox>
+    ```
+
+- **`spacing`**:
+  - _За какво е:_ Задава разстояние (в пиксели) между елементите. Валидно за HBox и VBox.
+  - _Пример:_
+    ```xml
+    <HBox spacing="15.0">
+        <Button text="OK"/> <Button text="Cancel"/>
+    </HBox>
+    ```
+
+- **`hgap` / `vgap`**:
+  - _За какво е:_ Задава разстояние между редовете и колоните в мрежа (GridPane) или поток (FlowPane).
+  - _Пример:_
+    ```xml
+    <GridPane hgap="10.0" vgap="10.0"> ... </GridPane>
+    ```
+
+- **`orientation`**:
+  - _За какво е:_ Определя дали елементите се редят хоризонтално или вертикално.
+  - _Пример:_
+    ```xml
+    <FlowPane orientation="VERTICAL" prefWrapLength="200"> ... </FlowPane>
+    ```
+
+### 4.3. Статични ограничения (Static Constraints)
+
+_Тези атрибути са най-особени. Те се слагат на **ДЕТЕТО**, но се четат от **РОДИТЕЛЯ**._
+
+- **`BorderPane.alignment`**:
+  - _За какво е:_ Казва на BorderPane къде да сложи това дете в неговата зона.
+  - _Пример:_
+    ```xml
+    <top>
+        <Label text="Header" BorderPane.alignment="CENTER" />
+    </top>
+    ```
+
+- **`GridPane.columnIndex` / `GridPane.rowIndex`**:
+  - _За какво е:_ Позиционира елемента в конкретна клетка на таблицата.
+  - _Пример:_
+    ```xml
+    <GridPane>
+        <!-- Етикет в колона 0, ред 0 -->
+        <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <!-- Поле в колона 1, ред 0 -->
+        <TextField GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+    </GridPane>
+    ```
+
+- **`GridPane.columnSpan` / `GridPane.rowSpan`**:
+  - _За какво е:_ Елементът заема мястото на няколко клетки.
+  - _Пример:_
+    ```xml
+    <!-- Бутонът е широк колкото 2 колони -->
+    <Button text="Submit" maxWidth="Infinity" GridPane.columnSpan="2" GridPane.rowIndex="3"/>
+    ```
+
+- **`VBox.vgrow` / `HBox.hgrow`**:
+  - _За какво е:_ Казва на детето да заеме всичкото свободно място. Много важно за responsive дизайн.
+  - _Пример:_
+    ```xml
+    <VBox>
+        <Label text="Menu Top" />
+        <!-- Този празен регион ще избута "Menu Bottom" най-долу -->
+        <Region VBox.vgrow="ALWAYS" />
+        <Button text="Menu Bottom" />
+    </VBox>
+    ```
+
+- **`AnchorPane.topAnchor` ...**:
+  - _За какво е:_ Закотвя елемента на разстояние от ръба.
+  - _Пример:_
+    ```xml
+    <AnchorPane>
+        <!-- Бутон, винаги стоящ долу вдясно на 10px от ръба -->
+        <Button text="Save" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+    </AnchorPane>
+    ```
+
+### 4.4. Свойства на Контролите
+
+_Тези атрибути променят поведението на самата контрола._
+
+- **`text`**:
+  - _Пример:_ `<Label text="Здравей свят" />`
+- **`promptText`** (Placeholder):
+  - _Пример:_ `<TextField promptText="Въведете имейл..." />`
+- **`wrapText`** (Пренасяне):
+  - _Пример:_ `<TextArea wrapText="true" />`
+- **`defaultButton`** (Реагира на Enter):
+  - _Пример:_ `<Button text="Login" defaultButton="true" />`
+
+### 4.5. Вложени тагове за свойства (Property Tags)
+
+_Използват се за сложни стойности, които не са просто текст или число._
+
+#### **1. Таг `<padding>` (Вътрешен отстъп)**
+
+Добавя разстояние вътре в елемента.
+
+- **Пример:**
+  ```xml
+  <GridPane hgap="10" vgap="10">
+      <padding>
+          <!-- 20px отстъп от всички страни на формата -->
+          <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+      </padding>
+      <Label text="Form Title" />
+  </GridPane>
+  ```
+
+#### **2. Таг `<font>` (Шрифт)**
+
+Променя шрифта на текста.
+
+- **Пример:**
+  ```xml
+  <Label text="Main Title">
+      <font>
+          <!-- Голям удебелен шрифт -->
+          <Font name="System Bold" size="24.0"/>
+      </font>
+  </Label>
+  ```
+
+#### **3. Таг `<background>` (Фон)**
+
+Задава цвят на фона без CSS.
+
+- **Пример:**
+  ```xml
+  <HBox>
+      <background>
+          <Background>
+              <fills>
+                  <!-- Задава сив фон -->
+                  <BackgroundFill>
+                      <fill>
+                          <Color red="0.9" green="0.9" blue="0.9"/>
+                      </fill>
+                  </BackgroundFill>
+              </fills>
+          </Background>
+      </background>
+      <Label text="Toolbar" />
+  </HBox>
+  ```
+
+#### **4. Таг `<margin>` (Външен отстъп)**
+
+Добавя разстояние _извън_ елемента. Това е статично свойство и се дефинира вътре в детето, но името на тага зависи от родителя (напр. `HBox.margin`).
+
+- **Пример:**
+  ```xml
+  <HBox>
+      <Button text="Button 1" />
+      <Button text="Button 2">
+          <!-- Отдалечава Button 2 с 10px от левия му съсед -->
+          <HBox.margin>
+              <Insets left="10.0" />
+          </HBox.margin>
+      </Button>
+  </HBox>
+  ```
