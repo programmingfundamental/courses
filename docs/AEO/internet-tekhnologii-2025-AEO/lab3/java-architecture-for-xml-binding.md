@@ -67,24 +67,24 @@ public class Student {
 ### Creating a class for the content of the XML file
 
 ```
-//Тази анотация означава, че клас "Group.java" е основният елемент на файла
+//Annotation showing which is the base file element ("Group.java" in this case)
 @XmlRootElement(name = "group")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Group {
 
-    // XmLElementWrapper генерира обвиващ елемент около XML елементите, родителския елемент
+    // XmLElementWrapper generates wrapper to XML elements, parent
     @XmlElementWrapper(name = "studentList")
-    // XmlElement задава името на вътрешните елементи
+    // XmlElement define inner element name
     @XmlElement(name = "student")
-    private ArrayList<Student> students;
+    private List<Student> students;
     private int number;
     private String department;
 
-    public void setStudents(ArrayList<Student> students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 
-    public ArrayList<Student> getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
