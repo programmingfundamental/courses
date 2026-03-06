@@ -272,11 +272,12 @@ FXML е XML базиран език, който служи за дефинира
     - С дефиниция на група:
       ```xml
       <VBox>
-          <fx:define>
-              <ToggleGroup fx:id="myGroup"/>
-          </fx:define>
-          <RadioButton text="Option A" toggleGroup="$myGroup" selected="true"/>
-          <RadioButton text="Option B" toggleGroup="$myGroup"/>
+          <RadioButton text="Option A" selected="true">
+            <toggleGroup>
+              <ToggleGroup fx:id="radioGroup"/>
+            </toggleGroup>
+          </RadioButton>
+          <RadioButton text="Option B" toggleGroup="$radioGroup"/>
       </VBox>
       ```
 
