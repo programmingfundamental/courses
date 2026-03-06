@@ -41,7 +41,7 @@ nav_order: 3
 
 _@RestController_ е специализиран контролер, който включва освен _@Controller_ и анотацията _@ResponseBody_, която позволява автоматично сериализиране на върнатия обект в HttpResponse.
 
-```
+```java
 @RestController
 public class ProductServiceController { 
 }
@@ -51,7 +51,7 @@ public class ProductServiceController {
 
 Анотацията @RequestMapping се използва за дефиниране на URI на заявката за достъп до крайните точки на REST. В него можем да дефинираме и метод на заявката. Методът за заявка по подразбиране е GET.
 
-```
+```java
 @RequestMapping(value = "/ex/foos", method = RequestMethod.GET)
 public ResponseEntity<Object> getProducts() { }
 ```
@@ -60,7 +60,7 @@ public ResponseEntity<Object> getProducts() { }
 
 Анотация за съотнасяне на HTTP GET заявки към специфични методи за обработка. По-конкретно, @GetMapping е съставна анотация, която действа като пряк път за @RequestMapping(method = RequestMethod.GET)
 
-```
+```java
 @GetMapping("/{id}")
 public ResponseEntity<Object> getProducts() { }
 ```
@@ -69,7 +69,7 @@ public ResponseEntity<Object> getProducts() { }
 
 Анотацията @RequestBody се използва за определяне на типа на съдържанието на тялото на заявката.
 
-```
+```java
 public ResponseEntity<Object> createProduct(@RequestBody Product product) {
 }
 ```
@@ -78,7 +78,7 @@ public ResponseEntity<Object> createProduct(@RequestBody Product product) {
 
 Анотацията @PathVariable се използва за дефиниране на персонализиран или динамичен URI на заявката. Променливата id в URI на заявката се дефинира във фигурни скоби {}, както е показано по-долу.
 
-```
+```java
 @GetMapping("/{id}/view")
 public ResponseEntity<Object> updateProduct(@PathVariable("id") String id) {
 }
@@ -88,7 +88,7 @@ public ResponseEntity<Object> updateProduct(@PathVariable("id") String id) {
 
 Анотацията @RequestParam се използва за четене на параметри от URL адреса на заявката. Можем да зададем стойност по подразбиране за параметрите на заявката, както е показано тук.
 
-```
+```java
 @GetMapping("/api/foos")
 public ResponseEntity<Object> getProduct(
    @RequestParam(value = "name", required = false, defaultValue = "honey") String name) {

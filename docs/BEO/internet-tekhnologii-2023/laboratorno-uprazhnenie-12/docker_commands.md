@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Основни команди в Docker
-parent: Лабораторно упражнение 6
+parent: Лабораторно упражнение 12
 grand_parent: Интернет технологии
 nav_order: 5
 ---
