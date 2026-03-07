@@ -3,7 +3,7 @@ layout: default
 title: Примерна задача
 parent: Лабораторно упражнение 4
 grand_parent: Програмни системи
-nav_order: 1
+nav_order: 2
 ---
 
 # Примерна задача
@@ -20,70 +20,92 @@ nav_order: 1
 - да валидира данните в реално време;
 - да активира бутона само при валидни данни.
 
-## 1. Реализация с imperative модел
+<table>
+    <tr>
+        <td>1. Реализация с imperative модел</td>
+        <td>2. Реализация с Reactive модел</td>
+    </tr>
+    <tr>
+        <td> 1.1 Структура на приложението</td>
+    </tr>
+<tr>
+<td width="50%">
 
-### 1.1 Структора на приложението
-
-Приложението се състои от:
-
-- FXML файл – описва изгледа (UI);
-- Controller клас – съдържа логиката;
-- JavaFX Application клас – стартира приложението.
-
-```java
-src/
- ├─ main
- │  └─ resources/
- │  │    └─ registration.fxml
- │  └─ java
- │      └─ controller/
- │          └─ RegistrationController.java
- └─ Application.java
+```
+ps-project/
+└─ src/
+   └─ main/
+      ├─ java/
+      │  └─ bg/
+      │     └─ tu_varna/
+      │        └─ sit/
+      │           └─ ps/
+      │              └─ lab4/
+      │                 └─ task1/
+      │                    ├─ Application.java
+      │                    ├─ Launcher.java
+      │                    └─ controller/
+      │                       └─ RegistrationController.java
+      └─ resources/
+         └─ bg/
+            └─ tu_varna/
+               └─ sit/
+                  └─ ps/
+                     └─ lab4/
+                        └─ task1/
+                           └─ registration.fxml
 ```
 
-### 2. FXML файл – потребителски интерфейс
+</td> <td width="50%">
 
-#### 2.1 registration.fxml
-
-```java
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.VBox?>
-
-<VBox spacing="10" alignment="CENTER"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="controller.RegistrationController">
-
-    <TextField fx:id="usernameField"
-               promptText="Username"/>
-
-    <PasswordField fx:id="passwordField"
-                   promptText="Password"/>
-
-    <Button fx:id="registerButton"
-            text="Регистрация"/>
-
-    <Label fx:id="statusLabel"
-           text="Въведете данни"/>
-
-</VBox>
+```
+ps-project/
+└─ src/
+   └─ main/
+      ├─ java/
+      │  └─ bg/
+      │     └─ tu_varna/
+      │        └─ sit/
+      │           └─ ps/
+      │              └─ lab4/
+      │                 └─ task2/
+      │                    ├─ Application.java
+      │                    ├─ Launcher.java
+      │                    └─ controller/
+      │                       └─ RegistrationController.java
+      └─ resources/
+         └─ bg/
+            └─ tu_varna/
+               └─ sit/
+                  └─ ps/
+                     └─ lab4/
+                        └─ task2/
+                           └─ registration-view.fxml
 ```
 
-- FXML описва само UI, без логика
-- fx:id осигурява връзка с controller-a
-- Това подпомага MVC / MVVM архитектура
+</td> </tr> 
 
-### 3. Controller – Imperative модел
-
-#### 3.1 Идея на imperative реализацията
-
+<tr>
+    <td>3. Controller</td>
+</tr>
+<tr>
+<td>
 При imperative подхода:
+
 - логиката се изпълнява само при събитие;
 - валидирането е ръчно;
 - няма автоматична реакция при промяна на данни.
+</td>
+<td>
+При Reactive подхода:
 
-#### 3.2 RegistrationController – imperative версия
+- използва JavaFX Properties;
+- реагира в реално време;
+- автоматично управлява UI чрез binding.
+</td>
+</tr>
+<tr>
+<td>
 
 ```java
 package controller;
@@ -122,24 +144,8 @@ public class RegistrationController {
 }
 ```
 
-- Валидирането става само при натискане на бутона
-- UI не реагира при писане
-- Липсва автоматична синхронизация
-- Подходът е типичен за imperative модел
-
-
-## 2. Реализация с Reactive модел
-
-#### 4. Controller – Reactive модел (основна версия)
-4.1 Основна идея
-
-Reactive версията:
-
-- използва JavaFX Properties;
-- реагира в реално време;
-- автоматично управлява UI чрез binding.
-
-#### 4.2 RegistrationController – reactive версия
+</td>
+<td>
 
 ```java
 package controller;
@@ -218,8 +224,63 @@ public class RegistrationController {
 
 ```
 
-### 5. Main Application клас
+</td>
+</tr>
+<tr>
+<td>
 
+- Валидирането става само при натискане на бутона
+- UI не реагира при писане
+- Липсва автоматична синхронизация
+- Подходът е типичен за imperative модел
+
+</td>
+</tr>
+<tr>
+<td>4. FXML файл – потребителски интерфейс - registration-view.fxml</td>
+</tr>
+<tr>
+<td>
+```java
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.RegistrationController">
+
+    <TextField fx:id="usernameField"
+               promptText="Username"/>
+
+    <PasswordField fx:id="passwordField"
+                   promptText="Password"/>
+
+    <Button fx:id="registerButton"
+            text="Регистрация"/>
+
+    <Label fx:id="statusLabel"
+           text="Въведете данни"/>
+
+</VBox>
+```
+</td>
+</tr>
+<tr>
+<td>
+
+- FXML описва само UI, без логика
+- fx:id осигурява връзка с controller-a
+</td>
+</tr>
+<tr>
+<td>
+5. Application клас
+</td>
+</tr>
+<tr>
+<td>
 
 ```java
 import javafx.application.Application;
@@ -227,13 +288,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class MainApp extends Application {
+public class RegistrationApplication extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
         Scene scene = new Scene(
             FXMLLoader.load(
-                getClass().getResource("/view/registration.fxml")
+                getClass().getResource("/../registration-view.fxml")
             ),
             300, 200
         );
@@ -250,6 +311,18 @@ public class MainApp extends Application {
 
 ```
 
+</td>
+</tr>
+<tr>
+<td>
+5. Main Application клас
+</td>
+</tr>
+</table>
+
+
+
+
 ### 6. Сравнение на FXML imperative vs reactive
 
 | Критерий              | Imperative | Reactive |
@@ -260,14 +333,4 @@ public class MainApp extends Application {
 | Listener-и            | Ограничени | Активни  |
 | Поддръжка             | По-трудна  | По-лесна |
 
-
-### 7. Заключение
-
-FXML ясно демонстрира предимствата на reactive модела в JavaFX:
-
-- UI е отделен от логиката;
-- промените се отразяват автоматично;
-- кодът е по-четим и разширяем.
-
-Imperative версията е полезна за разбиране на основите, но reactive моделът е препоръчителен за реални приложения.
 
