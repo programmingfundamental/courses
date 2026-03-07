@@ -310,16 +310,28 @@ public class RegistrationApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
 }</code></pre>
         </td>
     </tr>
 
     <tr>
         <td colspan="2"><b>6. Main / Launcher клас</b></td>
+    </tr>
+    <tr>
+<td>
+<code class="language-java">
+<pre>
+      package bg.tu_varna.sit.ps.sample_task;
+
+  import javafx.application.Application;
+
+  public class Launcher {
+      public static void main(String[] args) {
+          Application.launch(RegistrationApplication.class, args);
+      }
+  }
+</code></pre>
+        </td>
     </tr>
 </table>
 
