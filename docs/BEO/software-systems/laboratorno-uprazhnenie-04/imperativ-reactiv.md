@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Примерна задача
+title: Imperative и Reactive модел
 parent: Лабораторно упражнение 4
 grand_parent: Програмни системи
 nav_order: 1
