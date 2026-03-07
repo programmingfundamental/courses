@@ -38,26 +38,26 @@ fx:id атрибута е уникален идентификатор на UI е
 
 <table>
 <tr>
-<td>FXML</td>
-<td>Java</td>
+<td><b>FXML</b></td>
+<td><b>Java</b></td>
 </tr>
+
 <tr>
 <td>
 
-```xml
-<TextField fx:id="usernameField"/>
-```
+<pre><code class="language-xml">
+&lt;TextField fx:id="usernameField"/&gt;
+</code></pre>
 
 </td>
 <td>
 
-```java
-@FXML 
+<pre><code class="language-java">
+@FXML
 private TextField usernameField;
-```
+</code></pre>
 
 </td>
-
 </tr>
 </table>
 
@@ -68,31 +68,32 @@ private TextField usernameField;
 
 <table>
 <tr>
-<td>FXML</td>
-<td>Java</td>
+<td><b>FXML</b></td>
+<td><b>Java</b></td>
 </tr>
+
 <tr>
 <td>
 
-```xml
-<Button text="Вход" onAction="#onLogin"/>
-```
+<pre><code class="language-xml">
+&lt;Button text="Вход" onAction="#onLogin"/&gt;
+</code></pre>
 
 </td>
+
 <td>
 
-```java
+<pre><code class="language-java">
 @FXML
 private void onLogin() {
     System.out.println("Бутонът е натиснат");
 }
-```
+</code></pre>
 
 </td>
 
 </tr>
 </table>
-
 
 Метод initialize() се извиква автоматично след зареждане на FXML. Използва се при инициялизация на binding, listeners и първоначално състояние на интерфейса
 

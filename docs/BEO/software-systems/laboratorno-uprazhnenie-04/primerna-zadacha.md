@@ -22,16 +22,18 @@ nav_order: 2
 
 <table>
     <tr>
-        <td>1. Реализация с imperative модел</td>
-        <td>2. Реализация с Reactive модел</td>
+        <td><b>1. Реализация с imperative модел</b></td>
+        <td><b>2. Реализация с Reactive модел</b></td>
     </tr>
-    <tr>
-        <td> 1.1 Структура на приложението</td>
-    </tr>
-<tr>
-<td width="50%">
 
-```
+    <tr>
+        <td><b>1.1 Структура на приложението</b></td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td width="50%">
+            <pre><code>
 ps-project/
 └─ src/
    └─ main/
@@ -54,11 +56,11 @@ ps-project/
                      └─ lab4/
                         └─ task1/
                            └─ registration.fxml
-```
+            </code></pre>
+        </td>
 
-</td> <td width="50%">
-
-```
+        <td width="50%">
+            <pre><code>
 ps-project/
 └─ src/
    └─ main/
@@ -81,34 +83,36 @@ ps-project/
                      └─ lab4/
                         └─ task2/
                            └─ registration-view.fxml
-```
+            </code></pre>
+        </td>
+    </tr>
 
-</td> </tr> 
+    <tr>
+        <td colspan="2"><b>3. Controller</b></td>
+    </tr>
 
-<tr>
-    <td>3. Controller</td>
-</tr>
-<tr>
-<td>
-При imperative подхода:
+    <tr>
+        <td>
+            При imperative подхода:
+            <ul>
+                <li>логиката се изпълнява само при събитие;</li>
+                <li>валидирането е ръчно;</li>
+                <li>няма автоматична реакция при промяна на данни.</li>
+            </ul>
+        </td>
+        <td>
+            При Reactive подхода:
+            <ul>
+                <li>използва JavaFX Properties;</li>
+                <li>реагира в реално време;</li>
+                <li>автоматично управлява UI чрез binding.</li>
+            </ul>
+        </td>
+    </tr>
 
-- логиката се изпълнява само при събитие;
-- валидирането е ръчно;
-- няма автоматична реакция при промяна на данни.
-</td>
-<td>
-При Reactive подхода:
-
-- използва JavaFX Properties;
-- реагира в реално време;
-- автоматично управлява UI чрез binding.
-</td>
-</tr>
-<tr>
-<td>
-
-```java
-package controller;
+    <tr>
+        <td>
+            <pre><code class="language-java">package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -130,25 +134,22 @@ public class RegistrationController {
     @FXML
     public void initialize() {
 
-        registerButton.setOnAction(e -> {
+        registerButton.setOnAction(e -&gt; {
             String username = usernameField.getText();
             String password = passwordField.getText();
 
-            if (username.length() >= 4 && password.length() >= 6) {
+            if (username.length() &gt;= 4 &amp;&amp; password.length() &gt;= 6) {
                 statusLabel.setText("Данните са валидни");
             } else {
                 statusLabel.setText("Невалидни данни");
             }
         });
     }
-}
-```
+}</code></pre>
+        </td>
 
-</td>
-<td>
-
-```java
-package controller;
+        <td>
+            <pre><code class="language-java">package controller;
 
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
@@ -183,13 +184,13 @@ public class RegistrationController {
 
         /* ===== Observer (ChangeListener + addListener) ===== */
         usernameField.textProperty().addListener(
-            (obs, oldVal, newVal) ->
-                validUsername.set(newVal.length() >= 4)
+            (obs, oldVal, newVal) -&gt;
+                validUsername.set(newVal.length() &gt;= 4)
         );
 
         passwordField.textProperty().addListener(
-            (obs, oldVal, newVal) ->
-                validPassword.set(newVal.length() >= 6)
+            (obs, oldVal, newVal) -&gt;
+                validPassword.set(newVal.length() &gt;= 6)
         );
 
         /* ===== Binding ===== */
@@ -199,7 +200,7 @@ public class RegistrationController {
         registerButton.disableProperty().bind(formInvalid);
 
         /* ===== Observer върху Binding ===== */
-        formInvalid.addListener((obs, oldVal, newVal) -> {
+        formInvalid.addListener((obs, oldVal, newVal) -&gt; {
             if (newVal) {
                 statusLabel.setText("Невалидни данни");
             } else {
@@ -213,77 +214,83 @@ public class RegistrationController {
         /* ===== addEventHandler ===== */
         registerButton.addEventHandler(
             ActionEvent.ACTION,
-            e -> System.out.println("ActionEvent обработен")
+            e -&gt; System.out.println("ActionEvent обработен")
         );
     }
 
     private void handleRegister(ActionEvent event) {
         statusLabel.setText("Регистрацията е успешна!");
     }
-}
+}</code></pre>
+        </td>
+    </tr>
 
-```
+    <tr>
+        <td>
+            <ul>
+                <li>Валидирането става само при натискане на бутона</li>
+                <li>UI не реагира при писане</li>
+                <li>Липсва автоматична синхронизация</li>
+                <li>Подходът е типичен за imperative модел</li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li>Валидирането става в реално време</li>
+                <li>UI реагира при всяка промяна</li>
+                <li>Има автоматична синхронизация чрез binding</li>
+                <li>Подходът е типичен за reactive модел</li>
+            </ul>
+        </td>
+    </tr>
 
-</td>
-</tr>
-<tr>
-<td>
+    <tr>
+        <td colspan="2"><b>4. FXML файл – потребителски интерфейс – registration-view.fxml</b></td>
+    </tr>
 
-- Валидирането става само при натискане на бутона
-- UI не реагира при писане
-- Липсва автоматична синхронизация
-- Подходът е типичен за imperative модел
+    <tr>
+        <td colspan="2">
+            <pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 
-</td>
-</tr>
-<tr>
-<td>4. FXML файл – потребителски интерфейс - registration-view.fxml</td>
-</tr>
-<tr>
-<td>
-```java
-<?xml version="1.0" encoding="UTF-8"?>
+&lt;?import javafx.scene.control.*?&gt;
+&lt;?import javafx.scene.layout.VBox?&gt;
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.VBox?>
-
-<VBox spacing="10" alignment="CENTER"
+&lt;VBox spacing="10" alignment="CENTER"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="controller.RegistrationController">
+      fx:controller="controller.RegistrationController"&gt;
 
-    <TextField fx:id="usernameField"
-               promptText="Username"/>
+    &lt;TextField fx:id="usernameField"
+               promptText="Username"/&gt;
 
-    <PasswordField fx:id="passwordField"
-                   promptText="Password"/>
+    &lt;PasswordField fx:id="passwordField"
+                   promptText="Password"/&gt;
 
-    <Button fx:id="registerButton"
-            text="Регистрация"/>
+    &lt;Button fx:id="registerButton"
+            text="Регистрация"/&gt;
 
-    <Label fx:id="statusLabel"
-           text="Въведете данни"/>
+    &lt;Label fx:id="statusLabel"
+           text="Въведете данни"/&gt;
 
-</VBox>
-```
-</td>
-</tr>
-<tr>
-<td>
+&lt;/VBox&gt;</code></pre>
+        </td>
+    </tr>
 
-- FXML описва само UI, без логика
-- fx:id осигурява връзка с controller-a
-</td>
-</tr>
-<tr>
-<td>
-5. Application клас
-</td>
-</tr>
-<tr>
-<td>
+    <tr>
+        <td colspan="2">
+            <ul>
+                <li>FXML описва само UI, без логика</li>
+                <li>fx:id осигурява връзка с controller-a</li>
+            </ul>
+        </td>
+    </tr>
 
-```java
-import javafx.application.Application;
+    <tr>
+        <td colspan="2"><b>5. Application клас</b></td>
+    </tr>
+
+    <tr>
+        <td colspan="2">
+            <pre><code class="language-java">import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -307,21 +314,14 @@ public class RegistrationApplication extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-}
+}</code></pre>
+        </td>
+    </tr>
 
-```
-
-</td>
-</tr>
-<tr>
-<td>
-5. Main Application клас
-</td>
-</tr>
+    <tr>
+        <td colspan="2"><b>6. Main / Launcher клас</b></td>
+    </tr>
 </table>
-
-
-
 
 ### 6. Сравнение на FXML imperative vs reactive
 
