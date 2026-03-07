@@ -264,10 +264,11 @@ nav_order: 1
 
     <Label text="Profile Type:" GridPane.rowIndex="3"/>
     <HBox spacing="10.0" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="3">
-        <fx:define>
-            <ToggleGroup fx:id="accountGroup"/>
-        </fx:define>
-        <RadioButton fx:id="personalRadio" text="Personal" toggleGroup="$accountGroup"/>
+        <RadioButton fx:id="personalRadio" text="Personal">
+            <toggleGroup>
+                <ToggleGroup fx:id="accountGroup"/>
+            </toggleGroup>
+        </RadioButton>
         <RadioButton text="Business" toggleGroup="$accountGroup"/>
     </HBox>
 
