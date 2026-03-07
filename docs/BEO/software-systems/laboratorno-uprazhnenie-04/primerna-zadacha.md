@@ -319,8 +319,9 @@ public class RegistrationApplication extends Application {
     </tr>
     <tr>
 <td>
-<code class="language-java">
 <pre>
+<code class="language-java">
+
       package bg.tu_varna.sit.ps.sample_task;
 
   import javafx.application.Application;
@@ -334,6 +335,7 @@ public class RegistrationApplication extends Application {
         </td>
     </tr>
 </table>
+
 
 ### 6. Сравнение на FXML imperative vs reactive
 
