@@ -3,7 +3,7 @@ layout: default
 title: Imperative и Reactive модел
 parent: Лабораторно упражнение 4
 grand_parent: Програмни системи
-nav_order: 1
+nav_order: 4
 ---
 
 ## Imperative и Reactive модел при изграждане на приложения с потребителски интерфейс

@@ -3,7 +3,7 @@ layout: default
 title: Примерна задача
 parent: Лабораторно упражнение 4
 grand_parent: Програмни системи
-nav_order: 2
+nav_order: 5
 ---
 
 # Примерна задача
