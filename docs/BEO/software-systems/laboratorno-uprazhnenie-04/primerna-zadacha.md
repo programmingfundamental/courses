@@ -374,9 +374,6 @@ public class RegistrationApplication extends Application {
 <td>
 <pre>
 <code class="language-java">
-
-      package bg.tu_varna.sit.ps.sample_task;
-
   import javafx.application.Application;
 
   public class Launcher {
