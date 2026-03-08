@@ -23,12 +23,27 @@ FXML файлът не съдържа логика, а само декларат
 
 ![alt text](image-1.png)
 
+Атрибута ``` fx:controller ``` се подава само на основния елемент.
+
 ```xml
-<GridPane fx:controller="bg.tu_varna.sit.ps.lab4.LoginController" xmlns:fx="http://javafx.com/fxml/1">
+<VBox spacing="10" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml/1"
+
+      fx:controller="bg.tu_varna.sit.ps.lab4.task2.controller.RegistrationController">
+      
+</VBox>
+```
+
+Когато контролера не е дефиниран в fxml, трябва да се инициялизира при зареждане на интерфейса с Application класа.
+
+```xml
+<GridPane xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="labelTitle"></Label>
+</GridPane>
 ```
 
 ```java
-public class LoginController implements Initializable {
+public class LoginController  implements Initializable {
 
     private final String title;
 
@@ -41,19 +56,19 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle res) {
-        this.labelTitle.setText(this.title); 
+        this.labelTitle.setText(this.title);
     }
 }
 ```
 
 ```java
-public class App extends Application {
+public class LoginApplication extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
 
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/login-view.fxml")
+                getClass().getResource("login-view.fxml")
         );
 
         LoginController controller = new LoginController("Login Manager");
