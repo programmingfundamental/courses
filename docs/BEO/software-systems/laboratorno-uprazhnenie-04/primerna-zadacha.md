@@ -44,7 +44,7 @@ ps-project/
       │           └─ ps/
       │              └─ lab4/
       │                 └─ task1/
-      │                    ├─ Application.java
+      │                    ├─ RegistrationApplication.java
       │                    ├─ Launcher.java
       │                    └─ controller/
       │                       └─ RegistrationController.java
@@ -71,7 +71,7 @@ ps-project/
       │           └─ ps/
       │              └─ lab4/
       │                 └─ task2/
-      │                    ├─ Application.java
+      │                    ├─ RegistrationApplication.java
       │                    ├─ Launcher.java
       │                    └─ controller/
       │                       └─ RegistrationController.java
@@ -257,7 +257,7 @@ public class RegistrationController {
 
 &lt;VBox spacing="10" alignment="CENTER"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="controller.RegistrationController"&gt;
+      fx:controller="bg.tu_varna.sit.ps.lab4.[task1|task2].controller.RegistrationController"&gt;
 
     &lt;TextField fx:id="usernameField"
                promptText="Username"/&gt;
@@ -299,14 +299,14 @@ public class RegistrationApplication extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Scene scene = new Scene(
-            FXMLLoader.load(
-                getClass().getResource("/../registration-view.fxml")
-            ),
-            300, 200
-        );
+        
+        FXMLLoader loader = new FXMLLoader(RegistrationApplication.class.getResource("registration-view.fxml"));
 
-        stage.setTitle("JavaFX FXML Reactive Example");
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root, 300, 200);
+
+        stage.setTitle("JavaFX FXML Example");
         stage.setScene(scene);
         stage.show();
     }

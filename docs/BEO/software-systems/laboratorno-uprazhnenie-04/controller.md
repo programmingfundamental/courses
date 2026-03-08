@@ -53,7 +53,7 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
 
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/login-view.fxml")
+                getClass().getResource("login-view.fxml")
         );
 
         LoginController controller = new LoginController("Login Manager");
