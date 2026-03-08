@@ -55,7 +55,7 @@ ps-project/
                   └─ ps/
                      └─ lab4/
                         └─ task1/
-                           └─ registration.fxml
+                           └─ registration-view.fxml
             </code></pre>
         </td>
 
@@ -249,7 +249,7 @@ public class RegistrationController {
     </tr>
 
     <tr>
-        <td colspan="2">
+        <td>
             <pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 
 &lt;?import javafx.scene.control.*?&gt;
@@ -257,7 +257,31 @@ public class RegistrationController {
 
 &lt;VBox spacing="10" alignment="CENTER"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="bg.tu_varna.sit.ps.lab4.[task1|task2].controller.RegistrationController"&gt;
+      fx:controller="bg.tu_varna.sit.ps.lab4.task1.controller.RegistrationController"&gt;
+
+    &lt;TextField fx:id="usernameField"
+               promptText="Username"/&gt;
+
+    &lt;PasswordField fx:id="passwordField"
+                   promptText="Password"/&gt;
+
+    &lt;Button fx:id="registerButton"
+            text="Регистрация"/&gt;
+
+    &lt;Label fx:id="statusLabel"
+           text="Въведете данни"/&gt;
+
+&lt;/VBox&gt;</code></pre>
+        </td>
+        <td>
+            <pre><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;?import javafx.scene.control.*?&gt;
+&lt;?import javafx.scene.layout.VBox?&gt;
+
+&lt;VBox spacing="10" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="bg.tu_varna.sit.ps.lab4.task2.controller.RegistrationController"&gt;
 
     &lt;TextField fx:id="usernameField"
                promptText="Username"/&gt;
@@ -289,6 +313,29 @@ public class RegistrationController {
     </tr>
 
     <tr>
+        <td>
+            <pre><code class="language-java">import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class RegistrationApplication extends Application {
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        
+        FXMLLoader loader = new FXMLLoader(RegistrationApplication.class.getResource("registration-view.fxml"));
+
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root, 300, 200);
+
+        stage.setTitle("JavaFX FXML imperative Example");
+        stage.setScene(scene);
+        stage.show();
+    }
+}</code></pre>
+        </td>
         <td colspan="2">
             <pre><code class="language-java">import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -306,7 +353,7 @@ public class RegistrationApplication extends Application {
 
         Scene scene = new Scene(root, 300, 200);
 
-        stage.setTitle("JavaFX FXML Example");
+        stage.setTitle("JavaFX FXML Reactive Example");
         stage.setScene(scene);
         stage.show();
     }
