@@ -324,7 +324,10 @@ public class RegistrationApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         
-        FXMLLoader loader = new FXMLLoader(RegistrationApplication.class.getResource("registration-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(
+            RegistrationApplication.class
+            .getResource("registration-view.fxml")
+        );
 
         Parent root = loader.load();
 
@@ -347,7 +350,10 @@ public class RegistrationApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         
-        FXMLLoader loader = new FXMLLoader(RegistrationApplication.class.getResource("registration-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(
+            RegistrationApplication.class
+            .getResource("registration-view.fxml")
+        );
 
         Parent root = loader.load();
 
