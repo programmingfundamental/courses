@@ -18,61 +18,53 @@ JAXB/ Jakarta XML Binding служи за преобразуване между 
 
 За да кажеш на JAXB да ползва адаптера, се използва анотацията @XmlJavaTypeAdapter. Тя може да се сложи върху поле, метод, клас или дори на package ниво. Ако е на поле, важи само за него; ако е на клас, важи за всички препратки към този клас.
 
-Примерно преобразуването между: LocalDate ↔ String
+Примерно преобразуването между: LocalDateTime ↔ String
 
-JAXB често не работи директно с LocalDate, затова го адаптираме до String.
+JAXB често не работи директно с LocalDateTime, затова го адаптираме до String.
 
 ### 1. Адаптер
 
 ```java
-import jakarta.xml.bind.annotation.adapters.XmlAdapter;
-import java.time.LocalDate;
-
-public class LocalDateAdapter extends XmlAdapter<String, LocalDate> {
+public class LocalDateTimeAdapter extends XmlAdapter<String, LocalDateTime> {
 
     @Override
-    public LocalDate unmarshal(String v) throws Exception {
-        return v == null ? null : LocalDate.parse(v);
+    public LocalDateTime unmarshal(String value) {
+        return value == null ? null : LocalDateTime.parse(value);
     }
 
     @Override
-    public String marshal(LocalDate v) throws Exception {
-        return v == null ? null : v.toString();
+    public String marshal(LocalDateTime value) {
+        return value == null ? null : value.toString();
     }
 }
 ```
 
 Идеята е:
-- при marshal: LocalDate -> String
-- при unmarshal: String -> LocalDate
+- при marshal: LocalDateTime -> String
+- при unmarshal: String -> LocalDateTime
 
 ### Клас, който ще се сериализира
 
 ```java
-import jakarta.xml.bind.annotation.XmlRootElement;
-import jakarta.xml.bind.annotation.XmlJavaTypeAdapter;
-import java.time.LocalDate;
-
-@XmlRootElement
+@XmlRootElement(name = "task")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Task {
 
     private int id;
     private String title;
     private String description;
 
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
-    private LocalDate deadline;
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+    private LocalDateTime deadline;
 
     public Task() {}
 
-    public Task(int id, String title, String description, LocalDate deadline) {
+    public Task(int id, String title, String description, LocalDateTime deadline) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.deadline = deadline;
     }
-
-    // getters и setters
 }
 ```
 
@@ -80,7 +72,7 @@ public class Task {
 
 С адаптер се казва:
 
-- в Java искам полето да е LocalDate
+- в Java искам полето да е LocalDateTime
 - в XML искам то да се пази като String
 
 Това е основната логика на XmlAdapter<ValueType, BoundType>
