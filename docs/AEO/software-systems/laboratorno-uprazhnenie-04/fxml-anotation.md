@@ -6,10 +6,11 @@ grand_parent: Software Systems
 nav_order: 2
 ---
 
-#### Анотиране на полета с @FXML анотация
+## Annotating fields with the @FXML annotation.
 
-fx:id атрибута е уникален идентификатор на UI елемент във FXML, който позволява достъп до компонента от контролера. Името на променливата в контролера трябва да съвпада с fx:id. @FXML анотираните полета, автоматично ще бъдат инизиялизирани.
-Пример: 
+The fx:id attribute is a unique identifier of a UI element in FXML that allows the component to be accessed from the controller. The variable name in the controller must match the fx:id. Fields annotated with @FXML will be automatically initialized.
+
+Example: 
 
 <table>
 <tr>
@@ -36,10 +37,11 @@ private TextField usernameField;
 </tr>
 </table>
 
-#### Анотиране на методи с @FXML анотация
+#### Annotating methods with the @FXML annotation.
 
-Метод за действие - Event handlers 
-- атрибутите onAction, onMouseClicked, и др. свързват FXML събитие с метод в Controller. Метода трябва да съществува в контролера, да е маркиран с @FXML, да е void
+Action method – Event handlers
+
+The attributes onAction, onMouseClicked, etc., connect an FXML event to a method in the Controller. The method must exist in the controller, be annotated with @FXML, and have a void return type.
 
 <table>
 <tr>
@@ -51,7 +53,7 @@ private TextField usernameField;
 <td>
 
 <pre><code class="language-xml">
-&lt;Button text="Вход" onAction="#onLogin"/&gt;
+&lt;Button text="Login" onAction="#onLogin"/&gt;
 </code></pre>
 
 </td>
@@ -61,7 +63,7 @@ private TextField usernameField;
 <pre><code class="language-java">
 @FXML
 private void onLogin() {
-    System.out.println("Бутонът е натиснат");
+    System.out.println("The button is pressed.");
 }
 </code></pre>
 

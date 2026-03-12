@@ -8,27 +8,33 @@ nav_order: 6
 
 # Tasks
 
-Да се създаде JavaFX приложение с FXML интерфейс за вход в система.
+Create a JavaFX application with an FXML interface for system login.
 
-Приложението трябва да съдържа:
+The application must contain:
 
-- поле за потребителско име
-- поле за парола
-- бутон „Вход“
-- текст (Label) за съобщения към потребителя
+- a username field
+- a password field
+- a “Login” button
+- a text (Label) for messages to the user
 
-Логика на бутона:
+Button logic
 
-Ако някое поле е празно → се показва съобщение:
-- "Моля, попълнете всички полета!"
+If any field is empty → display the message:
 
-Ако username == "admin" и password == "1234" → се показва съобщение:
-- "Успешен вход!"
+- "Please fill in all fields!"
 
-Всеки друг случай → се показва съобщение:
-- "Невалидни данни!"
+If username == "admin" and password == "1234" → display the message:
 
-Съобщението е празно при инициялизация на приложението.
+- "Login successful!"
 
-Бутонът „Вход“ да е disabled, докато:
-- username или password е празно, опитайте да го направите с BooleanBinding
+In any other case → display the message:
+
+- "Invalid data!"
+
+The message should be empty when the application initializes.
+
+The “Login” button should be disabled while:
+
+- the username or password field is empty.
+
+Try to implement this using BooleanBinding.

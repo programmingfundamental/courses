@@ -6,25 +6,25 @@ grand_parent: Software Systems
 nav_order: 4
 ---
 
-## Imperative и Reactive модел при изграждане на приложения с потребителски интерфейс
+## Imperative and Reactive models in building user interface applications.
 
-Разработката на графични потребителски интерфейси изисква постоянна синхронизация между данните на приложението и визуалните компоненти. В ранните UI технологии тази синхронизация се реализира чрез т.нар. imperative модел, при който разработчикът ръчно управлява всяка промяна в интерфейса.
+The development of graphical user interfaces requires continuous synchronization between the application’s data and the visual components. In early UI technologies, this synchronization was implemented through the so-called imperative model, where the developer manually controls every change in the interface.
 
-С нарастване на сложността на приложенията този подход води до труден за поддръжка код и висока вероятност от грешки. В отговор на тези проблеми JavaFX въвежда reactive модел, който автоматизира реакцията на интерфейса при промени в данните и действията на потребителя.
+As the complexity of applications increases, this approach leads to code that is difficult to maintain and has a higher probability of errors. In response to these issues, JavaFX introduces a reactive model, which automatically updates the interface in response to changes in data and user actions.
 
 ### 1. Imperative модел при разработка на UI
 
-#### 1.1 Същност на imperative модела
+#### 1.1 Essence of the Imperative Model
 
-Imperative моделът представлява подход, при който разработчикът изрично описва последователността от действия, които трябва да се изпълнят при всяка промяна в данните или събитие от потребителя.
+The imperative model is an approach in which the developer explicitly defines the sequence of actions that must be executed whenever data changes or a user event occurs.
 
-Основни характеристики:
+Main characteristics:
 
-- UI се обновява ръчно;
-- логиката и интерфейсът са силно свързани;
-- всяка промяна изисква допълнителен код.
+- The UI is updated manually;
+- The logic and the interface are tightly coupled;
+- Every change requires additional code.
 
-#### 1.2 Пример за imperative подход
+#### 1.2 Example of the Imperative Approach
 
 ```java
 button.setOnAction(e -> {
@@ -33,49 +33,50 @@ button.setOnAction(e -> {
 });
 ```
 
-В този пример:
+In this example:
 
-разработчикът ръчно извлича стойността;
+the developer manually retrieves the value;
 
-ръчно обновява UI компонента;
+manually updates the UI component;
 
-кодът се изпълнява само при конкретно събитие.
+the code is executed only when a specific event occurs.
 
-Ако стойността на `textField` се промени по друг начин, `label` няма да бъде обновен.
+If the value of textField changes in another way, the label will not be updated.
 
-#### 1.3 Недостатъци на imperative модела
+#### 1.3 Disadvantages of the Imperative Model
 
-- необходимост от повторение на логика;
-- риск от пропуснати обновявания;
-- трудна поддръжка при сложни зависимости;
-- по-ниска четимост на кода.
+- the need to repeat logic;
+- risk of missed updates;
+- difficult maintenance with complex dependencies;
+- lower code readability.
 
-Тези ограничения мотивират въвеждането на реактивен подход.
+These limitations motivate the introduction of a reactive approach.
 
-### 2. Reactive модел в JavaFX
+### 2. Reactive Model in JavaFX
 
-Reactive моделът в JavaFX представлява архитектурен подход, при който потребителският интерфейс реагира автоматично на промени в състоянието на приложението. Основната идея е данните да бъдат централен елемент, а UI компонентите да бъдат техни наблюдатели.
+The reactive model in JavaFX represents an architectural approach in which the user interface automatically reacts to changes in the application’s state. The main idea is that data acts as the central element, while UI components observe it.
 
-#### 2.2 Пример за reactive подход
+#### 2.2 Example of the Reactive Approach
 
 ```java
 label.textProperty().bind(textField.textProperty());
 ```
 
-След създаването на тази връзка:
+After establishing this connection:
 
-- label се обновява автоматично;
-- няма нужда от допълнителен код;
-- всички промени се отразяват в реално време.
+- the label updates automatically;
+- no additional code is required;
+- all changes are reflected in real time.
 
-### 3. Сравнение между imperative и reactive модел
+### 3. Comparison between the Imperative and Reactive Models
 
-| Критерий         | Imperative  | Reactive (JavaFX) |
-| ---------------- | ----------- | ----------------- |
-| Обновяване на UI | Ръчно       | Автоматично       |
-| Свързаност       | Висока      | Ниска             |
-| Код              | Повече      | По-малко          |
-| Грешки           | По-вероятни | По-малко          |
-| Поддръжка        | Трудна      | Лесна             |
+| Criterion   | Imperative  | Reactive (JavaFX) |
+| ----------- | ----------- | ----------------- |
+| UI Update   | Manual      | Automatic         |
+| Coupling    | High        | Low               |
+| Code        | More        | Less              |
+| Errors      | More likely | Fewer             |
+| Maintenance | Difficult   | Easy              |
 
-Imperative моделът поставя основата за разработка на UI, но при по-сложни приложения става труден за поддръжка. Reactive моделът в JavaFX решава тези проблеми чрез Properties, listener-и, binding и event handling, осигурявайки автоматична синхронизация между данните и интерфейса.
+
+The imperative model provides the foundation for UI development, but it becomes difficult to maintain in more complex applications. The reactive model in JavaFX addresses these issues through properties, listeners, binding, and event handling, ensuring automatic synchronization between the data and the user interface.

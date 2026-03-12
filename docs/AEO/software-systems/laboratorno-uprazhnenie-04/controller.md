@@ -6,24 +6,26 @@ grand_parent: Software Systems
 nav_order: 1
 ---
 
-### Контролер (Controller)
+### Controller
 
-Controller е клас, който обработва действията на потребителя (кликове, въвеждане на данни и д.р.), чете и валидира данните от fxml файловете, обновява декора чрез JavaFX механизми (binding, setText, disable и др.)
+A Controller is a class that processes user actions (clicks, data input, etc.), reads and validates data from the FXML files, and updates the UI using JavaFX mechanisms (binding, setText, disable, etc.).
 
-В JavaFX Controller е Java клас, който се свързва с fxml файла и управлява поведението на потребителския интерфейс.
+In JavaFX, a Controller is a Java class that is connected to an FXML file and manages the behavior of the user interface.
 
-FXML файлът не съдържа логика, а само декларативно описание на интерфейса и връзките към контролера.
+The FXML file does not contain logic; it only provides a declarative description of the interface and the connections to the controller.
 
-Във fxml файл контролерът се дефинира и използва чрез няколко ключови елемента.
+In an FXML file, the controller is defined and used through several key elements.
 
-``` fx:controller ``` атрибута свързва FXML файла с конкретен Java Controller клас.
+``` fx:controller ``` - The attribute connects the FXML file with a specific Java Controller class.
 
-Създаването на обектите на потребителския интерфейс и обекта на Java Controller класа се осъществява от FXMLLoader, който преобразува fxml дефиницията към Java обект. Това се случва като FXMLLoader анализира файловете с изгледи и свързва съответните изгледи в полетата на контролера. Свързването се усъществява с анотацията @FXML, която маркира полета и методи, които се свързват с елементите, декларирани в fxml файла.
+The creation of user interface objects and the Java Controller class object is performed by FXMLLoader, which converts the FXML definition into Java objects. This happens when FXMLLoader parses the view files and connects the corresponding UI elements to the fields in the controller.
+
+The connection is established using the @FXML annotation, which marks fields and methods that are linked to the elements declared in the FXML file.
 
 
 ![alt text](image-1.png)
 
-Атрибута ``` fx:controller ``` се подава само на основния елемент.
+The `fx:controller` attribute is specified only on the root element.
 
 ```xml
 <VBox spacing="10" alignment="CENTER"
@@ -34,7 +36,7 @@ FXML файлът не съдържа логика, а само декларат
 </VBox>
 ```
 
-Когато контролера не е дефиниран в fxml, трябва да се инициялизира при зареждане на интерфейса с Application класа.
+When the controller is not defined in the FXML file, it must be initialized when the interface is loaded using the Application class.
 
 ```xml
 <GridPane xmlns:fx="http://javafx.com/fxml/1">
@@ -86,13 +88,15 @@ public class LoginApplication extends Application {
 }
 ```
 
-След като полетата бъдат успешно инициялизирани, можем безопасно да ги достъпим чрез метода за инициализация за операции като регистриране на обработвачи на събития и стилизиране. По същество инициялизацията на обектите не се случва при initialize, а след като конструкторът бъде извикан. Така че, полетата не са достъпни за използване в конструктора.
+After the fields are successfully initialized, we can safely access them through the initialization method for operations such as registering event handlers and applying styling.
+
+In essence, the initialization of the objects does not happen in initialize, but after the constructor is invoked. Therefore, the fields are not accessible for use inside the constructor.
 
 ![alt text](image.png)
 
-По време на създаване на обектите с конструктор изгледа е практически невалидни. Ако опитаме да достъпим FXML изгледите в конструктор, програмата ще хвърли NullPointerException.
+During object creation with the constructor, the view is practically invalid. If we try to access the FXML views in the constructor, the program will throw a NullPointerException.
 
-Затова initialize() предоставя безопасен начин за постобработка на FXML изгледи и настройването им в началото на изпълнението на програмата. След това декора се рендерира, когато изгледа в готов. Следователно можем да поставим логиката на инициализация на интерфейса в метода за инициализация.
+Therefore, initialize() provides a safe way for post-processing FXML views and configuring them at the start of the program execution. After that, the UI is rendered when the view is ready. Consequently, we can place the interface initialization logic in the initialization method.
 
 ```java
 @FXML
@@ -101,11 +105,11 @@ public void initialize() {
 }
 ```
 
-| Конструктор | *initialize()* |
-|---|---|
-| Изпълнява се, когато е създаден контролер обект | Изпълнява се автоматично след въвеждане на FXML изгледи |
-| Извикване от JVM по време на инстанциация на обекти | Извикан от JavaFX FXML Loader |
-| FXML изгледите са недостъпни | FXML изгледи са достъпни |
-| Използва се за настройване на състояние на обекта | Използва се за инициализация на потребителския интерфейс |
-| Извиква се веднъж на контролер | Извиква се веднъж на контролер |
-| Може да взема параметри | Изисква само два аргумента: *URL* и *ResourceBundle* |
+| Constructor                                    | *initialize()*                                          |
+| ---------------------------------------------- | ------------------------------------------------------- |
+| Executed when the controller object is created | Executed automatically after the FXML views are loaded  |
+| Called by the JVM during object instantiation  | Called by the JavaFX FXML Loader                        |
+| FXML views are not accessible                  | FXML views are accessible                               |
+| Used to set up the object's state              | Used to initialize the user interface                   |
+| Called once per controller                     | Called once per controller                              |
+| Can take parameters                            | Requires only two arguments: *URL* and *ResourceBundle* |

@@ -10,28 +10,28 @@ nav_order: 3
 
 ## 1. JavaFX Properties
 
-За реализацията на реактивния модел JavaFX използва Properties – наблюдаеми контейнери за данни. Те съхраняват стойност и уведомяват регистрираните наблюдатели при всяка промяна.
+For implementing the reactive model, JavaFX uses Properties – observable data containers. They store a value and notify registered observers whenever a change occurs.
 
-Често използвани типове:
+Commonly used types:
 
 - `StringProperty`
 - `IntegerProperty`
 - `BooleanProperty`
 
-Properties са ключови за автоматичното обновяване на интерфейса.
+Properties are key to the automatic updating of the user interface.
 
-## 2. Observer Pattern и ChangeListener
+## 2. Observer Pattern & ChangeListener
 
-След като свойствата могат да се променят динамично, JavaFX използва Observer design pattern, при който:
+Since properties can change dynamically, JavaFX uses the Observer design pattern, in which:
 
-- Property е наблюдаваният обект;
-- ChangeListener е наблюдателят.
-- `addListener()` методът служи за регистриране на слушател към дадено Property и позволява реакция при всяка промяна.
-- Слушателите могат да бъдат:
+- The Property is the observed object;
+- The ChangeListener is the observer.
+- `addListener()` The method is used to register a listener to a given Property and allows reacting to every change.
+- Listeners can be::
     - `ChangeListener`
     - `InvalidationListener`
 
-Пример:
+Example:
 
 ```java
 usernameField.textProperty().addListener(new ChangeListener<String>() {
@@ -42,9 +42,9 @@ usernameField.textProperty().addListener(new ChangeListener<String>() {
 });
 ```
 
-Където ``` obs ``` е обекта чиято стойност се е променила, ``` oldVal ``` старата стойност преди промяната и ``` newVal ``` новата стойност след промяната
+Where ``` obs ``` is the object whose value has changed, ``` oldVal ``` is the value before the change, and ``` newVal ``` is the value after the change.
 
-Тъй като интерфейсът за обработка на събития има само един метод, можем да го третираме като функционален интерфейс и да заменим тези редове с един лямбда израз, за да направим кода си по-лесен за четене:
+Since the event handling interface has only one method, we can treat it as a functional interface and replace these lines with a single lambda expression to make the code easier to read:
 
 ```java
 usernameField.textProperty().addListener(
@@ -53,11 +53,11 @@ usernameField.textProperty().addListener(
 );
 ```
 
-- Binding в JavaFX
+- JavaFX Binding
     
-    Binding автоматизира observer механизма и премахва необходимостта от ръчно управление на listener-и. Реализира се със метода `bind`
+    Binding automates the observer mechanism and removes the need for manual listener management. It is implemented using the method `bind`
 
-Пример:
+Example:
 
 ```java
 BooleanBinding formInvalid =
@@ -66,68 +66,69 @@ BooleanBinding formInvalid =
 registerButton.disableProperty().bind(formInvalid);
 ```
 
-В този случай бутонът автоматично се деактивира при празно поле.
+In this case, the button is automatically disabled when a field is empty.
 
-## 3. Event Handling в JavaFX
+## 3. JavaFX Event Handling
 
-Докато Property реагира на промени в състоянието, Event Handling обработва действия на потребителя. 
+While Property reacts to changes in state, Event Handling processes user actions.
 
-Интерфейсът EventHandler<T> дефинира поведението за обработка на събитието. В интерфейса T е типът на събитието (event), което обработчикът ще получи. T трябва да е клас, който наследява Event.
+The EventHandler<T> interface defines the behavior for handling an event. In this interface, T is the type of event that the handler will receive. T must be a class that extends Event.
 
-| T             | Кога се използва         |
-| ------------- | ------------------------ |
-| `ActionEvent` | при бутони, менюта       |
-| `MouseEvent`  | при действия с мишка     |
-| `KeyEvent`    | при натискане на клавиши |
-| `ScrollEvent` | при скрол                |
-| `DragEvent`   | при drag & drop          |
-| `TouchEvent`  | при touch събития        |
+| T             | When it is used    |
+| ------------- | ------------------ |
+| `ActionEvent` | for buttons, menus |
+| `MouseEvent`  | for mouse actions  |
+| `KeyEvent`    | for key presses    |
+| `ScrollEvent` | for scrolling      |
+| `DragEvent`   | for drag & drop    |
+| `TouchEvent`  | for touch events   |
+
 
 
 ```java
 button.setOnAction(new EventHandler<ActionEvent>() {
     @Override
     public void handle(ActionEvent event) {
-        System.out.println("Бутонът е натиснат");
+        System.out.println("The button is pressed.");
     }
 });
 ```
 
-Тъй като интерфейсът за обработка на събития има само един метод, можем да го третираме като функционален интерфейс и да заменим тези редове с един лямбда израз, за да направим кода си по-лесен за четене:
+Since the event handling interface has only one method, we can treat it as a functional interface and replace these lines with a single lambda expression to make the code easier to read:
 
 ```java
 button.setOnAction(e -> {
-    System.out.println("Бутонът е натиснат");
+    System.out.println("The button was pressed.");
 });
 ```
 
-## 4. addEventHandler в JavaFX
+## 4. JavaFX addEventHandler
 
-`addEventHandler()` предоставя разширен контрол и позволява добавянето на множество обработчици за едно събитие.
+`addEventHandler()` It provides extended control and allows adding multiple handlers for a single event.
 
-Пример:
+Example:
 
 ```java
 button.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
     @Override
     public void handle(ActionEvent e) {
-        System.out.println("Action обработен");
+        System.out.println("Action handled");
     }
 });
 ```
 
 ```java
 button.addEventHandler(ActionEvent.ACTION, e -> {
-    System.out.println("Action обработен");
+    System.out.println("Action handled");
 });
 ```
 
-Типовете на събития са:
+The types of events are:
 
 | Event class   | EventType                                  |
 | ------------- | ------------------------------------------ |
 | `ActionEvent` | `ACTION`                                   |
-| `MouseEvent`  | `MOUSE_CLICKED`, `MOUSE_PRESSED` и др.     |
+| `MouseEvent`  | `MOUSE_CLICKED`, `MOUSE_PRESSED`     |
 | `KeyEvent`    | `KEY_PRESSED`, `KEY_RELEASED`, `KEY_TYPED` |
 | `ScrollEvent` | `SCROLL`, `SCROLL_STARTED`                 |
 

@@ -6,28 +6,28 @@ grand_parent: Software Systems
 nav_order: 5
 ---
 
-# Примерна задача
+# Example Task
 
-Да се създаде JavaFX приложение „Форма за регистрация“, което съдържа:
+Create a JavaFX application called “Registration Form” that contains:
 
-- поле за потребителско име (TextField);
-- поле за парола (PasswordField);
-- бутон „Регистрация“ (Button);
-- текстово поле за статус (Label).
+- a username field (TextField);
+- a password field (PasswordField);
+- a “Register” button (Button);
+- a status text field (Label).
 
-Приложението трябва:
+The application should:
 
-- да валидира данните в реално време;
-- да активира бутона само при валидни данни.
+- validate the data in real time;
+- enable the button only when the data is valid.
 
 <table>
     <tr>
-        <td><b>1. Реализация с imperative модел</b></td>
-        <td><b>2. Реализация с Reactive модел</b></td>
+        <td><b>1. Implementation Using the Imperative Model</b></td>
+        <td><b>2. Implementation Using the Reactive Model</b></td>
     </tr>
 
     <tr>
-        <td><b>1.1 Структура на приложението</b></td>
+        <td><b>1.1 Application Structure</b></td>
         <td></td>
     </tr>
 
@@ -93,19 +93,19 @@ ps-project/
 
     <tr>
         <td>
-            При imperative подхода:
+            In the imperative approach:
             <ul>
-                <li>логиката се изпълнява само при събитие;</li>
-                <li>валидирането е ръчно;</li>
-                <li>няма автоматична реакция при промяна на данни.</li>
+                <li>the logic is executed only when an event occurs;</li>
+                <li>the validation is performed manually;</li>
+                <li>there is no automatic reaction when the data changes.</li>
             </ul>
         </td>
         <td>
-            При Reactive подхода:
+            In the reactive approach:
             <ul>
-                <li>използва JavaFX Properties;</li>
-                <li>реагира в реално време;</li>
-                <li>автоматично управлява UI чрез binding.</li>
+                <li>JavaFX Properties are used;</li>
+                <li>reacts in real time;</li>
+                <li>automatically manages the UI through binding.</li>
             </ul>
         </td>
     </tr>
@@ -139,9 +139,9 @@ public class RegistrationController {
             String password = passwordField.getText();
 
             if (username.length() &gt;= 4 &amp;&amp; password.length() &gt;= 6) {
-                statusLabel.setText("Данните са валидни");
+                statusLabel.setText("The data is valid.");
             } else {
-                statusLabel.setText("Невалидни данни");
+                statusLabel.setText("Invalid data");
             }
         });
     }
@@ -202,9 +202,9 @@ public class RegistrationController {
         /* ===== Observer върху Binding ===== */
         formInvalid.addListener((obs, oldVal, newVal) -&gt; {
             if (newVal) {
-                statusLabel.setText("Невалидни данни");
+                statusLabel.setText("Invalid data");
             } else {
-                statusLabel.setText("Данните са валидни");
+                statusLabel.setText("The data is valid");
             }
         });
 
@@ -214,12 +214,12 @@ public class RegistrationController {
         /* ===== addEventHandler ===== */
         registerButton.addEventHandler(
             ActionEvent.ACTION,
-            e -&gt; System.out.println("ActionEvent обработен")
+            e -&gt; System.out.println("Processed ActionEvent")
         );
     }
 
     private void handleRegister(ActionEvent event) {
-        statusLabel.setText("Регистрацията е успешна!");
+        statusLabel.setText("Registration successful!");
     }
 }</code></pre>
         </td>
@@ -228,24 +228,24 @@ public class RegistrationController {
     <tr>
         <td>
             <ul>
-                <li>Валидирането става само при натискане на бутона</li>
-                <li>UI не реагира при писане</li>
-                <li>Липсва автоматична синхронизация</li>
-                <li>Подходът е типичен за imperative модел</li>
+                <li>Validation occurs only when the button is pressed</li>
+                <li>The UI does not react while typing</li>
+                <li>Automatic synchronization is missing</li>
+                <li>This approach is typical of the imperative model</li>
             </ul>
         </td>
         <td>
             <ul>
-                <li>Валидирането става в реално време</li>
-                <li>UI реагира при всяка промяна</li>
-                <li>Има автоматична синхронизация чрез binding</li>
-                <li>Подходът е типичен за reactive модел</li>
+                <li>Validation occurs in real time</li>
+                <li>The UI reacts to every change</li>
+                <li>There is automatic synchronization through binding</li>
+                <li>This approach is typical of the reactive model</li>
             </ul>
         </td>
     </tr>
 
     <tr>
-        <td colspan="2"><b>4. FXML файл – потребителски интерфейс – registration-view.fxml</b></td>
+        <td colspan="2"><b>4. FXML file – user interface – registration-view.fxml</b></td>
     </tr>
 
     <tr>
@@ -266,10 +266,10 @@ public class RegistrationController {
                    promptText="Password"/&gt;
 
     &lt;Button fx:id="registerButton"
-            text="Регистрация"/&gt;
+            text="Registration"/&gt;
 
     &lt;Label fx:id="statusLabel"
-           text="Въведете данни"/&gt;
+           text="Enter data"/&gt;
 
 &lt;/VBox&gt;</code></pre>
         </td>
@@ -290,10 +290,10 @@ public class RegistrationController {
                    promptText="Password"/&gt;
 
     &lt;Button fx:id="registerButton"
-            text="Регистрация"/&gt;
+            text="Registration"/&gt;
 
     &lt;Label fx:id="statusLabel"
-           text="Въведете данни"/&gt;
+           text="Enter data"/&gt;
 
 &lt;/VBox&gt;</code></pre>
         </td>
@@ -302,14 +302,14 @@ public class RegistrationController {
     <tr>
         <td colspan="2">
             <ul>
-                <li>FXML описва само UI, без логика</li>
-                <li>fx:id осигурява връзка с controller-a</li>
+                <li>FXML describes only the UI, without logic.</li>
+                <li>fx:id provides a connection to the controller</li>
             </ul>
         </td>
     </tr>
 
     <tr>
-        <td colspan="2"><b>5. Application клас</b></td>
+        <td colspan="2"><b>5. Application class</b></td>
     </tr>
 
     <tr>
@@ -368,7 +368,7 @@ public class RegistrationApplication extends Application {
     </tr>
 
     <tr>
-        <td colspan="2"><b>6. Main / Launcher клас</b></td>
+        <td colspan="2"><b>6. Launcher class</b></td>
     </tr>
     <tr>
 <td>
@@ -387,14 +387,15 @@ public class RegistrationApplication extends Application {
 </table>
 
 
-### 6. Сравнение на FXML imperative vs reactive
+### 6. Comparison of FXML: Imperative vs Reactive
 
-| Критерий              | Imperative | Reactive |
-| --------------------- | ---------- | -------- |
-| Реакция при въвеждане | Не         | Да       |
-| Properties            | Не         | Да       |
-| Binding               | Не         | Да       |
-| Listener-и            | Ограничени | Активни  |
-| Поддръжка             | По-трудна  | По-лесна |
+| Criterion             | Imperative     | Reactive |
+| --------------------- | -------------- | -------- |
+| Reaction during input | No             | Yes      |
+| Properties            | No             | Yes      |
+| Binding               | No             | Yes      |
+| Listeners             | Limited        | Active   |
+| Maintenance           | More difficult | Easier   |
+
 
 
