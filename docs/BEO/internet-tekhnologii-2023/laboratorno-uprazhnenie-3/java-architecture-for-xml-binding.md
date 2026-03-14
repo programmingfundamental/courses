@@ -10,17 +10,31 @@ nav_order: 2
 
 JAXB осигурява бърз и удобен начин за обвързване на XML схеми и Java представителства, като улеснява разработчиците на Java да включват XML данни и функции за обработка в Java приложения. Като част от този процес, JAXB предоставя методи за демаркиране (четене) на документи от XML екземпляри в дървета със съдържание на Java и след това преобразуване (писане) на дървета със съдържание на Java обратно в документи на XML инстанции. JAXB предоставя също начин за генериране на XML схема от Java обекти.
 
-| Annotation                                      | Description                                                                                                                           |
+| Анотация                                      | Описание                                                                                                                           |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | @XmlRootElement(namespace = "namespace")        | Дефинира коренния елемент за XML дърво                                                                                                |
 | @XmlType(propOrder = { "field2", "field1",.. }) | Позволява да се определи редът, в който полетата се записват във XML файла                                                            |
-| @XmlElement(name = "neuName")                   | Определя XML елемента, който ще бъде използван. Трябва да се използва само ако името на XML елемента е различно от името на JavaBeans |
+| @XmlElement(name = "newName")                   | Определя XML елемента, който ще бъде използван. Използва се когато XML името е различно от Java полетo |
+|@XmlAccessorType(XmlAccessType.TYPE)| Определя по какъв начин JAXB достъпва данните в класа — дали чрез полета, getter/setter методи, публични членове или само изрично анотирани елементи
+@XmlElementWrapper(name = "wrapperName")| Създава обвиващ родителски XML елемент около списък от елементи
+@XmlTransient| Изключва поле или метод от XML сериализацията
+
+<br>
+
+| Стойност na AccessType       | Описание                                                      |
+| --------------- | ------------------------------------------------------------- |
+| `FIELD`         | JAXB използва директно всички полета на класа                 |
+| `PROPERTY`      | JAXB използва getter/setter методите                          |
+| `PUBLIC_MEMBER` | JAXB използва публични полета и публични getter/setter методи |
+| `NONE`          | Само елементи с изрично зададени JAXB анотации се обработват  |
+
+<br>
 
 ###
 
 ### JAXB библиотека
 
-https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime
+[https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime](https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime)
 
 ### Дефиниране на клас, моделиращ данните в XML файла
 
@@ -28,7 +42,7 @@ https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime
 @XmlRootElement(name = "student")
 @XmlAccessorType(XmlAccessType.FIELD)
 // Не е задължително но ако искате, можете да определите реда, в който да се запишат полетата
-@XmlType(propOrder = { "fakNum", "name", "specialty")
+@XmlType(propOrder = {"fakNum", "name", "specialty"})
 public class Student {
 
     private String name;
@@ -87,11 +101,11 @@ public class Group {
         return students;
     }
 
-    public String getNumber() {
+    public int getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(int number) {
         this.number = number;
     }
 
@@ -106,6 +120,8 @@ public class Group {
 ```
 
 ### Трансформиране в XML
+
+Добавяне на XSD схема за валидация:
 
 ```java
 String xsdFile = this.getClass().getClassLoader().getResource("xml/person.xsd").getPath();

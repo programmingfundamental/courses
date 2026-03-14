@@ -85,8 +85,11 @@ XML форматът е относително многословен, т.е. а
 
 2.1. Генериране на схема в resources
 
-- Създавате XML входен файл
-- Избирате меню Tools -> XML Actions -> Generate XSD Schema from XML file
-- Резултатния файл поставяте в директория resources
+- Създава се XML файл
+- Избира се меню Tools -> XML Actions -> Generate Schema from XML file...
+
+<figure><img src="../../../../assets/xml-scheme.png" alt=""><figcaption></figcaption></figure>
 
 
+- За тип се избира W3C XML Schema
+- Резултатния файл се поставя в ресурсната директория, която се създава с десен бутон върху основната директория на проекта -> New -> Directory -> src\main\resources
