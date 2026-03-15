@@ -185,6 +185,7 @@ public class FormController {
         facultyNumberField.clear();
         studentNameField.clear();
         specialtyField.clear();
+        requestTextArea.clear();
 
         studyFormToggle.setSelected(false);
 
