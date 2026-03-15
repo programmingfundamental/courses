@@ -76,6 +76,8 @@ public class FormController {
         initTextFields();
 
         initButtons();
+
+        initValidators();
     }
 
     private void initButtons() {
@@ -84,8 +86,6 @@ public class FormController {
                     newVal ? "Задочно обучение" : "Редовно обучение"
             );
         });
-
-        initValidators();
     }
 
     private void initValidators() {

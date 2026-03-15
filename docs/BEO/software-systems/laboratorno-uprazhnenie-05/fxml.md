@@ -381,6 +381,8 @@ FXML файлът служи за декларативно описание на
 
                 <Label fx:id="requestTextLabel"
                        text=".............................................."
+                       wrapText="true"
+                       GridPane.columnSpan="2"
                        GridPane.rowIndex="10"
                        GridPane.columnIndex="0"/>
 
@@ -617,6 +619,8 @@ FXML файлът служи за декларативно описание на
 
                 <Label fx:id="requestTextLabel"
                        text=".............................................."
+                       wrapText="true" 
+                       GridPane.columnSpan="2"
                        GridPane.rowIndex="10"
                        GridPane.columnIndex="0"/>
 
@@ -841,6 +845,8 @@ FXML файлът служи за декларативно описание на
 
                 <Label fx:id="requestTextLabel"
                        text=".............................................."
+                       wrapText="true" 
+                       GridPane.columnSpan="2"
                        GridPane.rowIndex="10"
                        GridPane.columnIndex="0"/>
 
@@ -1195,6 +1201,8 @@ private void selectedRequestType() {
 
                 <Label fx:id="requestTextLabel"
                        text=".............................................."
+                       wrapText="true" 
+                       GridPane.columnSpan="2"
                        GridPane.rowIndex="10"
                        GridPane.columnIndex="0"/>
 

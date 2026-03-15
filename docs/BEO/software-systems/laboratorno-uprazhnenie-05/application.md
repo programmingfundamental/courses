@@ -1,6 +1,6 @@
 ---
 layout: default
-title: FormApplication / Louncher
+title: FormApplication / Launcher
 parent: Лабораторно упражнение 5
 grand_parent: Програмни системи
 nav_order: 1
