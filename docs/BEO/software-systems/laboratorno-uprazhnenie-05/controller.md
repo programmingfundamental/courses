@@ -78,10 +78,10 @@ public class FormController {
             );
         });
 
-        initConfirmButton();
+        initValidators();
     }
 
-    private void initConfirmButton() {
+    private void initValidators() {
         studentNameField.textProperty().addListener((obs,o,n) -> validateName());
         facultyNumberField.textProperty().addListener((obs,o,n) -> validateFaculty());
         specialtyField.textProperty().addListener((obs,o,n) -> validateSpecialty());
@@ -237,6 +237,5 @@ public class FormController {
         }
     }
 }
-
 
 ```
