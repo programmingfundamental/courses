@@ -58,7 +58,8 @@ nav_order: 3
                 </font>
             </Label>
 
-            <VBox spacing="8">
+            <GridPane hgap="10" vgap="8">
+
                 <padding>
                     <Insets top="15" right="15" bottom="15" left="15"/>
                 </padding>
@@ -75,41 +76,63 @@ nav_order: 3
                     </Background>
                 </background>
 
+                <Label text="ДО" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <Label fx:id="receiverPreviewLabel"
+                       text=".............................................."
+                       GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-                <Label text="ДО"/>
-                <Label fx:id="receiverPreviewLabel" text=".............................................."/>
+                <Label text="От:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <Label fx:id="studentNamePreviewLabel"
+                       text=".............................................."
+                       GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-                <Label text=" " />
+                <Label text="Факултетен номер:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <Label fx:id="facultyNumberPreviewLabel"
+                       text=".............................................."
+                       GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
-                <Label text="От:"/>
-                <Label fx:id="studentNamePreviewLabel" text=".............................................."/>
+                <Label text="Специалност:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <Label fx:id="specialtyPreviewLabel"
+                       text=".............................................."
+                       GridPane.rowIndex="4" GridPane.columnIndex="1"/>
 
-                <Label text="Факултетен номер:"/>
-                <Label fx:id="facultyNumberPreviewLabel" text=".............................................."/>
+                <Label text="Форма на обучение:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <Label fx:id="studyFormPreviewLabel"
+                       text=".............................................."
+                       GridPane.rowIndex="5" GridPane.columnIndex="1"/>
 
-                <Label text="Специалност:"/>
-                <Label fx:id="specialtyPreviewLabel" text=".............................................."/>
-
-                <Label text="Форма на обучение:"/>
-                <Label fx:id="studyFormPreviewLabel" text=".............................................."/>
-
-                <Label text=" " />
-
-                <Label text="Уважаеми/а господин/госпожо,"/>
+                <Label text="Уважаеми/а господин/госпожо,"
+                       GridPane.rowIndex="7"
+                       GridPane.columnIndex="0"
+                       GridPane.columnSpan="2"/>
 
                 <Label wrapText="true"
-                       text="Моля да бъде разгледано моето заявление относно:"/>
+                       text="Моля да бъде разгледано моето заявление относно:"
+                       GridPane.rowIndex="8"
+                       GridPane.columnIndex="0"
+                       GridPane.columnSpan="2"/>
 
-                <Label fx:id="requestTypePreviewLabel" text=".............................................."/>
+                <Label fx:id="requestTypePreviewLabel"
+                       text=".............................................."
+                       GridPane.rowIndex="9"
+                       GridPane.columnIndex="0"
+                       GridPane.columnSpan="2"/>
 
-                <Label text=" " />
+                <Label fx:id="requestTextLabel" text=".............................................." GridPane.rowIndex="10" GridPane.columnIndex="0"/>
 
-                <Label wrapText="true"
-                       text="Дата: .........................          Подпис: ........................."/>
-            </VBox>
+                <Label text="Дата: ........................."
+                       GridPane.rowIndex="11"
+                       GridPane.columnIndex="0"/>
+
+                <Label text="Подпис: ........................."
+                       GridPane.rowIndex="11"
+                       GridPane.columnIndex="1"
+                       GridPane.halignment="RIGHT"/>
+
+            </GridPane>
 
             <HBox spacing="15" alignment="CENTER">
-                <Button fx:id="confirmButton" disable="true" text="Потвърди" defaultButton="true" onAction="#handleConfirm"/>
+                <Button fx:id="confirmButton" text="Потвърди" defaultButton="true" onAction="#handleConfirm"/>
                 <Button text="Почисти" onAction="#handleClear"/>
             </HBox>
         </VBox>
@@ -141,6 +164,15 @@ nav_order: 3
                          text="Отработване на часове"
                          toggleGroup="$requestGroup"
                          onAction="#selectedRequestType"/>
+
+
+            <Label text="Текст на заявлението"/>
+
+            <TextArea fx:id="requestTextArea"
+                      prefRowCount="5"
+                      wrapText="true"
+                      promptText="Въведете текста на заявлението"/>
+
         </VBox>
     </right>
 
@@ -156,5 +188,6 @@ nav_order: 3
         </HBox>
     </bottom>
 </BorderPane>
+
 
 ```

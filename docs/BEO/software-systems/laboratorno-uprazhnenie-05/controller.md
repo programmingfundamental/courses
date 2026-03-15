@@ -13,10 +13,11 @@ nav_order: 2
 package bg.tu_varna.sit.ps.lab5.task1.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 
@@ -31,8 +32,12 @@ public class FormController {
     private TextField studentNameField;
     @FXML
     private TextField specialtyField;
+
     @FXML
     private ToggleButton studyFormToggle;
+
+    @FXML
+    private TextArea requestTextArea;
 
     @FXML
     private CheckBox rectorCheckBox;
@@ -60,6 +65,8 @@ public class FormController {
     private Label requestTypePreviewLabel;
     @FXML
     private Label statusLabel;
+    @FXML
+    private Label requestTextLabel;
 
     @FXML
     private Button confirmButton;
@@ -86,6 +93,8 @@ public class FormController {
         facultyNumberField.textProperty().addListener((obs,o,n) -> validateFaculty());
         specialtyField.textProperty().addListener((obs,o,n) -> validateSpecialty());
 
+        requestTextArea.textProperty().addListener((obs,o,n) -> validateRequestText());
+
         rectorCheckBox.selectedProperty().addListener((obs,o,n) -> validateReceiver());
         deanCheckBox.selectedProperty().addListener((obs,o,n) -> validateReceiver());
         headCheckBox.selectedProperty().addListener((obs,o,n) -> validateReceiver());
@@ -108,6 +117,11 @@ public class FormController {
         specialtyField.textProperty().addListener(
                 (obs, oldVal, newVal) -> {
                     specialtyPreviewLabel.setText(getTextOrDefault(newVal));
+                });
+
+        requestTextArea.textProperty().addListener(
+                (obs, oldVal, newVal) -> {
+                    requestTextLabel.setText(getTextOrDefault(newVal));
                 });
     }
 
@@ -149,14 +163,21 @@ public class FormController {
         requestTypePreviewLabel.setText(result);
     }
 
-    private void setStatusLabel(String message, boolean disableButton) {
-        statusLabel.setText(message);
+    private void setStatusLabel(String successMessage, String errorMessage, boolean disableButton) {
+        statusLabel.setText(disableButton ? errorMessage : successMessage);
         confirmButton.setDisable(disableButton);
     }
 
     @FXML
     private void handleConfirm() {
-        setStatusLabel("Състояние: Данните са потвърдени", false);
+        if(!validateName()) return;
+        if(!validateFaculty()) return;
+        if(!validateSpecialty()) return;
+        if(!validateReceiver()) return;
+        if(!validateRequest()) return;
+        if(!validateRequestText()) return;
+
+        setStatusLabel("Състояние: Данните са потвърдени", "", false);
     }
 
     @FXML
@@ -174,67 +195,70 @@ public class FormController {
         leaveRadio.setSelected(false);
         hoursRadio.setSelected(false);
 
-        setStatusLabel("Състояние: Формата е изчистена", true);
+        setStatusLabel("Състояние: Формата е изчистена", "", true);
     }
 
-    private void validateName() {
-
-        String name = studentNameField.getText().trim();
-
-        if (name.length() < 3) {
-            setStatusLabel("Грешка: Името трябва да е повече от 3 символа", true);
-        } else {
-            setStatusLabel("Състояние: Въведено име", false);
-        }
-    }
-
-    private void validateFaculty() {
-
-        String faculty = facultyNumberField.getText().trim();
-
-        if (faculty.length() != 8) {
-            setStatusLabel("Грешка: Факултетният номер трябва да е 8 цифри", true);
-            return;
-        }
-
+    private boolean isDigit(String faculty) {
         for (char c : faculty.toCharArray()) {
             if (!Character.isDigit(c)) {
-                setStatusLabel("Грешка: Факултетният номер трябва да съдържа само цифри", true);
-                return;
+                return false;
             }
         }
-
-        setStatusLabel("Състояние: Въведен факултетен номер", false);
+        return true;
     }
 
-    private void validateSpecialty() {
+    private boolean validateName() {
+        String name = studentNameField.getText().trim();
+        String successMessage = "Състояние: Въведено име";
+        String errorMessage = "Грешка: Името трябва да е повече от 3 символа";
+        boolean isValid = name.length() >= 3;
+        setStatusLabel(successMessage, errorMessage, !isValid);
+        return isValid;
+    }
 
+    private boolean validateFaculty() {
+        String faculty = facultyNumberField.getText().trim();
+        String successMessage = "Състояние: Въведен факултетен номер";
+        String errorMessage = "Грешка: Факултетният номер трябва да е 8 цифри";
+        boolean isValid = faculty.length() == 8 && isDigit(faculty);
+        setStatusLabel(successMessage, errorMessage, !isValid);
+        return isValid;
+    }
+
+    private boolean validateSpecialty() {
         String specialty = specialtyField.getText().trim();
-
-        if (specialty.length() < 2) {
-            setStatusLabel("Грешка: Специалността трябва да е повече от 2 букви", true);
-        } else {
-            setStatusLabel("Състояние: Въведена специалност", false);
-        }
+        String successMessage = "Състояние: Въведена специалност";
+        String errorMessage = "Грешка: Специалността трябва да е повече от 2 букви";
+        boolean isValid = specialty.length() >= 2;
+        setStatusLabel(successMessage, errorMessage, !isValid);
+        return isValid;
     }
 
-    private void validateReceiver() {
-
-        if (!(rectorCheckBox.isSelected() || deanCheckBox.isSelected() || headCheckBox.isSelected())) {
-            setStatusLabel("Грешка: Изберете получател", true);
-        } else {
-            setStatusLabel("Състояние: Избран получател", false);
-        }
+    private boolean validateReceiver() {
+        String successMessage = "Състояние: Избран получател";
+        String errorMessage = "Грешка: Изберете получател";
+        boolean isValid = (rectorCheckBox.isSelected() || deanCheckBox.isSelected() || headCheckBox.isSelected());
+        setStatusLabel(successMessage, errorMessage, !isValid);
+        return isValid;
     }
 
-    private void validateRequest() {
+    private boolean validateRequest() {
+        String successMessage = "Състояние: Избран вид заявление";
+        String errorMessage = "Грешка: Изберете вид заявление";
+        boolean isValid = (leaveRadio.isSelected() || hoursRadio.isSelected());
+        setStatusLabel(successMessage, errorMessage, !isValid);
+        return isValid;
+    }
 
-        if (!(leaveRadio.isSelected() || hoursRadio.isSelected())) {
-            setStatusLabel("Грешка: Изберете вид заявление", true);
-        } else {
-            setStatusLabel("Състояние: Избран вид заявление", false);
-        }
+    private boolean validateRequestText() {
+        String text = requestTextArea.getText().trim();
+        String successMessage = "Състояние: Попълнен текст на заявлението";
+        String errorMessage = "Грешка: Текстът на заявлението трябва да е поне 10 символа";
+        boolean isValid = text.length() >= 10;
+        setStatusLabel(successMessage, errorMessage, !isValid);
+        return isValid;
     }
 }
+
 
 ```
