@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Form fxml
+title: Form Controller
 parent: Лабораторно упражнение 5
 grand_parent: Програмни системи
 nav_order: 2
