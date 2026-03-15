@@ -86,12 +86,12 @@ public class FormController {
         facultyNumberField.textProperty().addListener((obs,o,n) -> validateFaculty());
         specialtyField.textProperty().addListener((obs,o,n) -> validateSpecialty());
 
-        rectorCheckBox.setOnAction(e -> validateReceiver());
-        deanCheckBox.setOnAction(e -> validateReceiver());
-        headCheckBox.setOnAction(e -> validateReceiver());
+        rectorCheckBox.selectedProperty().addListener((obs,o,n) -> validateReceiver());
+        deanCheckBox.selectedProperty().addListener((obs,o,n) -> validateReceiver());
+        headCheckBox.selectedProperty().addListener((obs,o,n) -> validateReceiver());
 
-        leaveRadio.setOnAction(e -> validateRequest());
-        hoursRadio.setOnAction(e -> validateRequest());
+        leaveRadio.selectedProperty().addListener((obs,o,n) -> validateRequest());
+        hoursRadio.selectedProperty().addListener((obs,o,n) -> validateRequest());
     }
 
     private void initTextFields() {
@@ -130,7 +130,6 @@ public class FormController {
         }
 
         if (stringBuilder.isEmpty()) {
-            stringBuilder.append(template);
             stringBuilder.append(template);
         }
 
