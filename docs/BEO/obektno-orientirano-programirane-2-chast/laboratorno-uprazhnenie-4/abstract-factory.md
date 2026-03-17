@@ -33,13 +33,13 @@ public abstract class Computer {
 #### Следващата стъпка е да създадем фактическия клас наследник на абстрактния
 
 ```java
-public class DvaesktopComputer extends Computer {
+public class DesktopComputer extends Computer {
  
     private String ram;
     private String hdd;
     private String cpu;
      
-    public PC(String ram, String hdd, String cpu){
+    public DesktopComputer(String ram, String hdd, String cpu){
         this.ram=ram;
         this.hdd=hdd;
         this.cpu=cpu;
@@ -69,7 +69,7 @@ public class ServerComputer extends Computer {
     private String hdd;
     private String cpu;
      
-    public Server(String ram, String hdd, String cpu){
+    public ServerComputer(String ram, String hdd, String cpu){
         this.ram=ram;
         this.hdd=hdd;
         this.cpu=cpu;
@@ -107,20 +107,20 @@ public interface ComputerAbstractFactory {
 Методът createComputer връща екземпляр на супер класа Computer. Сега фабричните класове ще реализират този интерфейс и ще върнат съответния подклас.
 
 ```java
-public class DvaesktopComputerFactory implements ComputerAbstractFactory {
+public class DesktopComputerFactory implements ComputerAbstractFactory {
 
 	private String ram;
 	private String hdd;
 	private String cpu;
 	
-	public PCFactory(String ram, String hdd, String cpu){
+	public DesktopComputerFactory(String ram, String hdd, String cpu){
 		this.ram=ram;
 		this.hdd=hdd;
 		this.cpu=cpu;
 	}
 	@Override
 	public Computer createComputer() {
-		return new PC(ram,hdd,cpu);
+		return new DesktopComputer(ram,hdd,cpu);
 	}
 
 }
@@ -133,7 +133,7 @@ public class ServerComputerFactory implements ComputerAbstractFactory {
 	private String hdd;
 	private String cpu;
 	
-	public ServerFactory(String ram, String hdd, String cpu){
+	public ServerComputerFactory(String ram, String hdd, String cpu){
 		this.ram=ram;
 		this.hdd=hdd;
 		this.cpu=cpu;
@@ -141,7 +141,7 @@ public class ServerComputerFactory implements ComputerAbstractFactory {
 	
 	@Override
 	public Computer createComputer() {
-		return new Server(ram,hdd,cpu);
+		return new ServerComputerFactory(ram,hdd,cpu);
 	}
 
 }
@@ -168,7 +168,7 @@ public class Application {
 	}
 
 	private static void testAbstractFactory() {
-		Computer pc = ComputerFactory.getComputer(new DvaesktopComputerFactory("2 GB","500 GB","2.4 GHz"));
+		Computer pc = ComputerFactory.getComputer(new DesktopComputerFactory("2 GB","500 GB","2.4 GHz"));
 		Computer server = ComputerFactory.getComputer(new ServerComputerFactory("16 GB","1 TB","2.9 GHz"));
 		System.out.println("AbstractFactory PC Config::"+pc);
 		System.out.println("AbstractFactory Server Config::"+server);
