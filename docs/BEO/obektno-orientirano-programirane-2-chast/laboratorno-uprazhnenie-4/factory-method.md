@@ -130,4 +130,19 @@ public class PushNotificationFactory {
 }
 ```
 
-Самото създаване на обекти минава през фактори метода по следния начин
+Самото създаване на обекти минава през фактори метода по следния начин:
+
+```
+public class NotificationCenter {
+
+    public enum NotificationType { SMS, EMAIL, PUSH }
+
+    public static Notification createNotification(NotificationType type) {
+        return switch (type) {
+            case SMS -> new SmsNotificationFactory().create();
+            case EMAIL -> new EmailNotificationFactory().create();
+            case PUSH -> new PushNotificationFactory().create();
+        };
+    }
+}
+```
