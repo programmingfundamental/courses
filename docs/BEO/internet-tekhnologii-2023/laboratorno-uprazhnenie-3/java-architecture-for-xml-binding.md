@@ -121,45 +121,132 @@ public class Group {
 
 ### Трансформиране в XML
 
-Добавяне на XSD схема за валидация:
+Преобразуването на Java обект към XML се извършва чрез Marshaller.
+Този процес се нарича marshalling и позволява съдържанието на Java обект да бъде записано като XML структура.
+
+При servlet приложения най-често се използва Writer, защото резултатът трябва да се изпрати директно към HTTP отговора чрез:
 
 ```java
-String xsdFile = this.getClass().getClassLoader().getResource("xml/person.xsd").getPath();
+response.getWriter()
 ```
+
+По този начин XML съдържанието се генерира директно в изходния поток без необходимост от междинен файл.
+
+Реализация:
 
 ```java
 public void writeToXML(Writer writer, Group group) {
 
-    // Създаване на JAXB контекст
+    // Създаване на JAXB контекст за класа Group
     JAXBContext context = JAXBContext.newInstance(Group.class);
+
     // Създаване на marshaller инстанция
     Marshaller m = context.createMarshaller();
+
+    // Форматиране на XML резултата за по-добра четимост
     m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
-    // Записване в поток
+    // Записване на Java обекта в изходния поток
     m.marshal(group, writer);
-
 }
 ```
 
-###
+Обяснение:
+- JAXBContext определя кой клас ще бъде преобразуван
+- Marshaller извършва самото преобразуване
+- JAXB_FORMATTED_OUTPUT форматира XML с отстъпи
+- writer задава къде ще бъде записан резултатът
+
+#### Работа с файлове:
+
+Същият метод може да работи и с файлове чрез FileWriter:
+
+```java
+FileWriter writer = new FileWriter("group.xml");
+writeToXML(writer, group);
+writer.close();
+```
+
+Това позволява XML съдържанието да бъде записано във файл вместо в HTTP отговор.
 
 ### Трансформиране от XML
 
+Преобразуването на XML към Java обект се извършва чрез Unmarshaller. Този процес се нарича unmarshalling и позволява XML данните да бъдат прочетени и превърнати в Java обект.
+
+При servlet приложения входящите данни обикновено се четат чрез:
+
 ```java
-public Group readerFromXML(String xml) {
+request.getReader()
+```
+
+Затова е по-удобно методът да работи с Reader.
+
+Реализация:  
+
+```java
+public Group readerFromXML(Reader reader) {
 
     // Създаване на JAXB контекст
     JAXBContext context = JAXBContext.newInstance(Group.class);
+
     // Създаване на unmarshaller инстанция
     Unmarshaller um = context.createUnmarshaller();
 
-    //Валидиране с xsd
+    // Прочитане на XML и създаване на Java обект
+    Group group = (Group) um.unmarshal(reader);
+
+    return group;
+}
+```
+
+Добавяне на XSD схема за валидация:
+
+```java
+String xsdFile = this.getClass()
+        .getClassLoader()
+        .getResource("xml/student.xsd")
+        .getPath();
+```
+
+XSD файлът съдържа правилата за XML структурата и може да бъде използван при валидиране.
+
+Реализация със схема за валидиране:
+
+```java
+public Group readerFromXML(Reader reader) {
+
+    // Създаване на JAXB контекст
+    JAXBContext context = JAXBContext.newInstance(Group.class);
+
+    // Създаване на unmarshaller инстанция
+    Unmarshaller um = context.createUnmarshaller();
+
+    // Валидиране с XSD схема
     SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
     Schema schema = sf.newSchema(new File(xsdFile));
     um.setSchema(schema);
 
-    Group group = (Group) um.unmarshal(new StringReader(xml));
+    // Прочитане на XML и създаване на Java обект
+    Group group = (Group) um.unmarshal(reader);
+
     return group;
 }
 ```
+
+Обяснение:
+- Unmarshaller преобразува XML към Java обект
+- SchemaFactory зарежда XSD схемата
+- setSchema() активира XML валидацията
+- reader подава входния XML поток
+
+#### Работа с файлове:
+
+Методът може да работи и с файл чрез FileReader:
+
+```java
+FileReader reader = new FileReader("group.xml");
+Group group = readerFromXML(reader);
+reader.close();
+``` 
+
+Така XML може да бъде зареден от външен файл.
