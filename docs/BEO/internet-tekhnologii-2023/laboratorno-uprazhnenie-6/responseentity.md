@@ -7,11 +7,11 @@ nav_order: 4
 ---
 # ResponseEntity
 
-ResponseEntity е клас в Spring Framework, който представя пълен HTTP отговор. Съдържа: код на състоянието, хедъри и тяло, в резултат на което можем да го използваме за пълно конфигуриране на HTTP отговора. ResponseEntity е генерик и всеки тип може да бъде използван в качеството на тяло на отговора.
+ResponseEntity е клас в Spring Framework, който представя пълен HTTP отговор. Съдържа: код на състоянието, хедъри и тяло, в резултат на което можем да го използваме за пълно конфигуриране на HTTP отговора. ResponseEntity е генерик и всеки тип може да бъде използван като тяло на отговора.
 
 ```java
 @GetMapping("/hello")
-ResponseEntity<String> hello() {
+public ResponseEntity<String> hello() {
 
     return new ResponseEntity<>("Hello World!", HttpStatus.OK);
 }
@@ -23,7 +23,7 @@ ResponseEntity<String> hello() {
 
 ```java
 @GetMapping("/customHeader")
-ResponseEntity<String> customHeader() {
+public ResponseEntity<String> customHeader() {
 
     HttpHeaders headers = new HttpHeaders();
     headers.add("Custom-Header", "foo");
@@ -50,7 +50,7 @@ BodyBuilder ok();
 
 ```java
 @GetMapping("/hello")
-ResponseEntity<String> hello() {
+public ResponseEntity<String> hello() {
     return ResponseEntity.ok("Hello World!");
 }
 ```
@@ -59,7 +59,7 @@ ResponseEntity<String> hello() {
 
 ```java
 @GetMapping("/customHeader")
-ResponseEntity<String> customHeader() {
+public ResponseEntity<String> customHeader() {
     return ResponseEntity.ok()
         .header("Custom-Header", "foo")
         .body("Custom header set");
@@ -69,3 +69,26 @@ ResponseEntity<String> customHeader() {
 Този код създава endpoint /customHeader със статус код 200. Методът .header("Custom-Header", "foo") добавя персонализиран хедър. След това .body("Custom header set") задава тялото на отговора и завършва изграждането на ResponseEntity:
 
 Тъй като _BodyBuilder.body()_ връща _ResponseEntity_ вместо _BodyBuilder,_ трябва да бъде извикан последен.
+
+```java
+@PostMapping("/hello")
+public ResponseEntity<String> hello(@RequestParam String name) {
+    String message = "Hello, " + name + "!";
+    return ResponseEntity.status(201).body(message);
+}
+```
+
+Този endpoint /hello с метод POST връща 201 Created, когато успешно създаваме ресурс. Отговорът връща съобщението, което включва името, подадено като параметър.
+
+
+```java
+@PostMapping("/checkName")
+public ResponseEntity<String> checkName(@RequestParam String name) {
+    if (name == null || name.trim().isEmpty()) {
+        return ResponseEntity.badRequest().body("Name cannot be empty");
+    }
+    return ResponseEntity.ok("Hello " + name + "! Name is valid");
+}
+```
+
+Endpoint /checkName проверява дали параметърът name е празен. Ако е празен, връща 400 Bad Request, в противен случай – 200 OK с персонализирано съобщение. Методът .body() задава съдържанието на HTTP отговора, което се връща на клиента.
