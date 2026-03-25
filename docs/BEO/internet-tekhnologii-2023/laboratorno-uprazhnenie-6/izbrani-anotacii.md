@@ -46,53 +46,6 @@ Spring Bean-овете най-често се дефинират като single
 | `@Configuration` | Клас, съдържащ дефиниции на bean-ове.           |
 | `@Qualifier`     | Използва се, когато има повече от една възможна зависимост. |
 
-
-### Дефиниране и инжектиране на Spring Bean
-
-Най-общата анотация за регистриране на Spring Bean е `@Component`. При стартиране на приложението Spring открива този клас и създава управлявана инстанция в контейнера.
-
-```java
-@Component
-public class ProductService {
-
-    public String getProductInfo() {
-        return "Product information";
-    }
-}
-```
-
-След като bean-ът бъде създаден, той може да бъде използван в други класове чрез dependency injection. Един от възможните начини е чрез анотацията върху поле @Autowired, което позволява Spring автоматично да намери и подаде необходимата зависимост към съответното поле.
-
-```java
-@RestController
-public class ProductController {
-
-    @Autowired
-    private ProductService productService;
-
-}
-```
-
-По-препоръчителният подход е constructor injection, при който зависимостта се подава чрез конструктора. Така зависимостите стават ясно видими още при създаване на класа и класът става по-лесен за тестване.
-
-В този пример @RestController обозначава, че класът е Spring Bean, който обработва HTTP заявки и връща данни директно в HTTP отговора, обикновено във формат JSON. Анотацията комбинира @Controller и @ResponseBody, което позволява автоматично сериализиране на върнатите обекти.
-
-```java
-@RestController
-public class ProductController {
-
-    private final ProductService productService;
-
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
-
-}
-```
-
-При constructor injection анотацията @Autowired над конструктора не е задължителна, когато класът има само един конструктор, тъй като Spring автоматично използва него за подаване на зависимостите.
-
-
 ### @RequestMapping
 
 Анотацията @RequestMapping се използва за дефиниране на URI на заявката за достъп до крайните точки на REST. В него можем да дефинираме и метод на заявката. Методът за заявка по подразбиране е GET.
