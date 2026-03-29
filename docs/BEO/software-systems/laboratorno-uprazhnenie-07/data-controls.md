@@ -2,7 +2,7 @@
 layout: default
 title: Контроли за данни
 parent: Лабораторно упражнение 7
-has_children: false
+grand_parent: Програмни системи
 nav_order: 1
 ---
 

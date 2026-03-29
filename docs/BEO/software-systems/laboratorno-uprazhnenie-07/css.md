@@ -2,7 +2,7 @@
 layout: default
 title: Стилизиране с JavaFX CSS
 parent: Лабораторно упражнение 7
-has_children: false
+grand_parent: Програмни системи
 nav_order: 2
 ---
 
