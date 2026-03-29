@@ -232,7 +232,7 @@ public class DeveloperController {
 
 В този файл се дефинира визуалната структура на приложението. Зареждането на CSS файла се осъществява чрез атрибута `stylesheets` в кореновия `HBox` елемент.
 
-Дефиниране на `src/main/resources/bg/tu_varna/sit/ps/lab7/sample_task/team-view.fxml`:
+Дефиниране на `src/main/resources/bg/tu_varna/sit/ps/lab7/task1/team-view.fxml`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -240,7 +240,7 @@ public class DeveloperController {
 <?import javafx.scene.layout.*?>
 
 <!-- Зареждане на CSS файл. Символът @ указва наличие на ресурс в съответната директория -->
-<HBox spacing="20" stylesheets="@../css/styles.css" styleClass="main-container" xmlns:fx="http://javafx.com/fxml"
+<HBox spacing="20" styleClass="main-container" xmlns:fx="http://javafx.com/fxml"
       fx:controller="bg.tu_varna.sit.ps.lab7.task1.controllers.DeveloperController" prefWidth="800"
       prefHeight="550">
 
@@ -282,12 +282,12 @@ public class DeveloperController {
 
 ### 4. Дефиниране на CSS файл за стилизиране (`styles.css`)
 
-Дефиниране на `src/main/resources/bg/tu_varna/sit/ps/lab7/sample_task/css/styles.css`:
+Дефиниране на `src/main/resources/bg/tu_varna/sit/ps/lab7/task1/css/styles.css`:
 
 След като е създаден css файла трябва да се добави към root тага в fxml файла:
 
 ```xml
- <HBox  stylesheets="@../css/styles.css" 
+ <HBox  stylesheets="@css/styles.css" 
   
       styleClass="main-container" 
       spacing="20" xmlns:fx="http://javafx.com/fxml"
@@ -380,12 +380,12 @@ TableView ColumnHeader {
 
 ```
 
-### 5. Дефиниране на основен Application клас `ITApplication.java` (`src/main/java/bg/tu_varna/sit/ps/lab7/sample_task/ITApplication.java`)
+### 5. Дефиниране на основен Application клас `DeveloperApplication.java` (`src/main/java/bg/tu_varna/sit/ps/lab7/task1/DeveloperApplication.java`)
 
 Класът отговаря за зареждането на FXML файла и инициализацията на основния JavaFX прозорец.
 
 ```java
-package bg.tu_varna.sit.ps.lab7.sample_task;
+package bg.tu_varna.sit.ps.lab7.task1;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -394,11 +394,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ITApplication extends Application {
+public class DeveloperApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(
-                ITApplication.class.getResource("team-view.fxml")
+                DeveloperApplication.class.getResource("team-view.fxml")
         );
 
         Scene scene = new Scene(fxmlLoader.load());
@@ -412,13 +412,13 @@ public class ITApplication extends Application {
 ### 6. Дефиниране на стартов клас Launcher (`src/main/java/bg/tu_varna/sit/ps/lab7/sample_task/Launcher.java`)
 
 ```java
-package bg.tu_varna.sit.ps.lab7.sample_task;
+package bg.tu_varna.sit.ps.lab7.task1;
 
 import javafx.application.Application;
 
 public class Launcher {
     public static void main(String[] args) {
-        Application.launch(ITApplication.class, args);
+        Application.launch(DeveloperApplication.class, args);
     }
 }
 ```

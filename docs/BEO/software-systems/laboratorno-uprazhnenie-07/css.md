@@ -129,8 +129,9 @@ src/
 Прилага се към всички елементи от даден тип. В CSS името на класа се изписва с малки букви.
 
 ```css
-.text-field {
-  -fx-background-color: white;
+Label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
 }
 ```
 
@@ -150,6 +151,9 @@ src/
 .form-pane {
   -fx-background-color: white;
   -fx-padding: 15;
+  -fx-border-color: #e0e0e0;
+  -fx-border-width: 1;
+  -fx-border-radius: 8;
 }
 ```
 
@@ -167,8 +171,10 @@ src/
 
 ```css
 #form-title {
-  -fx-font-weight: bold;
   -fx-font-size: 18px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #2c3e50;
+  -fx-padding: 0 0 10 0;
 }
 ```
 
@@ -188,6 +194,9 @@ src/
 #add-btn {
   -fx-background-color: #3498db;
   -fx-text-fill: white;
+  -fx-font-weight: bold;
+  -fx-padding: 8;
+  -fx-border-radius: 4;
 }
 
 /* Състояние при позициониран курсор (hover) */
@@ -200,6 +209,21 @@ src/
   -fx-background-color: #1f618d;
 }
 ```
+#### 2.5. Наследяване на стилове
+
+Поддържат се съставни (комбинирани) селектори, които позволяват таргетиране на вложени елементи в рамките на даден UI компонент. Някои класове дефинират вътрешни структури (sub-nodes), които могат да бъдат стилизирани самостоятелно чрез т.нар. наследени (descendant) селектори.
+
+Селекторът се състои от последователност от типови или класови селектори, разделени с интервал, като всеки следващ селектор реферира към наследен (вложен) елемент в йерархията на сцената.
+
+Този механизъм позволява прилагане на стилове върху конкретни подкомпоненти, без да се засягат останалите части на контрола.
+
+**Пример**
+TableView ColumnHeader {
+  -fx-background-color: #ecf0f1;
+  -fx-font-weight: bold;
+}
+
+В примера се прилага стил върху елементите ColumnHeader, които са вложени в TableView.
 
 ### 3. Стилови свойства
 
