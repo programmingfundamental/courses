@@ -222,11 +222,13 @@ ObservableList<Developer> selectedDevs = developersListView.getSelectionModel().
 **Пример за добавяне:**
 
 ```java
+private final ObservableList<Developer> developersData;
+
 public void addNewDeveloper(String name, String level, String skills) {
     Developer newDev = new Developer(name, level, skills);
 
     // Вземаме колекцията, асоциирана с таблицата, и добавяме елемента
-    developerTable.getItems().add(newDev);
+    developersData.add(newDev);
 }
 ```
 
@@ -239,7 +241,7 @@ public void removeSelectedDeveloper() {
 
     // 2. Премахване от колекцията (графичният интерфейс се обновява сам)
     if (selectedDev != null) {
-        developerTable.getItems().remove(selectedDev);
+        developersData.remove(selectedDev);
     }
 }
 ```
