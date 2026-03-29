@@ -79,6 +79,27 @@ src/
 Ако изгледът `team-view.fxml` изисква зареждане на `styles.css` от поддиректорията `css/`, пътят се задава по следния начин:
 
 ```xml
+<HBox stylesheets="@css/styles.css" xmlns:fx="http://javafx.com/fxml/1">
+    <!-- Съдържание -->
+</HBox>
+```
+
+**Вариант В: При разположение на CSS файла в поддиректория спрямо директорията на FXML файла**
+
+```text
+src/
+└─ main/
+   └─ resources/
+      └─ bg/tu_varna/sit/ps/lab7/
+         ├─ view                  <-- Поддиректория за изгледа
+         |  └─team-view.fxml      <-- Работен изглед
+         └─ css/                  <-- Поддиректория за стилове
+            └─ styles.css         <-- CSS файл
+```
+
+Ако изгледът `team-view.fxml` изисква зареждане на `styles.css` от поддиректорията `css/`, пътят се задава по следния начин:
+
+```xml
 <HBox stylesheets="@../css/styles.css" xmlns:fx="http://javafx.com/fxml/1">
     <!-- Съдържание -->
 </HBox>
