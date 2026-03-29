@@ -22,7 +22,7 @@ nav_order: 1
 
 Използва се за предоставяне на възможност за избор на една стойност от предварително дефиниран списък с опции.
 
-В Java кода `ComboBox` приема един тип `<T>`. Макар често да се използват стандартни типове (напр. `<String>` за нива на умения), контролата е изключително полезна за работа с потребителски дефинирани обекти (напр. `<Developer>`).
+В Java кода в контролера, `ComboBox` приема един тип `<T>`. Макар често да се използват стандартни типове (напр. `<String>` за нива на умения), контролата е изключително полезна за работа с потребителски дефинирани обекти (напр. `<Developer>`).
 
 - **Свойства (FXML Атрибути):**
   - `promptText` - текст, визуализиращ се преди осъществяването на избор (подсказка).
@@ -102,22 +102,16 @@ nav_order: 1
           developersListView.setItems(developers);
 
           // Дефиниране на CellFactory за визуализация на множество данни и вложени елементи
-          developersListView.setCellFactory(param -> new ListCell<Developer>() {
+          developersListView.setCellFactory(param -> new ListCell<>() {
               @Override
               protected void updateItem(Developer dev, boolean empty) {
                   super.updateItem(dev, empty);
+
                   if (empty || dev == null) {
                       setText(null);
-                      setGraphic(null);
                   } else {
-                      // Създаване на структуриран изглед с вложени елементи
-                      HBox layout = new HBox(10);
-                      Label nameLabel = new Label(dev.getName());
-                      nameLabel.setStyle("-fx-font-weight: bold;");
-                      Label levelLabel = new Label("(" + dev.getLevel() + ")");
-
-                      layout.getChildren().addAll(nameLabel, levelLabel);
-                      setGraphic(layout); // Задаване на графичния елемент към клетката
+                      setText(dev.getName() + " (" + dev.getLevel() + ")");
+                      setStyle("-fx-font-weight: bold;");
                   }
               }
           });

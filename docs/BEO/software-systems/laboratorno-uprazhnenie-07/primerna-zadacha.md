@@ -43,7 +43,6 @@ public class Developer {
         return skills;
     }
 }
-
 ```
 
 ### 2. Дефиниране на контролер клас `DeveloperController.java` (`src/main/java/bg/tu_varna/sit/ps/lab7/sample_task/controllers/DeveloperController.java`)
@@ -122,9 +121,10 @@ public class DeveloperController {
         String skills = String.join(", ", selectedTechs);
 
         // Валидация на задължителни полета
-        if (name.trim().isEmpty() || skills.isEmpty()) {
+        if (name.trim().isEmpty() || skills.isEmpty() || level == null) {
             statusLabel.setText("Моля, въведете име и изберете поне едно умение!");
-            statusLabel.setStyle("-fx-text-fill: red;");
+            // Динамично прилагане на inline стил за грешка
+            statusLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
             return;
         }
 
@@ -138,7 +138,8 @@ public class DeveloperController {
         levelCombo.getSelectionModel().clearSelection();
 
         statusLabel.setText("Успешно добавен!");
-        statusLabel.setStyle("-fx-text-fill: green;");
+        // Динамично прилагане на inline стил за успех
+        statusLabel.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
     }
 }
 ```
@@ -151,17 +152,13 @@ public class DeveloperController {
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <!-- Зареждане на CSS файл. Символът @ указва наличие на ресурс в съответната директория -->
-<HBox spacing="20" stylesheets="@css/styles.css" xmlns:fx="http://javafx.com/fxml"
+<HBox spacing="20" stylesheets="@css/styles.css" styleClass="main-container" xmlns:fx="http://javafx.com/fxml"
       fx:controller="bg.tu_varna.sit.ps.lab7.sample_task.controllers.DeveloperController" prefWidth="800"
       prefHeight="550">
-    <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
-    </padding>
 
     <!-- Ляв панел: Форма за добавяне (асоциирана с CSS клас form-pane) -->
     <VBox spacing="10" prefWidth="250" styleClass="form-pane">
@@ -199,7 +196,7 @@ public class DeveloperController {
 
 ### 4. Дефиниране на CSS файл за стилизиране (`styles.css`)
 
-Дефиниране на `src/main/resources/bg/tu_varna/sit/ps/lab3/css/styles.css`:
+Дефиниране на `src/main/resources/bg/tu_varna/sit/ps/lab7/sample_task/css/styles.css`:
 
 ```css
 /* Типов селектор: дефиниране на глобален шрифт за приложението */
@@ -208,14 +205,18 @@ public class DeveloperController {
   -fx-background-color: #f4f6f8; /* Светлосив фон */
 }
 
+/* Основен контейнер: външно отстояние */
+.main-container {
+  -fx-padding: 20;
+}
+
 /* Селектор за клас: стилизиране на контейнера на формата */
 .form-pane {
   -fx-background-color: white;
   -fx-padding: 15;
-  -fx-background-radius: 8;
-  -fx-border-radius: 8;
   -fx-border-color: #e0e0e0;
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 10, 0, 0, 2);
+  -fx-border-width: 1;
+  -fx-border-radius: 8;
 }
 
 /* ID селектор: Заглавие на формата */
@@ -228,14 +229,15 @@ public class DeveloperController {
 
 /* Типов селектор за всички TextField компоненти */
 .text-field {
-  -fx-background-radius: 4;
   -fx-border-color: #cccccc;
+  -fx-border-width: 1;
   -fx-border-radius: 4;
   -fx-padding: 5;
 }
 
 .text-field:focused {
   -fx-border-color: #3498db;
+  -fx-border-width: 2;
 }
 
 /* ID селектор: Стилизиране на основния бутон */
@@ -243,9 +245,8 @@ public class DeveloperController {
   -fx-background-color: #3498db;
   -fx-text-fill: white;
   -fx-font-weight: bold;
-  -fx-background-radius: 4;
   -fx-padding: 8;
-  -fx-cursor: hand;
+  -fx-border-radius: 4;
 }
 
 /* Псевдо-клас: ефект при позициониране на курсора (hover) */
