@@ -14,20 +14,77 @@ nav_order: 3
 
 Началният етап изисква дефинирането на клас, описващ същността на един програмист. Задължително условие за този клас е наличието на `public` Get-методи, осигуряващи достъп до данните от страна на компонента `TableView`.
 
-Дефиниране на клас `Developer` (`src/main/java/bg/tu_varna/sit/ps/lab7/sample_task/models/Developer.java`):
+Дефиниране на клас enum `Level` (`src/main/java/bg/tu_varna/sit/ps/lab7/task1/models/Level.java`):
 
 ```java
-package bg.tu_varna.sit.ps.lab7.sample_task.models;
+package bg.tu_varna.sit.ps.lab7.task1.models;
+
+public enum Level {
+    JUNIOR("Junior"),
+    MID("Mid"),
+    SENIOR("Senior"),
+    LEAD("Lead");
+
+    private final String displayName;
+
+    Level(String displayName) {
+        this.displayName = displayName;
+    }
+
+    @Override
+    public String toString() {
+        return displayName;
+    }
+}
+```
+
+Дефиниране на клас enum `Technology` (`src/main/java/bg/tu_varna/sit/ps/lab7/task1/models/Technology.java`):
+
+```java
+package bg.tu_varna.sit.ps.lab7.task1.models;
+
+public enum Technology {
+    JAVA("Java"),
+    JAVAFX("JavaFX"),
+    SPRING_BOOT("Spring Boot"),
+    SQL("SQL"),
+    GIT("Git"),
+    JAVASCRIPT("JavaScript"),
+    DOCKER("Docker");
+
+    private final String displayName;
+
+    Technology(String displayName) {
+        this.displayName = displayName;
+    }
+
+    @Override
+    public String toString() {
+        return displayName;
+    }
+}
+```
+
+Дефиниране на клас `Developer` (`src/main/java/bg/tu_varna/sit/ps/lab7/task1/models/Developer.java`):
+
+```java
+package bg.tu_varna.sit.ps.lab7.task1.models;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Developer {
-    private String name;
-    private String level;
-    private String skills;
+    private final String name;
+    private final Level level;
+    private final List<Technology> skills;
 
-    public Developer(String name, String level, String skills) {
+    public Developer(String name, Level level, List<Technology> skills) {
+        if (name.trim().isEmpty() || skills.isEmpty() || level == null) {
+            throw new IllegalArgumentException("Моля, въведете име и изберете поне едно умение!");
+        }
         this.name = name;
         this.level = level;
-        this.skills = skills;
+        this.skills = new ArrayList<>(skills);
     }
 
     // Наличието на Get методи е задължително за работата на PropertyValueFactory
@@ -35,29 +92,33 @@ public class Developer {
         return name;
     }
 
-    public String getLevel() {
+    public Level getLevel() {
         return level;
     }
 
-    public String getSkills() {
+    public List<Technology> getSkills() {
         return skills;
     }
 }
 ```
 
-### 2. Дефиниране на контролер клас `DeveloperController.java` (`src/main/java/bg/tu_varna/sit/ps/lab7/sample_task/controllers/DeveloperController.java`)
+### 2. Дефиниране на контролер клас `DeveloperController.java` (`src/main/java/bg/tu_varna/sit/ps/lab7/task1/controllers/DeveloperController.java`)
 
 Основната функция на контролера е осъществяването на връзка между изгледа и данните. В него се извършва инициализацията на падащия списък и списъка с технологии, конфигурирането на колоните на таблицата и имплементацията на логиката за обработка на събития от бутоните.
 
 ```java
-package bg.tu_varna.sit.ps.lab7.sample_task.controllers;
+package bg.tu_varna.sit.ps.lab7.task1.controllers;
 
-import bg.tu_varna.sit.ps.lab7.sample_task.models.Developer;
+import bg.tu_varna.sit.ps.lab7.task1.models.Developer;
+import bg.tu_varna.sit.ps.lab7.task1.models.Level;
+import bg.tu_varna.sit.ps.lab7.task1.models.Technology;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.util.List;
 
 public class DeveloperController {
 
@@ -65,48 +126,63 @@ public class DeveloperController {
     @FXML
     private TextField nameField;
     @FXML
-    private ComboBox<String> levelCombo;
+    public Label errorStatusLabel;
     @FXML
-    private ListView<String> techListView;
+    public Label successStatusLabel;
     @FXML
     private Button addButton;
-    @FXML
-    private Label statusLabel;
 
-    // --- Елементи на таблицата ---
+    @FXML
+    private ComboBox<Level> levelCombo;
+    @FXML
+    private ListView<Technology> techListView;
     @FXML
     private TableView<Developer> developerTable;
     @FXML
     private TableColumn<Developer, String> colName;
     @FXML
-    private TableColumn<Developer, String> colLevel;
+    private TableColumn<Developer, Level> colLevel;
     @FXML
-    private TableColumn<Developer, String> colSkills;
+    private TableColumn<Developer, List<Technology>> colSkills;
 
     // Списък за визуализация в таблицата
-    private ObservableList<Developer> developersData;
+    private final ObservableList<Developer> developersData;
+
+    public DeveloperController() {
+        developersData = FXCollections.observableArrayList();
+    }
 
     @FXML
     public void initialize() {
-        // 1. Конфигуриране на ComboBox
-        levelCombo.setItems(FXCollections.observableArrayList(
-                "Junior", "Mid", "Senior", "Lead"
-        ));
 
-        // 2. Конфигуриране на ListView
-        techListView.setItems(FXCollections.observableArrayList(
-                "Java", "JavaFX", "Spring Boot", "SQL", "Git", "JavaScript", "Docker"
-        ));
+        initComboBox();
+
+        initListView();
+
+        initTableView();
+    }
+
+    //Конфигуриране на ComboBox
+    private void initComboBox() {
+
+        levelCombo.setItems(FXCollections.observableArrayList(Level.values()));
+    }
+
+    //Конфигуриране на ListView
+    private void initListView() {
+
+        techListView.setItems(FXCollections.observableArrayList(Technology.values()));
         // Разрешаване на множествен избор на технологии (чрез клавиш Ctrl/Cmd)
         techListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+    }
 
-        // 3. Конфигуриране на TableView (Свързване на колоните с класа Developer)
+    // Конфигуриране на TableView (Свързване на колоните с класа Developer)
+    private void initTableView() {
+
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colLevel.setCellValueFactory(new PropertyValueFactory<>("level"));
         colSkills.setCellValueFactory(new PropertyValueFactory<>("skills"));
 
-        // Инициализиране на празен списък към таблицата
-        developersData = FXCollections.observableArrayList();
         developerTable.setItems(developersData);
     }
 
@@ -114,32 +190,40 @@ public class DeveloperController {
     protected void handleAddDeveloper() {
         // Извличане на данни от формата
         String name = nameField.getText();
-        String level = levelCombo.getValue();
-
+        Level level = levelCombo.getValue();
         // Извличане на всички избрани елементи от ListView и конкатенация в общ String
-        ObservableList<String> selectedTechs = techListView.getSelectionModel().getSelectedItems();
-        String skills = String.join(", ", selectedTechs);
+        List<Technology> selectedTechs = techListView.getSelectionModel().getSelectedItems();
 
-        // Валидация на задължителни полета
-        if (name.trim().isEmpty() || skills.isEmpty() || level == null) {
-            statusLabel.setText("Моля, въведете име и изберете поне едно умение!");
-            // Динамично прилагане на inline стил за грешка
-            statusLabel.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
-            return;
+        boolean isCreated = createDeveloper(name, level, selectedTechs);
+
+        if (isCreated) {
+            clearForm();
+            displayMessage("Успешно добавен!", false);
+        } else {
+            displayMessage("Моля, въведете име и изберете поне едно умение!", true);
         }
+    }
 
-        // Създаване на обект и добавяне към колекцията на таблицата
-        Developer newDev = new Developer(name, level, skills);
-        developersData.add(newDev);
+    private boolean createDeveloper(String name, Level level, List<Technology> selectedTechs) {
+        try {
+            Developer newDev = new Developer(name, level, selectedTechs);
+            return developersData.add(newDev);
+        } catch (IllegalArgumentException e) {
+            displayMessage(e.getMessage(), true);
+        }
+        return false;
+    }
 
-        // Изчистване на формата за последващо въвеждане
+    private void clearForm() {
         nameField.clear();
         techListView.getSelectionModel().clearSelection();
         levelCombo.getSelectionModel().clearSelection();
+    }
 
-        statusLabel.setText("Успешно добавен!");
-        // Динамично прилагане на inline стил за успех
-        statusLabel.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
+    private void displayMessage(String message, boolean isError) {
+        errorStatusLabel.setText(message);
+        errorStatusLabel.setDisable(!isError);
+        successStatusLabel.setDisable(isError);
     }
 }
 ```
@@ -156,8 +240,8 @@ public class DeveloperController {
 <?import javafx.scene.layout.*?>
 
 <!-- Зареждане на CSS файл. Символът @ указва наличие на ресурс в съответната директория -->
-<HBox spacing="20" stylesheets="@css/styles.css" styleClass="main-container" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="bg.tu_varna.sit.ps.lab7.sample_task.controllers.DeveloperController" prefWidth="800"
+<HBox spacing="20" stylesheets="@../css/styles.css" styleClass="main-container" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="bg.tu_varna.sit.ps.lab7.task1.controllers.DeveloperController" prefWidth="800"
       prefHeight="550">
 
     <!-- Ляв панел: Форма за добавяне (асоциирана с CSS клас form-pane) -->
@@ -176,12 +260,13 @@ public class DeveloperController {
         <Button fx:id="addButton" text="Добави в екипа" onAction="#handleAddDeveloper"
                 maxWidth="Infinity" id="add-btn"/>
 
-        <Label fx:id="statusLabel" wrapText="true"/>
+        <Label fx:id="errorStatusLabel" styleClass="error" disable="false" wrapText="true"/>
+        <Label fx:id="successStatusLabel" styleClass="success" disable="false" wrapText="true"/>
     </VBox>
 
     <!-- Десен панел: Таблица -->
     <VBox HBox.hgrow="ALWAYS" spacing="10">
-        <Label text="Списък на екипа" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+        <Label text="Списък на екипа"/>
 
         <TableView fx:id="developerTable" VBox.vgrow="ALWAYS">
             <columns>
@@ -192,13 +277,27 @@ public class DeveloperController {
         </TableView>
     </VBox>
 </HBox>
+
 ```
 
 ### 4. Дефиниране на CSS файл за стилизиране (`styles.css`)
 
 Дефиниране на `src/main/resources/bg/tu_varna/sit/ps/lab7/sample_task/css/styles.css`:
 
+След като е създаден css файла трябва да се добави към root тага в fxml файла:
+
+```xml
+ <HBox  stylesheets="@../css/styles.css" 
+  
+      styleClass="main-container" 
+      spacing="20" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="bg.tu_varna.sit.ps.lab7.task1.controllers.DeveloperController" prefWidth="800"
+      prefHeight="550">
+
+```
+
 ```css
+/* Типов селектор: дефиниране на глобален шрифт за приложението */
 /* Типов селектор: дефиниране на глобален шрифт за приложението */
 .root {
   -fx-font-family: 'Segoe UI', Arial, sans-serif;
@@ -208,6 +307,12 @@ public class DeveloperController {
 /* Основен контейнер: външно отстояние */
 .main-container {
   -fx-padding: 20;
+}
+
+/* Селектор за елемент: стилизиране на Label на формата */
+Label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
 }
 
 /* Селектор за клас: стилизиране на контейнера на формата */
@@ -228,14 +333,14 @@ public class DeveloperController {
 }
 
 /* Типов селектор за всички TextField компоненти */
-.text-field {
+TextField {
   -fx-border-color: #cccccc;
   -fx-border-width: 1;
   -fx-border-radius: 4;
   -fx-padding: 5;
 }
 
-.text-field:focused {
+TextField:focused {
   -fx-border-color: #3498db;
   -fx-border-width: 2;
 }
@@ -260,10 +365,19 @@ public class DeveloperController {
 }
 
 /* Специфично стилизиране на заглавната част на таблицата */
-.table-view .column-header {
+TableView ColumnHeader {
   -fx-background-color: #ecf0f1;
   -fx-font-weight: bold;
 }
+
+.error {
+    -fx-text-fill: red;
+}
+
+.success {
+    -fx-text-fill: green;
+}
+
 ```
 
 ### 5. Дефиниране на основен Application клас `ITApplication.java` (`src/main/java/bg/tu_varna/sit/ps/lab7/sample_task/ITApplication.java`)
