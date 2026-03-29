@@ -8,13 +8,13 @@ nav_order: 3
 
 # Примерна задача: Система за управление на ИТ екип
 
-Ще създадем приложение, в което въвеждаме данни за софтуерни разработчици и ги визуализираме в таблица. Проектът ще демонстрира използването на `TableView`, `ComboBox`, `ListView` (с множествен избор), както и външно стилизиране със CSS.
+Настоящата задача обхваща реализацията на приложение за въвеждане и визуализация на данни за софтуерни разработчици. Проектът демонстрира практическото използване на `TableView`, `ComboBox`, `ListView` (с настроен множествен избор), както и външно стилизиране чрез CSS.
 
-### 1. Създайте модел на данните (Model)
+### 1. Дефиниране на модел на данните (Model)
 
-Първо трябва да създадем клас, който описва един програмист. Този клас **задължително** трябва да има `public` Get-методи, за да може `TableView` да ги прочете.
+Началният етап изисква дефинирането на клас, описващ същността на един програмист. Задължително условие за този клас е наличието на `public` Get-методи, осигуряващи достъп до данните от страна на компонента `TableView`.
 
-Създайте клас `Developer` (`src/main/java/bg/tu_varna/sit/ps/lab7/sample_task/models/Developer.java`):
+Дефиниране на клас `Developer` (`src/main/java/bg/tu_varna/sit/ps/lab7/sample_task/models/Developer.java`):
 
 ```java
 package bg.tu_varna.sit.ps.lab7.sample_task.models;
@@ -30,7 +30,7 @@ public class Developer {
         this.skills = skills;
     }
 
-    // Изключително важно за PropertyValueFactory!
+    // Наличието на Get методи е задължително за работата на PropertyValueFactory
     public String getName() {
         return name;
     }
@@ -46,9 +46,9 @@ public class Developer {
 
 ```
 
-### 2. Създайте контролер класа `DeveloperController.java` (`src/main/java/bg/tu_varna/sit/ps/lab7/sample_task/controllers/DeveloperController.java`)
+### 2. Дефиниране на контролер клас `DeveloperController.java` (`src/main/java/bg/tu_varna/sit/ps/lab7/sample_task/controllers/DeveloperController.java`)
 
-Контролерът ще свърже изгледа с данните. Ще инициализираме падащия списък и списъка с технологии, ще настроим колоните на таблицата и ще добавим логика за бутона.
+Основната функция на контролера е осъществяването на връзка между изгледа и данните. В него се извършва инициализацията на падащия списък и списъка с технологии, конфигурирането на колоните на таблицата и имплементацията на логиката за обработка на събития от бутоните.
 
 ```java
 package bg.tu_varna.sit.ps.lab7.sample_task.controllers;
@@ -84,55 +84,55 @@ public class DeveloperController {
     @FXML
     private TableColumn<Developer, String> colSkills;
 
-    // Списъкът, който ще се показва в таблицата
+    // Списък за визуализация в таблицата
     private ObservableList<Developer> developersData;
 
     @FXML
     public void initialize() {
-        // 1. Настройка на ComboBox
+        // 1. Конфигуриране на ComboBox
         levelCombo.setItems(FXCollections.observableArrayList(
                 "Junior", "Mid", "Senior", "Lead"
         ));
 
-        // 2. Настройка на ListView
+        // 2. Конфигуриране на ListView
         techListView.setItems(FXCollections.observableArrayList(
                 "Java", "JavaFX", "Spring Boot", "SQL", "Git", "JavaScript", "Docker"
         ));
-        // Разрешаваме избор на повече от една технология (с натиснат Ctrl/Cmd)
+        // Разрешаване на множествен избор на технологии (чрез клавиш Ctrl/Cmd)
         techListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        // 3. Настройка на TableView (Свързване на колоните с класа Developer)
+        // 3. Конфигуриране на TableView (Свързване на колоните с класа Developer)
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colLevel.setCellValueFactory(new PropertyValueFactory<>("level"));
         colSkills.setCellValueFactory(new PropertyValueFactory<>("skills"));
 
-        // Инициализиране на празен списък за таблицата
+        // Инициализиране на празен списък към таблицата
         developersData = FXCollections.observableArrayList();
         developerTable.setItems(developersData);
     }
 
     @FXML
     protected void handleAddDeveloper() {
-        // Четене на данните от формата
+        // Извличане на данни от формата
         String name = nameField.getText();
         String level = levelCombo.getValue();
 
-        // Вземане на всички избрани елементи от ListView и обединяването им в един String
+        // Извличане на всички избрани елементи от ListView и конкатенация в общ String
         ObservableList<String> selectedTechs = techListView.getSelectionModel().getSelectedItems();
         String skills = String.join(", ", selectedTechs);
 
-        // Валидация (задължителни полета)
+        // Валидация на задължителни полета
         if (name.trim().isEmpty() || skills.isEmpty()) {
             statusLabel.setText("Моля, въведете име и изберете поне едно умение!");
             statusLabel.setStyle("-fx-text-fill: red;");
             return;
         }
 
-        // Създаване на нов обект и добавяне към колекцията на таблицата
+        // Създаване на обект и добавяне към колекцията на таблицата
         Developer newDev = new Developer(name, level, skills);
         developersData.add(newDev);
 
-        // Изчистване на формата за следващо въвеждане
+        // Изчистване на формата за последващо въвеждане
         nameField.clear();
         techListView.getSelectionModel().clearSelection();
         levelCombo.getSelectionModel().clearSelection();
@@ -143,11 +143,11 @@ public class DeveloperController {
 }
 ```
 
-### 3. Създайте FXML файла (`team-view.fxml`)
+### 3. Дефиниране на изглед чрез FXML (`team-view.fxml`)
 
-Тук дефинираме визуалната структура. Забележете как зареждаме CSS файла чрез атрибута `stylesheets` в кореновия `HBox`.
+В този файл се дефинира визуалната структура на приложението. Зареждането на CSS файла се осъществява чрез атрибута `stylesheets` в кореновия `HBox` елемент.
 
-Създайте `src/main/resources/bg/tu_varna/sit/ps/lab7/sample_task/team-view.fxml`:
+Дефиниране на `src/main/resources/bg/tu_varna/sit/ps/lab7/sample_task/team-view.fxml`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -155,7 +155,7 @@ public class DeveloperController {
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<!-- Зареждаме CSS файла. Символът @ указва, че това е ресурс в същата папка -->
+<!-- Зареждане на CSS файл. Символът @ указва наличие на ресурс в съответната директория -->
 <HBox spacing="20" stylesheets="@css/styles.css" xmlns:fx="http://javafx.com/fxml"
       fx:controller="bg.tu_varna.sit.ps.lab7.sample_task.controllers.DeveloperController" prefWidth="800"
       prefHeight="550">
@@ -163,7 +163,7 @@ public class DeveloperController {
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <!-- Лява част: Форма за добавяне (свързана с CSS клас form-pane) -->
+    <!-- Ляв панел: Форма за добавяне (асоциирана с CSS клас form-pane) -->
     <VBox spacing="10" prefWidth="250" styleClass="form-pane">
         <Label text="Нов служител" id="form-title"/>
 
@@ -182,7 +182,7 @@ public class DeveloperController {
         <Label fx:id="statusLabel" wrapText="true"/>
     </VBox>
 
-    <!-- Дясна част: Таблица -->
+    <!-- Десен панел: Таблица -->
     <VBox HBox.hgrow="ALWAYS" spacing="10">
         <Label text="Списък на екипа" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
 
@@ -197,18 +197,18 @@ public class DeveloperController {
 </HBox>
 ```
 
-### 4. Създайте CSS файла за стилизиране (`styles.css`)
+### 4. Дефиниране на CSS файл за стилизиране (`styles.css`)
 
-Създайте `src/main/resources/bg/tu_varna/sit/ps/lab3/css/styles.css`:
+Дефиниране на `src/main/resources/bg/tu_varna/sit/ps/lab3/css/styles.css`:
 
 ```css
-/* Типов селектор: задава глобален шрифт за цялото приложение */
+/* Типов селектор: дефиниране на глобален шрифт за приложението */
 .root {
   -fx-font-family: 'Segoe UI', Arial, sans-serif;
-  -fx-background-color: #f4f6f8; /* Светло сив фон */
+  -fx-background-color: #f4f6f8; /* Светлосив фон */
 }
 
-/* Селектор за клас: стилизираме контейнера на формата */
+/* Селектор за клас: стилизиране на контейнера на формата */
 .form-pane {
   -fx-background-color: white;
   -fx-padding: 15;
@@ -218,7 +218,7 @@ public class DeveloperController {
   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 10, 0, 0, 2);
 }
 
-/* ID селектор: Заглавието на формата */
+/* ID селектор: Заглавие на формата */
 #form-title {
   -fx-font-size: 18px;
   -fx-font-weight: bold;
@@ -226,7 +226,7 @@ public class DeveloperController {
   -fx-padding: 0 0 10 0;
 }
 
-/* Типов селектор за всички TextField контроли */
+/* Типов селектор за всички TextField компоненти */
 .text-field {
   -fx-background-radius: 4;
   -fx-border-color: #cccccc;
@@ -248,12 +248,12 @@ public class DeveloperController {
   -fx-cursor: hand;
 }
 
-/* Псевдо-клас: ефект при посочване (hover) */
+/* Псевдо-клас: ефект при позициониране на курсора (hover) */
 #add-btn:hover {
   -fx-background-color: #2980b9;
 }
 
-/* Псевдо-клас: ефект при натискане (pressed) */
+/* Псевдо-клас: ефект при активиране (pressed) */
 #add-btn:pressed {
   -fx-background-color: #1f618d;
 }
@@ -265,9 +265,9 @@ public class DeveloperController {
 }
 ```
 
-### 5. Application клас `ITApplication.java` (`src/main/java/bg/tu_varna/sit/ps/lab7/sample_task/ITApplication.java`)
+### 5. Дефиниране на основен Application клас `ITApplication.java` (`src/main/java/bg/tu_varna/sit/ps/lab7/sample_task/ITApplication.java`)
 
-Основният клас, който зарежда FXML файла и стартира JavaFX прозореца.
+Класът отговаря за зареждането на FXML файла и инициализацията на основния JavaFX прозорец.
 
 ```java
 package bg.tu_varna.sit.ps.lab7.sample_task;
@@ -294,7 +294,7 @@ public class ITApplication extends Application {
 }
 ```
 
-### 6. Main / Launcher клас (`src/main/java/bg/tu_varna/sit/ps/lab7/sample_task/Launcher.java`)
+### 6. Дефиниране на стартов клас Launcher (`src/main/java/bg/tu_varna/sit/ps/lab7/sample_task/Launcher.java`)
 
 ```java
 package bg.tu_varna.sit.ps.lab7.sample_task;

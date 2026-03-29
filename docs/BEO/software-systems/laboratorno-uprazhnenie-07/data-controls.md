@@ -6,34 +6,35 @@ has_children: false
 nav_order: 1
 ---
 
-В това упражнение ще надградим знанията си за изграждане на потребителски интерфейс в JavaFX, като разгледаме сложни графични елементи (контроли), които служат за визуализация на колекции от данни.
+Настоящото лабораторно упражнение надгражда знанията за изграждане на потребителски интерфейс в JavaFX чрез разглеждане на сложни графични елементи (контроли), предназначени за визуализация на колекции от данни.
 
-За разлика от базовите контроли (като `Button` или `Label`), които показват единична стойност, контролите за данни са предназначени да визуализират и управляват списъци или таблици от обекти.
+За разлика от базовите контроли (като `Button` или `Label`), визуализиращи единична стойност, контролите за данни служат за показване и управление на списъци или таблици от обекти.
 
 ## 1. Основни концепции
 
-- **Разделяне на изгледа от данните:** При тези контроли дефинираме визуалната структура в **FXML**, но самите данни се подават динамично чрез програмната логика (**Java Controller**).
-- **ObservableList:** За да подадем списък с данни на тези компоненти, използваме специална колекция, наречена `ObservableList`. Нейното предимство е, че автоматично уведомява графичния интерфейс (сцената), когато в нея се добавят, променят или премахнат елементи, и изгледът се обновява веднага.
-- **Генерици (Generics - `<T>`):** Тъй като тези контроли могат да показват всякакви данни (текст, числа или ваши собствени обекти като `Student` или `Car`), те са "типизирани". Когато ги дефинираме в Java кода, **задължително** трябва да укажем какъв тип данни ще съхраняват, използвайки триъгълни скоби (напр. `ComboBox<String>`).
+- **Разделяне на изгледа от данните:** При тези контроли визуалната структура се дефинира в **FXML**, докато самите данни се подават динамично чрез програмната логика (**Java Controller**).
+- **ObservableList:** За подаване на списък с данни към тези компоненти се използва специализирана колекция, наречена `ObservableList`. Нейното основно предимство е автоматичното уведомяване на графичния интерфейс (сцената) при добавяне, промяна или премахване на елементи, което води до незабавно обновяване на изгледа.
+- **Генерици (Generics - `<T>`):** Поради способността на тези контроли да визуализират различни типове данни (както стандартни типове като `String`, така и потребителски дефинирани класове като `Developer`), те са "типизирани". При дефинирането им в Java кода е **задължително** указването на типа данни, които ще съхраняват, чрез използване на триъгълни скоби (напр. `ComboBox<Developer>`).
+
+Всички примери по-долу са базирани на модела `Developer` от примерната задача за система за управление на ИТ екип.
 
 ## 2. `ComboBox` (Падащ списък)
 
-Използва се, когато искаме да предоставим на потребителя възможност да избере една стойност от предварително дефиниран списък с опции, спестявайки място на екрана.
+Използва се за предоставяне на възможност за избор на една стойност от предварително дефиниран списък с опции.
 
-В Java кода `ComboBox` приема един тип `<T>` – типът на опциите в списъка. Най-често това е `<String>`.
+В Java кода `ComboBox` приема един тип `<T>`. Макар често да се използват стандартни типове (напр. `<String>` за нива на умения), контролата е изключително полезна за работа с потребителски дефинирани обекти (напр. `<Developer>`).
 
 - **Свойства (FXML Атрибути):**
-  - `promptText` - текст, който се показва, преди да бъде направен избор (подсказка, напр. "Изберете град").
-  - `visibleRowCount` - колко елемента да се виждат едновременно при отваряне на падащото меню (по подразбиране е 10). Ако списъкът е по-голям, се появява скролбар.
-  - `editable` - ако е `true`, потребителят може да въвежда собствена стойност в полето, освен да избира от падащия списък.
+  - `promptText` - текст, визуализиращ се преди осъществяването на избор (подсказка).
+  - `visibleRowCount` - брой едновременно видими елементи при отваряне на падащото меню.
 
-- **Пример в FXML:**
+- **Примерна дефиниция в FXML:**
 
   ```xml
-  <ComboBox fx:id="cityComboBox" promptText="Изберете град" prefWidth="200.0" visibleRowCount="5" editable="false" />
+  <ComboBox fx:id="leadDeveloperComboBox" promptText="Изберете ръководител" prefWidth="250.0" />
   ```
 
-- **Пример в Java (Controller):**
+- **Примерна реализация в Java (Controller):**
 
   ```java
   import javafx.collections.FXCollections;
@@ -41,67 +42,85 @@ nav_order: 1
   import javafx.fxml.FXML;
   import javafx.scene.control.ComboBox;
 
-  public class MainController {
+  public class TeamController {
 
-      // Указваме типа <String>, защото градовете са текст
+      // Указване на потребителски дефиниран тип <Developer>
       @FXML
-      private ComboBox<String> cityComboBox;
+      private ComboBox<Developer> leadDeveloperComboBox;
 
       @FXML
       public void initialize() {
-          // 1. Създаване на списък с данни от съответния тип
-          ObservableList<String> cities = FXCollections.observableArrayList(
-              "София", "Пловдив", "Варна", "Бургас", "Русе"
+          ObservableList<Developer> developers = FXCollections.observableArrayList(
+              new Developer("Иван Иванов", "Lead", "Java, Spring"),
+              new Developer("Мария Георгиева", "Senior", "React, Node.js")
           );
 
-          // 2. Подаване на данните към ComboBox-а
-          cityComboBox.setItems(cities);
+          leadDeveloperComboBox.setItems(developers);
       }
   }
   ```
+
+  _Забележка: За да визуализира коректно текста в падащия списък, `ComboBox` извиква метода `toString()` на подадения обект. Препоръчително е класът `Developer` да има предефиниран `toString()` метод._
 
 ---
 
 ## 3. `ListView` (Списъчен изглед)
 
-Показва списък от елементи в правоъгълна област с възможност за превъртане. Подходящ е за показване на голям набор от еднотипни данни, когато искаме няколко елемента да са видими постоянно.
+Визуализира списък от елементи в правоъгълна област с възможност за превъртане.
 
-Подобно на `ComboBox`, `ListView` също приема един параметър за тип `<T>` в Java кода.
+Когато се работи с потребителски класове, често се изисква показването на повече от една данна (например едновременно името и нивото на разработчика) чрез вложени елементи. Това се реализира чрез дефиниране на потребителски `CellFactory`.
 
-- **Свойства (FXML Атрибути):**
-  - `orientation` - определя дали списъкът да се превърта вертикално (по подразбиране) или хоризонтално. Възможни стойности: `VERTICAL`, `HORIZONTAL`.
-- В контролера може да се настрои режим на селекция – дали потребителят може да избира само един ред (`SINGLE`) или няколко едновременно (`MULTIPLE`).
-
-- **Пример в FXML:**
+- **Примерна дефиниция в FXML:**
 
   ```xml
-  <ListView fx:id="usersListView" prefHeight="200.0" prefWidth="250.0" orientation="VERTICAL" />
+  <ListView fx:id="developersListView" prefHeight="200.0" prefWidth="300.0" />
   ```
 
-- **Пример в Java (Controller):**
+- **Примерна реализация с вложени графични елементи в Java:**
 
   ```java
   import javafx.collections.FXCollections;
   import javafx.collections.ObservableList;
   import javafx.fxml.FXML;
+  import javafx.scene.control.ListCell;
   import javafx.scene.control.ListView;
-  import javafx.scene.control.SelectionMode;
+  import javafx.scene.control.Label;
+  import javafx.scene.layout.HBox;
 
-  public class MainController {
+  public class TeamController {
 
       @FXML
-      private ListView<String> usersListView;
+      private ListView<Developer> developersListView;
 
       @FXML
       public void initialize() {
-          ObservableList<String> users = FXCollections.observableArrayList(
-              "Иван Иванов", "Петър Петров", "Мария Георгиева"
+          ObservableList<Developer> developers = FXCollections.observableArrayList(
+              new Developer("Иван Иванов", "Junior", "Java"),
+              new Developer("Петър Петров", "Mid", "SQL")
           );
 
-          usersListView.setItems(users);
+          developersListView.setItems(developers);
 
-          // Позволяваме на потребителя да избира няколко елемента едновременно
-          usersListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+          // Дефиниране на CellFactory за визуализация на множество данни и вложени елементи
+          developersListView.setCellFactory(param -> new ListCell<Developer>() {
+              @Override
+              protected void updateItem(Developer dev, boolean empty) {
+                  super.updateItem(dev, empty);
+                  if (empty || dev == null) {
+                      setText(null);
+                      setGraphic(null);
+                  } else {
+                      // Създаване на структуриран изглед с вложени елементи
+                      HBox layout = new HBox(10);
+                      Label nameLabel = new Label(dev.getName());
+                      nameLabel.setStyle("-fx-font-weight: bold;");
+                      Label levelLabel = new Label("(" + dev.getLevel() + ")");
+
+                      layout.getChildren().addAll(nameLabel, levelLabel);
+                      setGraphic(layout); // Задаване на графичния елемент към клетката
+                  }
+              }
+          });
       }
   }
   ```
@@ -110,71 +129,27 @@ nav_order: 1
 
 ## 4. `TableView` (Таблица)
 
-Изключително мощен елемент за показване на сложни обекти под формата на редове и колони. Всеки ред отговаря на един обект (например `Student`), а всяка колона показва конкретно негово свойство (например "Име" или "Оценка").
+Комплексен елемент за визуализация на сложни обекти под формата на редове и колони. Всеки ред съответства на отделен обект (`Developer`), а всяка колона изобразява конкретно негово свойство ("Име", "Ниво").
 
-### 4.1. Типове на таблицата и колоните
+### 4.1. Типизация на таблицата и колоните
 
-Заради по-сложната си структура, тук трябва да укажем типовете както за самата таблица, така и за всяка отделна колона:
+1. **`TableView<S>`:** Приема един тип `S` (Модел). Това е класът на обектите, представляващи редовете (напр. `TableView<Developer>`).
+2. **`TableColumn<S, T>`:** Дефинирането на колоните изисква **два** типа:
+   - `S` - типът на реда (напр. `Developer`).
+   - `T` - типът на данните за визуализация в конкретната клетка (напр. `String` за име).
 
-1. **`TableView<S>`:** Приема един тип `S` (Моделът). Това е класът на обектите, които ще представляват редовете. (напр. `TableView<Student>`).
-2. **`TableColumn<S, T>`:** Колоните изискват **ДВА** типа:
-   - `S` - типът на реда (трябва да съвпада с този на таблицата, напр. `Student`).
-   - `T` - типът на данните, които ще се визуализират в самата клетка на тази колона (напр. `Integer` за номер, `String` за име, `Double` за оценка). _Забележка: използват се обвиващите класове (`Integer`, `Double`), а не примитивни типове (`int`, `double`)._
+### 4.2. Етапи на реализация и `PropertyValueFactory`
 
-### 4.2. Свойства (FXML Атрибути)
-
-- **За `TableView`:** `prefHeight`, `prefWidth`.
-- **За `TableColumn`:**
-  - `text` - заглавието на колоната, което се показва в хедъра на таблицата.
-  - `prefWidth` - препоръчителна ширина на колоната.
-
-### 4.3. Примерна имплементация стъпка по стъпка
-
-**Стъпка 1: Създаване на клас (Модел)**
-
-Този клас описва данните за един ред.
-
-_**Много важно**: Задължително е да имате публични "getter" методи (напр. `getName()`), защото таблицата ги използва скрито, за да прочете стойностите!_
-
-```java
-public class Student {
-    private int id;
-    private String name;
-    private double grade;
-
-    public Student(int id, String name, double grade) {
-        this.id = id;
-        this.name = name;
-        this.grade = grade;
-    }
-
-    // Getters са задължителни за PropertyValueFactory!
-    public int getId() { return id; }
-    public String getName() { return name; }
-    public double getGrade() { return grade; }
-}
-```
-
-**Стъпка 2: Дефиниране на таблицата в FXML**
-
-Всяка колона получава собствен `fx:id`, за да можем да я достъпим в контролера и да ѝ кажем какво да показва. `TableView` съдържа тага `<columns>`, в който се изброяват колоните.
+Свързването на колоните с класа се осъществява чрез `PropertyValueFactory`. При подаване на низ (напр. `"name"`), таблицата вътрешно търси съответен getter метод (напр. `getName()`) в модела `Developer`.
 
 ```xml
-<TableView fx:id="studentsTable" prefHeight="300.0" prefWidth="500.0">
+<TableView fx:id="developerTable" prefHeight="300.0" prefWidth="500.0">
     <columns>
-        <!-- Колона за ID -->
-        <TableColumn fx:id="idColumn" text="Номер" prefWidth="80.0" />
-        <!-- Колона за Име -->
-        <TableColumn fx:id="nameColumn" text="Име и Фамилия" prefWidth="250.0" />
-        <!-- Колона за Оценка -->
-        <TableColumn fx:id="gradeColumn" text="Среден успех" prefWidth="150.0" />
+        <TableColumn fx:id="colName" text="Име" prefWidth="150.0" />
+        <TableColumn fx:id="colLevel" text="Ниво" prefWidth="100.0" />
     </columns>
 </TableView>
 ```
-
-**Стъпка 3: Свързване и зареждане на данните в Java (Controller)**
-
-За да разбере дадена колона коя стойност от обекта `Student` да покаже, използваме класа `PropertyValueFactory`. Името, което подаваме там (напр. `"name"`), кара таблицата да търси метод `getName()` в модела.
 
 ```java
 import javafx.collections.FXCollections;
@@ -184,55 +159,80 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class MainController {
+public class TeamController {
 
-    // Таблицата съхранява обекти от тип Student
     @FXML
-    private TableView<Student> studentsTable;
+    private TableView<Developer> developerTable;
 
-    // Колоната за номер взема обект Student и връща Integer
     @FXML
-    private TableColumn<Student, Integer> idColumn;
+    private TableColumn<Developer, String> colName;
 
-    // Колоната за име взема обект Student и връща String
     @FXML
-    private TableColumn<Student, String> nameColumn;
-
-    // Колоната за оценка взема обект Student и връща Double
-    @FXML
-    private TableColumn<Student, Double> gradeColumn;
+    private TableColumn<Developer, String> colLevel;
 
     @FXML
     public void initialize() {
-        // 1. Свързване на колоните със свойствата на класа Student чрез PropertyValueFactory
-        // Текстовете "id", "name", "grade" отговарят на методите getId(), getName(), getGrade()
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        gradeColumn.setCellValueFactory(new PropertyValueFactory<>("grade"));
+        // Свързване на колоните с Get методите на класа Developer
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colLevel.setCellValueFactory(new PropertyValueFactory<>("level"));
 
-        // 2. Създаване на колекцията с данните
-        ObservableList<Student> studentList = FXCollections.observableArrayList(
-            new Student(101, "Георги Димитров", 5.50),
-            new Student(102, "Елена Василева", 6.00),
-            new Student(103, "Николай Костов", 4.20)
+        ObservableList<Developer> list = FXCollections.observableArrayList(
+            new Developer("Иван Иванов", "Senior", "Java, Docker")
         );
 
-        // 3. Подаване на списъка към таблицата за визуализация
-        studentsTable.setItems(studentList);
+        developerTable.setItems(list);
     }
 }
 ```
 
-### 4.4. Как работи `PropertyValueFactory` и защо е важен?
+---
 
-Когато работим с `TableView`, всяка колона трябва да знае **как да извлече** конкретната стойност от обекта (в нашия случай `Student`), за да я покаже в съответната клетка. `PropertyValueFactory` е вграден клас в JavaFX, който автоматизира този процес, като създава връзката между колоната и свойството на класа.
+## 5. Интеракция с компонентите (Селектиране, Добавяне и Премахване)
 
-#### Как се осъществява магията?
+Управлението на данните и селекцията е стандартизирано и се извършва по сходен начин при всички контроли за данни.
 
-Той използва механизъм, наречен "Reflection" (Отражение в Java), за да търси метод по определено име. Когато подадете низ (String) в конструктора му, например `new PropertyValueFactory<>("name")`, JavaFX автоматично търси в класа (Модела) метод, който е конструиран по стандарта за Java Getters: думата `get` + името на свойството с главна буква.
+### 5.1. Управление на селекцията (SelectionModel)
 
-Примери за съвпадения:
+Достъпът до избраните от потребителя елементи се осъществява чрез `SelectionModel`.
 
-- `"id"` кара таблицата да извиква метода `getId()` за всеки ред.
-- `"name"` кара таблицата да извиква метода `getName()`.
-- `"firstName"` кара таблицата да извиква метода `getFirstName()`.
+_Забележка: Настройката за режим на селекция (`SelectionMode`) и логиката за извличане на елементи е валидна за `ListView`, `TableView`, `TreeView` и други подобни контроли._
+
+```java
+// Настройване на режим за избор на множество елементи
+developersListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+// Извличане на един избран елемент (SINGLE режим)
+Developer selectedDev = developerTable.getSelectionModel().getSelectedItem();
+
+// Извличане на списък с всички избрани елементи (MULTIPLE режим)
+ObservableList<Developer> selectedDevs = developersListView.getSelectionModel().getSelectedItems();
+```
+
+### 5.2. Динамично добавяне и премахване
+
+Тъй като контролите са обвързани с `ObservableList`, добавянето или премахването на елемент от колекцията автоматично и мигновено обновява графичния интерфейс.
+
+**Пример за добавяне:**
+
+```java
+public void addNewDeveloper(String name, String level, String skills) {
+    Developer newDev = new Developer(name, level, skills);
+
+    // Вземаме колекцията, асоциирана с таблицата, и добавяме елемента
+    developerTable.getItems().add(newDev);
+}
+```
+
+**Пример за премахване на селектиран елемент:**
+
+```java
+public void removeSelectedDeveloper() {
+    // 1. Установяване на селектирания елемент
+    Developer selectedDev = developerTable.getSelectionModel().getSelectedItem();
+
+    // 2. Премахване от колекцията (графичният интерфейс се обновява сам)
+    if (selectedDev != null) {
+        developerTable.getItems().remove(selectedDev);
+    }
+}
+```
