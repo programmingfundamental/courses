@@ -225,7 +225,13 @@ public class Application {
 
 ### Task 1
 
-Finish the example for Decorator from the lesson and add behavior for the attributes. Modify existing decorators to reflect the attributes.
+Write a program to order hot drinks offered in a cafeteria.
+
+The bar offers coffee and tea, described by name and base price. Extras such as milk, honey, sugar can be added to each drink. Each of the additions changes the price and increases it by 0.5, 0.7 and 0.3, respectively.
+
+The order is described by a number and returns information about its final price as behavior.
+
+The behavior of the cafeteria consists of creating and displaying information about each order.
 
 
 ### Task 2
