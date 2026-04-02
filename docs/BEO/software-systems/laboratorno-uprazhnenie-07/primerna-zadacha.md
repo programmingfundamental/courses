@@ -129,8 +129,6 @@ public class DeveloperController {
     public Label errorStatusLabel;
     @FXML
     public Label successStatusLabel;
-    @FXML
-    private Button addButton;
 
     @FXML
     private ComboBox<Level> levelCombo;
@@ -221,9 +219,9 @@ public class DeveloperController {
     }
 
     private void displayMessage(String message, boolean isError) {
-        errorStatusLabel.setText(message);
-        errorStatusLabel.setDisable(!isError);
-        successStatusLabel.setDisable(isError);
+        (isError ? errorStatusLabel : successStatusLabel).setText(message);
+        errorStatusLabel.setVisible(isError);
+        successStatusLabel.setVisible(!isError);
     }
 }
 ```
@@ -257,7 +255,7 @@ public class DeveloperController {
         <Label text="Умения (задръжте Ctrl):"/>
         <ListView fx:id="techListView" prefHeight="150"/>
 
-        <Button fx:id="addButton" text="Добави в екипа" onAction="#handleAddDeveloper"
+        <Button text="Добави в екипа" onAction="#handleAddDeveloper"
                 maxWidth="Infinity" id="add-btn"/>
 
         <Label fx:id="errorStatusLabel" styleClass="error" disable="false" wrapText="true"/>
