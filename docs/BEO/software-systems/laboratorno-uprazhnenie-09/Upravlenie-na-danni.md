@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Управление на данни
-parent: Лабораторно упражнение 8
+parent: Лабораторно упражнение 9
 grand_parent: Програмни системи
 nav_order: 1
 ---
