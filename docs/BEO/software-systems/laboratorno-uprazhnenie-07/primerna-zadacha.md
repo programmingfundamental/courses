@@ -250,13 +250,13 @@ public class DeveloperController {
         <TextField fx:id="nameField" promptText="Напр. Иван Иванов"/>
 
         <Label text="Ниво (Позиция):"/>
-        <ComboBox fx:id="levelCombo" maxWidth="Infinity"/>
+        <ComboBox fx:id="levelCombo" maxWidth="150"/>
 
         <Label text="Умения (задръжте Ctrl):"/>
         <ListView fx:id="techListView" prefHeight="150"/>
 
         <Button text="Добави в екипа" onAction="#handleAddDeveloper"
-                maxWidth="Infinity" id="add-btn"/>
+                maxWidth="150" id="add-btn"/>
 
         <Label fx:id="errorStatusLabel" styleClass="error" disable="false" wrapText="true"/>
         <Label fx:id="successStatusLabel" styleClass="success" disable="false" wrapText="true"/>

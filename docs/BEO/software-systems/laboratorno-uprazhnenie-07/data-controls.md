@@ -47,7 +47,7 @@ nav_order: 1
 - **Примерна дефиниция в FXML:**
 
   ```xml
-    <ComboBox fx:id="levelCombo" maxWidth="Infinity"/>
+    <ComboBox fx:id="levelCombo" maxWidth="150"/>
   ```
 
 - **Примерна реализация в Java (Controller):**
