@@ -83,8 +83,6 @@ nav_order: 2
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.Controller">
-
-    <children>
         <TextArea fx:id="textArea" prefHeight="200.0" prefWidth="400.0">
             <contextMenu>
                 <ContextMenu>
@@ -94,8 +92,6 @@ nav_order: 2
                 </ContextMenu>
             </contextMenu>
         </TextArea>
-    </children>
-
 </AnchorPane>
 ```
 

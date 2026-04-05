@@ -72,12 +72,8 @@ dialogStage.show();
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.DialogController"
       spacing="10" alignment="CENTER">
-
-    <children>
         <Label text="Това е диалогов прозорец"/>
         <Button text="Затвори" onAction="#handleClose"/>
-    </children>
-
 </VBox>
 ```
 

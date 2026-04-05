@@ -18,8 +18,6 @@ nav_order: 5
     - Изход – затваря приложението след потвърждение;
 - За програмата – отваря FXML диалогов прозорец.
 - Контекстно меню (ContextMenu) към TableView, което съдържа:
-    - Преглед – показва информация за избрания разработчик;
-    - Редакция – отваря FXML диалог за редакция;
     - Изтриване – премахва избрания разработчик след потвърждение.
 - Използване на стандартни диалогови прозорци (Alert) за:
     - грешки;
@@ -45,21 +43,20 @@ nav_order: 5
 В метода `displayMessage` при създаване или при грешка
 
 ```java
-    @FXML
+       @FXML
     protected void handleAddDeveloper() {
-
+        // Извличане на данни от формата
         String name = nameField.getText();
         Level level = levelCombo.getValue();
-
+        // Извличане на всички избрани елементи от ListView и конкатенация в общ String
         List<Technology> selectedTechs = techListView.getSelectionModel().getSelectedItems();
 
-        boolean isCreated = createDeveloper(name, level, selectedTechs);
-
-        if (isCreated) {
+        try {
+            createDeveloper(name, level, selectedTechs);
             clearForm();
             showAlert(Alert.AlertType.INFORMATION, "Успешно действие", null, "Успешно добавен!");
-        } else {
-            showAlert(Alert.AlertType.ERROR, "Грешка","Грешка по време на създаване", "Моля, въведете име и изберете поне едно умение!");
+        } catch (IllegalArgumentException exception) {
+            showAlert(Alert.AlertType.ERROR, "Грешка","Грешка по време на създаване", exception.getMessage());
         }
     }
 ```
@@ -71,10 +68,9 @@ nav_order: 5
         try {
             Developer newDev = new Developer(name, level, selectedTechs);
             return developersData.add(newDev);
-        } catch (IllegalArgumentException e) {
-            showAlert(Alert.AlertType.ERROR, "Грешка","Грешка по време на създаване", e.getMessage());
+        } catch (IllegalArgumentException exception) {
+            throw exception;
         }
-        return false;
     }
 ```
 
@@ -331,7 +327,6 @@ public class DeveloperController {
 
         developerTable.setItems(developersData);
     }
-
     @FXML
     protected void handleAddDeveloper() {
         // Извличане на данни от формата
@@ -340,13 +335,12 @@ public class DeveloperController {
         // Извличане на всички избрани елементи от ListView и конкатенация в общ String
         List<Technology> selectedTechs = techListView.getSelectionModel().getSelectedItems();
 
-        boolean isCreated = createDeveloper(name, level, selectedTechs);
-
-        if (isCreated) {
+        try {
+            createDeveloper(name, level, selectedTechs);
             clearForm();
             showAlert(Alert.AlertType.INFORMATION, "Успешно действие", null, "Успешно добавен!");
-        } else {
-            showAlert(Alert.AlertType.ERROR, "Грешка","Грешка по време на създаване", "Моля, въведете име и изберете поне едно умение!");
+        } catch (IllegalArgumentException exception) {
+            showAlert(Alert.AlertType.ERROR, "Грешка","Грешка по време на създаване", exception.getMessage());
         }
     }
 
@@ -354,10 +348,9 @@ public class DeveloperController {
         try {
             Developer newDev = new Developer(name, level, selectedTechs);
             return developersData.add(newDev);
-        } catch (IllegalArgumentException e) {
-            showAlert(Alert.AlertType.ERROR, "Грешка","Грешка по време на създаване", e.getMessage());
+        } catch (IllegalArgumentException exception) {
+            throw exception;
         }
-        return false;
     }
 
     private void clearForm() {
@@ -366,19 +359,15 @@ public class DeveloperController {
         levelCombo.getSelectionModel().clearSelection();
     }
 
-    public void handleNew(ActionEvent actionEvent) {
+    public void handleNew() {
 
     }
 
-    public void handleExit(ActionEvent actionEvent) {
+    public void handleExit() {
 
     }
 
-    public void handleAboutDialog(ActionEvent actionEvent) {
-
-    }
-
-    public void handleEditDeveloper(ActionEvent actionEvent) {
+    public void handleAboutDialog() {
 
     }
 
