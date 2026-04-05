@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Context Menu
+title: Диалогови прозорци (Alert)
 parent: Лабораторно упражнение 8
 grand_parent: Програмни системи
 nav_order: 4
 ---
 
-## 4. Диалогови прозорци (Dialogs)
+## 4. Диалогови прозорци (Alert)
 
 ### 4.1 Същност
 
