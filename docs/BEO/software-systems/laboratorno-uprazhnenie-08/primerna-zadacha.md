@@ -37,9 +37,9 @@ nav_order: 5
     }
 ```
 
-На всички места в DeveloperControllerкъдето се ползва метода `displayMessage` , трябва да се смени с използването на метода `showAlert` 
+На всички места в DeveloperController, където се ползва метода `displayMessage` , трябва да се смени с използването на метода `showAlert` 
 
-В метода `displayMessage` при създаване или при грешка
+В метода `handleAddDeveloper` при създаване или при грешка:
 
 ```java
        @FXML
@@ -60,7 +60,7 @@ nav_order: 5
     }
 ```
 
-В метода `createDeveloper` при възникнало изключение
+В метода `createDeveloper` при възникнало изключение:
 
 ```java
     private boolean createDeveloper(String name, Level level, List<Technology> selectedTechs) {
@@ -242,9 +242,11 @@ nav_order: 5
                 <Label text="Списък на екипа"/>
 
                 <TableView fx:id="developerTable" VBox.vgrow="ALWAYS">
-                    <contextMenu>
+                     <contextMenu>
                         <ContextMenu>
-                            <MenuItem text="Изтрий" onAction="#handleDeleteSelected"/>
+                            <items>
+                                <MenuItem text="Изтрий" onAction="#handleDeleteSelected"/>
+                            </items>
                         </ContextMenu>
                     </contextMenu>
                     <columns>
@@ -447,6 +449,16 @@ public class DeveloperController {
 </VBox>
 ```
 
+В styles.css се добавя оформление за заглавието на диалога:
+
+```css
+.dialog-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+```
+
 Като допълнение към стандартното отваряне на прозорец се използва `initModality` за поведението на приложението при стартиран дъщерен прозорец.
 
 ```java
@@ -461,7 +473,7 @@ public class DeveloperController {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(new Scene(root));
             stage.showAndWait();
-        } catch (IOException e) {
+        } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Грешка", "Неуспешно отваряне на прозореца.", e.getMessage());
         }
     }
