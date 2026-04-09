@@ -64,15 +64,6 @@ public ResponseEntity<Object> getProducts() { }
 public ResponseEntity<Object> getProducts() { }
 ```
 
-### @RequestBody
-
-Анотацията @RequestBody се използва за определяне на типа на съдържанието на тялото на заявката.
-
-```java
-public ResponseEntity<Object> createProduct(@RequestBody Product product) {
-}
-```
-
 ### @PathVariable
 
 Анотацията @PathVariable се използва за дефиниране на персонализиран или динамичен URI на заявката. Променливата id в URI на заявката се дефинира във фигурни скоби {}, както е показано по-долу.
@@ -94,3 +85,22 @@ public ResponseEntity<Object> getProduct(
 }
 ```
 
+### @ModelAttribute
+
+Анотацията @ModelAttribute се използва за свързване на параметри от HTTP заявка към Java обект. Тя автоматично попълва полетата на обекта със стойности от query parameters, form data или path параметри, когато имената съвпадат.
+Най-често се използва при GET заявки за филтриране или подаване на множество параметри към DTO обект.
+
+```java
+@GetMapping("/reports")
+public ResponseEntity<List<Object>> getReports(@ModelAttribute FilterReportDto filter) {
+}
+```
+
+### @RequestBody
+
+Анотацията @RequestBody се използва за определяне на типа на съдържанието на тялото на заявката.
+
+```java
+public ResponseEntity<Object> createProduct(@RequestBody Product product) {
+}
+```
