@@ -26,12 +26,13 @@ public interface Subject {
 
 След това ще създадем договор за наблюдателя, ще има метод за прикачване на субекта към наблюдателя и друг метод, който да се използва от субекта за уведомяване за всяка промяна.
 
-<pre><code>public interface Observer {
-<strong>	String update();
-</strong>
+```
+public interface Observer {
+	String update();
 	void setSubject(Subject sub);
 }
-</code></pre>
+
+```
 
 Сега договорът е готов, продължава се с конкретна имплементация.
 
