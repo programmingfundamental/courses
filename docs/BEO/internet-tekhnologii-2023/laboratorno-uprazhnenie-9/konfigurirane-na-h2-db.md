@@ -122,7 +122,8 @@ H2 е релационна база данни, написана на Java, пр
 ### Mixed режим
 
 - Комбинира **Embedded и Server** достъп.  
-- Приложението има директен локален достъп, а външни клиенти могат да се свързват през TCP.   
+- Приложението има директен локален достъп, а външни клиенти могат да се свързват през TCP.
+- Реализацията на този режим се усъществява с добавянето на AUTO_SERVER=TRUE към адреса за содтъп до базата `jdbc:h2:mem:testdb;AUTO_SERVER=TRUE`
 <br> 
 
 <p align="center">
@@ -138,16 +139,13 @@ H2 е релационна база данни, написана на Java, пр
 В `src/main/resources/application.properties` се добавят следните настройки:
 
 ```properties
-spring.datasource.url=jdbc:h2:file:./data/tasksdb 
+spring.datasource.url=jdbc:h2:file:./data/tasksdb;AUTO_SERVER=TRUE
 spring.datasource.driverClassName=org.h2.Driver 
-spring.datasource.username=sa
-spring.datasource.password= 
+spring.datasource.username=padawan
+spring.datasource.password=R2D2c3pO
 
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect
 spring.jpa.hibernate.ddl-auto=update  
-
-spring.h2.console.enabled=true 
-spring.h2.console.path=/h2-console
 ```
 
 
@@ -157,11 +155,11 @@ spring.h2.console.path=/h2-console
 - **`spring.datasource.driverClassName=org.h2.Driver`**  
   Указва JDBC драйвера за H2, който Spring Boot използва, за да се свърже с базата.
 
-- **`spring.datasource.username=sa`**  
-  Стандартно потребителско име за H2. Позволява достъп без предварителна регистрация на потребител.
+- **`spring.datasource.username=padawan`**  
+  Първоначалното създаване на потребител в H2 се осъществява от конфигурацията. Първия потреббител кйто се създаде има права на администратор на цялата база данни.
 
-- **`spring.datasource.password=`**  
-  Позволява работа без парола в локална среда. Може да се добави парола при нужда за защита.
+- **`spring.datasource.password=R2D2c3pO`**  
+  Позволява работа без парола в локална среда. Паролата е задължителна за осигуряване защитата на сървъра.
 
 - **`spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect`**  
   Указва SQL диалекта за Hibernate, специфичен за H2. Това позволява правилно генериране на SQL команди.
@@ -217,8 +215,8 @@ Spring Boot приложенията, които използват H2 база 
 - Отваря се браузър: `http://localhost:8080/h2-console`  
 - Попълва се формата:  
   - JDBC URL: `jdbc:h2:file:./data/tasksdb`  
-  - User Name: `sa`  
-  - Password: празно    
+  - User Name: `padawan`  
+  - Password: `R2D2c3pO`
   <br>
 
 
@@ -245,8 +243,8 @@ Spring Boot приложенията, които използват H2 база 
 
 - Въвеждат се:  
   - URL: `jdbc:h2:file:./data/tasksdb`  
-  - User: `sa`  
-  - Password: празно  
+  - User: `padawan`  
+  - Password: `R2D2c3pO`  
   <br>
 
 <p align="center">
