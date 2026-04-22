@@ -6,7 +6,7 @@ grand_parent: Интернет технологии
 nav_order: 2
 ---
 
-# Jakarta Persistence анотации
+# ОСНОВНИ JPA АНОТАЦИИ (ENTITY МОДЕЛИРАНЕ)
 
 Jakarta Persistence (JPA) е стандарт за обектно-релационно свързване (ORM) в Java, който позволява работа с релационни бази от данни чрез обекти. Вместо да пишем директно SQL заявки, JPA ни позволява да работим с Java обекти, които автоматично се преобразуват към записи в таблиците на базата.
 
@@ -133,6 +133,12 @@ public class Book {
 }
 ```
 
+## ВРЪЗКИ МЕЖДУ ТАБЛИЦИ
+
+В релационните бази връзките се правят чрез foreign keys, докато в JPA те се представят чрез Java обекти.
+
+Това означава, че вместо да се работи с ID стойности, се използват директно обекти.
+
 ### _@OneToMany_
 
 Указва асоциация едно към много (1:M).
@@ -141,7 +147,7 @@ public class Book {
 
 Пример:
 
-Клас Customer
+Клас Customer:
 
 ```java
 @Entity
@@ -159,7 +165,29 @@ public class Customer {
 }
 ```
 
-Клас Order
+### CascadeType
+
+Определя как операциите върху entity се прехвърлят към свързаните entity-та.
+
+```java
+cascade = CascadeType.ALL
+```
+
+Видове:
+- ALL → всички операции (save, delete, update)
+- PERSIST → при запис
+- MERGE → при update
+- REMOVE → при delete
+
+### @ManyToOne
+
+Анотацията указва връзка много към един (M:1) между entity класове. Това означава, че много записи от една таблица могат да се свържат с един запис от друга таблица.
+
+Обикновено се използва за foreign key връзки.
+
+Пример: 
+
+Клас Order:
 
 ```java
 @Entity
@@ -173,14 +201,64 @@ public class Order {
 	***
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="task_id", nullable = false)
+    @JoinColumn(name="customer_id", nullable = false)
     private Customer customer;
 }
 ```
 
+### FetchType (LAZY / EAGER)
+
+Определя кога се зареждат свързаните данни.
+
+```java
+@ManyToOne(fetch = FetchType.LAZY)
+```
+
+Видове:    
+- LAZY 
+    - данните се зареждат само когато са нужни   
+    - по-ефективно за производителност
+- EAGER 
+    - данните се зареждат веднага
+    - може да доведе до излишни заявки
+
+
+### @JoinColumn
+
+Анотацията указва колоната в таблицата, която служи като foreign key.
+
+Тя се използва за да дефинира връзката между две таблици.
+
+```java
+@JoinColumn(name = "customer_id")
+private Customer customer;
+```
+
+>
+- name → името на колоната в таблицата
+- свързва текущия entity с друг entity
+
+**По подразбиране:**    
+Ако НЕ се зададе name, се генерира автоматично:
+
+```
+<field_name>_<referenced_id>
+```
+>Където:    
+`<field_name>` = името на полето в entity-то    
+`<referenced_id>` = името на primary key колоната на свързаната таблица
+
+
+
 ### _@ManyToMany_
 
 Указва асоциация много към много (M:M).
+
+Това е най-сложният тип връзка в релационните бази данни, защото:
+- един запис от първата таблица може да има много записи от втората
+- и един запис от втората може да има много от първата
+
+Затова НЕ може да се реализира директно с foreign key между двете таблици. Вместо това се използва междинна (join) таблица, която свързва двете entities чрез техните primary keys.
 
 Пример 1
 
@@ -198,8 +276,14 @@ public class Customer {
     @JoinTable(name="Cust_phones")
     private Set<PhoneNumber> phones;
 }
+```
 
 
+- Customer има множество PhoneNumber обекти   
+- @JoinTable указва, че ще бъде създадена междинна таблица с име Cust_phones   
+- тъй като не са зададени колони, JPA ще ги генерира автоматично
+
+```java
 @Entity
 @Table(name="phone")
 
@@ -212,6 +296,12 @@ public class PhoneNumber {
     private Set<Customer> customers;
 }
 ```
+> 
+- PhoneNumber също има множество Customer обекти    
+- mappedBy="phones" показва, че тази страна НЕ управлява връзката     
+- връзката се управлява от полето phones в класа Customer    
+<br>
+
 
 Пример 2
 
@@ -231,7 +321,13 @@ public class Customer {
 	inverseJoinColumns = @JoinColumn(name = "phone_id", referencedColumnName = "id"))
 private Set<PhoneNumber> phones;
 }
+```
+>
+- name = "CUST_PHONES" → името на междинната таблица
+- joinColumns → колоната, която сочи към текущия entity (Customer)
+- inverseJoinColumns → колоната, която сочи към другия entity (PhoneNumber)
 
+```java
 @Entity
 @Table(name="phone_numbers")
 public class PhoneNumber {
@@ -244,3 +340,7 @@ public class PhoneNumber {
     private Set<Customer> customers; 
 }
 ```
+>
+- отново имаме обратната страна на връзката
+- mappedBy="phones" показва, че връзката вече е дефинирана в Customer
+- този клас само я използва, без да я управлява

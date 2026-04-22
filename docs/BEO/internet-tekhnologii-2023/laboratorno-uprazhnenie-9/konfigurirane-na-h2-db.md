@@ -123,7 +123,7 @@ H2 е релационна база данни, написана на Java, пр
 
 - Комбинира **Embedded и Server** достъп.  
 - Приложението има директен локален достъп, а външни клиенти могат да се свързват през TCP.
-- Реализацията на този режим се усъществява с добавянето на AUTO_SERVER=TRUE към адреса за содтъп до базата `jdbc:h2:mem:testdb;AUTO_SERVER=TRUE`
+- Реализацията на този режим се усъществява с добавянето на AUTO_SERVER=TRUE към адреса за достъп до базата `jdbc:h2:mem:testdb;AUTO_SERVER=TRUE`
 <br> 
 
 <p align="center">
@@ -139,7 +139,7 @@ H2 е релационна база данни, написана на Java, пр
 В `src/main/resources/application.properties` се добавят следните настройки:
 
 ```properties
-spring.datasource.url=jdbc:h2:file:./data/tasksdb;AUTO_SERVER=TRUE
+spring.datasource.url=jdbc:h2:file:./data/tasks_db;AUTO_SERVER=TRUE
 spring.datasource.driverClassName=org.h2.Driver 
 spring.datasource.username=padawan
 spring.datasource.password=R2D2c3pO
@@ -156,7 +156,7 @@ spring.jpa.hibernate.ddl-auto=update
   Указва JDBC драйвера за H2, който Spring Boot използва, за да се свърже с базата.
 
 - **`spring.datasource.username=padawan`**  
-  Първоначалното създаване на потребител в H2 се осъществява от конфигурацията. Първия потреббител кйто се създаде има права на администратор на цялата база данни.
+  Първоначалното създаване на потребител в H2 се осъществява от конфигурацията. Първия потребител, кoйто e създаден, има права на администратор на цялата база данни.
 
 - **`spring.datasource.password=R2D2c3pO`**  
   Позволява работа без парола в локална среда. Паролата е задължителна за осигуряване защитата на сървъра.
@@ -166,12 +166,7 @@ spring.jpa.hibernate.ddl-auto=update
 
 - **`spring.jpa.hibernate.ddl-auto=update`**  
   Определя как Hibernate управлява схемата на базата: проверява, създава или обновява таблиците според entity класовете. Стойността `update` добавя промени без да изтрива данни.
-
-- **`spring.h2.console.enabled=true`**  
-  Активира уеб конзолата на H2 за визуална работа и изпълнение на SQL заявки.
-
-- **`spring.h2.console.path=/h2-console`**  
-  Определя URL адреса, на който е достъпна H2 Console. По подразбиране това е `http://localhost:8080/h2-console`.   
+ 
   <br>
 
 > URL за JDBC се дефинира тук, за да може Spring Boot да създаде връзката при стартиране. H2 Console и IntelliJ Data Source използват същия URL за визуална работа с базата.
@@ -211,7 +206,21 @@ Spring Boot приложенията, които използват H2 база 
 </dependency>
 ```
 
-- Стартира се приложението (Embedded Tomcat слуша на порт 8080).  
+След това трябва да се добави конфигурация за използването на H2 в `application.properties`:
+
+
+```properties
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+```
+>
+- **`spring.h2.console.enabled=true`**  
+  Активира уеб конзолата на H2 за визуална работа и изпълнение на SQL заявки.
+
+- **`spring.h2.console.path=/h2-console`**  
+  Определя URL адреса, на който е достъпна H2 Console. По подразбиране това е `http://localhost:8080/h2-console`.  
+
+Стартира се приложението (Embedded Tomcat слуша на порт 8080).  
 - Отваря се браузър: `http://localhost:8080/h2-console`  
 - Попълва се формата:  
   - JDBC URL: `jdbc:h2:file:./data/tasksdb`  
