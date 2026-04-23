@@ -33,8 +33,8 @@ public interface Color {
 
 ```java
 public abstract class Shape {
-	//Composition - implementor
-	protected Color color;
+	
+	private Color color;
 	
 	//constructor with implementor as input argument
 	public Shape(Color c){
