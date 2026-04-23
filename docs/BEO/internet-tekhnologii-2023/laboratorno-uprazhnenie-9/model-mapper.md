@@ -144,6 +144,27 @@ modelMapper.typeMap(UserDto.class, User.class).addMappings(mapper ->
 );
 ```
 
+# Работа с колекции в ModelMapper
+
+ModelMapper може да преобразува и колекции от обекти (например List, Set).
+Поради особеност на Java (type erasure), е необходимо изрично да се укаже типът на целевата колекция чрез TypeToken.
+
+```java
+List<Task> tasks = repository.findAll();
+
+Type listType = new TypeToken<List<TaskResponseDto>>() {}.getType();
+
+List<TaskResponseDto> result = mapper.map(tasks, listType);
+```
+>
+- tasks → списък от entity обекти (Task)
+- TypeToken → указва, че резултатът трябва да бъде List<TaskResponseDto>
+- mapper.map(...) → преобразува всеки елемент от списъка към DTO       
+
+
+**Важно:**
+Без TypeToken, ModelMapper не може да разпознае типа на елементите в колекцията и няма да извърши коректно мапване.
+
 # ModelMapper позволява по-прецизна конфигурация при нужда, като например:
 
 1. Пропускане на определени полета - ModelMapper по подразбиране мапва всички съвпадащи по име полета. В някои случаи може да е необходимо определени полета да не се мапват. Това се постига чрез игнориране на дадено свойство.
