@@ -7,32 +7,34 @@ nav_order: 1
 #permalink: /docs/BEO/software-systems/laboratorno-uprazhnenie-07/Upravlenie-na-danni
 ---
 
-# Управление на данни с JavaFX
+# Data management with JavaFX
 
-Графичните приложения, изградени с JavaFX, често се нуждаят от съхранение и извличане на информация – потребители, настройки, резултати или други структурирани данни. Тъй като JavaFX се фокусира единствено върху изграждането на потребителския интерфейс, за работата с бази данни се използват стандартните механизми на Java и външни технологии.
+Graphic apps, created with JavaFX, often need storage and extraciont of information – user, settings, results as well as other structured data. As JavaFX is focused on the GUI creation only, standard Java techniques and external technologies for work with data bases are used.
 
-За тази цел най-често се комбинират JDBC като универсален интерфейс за достъп до бази данни и конкретна система за управление на бази данни, например H2. Тази комбинация позволява ясно разделение между визуалната част на приложението и логиката за работа с данни.
+Most often the standard database interface JDBC is used together with some database management system, for example H2. Such a combination allows clear separation of the user interface of the app and the database logic.
 
 <img width="560" height="382" alt="image" src="https://github.com/user-attachments/assets/102fdbfd-ab5e-46d3-b5bf-94b4f30b6f5b" />
 
-## JDBC слой – връзка между Java и базата данни
+## JDBC layer – connection between Java and the data base
 
-JDBC (Java Database Connectivity) представлява стандартен интерфейс за работа с релационни бази данни в Java. Той дефинира начин за създаване на връзка, изпълнение на SQL заявки и обработка на резултатите, независимо от конкретната база данни.
+JDBC (Java Database Connectivity) is a standard programming interface for work with relational data bases in Java. It defines creation of a connection, execution of SQL queries and processing of results – no matter of which specific database management system is used.
 
-Чрез JDBC приложението не комуникира директно с базата, а използва драйвер, който превежда заявките към конкретната система за управление на бази данни. Това позволява смяна на базата без промяна на бизнес логиката.
+Using JDBC the app does not communicate with the database directly. It uses a driver instead, which translates the queries to a specific database management system. Thus, the databse could me changed without modifying the business logic.
 
-Основните обекти, с които работи JDBC, са:
-- Connection – активна връзка към базата данни
-- Statement / PreparedStatement – изпълнение на SQL заявки
-- ResultSet – резултат от SELECT заявка
+The main objects, used by JDBC, are:
+- Connection – active connection to the database
+- Statement / PreparedStatement – execution of SQL queries
+- ResultSet – result from execution of SELECT query
 
-## H2 – вградена релационна база данни
+## H2 – integrated relational database
 
-За настолни Java приложения често се използват леки вградени бази данни. H2 е такава база, реализирана изцяло на Java, която се използва чрез JDBC и поддържа стандартен SQL синтаксис.
+Light integrated relational database management systems are usually used in desktop Java apps. Such a database is H2, which is implemented in Java entirely. H2 is used through JDBC and supports standard SQL syntax.
 
-H2 може да работи във файл, което означава, че данните се съхраняват локално и се запазват между стартиранията на приложението. Това я прави подходяща за JavaFX приложения без нужда от външен сървър.
+H2 could store data in file. This means that data are saved locally and are stored between different application runs. Hence, H2 is suitable for JavaFX apps and does need a separate SQL server.
 
-За да бъде използвана в Maven проект, е необходимо да се добави зависимостта към H2 JDBC драйвера.
+
+In order to use H2 in a Maven project, the dependency to the JDBC H2 driver must be added.
+
 
 ```xml
 <dependency>
@@ -42,9 +44,9 @@ H2 може да работи във файл, което означава, че
 </dependency>
 ```
 
-## Създаване на връзка към базата данни
+## Creation of a database connection
 
-Връзката към базата се реализира в отделен клас, който централизира конфигурацията и позволява повторна употреба:
+The database connection is implemented in a separate class, which centralizes the configuration and allows re-use:
 
 ```java
 import java.sql.Connection;
@@ -63,16 +65,16 @@ public class DatabaseConnection {
 }
 ```
 
-Тук се задават:
-- URL – пътя до H2 база в локален файл (./data/librarydb)
-- USER и PASSWORD – стандартни стойности за H2
-- Методът getConnection() връща готова връзка за използване от DAO или други класове.
+The following data are defined here:
+- URL – path to H2 base in a local file (./data/librarydb)
+- USER and PASSWORD – standard values for H2
+- The method getConnection() returns a ready connected, which can be used by DAO or other classes.
 
-## Примерна задача: Каталог с книги
+## Example task: A catalog with books
 
-За демонстрация на управлението на данни да се създаде каталог с книги. Всеки запис да съдържа заглавие, автор, година на издаване и ISBN номер. Данните да се извличат от базата и да се визуализират с JavaFX интерфейс.
+The example demonstrates data management by creation a catalog with books. Each record contains title, author, year of publication and ISBN number. The data are extracted from the database and are visualized through JavaFX interface.
 
-### SQL структура на базата данни
+### SQL database structure
 
 ```sql
 CREATE TABLE books (
@@ -85,9 +87,9 @@ CREATE TABLE books (
 
 ```
 
-## Entity слой – клас Book
+## Entity layer – class Book
 
-Всеки ред от таблицата books се представя в Java чрез entity клас. Този клас не съдържа логика за достъп до база данни и служи само за пренос и представяне на данните.
+Each row from the table books is presented in Java with entity class. This class does not contain logic for database access and serves only for transmission and presentation of the data.
 
 ```java
 package bg.tu_varna.sit.ps.lab7;
@@ -119,7 +121,7 @@ public class Book {
 
 ## Database Initializer
 
-За да не се налага ръчно изпълнение на SQL скриптове, се създава клас DatabaseInitializer. Той създава таблица books и вкарва записи.
+To prevent the necessity of manually executing SQL scripts the class DatabaseInitializer is implemented. It creates a table books and inserts records inside.
 
 
 ```java
@@ -135,7 +137,7 @@ public class DatabaseInitializer {
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement()) {
 
-            // Създаваме таблицата books, ако не съществува
+            // Creates table books, if it does not exist
             stmt.execute("CREATE TABLE IF NOT EXISTS books (" +
                     "id INT AUTO_INCREMENT PRIMARY KEY, " +
                     "title VARCHAR(255) NOT NULL, " +
@@ -143,7 +145,7 @@ public class DatabaseInitializer {
                     "year INT, " +
                     "isbn VARCHAR(20))");
 
-            // Вкарваме няколко примерни книги
+            // Insert records
             stmt.execute("INSERT INTO books (title, author, year, isbn) VALUES " +
                     "('Clean Code', 'Robert C. Martin', 2008, '9780132350884')," +
                     "('Effective Java', 'Joshua Bloch', 2018, '9780134685991')," +
@@ -156,16 +158,16 @@ public class DatabaseInitializer {
 }
 ```
 
-Какво се прави тук:
-- Създава се връзка чрез DatabaseConnection.getConnection(). Това гарантира, че всички SQL заявки ще се изпълнят в правилната база.
-- Създава се Statement, който позволява изпълнение на SQL код.
-- Създава се таблица само ако не съществува (IF NOT EXISTS), за да не се презаписват вече съществуващи данни.
-- Вкарват се начални записи чрез INSERT, което позволява веднага да се визуализират примерни данни в JavaFX приложението.
+The upper fragment does the following:
+- Creates a connection using DatabaseConnection.getConnection(). This guarantees that all SQL queries will be executed in the right database.
+- Created Statement, which allows execution of SQL code.
+- Created a table, if it does not exist (IF NOT EXISTS), in order to prevent rewriting existing data.
+- A few records are inserted with INSERT command, which allows immediate visualization of the data in the JavaFX app.
 
 
-## DAO слой – достъп до данните
+## DAO layer – data access
 
-DAO класът съдържа SQL заявките и отговаря за извличането на данни от базата. Той връща списък от entity обекти, които могат директно да бъдат използвани от JavaFX слоя.
+The DAO class contains SQL queries and is responsible for extraction of data from the database. It returns a list of entity objects, which could be used from the JavaFX layer directly.
 
 ```java
 import java.sql.*;
@@ -202,16 +204,16 @@ public class BookDao {
 }
 ```
 
-## Визуализация с JavaFX
+## Visualization with JavaFX
 
-След като данните се извлекат от DAO, те се визуализират в графичния интерфейс чрез JavaFX TableView. Това позволява потребителят да вижда записите подредени в таблица. В зависимост от нуждите на приложението, могат да се използват и други контроли за визуализация на данните, като ListView, ComboBox или различни панели с текстови полета и етикети.
+After the data are extracted by DAO, they are visualized in the graphical user interface using JavaFX TableView. Thus, users can see data ordered in a table. In accordance with the app specifics other UI controls for data visualization could be used, for example ListView, ComboBox and different panels with text fields and labels.
 
 ```java
 public class LibraryApplication extends Application {
 
     @Override
     public void start(Stage stage) {
-        DatabaseInitializer.initialize(); // Създава се база и се вкарват примерни данни
+        DatabaseInitializer.initialize(); // A database is created and sample data are inserted 
 
         BookDao dao = new BookDao();
         List<Book> books = dao.findAll();
@@ -243,8 +245,9 @@ public class LibraryApplication extends Application {
     }
 ```
 
-При успешно стартиране, трябва да се визуализира следният прозорец: 
+The following window shoulb be visualized in case of successful execution: 
 
 <img width="652" height="469" alt="Screenshot 2026-02-03 223238" src="https://github.com/user-attachments/assets/fbb76196-a774-46b4-a8ef-c251e2c87088" />
+
 
 
