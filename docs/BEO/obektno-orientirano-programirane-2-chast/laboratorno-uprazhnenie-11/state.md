@@ -142,7 +142,8 @@ public class AvailableTicket implements TicketState {
 
 ```
 public class BookedTicket implements TicketState {
-    @Override
+
+	@Override
     public String bookTicket(Ticket ticket) {
         return "Ticket with id = " + ticket.getTicketId() + " is already booked";
     }
@@ -163,7 +164,8 @@ public class BookedTicket implements TicketState {
 
 ```
 public class SoldTicket implements TicketState {
-    @Override
+
+	@Override
     public String bookTicket(Ticket ticket) {
         return "Sold ticket cannot be booked";
     }
