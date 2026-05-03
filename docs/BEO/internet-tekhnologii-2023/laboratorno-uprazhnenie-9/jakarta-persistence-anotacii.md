@@ -6,7 +6,7 @@ grand_parent: Интернет технологии
 nav_order: 2
 ---
 
-# ОСНОВНИ JPA АНОТАЦИИ (ENTITY МОДЕЛИРАНЕ)
+# JPA АНОТАЦИИ (ENTITY МОДЕЛИРАНЕ)
 
 Jakarta Persistence (JPA) е стандарт за обектно-релационно свързване (ORM) в Java, който позволява работа с релационни бази от данни чрез обекти. Вместо да пишем директно SQL заявки, JPA ни позволява да работим с Java обекти, които автоматично се преобразуват към записи в таблиците на базата.
 
@@ -135,7 +135,7 @@ public class Book {
 
 ## ВРЪЗКИ МЕЖДУ ТАБЛИЦИ
 
-В релационните бази връзките се правят чрез foreign keys, докато в JPA те се представят чрез Java обекти.
+В релационните бази връзките се реализират чрез foreign keys, а в JPA връзките се моделират чрез обектни релации, които се мапват към тези foreign keys от базата данни.
 
 Това означава, че вместо да се работи с ID стойности, се използват директно обекти.
 
@@ -167,21 +167,21 @@ public class Customer {
 
 ### CascadeType
 
-Определя как операциите върху entity се прехвърлят към свързаните entity-та.
+CascadeType определя кои операции от жизнения цикъл на едно entity се прилагат автоматично и върху свързаните с него entity-та.
 
 ```java
 cascade = CascadeType.ALL
 ```
 
 Видове:
-- ALL → всички операции (save, delete, update)
+- ALL → всички операции
 - PERSIST → при запис
 - MERGE → при update
 - REMOVE → при delete
 
 ### @ManyToOne
 
-Анотацията указва връзка много към един (M:1) между entity класове. Това означава, че много записи от една таблица могат да се свържат с един запис от друга таблица.
+Анотацията @manytoone указва връзка много към един (M:1) между entity класове, при която множество обекти от един тип са свързани с един обект от друг тип. В релационната база това се реализира чрез foreign key в таблицата на „many“ страната.
 
 Обикновено се използва за foreign key връзки.
 
@@ -191,8 +191,8 @@ cascade = CascadeType.ALL
 
 ```java
 @Entity
-@Table(name="orders")
-public class Order {
+@Table(name="reports")
+public class Report {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -201,20 +201,20 @@ public class Order {
 	***
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="customer_id", nullable = false)
-    private Customer customer;
+    @JoinColumn(name="task_id", nullable = false)
+    private Task task;
 }
 ```
 
 ### FetchType (LAZY / EAGER)
 
-Определя кога се зареждат свързаните данни.
+FetchType определя кога се зареждат асоциираните entity обекти – веднага при извличане на основния обект (EAGER) или отложено при първи достъп до тях (LAZY).
 
 ```java
 @ManyToOne(fetch = FetchType.LAZY)
 ```
 
-Видове:    
+Стойности на FetchType:    
 - LAZY 
     - данните се зареждат само когато са нужни   
     - по-ефективно за производителност
@@ -230,8 +230,8 @@ public class Order {
 Тя се използва за да дефинира връзката между две таблици.
 
 ```java
-@JoinColumn(name = "customer_id")
-private Customer customer;
+@JoinColumn(name = "task_id")
+private Task task;
 ```
 
 >
@@ -254,7 +254,7 @@ private Customer customer;
 
 Указва асоциация много към много (M:M).
 
-Това е най-сложният тип връзка в релационните бази данни, защото:
+Това е тип връзка в релационните бази данни, при която:
 - един запис от първата таблица може да има много записи от втората
 - и един запис от втората може да има много от първата
 
@@ -278,7 +278,7 @@ public class Customer {
 }
 ```
 
-
+>
 - Customer има множество PhoneNumber обекти   
 - @JoinTable указва, че ще бъде създадена междинна таблица с име Cust_phones   
 - тъй като не са зададени колони, JPA ще ги генерира автоматично
