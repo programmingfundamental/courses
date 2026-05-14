@@ -8,4 +8,3 @@ permalink: /docs/software-systems
 ---
 
 # Програмни системи
-

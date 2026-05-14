@@ -6,3 +6,7 @@ has_children: true
 nav_order: 10
 permalink: /docs/software-systems/laboratorno-uprazhnenie-10
 ---
+
+# Лабораторно упражнение 10
+
+Самостоятелна работа
