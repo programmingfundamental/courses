@@ -252,7 +252,7 @@ target/
 
 Основният `.jar` файл. Файла тряба да отговаря на дефинираното име и версия в 
 
-``
+```
     <artifactId>PS-Projects</artifactId>
     <version>1.0</version>
 ```
