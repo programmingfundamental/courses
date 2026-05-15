@@ -32,21 +32,21 @@ DeveloperApp.exe
 # Основна информация за проекта
 
 ```xml
-<groupId>bg.tu_varna.sit</groupId>
-<artifactId>javaFX-project</artifactId>
-<version>1.0</version>
+<groupId>bg.tu_varna.sit.ps</groupId>
+<artifactId>PS-Projects</artifactId>
+<version>1.0-SNAPSHOT</version>
 ```
 
 Това определя:
 
-* организацията;
-* името на проекта;
-* версията.
+* организацията - groupId;
+* името на проекта - artifactId;
+* версията - version. SNAPSHOT в номера на версията означава, че това все още е версия в разрботка.
 
 Maven ще създаде:
 
 ```text
-javaFX-project-1.0.jar
+PS-Projects-1.0-SNAPSHOT.jar
 ```
 
 ---
@@ -98,8 +98,67 @@ javaFX-project-1.0.jar
 ## Стартиране
 
 ```bash
-mvn clean javafx:run
+./mvnw clean javafx:run
 ```
+
+Резултата трябва да е:
+
+`
+Error: JAVA_HOME not found in your environment. 
+Please set the JAVA_HOME variable in your environment to match the 
+location of your Java installation. 
+`
+
+Това означава, че в операционната система не е инстанцирана виртуална машина за изпълнение на Java приложения.
+
+## Инициялизация през Java SDK в IntelliJ
+
+В IntelliJ Отворете Меню -> File ->  Project Structure
+
+В отворилия се прозорец изберете Platform Settings -> SDKs, това е списък с версиите на Java SDK инсталирани в IntelliJ
+
+Избирате версията с ковто е създаден проекта `openjdk-21`
+
+В JDK home path се зе покаже пътя до Java SDK
+
+`C:\Users\OOP\.jdks\openjdk-21` - копирайте го.
+
+## Създаване на системна променлива JAVA_HOME
+
+В windows search въведете: `edit environment variables for your account` 
+
+В отворения прозорец:
+
+<img width="600" height="568" alt="image" src="https://github.com/user-attachments/assets/9e44f0ee-b3a6-4774-a9ee-ce23873de1f0" />
+
+Трябва да се попълни `User variables for ...` с бутона `New`
+
+Variable name: JAVA_HOME
+Variable value: C:\Users\OOP\.jdks\openjdk-21
+
+Когато е създадена променливата на средата JAVA_HOME.
+
+Трябва да се дефинира пътя до изпълнимия файл на JRE:
+
+Променливата Path се отваря в Edit
+
+<img width="516" height="487" alt="image" src="https://github.com/user-attachments/assets/79caa51c-53e6-4ba3-93b3-43b582fa0c87" />
+
+Създава се нов пър с бутона `New`:
+
+Пътя трябва да е `%JAVA_HOME%\bin`
+
+Записвате промените в променливата Path и в Enviroment Variables.
+
+Следващата стъпка е рестартиране на IntelliJ за да може терминала в IntelliJ да прочете новите пеоменливи.
+
+## Стартиране отново
+
+```bash
+./mvnw clean javafx:run
+```
+
+Резултата трябва да е стартирано приложение, това кое приложение ще се изпълнизависи от pom.xaml конфигуразията `<mainClass>`
 
 ---
 
@@ -111,37 +170,13 @@ mvn clean javafx:run
 </mainClass>
 ```
 
-Това е началният клас на приложението.
-
----
-
-# jlink Configuration
-
-```xml
-<launcher>app</launcher>
-<jlinkZipName>app</jlinkZipName>
-<jlinkImageName>app</jlinkImageName>
-```
-
-## Предназначение
-
-Създава custom runtime image.
-
----
-
-## Оптимизация
-
-```xml
-<noManPages>true</noManPages>
-<stripDebug>true</stripDebug>
-<noHeaderFiles>true</noHeaderFiles>
-```
-
-Намалява размера на приложението.
+Това е началният клас на приложението. Сменете го с класа, който стартира приложението DeveloperApplication, на всички места където се ползва.
 
 ---
 
 # Maven Dependency Plugin
+
+Създаването на изпълним файл изисква добавянето на няколко плъгина:
 
 ```xml
 <plugin>
@@ -168,7 +203,7 @@ target/
 Plugin-ът се изпълнява при:
 
 ```bash
-mvn clean package
+./mvnw clean package
 ```
 
 ---
@@ -212,10 +247,15 @@ target/
 # Main JAR
 
 ```xml
-<mainJar>javaFX-project-1.0.jar</mainJar>
+<mainJar>PS-Projects-1.0.jar</mainJar> 
 ```
 
-Основният `.jar` файл.
+Основният `.jar` файл. Файла тряба да отговаря на дефинираното име и версия в 
+
+``
+    <artifactId>PS-Projects</artifactId>
+    <version>1.0</version>
+```
 
 ---
 
@@ -289,7 +329,7 @@ destination/
 ## Стартиране от Maven
 
 ```bash
-mvn clean javafx:run
+./mvnw clean javafx:run
 ```
 
 ---
@@ -299,7 +339,7 @@ mvn clean javafx:run
 ## Команда
 
 ```bash
-mvn clean package
+./mvnw clean package
 ```
 
 ---
@@ -478,7 +518,7 @@ DeveloperApp.exe
 
                     <input>${project.build.directory}</input>
 
-                    <mainJar>javaFX-project-1.0.jar</mainJar>
+                    <mainJar>PS-Projects-1.0.jar</mainJar>
 
                     <mainClass>
                         bg.tu_varna.sit.ps.lab9.task1.Launcher
