@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Основни команди в Docker
+title: Kоманди в Docker
 parent: Лабораторно упражнение 12
 grand_parent: Интернет технологии
 nav_order: 5
 ---
 
-# Основни команди в Docker
+# Kоманди в Docker
 
 ## Общи команди
 
