@@ -10,7 +10,6 @@ nav_order: 1
 
 Да се създаде възможност JavaFX приложението **DeveloperApp** да бъде пакетирано като изпълним файл.
 
-
 Крайният резултат трябва да бъде папка:
 
 ```text
@@ -33,34 +32,44 @@ DeveloperApp.exe
 
 ```xml
 <groupId>bg.tu_varna.sit.ps</groupId>
-<artifactId>PS-Projects</artifactId>
-<version>1.0-SNAPSHOT</version>
+<artifactId>lab7</artifactId>
+<version>1.0</version>
 ```
 
 Това определя:
 
-* организацията - groupId;
-* името на проекта - artifactId;
-* версията - version. SNAPSHOT в номера на версията означава, че това все още е версия в разрботка.
+- организацията - groupId;
+- името на проекта - artifactId;
+- версията - version. SNAPSHOT в номера на версията означава, че това все още е версия в разработка.
 
 Maven ще създаде:
 
 ```text
-PS-Projects-1.0-SNAPSHOT.jar
+lab7-1.0.jar
 ```
 
 ---
-
 
 # 3. Build Plugins
 
 # Maven Compiler Plugin
 
 ```xml
-<plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-compiler-plugin</artifactId>
-</plugin>
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <!--...-->
+            <configuration>
+                <source>21</source>
+                <target>21</target>
+            </configuration>
+        </plugin>
+
+        <!--...-->
+    </plugins>
+</build>
 ```
 
 ## Предназначение
@@ -83,10 +92,17 @@ PS-Projects-1.0-SNAPSHOT.jar
 # JavaFX Maven Plugin
 
 ```xml
-<plugin>
-    <groupId>org.openjfx</groupId>
-    <artifactId>javafx-maven-plugin</artifactId>
-</plugin>
+<build>
+    <plugins>
+        <!--...-->
+
+        <plugin>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-maven-plugin</artifactId>
+            <!--...-->
+        </plugin>
+    </plugins>
+</build>
 ```
 
 ## Предназначение
@@ -103,21 +119,21 @@ PS-Projects-1.0-SNAPSHOT.jar
 
 Резултата трябва да е:
 
-`
-Error: JAVA_HOME not found in your environment. 
-Please set the JAVA_HOME variable in your environment to match the 
-location of your Java installation. 
-`
+```
+Error: JAVA_HOME not found in your environment.
+
+Please set the JAVA_HOME variable in your environment to match the location of your Java installation.
+```
 
 Това означава, че в операционната система не е инстанцирана виртуална машина за изпълнение на Java приложения.
 
-## Инициялизация през Java SDK в IntelliJ
+## Инициализация през Java SDK в IntelliJ
 
-В IntelliJ Отворете Меню -> File ->  Project Structure
+В IntelliJ Отворете Меню -> File -> Project Structure
 
 В отворилия се прозорец изберете Platform Settings -> SDKs, това е списък с версиите на Java SDK инсталирани в IntelliJ
 
-Избирате версията с ковто е създаден проекта `openjdk-21`
+Избирате версията с която е създаден проекта `openjdk-21`
 
 В JDK home path се зе покаже пътя до Java SDK
 
@@ -125,7 +141,7 @@ location of your Java installation.
 
 ## Създаване на системна променлива JAVA_HOME
 
-В windows search въведете: `edit environment variables for your account` 
+В windows search въведете: `edit environment variables for your account`
 
 В отворения прозорец:
 
@@ -150,7 +166,7 @@ Variable value: C:\Users\OOP\.jdks\openjdk-21
 
 Записвате промените в променливата Path и в Enviroment Variables.
 
-Следващата стъпка е рестартиране на IntelliJ за да може терминала в IntelliJ да прочете новите пеоменливи.
+Следващата стъпка е рестартиране на IntelliJ за да може терминала в IntelliJ да прочете новите променливи.
 
 ## Стартиране отново
 
@@ -158,7 +174,7 @@ Variable value: C:\Users\OOP\.jdks\openjdk-21
 ./mvnw clean javafx:run
 ```
 
-Резултата трябва да е стартирано приложение, това кое приложение ще се изпълнизависи от pom.xaml конфигуразията `<mainClass>`
+Резултата трябва да е стартирано приложение, това кое приложение ще се изпълни зависи от `pom.xml` конфигурацията `<mainClass>`
 
 ---
 
@@ -166,22 +182,46 @@ Variable value: C:\Users\OOP\.jdks\openjdk-21
 
 ```xml
 <mainClass>
-    bg.tu_varna.sit.ps.lab9.task1.Launcher
+    bg.tu_varna.sit.ps.lab7.HelloApplication
 </mainClass>
 ```
 
-Това е началният клас на приложението. Сменете го с класа, който стартира приложението DeveloperApplication, на всички места където се ползва.
+Това е началният клас на приложението. Сменете го с класа, който стартира приложението DeveloperApplication.
 
 ---
 
 # Maven Dependency Plugin
 
-Създаването на изпълним файл изисква добавянето на няколко плъгина:
+Създаването на изпълним файл изисква добавянето на няколко плъгина. Един от тях е `maven-dependency-plugin`:
 
 ```xml
-<plugin>
-    <artifactId>maven-dependency-plugin</artifactId>
-</plugin>
+<build>
+    <plugins>
+        <!--...-->
+
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.8.1</version>
+
+            <executions>
+                <execution>
+                    <id>copy-dependencies</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>copy-dependencies</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>
+                            ${project.build.directory}
+                        </outputDirectory>
+                        <includeScope>runtime</includeScope>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
 ```
 
 ## Предназначение
@@ -197,7 +237,17 @@ target/
 ## Важна конфигурация
 
 ```xml
-<phase>package</phase>
+<plugin>
+    <artifactId>maven-dependency-plugin</artifactId>
+    <!--...-->
+
+    <executions>
+        <execution>
+            <phase>package</phase>
+            <!--...-->
+        </execution>
+    </executions>
+</plugin>
 ```
 
 Plugin-ът се изпълнява при:
@@ -210,10 +260,60 @@ Plugin-ът се изпълнява при:
 
 # jpackage Maven Plugin
 
+Следващият плъгин е `jpackage-maven-plugin`:
+
 ```xml
-<plugin>
-    <artifactId>jpackage-maven-plugin</artifactId>
-</plugin>
+<build>
+    <plugins>
+        <!--...-->
+
+        <plugin>
+            <groupId>org.panteleyev</groupId>
+            <artifactId>jpackage-maven-plugin</artifactId>
+            <version>1.6.6</version>
+
+            <configuration>
+                <name>DeveloperApp</name>
+
+                <input>${project.build.directory}</input>
+
+                <mainJar>lab7-1.0.jar</mainJar>
+
+                <mainClass>
+                    bg.tu_varna.sit.ps.lab7.task1.Launcher
+                </mainClass>
+
+                <type>APP_IMAGE</type>
+
+                <destination>
+                    ${project.basedir}/destination
+                </destination>
+
+                <winConsole>false</winConsole>
+
+                <javaOptions>
+                    <option>--module-path</option>
+                    <option>$APPDIR</option>
+
+                    <option>--add-modules</option>
+
+                    <option>
+                        javafx.controls,javafx.fxml
+                    </option>
+                </javaOptions>
+            </configuration>
+
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>jpackage</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
 ```
 
 ## Предназначение
@@ -247,14 +347,14 @@ target/
 # Main JAR
 
 ```xml
-<mainJar>PS-Projects-1.0.jar</mainJar> 
+<mainJar>lab7-1.0.jar</mainJar>
 ```
 
-Основният `.jar` файл. Файла тряба да отговаря на дефинираното име и версия в 
+Основният `.jar` файл. Файла тряба да отговаря на дефинираното име и версия в
 
-```
-    <artifactId>PS-Projects</artifactId>
-    <version>1.0</version>
+```xml
+<artifactId>lab7</artifactId>
+<version>1.0</version>
 ```
 
 ---
@@ -297,6 +397,15 @@ destination/
 
 ```xml
 <javaOptions>
+    <option>--module-path</option>
+    <option>$APPDIR</option>
+
+    <option>--add-modules</option>
+
+    <option>
+        javafx.controls,javafx.fxml
+    </option>
+</javaOptions>
 ```
 
 ## Module Path
@@ -368,19 +477,15 @@ DeveloperApp.exe
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-         https://maven.apache.org/xsd/maven-4.0.0.xsd">
-
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>bg.tu_varna.sit</groupId>
-    <artifactId>javaFX-project</artifactId>
+    <groupId>bg.tu_varna.sit.ps</groupId>
+    <artifactId>lab7</artifactId>
     <version>1.0</version>
-
-    <name>javaFX-project</name>
+    <name>lab7</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -388,19 +493,16 @@ DeveloperApp.exe
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>2.4.240</version>
         </dependency>
-
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>21.0.6</version>
         </dependency>
-
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
@@ -413,25 +515,20 @@ DeveloperApp.exe
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
-
         <plugins>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
-
                 <configuration>
                     <source>21</source>
                     <target>21</target>
@@ -442,35 +539,20 @@ DeveloperApp.exe
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
-
                 <executions>
                     <execution>
-
                         <id>default-cli</id>
-
                         <configuration>
-
                             <mainClass>
-                                bg.tu_varna.sit.ps.lab9.task1.Launcher
+                                bg.tu_varna.sit.ps.lab7.HelloApplication
                             </mainClass>
-
-                            <launcher>app</launcher>
-
-                            <jlinkZipName>app</jlinkZipName>
-
-                            <jlinkImageName>app</jlinkImageName>
-
-                            <noManPages>true</noManPages>
-
-                            <stripDebug>true</stripDebug>
-
-                            <noHeaderFiles>true</noHeaderFiles>
-
+                            <options>
+                                <option>--add-opens</option>
+                                <option>java.base/java.lang=ALL-UNNAMED</option>
+                            </options>
                         </configuration>
-
                     </execution>
                 </executions>
-
             </plugin>
 
             <plugin>
@@ -480,48 +562,35 @@ DeveloperApp.exe
 
                 <executions>
                     <execution>
-
                         <id>copy-dependencies</id>
-
                         <phase>package</phase>
-
                         <goals>
                             <goal>copy-dependencies</goal>
                         </goals>
-
                         <configuration>
-
                             <outputDirectory>
                                 ${project.build.directory}
                             </outputDirectory>
-
                             <includeScope>runtime</includeScope>
-
                         </configuration>
-
                     </execution>
                 </executions>
-
             </plugin>
 
             <plugin>
-
                 <groupId>org.panteleyev</groupId>
-
                 <artifactId>jpackage-maven-plugin</artifactId>
-
                 <version>1.6.6</version>
 
                 <configuration>
-
                     <name>DeveloperApp</name>
 
                     <input>${project.build.directory}</input>
 
-                    <mainJar>PS-Projects-1.0.jar</mainJar>
+                    <mainJar>lab7-1.0.jar</mainJar>
 
                     <mainClass>
-                        bg.tu_varna.sit.ps.lab9.task1.Launcher
+                        bg.tu_varna.sit.ps.lab7.task1.Launcher
                     </mainClass>
 
                     <type>APP_IMAGE</type>
@@ -533,9 +602,7 @@ DeveloperApp.exe
                     <winConsole>false</winConsole>
 
                     <javaOptions>
-
                         <option>--module-path</option>
-
                         <option>$APPDIR</option>
 
                         <option>--add-modules</option>
@@ -543,30 +610,19 @@ DeveloperApp.exe
                         <option>
                             javafx.controls,javafx.fxml
                         </option>
-
                     </javaOptions>
-
                 </configuration>
 
                 <executions>
-
                     <execution>
-
                         <phase>package</phase>
-
                         <goals>
                             <goal>jpackage</goal>
                         </goals>
-
                     </execution>
-
                 </executions>
-
             </plugin>
-
         </plugins>
-
     </build>
-
 </project>
 ```
