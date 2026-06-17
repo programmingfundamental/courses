@@ -5,93 +5,78 @@ parent: Лабораторно упражнение 3
 grand_parent: Обектно-ориентирано програмиране - 1 част
 nav_order: 2
 ---
-# Ключовите думи this и super
+# Ключовите думи `this` и `super` в Java
 
-**this** и **super** не могат да се използват в статичен контекст.
+Ключовите думи `this` и `super` се използват за рефериране към инстанции на обекти. Важно е да се отбележи, че те **не могат да се използват в статичен контекст** (статични методи или блокове), тъй като статичните елементи принадлежат на класа, а не на конкретна инстанция.
 
-### Запазена дума – this
+---
 
-Запазената дума „**this**“ сочи към текущия обект в метод или конструктор. Най-често „this”  се използва, за да предотврати объркването между атрибутите (на класа) и параметрите (на метода), които имат еднакви имена.
+## 1. Ключова дума `this`
 
-`„this“` може също да се използва, за да :
+Ключовата дума `this` представлява референция към **текущия обект** (инстанцията), в чийто контекст се изпълнява кодът.
 
-·         извика конструктора на текущия клас;
+### Основни приложения на `this`:
+1.  **Разграничаване на полета от параметри:** Най-честата употреба е, когато параметрите на метод или конструктор имат същите имена като атрибутите на класа.
+2.  **Извикване на друг конструктор в същия клас:** Помага за избягване на дублиране на код (Constructor Chaining).
+3.  **Извикване на методи на текущия клас.**
+4.  **Предаване на текущия обект като аргумент** на други методи или конструктори.
 
-·         извика метод от текущия клас;
-
-·         се връщане обект от текущия клас;
-
-·         се предаде като аргумент на метод;
-
-·         се предаде като аргумент на конструктор
-
-
+### Пример с `this`:
 ```java
 public class Subject {
-    String name;
-    double finalGrade;
-    int hours;
+    private String name;
+    private int hours;
+    private double finalGrade;
 
-    public Subject() {
-    }
-
+    // Конструктор с 2 параметъра
     public Subject(String name, int hours) {
-        this.name = name;
+        this.name = name; // 'this.name' е атрибутът на класа, 'name' е параметърът
         this.hours = hours;
     }
 
+    // Конструктор с 3 параметъра, използващ предходния
     public Subject(String name, int hours, double finalGrade) {
-        this(name, hours); //invokes constructor with only two parameters
+        this(name, hours); // Извиква конструктора с 2 параметъра
         this.finalGrade = finalGrade;
     }
 
-    public String getName(){
-        return this.name;
+    public void printDetails() {
+        // Използването на 'this' за извикване на гетъри е опционално, но внася яснота
+        System.out.println("Предмет: " + this.getName() + " (Часове: " + this.getHours() + ")");
     }
 
-    public Double getFinalGrade(){
-        return this.finalGrade;
-    }
-
-    public int getHours()
-    {
-        return this.hours;
-    }
-
-    public void printSubjectNameAndHours(){
-        System.out.println("Subject: " + this.getName() + " : " + this.getHours()); //method invoke
-    }
-
+    public String getName() { return name; }
+    public int getHours() { return hours; }
 }
 ```
 
-### Запазена дума – super
+---
 
-Запазената дума супер сочи към супер класа (родителския клас) на обекта. Използва се, за да се извикват атрибути,методи и конструктор наследени от родителския клас.
+## 2. Ключова дума `super`
 
+Ключовата дума `super` се използва за достъп до членове (атрибути, методи и конструктори) на **родителския клас** (superclass).
 
+### Основни приложения на `super`:
+1.  **Извикване на конструктор на родителския клас:** Трябва да бъде **първата инструкция** в конструктора на подкласа.
+2.  **Достъп до скрити атрибути или пренаписани методи:** Когато подкласът има метод със същото име като в родителя, но искаме да изпълним и оригиналната логика.
+
+### Пример със `super`:
 ```java
-class Animal { // Superclass (parent)
-  public void animalSound() {
-    System.out.println("The animal makes a sound");
-  }
+class Animal { // Родителски клас
+    public void makeSound() {
+        System.out.println("Животното издава звук.");
+    }
+}
+
+class Dog extends Animal { // Клас наследник
+    @Override
+    public void makeSound() {
+        super.makeSound(); // Извиква оригиналния метод от Animal
+        System.out.println("Кучето лае: Бау-бау!");
+    }
 }
 ```
 
-```java
-class Dog extends Animal { // Subclass (child)
-  public void animalSound() {
-    super.animalSound(); // Call the superclass method
-    System.out.println("The dog says: bow wow");
-  }
-}
-```
-
-```java
-public class Main {
-  public static void main(String args[]) {
-    Animal myDog = new Dog(); // Create a Dog object
-    myDog.animalSound(); // Call the method on the Dog object
-  }
-}
-```
+### Важни правила:
+*   `this()` и `super()` (като извиквания на конструктори) не могат да присъстват едновременно в един и същ конструктор, тъй като и двете изискват да бъдат на първия ред.
+*   Използването на `super` е задължително, когато родителският клас няма конструктор по подразбиране (без параметри).
