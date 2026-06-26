@@ -30,11 +30,11 @@ class Demo{
 }
 ```
 
-Интерфейсът може да има само абстрактни методи, не може да има конкретни методи
+Интерфейсът в повечето случаи може да има само абстрактни методи, не може да има конкретни методи (изключват се дефолтните реализирани методи)
 
 ```
 interface Example1{
-   public abstract void display1();
+   void display1();
 }
 class Example2 implements Example1{
    public void display1(){
