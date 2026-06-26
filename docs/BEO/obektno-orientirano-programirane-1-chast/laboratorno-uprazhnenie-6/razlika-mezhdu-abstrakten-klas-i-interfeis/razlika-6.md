@@ -34,7 +34,7 @@ class Demo{
 }
 ```
 
-Интерфейсът може да има само public static final (константна) променлива
+Интерфейсът може да има само public static final (константно) поле
 
 ```
 interface Example1{
