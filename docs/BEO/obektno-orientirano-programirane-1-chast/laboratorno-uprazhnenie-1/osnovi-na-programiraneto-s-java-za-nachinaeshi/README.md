@@ -75,7 +75,8 @@ Java Development Kit (JDK) представлява комплект от инс
 
 *Процес на компилация и изпълнение*
 
-<img width="346" height="296" alt="image" src="https://github.com/user-attachments/assets/59a0c732-d16e-4a1a-920a-8b03fdd27be7" />
+<img width="144" height="345" alt="image" src="https://github.com/user-attachments/assets/c2ff6642-2a74-433c-9dd9-e176ca1ec23c" />
+
 
 
 *Компоненти на Java платформата*
