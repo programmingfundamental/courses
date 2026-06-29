@@ -3,97 +3,148 @@ layout: default
 title: Оператор Break
 parent: Лабораторно упражнение 1
 grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 12
+nav_order: 9
 ---
-# Break
 
-Прекратява действието на оператора, който се изпълнява в момента:
+# Оператори за управление на изпълнението
 
-### Пример за break в while-loop
+Операторите *break*, *continue* и *return* управляват начина, по който се изпълнява програмата. Те могат да прекратят изпълнението на цикъл или метод, както и да пропуснат текущата итерация на цикъл.
+
+### Оператор break
+
+Операторът *break* прекратява изпълнението на най-вътрешния цикъл (for, while или do-while) или оператор switch, в който се намира, след което изпълнението продължава с първата инструкция след него.
+
+Синтаксис:
 
 ```
-public class BreakExample1 {
-   public static void main(String[] args){
-      int num =0;
-      while(num<=100)
-      {
-          System.out.println("Value of variable is: "+num);
-          if (num==2)
-          {
-             break;
-          }
-          num++;
-      }
-      System.out.println("Out of while-loop");
-  }
+break;
+```
+
+Пример с оператор for:
+
+```
+for (int i = 1; i <= 10; i++) {
+
+    if (i == 5) {
+        break;
+    }
+
+    System.out.println(i);
 }
 ```
 
-**Изход:**
+Резултат:
 
 ```
-Value of variable is: 0
-Value of variable is: 1
-Value of variable is: 2
-Out of while-loop
+1
+2
+3
+4
 ```
 
-### Пример за break във for-loop
+При достигане на стойност 5 операторът *break* прекратява изпълнението на цикъла.
+
+Пример със switch:
+
 
 ```
-public class BreakExample2 {
+int day = 2;
 
-public static void main(String[] args){
-	int var;
-	for (var =100; var>=10; var --)
-	{
-	    System.out.println("var: "+var);
-	    if (var==99)
-	    {
-	         break;
-	    }
-	 }
-	 System.out.println("Out of for-loop");
-   }
+switch (day) {
+
+    case 1:
+        System.out.println("Monday");
+        break;
+    case 2:
+        System.out.println("Tuesday");
+        break;
+    default:
+        System.out.println("Unknown");
+}
+```
+В този случай *break* предотвратява преминаването към следващия case.
+
+
+### Оператор continue
+
+Операторът *continue* прекратява изпълнението на текущата итерация на цикъла и преминава към следващата.
+
+Синтаксис:
+
+```
+continue;
+```
+
+Пример:
+
+```
+for (int i = 1; i <= 5; i++) {
+
+    if (i == 3) {
+        continue;
+    }
+
+    System.out.println(i);
 }
 ```
 
-**Output:**
+Резултат:
 
 ```
-var: 100
-var: 99
-Out of for-loop
+1
+2
+4
+5
 ```
 
-### Пример за break в switch-case
+При стойност 3 операторът *continue* пропуска останалите инструкции в текущата итерация и цикълът продължава със следващата.
+
+### Оператор return
+
+Операторът *return* прекратява изпълнението на текущия метод и връща управлението към мястото, откъдето методът е бил извикан.
+
+Ако методът връща стойност, операторът *return* трябва да върне резултат от съответния тип. При методи с тип void операторът *return* може да бъде използван само за преждевременно прекратяване на изпълнението.
+
+Синтаксис:
 
 ```
-public class BreakExample3 {
+return;
 
-   public static void main(String[] args){
-	int num=2;
-	      
-	switch (num)
-	{
-	    case 1:
-	       System.out.println("Case 1 ");
-	       break;
-	    case 2:
-	       System.out.println("Case 2 ");
-	       break;
-	    case 3:
-	       System.out.println("Case 3 ");
-	       break;
-	    default:
-	       System.out.println("Default ");
-	}
-   }
+// или
+
+return стойност;
+```
+
+Пример при метод с тип void:
+
+```
+public static void printNumber(int number) {
+
+    if (number < 0) {
+        return;
+    }
+
+    System.out.println(number);
 }
 ```
+Ако параметърът е отрицателен, методът приключва незабавно.
 
-**Изход:**
+Пример при метод, който връща стойност:
 
 ```
-Case 2
+public static int square(int number) {
+    return number * number;
+}
 ```
+Операторът *return* връща резултата от изчислението към извикващия метод.
+
+**Сравнение**
+
+| Оператор | Предназначение 															|
+|----------|----------------------------------------------------------------------------|
+| break    | Прекратява изпълнението на цикъл или switch 								|
+| continue | Пропуска текущата итерация на цикъл и преминава към следващата 			|
+| return   | Прекратява изпълнението на текущия метод и при необходимост връща стойност |
+
+
+
