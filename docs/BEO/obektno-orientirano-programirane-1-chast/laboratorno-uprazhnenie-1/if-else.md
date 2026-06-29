@@ -6,179 +6,171 @@ grand_parent: Обектно-ориентирано програмиране - 1
 nav_order: 7
 ---
 
-# Условен оператор If
+# Условни оператори
 
-### Твърдение If
+Условните оператори позволяват изпълнението на различни части от програмата в зависимост от резултата на логически израз. В Java основните условни конструкции са:
+* if
+* if-else
+* if-else-if
+* switch
 
-Твърдението if се състои от условие, последвано от операции или набор от операции, както е показано по-долу:
+### Оператор If
+
+Операторът if изпълнява даден блок код само ако зададеното условие има стойност *true*:
 
 ```
-if(condition){
-  Statement(s);
+if (условие){
+  // инструкции
 }
 ```
 
-Операторите се изпълняват само когато даденото условие е удовлетворено. Ако условието не е удовлетворено, операторите в тялото на израза се игнорират.\
-![if statement flow diagram](https://beginnersbook.com/wp-content/uploads/2017/08/if\_statement\_flow\_diagram.jpg)
-
-#### Пример
-
 ```
-public class IfStatementExample {
+int number = 70;
 
-   public static void main(String[] args){
-      int num=70;
-      if( num < 100 ){
-	  /* This println statement will only execute,
-	   * if the above condition is true
-	   */
-	  System.out.println("number is less than 100");
-      }
-   }
+if (number < 100) {
+	System.out.println("Числото е по-малко от 100");
 }
 ```
 
-**Изход:**
+В примера условието е изпълнено, поради което инструкциите в тялото на условния оператор се изпълняват.
+
+### Оператор if-else
+
+Операторът *if-else* се използва, когато трябва да бъде избрана една от две възможности.
+
+Синтаксис:
 
 ```
-number is less than 100
-```
-
-Вложен израз на if в Java
-
-Когато има оператор if в друг оператор if, той се нарича вложен оператор if. Структурата на вложения if изглежда по следния начин:
-
-```
-if(condition_1) {
-   Statement1(s);
-
-   if(condition_2) {
-      Statement2(s);
-   }
+if (условие){
+  // инструкции при true
+} else {
+  // инструкции при false
 }
 ```
 
-#### Пример:
+Пример:
 
 ```
-public class NestedIfExample {
+int number = 120;
 
-   public static void main(String[] args){
-        int num=70;
-	if( num < 100 ){ 
-           System.out.println("number is less than 100"); 
-           if(num > 50){
-	      System.out.println("number is greater than 50");
-	   }
-	}
-   }
+if (number < 100) {
+	System.out.println("Числото е по-малко от 100");
+} else {
+	System.out.println("Числото е по-голямо или равно на 100");
 }
 ```
 
-**Изход:**
+При изпълнено условие се изпълнява първият блок инструкции. В противен случай се изпълнява блокът *else*.
+
+### Оператор if-else-if
+
+Конструкцията *if-else-if* се използва, когато трябва последователно да бъдат проверени няколко условия.
+
+Синтаксис:
 
 ```
-number is less than 100
-number is greater than 50
-```
+if (условие1) {
 
-### If else в Java
+}
+else if (условие2) {
 
-```
-if(condition) {
-   Statement(s);
+}
+else if (условие3) {
+
 }
 else {
-   Statement(s);
+
 }
 ```
 
-Блокът „if“ ще се изпълни ако условието е удовлетворено, а блока „else“ ще се изпълни само при неудовлетворено условие.\
-![If else flow diagram](https://beginnersbook.com/wp-content/uploads/2017/08/If\_else\_flow\_diagram.jpg)
+Условията се проверяват последователно. След изпълнение на първото удовлетворено условие останалите проверки не се извършват.
 
-#### Пример:
+
+Пример:
 
 ```
-public class IfElseExample {
+int number = 1234;
 
-   public static void main(String[] args){
-     int num=120;
-     if( num < 50 ){
-	System.out.println("num is less than 50");
-     }
-     else {
-	System.out.println("num is greater than or equal 50");
-     }
-   }
+if (number < 100) {
+    System.out.println("Двуцифрено число");
 }
-```
-
-**Изход:**
-
-```
-num is greater than or equal 50
-```
-
-### if-else-if в Java
-
-if-else-if се използва когато трябва да проверим множество условия:
-
-```
-if(condition_1) {
-   /*if condition_1 is true execute this*/
-   statement(s);
+else if (number < 1000) {
+    System.out.println("Трицифрено число");
 }
-else if(condition_2) {
-   /* execute this if condition_1 is not met and
-    * condition_2 is met
-    */
-   statement(s);
+else if (number < 10000) {
+    System.out.println("Четирицифрено число");
 }
-else if(condition_3) {
-   /* execute this if condition_1 & condition_2 are
-    * not met and condition_3 is met
-    */
-   statement(s);
-}
-.
-.
-.
 else {
-   /* if none of the condition is true
-    * then these statements gets executed
-    */
-   statement(s);
+    System.out.println("Числото съдържа повече от четири цифри.");
 }
 ```
 
-#### Пример:
+### Вложени условни оператори
+
+Възможно е в тялото на един оператор *if* да бъде разположен друг такъв оператор. Подобна конструкция се нарича **вложен условен оператор**.
+
+Пример:
 
 ```
-public class IfElseIfExample {
+int number = 70;
 
-   public static void main(String[] args){
-	int num=1234;
-	if(num <100 && num>=1) {
-	  System.out.println("Its a two digit number");
-	}
-	else if(num <1000 && num>=100) {
-	  System.out.println("Its a three digit number");
-	}
-	else if(num <10000 && num>=1000) {
-	  System.out.println("Its a four digit number");
-	}
-	else if(num <100000 && num>=10000) {
-	  System.out.println("Its a five digit number");			
-	}
-	else {
-	  System.out.println("number is not between 1 & 99999");			
-	}
-   }
+if (number < 100) {
+    System.out.println("Числото е по-малко от 100.");
+
+    if (number > 50) {
+        System.out.println("Числото е по-голямо от 50.");
+    }
 }
 ```
 
-**Изход:**
+### Оператор switch
+
+Операторът switch се използва, когато изборът трябва да бъде направен между множество възможности въз основа на стойността на един израз.
+
+Синтаксис:
 
 ```
-Its a four digit number
+switch (израз) {
+
+    case стойност1:
+        инструкции;
+
+    case стойност2:
+        инструкции;
+
+    ...
+
+    default:
+        инструкции;
+}
 ```
+
+Пример:
+
+```
+int number = 2;
+
+switch (number) {
+
+    case 1:
+        System.out.println("Case 1");
+
+    case 2:
+        System.out.println("Case 2");
+
+    case 3:
+        System.out.println("Case 3");
+
+    default:
+        System.out.println("Default");
+}
+```
+
+Резултат:
+
+```
+Case 2
+Case 3
+Default
+```
+
