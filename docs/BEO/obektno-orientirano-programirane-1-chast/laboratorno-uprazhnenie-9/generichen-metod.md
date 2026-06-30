@@ -3,56 +3,90 @@ layout: default
 title: Генеричен метод
 parent: Лабораторно упражнение 9
 grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 1
+nav_order: 2
 ---
 # Генеричен метод
 
-Докато параметрите на типа при генеричния клас принадлежат на целия клас, генеричният метод декларира свои собствени параметри на типа, които са валидни само в рамките на метода.
+Генеричният метод декларира собствен параметър на типа, който е валиден само в рамките на метода.
 
-Генеричният метод е метод, който декларира един или повече параметри на типа. Това му позволява да работи с обекти от различни типове, като същевременно осигурява проверка на типовете по време на компилация.
-
-При извикване на метода компилаторът определя конкретния тип въз основа на подадените аргументи. Това позволя един и същ метод да бъде използван от различни типове данни, без необходимост от създаване на множество версии на метода или извършване на изрични преобразувания на типовете (casting):
+Параметърът на типа се записва преди типа на връщания резултат.
 
 ```java
-class Test {
-	// A Generic method example
-	static <T> void genericDisplay(T element)
-	{
-		System.out.println(element.getClass().getName() + " = " + element);
-	}
-}
+public class Printer {
 
-	// Driver method
-	public static void main(String[] args)
-	{
-		// Calling generic method with Integer argument
-		Test.genericDisplay(11);
-
-		// Calling generic method with String argument
-		Test.genericDisplay("TU-Varna");
-
-		// Calling generic method with double argument
-		Test.genericDisplay(1.0);
-	}
+    public static <T> void print(T value) {
+        System.out.println(value);
+    }
 }
 
 ```
-
 
 Изпълнение:
-```
-java.lang.Integer = 11
-
-java.lang.String = TU-Varna
-
-java.lang.Double = 1.0
+```java
+Printer.print("Java");
+Printer.print(100);
+Printer.print(3.14);
 ```
 
-Основното предназначение на генеричните методи е да повишат повторното използване на кода и да осигурят типова безопасност, като същевременно намалят необходимостта от дублиране на логика за различни типове данни.
+При всяко извикване компилаторът определя типа въз основа на подадения аргумент.
 
-Основни предимства от използване на генерични методи:
-- намаляване на дублирането на кода;
-- осигуряване на проверка на типовете по време на компилация;
-- елиминиране на голяма част от необходимостта от casting;
-- възможно е тяхното използване с различни типове данни, без реализацията да търпи промени.
+# Генеричен интерфейс
+
+Генеричният интерфейс е интерфейс, който декларира параметър на типа. Това позволява различни реализации да работят с различни типове данни.
+
+```java
+interface Repository<T> {
+
+    void save(T item);
+
+    T findById(int id);
+}
+```
+
+Примерна реализация:
+
+```java
+public class StudentRepository implements Repository<Student> {
+
+    @Override
+    public void save(Student item) {
+        System.out.println("Saving student: " + item.getName());
+    }
+
+    @Override
+    public Student findById(int id) {
+        return new Student("Ivan", id);
+    }
+}
+```
+
+Примерен клас:
+
+```java
+public class Student {
+
+    private String name;
+    private int facultyNumber;
+
+    public Student(String name, int facultyNumber) {
+        this.name = name;
+        this.facultyNumber = facultyNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getFacultyNumber() {
+        return facultyNumber;
+    }
+}
+```
+
+Генеричните интерфейси се използват често при работа с колекции, хранилища на данни, услуги и други структури, които трябва да работят с различни типове обекти.
+
+
+
+
+
 
