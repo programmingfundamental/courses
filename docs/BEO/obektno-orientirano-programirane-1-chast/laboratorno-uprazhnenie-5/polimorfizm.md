@@ -24,17 +24,17 @@ nav_order: 1
 Промяната единствено на типа на връщаната стойност не е достатъчна за претоварване.
 
 ```
-class Calculator {
+public class Calculator {
 
-    int sum(int a, int b) {
+    public int sum(int a, int b) {
         return a + b;
     }
 
-    int sum(int a, int b, int c) {
+    public int sum(int a, int b, int c) {
         return a + b + c;
     }
 
-    double sum(double a, double b) {
+    public double sum(double a, double b) {
         return a + b;
     }
 }
@@ -48,22 +48,22 @@ class Calculator {
 Това позволява създаването на обекти по различни начини в зависимост от наличната информация.
 
 ```
-class Student {
+public class Student {
 
-    String name;
-    int facultyNumber;
+    private String name;
+    private int facultyNumber;
 
-    Student() {
+    public Student() {
         name = "Unknown";
         facultyNumber = 0;
     }
 
-    Student(String name) {
+    public Student(String name) {
         this.name = name;
         facultyNumber = 0;
     }
 
-    Student(String name, int facultyNumber) {
+    public Student(String name, int facultyNumber) {
         this.name = name;
         this.facultyNumber = facultyNumber;
     }
@@ -89,23 +89,23 @@ class Student {
 Добра практика е използването на анотацията @Override, която позволява на компилатора да провери дали методът е предефиниран коректно.
 
 ```
-class Shape {
+public class Shape {
 
-    double area() {
+    public double area() {
         return 0;
     }
 }
 
-class Circle extends Shape {
+public class Circle extends Shape {
 
-    double radius;
+    private double radius;
 
-    Circle(double radius) {
+    public Circle(double radius) {
         this.radius = radius;
     }
 
     @Override
-    double area() {
+    public double area() {
         return Math.PI * radius * radius;
     }
 }
