@@ -33,23 +33,25 @@ nav_order: 2
 
 ```
 //абстрактен клас
-abstract class Shape {
+public abstract class Shape {
 
-    abstract double area();
+    // attributes, constructor, methods
+
+    public abstract double area();
 
 }
 
 //Наследник на класа Shape
-class Circle extends Shape {
+public class Circle extends Shape {
 
-    double radius;
+    private double radius;
 
-    Circle(double radius) {
+   public Circle(double radius) {
         this.radius = radius;
     }
 
     @Override
-    double area() {
+    public double area() {
         return Math.PI * radius * radius;
     }
 }
