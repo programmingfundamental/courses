@@ -3,64 +3,53 @@ layout: default
 title: Генериците работят само с референтни типове
 parent: Лабораторно упражнение 9
 grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 3
+nav_order: 4
 ---
 
 # Генериците работят само с референтни типове
 
-Когато се създава инстанция на генеричен тип, аргументът, предаден на параметъра на типа, трябва да бъде референтен тип. Не е възможно използването на примитивни типове данни като **int** и **char.**
+Като аргументи на типа могат да бъдат използвани само референтни типове. Не е възможно директно използване на примитивни типове.
 
 Пример:
 ```java
-Test<int> obj = new Test<int>(20); 
+Storage<int> storage = new Storage<>(); // грешка
 ```
 
-Компилационна грешка:
-```
-Type argument cannot be of a primitive type
+Вместо това се използват съответните обгръщащи класове:
+```java
+Storage<Integer> storage = new Storage<>();
 ```
 
-Горният ред ще доведе до грешка по време на компилиране, която може да бъде разрешена с помощта на wrappers за капсулиране на примитивен тип.
+Масивите от примитивни типове обаче са референтни типове и могат да бъдат използвани:
+```java
+Storage<int[]> storage = new Storage<>();
+```
 
-Но масивите от примитивни типове могат да бъдат предадени на параметъра тип, тъй като масивите са референтни типове.
+# Типова безопасност
+
+Генериците осигуряват проверка на типовете още по време на компилация.
 
 ```java
-ArrayList<int[]> a = new ArrayList<>();
+Storage<Integer> storage = new Storage<>();
+
+storage.setValue(10);
+// storage.setValue("Java"); // компилационна грешка
 ```
+Така грешките се откриват преди изпълнението на програмата.
 
+# Raw типове
 
-Пример:
+Raw тип се получава, когато генеричен клас или интерфейс се използва без задаване на параметър на типа.
+
 ```java
-class Test<T> {
-	// An object of type T is declared
-	T obj;
-	Test(T obj) { this.obj = obj; } // constructor
-	public T getObject() { return this.obj; }
-}
-
-// Driver class to test above
-class Main {
-	public static void main(String[] args)
-	{
-		// instance of Integer type
-		Test<Integer> iObj = new Test<Integer>(15);
-		System.out.println(iObj.getObject());
-
-		// instance of String type
-		Test<String> sObj = new Test<String>("TU-Varna");
-		System.out.println(sObj.getObject());
-		iObj = sObj; // This results an error
-	}
-}
-
+Storage rawStorage = new Storage();
 ```
+Този запис е позволен основно за съвместимост със стар код, написан преди въвеждането на генериците в Java. Използването на raw типове не е препоръчително, защото заобикаля проверката на типовете.
 
+```java
+Storage<String> storage = new Storage<>();
 
-Компилационна грешка:
+Storage rawStorage = storage;
+rawStorage.setValue(100); // warning
 ```
-Required type: Test<Integer>
-Provided: Test<String>
-```
-
-
-Въпреки че iObj и sObj са от тип Test, те са препратки към различни типове, тъй като техните параметри на типа се различават. По този начин генериците добавят безопасност на типа и предотвратяват грешки.
+Raw типовете могат да доведат до грешки по време на изпълнение, затова трябва да се избягват.
