@@ -40,3 +40,8 @@ nav_order: 2
 
 Няколко референции могат да сочат към един и същ обект.
 
+### Връзка между понятията
+
+<img width="259" height="321" alt="image" src="https://github.com/user-attachments/assets/03f4777f-c8d7-44db-8dee-53bac10fab99" />
+
+
