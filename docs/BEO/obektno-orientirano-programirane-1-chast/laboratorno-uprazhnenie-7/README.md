@@ -24,7 +24,7 @@ permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhneni
 
 Пример:
 
-```
+```java
 String first = "Java";
 String second = first;
 
@@ -35,7 +35,7 @@ System.out.println(second);
 ```
 Резултат:
 
-```
+```java
 Java Programming
 Java
 ```
@@ -50,20 +50,20 @@ Java
 
 **Чрез литерал**
 
-```
+```java
 String language = "Java";
 ```
 
 **Чрез друг символен низ**
 
-```
+```java
 String first = "Java";
 String second = first;
 ```
 
 **Чрез резултат от израз**
 
-```
+```java
 String name = "Ivan";
 String message = "Hello, " + name + "!";
 ```
@@ -73,7 +73,7 @@ String message = "Hello, " + name + "!";
 
 **Сравнение**
 
-```
+```java
 equals()
 
 equalsIgnoreCase()
@@ -84,7 +84,7 @@ compareToIgnoreCase()
 ```
 
 Пример:
-```
+```java
 String first = "Java";
 String second = "JAVA";
 
@@ -102,7 +102,7 @@ System.out.println(first.equalsIgnoreCase(second));
 
 Пример:
 
-```
+```java
 String text = "Introduction to Java";
 
 System.out.println(text.contains("Java"));
@@ -113,7 +113,7 @@ System.out.println(text.endsWith("Java"));
 
 **Извличане**
 
-```
+```java
 charAt()
 
 substring()
@@ -121,7 +121,7 @@ substring()
 
 Пример:
 
-```
+```java
 String text = "Introduction";
 
 System.out.println(text.charAt(0));
@@ -131,7 +131,7 @@ System.out.println(text.substring(5, 9));
 
 **Замяна и промяна**
 
-```
+```java
 replace()
 
 toUpperCase()
@@ -147,7 +147,7 @@ isBlank()
 
 Пример:
 
-```
+```java
 String text = " Java ";
 
 System.out.println(text.trim());
@@ -157,13 +157,13 @@ System.out.println(text.toLowerCase());
 
 **Разделяне**
 
-```
+```java
 split()
 ```
 
 Пример:
 
-```
+```java
 String list = "dog,cat,lion";
 
 String[] animals = list.split(",");
@@ -176,7 +176,7 @@ String[] animals = list.split(",");
 * оператора +=;
 * метода concat().
 
-```
+```java
 String first = "Hello";
 String second = " Java";
 
@@ -198,6 +198,6 @@ String result = first + second;
 
 Пример:
 
-```
+```java
 String text = "Book \"Java\"";
 ```
