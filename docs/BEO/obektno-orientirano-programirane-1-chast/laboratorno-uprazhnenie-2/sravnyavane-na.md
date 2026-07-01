@@ -12,7 +12,7 @@ nav_order: 7
 
 
 Пример
-```
+```java
 public class Application {
     public static void main(String args[]) {
          Integer x = 400, y = 400;
@@ -38,7 +38,7 @@ info
 
 
 Пример
-```
+```java
 public class Application {
     public static void main(String args[]) {
          Integer x = 40, y = 40;
