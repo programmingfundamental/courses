@@ -166,7 +166,7 @@ double area = 2 * Math.PI * r; // Грешна формула за лице на
 
 При стартиране на Java програма е възможно към метода main да бъдат подадени аргументи. Те се записват в полето Program arguments в конфигурацията за изпълнение.
 
-```
+```java
 public static void main(String[] args) {
     System.out.println(args[0]);
 }
@@ -184,7 +184,7 @@ Java
 Ivan 12345
 ```
 
-```
+```java
 System.out.println(args[0]); // Ivan
 System.out.println(args[1]); // 12345
 ```
