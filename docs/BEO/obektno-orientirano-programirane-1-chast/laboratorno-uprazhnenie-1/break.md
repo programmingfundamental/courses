@@ -16,13 +16,13 @@ nav_order: 9
 
 Синтаксис:
 
-```
+```java
 break;
 ```
 
 Пример с оператор for:
 
-```
+```java
 for (int i = 1; i <= 10; i++) {
 
     if (i == 5) {
@@ -47,7 +47,7 @@ for (int i = 1; i <= 10; i++) {
 Пример със switch:
 
 
-```
+```java
 int day = 2;
 
 switch (day) {
@@ -71,13 +71,13 @@ switch (day) {
 
 Синтаксис:
 
-```
+```java
 continue;
 ```
 
 Пример:
 
-```
+```java
 for (int i = 1; i <= 5; i++) {
 
     if (i == 3) {
@@ -107,7 +107,7 @@ for (int i = 1; i <= 5; i++) {
 
 Синтаксис:
 
-```
+```java
 return;
 
 // или
@@ -117,7 +117,7 @@ return стойност;
 
 Пример при метод с тип void:
 
-```
+```java
 public static void printNumber(int number) {
 
     if (number < 0) {
@@ -131,7 +131,7 @@ public static void printNumber(int number) {
 
 Пример при метод, който връща стойност:
 
-```
+```java
 public static int square(int number) {
     return number * number;
 }
