@@ -67,7 +67,7 @@ info
 
 
 Пример
-```
+```java
 public class Application {
     public static void main (String args[]) {
           Integer x = new Integer(40), y = new Integer(40);
@@ -91,7 +91,7 @@ public class Application {
 
 
 Пример
-```
+```java
 public class Application {
     public static void main(String[] args) {
           Integer X = new Integer(10);
@@ -113,5 +113,3 @@ info
 
 
 
-
-\
