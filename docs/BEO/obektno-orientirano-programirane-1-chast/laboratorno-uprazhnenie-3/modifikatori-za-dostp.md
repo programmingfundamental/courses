@@ -69,7 +69,7 @@ nav_order: 4
 Използването на enum повишава четимостта на програмния код и предотвратява използването на невалидни стойности.
 
 Пример:
-```
+```java
 enum Status {
 
     NEW,
@@ -83,13 +83,13 @@ enum Status {
 
 **Използване**
 
-```
+```java
 Status status = Status.NEW;
 ```
 
 или
 
-```
+```java
 if (status == Status.COMPLETED) {
 
 }
@@ -105,7 +105,7 @@ if (status == Status.COMPLETED) {
 | name()           | Връща името на константата.             |
 
 Пример:
-```
+```java
 for (Status status : Status.values()) {
     System.out.println(status);
 }
@@ -138,7 +138,7 @@ for (Status status : Status.values()) {
 
 **Декларация**
 
-```
+```java
 record Student(String name,
                int facultyNumber) {
 
@@ -147,7 +147,7 @@ record Student(String name,
 
 **Създаване на обект**
 
-```
+```java
 Student student =
         new Student("Ivan", 12345);
 ```
@@ -155,7 +155,7 @@ Student student =
 **Достъп до стойностите**
 
 За всеки компонент автоматично се създава метод със същото име.
-```
+```java
 System.out.println(student.name());
 
 System.out.println(student.facultyNumber());
@@ -183,7 +183,7 @@ System.out.println(student.facultyNumber());
 * След създаване на обекта техните стойности не могат да бъдат променяни.
 
 Пример:
-```
+```java
 record Point(int x, int y) {
 
 }
