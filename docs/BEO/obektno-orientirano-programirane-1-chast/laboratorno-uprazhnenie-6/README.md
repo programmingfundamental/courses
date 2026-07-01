@@ -20,7 +20,7 @@ permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhneni
 
 Най-простият интерфейс съдържа декларации на методи без тяхната реализация.
 
-```
+```java
 public interface Printable {
 
     void print();
@@ -34,7 +34,7 @@ public interface Printable {
 
 Всички абстрактни методи на интерфейса трябва да бъдат реализирани. Ако това не бъде направено, класът също трябва да бъде деклариран като абстрактен.
 
-```
+```java
 public interface Printable {
 
     void print();
@@ -65,7 +65,7 @@ public class Document implements Printable {
 
 Абстрактният метод съдържа само декларация и трябва да бъде реализиран от всеки клас, който имплементира интерфейса.
 
-```
+```java
 public interface Drawable {
 
     void draw();
@@ -77,7 +77,7 @@ public interface Drawable {
 
 Методите с модификатор *default* имат собствена реализация и не е задължително да бъдат предефинирани.
 
-```
+```java
 public interface Printable {
 
     void print();
@@ -93,7 +93,7 @@ public interface Printable {
 
 Интерфейсите могат да съдържат и статични методи. Те принадлежат на самия интерфейс и се извикват чрез неговото име.
 
-```
+```java
 public interface Printable {
 
     static void printInfo() {
@@ -104,7 +104,7 @@ public interface Printable {
 ```
 Извикване:
 
-```
+```java
 Printable.printInfo();
 ```
 
@@ -115,7 +115,7 @@ Printable.printInfo();
 * static;
 * final.
 
-```
+```java
 public interface Constants {
 
     int MAX_SIZE = 100;
@@ -130,7 +130,7 @@ public interface Constants {
 
 При интерфейсите се използва ключовата дума extends. За разлика от класовете, един интерфейс може да наследява повече от един родителски интерфейс.
 
-```
+```java
 public interface Printable {
 
     void print();
@@ -157,7 +157,7 @@ public interface PrintableDocument extends Printable, Savable {
 
 Използват се за описание на общо поведение.
 
-```
+```java
 public interface Drawable {
 
     void draw();
@@ -169,7 +169,7 @@ public interface Drawable {
 
 Функционалният интерфейс съдържа точно един абстрактен метод. Той служи като основа за използване на ламбда изрази и функционално програмиране.
 
-```
+```java
 @FunctionalInterface
 public interface Calculator {
 
@@ -230,7 +230,7 @@ public interface Calculator {
 
 Пример:
 
-```
+```java
 public abstract class Shape {
 
     private String color;
