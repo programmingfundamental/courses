@@ -12,7 +12,7 @@ nav_order: 10
 
 Например:
 
-```
+```java
 System.out.println("This is an example");
 ```
 
@@ -25,13 +25,13 @@ System.out.println("This is an example");
 
 Методът print() извежда информация на конзолата, без да преминава на нов ред.
 
-```
+```java
 System.out.print("This is ");
 System.out.print("an example!");
 ```
 
 Резултатът е:
-```
+```java
 This is an example
 ```
 
@@ -39,13 +39,13 @@ This is an example
 
 Методът println() извежда информация на конзолата и след това преминава на нов ред.
 
-```
+```java
 System.out.println("This is ");
 System.out.println("an example!");
 ```
 
 Резултатът е:
-```
+```java
 This is
 an example
 ```
@@ -54,7 +54,7 @@ an example
 
 Методът printf() позволява форматирано извеждане на информация чрез използване на форматиращи спецификатори.
 
-```
+```java
 String name = "Ivan";
 int age = 20;
 
@@ -62,7 +62,7 @@ System.out.printf("Име: %s, възраст: %d%n", name, age);
 ```
 
 Резултатът е:
-```
+```java
 Име: Ivan, възраст: 20
 ```
 
