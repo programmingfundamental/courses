@@ -8,176 +8,176 @@ nav_order: 2
 
 # Abstract Factory
 
-Abstract Factory не използва условен блок, за да създаде обектите, вместо това използва factory клас за всеки подклас. Abstract Factory клас, връща подкласа въз основа на factory клас на входа.
+### Проблем
 
-Нека да видим прилагането на този модел при създаването на компютърни конфигурациии.
+В практиката често се налага създаването на **семейства от свързани обекти**, които трябва да бъдат използвани заедно.
 
-#### Първо ще е необходим абстрактен клас
+Например в банкова система могат да съществуват различни картови организации, като Visa и Mastercard. Всяка от тях предлага различни видове карти – например дебитни и кредитни. Необходимо е клиентският код да работи с общи интерфейси, без да зависи от конкретните реализации на картите.
 
+### Решение
+
+Шаблонът **Abstract Factory** предоставя общ интерфейс за създаване на семейства от взаимосвързани обекти.
+
+Вместо клиентът директно да създава конкретните обекти, той използва фабрика. В зависимост от избраната фабрика се създава цялото семейство продукти.
+
+Например:
+* VisaCardFactory създава Visa Debit Card и Visa Credit Card;
+* MastercardCardFactory създава Mastercard Debit Card и Mastercard Credit Card.
+
+По този начин смяната на цялото семейство продукти се свежда единствено до смяна на използваната фабрика.
+
+### Дефиниция
+
+Abstract Factory е шаблон за проектиране от групата на създаващите (Creational) шаблони, който предоставя интерфейс за създаване на семейства от взаимосвързани или зависими обекти, без да се посочват техните конкретни класове.
+
+### UML диаграма
+
+<img width="755" height="310" alt="AbstractFactory" src="https://github.com/user-attachments/assets/67b82c3d-2ceb-4082-addf-50377f0af977" />
+
+### Примерна реализация
+
+Интерфейси на продуктите:
 ```java
-public abstract class Computer {
-     
-    public abstract String getRAM();
-    public abstract String getHDD();
-    public abstract String getCPU();
-     
-    @Override
-    public String toString(){
-        return "RAM= "+this.getRAM()+", HDD="+this.getHDD()+", CPU="+this.getCPU();
-    }
-}
-```
+public interface DebitCard {
 
-Класа ще съдържа абстрактни методи за компонентите на всеки компонент
-
-#### Следващата стъпка е да създадем фактическия клас наследник на абстрактния
-
-```java
-public class DesktopComputer extends Computer {
- 
-    private String ram;
-    private String hdd;
-    private String cpu;
-     
-    public DesktopComputer(String ram, String hdd, String cpu){
-        this.ram=ram;
-        this.hdd=hdd;
-        this.cpu=cpu;
-    }
-    @Override
-    public String getRAM() {
-        return this.ram;
-    }
- 
-    @Override
-    public String getHDD() {
-        return this.hdd;
-    }
- 
-    @Override
-    public String getCPU() {
-        return this.cpu;
-    }
- 
-}
-```
-
-```java
-public class ServerComputer extends Computer {
- 
-    private String ram;
-    private String hdd;
-    private String cpu;
-     
-    public ServerComputer(String ram, String hdd, String cpu){
-        this.ram=ram;
-        this.hdd=hdd;
-        this.cpu=cpu;
-    }
-    @Override
-    public String getRAM() {
-        return this.ram;
-    }
- 
-    @Override
-    public String getHDD() {
-        return this.hdd;
-    }
- 
-    @Override
-    public String getCPU() {
-        return this.cpu;
-    }
- 
-}
-```
-
-В тези класове само имплементираме абстрактните методи от родителския клас
-
-#### Следващата стъпка е да се създадат Abstract Factory класа
-
-Abstract Factory може да бъде интерфейс или абстрактен клас
-
-```java
-public interface ComputerAbstractFactory {
-	public Computer createComputer();
-}
-```
-
-Методът createComputer връща екземпляр на супер класа Computer. Сега фабричните класове ще реализират този интерфейс и ще върнат съответния подклас.
-
-```java
-public class DesktopComputerFactory implements ComputerAbstractFactory {
-
-	private String ram;
-	private String hdd;
-	private String cpu;
-	
-	public DesktopComputerFactory(String ram, String hdd, String cpu){
-		this.ram=ram;
-		this.hdd=hdd;
-		this.cpu=cpu;
-	}
-	@Override
-	public Computer createComputer() {
-		return new DesktopComputer(ram,hdd,cpu);
-	}
+    String getCardType();
 
 }
 ```
-
 ```java
-public class ServerComputerFactory implements ComputerAbstractFactory {
+public interface CreditCard {
 
-	private String ram;
-	private String hdd;
-	private String cpu;
-	
-	public ServerComputerFactory(String ram, String hdd, String cpu){
-		this.ram=ram;
-		this.hdd=hdd;
-		this.cpu=cpu;
-	}
-	
-	@Override
-	public Computer createComputer() {
-		return new ServerComputerFactory(ram,hdd,cpu);
-	}
+    String getCardType();
 
 }
 ```
-
-#### Сега следва да се  създаде Factory клас, който ще осигури входната точка за създаване на подкласове.
-
+Конкретни продукти:
 ```java
-public class ComputerFactory {
+public class VisaDebitCard implements DebitCard {
 
-	public static Computer getComputer(ComputerAbstractFactory factory){
-		return factory.createComputer();
-	}
+    @Override
+    public String getCardType() {
+        return "Visa Debit";
+    }
+
 }
 ```
+```java
+public class VisaCreditCard implements CreditCard {
 
-Tова е клас с метод който приема аргумент и връща  обект. На този етап изпълнението трябва да стане ясно. Нека да напишем прост метод за тестване и да видим как да използваме абстрактната фабрика, за да получим инстанцията на подкласовете.
+    @Override
+    public String getCardType() {
+        return "Visa Credit";
+    }
 
+}
+```
+```java
+public class MastercardDebitCard implements DebitCard {
+
+    @Override
+    public String getCardType() {
+        return "Mastercard Debit";
+    }
+
+}
+```
+```java
+public class MastercardCreditCard implements CreditCard {
+
+    @Override
+    public String getCardType() {
+        return "Mastercard Credit";
+    }
+
+}
+```
+Абстрактна фабрика:
+```java
+public interface CardFactory {
+
+    DebitCard createDebitCard();
+
+    CreditCard createCreditCard();
+
+}
+```
+Конкретни фабрики:
+```java
+public class VisaCardFactory implements CardFactory {
+
+    @Override
+    public DebitCard createDebitCard() {
+        return new VisaDebitCard();
+    }
+
+    @Override
+    public CreditCard createCreditCard() {
+        return new VisaCreditCard();
+    }
+
+}
+```
+```java
+public class MastercardCardFactory implements CardFactory {
+
+    @Override
+    public DebitCard createDebitCard() {
+        return new MastercardDebitCard();
+    }
+
+    @Override
+    public CreditCard createCreditCard() {
+        return new MastercardCreditCard();
+    }
+
+}
+```
+Клиентски код:
 ```java
 public class Application {
 
-	public static void main(String[] args) {
-		testAbstractFactory();
-	}
+    public static void main(String[] args) {
 
-	private static void testAbstractFactory() {
-		Computer pc = ComputerFactory.getComputer(new DesktopComputerFactory("2 GB","500 GB","2.4 GHz"));
-		Computer server = ComputerFactory.getComputer(new ServerComputerFactory("16 GB","1 TB","2.9 GHz"));
-		System.out.println("AbstractFactory PC Config::"+pc);
-		System.out.println("AbstractFactory Server Config::"+server);
-	}
+        CardFactory factory = new VisaCardFactory();
+
+        DebitCard debitCard = factory.createDebitCard();
+        CreditCard creditCard = factory.createCreditCard();
+
+        System.out.println(debitCard.getCardType());
+        System.out.println(creditCard.getCardType());
+
+    }
+
 }
 ```
+При необходимост от използване на друго семейство продукти е достатъчно да бъде сменена използваната фабрика:
+```java
+CardFactory factory = new MastercardCardFactory();
+```
+Без никакви промени в останалата част на приложението.
 
-#### Предимства <a href="#abstract-factory-design-pattern-benefits" id="abstract-factory-design-pattern-benefits"></a>
+В реални приложения изборът на конкретната фабрика често се извършва чрез конфигурационен файл, потребителски избор, dependency injection или друг механизъм. След като фабриката бъде избрана, клиентският код работи единствено с нейния интерфейс.
 
-* Моделът на дизайна на Abstract Factory осигурява подход към кода за интерфейс, а не към изпълнението.
-* Моделът Abstract Factory е "фабрика на фабрики" и може лесно да бъде разширен, за да побере повече продукти, например можем да добавим още един подклас лаптоп и фабрика LaptopFactory.
-* Моделът на Abstract Factory е здрав и избягва условната логика на фабричния модел.
+### Предимства
+
+* капсулира създаването на обекти;
+* позволява лесна смяна на цяло семейство продукти;
+* клиентският код работи само с интерфейси;
+* намалява зависимостта от конкретни класове;
+* улеснява разширяването на приложението с нови семейства продукти.
+
+### Недостатъци
+
+* увеличава броя на класовете;
+* при добавяне на нов вид продукт трябва да бъдат променени всички фабрики;
+* структурата е по-сложна в сравнение с Factory Method.
+
+### Приложение
+
+Шаблонът Abstract Factory е подходящ когато:
+* се работи със семейства от взаимосвързани обекти;
+* е необходимо лесно превключване между различни реализации;
+* клиентският код не трябва да зависи от конкретните класове;
+* трябва да се гарантира, че използваните обекти принадлежат към едно и също семейство.
+
