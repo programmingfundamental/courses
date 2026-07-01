@@ -31,7 +31,7 @@ nav_order: 2
 
 Това позволява общата функционалност да бъде реализирана само веднъж в родителския клас, а специфичното поведение да бъде оставено на наследниците.
 
-```
+```java
 //абстрактен клас
 public abstract class Shape {
 
@@ -57,7 +57,7 @@ public class Circle extends Shape {
 }
 ```
 Използване:
-```
+```java
 Shape shape = new Circle(5);
 
 System.out.println(shape.area());
