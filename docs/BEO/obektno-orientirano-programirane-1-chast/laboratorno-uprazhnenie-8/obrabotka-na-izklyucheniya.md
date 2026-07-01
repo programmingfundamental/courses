@@ -96,7 +96,7 @@ Unchecked изключенията наследяват класа RuntimeExcept
 
 Ако по време на изпълнение възникне изключение, управлението се прехвърля към първия подходящ catch блок.
 
-```
+```java
 public class Example {
 
     public static void main(String[] args) {
@@ -119,7 +119,7 @@ public class Example {
 
 Един блок try може да бъде последван от няколко catch блока. Изключенията трябва да бъдат подредени **от най-конкретното към най-общото**, тъй като Java избира първия подходящ обработчик.
 
-```
+```java
 try {
 
     // код
@@ -138,7 +138,7 @@ catch (Exception ex) {
 
 След Java 7 е възможно няколко изключения да бъдат обработени в един общ блок.
 
-```
+```java
 catch (IOException | SQLException ex) {
     System.out.println(ex.getMessage());
 }
@@ -149,7 +149,7 @@ catch (IOException | SQLException ex) {
 
 Блокът *finally* съдържа код, който трябва да бъде изпълнен независимо дали е възникнало изключение. Най-често в него се освобождават използваните ресурси.
 
-```
+```java
 try {
     System.out.println("Try block");
 }
@@ -163,7 +163,7 @@ finally {
 
 Когато даден метод не обработва възникналото изключение, той може да го предаде на извикващия го метод. Това става чрез ключовата дума *throws*.
 
-```
+```java
 public static int divide(int a, int b) throws ArithmeticException {
     return a / b;
 }
@@ -174,7 +174,7 @@ public static int divide(int a, int b) throws ArithmeticException {
 
 Понякога възникват ситуации, в които програмистът сам трябва да реши кога да бъде генерирано изключение. Това става чрез ключовата дума *throw*.
 
-```
+```java
 public static int divide(int a, int b) {
     if (b == 0) {
         throw new ArithmeticException("Division by zero.");
@@ -197,7 +197,7 @@ public static int divide(int a, int b) {
 
 Собствените изключения се използват, когато е необходимо описване на специфична бизнес логика.
 
-```
+```java
 class InvalidGradeException extends Exception {
 
     public InvalidGradeException(String message) {
@@ -208,7 +208,7 @@ class InvalidGradeException extends Exception {
 
 Използване:
 
-```
+```java
 public static void validateGrade(int grade) throws InvalidGradeException {
     if (grade < 2 || grade > 6) {
         throw new InvalidGradeException("Invalid grade.");
@@ -220,7 +220,7 @@ public static void validateGrade(int grade) throws InvalidGradeException {
 
 При работа с файлове, потоци или други ресурси, те трябва да бъдат затворени след приключване на работата. След Java 7 това най-често се реализира чрез конструкцията *try-with-resources*.
 
-```
+```java
 try (BufferedReader reader = new BufferedReader(new FileReader("data.txt"))) {
     String line = reader.readLine();
     System.out.println(line);
