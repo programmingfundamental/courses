@@ -10,7 +10,7 @@ nav_order: 1
 
 Класът се дефинира чрез ключовата дума class, следвана от неговото име и тяло, оградено с фигурни скоби.
 
-```
+```java
 class Student {
 
 }
@@ -43,7 +43,7 @@ class Student {
 * други методи, реализиращи поведението на обекта.
 
 Пример:
-```
+```java
 class Student {
 
     String name;
@@ -62,7 +62,7 @@ class Student {
 
 Пример:
 
-```
+```java
 class Student {
 
     // Полета
@@ -122,7 +122,7 @@ class Student {
 
 Пример:
 
-```
+```java
 class Student {
 
     // Полета
@@ -139,7 +139,7 @@ class Student {
 
 Пример:
 
-```
+```java
 class Student {
 
     String name;
@@ -161,7 +161,7 @@ class Student {
 
 Пример:
 
-```
+```java
 class Student {
 
     String name;
@@ -192,7 +192,7 @@ class Student {
 
 Синтаксис:
 
-```
+```java
 ClassName objectName = new ClassName();
 
 // или
@@ -202,7 +202,7 @@ ClassName objectName = new ClassName();
 
 Пример:
 
-```
+```java
 class Student {
 
     String name;
@@ -242,7 +242,7 @@ public class Application {
 
 Пример:
 
-```
+```java
 class Student {
 
     String name;
@@ -264,7 +264,7 @@ class Student {
 
 Извикването трябва да бъде първата инструкция в конструктора.
 
-```
+```java
 class Student {
 
     String name;
@@ -288,7 +288,7 @@ class Student {
 
 Пример:
 
-```
+```java
 class Student {
 
     String name;
@@ -328,7 +328,7 @@ class Student {
 При промяна на стойността му промяната е видима за всички инстанции на класа.
 
 Пример:
-```
+```java
 class Student {
 
     static String university = "Technical University of Varna";
@@ -346,7 +346,7 @@ class Student {
 
 Статичните полета могат да бъдат достъпвани чрез името на класа:
 
-```
+```java
 System.out.println(Student.university);
 ```
 Макар достъпът чрез обект да е възможен, препоръчително е статичните членове да се използват чрез името на класа, тъй като принадлежат на него.
@@ -356,7 +356,7 @@ System.out.println(Student.university);
 Статичният метод принадлежи на класа и може да бъде извикан без създаване на обект.
 
 Пример:
-```
+```java
 class Calculator {
 
     static int square(int number) {
@@ -366,7 +366,7 @@ class Calculator {
 ```
 
 Извикване:
-```
+```java
 int result = Calculator.square(5);
 ```
 
@@ -386,7 +386,7 @@ int result = Calculator.square(5);
 Той се използва за инициализиране на статични полета или за извършване на действия, които трябва да бъдат изпълнени само веднъж.
 
 Синтаксис:
-```
+```java
 static {
 
 }
@@ -394,7 +394,7 @@ static {
 
 Пример:
 
-```
+```java
 class Student {
 
     static String university;
@@ -427,14 +427,14 @@ class Student {
 
 Пример:
 
-```
+```java
 final double PI = 3.141592653589793;
 
 System.out.println(PI);
 ```
 Следният код ще доведе до грешка при компилация:
 
-```
+```java
 PI = 3.14;
 ```
 
@@ -445,7 +445,7 @@ PI = 3.14;
 Съгласно общоприетите конвенции техните имена се записват с главни букви, като отделните думи се разделят със символа _.
 
 Пример:
-```
+```java
 class MathConstants {
 
     static final double PI = 3.141592653589793;
@@ -459,7 +459,7 @@ class MathConstants {
 Клас, деклариран с ключовата дума final, не може да бъде наследяван.
 
 Пример:
-```
+```java
 final class Utility {
 
 }
@@ -490,14 +490,14 @@ final class Utility {
 * **клас наследник** (subclass, child class) – класът, който наследява характеристиките на родителския клас и при необходимост добавя нови полета и методи.
 
 Синтаксис:
-```
+```java
 class ChildClass extends ParentClass {
 
 }
 ```
 
 Пример:
-```
+```java
 class Person {
 
     String name;
@@ -518,7 +518,7 @@ class Student extends Person {
 **Многостепенно наследяване**
 
 В Java е възможно изграждането на йерархия от няколко нива:
-```
+```java
 class Person {
 
 }
