@@ -12,7 +12,7 @@ permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhneni
 
 Генериците позволяват класове, интерфейси и методи да работят с различни типове данни, без да се губи типовата безопасност. Чрез тях типът на данните се подава като параметър.
 
-```
+```java
 List<String> names = new ArrayList<>();
 List<Integer> numbers = new ArrayList<>();
 ```
@@ -22,7 +22,7 @@ List<Integer> numbers = new ArrayList<>();
 
 Преди въвеждането на генериците често се е използвал типът Object, тъй като той е родителски клас на всички класове в Java.
 
-```
+```java
 public class Storage {
 
     private Object value;
@@ -41,7 +41,7 @@ public class Storage {
 * липса на проверка на типа по време на компилация;
 * необходимост от явно преобразуване на типа при извличане на стойността.
 
-```
+```java
 Storage storage = new Storage();
 
 storage.setValue("Java");
