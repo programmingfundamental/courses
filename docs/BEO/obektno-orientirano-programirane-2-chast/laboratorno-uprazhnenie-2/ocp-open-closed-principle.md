@@ -8,93 +8,80 @@ nav_order: 2
 
 # OCP - Open-Closed Principle
 
-**Както подсказва името, този принцип гласи, че софтуерните обекти трябва да бъдат отворени за разширение, но затворени за модификация.** В резултат на това, когато бизнес изискванията се променят (условието на задачата се надгради), тогава обектът може да бъде разширен, но не и модифициран.
+## Принцип „отворен за разширение, затворен за промяна“
 
-Пример:
+Принципът Open/Closed гласи, че софтуерните елементи трябва да бъдат отворени за разширение, но затворени за промяна. Това означава, че при добавяне на нова функционалност е желателно да се добавя нов код, без да се променя вече съществуващият и тестван код.
 
-```
-public class Guitar {
-    private String make;
-    private String model;
-    private int volume;
+### Проблем
 
-    //Constructors, getters & setters
-}
-```
-
-В началото този клас описва класическа китара, но след време се налага добавянето за декорация.
-
-Възможно е добавянето на поле за декорация в клас _"Китара_", но това би довело и до други промени.
-
-Вместо това е възможно разширяването на съществуващия клас _**Китара**_:
-
-```
-public class SuperCoolGuitarWithFlames extends Guitar {
-
-    private String flameColor;
- 
-    //constructor, getters + setters
-}
-```
-
-По този начин е сигурно, че досегашното приложение няма да бъде засегнато, а само ще бъде разширена функционалността.
-
-**Интерфейсите са един от начините за спазване на този принцип.**
-
-### **1.** Несъответствие
-
-**Калкулатор за събиране и изваждане.**
-
-
-```
-public interface CalculatorOperation {}
-```
-
-**Клас **_**"Добавяне**_**", който би събрал две числа и би имплементирал **_**CalculatorOperation**_**:**
+Нека имаме калкулатор, който изпълнява различни операции.
 
 ```java
+public interface CalculatorOperation {
+}
+```
+```java
 public class Addition implements CalculatorOperation {
+
     private double left;
     private double right;
-    private double result = 0.0;
+    private double result;
 
     public Addition(double left, double right) {
         this.left = left;
         this.right = right;
     }
 
-    // getters and setters
+    public double getLeft() {
+        return left;
+    }
 
+    public double getRight() {
+        return right;
+    }
+
+    public void setResult(double result) {
+        this.result = result;
+    }
+
+    public double getResult() {
+        return result;
+    }
 }
 ```
-
-Необходимо е декларирането и на клас _Изваждане_:
-
 ```java
 public class Subtraction implements CalculatorOperation {
+
     private double left;
     private double right;
-    private double result = 0.0;
+    private double result;
 
     public Subtraction(double left, double right) {
         this.left = left;
         this.right = right;
     }
 
-    // getters and setters
+    public double getLeft() {
+        return left;
+    }
+
+    public double getRight() {
+        return right;
+    }
+
+    public void setResult(double result) {
+        this.result = result;
+    }
+
+    public double getResult() {
+        return result;
+    }
 }
 ```
-
-**Клас за изпълнение на операциите:**
-
 ```java
 public class Calculator {
 
     public void calculate(CalculatorOperation operation) {
-        if (operation == null) {
-            throw new InvalidParameterException("Can not perform operation");
-        }
-
         if (operation instanceof Addition) {
             Addition addition = (Addition) operation;
             addition.setResult(addition.getLeft() + addition.getRight());
@@ -106,71 +93,118 @@ public class Calculator {
 }
 ```
 
-**Въпреки че това може да изглежда добре, това не е добър пример за OCP.** Добавянето на нови операции би довело до промяна в съществуващия метод _изчисляване_ на клас _Калкулатор_.
+Този код работи, но нарушава OCP. Ако бъде добавена нова операция, например умножение или деление, класът *Calculator* трябва да бъде променян.
 
-**Това означава, че този код не е съвместим с OCP.**
+### Решение
 
-### 2. Съвместими с OCP
-
-Горният пример може да бъде рефакторирано с цел спазване на OCP. Необходимо е методът _изчисляване_ да бъде сложен на по-абстрактно ниво.
-
-Едно възможно решение е всяка операция да бъде делегирана в съответен клас:
+Възможна е реализация, при която операцията сама да знае как да се изпълни.
 
 ```java
 public interface CalculatorOperation {
+
     void perform();
 }
 ```
-
 ```java
 public class Addition implements CalculatorOperation {
+
     private double left;
     private double right;
     private double result;
 
-    // constructor, getters and setters
+    public Addition(double left, double right) {
+        this.left = left;
+        this.right = right;
+    }
 
     @Override
     public void perform() {
         result = left + right;
     }
+
+    public double getResult() {
+        return result;
+    }
 }
 ```
-
-Добавянето на нова функционалност се свежда до създаването на нов клас, имплементиращ същия интерфейс:
-
 ```java
-public class Division implements CalculatorOperation {
+public class Subtraction implements CalculatorOperation {
+
     private double left;
     private double right;
     private double result;
 
-    // constructor, getters and setters
+    public Subtraction(double left, double right) {
+        this.left = left;
+        this.right = right;
+    }
+
     @Override
     public void perform() {
-        if (right != 0) {
-            result = left / right;
-        }
+        result = left - right;
+    }
+
+    public double getResult() {
+        return result;
     }
 }
 ```
-
-**По този начин няма да е необходимо класа **_**Калкулатор**_** да бъде модифициран при добавяне на нова операция:**
-
 ```java
 public class Calculator {
 
     public void calculate(CalculatorOperation operation) {
-        if (operation == null) {
-            throw new InvalidParameterException("Cannot perform operation");
-        }
         operation.perform();
     }
 }
 ```
+Добавянето на нова операция вече не изисква промяна в класа Calculator.
 
-Така класът е _затворен_ за модификация, но _отворен_ за разширение.
+```java
+public class Division implements CalculatorOperation {
 
-### 3. Заключение
+    private double left;
+    private double right;
+    private double result;
 
-Принципа на отворени за разширение и затворени за модификация обекти подобрява работата върху проектите, като намалява грешките, които могат да възникнат при модифициране на класове и улеснява тестването като капсулира вече съществуващата логика и предоставя възможност за концентрация върху новата логика на приложението.
+    public Division(double left, double right) {
+        this.left = left;
+        this.right = right;
+    }
+
+    @Override
+    public void perform() {
+        if (right == 0) {
+            throw new ArithmeticException("Division by zero.");
+        }
+
+        result = left / right;
+    }
+
+    public double getResult() {
+        return result;
+    }
+}
+```
+
+### Предимства
+
+Прилагането на OCP води до:
+* по-лесно добавяне на нова функционалност;
+* по-малък риск от грешки в съществуващ код;
+* по-добра разширяемост;
+* по-лесно тестване на отделните реализации.
+
+### Недостатъци / трудности
+
+OCP често изисква използване на абстракции, интерфейси и допълнителни класове. При малки задачи това може да направи кода по-сложен от необходимото.
+
+### Приложение
+
+OCP се използва при:
+* добавяне на нови операции;
+* работа с различни стратегии;
+* плъгини и разширения;
+* шаблони като Strategy, Factory Method, Abstract Factory, Decorator.
+
+
+
