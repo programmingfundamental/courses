@@ -19,7 +19,7 @@ nav_order: 3
 * извършване на проверки (валидация) при промяна на стойностите.
 
 Пример:
-```
+```java
 class Student {
 
     private String name;
