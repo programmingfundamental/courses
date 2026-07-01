@@ -8,14 +8,29 @@ nav_order: 1
 
 # Builder
 
-Шаблоните за проектиране представляват решения на често срещани проблеми.
+### Проблем
 
-Шаблонът Builder спада към така наречените creational шаблони, като той предоставя възможност за създаване на сложни обекти без използването на много и различни експлицитни конструктори.
+При разработването на софтуер често се налага създаването на обекти, които съдържат голям брой свойства. Обикновено само част от тях са задължителни, а останалите имат незадължителен характер.
 
-Нека разгледаме следния пример:
+Използването на конструктор с много параметри затруднява четимостта на кода и увеличава вероятността от грешки при подаване на аргументите. От друга страна, създаването на множество претоварени конструктори води до усложняване на реализацията и затруднява нейното поддържане.
 
-```
+### Решение
+
+Шаблонът **Builder** отделя процеса по създаване на обекта от неговото представяне. При реализацията с вътрешен статичен клас помощният клас Builder съдържа необходимите свойства и предоставя методи за тяхното последователно задаване. Задължителните параметри се подават чрез конструктора на Builder класа, а незадължителните се задават чрез каскадно извикване на методи. След приключване на конфигурирането методът *build()* създава крайния обект.
+
+### Дефиниция
+
+Builder е шаблон за проектиране от групата на създаващите (Creational) шаблони, който разделя процеса на конструиране на сложен обект от неговото представяне и позволява един и същ процес на създаване да бъде използван за изграждане на различни конфигурации на обекта.
+
+### UML диаграма
+
+<img width="383" height="560" alt="Builder" src="https://github.com/user-attachments/assets/dd7615b4-4986-40df-8796-f0230c14ba04" />
+
+### Примерна реализация
+
+```java
 public class Book {
+
     private String isbn;
     private String title;
     private String author;
@@ -24,104 +39,20 @@ public class Book {
     private String annotation;
     private int pages;
     private double price;
-    public Book(String isbn, String title, String author, int publishingYear, String genre, String annotation, int pages, double price) {
-        this.isbn = isbn;
-        this.title = title;
-        this.author = author;
-        this.publishingYear = publishingYear;
-        this.genre = genre;
-        this.annotation = annotation;
-        this.pages = pages;
-        this.price = price;
-    }
-    // getters
-}
-```
 
-Нека обаче приемем, че само първите три атрибута са задължителни (ISBN, заглавие и автор). Това означава, че всеки път, когато създаваме обекти от този клас, ще предаваме нулева стойност ако даден параметър липсва:
+    private Book(Builder builder) {
+        this.isbn = builder.isbn;
+        this.title = builder.title;
+        this.author = builder.author;
+        this.publishingYear = builder.publishingYear;
+        this.genre = builder.genre;
+        this.annotation = builder.annotation;
+        this.pages = builder.pages;
+        this.price = builder.price;
+    }
 
-```
-public class Main {
-    public static void main(String[] args) {
-        Book bookOne = new Book("123456", "East of Eden", "John Steinbeck", 1999,
-                "classics",null, 512, 30.85);
-        Book bookTwo = new Book("147147", "The Great Gatsby", "Francis Scott Fitzgerald", 0,
-                "classics", null, 0, 28.75);
-    }
-}
-```
-
-Един от възможните подходи за избягване на предаване на нулеви параметри е използването на множество експлицитни конструктори:
-
-```
-public class Book {
-    private String isbn;
-    private String title;
-    private String author;
-    private int publishingYear;
-    private String genre;
-    private String annotation;
-    private int pages;
-    private double price;
-    public Book(String isbn, String title, String author) {
-        this.isbn = isbn;
-        this.title = title;
-        this.author = author;
-    }
-    public Book(String isbn, String title, String author, int publishingYear) {
-        this.isbn = isbn;
-        this.title = title;
-        this.author = author;
-        this.publishingYear = publishingYear;
-    }
-    public Book(String isbn, String title, String author, String genre) {
-        this.isbn = isbn;
-        this.title = title;
-        this.author = author;
-        this.genre = genre;
-    }
-    public Book(String isbn, String title, String author, int publishingYear, String genre) {
-        this.isbn = isbn;
-        this.title = title;
-        this.author = author;
-        this.publishingYear = publishingYear;
-        this.genre = genre;
-    }
-    public Book(String isbn, String title, String author, String genre, String annotation) {
-        this.isbn = isbn;
-        this.title = title;
-        this.author = author;
-        this.genre = genre;
-        this.annotation = annotation;
-    }
-    public Book(String isbn, String title, String author, int publishingYear, String annotation, int pages) {
-        this.isbn = isbn;
-        this.title = title;
-        this.author = author;
-        this.publishingYear = publishingYear;
-        this.annotation = annotation;
-        this.pages = pages;
-    }
-    public Book(String isbn, String title, String author, double price) {
-        this.isbn = isbn;
-        this.title = title;
-        this.author = author;
-        this.price = price;
-    }
-    // getters
-}
-```
-
-Тук обаче не трябва да се забравя, че не може да съществуват конструктори с еднакви по брой и типове параметри – така например, не може да има конструктор по ISBN, заглавие, автор и година на издаване, и едновременно с това конструктор по ISBN, заглавие, автор и брой страници на книгата.
-
-### _Използване на Builder_
-
-Как би изглеждал класът Book с използване на шаблона Builder:
-
-```
-// Some code
-public class Book {
     public static class Builder {
+
         private String isbn;
         private String title;
         private String author;
@@ -130,68 +61,88 @@ public class Book {
         private String annotation;
         private int pages;
         private double price;
-        public Builder (String isbn, String title, String author) {
+
+        public Builder(String isbn, String title, String author) {
             this.isbn = isbn;
             this.title = title;
             this.author = author;
         }
+
         public Builder withPublishingYear(int publishingYear) {
             this.publishingYear = publishingYear;
             return this;
         }
+
         public Builder withGenre(String genre) {
             this.genre = genre;
             return this;
         }
+
         public Builder withAnnotation(String annotation) {
             this.annotation = annotation;
             return this;
         }
+
         public Builder withPages(int pages) {
             this.pages = pages;
             return this;
         }
+
         public Builder withPrice(double price) {
             this.price = price;
             return this;
         }
+
         public Book build() {
             return new Book(this);
         }
     }
-    private Book(Builder builder) {
-        // асоциация на свойствата
-    }
-    // getters, setters, toString, etc.
+
+    // getters
 }
 ```
+Използването на шаблона изглежда по следния начин:
+```java
+public class Application {
 
-Необходимо е да се обърне внимание, че конструкторът на класа Book е частен, т.е. е невъзможно създаването на обект чрез неговото директно извикване. Създаването на обектите задължително минава през извикването на Builder.
-
-Тогава създаването на двата обекта от примера по-горе ще изглежда по следния начин:
-
-```
-// Some code
-public class Main {
     public static void main(String[] args) {
+
         Book bookOne = new Book.Builder("123456", "East of Eden", "John Steinbeck")
-                .withGenre("classics")
+                .withGenre("Classics")
                 .withPublishingYear(1999)
                 .withPages(512)
                 .withPrice(30.85)
                 .build();
+
         Book bookTwo = new Book.Builder("147147", "The Great Gatsby", "Francis Scott Fitzgerald")
                 .withPrice(28.75)
                 .build();
     }
 }
 ```
+Конструкторът на класа Book е private, което не позволява директното създаване на обекти. Единственият начин за създаване на инстанции е чрез вътрешния клас Builder, който последователно задава необходимите стойности и накрая извиква метода build().
 
-### _Предимства и недостатъци от използването на Builder_
+### Предимства
 
-Със сигурност използването на шаблон Builder води до писане на повече код, но той е по-лесно читаем и проекта става по-гъвкав.
+* позволява създаване на обекти с голям брой параметри без множество конструктори;
+* разделя процеса на конструиране от представянето на обекта;
+* подобрява четимостта на кода чрез последователно задаване на параметрите;
+* позволява ясно разграничаване между задължителни и незадължителни свойства;
+* улеснява бъдещо разширяване на класа с нови свойства.
 
-Множеството параметри от конструктора се редуцират и създаването на обекти се свежда до каскадно извикване на методи за отделните параметри. По този начин се избягва предаването на нулеви стойности за атрибутите, които не са задължителни.
+### Недостатъци
 
-Създаването на обекти се управлява от едно място което създава сигурност в проектирането на сафтуера.
+* увеличава броя на класовете и количеството код;
+* не е подходящ за прости класове с малък брой свойства;
+* при всяка промяна в структурата на класа обикновено се налага актуализиране и на Builder класа.
+
+### Приложение
+
+Шаблонът Builder е подходящ когато:
+* обектът съдържа голям брой задължителни и незадължителни свойства;
+* е необходимо създаването на различни конфигурации на един и същ тип обект;
+* се цели подобряване на четимостта и поддържаемостта на кода;
+* се разработват библиотеки и API, при които създаването на обекти трябва да бъде максимално ясно и удобно.
+
+
 
