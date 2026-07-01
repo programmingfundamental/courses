@@ -23,7 +23,7 @@ nav_order: 1
 
 Промяната единствено на типа на връщаната стойност не е достатъчна за претоварване.
 
-```
+```java
 public class Calculator {
 
     public int sum(int a, int b) {
@@ -47,7 +47,7 @@ public class Calculator {
 
 Това позволява създаването на обекти по различни начини в зависимост от наличната информация.
 
-```
+```java
 public class Student {
 
     private String name;
@@ -88,7 +88,7 @@ public class Student {
 
 Добра практика е използването на анотацията @Override, която позволява на компилатора да провери дали методът е предефиниран коректно.
 
-```
+```java
 public class Shape {
 
     public double area() {
@@ -134,7 +134,7 @@ public class Circle extends Shape {
 
 **Пример за използване на полиморфизъм**
 
-```
+```java
 Shape shape = new Circle(5);
 
 System.out.println(shape.area());
