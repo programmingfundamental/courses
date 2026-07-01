@@ -21,7 +21,7 @@ nav_order: 6
 
 При делението на две цели числа резултатът също е цяло число. Дробната част се отрязва:
 
-```
+```java
 int result = 5/2;
 System.out.println(result);			// 2
 
@@ -33,7 +33,7 @@ System.out.println(secondResult);		// 2.0
 
 **Остатък при деление**
 
-```
+```java
 int reminder = 10 % 3;
 System.out.println(reminder);			// 1
 ```
@@ -42,7 +42,7 @@ System.out.println(reminder);			// 1
 
 **Инкрементиране и декрементиране**
 
-```
+```java
 int number = 6;
 number++;
 number--;
@@ -52,7 +52,7 @@ number--;
 
 **Кратко оценяване на изрази**
 
-```
+```java
 if (number != 0 && 10/number > 1) {
 	System.out.println("Valid");
 }
