@@ -125,18 +125,20 @@ public class Application {
 
     public static void main(String[] args) {
 
-        PaymentProcessor bankProcessor =
-                new BankPaymentProcessor();
+        PaymentProcessor bankProcessor = new BankPaymentProcessor();
 
-        System.out.println(bankProcessor.pay(120.50));
+        if (bankProcessor.pay(120.50)) {
+            System.out.println("Payment completed successfully.");
+        }
 
-        ExternalPayPalService payPalService =
-                new ExternalPayPalService();
+        ExternalPayPalService payPalService = new ExternalPayPalService();
 
-        PaymentProcessor payPalProcessor =
-                new PayPalAdapter(payPalService);
+        PaymentProcessor payPalProcessor = new PayPalAdapter(payPalService);
 
-        System.out.println(payPalProcessor.pay(89.99));
+        if (payPalProcessor.pay(120.50)) {
+            System.out.println("Payment completed successfully.");
+        }
+       
     }
 
 }
