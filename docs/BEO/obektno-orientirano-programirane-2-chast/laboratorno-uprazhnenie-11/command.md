@@ -8,208 +8,172 @@ nav_order: 2
 
 # Command
 
-Командният модел е един от поведенческите моделни модели. Шаблонът за проектиране на команди се използва за прилагане на хлабаво свързване в модел заявка-отговор.
+### Проблем
 
-В командния модел заявката се изпраща до инвокатора и инвокаторът я предава към капсулирания команден обект. Командният обект предава заявката към съответния метод на Receiver за извършване на конкретното действие. Клиентската програма създава обекта приемник и след това го прикачва към командата. След това създава обекта invoker и прикачва командния обект за извършване на действие. Когато клиентската програма изпълни действието, то се обработва въз основа на командата и обекта на приемника.
+В практиката често се налага дадено действие да бъде подадено, съхранено или изпълнено по-късно, без обектът, който го извиква, да знае как точно ще бъде реализирано то.
 
-Може да се внедри командния модел в помощна програма за файлова система с методи за отваряне, запис и затваряне на файл. Тази помощна програма за файлова система трябва да поддържа множество операционни системи като Windows и Unix. За да се създаде помощна програма за файлова система, първо трябва да се създаде класове приемници, които всъщност ще изпълняват функционалностите. Може да ползваме интерфейс FileSystemReceiver и неговите класове за внедряване за различни разновидности на операционни системи като Windows, Unix, Solaris и т.н.
+Например дистанционно управление на музикален плеър може да има бутони за стартиране, пауза и спиране. Самото дистанционно не трябва да знае как работи плеърът. То трябва единствено да изпълни зададената команда.
 
-```
-public interface FileSystemReceiver {
+### Решение
 
-	String openFile();
-	String writeFile();
-	String closeFile();
-}
-```
+Шаблонът Command капсулира заявка като самостоятелен обект. Всеки команден обект съдържа необходимата информация за извикване на конкретно действие върху получателя.
 
-Интерфейсът FileSystemReceiver дефинира договора за класовете за изпълнение. Следва да се създадат два варианта на класовете приемници за работа с Unix и Windows системи.
+По този начин обектът, който извиква командата, не зависи директно от класа, който реално извършва действието.
 
-```
-public class UnixFileSystemReceiver implements FileSystemReceiver {
+### Дефиниция
 
-	@Override
-	public String openFile() {
-		return "Opening file in unix OS";
-	}
+Command е поведенчески шаблон за проектиране, който превръща заявка в обект, позволявайки нейното подаване, съхранение, отлагане или изпълнение без пряка зависимост между извикващия обект и обекта, който реално изпълнява действието.
 
-	@Override
-	public String writeFile() {
-		return "Writing file in unix OS";
-	}
+Основни понятия:
+* Command - Интерфейсът, който дефинира изпълнението на команда.
+* Concrete Command - Конкретна команда, която извиква определен метод на получателя.
+* Receiver - Обектът, който реално извършва действието.
+* Invoker - Обектът, който стартира командата, без да знае детайлите на изпълнението.
+* Client - Създава командите и ги свързва с получателя.
 
-	@Override
-	public String closeFile() {
-		return "Closing file in unix OS";
-	}
+### UML диаграма
 
-}
-```
+<img width="928" height="547" alt="Command" src="https://github.com/user-attachments/assets/0e8aa98a-918d-4c2a-80c3-8d995f2e14dc" />
 
-```
-public class WindowsFileSystemReceiver implements FileSystemReceiver {
 
-	@Override
-	public String openFile() {
-		return "Opening file in Windows OS";
-		
-	}
+### Примерна реализация
 
-	@Override
-	public String writeFile() {
-		return "Writing file in Windows OS";
-	}
-
-	@Override
-	public String closeFile() {
-		return "Closing file in Windows OS";
-	}
-}
-```
-
-За създаването на основната команда може да се използва интерфейс или абстрактен клас; това е дизайнерско решение и зависи от изискванията. В конкретния пример е използван интерфейс:
-
-```
+```java
 public interface Command {
 
-	String execute();
+    String execute();
 }
 ```
+```java
+public class MusicPlayer {
 
-Следва да се създадат реализации за всички различни типове действия, извършвани от приемника. За трите действия от конкретния пример ще са необходими три реализации на Command. Всяка реализация на команда ще препрати заявката към подходящия метод на получателя.
+    public String play() {
+        return "Music player started.";
+    }
 
-```
-public class OpenFileCommand implements Command {
+    public String pause() {
+        return "Music player paused.";
+    }
 
-	private FileSystemReceiver fileSystem;
-	
-	public OpenFileCommand(FileSystemReceiver fs){
-		this.fileSystem = fs;
-	}
-	@Override
-	public String execute() {
-		//open command is forwarding request to openFile method
-		return this.fileSystem.openFile();
-	}
-
+    public String stop() {
+        return "Music player stopped.";
+    }
 }
 ```
+```java
+public class PlayCommand implements Command {
 
-```
-public class CloseFileCommand implements Command {
+    private MusicPlayer player;
 
-	private FileSystemReceiver fileSystem;
-	
-	public CloseFileCommand(FileSystemReceiver fs){
-		this.fileSystem = fs;
-	}
+    public PlayCommand(MusicPlayer player) {
+        this.player = player;
+    }
 
-	@Override
-	public String execute() {
-		return this.fileSystem.closeFile();
-	}
-
+    @Override
+    public String execute() {
+        return player.play();
+    }
 }
 ```
+```java
+public class PauseCommand implements Command {
 
-```
-public class WriteFileCommand implements Command {
+    private MusicPlayer player;
 
-	private FileSystemReceiver fileSystem;
-	
-	public WriteFileCommand(FileSystemReceiver fs){
-		this.fileSystem = fs;
-	}
+    public PauseCommand(MusicPlayer player) {
+        this.player = player;
+    }
 
-	@Override
-	public String execute() {
-		return this.fileSystem.writeFile();
-	}
-
+    @Override
+    public String execute() {
+        return player.pause();
+    }
 }
 ```
+```java
+public class StopCommand implements Command {
 
-След като са готови реализациите на приемника и командите, следващата стъпка е внедряване на класа invoker.
+    private MusicPlayer player;
 
-Invoker е прост клас, който капсулира командата и предава заявката към командния обект, за да я обработи.
+    public StopCommand(MusicPlayer player) {
+        this.player = player;
+    }
 
-```
-public class FileInvoker {
-
-	public Command command;
-	
-	public FileInvoker(Command c){
-		this.command = c;
-	}
-	
-	public String execute(){
-		return this.command.execute();
-	}
+    @Override
+    public String execute() {
+        return player.stop();
+    }
 }
 ```
+```java
+public class RemoteControl {
 
-Реализацията на помощната програма за файлова система е готова и може да се премине към написването на клиентска програма за шаблон на стандартна команда. Първо е необходимо да се предостави помощен метод за създаване на подходящия обект FileSystemReceiver. Можем да се използва системния клас, за получаване на информация за операционната система, може да се използва той или в противен случай можем да се използва фабричен шаблон, за връщане  на подходящ тип въз основа на входа.
+    private Command command;
 
-```
-public class FileSystemReceiverUtil {
-	
-	public static FileSystemReceiver getUnderlyingFileSystem(){
-		 String osName = System.getProperty("os.name");
-		 System.out.println("Underlying OS is:" + osName);
-		 if (osName.contains("Windows")) {
-			 return new WindowsFileSystemReceiver();
-		 } else {
-			 return new UnixFileSystemReceiver();
-		 }
-	}
-	
+    public void setCommand(Command command) {
+        this.command = command;
+    }
+
+    public String pressButton() {
+        return command.execute();
+    }
 }
 ```
+Използване
+```java
+public class Application {
 
-Вече може да се премине към създаването на клиентска програма за модел на команди, която ще използва помощна програма за файлова система.
+    public static void main(String[] args) {
 
-```
-public class FileSystemClient {
+        MusicPlayer player = new MusicPlayer();
 
-	public static void main(String[] args) {
-		//Creating the receiver object
-		FileSystemReceiver fs = FileSystemReceiverUtil.getUnderlyingFileSystem();
-		
-		//creating command and associating with receiver
-		OpenFileCommand openFileCommand = new OpenFileCommand(fs);
-		
-		//Creating invoker and associating with Command
-		FileInvoker file = new FileInvoker(openFileCommand);
-		
-		//perform action on invoker object
-		System.out.println(file.execute());
-		
-		WriteFileCommand writeFileCommand = new WriteFileCommand(fs);
-		file = new FileInvoker(writeFileCommand);
-		System.out.println(file.execute());
-		
-		CloseFileCommand closeFileCommand = new CloseFileCommand(fs);
-		file = new FileInvoker(closeFileCommand);
-		System.out.println(file.execute());
-	}
+        Command playCommand = new PlayCommand(player);
+        Command pauseCommand = new PauseCommand(player);
+        Command stopCommand = new StopCommand(player);
 
+        RemoteControl remoteControl = new RemoteControl();
+
+        remoteControl.setCommand(playCommand);
+        System.out.println(remoteControl.pressButton());
+
+        remoteControl.setCommand(pauseCommand);
+        System.out.println(remoteControl.pressButton());
+
+        remoteControl.setCommand(stopCommand);
+        System.out.println(remoteControl.pressButton());
+    }
 }
 ```
+Класът MusicPlayer е получателят (Receiver) и съдържа реалната логика за изпълнение на действията.
 
-Клиентът е отговорен за създаването на подходящия тип команден обект. Например, ако се иска написвеане на файл, не трябва да се създава обект CloseFileCommand. Клиентската програма също е отговорна за прикачването на приемника към командата и след това на командата към класа invoker.
+Всеки конкретен команден клас (PlayCommand, PauseCommand, StopCommand) съдържа референция към MusicPlayer и извиква конкретен негов метод.
 
-Заключение:
+Класът RemoteControl е извикващият обект (Invoker). Той не знае какво действие ще бъде изпълнено, а работи единствено с интерфейса Command.
 
-Командата е ядрото на шаблона за проектиране на команда, който определя договора за изпълнение.
+По този начин командите могат да бъдат сменяни динамично, без да се променя класът RemoteControl.
 
-Реализацията на приемника е отделна от реализацията на командата.
+> [!IMPORTANT]
+> Command не изпълнява действието самостоятелно. Той капсулира заявката и я насочва към получателя,
+> който реално извършва действието.
 
-Класовете за внедряване на команди избират метода за извикване на обекта приемник, за всеки метод в приемника ще има изпълнение на команда. Той работи като мост между приемника и методите на действие.
+### Предимства
 
-Класът Invoker просто препраща заявката от клиента към командния обект. Клиентът е отговорен да създаде подходяща команда и реализация на приемник и след това да ги асоциира заедно.
+* намалява зависимостта между извикващия обект и получателя;
+* позволява действията да бъдат представени като обекти;
+* улеснява добавянето на нови команди;
+* позволява съхранение, отлагане или групиране на команди;
+* подпомага спазването на принципа Open/Closed.
 
-Клиентът също е отговорен за инстанцирането на обекта invoker и свързването на командния обект с него и изпълнението на метода на действие.
+### Недостатъци
 
-Шаблонът за проектиране на команди е лесно разширим, можем да се добавят нови методи за действие в приемници и да се създават нови реализации на команди, без да се променя клиентския код.
+* увеличава броя на класовете;
+* при голям брой действия могат да се създадат много конкретни команди;
+* структурата може да изглежда излишно сложна при малки приложения.
 
-Недостатъкът на модела на дизайн на Command е, че кодът става огромен и объркващ с голям брой методи за действие и поради толкова много асоциации.
+### Приложение
+
+Command е подходящ когато:
+* действията трябва да бъдат капсулирани като обекти;
+* извикващият обект не трябва да зависи от конкретния изпълнител;
+* е необходимо динамично сменяне на действия;
+* се реализират бутони, менюта, макроси, undo/redo механизми или опашки от задачи.
