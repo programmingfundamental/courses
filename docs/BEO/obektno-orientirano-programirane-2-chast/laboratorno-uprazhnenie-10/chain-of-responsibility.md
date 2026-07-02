@@ -8,18 +8,43 @@ nav_order: 2
 
 # Chain of Responsibility
 
-Моделът на веригата на отговорност се използва за постигане на слабо свързване на обекти в софтуерния дизайн, където заявка от клиент се предава на верига от обекти, за да ги обработи. След това обектът във веригата сам ще реши кой ще обработва заявката и дали искането трябва да бъде изпратено до следващия обект във веригата или не.
+### Проблем
 
-Пример за модел на верига на отговорност в JDK може да видим в множество catch блокове в блоков код try-catch. Тук всеки catch блок е един вид процесор за обработка на конкретно изключение. Така че, когато възникне изключение в блока try, то се изпраща до първия блок catch за обработка. Ако catch блокът не може да го обработи, той препраща заявката към следващия обект във веригата, т.е. следващия catch блок. Ако дори последният catch блок не може да го обработи, изключението се хвърля извън веригата към извикващата програма.
+В практиката често постъпват заявки, които могат да бъдат обработени от различни обекти, като предварително не е известно кой точно трябва да ги обработи.
 
-Класически пример за използването на шаблона Chain of Responsibility е обработката на заявка, постъпваща на входа на система, като предварително не е известно кой ще я обработи. Посоченото по-долу решение показва базова реализация на подобна задача.
+Например в информационна система могат да постъпват административни, счетоводни или технически заявки. Всеки отдел обработва само заявките, които попадат в неговата компетентност. Ако даден отдел не може да обработи заявката, тя трябва автоматично да бъде предадена към следващото звено.
 
-Всяко едно звено от веригата трябва да обработва заявка, която има следната структура:
+### Решение
 
-```
+Chain of Responsibility организира обработващите обекти във верига. Всеки обработващ обект проверява дали може да обработи заявката. Ако не може, я предава на следващия обект във веригата.
+
+По този начин клиентският код не знае кой конкретен обект ще обработи заявката.
+
+### Дефиниция
+
+Chain of Responsibility е поведенчески шаблон за проектиране, който предава заявка последователно през верига от обработващи обекти, докато някой от тях я обработи или веригата приключи.
+
+Основните участници са:
+* Handler - Интерфейс или абстрактен клас, който дефинира обработката на заявката и връзката към следващото звено.
+* Concrete Handler - Конкретно звено от веригата, което обработва определен тип заявки.
+* Client - Създава веригата и подава заявката към първото звено.
+
+### UML диаграма
+
+<img width="846" height="375" alt="ChainOfResponsibility" src="https://github.com/user-attachments/assets/ff686737-df04-4b18-9339-ba11d9ca729b" />
+
+### Примерна реализация
+
+Заявка
+
+```java
 public class Request {
 
-    public enum RequestType { ADMINISTRATIVE, ACCOUNTING, TECHNICAL }
+    public enum RequestType {
+        ADMINISTRATIVE,
+        ACCOUNTING,
+        TECHNICAL
+    }
 
     private String name;
     private RequestType requestType;
@@ -32,34 +57,25 @@ public class Request {
     public RequestType getRequestType() {
         return requestType;
     }
-
-    @Override
-    public String toString() {
-        return "Request{" +
-                "name='" + name + '\'' +
-                ", requestType=" + requestType +
-                '}';
-    }
 }
 ```
 
-Базовият интерфейс трябва да има метод за определяне на следващото звено от веригата и метод, който ще обработва постъпилата заявка:
-
-```
+Handler
+```java
 public interface RequestHandler {
 
-    void setNextHandler(RequestHandler requestHandler);
+    void setNextHandler(RequestHandler handler);
 
     String processRequest(Request request);
+
 }
 ```
 
-Трябва да се създадат различни класове, описващи отделите, обработващи заявките. Тъй като в конкретния случай имаме три типа заявки, ще имаме три конкретни имплементации на дефинирания интерфей:
-
-```
+Concrete Handlers
+```java
 public class AccountingDepartment implements RequestHandler {
 
-    private RequestHandler requestHandler;
+    private RequestHandler nextHandler;
 
     @Override
     public void setNextHandler(RequestHandler requestHandler) {
@@ -70,19 +86,18 @@ public class AccountingDepartment implements RequestHandler {
     public String processRequest(Request request) {
         if (Request.RequestType.ACCOUNTING == request.getRequestType()) {
             return "Request has been processed by accounting department";
-        } else if (Objects.nonNull(requestHandler)) {
-            return requestHandler.processRequest(request);
+        } else if (Objects.nonNull(nextHandler)) {
+            return nextHandler.processRequest(request);
         } else {
             return "No department to process request found!";
         }
     }
 }
 ```
-
-```
+```java
 public class AdministrativeDepartment implements RequestHandler {
 
-    private RequestHandler requestHandler;
+    private RequestHandler nextHandler;
 
     @Override
     public void setNextHandler(RequestHandler requestHandler) {
@@ -92,20 +107,19 @@ public class AdministrativeDepartment implements RequestHandler {
     @Override
     public String processRequest(Request request) {
         if (Request.RequestType.ADMINISTRATIVE == request.getRequestType()) {
-            return "Request has been processed by administrative department";
-        } else if (Objects.nonNull(requestHandler)) {
-            return requestHandler.processRequest(request);
+            return "Request has been processed by accounting department";
+        } else if (Objects.nonNull(nextHandler)) {
+            return nextHandler.processRequest(request);
         } else {
             return "No department to process request found!";
         }
     }
 }
 ```
-
-```
+```java
 public class TechnicalDepartment implements RequestHandler {
 
-    private RequestHandler requestHandler;
+    private RequestHandler nextHandler;
 
     @Override
     public void setNextHandler(RequestHandler requestHandler) {
@@ -115,9 +129,9 @@ public class TechnicalDepartment implements RequestHandler {
     @Override
     public String processRequest(Request request) {
         if (Request.RequestType.TECHNICAL == request.getRequestType()) {
-            return "Request has been processed by technical department";
-        } else if (Objects.nonNull(requestHandler)) {
-            return requestHandler.processRequest(request);
+            return "Request has been processed by accounting department";
+        } else if (Objects.nonNull(nextHandler)) {
+            return nextHandler.processRequest(request);
         } else {
             return "No department to process request found!";
         }
@@ -125,51 +139,79 @@ public class TechnicalDepartment implements RequestHandler {
 }
 ```
 
-Важното, е да се отбележи, че всеки метод за обработка на заявка се опитва да я обработи в зависимост от нейния тип. Ако конкретното звено не може да обработи постъпилата заявака, то изпраща заявката към следващото звено за обработка - при наличието на такова. При достигане на края на веригата без да е намерено подходящо звено, в конкретния пример се връща съобщение за грешка.
-
-Веригата трябва да се създаде внимателно, в противен случай е възможно получаването на циклична зависимост. Класът RequestProcessor създава веригата в своя дефолтен конструктор, а заявката постъпва винаги на входа на първото звено:
-
-```
+Създаване на веригата
+```java
 public class RequestProcessor {
 
-    private AccountingDepartment accountingDepartment = new AccountingDepartment();
-    private AdministrativeDepartment administrativeDepartment = new AdministrativeDepartment();
-    private TechnicalDepartment technicalDepartment = new TechnicalDepartment();
+    private final RequestHandler firstHandler;
 
     public RequestProcessor() {
-        // setting the chain
-        accountingDepartment.setNextHandler(administrativeDepartment);
-        administrativeDepartment.setNextHandler(technicalDepartment);
+
+        RequestHandler accounting = new AccountingDepartment();
+        RequestHandler administrative = new AdministrativeDepartment();
+        RequestHandler technical = new TechnicalDepartment();
+
+        accounting.setNextHandler(administrative);
+        administrative.setNextHandler(technical);
+
+        firstHandler = accounting;
     }
 
     public String processRequest(Request request) {
-        // request enters first handler of the chain
-        return accountingDepartment.processRequest(request);
+        return firstHandler.processRequest(request);
     }
+
 }
 ```
 
-Демонстрация на реализирания шаблон е показана в следващия кодов фрагмент:
+Използване
+```java
+public class Application {
 
-```
-	public class Application {
     public static void main(String[] args) {
+
         RequestProcessor processor = new RequestProcessor();
 
-        System.out.println(processor.processRequest(new Request("Monthly payment", Request.RequestType.ACCOUNTING)));
-        System.out.println(processor.processRequest(new Request("Setting new account", Request.RequestType.TECHNICAL)));
+        System.out.println(processor.processRequest(new Request("Monthly payment",
+                                Request.RequestType.ACCOUNTING)));
+
+        System.out.println(processor.processRequest(new Request("New workstation",
+                                Request.RequestType.TECHNICAL)));
+
     }
+
 }
 ```
 
-Заключение:
+Интерфейсът RequestHandler дефинира общото поведение на всички звена във веригата. Освен метода за обработка на заявката той съдържа и метод за определяне на следващия обработващ обект.
 
-Клиентът не знае коя част от веригата ще обработва заявката и ще изпрати заявката до първия обект във веригата. 
+Всеки отдел реализира интерфейса RequestHandler и проверява дали може да обработи постъпилата заявка. Ако може, обработката приключва. В противен случай заявката се предава към следващото звено чрез метода processRequest().
 
-Всеки обект във веригата ще има собствена реализация за обработка на заявката или за изпращането й до следващия обект във веригата.
+Класът RequestProcessor създава веригата от обработващи обекти и съхранява референция само към първото звено. Клиентският код винаги подава заявката към началото на веригата, без да знае кой конкретен обект ще я обработи.
 
-Всеки обект във веригата трябва да има препратка към следващия обект във веригата, към който да препрати заявката, постигната чрез java композиция.
+> [!IMPORTANT]
+> Всеки обработващ обект взема самостоятелно решение дали да обработи заявката или да я предаде към следващото
+> звено. Клиентът не знае кой обект ще извърши обработката и не е свързан директно с конкретните обработващи класове.
 
-Внимателното създаване на веригата е много важно, за да се избегне случай, в който заявката никога няма да бъде препратена към конкретно звено или няма обекти във веригата, които да могат да обработват заявката.
 
-Шаблонът за проектиране на веригата на отговорността е добър за решаване на проблема за загуба на свързване, но идва с компромиса от наличието на много класове за внедряване и проблеми с поддръжката, ако по-голямата част от кода е общ във всички реализации.
+### Предимства
+
+* намалява зависимостите между клиента и обработващите обекти;
+* позволява динамично изграждане и промяна на веригата;
+* улеснява добавянето на нови обработващи обекти;
+* подпомага спазването на принципа Open/Closed;
+* разпределя отговорността между множество класове.
+
+### Недостатъци
+
+* обработката може да премине през голяма част от веригата;
+* при неправилно изградена верига заявката може да остане необработена;
+* голям брой обработващи обекти могат да усложнят архитектурата.
+
+### Приложение
+
+Chain of Responsibility е подходящ когато:
+* няколко обекта могат да обработят една и съща заявка;
+* предварително не е известно кой ще обработи заявката;
+* обработващите обекти трябва лесно да се добавят, премахват или пренареждат;
+* се цели намаляване на зависимостите между клиента и конкретните обработващи класове.
