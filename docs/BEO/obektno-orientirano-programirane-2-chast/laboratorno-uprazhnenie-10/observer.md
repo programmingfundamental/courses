@@ -8,145 +8,150 @@ nav_order: 1
 
 # Observer
 
-Шаблонът за проектиране на наблюдател е полезен, когато се интересувате от състоянието на даден обект и искате да получавате известия, когато има някаква промяна. В модела на наблюдателя Обектът, който наблюдава състоянието на друг Обект, се нарича наблюдател, а Обектът, който се наблюдава, се нарича субект.
+### Проблем
 
-Като пример за Java програма която използва модела на наблюдател, ще реализираме тема и наблюдателите могат да се регистрират в тази тема. Всеки път, когато в темата бъде публикувано ново съобщение, всички наблюдатели ще бъдат уведомени и те могат да  използват съобщението. Основният интерфейс ще е Subject, който дефинира договорните методи, които трябва да бъдат приложени от всеки конкретен субект.
+В практиката често се налага няколко обекта да реагират при промяна в състоянието на друг обект. Ако наблюдаваният обект познава директно всички конкретни класове, които трябва да бъдат уведомени, системата става силно свързана и трудна за разширяване.
 
+### Решение
+
+Observer позволява един обект да поддържа списък от зависими обекти и автоматично да ги уведомява при настъпване на промяна.
+
+Наблюдаваният обект работи с общ интерфейс на наблюдателите, без да зависи от конкретните им класове.
+
+### Дефиниция
+
+Observer е поведенчески шаблон за проектиране, който дефинира зависимост „един към много“ между обекти, така че при промяна в състоянието на един обект всички негови наблюдатели да бъдат уведомени автоматично.
+
+Основни участници:
+* Subject - Обектът, който се наблюдава и уведомява регистрираните наблюдатели.
+* Observer - Интерфейсът, чрез който наблюдателите получават известие.
+* Concrete Subject - Конкретна реализация на наблюдавания обект.
+* Concrete Observer - Конкретен наблюдател, който реагира на промяната.
+
+### UML диаграма
+
+<img width="332" height="579" alt="Observer" src="https://github.com/user-attachments/assets/fbb4b3c6-5fce-4706-9b1b-7ca0ab4670c5" />
+
+
+### Примерна реализация
+
+```java
+public interface Observer {
+
+    String update(String message);
+}
 ```
+```java
 public interface Subject {
 
-	void register(Observer obj);
-	void unregister(Observer obj);
+    void register(Observer observer);
 
-	String notifyObservers();
+    void unregister(Observer observer);
 
-	Object getUpdate(Observer obj);	
+    String notifyObservers(String message);
 }
 ```
+```java
+import java.util.HashSet;
+import java.util.Set;
 
-След това ще създадем договор за наблюдателя, ще има метод за прикачване на субекта към наблюдателя и друг метод, който да се използва от субекта за уведомяване за всяка промяна.
-
-```
-public interface Observer {
-	String update();
-	void setSubject(Subject sub);
-}
-
-```
-
-Сега договорът е готов, продължава се с конкретна имплементация.
-
-```
 public class Topic implements Subject {
 
-	private Set<Observer> observers;
-	private String message;
-	private boolean changed;
-	
-	public Topic(){
-		this.observers = new HashSet<>();
-	}
+    private Set<Observer> observers = new HashSet<>();
 
-	@Override
-	public void register(Observer obj) {
-		if (obj == null) {
-			throw new NullPointerException("Null Observer");
-		}		
-		observers.add(obj);
-	}
+    @Override
+    public void register(Observer observer) {
+        observers.add(observer);
+    }
 
-	@Override
-	public void unregister(Observer obj) {
-		observers.remove(obj);
-	}
+    @Override
+    public void unregister(Observer observer) {
+        observers.remove(observer);
+    }
 
-	@Override
-	public String notifyObservers() {
-		StringBuilder result = new StringBuilder();
-		List<Observer> observersLocal;
-			if (!changed)
-				result.append("");
-			observersLocal = new ArrayList<>(this.observers);
-			this.changed = false;
-		for (Observer obj : observersLocal) {
-			result.append(obj.update()).append("\n");
-		}
-		return result.toString();
-	}
+    @Override
+    public String notifyObservers(String message) {
+        StringBuilder result = new StringBuilder();
 
-	@Override
-	public Object getUpdate(Observer obj) {
-		return this.message;
-	}
-	
-	//method that posts message to the topic
-	public String postMessage(String msg){
-		this.message = msg;
-		this.changed = true;
-		return notifyObservers();
-	}
+        for (Observer observer : observers) {
+            result.append(observer.update(message)).append("\n");
+        }
 
+        return result.toString();
+    }
+
+    public String postMessage(String message) {
+        return notifyObservers(message);
+    }
 }
 ```
-
-Реализацията на метода за регистриране и отписване на наблюдател е много проста, допълнителният метод е postMessage(), който ще се използва от клиентското приложение за публикуване на String съобщение в темата. Забележете булевата променлива за проследяване на промяната в състоянието на темата и използвана при уведомяване на наблюдатели. Тази променлива е необходима, така че ако няма актуализация и някой извика метод notifyObservers(), той не изпраща фалшиви известия до наблюдателите. Забележете също използването на синхронизация в метода notifyObservers(), за да сте сигурни, че известието се изпраща само до наблюдателите, регистрирани преди съобщението да бъде публикувано в темата. Ето изпълнението на Наблюдатели, които ще наблюдават темата.
-
-```
+```java
 public class TopicSubscriber implements Observer {
-	
-	private String name;
-	private Subject subject;
-	
-	public TopicSubscriber(String nm){
-		this.name=nm;
-	}
-	@Override
-	public String update() {
-		String msg = (String) subject.getUpdate(this);
-		if (msg == null){
-			return (name + ":: No new message");
-		} else
-		return (name + ":: Consuming message ::" + msg);
-	}
 
-	@Override
-	public void setSubject(Subject subject) {
-		this.subject = subject;
-	}
+    private String name;
 
+    public TopicSubscriber(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String update(String message) {
+        return name + " received message: " + message;
+    }
 }
 ```
+Използване
+```java
+public class Application {
 
-Обърнете внимание на внедряването на метода update(), където той извиква метода Subject getUpdate(), за да накара съобщението да се консумира. Можехме да избегнем това извикване, като подадохме съобщение като аргумент на метода update(). Ето една проста тестова програма за използване на внедряването на нашата тема.
+    public static void main(String[] args) {
 
-```
-public class Application{
+        Topic topic = new Topic();
 
-	public static void main(String[] args) {
-		//create subject
-		Topic topic = new Topic();
-		
-		//create observers
-		Observer obj1 = new TopicSubscriber("Obj1");
-		Observer obj2 = new TopicSubscriber("Obj2");
-		Observer obj3 = new TopicSubscriber("Obj3");
-		
-		//register observers to the subject
-		topic.register(obj1);
-		topic.register(obj2);
-		topic.register(obj3);
-		
-		//attach observer to subject
-		obj1.setSubject(topic);
-		obj2.setSubject(topic);
-		obj3.setSubject(topic);
-		
-		//check if any update is available for given susbscriber
-		System.out.println(obj1.update());
-		
-		//now send message to all registered observers
-		System.out.println(topic.postMessage("New Message"));
-	}
+        Observer firstSubscriber = new TopicSubscriber("First subscriber");
 
+        Observer secondSubscriber = new TopicSubscriber("Second subscriber");
+
+        topic.register(firstSubscriber);
+        topic.register(secondSubscriber);
+
+        System.out.println(topic.postMessage("New message"));
+    }
 }
 ```
+Класът Topic е наблюдаваният обект. Той поддържа колекция от регистрирани наблюдатели и ги уведомява при публикуване на ново съобщение.
+
+Интерфейсът Observer дефинира метода update(), чрез който всеки наблюдател получава информация за настъпилата промяна.
+
+Класът TopicSubscriber е конкретен наблюдател. При получаване на съобщение той връща текст, който показва, че е бил уведомен.
+
+Клиентският код регистрира наблюдателите към обекта Topic. След това при извикване на postMessage() всички регистрирани наблюдатели получават съобщението автоматично.
+
+> [!IMPORTANT]
+> Observer намалява зависимостта между наблюдавания обект и конкретните наблюдатели. Topic не знае какви точно
+> класове са регистрирани към него — той работи само с интерфейса Observer.
+
+### Предимства
+
+* намалява зависимостта между обектите;
+* позволява динамично добавяне и премахване на наблюдатели;
+* един обект може да уведомява много други обекти;
+* улеснява разширяването на системата с нови реакции при промяна.
+
+### Недостатъци
+
+* при голям брой наблюдатели уведомяването може да стане по-бавно;
+* редът на уведомяване не винаги е гарантиран;
+* може да бъде по-трудно да се проследи кой обект реагира на дадена промяна;
+* при неправилно отписване на наблюдатели могат да се задържат ненужни референции.
+
+### Приложение
+
+Observer е подходящ когато:
+* промяна в един обект трябва да води до реакция в други обекти;
+* броят на заинтересованите обекти може да се променя динамично;
+* наблюдаваният обект не трябва да зависи от конкретните наблюдатели;
+* се реализират събития, известия, абонаменти или listener механизми.
+
+
+
