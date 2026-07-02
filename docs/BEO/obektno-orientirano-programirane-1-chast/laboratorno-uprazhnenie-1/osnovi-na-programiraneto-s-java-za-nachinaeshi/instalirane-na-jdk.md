@@ -11,12 +11,12 @@ nav_order: 1
 
 # Инсталиране на JDK
 
-Преди разработването на Java приложения е необходимо да бъде инсталиран Java Development Kit (JDK). 
+Преди разработването на Java приложения е необходимо да бъде инсталиран Java Development Kit (JDK).
 
 Препоръчително е използването на актуална **LTS (Long-Term Support)** версия на JDK, която може да бъде изтеглена от официалния сайт на Oracle или от алтернативния линк по-долу:
 
 - [https://www.oracle.com/java/technologies/downloads/](https://www.oracle.com/java/technologies/downloads/)
-  
+
 - https://tuvarnabg-my.sharepoint.com/:u:/g/personal/vkolesnichenko_tu-varna_bg/ET92nCILMK9MpO_krBzE8RkBYg90A97t1NTBC-aor3a26A?e=e6PcXa
 
 След стартиране на инсталационната програма се следват стандартните стъпки на инсталационния процес. Препоръчително е JDK да бъде инсталиран в директорията по подразбиране.
@@ -39,13 +39,11 @@ nav_order: 1
 
 <img width="834" height="365" alt="image" src="https://github.com/user-attachments/assets/8f4c39ae-4271-442d-9aaf-de6e73fce44b" />
 
-
 **Променлива Path**
 
 Към системната променлива **Path** се добавя пътят до директорията **bin**, намираща се в инсталационната директория на JDK:
 
 <img width="531" height="637" alt="image" src="https://github.com/user-attachments/assets/3a720c45-de22-4122-9167-b4ae5bdb74b1" />
-
 
 **Проверка на инсталацията**
 
@@ -54,8 +52,8 @@ nav_order: 1
 ```
 java -version
 javac -version
-
 ```
+
 Ако инсталацията е извършена успешно, на екрана се извежда информация за използваната версия на Java и компилатора *javac*.
 
 **Управление на версиите на Java**

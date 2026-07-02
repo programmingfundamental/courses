@@ -16,7 +16,6 @@ permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhneni
 
 <img width="213" height="294" alt="image" src="https://github.com/user-attachments/assets/a5cf871d-6307-4879-95f6-c7fa2e586c20" />
 
-
 #### Java е обектно-ориентиран език
 
 Java е обектно-ориентиран език за програмиране. Обектно-ориентираното програмиране (ООП) е парадигма, при която програмата се моделира чрез взаимодействащи класове и обекти. Всеки обект представлява екземпляр на определен клас.
@@ -74,18 +73,10 @@ Java Runtime Environment (JRE) представлява средата, необ
 
 Java Development Kit (JDK) представлява комплект от инструменти за разработване на Java приложения. Освен JRE, той включва компилатора *javac*, документиращи и помощни инструменти, необходими за разработката и тестването на програми.
 
-
 *Процес на компилация и изпълнение*
 
 <img width="144" height="345" alt="image" src="https://github.com/user-attachments/assets/c2ff6642-2a74-433c-9dd9-e176ca1ec23c" />
 
-
-
 *Компоненти на Java платформата*
 
 <img width="346" height="296" alt="image" src="https://github.com/user-attachments/assets/d03a058f-d44a-4116-b910-66b880445da2" />
-
-
-  
-
-

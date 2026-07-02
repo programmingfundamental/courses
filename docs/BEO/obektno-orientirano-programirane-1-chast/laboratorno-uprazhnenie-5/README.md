@@ -6,5 +6,5 @@ has_children: true
 nav_order: 5
 permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-5
 ---
-# Лабораторно упражнение 5
 
+# Лабораторно упражнение 5

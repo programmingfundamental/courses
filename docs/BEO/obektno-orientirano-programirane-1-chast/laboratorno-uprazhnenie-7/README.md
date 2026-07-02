@@ -6,6 +6,7 @@ has_children: true
 nav_order: 7
 permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-7
 ---
+
 # Лабораторно упражнение 7
 
 # Символни низове в Java
@@ -33,16 +34,17 @@ first = first + " Programming";
 System.out.println(first);
 System.out.println(second);
 ```
+
 Резултат:
 
 ```java
 Java Programming
 Java
 ```
+
 В примера промяната на променливата first не променя стойността на second, защото вместо модификация на съществуващия обект е създаден нов обект от тип String.
 
 *Забележка:* Символните литерали се съхраняват в специална област на паметта, наречена String Pool. Ако вече съществува низ със същото съдържание, Java използва съществуващия обект вместо да създава нов.
-
 
 #### Създаване на символен низ
 
@@ -68,7 +70,6 @@ String name = "Ivan";
 String message = "Hello, " + name + "!";
 ```
 
-
 #### Основни операции върху String
 
 **Сравнение**
@@ -84,6 +85,7 @@ compareToIgnoreCase()
 ```
 
 Пример:
+
 ```java
 String first = "Java";
 String second = "JAVA";
@@ -95,10 +97,11 @@ System.out.println(first.equalsIgnoreCase(second));
 **Търсене**
 
 Най-често използваните методи са:
-* contains()
-* indexOf()
-* startsWith()
-* endsWith()
+
+- contains()
+- indexOf()
+- startsWith()
+- endsWith()
 
 Пример:
 
@@ -172,9 +175,10 @@ String[] animals = list.split(",");
 **Конкатенация**
 
 Символните низове могат да бъдат обединявани чрез:
-* оператора +;
-* оператора +=;
-* метода concat().
+
+- оператора +;
+- оператора +=;
+- метода concat().
 
 ```java
 String first = "Hello";
