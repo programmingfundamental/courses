@@ -3,7 +3,7 @@ layout: default
 title: Лабораторно упражнение 1
 parent: Обектно-ориентирано програмиране - 1 част
 has_children: true
-nav_order: 1
+nav_order: 2
 permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1
 ---
 
@@ -11,7 +11,7 @@ permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhneni
 
 Това упражнение е насочено към първоначалното запознаване с езика за програмиране Java и неговата среда за изпълнение.
 
-### Цели на упражнението:
+## Цели на упражнението:
 
 - Разбиране на основните характеристики на Java (платформена независимост, JVM, JDK).
 - Инсталиране и конфигуриране на среда за разработка (IntelliJ IDEA).
