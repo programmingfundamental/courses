@@ -8,115 +8,132 @@ nav_order: 1
 
 # Strategy
 
-Strategy е представител на поведенческите шаблони. Използва се когато даден проблем може да бъде разрешен по различни начини и избора за неговото решение се взема по време на изпълнението. 
+### Проблем
 
-За имплементация на Strategy е необходимо:
-- интерфейс Strategy;
-- конкретни имплементации на интерфейса - за всяка отделна стратегия;
-- контекстен обект с поведение, което зависи от избраната стратегия.
+В практиката често съществуват различни начини за изпълнение на една и съща операция. Ако изборът между тях се реализира чрез множество условни конструкции, кодът става труден за поддръжка и разширяване.
 
-Подобна имплементация прави промяната на дадена стратегия или добавянето на нова безпроблемно, без това да налага промени в контекстния обект и в клиентската част, която използва този контекстен обект. Освен това стратегиите са взаимозаменяеми.
+Например крайната цена на поръчка може да бъде изчислена по различен начин според приложената отстъпка.
 
-Като недостатък на Strategy може да се посочи необходимостта клиента да е запознат с различните стратегии, за да може да ги прилага правилно. Освен това подобен подход не е много ефективен в практиката ако имаме само две или три стратегии.
+### Решение
 
-Като пример по-долу е показана програма, която изчислява лице на геометрична фигура.
+Strategy отделя различните алгоритми в самостоятелни класове и позволява те да бъдат взаимозаменяеми.
 
-```
-public interface ShapeStrategy {
+Контекстният обект използва избрана стратегия, без да познава детайлите на нейното изпълнение.
 
-    double calculateArea();
+### Дефиниция
+
+Strategy е поведенчески шаблон за проектиране, който дефинира семейство от алгоритми, капсулира всеки от тях в отделен клас и позволява тяхната взаимна замяна по време на изпълнение.
+
+Основни термини:
+* Context - Обектът, който използва избраната стратегия.
+* Strategy - Интерфейсът, който дефинира общото поведение на алгоритмите.
+* Concrete Strategy - Конкретна реализация на даден алгоритъм.
+
+### UML диаграма
+
+<img width="640" height="358" alt="Strategy" src="https://github.com/user-attachments/assets/1c65702e-4345-4dc7-823f-8e3257756781" />
+
+
+### Примерна реализация
+
+```java
+public interface DiscountStrategy {
+
+    double applyDiscount(double price);
 }
 ```
-
-Необходими са конкретни имплементации:
-
-```
-public class RectangleShape implements ShapeStrategy{
-
-    private int length;
-    private int width;
-
-    public RectangleShape(int length, int width) {
-        this.length = length;
-        this.width = width;
-    }
+```java
+public class NoDiscountStrategy implements DiscountStrategy {
 
     @Override
-    public double calculateArea() {
-        return length * width;
+    public double applyDiscount(double price) {
+        return price;
     }
 }
 ```
-```
-public class TriangleStrategy implements ShapeStrategy{
-
-    private int a;
-    private int b;
-    private int c;
-
-    public TriangleStrategy(int a, int b, int c) {
-        if ((a + b > c) && (a + c > b) && (b + c > a)) {
-            this.a = a;
-            this.b = b;
-            this.c = c;
-        }
-    }
+```java
+public class StudentDiscountStrategy implements DiscountStrategy {
 
     @Override
-    public double calculateArea() {
-        int p = (a + b + c)/2;
-        return Math.sqrt(p * (p - a) * (p - b) * (p - c));
+    public double applyDiscount(double price) {
+        return price * 0.90;
     }
 }
 ```
-```
-public class CircleStrategy implements ShapeStrategy{
-
-    private int radius;
-
-    public CircleStrategy(int radius) {
-        this.radius = radius;
-    }
+```java
+public class VipDiscountStrategy implements DiscountStrategy {
 
     @Override
-    public double calculateArea() {
-        return Math.PI * radius * radius;
+    public double applyDiscount(double price) {
+        return price * 0.80;
     }
 }
 ```
+Контекст
+```java
+public class Order {
 
-След това трябва да бъде създаден и контекстен клас:
+    private final double initialPrice;
+    private DiscountStrategy discountStrategy;
 
-```
-public class Shape {
-
-    private ShapeStrategy shapeStrategy;
-
-    public Shape(ShapeStrategy shapeStrategy) {
-        this.shapeStrategy = shapeStrategy;
+    public Order(double initialPrice, DiscountStrategy discountStrategy) {
+        this.initialPrice = initialPrice;
+        this.discountStrategy = discountStrategy;
     }
 
-    public double getArea() {
-        return shapeStrategy.calculateArea();
+    public double getFinalPrice() {
+        return discountStrategy.applyDiscount(initialPrice);
     }
 }
 ```
-
-Клиентският код изглежда по следния начин:
-
-```
+Използване
+```java
 public class Application {
 
     public static void main(String[] args) {
-        Shape circle = new Shape(new CircleStrategy(2));
-        System.out.println("Circle's area is: " + String.format("%.2f", circle.getArea()));
 
-        Shape triangle = new Shape(new TriangleStrategy(5, 4, 6));
-        System.out.println("Triangle's area is: " + String.format("%.2f", triangle.getArea()));
+        Order firstOrder = new Order(100.00, new NoDiscountStrategy());
 
-        Shape rectangle = new Shape(new RectangleShape(4, 7));
-        System.out.println("Rectangle's area is: " + rectangle.getArea());
+        Order secondOrder = new Order(100.00, new StudentDiscountStrategy());
+
+        Order thirdOrder = new Order(100.00, new VipDiscountStrategy());
+
+        System.out.println(firstOrder.getFinalPrice());
+        System.out.println(secondOrder.getFinalPrice());
+        System.out.println(thirdOrder.getFinalPrice());
     }
 }
 ```
+
+Класът Order е контекстът. Той съдържа началната цена и референция към обект от тип DiscountStrategy.
+
+Интерфейсът DiscountStrategy дефинира общ метод за изчисляване на цена след прилагане на отстъпка.
+
+Всеки конкретен клас реализира различен алгоритъм за изчисление. Класът Order не знае как точно се пресмята отстъпката, а само извиква метода applyDiscount() на избраната стратегия.
+
+> [!IMPORTANT]
+> При Strategy се променя алгоритъмът, а не състоянието на обекта. Това е основната разлика
+> между Strategy и State.
+
+### Предимства
+
+* премахва част от условната логика;
+* позволява лесно добавяне на нови алгоритми;
+* стратегиите са взаимозаменяеми;
+* контекстният обект не зависи от конкретните реализации;
+* подпомага спазването на принципа Open/Closed.
+
+### Недостатъци
+
+* увеличава броя на класовете;
+* клиентът трябва да избере подходящата стратегия;
+* не е оправдан при много малко и рядко променящи се варианти.
+
+### Приложение
+
+Strategy е подходящ когато:
+* съществуват няколко варианта на един и същ алгоритъм;
+* изборът на алгоритъм трябва да може да се променя;
+* не е желателно използването на множество условни конструкции;
+* различните алгоритми трябва да бъдат отделени в самостоятелни класове.
 
