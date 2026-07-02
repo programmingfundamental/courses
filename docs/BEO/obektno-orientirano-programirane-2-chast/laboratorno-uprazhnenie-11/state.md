@@ -8,187 +8,116 @@ nav_order: 3
 
 # State
 
-Моделът на проектиране на състоянието позволява промяна на поведението на обект при промяна на неговото вътрешно състояние. Обикновено различните състояния са обособени в отделни класове и поведението се делегира на текущото състояние.
+### Проблем
 
-State елиминира условната логика чрез полиморфизъм. Неговото използване спестява писането на множество условни конструкции, силно разклонена логика и нарушаването на OCP.
+При някои обекти поведението зависи от тяхното текущо състояние. Често това води до използването на множество условни конструкции (if, switch), които постепенно усложняват логиката на програмата.
 
-За реализация на шаблона State са необходими контекст (обект, чието поведение се променя), състояние (описвано чрез интерфейс, дефиниращ поведението на контекста) и конкретни състояния (представляващи реализации на дадено състояние).
+Например билет може да бъде свободен, резервиран или продаден. В зависимост от текущото му състояние едни операции са позволени, а други – не. При добавяне на нови състояния или промяна в бизнес логиката условните конструкции стават все по-сложни и трудни за поддръжка.
 
-Основни характеристики на State:
+### Решение
 
-- поведението на обекта варира според състоянието
+Шаблонът State разделя различните състояния в самостоятелни класове. Вместо контекстният обект да съдържа условна логика, той делегира изпълнението на текущото състояние.
 
-- преходите между различните състояния могат да бъдат контролирани или от самите състояния, или от контекста (съществуват различни имплементации)
+При промяна на състоянието поведението на обекта автоматично се променя чрез използването на друга реализация на интерфейса State.
 
-- използва композиция и полиморфизъм
+### Дефиниция
 
-- намалява присъствието на условна логика.
+State е поведенчески шаблон за проектиране, който позволява на даден обект да променя поведението си при промяна на вътрешното си състояние.
 
+Основните участници в шаблона са:
+* Context - Обектът, чието поведение зависи от текущото състояние.
+* State - Интерфейсът, който дефинира поведението за различните състояния.
+* Concrete State - Конкретна реализация на дадено състояние.
 
-Нека разгледаме пример за билет, който може да бъде резервиран, закупен и отказан. Реализацията по-долу е без използване на шаблона State.
+### UML диаграма
 
-```
-
-public class Ticket {
-
-    private String ticketState;
-    private int ticketId;
-
-    public Ticket(int ticketId) {
-        this.ticketState = "available";
-        this.ticketId = ticketId;
-    }
-
-    public String book() {
-        if (ticketState.equalsIgnoreCase("available")) {
-            ticketState = "booked";
-            return "Ticket with id = " + this.ticketId + " has been booked";
-        } else if (ticketState.equalsIgnoreCase("booked")) {
-            return "Ticket with id = " + this.ticketId + " has been already booked";
-        } else if (ticketState.equalsIgnoreCase("sold")) {
-            return "Ticket with id = " + this.ticketId + " has been already sold";
-        }
-        return "Unrecognized state";
-    }
-
-    public String buy() {
-        if (ticketState.equalsIgnoreCase("available") ||
-				ticketState.equalsIgnoreCase("booked")) {
-            ticketState = "sold";
-            return "Ticket with id = " + this.ticketId + " has been sold";
-        } else if (ticketState.equalsIgnoreCase("sold")) {
-            return "Ticket with id = " + this.ticketId + " has been already sold";
-        }
-        return "Unrecognized state";
-    }
-
-    public String cancel() {
-        if (ticketState.equalsIgnoreCase("available")) {
-            return "Available ticket cannot be cancelled";
-        } else if (ticketState.equalsIgnoreCase("booked")) {
-            ticketState = "available";
-            return "Ticket with id = " + this.ticketId + " has been cancelled";
-        } else if (ticketState.equalsIgnoreCase("sold")) {
-            return "Sold ticket cannot be cancelled";
-        }
-        return "Unrecognized state";
-    }
-
-}
-
-public class Application {
-
-    public static void main(String[] args) {
-        Ticket ticket = new Ticket(123);
-        System.out.println(ticket.book());
-        System.out.println(ticket.cancel());
-        System.out.println(ticket.buy());
-        System.out.println(ticket.cancel());
-
-    }
-}
-
-```
-
-Полученият резултат от изпълнението на горния пример е:
-
-```
-Ticket with id = 123 has been booked
-Ticket with id = 123 has been cancelled
-Ticket with id = 123 has been sold
-Sold ticket cannot be cancelled
-
-```
+<img width="453" height="456" alt="State" src="https://github.com/user-attachments/assets/7824061e-55aa-44ac-ab38-0fa238cbbc70" />
 
 
-По-долу е показан същия пример, но реализиран с използване на шаблона State:
+### Примерна реализация
 
+Интерфейс State
 
-```
+```java
 public interface TicketState {
 
-    String bookTicket(Ticket ticket);
+    String book(Ticket ticket);
 
-    String buyTicket(Ticket ticket);
+    String buy(Ticket ticket);
 
-    String cancelTicket(Ticket ticket);
+    String cancel(Ticket ticket);
+
 }
 ```
-Интерфейсът описва възможните състояния на контекста (Ticket).
-
-Всяко състояние представлява отделен клас.
-
-```
+Concrete State
+```java
 public class AvailableTicket implements TicketState {
 
     @Override
-    public String bookTicket(Ticket ticket) {
+    public String book(Ticket ticket) {
         ticket.setTicketState(new BookedTicket());
-        return "Ticket with id = " + ticket.getTicketId() + " has been booked";
+        return "Ticket " + ticket.getTicketId() + " has been booked.";
     }
 
     @Override
-    public String buyTicket(Ticket ticket) {
+    public String buy(Ticket ticket) {
         ticket.setTicketState(new SoldTicket());
-        return "Ticket with id = " + ticket.getTicketId() + " has been sold";
+        return "Ticket " + ticket.getTicketId() + " has been sold.";
     }
 
     @Override
-    public String cancelTicket(Ticket ticket) {
-        return "No ticket to be cancelled";
+    public String cancel(Ticket ticket) {
+        return "Available ticket cannot be cancelled.";
     }
 }
 ```
-
-```
+```java
 public class BookedTicket implements TicketState {
 
-	@Override
-    public String bookTicket(Ticket ticket) {
-        return "Ticket with id = " + ticket.getTicketId() + " is already booked";
+    @Override
+    public String book(Ticket ticket) {
+        return "Ticket is already booked.";
     }
 
     @Override
-    public String buyTicket(Ticket ticket) {
+    public String buy(Ticket ticket) {
         ticket.setTicketState(new SoldTicket());
-        return "Ticket with id = " + ticket.getTicketId() + " has been sold";
+        return "Ticket " + ticket.getTicketId() + " has been sold.";
     }
 
     @Override
-    public String cancelTicket(Ticket ticket) {
+    public String cancel(Ticket ticket) {
         ticket.setTicketState(new AvailableTicket());
-        return "Ticket with id = " + ticket.getTicketId() + " has been cancelled";
+        return "Reservation cancelled.";
     }
 }
 ```
-
-```
+```java
 public class SoldTicket implements TicketState {
 
-	@Override
-    public String bookTicket(Ticket ticket) {
-        return "Sold ticket cannot be booked";
+    @Override
+    public String book(Ticket ticket) {
+        return "Sold ticket cannot be booked.";
     }
 
     @Override
-    public String buyTicket(Ticket ticket) {
-        return "Sold ticket cannot be sold";
+    public String buy(Ticket ticket) {
+        return "Ticket is already sold.";
     }
 
     @Override
-    public String cancelTicket(Ticket ticket) {
-        return "Sold ticket cannot be cancelled";
+    public String cancel(Ticket ticket) {
+        return "Sold ticket cannot be cancelled.";
     }
 }
 ```
-
-Контекстният обект ще изглежда така:
-
-```
+Context
+```java
 public class Ticket {
 
+    private final int ticketId;
+
     private TicketState ticketState = new AvailableTicket();
-    private int ticketId;
 
     public Ticket(int ticketId) {
         this.ticketId = ticketId;
@@ -203,36 +132,72 @@ public class Ticket {
     }
 
     public String book() {
-        return ticketState.bookTicket(this);
+        return ticketState.book(this);
     }
 
     public String buy() {
-        return ticketState.buyTicket(this);
+        return ticketState.buy(this);
     }
 
     public String cancel() {
-        return ticketState.cancelTicket(this);
+        return ticketState.cancel(this);
     }
-}
 
+}
+```
+Използване
+```java
+public class Application {
+
+    public static void main(String[] args) {
+
+        Ticket ticket = new Ticket(123);
+
+        System.out.println(ticket.book());
+        System.out.println(ticket.cancel());
+        System.out.println(ticket.buy());
+        System.out.println(ticket.cancel());
+
+    }
+
+}
+```
+Резултатът е:
+```java
+Ticket 123 has been booked.
+Reservation cancelled.
+Ticket 123 has been sold.
+Sold ticket cannot be cancelled.
 ```
 
-Тестването и резултата от реализирания код изглеждат по напълно идентичен начин.
+Класът Ticket представлява контекстния обект (Context). Вместо да съдържа условна логика за всички възможни състояния, той пази референция към текущото състояние чрез поле от тип TicketState.
 
-Реализираният със State пример представя ясно разделение на ролите и при него състоянието не пази вътрешни данни.
+Интерфейсът TicketState дефинира общото поведение на всички състояния. Всяка конкретна реализация (AvailableTicket, BookedTicket и SoldTicket) определя как трябва да се изпълняват операциите book(), buy() и cancel().
 
-Важно е да се отбележи, че State не е универсално решение за премахване на всякаква условна логика.
+При необходимост от промяна на състоянието конкретният клас извиква метода setTicketState() на контекста и задава ново състояние. След тази промяна всички следващи извиквания автоматично използват поведението на новото състояние.
 
+> [!IMPORTANT]
+> Шаблонът State не премахва логиката за преход между състоянията. Вместо това я разпределя между отделните класове,
+> описващи конкретните състояния. Така контекстният обект остава прост и не съдържа множество условни конструкции.
 
+### Предимства
 
-В заключение, използването на шаблона State е подходящо при решаване на задачи, при които:
+* премахва голяма част от условната логика;
+* разделя поведението на отделни класове;
+* улеснява добавянето на нови състояния;
+* подпомага спазването на принципа Open/Closed;
+* подобрява четимостта и поддържаемостта на кода.
 
-- има ясно разграничени състояния
+### Недостатъци
 
-- поведението на обекта се променя
+* увеличава броя на класовете;
+* при голям брой състояния структурата може да стане по-сложна;
+* преходите между състоянията трябва да бъдат проектирани внимателно.
 
-- наблюдават се преходи между различни състояния
+### Приложение
 
-- не желаем условна логика в контекста.
-
-
+Шаблонът State е подходящ когато:
+* поведението на обекта зависи от неговото текущо състояние;
+* има ясно разграничени състояния и преходи между тях;
+* условната логика започва да се разраства;
+* се цели отделяне на логиката за всяко състояние в самостоятелен клас.
