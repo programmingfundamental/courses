@@ -27,7 +27,7 @@ nav_order: 5
 
 Пример
 
-```
+```java
 import java.io.*;
 
 class Application {
@@ -46,7 +46,7 @@ class Application {
 
 Second Tab
 
-```
+```text
 45
 5
 ```

@@ -27,7 +27,7 @@ public class Application {
 
 Second Tab
 
-```
+```text
 Не са едни и същи
 ```
 
@@ -52,7 +52,7 @@ public class Application {
 
 Резултат
 
-```
+```text
 Едни и същи
 ```
 
@@ -79,7 +79,7 @@ public class Application {
 
 Резултат
 
-```
+```text
 Не са едни и същи
 ```
 
@@ -100,7 +100,7 @@ public class Application {
 
 Second Tab
 
-```
+```text
 false
 ```
 
