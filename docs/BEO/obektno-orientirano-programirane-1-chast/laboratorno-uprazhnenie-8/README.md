@@ -6,4 +6,5 @@ has_children: true
 nav_order: 8
 permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-8
 ---
+
 # Лабораторно упражнение 8

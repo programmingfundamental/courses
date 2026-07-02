@@ -5,12 +5,13 @@ parent: Лабораторно упражнение 11
 grand_parent: Обектно-ориентирано програмиране - 1 част
 nav_order: 1
 ---
+
 # Упражнения за извънаудиторна заетост
 
 I. Да се състави интерфейс „Редактор на книга“, методи
 
-* void genereteBook(String title, int numberPages ): създава книга със заглавие title и numberPages празни страници
-* void swapPages(int firstPN, int secondPN): разменя страниците с номера, параметри.
+- void genereteBook(String title, int numberPages ): създава книга със заглавие title и numberPages празни страници
+- void swapPages(int firstPN, int secondPN): разменя страниците с номера, параметри.
 
 Продуцира изключение ако не може да се изпълни (InvalidPageException)
 
@@ -18,8 +19,8 @@ II. Да се състави клас „Страница“, имплемент
 
 Частни полета:
 
-* Номер на стр. Число
-* Съдържание - низ
+- Номер на стр. Число
+- Съдържание - низ
 
 Публични членове. Конструктори:
 

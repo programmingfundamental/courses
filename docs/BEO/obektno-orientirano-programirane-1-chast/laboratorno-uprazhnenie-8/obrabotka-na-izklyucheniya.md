@@ -5,6 +5,7 @@ parent: Лабораторно упражнение 8
 grand_parent: Обектно-ориентирано програмиране - 1 част
 nav_order: 3
 ---
+
 # Обработка на изключения
 
 ### Какво представлява изключението?
@@ -19,12 +20,12 @@ nav_order: 3
 
 Всички изключения и грешки в Java наследяват класа Throwable.
 
-
 <p align="center"> <img width="729" height="491" alt="0_XrfSEZ-iZxaT3-qB" src="https://github.com/user-attachments/assets/edb74579-ec7f-4ca6-9c58-e1b3fa79546c" /> </p>
 
 Йерархията разделя възникналите проблеми в две основни групи:
-* **Error** – критични грешки, възникващи в средата за изпълнение;
-* **Exception** – ситуации, които приложението може да обработи.
+
+- **Error** – критични грешки, възникващи в средата за изпълнение;
+- **Exception** – ситуации, които приложението може да обработи.
 
 ### Error и Exception
 
@@ -33,9 +34,10 @@ nav_order: 3
 Класът Error описва сериозни проблеми, възникващи в JVM или операционната среда. Такива грешки обикновено не могат да бъдат обработени успешно от приложението.
 
 Примери:
-* OutOfMemoryError;
-* StackOverflowError;
-* VirtualMachineError.
+
+- OutOfMemoryError;
+- StackOverflowError;
+- VirtualMachineError.
 
 При възникването им програмата най-често не може да продължи нормалното си изпълнение.
 
@@ -44,10 +46,11 @@ nav_order: 3
 Класът Exception описва ситуации, които могат да възникнат по време на работа на програмата и при които приложението има възможност да предприеме подходящи действия.
 
 Примери:
-* деление на нула;
-* липсващ файл;
-* невалиден вход от потребителя;
-* достъп до невалиден индекс на масив.
+
+- деление на нула;
+- липсващ файл;
+- невалиден вход от потребителя;
+- достъп до невалиден индекс на масив.
 
 ### Checked и Unchecked изключения
 
@@ -58,13 +61,15 @@ nav_order: 3
 Checked изключенията се проверяват от компилатора.
 
 При извикване на метод, който може да хвърли checked изключение, програмистът е длъжен:
-* да обработи изключението чрез try-catch;
-* или да го декларира чрез throws.
+
+- да обработи изключението чрез try-catch;
+- или да го декларира чрез throws.
 
 Типичен пример за такива изключения са:
-* IOException
-* SQLException
-* ClassNotFoundException
+
+- IOException
+- SQLException
+- ClassNotFoundException
 
 **Unchecked exceptions**
 
@@ -73,12 +78,12 @@ Unchecked изключенията наследяват класа RuntimeExcept
 Те не се проверяват от компилатора и най-често са резултат от логическа грешка в програмата.
 
 Типични представители са:
-* NullPointerException;
-* ArithmeticException;
-* ArrayIndexOutOfBoundsException;
-* NumberFormatException;
-* IllegalArgumentException.
 
+- NullPointerException;
+- ArithmeticException;
+- ArrayIndexOutOfBoundsException;
+- NumberFormatException;
+- IllegalArgumentException.
 
 ### Класът Throwable
 
@@ -113,6 +118,7 @@ public class Example {
     }
 }
 ```
+
 В примера цикълът използва условието <=, което води до опит за достъп до несъществуващ елемент на масива. Възникналото изключение се прихваща и обработва в блока *catch*.
 
 ### Multiple catch
@@ -143,6 +149,7 @@ catch (IOException | SQLException ex) {
     System.out.println(ex.getMessage());
 }
 ```
+
 Тази конструкция се използва, когато обработката на различните изключения е еднаква.
 
 ### Блок finally
@@ -157,6 +164,7 @@ finally {
     System.out.println("Finally block");
 }
 ```
+
 Дори ако възникне изключение, блокът finally ще бъде изпълнен.
 
 ### Ключова дума throws
@@ -168,6 +176,7 @@ public static int divide(int a, int b) throws ArithmeticException {
     return a / b;
 }
 ```
+
 Извикващият метод трябва да обработи или отново да декларира изключението.
 
 ### Ключова дума throw
@@ -229,7 +238,5 @@ catch (IOException ex) {
     System.out.println(ex.getMessage());
 }
 ```
+
 Всички ресурси, декларирани в скобите след try, се затварят автоматично, независимо дали е възникнало изключение.
-
-
-
