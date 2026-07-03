@@ -124,7 +124,6 @@ H2 е релационна база данни, написана на Java, пр
 - Комбинира **Embedded и Server** достъп.
 - Приложението има директен локален достъп, а външни клиенти могат да се свързват чрез TCP.
 - Реализацията на този режим се осъществява чрез добавянето на AUTO_SERVER=TRUE към адреса за достъп до базата данни: jdbc:h2:mem:testdb;AUTO_SERVER=TRUE
-<br> 
 
 <p align="center">
   <img src="../../../../assets/connection-mode-mixed-2.png" alt="alt text" width="230"/>
@@ -139,7 +138,7 @@ H2 е релационна база данни, написана на Java, пр
 В `src/main/resources/application.properties` се добавят следните настройки:
 
 ```properties
-spring.datasource.url=jdbc:h2:file:./data/tasksdb;AUTO_SERVER=TRUE
+spring.datasource.url=jdbc:h2:file:./data/tasks_db;AUTO_SERVER=TRUE
 spring.datasource.driverClassName=org.h2.Driver 
 spring.datasource.username=padawan
 spring.datasource.password=R2D2c3pO
@@ -156,6 +155,7 @@ spring.jpa.hibernate.ddl-auto=update
   Указва JDBC драйвера за H2, който Spring Boot използва, за да се свърже с базата.
 
 - **`spring.datasource.username=padawan`**  
+
   Първоначалното създаване на потребител в H2 се извършва чрез конфигурацията. Първият създаден потребител има администраторски права върху цялата база данни.
 
 - **`spring.datasource.password=R2D2c3pO`**  
@@ -166,7 +166,6 @@ spring.jpa.hibernate.ddl-auto=update
 
 - **`spring.jpa.hibernate.ddl-auto=update`**  
   Определя как Hibernate управлява схемата на базата: проверява, създава или обновява таблиците според entity класовете. Стойността `update` добавя промени без да изтрива данни.
-  <br>
 
 > URL за JDBC се дефинира тук, за да може Spring Boot да създаде връзката при стартиране. H2 Console и IntelliJ Data Source използват същия URL за визуална работа с базата.
 
@@ -216,6 +215,7 @@ spring.jpa.hibernate.ddl-auto=update
   Определя пътя до уеб интерфейса на H2. Конзолата е достъпна чрез адреса на приложението, комбиниран с този път (например: `http://localhost:8080/h2-console`).
 
 - Стартира се приложението (Embedded Tomcat слуша на порт 8080).  
+
 - Отваря се браузър: `http://localhost:8080/h2-console`  
 - Попълва се формата:  
   - JDBC URL: `jdbc:h2:file:./data/tasksdb`  
