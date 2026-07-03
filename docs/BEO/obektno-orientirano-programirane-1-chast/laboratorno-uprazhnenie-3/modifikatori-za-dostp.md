@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Модификатори за достъп
+title: Модификатори за достъп (Access Modifiers)
 parent: Лабораторно упражнение 3
 grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 4
+nav_order: 2
 ---
 
 # Модификатори за достъп (Access Modifiers)

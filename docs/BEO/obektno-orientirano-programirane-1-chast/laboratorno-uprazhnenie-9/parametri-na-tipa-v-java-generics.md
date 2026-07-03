@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Параметри на типа в Java Generics
+title: Параметри на типа
 parent: Лабораторно упражнение 9
 grand_parent: Обектно-ориентирано програмиране - 1 част
 nav_order: 3

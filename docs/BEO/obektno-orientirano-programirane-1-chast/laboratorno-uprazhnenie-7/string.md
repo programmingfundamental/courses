@@ -1,9 +1,9 @@
 ---
 layout: default
-title: StringBuilder и StringBuffer
+title: StringBuilder
 parent: Лабораторно упражнение 7
 grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 2
+nav_order: 1
 ---
 
 # StringBuilder

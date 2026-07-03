@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Капсулиране
+title: Капсулиране (Encapsulation)
 parent: Лабораторно упражнение 3
 grand_parent: Обектно-ориентирано програмиране - 1 част
 nav_order: 3
