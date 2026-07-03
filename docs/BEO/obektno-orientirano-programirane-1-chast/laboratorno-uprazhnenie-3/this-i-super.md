@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Ключовите думи this и super
+title: Ключова дума super
 parent: Лабораторно упражнение 3
 grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 2
+nav_order: 4
 ---
 
 # Ключова дума super

@@ -3,7 +3,7 @@ layout: default
 title: Системен изход в JAVA
 parent: Лабораторно упражнение 1
 grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 9
+nav_order: 5
 ---
 
 # Системен изход в Java

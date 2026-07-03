@@ -3,7 +3,7 @@ layout: default
 title: Обект
 parent: Лабораторно упражнение 2
 grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 3
+nav_order: 2
 ---
 
 # Обект
