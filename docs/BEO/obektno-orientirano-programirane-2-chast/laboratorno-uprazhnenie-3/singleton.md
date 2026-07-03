@@ -10,16 +10,61 @@ nav_order: 2
 
 ### Проблем
 
-В практиката съществуват ситуации, в които е необходимо даден клас да има само една инстанция за цялото приложение. Създаването на множество обекти би могло да доведе до некоректно поведение, излишен разход на ресурси или несъгласувано състояние на системата.
+Да се разработи клас Logger, който записва съобщенията, генерирани от различните модули на приложение.
 
-Типични примери са:
-* управление на конфигурация;
-* записване в лог файл;
-* достъп до база от данни;
-* управление на кеш;
-* управление на печатащи устройства или други споделени ресурси.
+### Решение без използване на шаблона 
 
-### Решение
+Най-естественото решение е използването на обикновен клас:
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class Logger {
+
+    private List<String> messages = new ArrayList<>();
+
+    public void log(String message) {
+        messages.add(message);
+    }
+
+    public List<String> getMessages() {
+        return new ArrayList<>(messages);
+    }
+}
+```
+
+Клиентски код:
+
+```java
+public class Application {
+
+    public static void main(String[] args) {
+
+        Logger authenticationLogger = Logger.getInstance();
+        Logger paymentLogger = Logger.getInstance();
+
+        authenticationLogger.log("User login");
+        paymentLogger.log("Payment completed");
+
+        for (String message : authenticationLogger.getMessages()) {
+            System.out.println(message);
+        }
+    }
+}
+```
+Резултат:
+```java
+User login
+```
+
+### Недостатъци на решението
+
+В представения пример променливите *authenticationLogger* и *paymentLogger* изглеждат като различни логъри, но всъщност е желателно всички съобщения да се записват на едно място. Ако всеки модул създава собствен обект Logger, управлението на записите се затруднява и се губи централизацията на логването.
+
+Следователно е необходимо решение, което да гарантира използването на един и същ обект от всички части на приложението.
+
+### Шаблонът като решение
 
 Шаблонът **Singleton** гарантира, че от даден клас може да съществува само една инстанция и предоставя глобална точка за достъп до нея.
 
@@ -30,48 +75,73 @@ nav_order: 2
 
 ### Дефиниция
 
-Singleton е шаблон за проектиране от групата на** шаблоните за създаване (Creational Design Patterns)**. Неговата цел е да гарантира наличието на единствен обект от даден клас и да осигури контролиран глобален достъп до него.
+Singleton е шаблон за проектиране от групата на **шаблоните за създаване (Creational Design Patterns)**. Неговата цел е да гарантира наличието на единствен обект от даден клас и да осигури контролиран глобален достъп до него.
 
 Всички реализации на шаблона следват две основни изисквания:
 * конструкторът е деклариран като private;
-* класът предоставя публичен статичен метод (обикновено getInstance()), чрез който се получава единствената инстанция.
+* единствената инстанция се достъпва чрез публичен статичен метод.
 
 ### UML диаграма
 
-<img width="286" height="116" alt="Singleton" src="https://github.com/user-attachments/assets/493b1e9a-9266-4b1a-8933-0ecc2f87cf04" />
+<img width="267" height="282" alt="Singleton" src="https://github.com/user-attachments/assets/d080398b-160d-436a-98b4-85125b483e65" />
+
 
 ### Примерна реализация (Lazy Initialization)
 
 ```java
-public class SingletonClass {
+import java.util.ArrayList;
+import java.util.List;
 
-    private static SingletonClass singletonInstance;
+public class Logger {
 
-    private SingletonClass() {}
+    private static Logger instance;
 
-    public static SingletonClass getInstance() {
-        if (singletonInstance == null) {
-            singletonInstance = new SingletonClass();
+    private List<String> messages = new ArrayList<>();
+
+    private Logger() {
+    }
+
+    public static Logger getInstance() {
+        if (instance == null) {
+            instance = new Logger();
         }
-        return singletonInstance;
+        return instance;
+    }
+
+    public void log(String message) {
+        messages.add(message);
+    }
+
+    public List<String> getMessages() {
+        return messages;
     }
 }
 ```
-Проверка, че се създава само една инстанция:
+Използване:
 
 ```java
 public class Application {
 
     public static void main(String[] args) {
 
-        SingletonClass first = SingletonClass.getInstance();
-        SingletonClass second = SingletonClass.getInstance();
+        Logger authenticationLogger = Logger.getInstance();
+        Logger paymentLogger = Logger.getInstance();
 
-        System.out.println(first == second);   // true
+        authenticationLogger.log("User login");
+        paymentLogger.log("Payment completed");
+
+        for (String message : authenticationLogger.getMessages()) {
+            System.out.println(message);
+        }
     }
 }
 ```
-За да се провери, че шаблонът създава само една инстанция, могат да бъдат получени две препратки чрез метода getInstance(). Сравнението с оператора == връща true, което показва, че и двете променливи сочат към един и същ обект в паметта.
+Конструкторът на класа е деклариран като private, поради което създаването на обекти чрез оператора new извън класа е невъзможно.
+
+Единствената инстанция се съхранява в статичното поле instance. При първото извикване на метода getInstance() обектът се създава и се записва в това поле. При всички следващи извиквания се връща вече съществуващият обект.
+
+По този начин всички части на приложението използват един и същ обект Logger, което позволява централизирано управление на процеса на записване.
+
 
 **Реализации на Singleton**
 
@@ -96,18 +166,18 @@ public class Application {
 * централизира управлението на споделени ресурси;
 * предотвратява случайното създаване на множество обекти.
 
-### Недостатъци
+### Недостатъци на шаблона
 
-* нарушава принципа Single Responsibility Principle (SRP), тъй като класът едновременно управлява собствената си логика и жизнения си цикъл;
+* нарушава принципа *Single Responsibility Principle (SRP)*, тъй като класът едновременно управлява собствената си логика и жизнения си цикъл;
 * създава глобално състояние в приложението;
-* затруднява модулното тестване и използването на mock обекти;
+* затруднява модулното тестване;
 * при неправилна реализация може да създаде проблеми в многонишкова среда.
 
 ### Приложение
 
 Singleton е подходящ при разработване на:
 * конфигурационни мениджъри;
-* логващи системи (Logger);
+* логващи системи;
 * кеширащи компоненти;
 * управление на връзки към база данни;
-управление на споделени системни ресурси.
+* управление на споделени системни ресурси.
