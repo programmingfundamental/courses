@@ -8,177 +8,169 @@ nav_order: 1
 
 # Adapter
 
-Шаблонът за проектиране на адаптер е един от **шаблоните за структурен дизайн** и се използва с цел два несвързани интерфейса да могат да работят заедно. Обектът, който се присъединява към тези несвързани интерфейси, се нарича **адаптер** .
+### Проблем
 
-Реалн пример за дизайн на адаптера е зарядното устройство за мобилни устройства. Мобилната батерия се нуждае от 3 волта за зареждане, но нормалният контакт произвежда или 120 V (САЩ), или 240 V (Европа). Така мобилното зарядно устройство работи като адаптер между гнездото за мобилно зареждане и стенния контакт. По-долу е показана реализация на мулти-адаптер, използващ шаблон за проектиране на адаптер. Необходимо е създаването на два класа - `Volt`(за измерване на волта) и `Socket`(създаване на контакт с постоянни волтове на база 120V).
+В дадено приложение вече съществува интерфейс за обработка на плащания. По-късно възниква необходимост да се използва външна платежна система, чийто интерфейс е различен от този, който приложението очаква.
 
-```
-public class Volt {
+Клиентският код не трябва да бъде променян, за да работи директно с външната система.
 
-	private int volts;
-	
-	public Volt(int v){
-		this.volts=v;
-	}
+### Решение
 
-	public int getVolts() {
-		return volts;
-	}
+Шаблонът **Adapter** позволява клас с несъвместим интерфейс да бъде използван чрез интерфейс, който клиентският код вече познава.
 
-	public void setVolts(int volts) {
-		this.volts = volts;
-	}
-	
-}
-```
+Адаптерът обвива външния клас и преобразува извикванията от очаквания интерфейс към реалните методи на адаптирания клас.
 
-<pre><code><strong>public class Socket {
-</strong>
-	public Volt getVolt(){
-		return new Volt(120);
-	}
-}
-</code></pre>
+### Дефиниция
 
-След това трябва да се реализира адаптер, който може да произвежда 3 волта, 12 волта и 120 волта по подразбиране. За целта се създава интерфейс на адаптер с тези методи.
+Adapter е структурен шаблон за проектиране, който позволява обекти с несъвместими интерфейси да работят заедно, без да се променя техният съществуващ код.
 
-```
-public interface SocketAdapter {
-	public Volt get120Volt();
-		
-	public Volt get12Volt();
-	
-	public Volt get3Volt();
-}
-```
+В описанието на шаблона Adapter често се използват следните термини:
+* Target – интерфейсът, който клиентският код очаква да използва.
+* Adaptee – съществуващият клас с несъвместим интерфейс, който трябва да бъде използван.
+* Adapter – класът, който реализира интерфейса Target и преобразува извикванията към Adaptee.
 
-#### Модел на двупосочен адаптер
+**Реализации на шаблона Adapter**
 
-При прилагането на модела на адаптер има два подхода - адаптер на клас и адаптер на обект - но и двата подхода дават един и същ резултат.
+Съществуват два основни начина за реализиране на шаблона Adapter.
 
-1. **Class Adapter** – Тази форма използва **наследяване на java** и разширява интерфейса на източника, в нашия случай Socket клас.
-2. **Обектен адаптер** - Този подход използва **Java Composition** и адаптерът съдържа изходния обект.
+*Class Adapter*
+* използва наследяване;
+* адаптерът наследява адаптирания клас и имплементира целевия интерфейс;
+* поради липсата на множествено наследяване на класове в Java този подход се използва сравнително рядко.
 
-#### Шаблон за проектиране на адаптер - адаптер за клас
+*Object Adapter*
+* използва композиция (делегиране чрез съдържане на референция към адаптирания обект);
+* адаптерът съдържа референция към адаптирания обект;
+* осигурява по-слаба свързаност между класовете;
+* това е най-често използваната реализация в Java.
 
-Ето реализацията на подхода **за клас адаптер** на адаптера от гореописания пример.
+В настоящото упражнение ще бъде разгледан Object Adapter.
 
-```
+| Class Adapter 			| Object Adapter 		|
+|---------------------------|-----------------------|
+| използва наследяване      | използва композиция   |
+| по-силна свързаност       | по-слаба свързаност   |
+| по-труден за разширяване  | по-гъвкав             |
+| използва се рядко в Java  | предпочитан подход    |
 
-public class SocketClassAdapterImpl extends Socket implements SocketAdapter{
 
-	@Override
-	public Volt get120Volt() {
-		return getVolt();
-	}
+> [!IMPORTANT]
+>
+> В литературата за шаблоните за проектиране често се среща изразът **"използва композиция вместо наследяване" (favor composition over inheritance)**.
+>
+> В този контекст *терминът композиция не се използва в тесния UML смисъл на отношение част–цяло, при което един обект управлява жизнения цикъл на друг*.
+>
+> Вместо това той означава, че **даден клас съдържа референция към друг обект и делегира част от своето поведение към него**, вместо да наследява неговата функционалност.
+>
+> Именно този подход осигурява по-слаба свързаност между класовете и по-лесно разширяване на системата. Поради тази причина реализацията чрез Object Adapter е предпочитаният подход в Java.
 
-	@Override
-	public Volt get12Volt() {
-		Volt v= getVolt();
-		return convertVolt(v,10);
-	}
+### UML диаграма
 
-	@Override
-	public Volt get3Volt() {
-		Volt v= getVolt();
-		return convertVolt(v,40);
-	}
-	
-	private Volt convertVolt(Volt v, int i) {
-		return new Volt(v.getVolts()/i);
-	}
+<img width="697" height="358" alt="ObjectAdapter" src="https://github.com/user-attachments/assets/8d29ae30-d1e0-456b-95d2-ce813b11bb8c" />
+
+| Роля			| Пример 		     		|
+|---------------|---------------------------|
+| Target        | PaymentProcessor   		|
+| Adapter       | PayPalAdapter      		|
+| Adaptee       | ExternalPayPalService     |
+| Client        | Application    			|
+
+
+### Примерна реализация
+
+```java
+public interface PaymentProcessor {
+
+    boolean pay(double amount);
 
 }
 ```
+```java
+public class BankPaymentProcessor implements PaymentProcessor {
 
-#### Шаблон за проектиране на адаптер - Реализация на адаптер на обект
+    @Override
+    public boolean pay(double amount) {
+        return true;
+    }
 
-Ето реализацията на **Object adapter** на същия адаптер.
-
-```
-
-
-public class SocketObjectAdapterImpl implements SocketAdapter{
-
-	// composition
-	private Socket sock = new Socket();
-	
-	@Override
-	public Volt get120Volt() {
-		return sock.getVolt();
-	}
-
-	@Override
-	public Volt get12Volt() {
-		Volt v= sock.getVolt();
-		return convertVolt(v,10);
-	}
-
-	@Override
-	public Volt get3Volt() {
-		Volt v= sock.getVolt();
-		return convertVolt(v,40);
-	}
-	
-	private Volt convertVolt(Volt v, int i) {
-		return new Volt(v.getVolts()/i);
-	}
 }
 ```
+```java
+public class ExternalPayPalService {
 
-Забележете, че и двете реализации на адаптера са почти еднакви и имплементират `SocketAdapter`интерфейса. Интерфейсът на адаптера може също да бъде **абстрактен клас** . Ето тестова програма за използване на описаната реализация на адаптер.
+    public boolean makePayment(double amount) {
+        return true;
+    }
 
+}
 ```
+```java
+public class PayPalAdapter implements PaymentProcessor {
 
+    private ExternalPayPalService payPalService;
 
+    public PayPalAdapter(ExternalPayPalService payPalService) {
+        this.payPalService = payPalService;
+    }
+
+    @Override
+    public boolean pay(double amount) {
+        return payPalService.makePayment(amount);
+    }
+
+}
+```
+```java
 public class Application {
 
-	public static void main(String[] args) {
-		
-		testClassAdapter();
-		testObjectAdapter();
-	}
+    public static void main(String[] args) {
 
-	private static void testObjectAdapter() {
-		SocketAdapter sockAdapter = new SocketObjectAdapterImpl();
-		Volt v3 = getVolt(sockAdapter,3);
-		Volt v12 = getVolt(sockAdapter,12);
-		Volt v120 = getVolt(sockAdapter,120);
-		System.out.println("v3 volts using Object Adapter="+v3.getVolts());
-		System.out.println("v12 volts using Object Adapter="+v12.getVolts());
-		System.out.println("v120 volts using Object Adapter="+v120.getVolts());
-	}
+        PaymentProcessor bankProcessor = new BankPaymentProcessor();
 
-	private static void testClassAdapter() {
-		SocketAdapter sockAdapter = new SocketClassAdapterImpl();
-		Volt v3 = getVolt(sockAdapter,3);
-		Volt v12 = getVolt(sockAdapter,12);
-		Volt v120 = getVolt(sockAdapter,120);
-		System.out.println("v3 volts using Class Adapter="+v3.getVolts());
-		System.out.println("v12 volts using Class Adapter="+v12.getVolts());
-		System.out.println("v120 volts using Class Adapter="+v120.getVolts());
-	}
-	
-	private static Volt getVolt(SocketAdapter sockAdapter, int i) {
-		switch (i){
-		case 3: return sockAdapter.get3Volt();
-		case 12: return sockAdapter.get12Volt();
-		case 120: return sockAdapter.get120Volt();
-		default: return sockAdapter.get120Volt();
-		}
-	}
+        if (bankProcessor.pay(120.50)) {
+            System.out.println("Payment completed successfully.");
+        }
+
+        ExternalPayPalService payPalService = new ExternalPayPalService();
+
+        PaymentProcessor payPalProcessor = new PayPalAdapter(payPalService);
+
+        if (payPalProcessor.pay(120.50)) {
+            System.out.println("Payment completed successfully.");
+        }
+       
+    }
+
 }
 ```
+В примера приложението работи единствено с интерфейса PaymentProcessor. То не знае дали плащането ще бъде извършено чрез стандартната банкова реализация или чрез външната услуга PayPal.
 
-При стартиране на горната тестова програма се получава следния изход:
+Класът ExternalPayPalService представлява вече съществуваща външна библиотека, чийто интерфейс (makePayment()) не съответства на интерфейса, използван от приложението (pay()).
 
-```
-v3 volts using Class Adapter=3
-v12 volts using Class Adapter=12
-v120 volts using Class Adapter=120
-v3 volts using Object Adapter=3
-v12 volts using Object Adapter=12
-v120 volts using Object Adapter=120
-```
+Класът PayPalAdapter реализира интерфейса PaymentProcessor и съдържа референция към обект от тип ExternalPayPalService. При извикване на метода pay() адаптерът делегира изпълнението към метода makePayment() на външната библиотека.
 
-####
+По този начин останалата част от приложението работи единствено с интерфейса PaymentProcessor и не се налагат промени в клиентския код при интегриране на нова платежна система.
+
+Ако в бъдеще се наложи използването на друга външна платежна система (например Stripe), ще бъде достатъчно създаването на нов адаптер, без промяна в съществуващия клиентски код.
+
+### Предимства
+
+* позволява използване на съществуващи класове с несъвместим интерфейс;
+* намалява необходимостта от промяна в клиентския код;
+* отделя логиката за преобразуване в самостоятелен клас;
+* улеснява интеграцията с външни библиотеки и услуги.
+
+### Недостатъци
+
+* добавя допълнителен клас в структурата;
+* при много адаптери системата може да стане по-трудна за проследяване;
+* не решава проблеми в логиката на адаптирания клас, а само променя начина на достъп до него.
+
+### Приложение
+
+Adapter се използва когато:
+* съществуващ клас трябва да бъде използван чрез друг интерфейс;
+* се интегрира външна библиотека или услуга;
+* клиентският код не трябва да бъде променян;
+* е необходимо стар код да бъде включен в нова система.
+

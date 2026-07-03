@@ -8,145 +8,221 @@ nav_order: 1
 
 # Visitor
 
-Моделът на посетителя се използва, когато трябва да извършим операция на група от подобен вид обекти. С помощта на посетителския модел можем да преместим оперативната логика от обектите в друг клас. Например, помислете за количка за пазаруване, където можем да добавяме различни видове артикули (Елементи). Когато кликнем върху бутона за плащане, той изчислява общата сума, която трябва да бъде платена. Сега можем да имаме логиката на изчисление в класовете на елементите или можем да преместим тази логика в друг клас, използвайки посетителски модел. Нека приложим това в нашия пример за посетителски модел.
+### Проблем
 
-За да приложим посетителския модел, на първо място ще създадем различни видове артикули (елементи), които да се използват в количката за пазаруване.
+В практиката често съществува стабилна йерархия от класове, върху която трябва да бъдат изпълнявани различни операции.
 
+Например един документ може да съдържа различни елементи: параграфи, изображения и таблици. Самите елементи не се променят често, но към тях може да се налага добавяне на нови операции: експортиране, извличане на статистика, проверка или форматиране.
+
+Ако всяка нова операция се добавя директно в класовете на елементите, те постепенно ще започнат да съдържат логика, която не е част от основната им отговорност.
+
+### Решение
+
+Шаблонът Visitor позволява нови операции да бъдат добавяни в отделни класове, без да се променят класовете на елементите.
+
+Всеки елемент приема посетител чрез метод accept(), а посетителят изпълнява съответната операция според конкретния тип на елемента.
+
+### Дефиниция
+
+Visitor е поведенчески шаблон за проектиране, който позволява дефиниране на нови операции върху обекти от дадена структура, без да се променят класовете на тези обекти.
+
+Основни участници:
+* Element - Интерфейс или абстрактен клас за обектите, които могат да бъдат посетени.
+* Concrete Element - Конкретен елемент от структурата.
+* Visitor - Интерфейс, който дефинира операции за посещение на различните типове елементи.
+* Concrete Visitor - Конкретна реализация на операцията, която се изпълнява върху елементите.
+
+### UML диаграма
+
+<img width="1015" height="596" alt="Visitor" src="https://github.com/user-attachments/assets/53d21a75-afc6-4a04-807d-3a7c036c55ff" />
+
+
+### Примерна реализация
+
+Element
+```java
+public interface DocumentElement {
+
+    String accept(DocumentVisitor visitor);
+}
 ```
-public interface ItemElement {
+Concrete Elements
+```java
+public class Paragraph implements DocumentElement {
 
-	int accept(ShoppingCartVisitor visitor);
+    private String text;
+
+    public Paragraph(String text) {
+        this.text = text;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    @Override
+    public String accept(DocumentVisitor visitor) {
+        return visitor.visit(this);
+    }
+}
+```
+```java
+public class ImageElement implements DocumentElement {
+
+    private String fileName;
+
+    public ImageElement(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    @Override
+    public String accept(DocumentVisitor visitor) {
+        return visitor.visit(this);
+    }
+}
+```
+```java
+public class TableElement implements DocumentElement {
+
+    private int rows;
+    private int columns;
+
+    public TableElement(int rows, int columns) {
+        this.rows = rows;
+        this.columns = columns;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public int getColumns() {
+        return columns;
+    }
+
+    @Override
+    public String accept(DocumentVisitor visitor) {
+        return visitor.visit(this);
+    }
+}
+```
+Visitor
+```java
+public interface DocumentVisitor {
+
+    String visit(Paragraph paragraph);
+
+    String visit(ImageElement image);
+
+    String visit(TableElement table);
+}
+```
+```java
+public class HtmlExportVisitor implements DocumentVisitor {
+
+    @Override
+    public String visit(Paragraph paragraph) {
+        return "<p>" + paragraph.getText() + "</p>";
+    }
+
+    @Override
+    public String visit(ImageElement image) {
+        return "<img src=\"" + image.getFileName() + "\">";
+    }
+
+    @Override
+    public String visit(TableElement table) {
+        return "<table>"
+                + table.getRows()
+                + " rows, "
+                + table.getColumns()
+                + " columns</table>";
+    }
+}
+```
+```java
+public class StatisticsVisitor implements DocumentVisitor {
+
+    @Override
+    public String visit(Paragraph paragraph) {
+        return "Paragraph length: " + paragraph.getText().length();
+    }
+
+    @Override
+    public String visit(ImageElement image) {
+        return "Image file: " + image.getFileName();
+    }
+
+    @Override
+    public String visit(TableElement table) {
+        return "Table cells: " + table.getRows() * table.getColumns();
+    }
+}
+```
+Използване
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class Application {
+
+    public static void main(String[] args) {
+
+        List<DocumentElement> document = new ArrayList<>();
+
+        document.add(new Paragraph("Visitor design pattern"));
+        document.add(new ImageElement("diagram.png"));
+        document.add(new TableElement(3, 4));
+
+        DocumentVisitor htmlVisitor = new HtmlExportVisitor();
+        DocumentVisitor statisticsVisitor = new StatisticsVisitor();
+
+        for (DocumentElement element : document) {
+            System.out.println(element.accept(htmlVisitor));
+        }
+
+        for (DocumentElement element : document) {
+            System.out.println(element.accept(statisticsVisitor));
+        }
+    }
 }
 ```
 
-Забележете, че методът за приемане приема аргумента на посетителя. Можем да имаме някои други методи, също специфични за елементите, но за простота не навлизам в толкова много подробности и се фокусирам само върху модела на посетителите. Нека да създадем някои конкретни класове за различни видове елементи.
+Интерфейсът DocumentElement дефинира метода accept(), чрез който всеки елемент от документа приема посетител.
 
-```
-public class Book implements ItemElement {
+Класовете Paragraph, ImageElement и TableElement са конкретни елементи. Всеки от тях извиква подходящия метод visit() на подадения посетител, като подава себе си като аргумент.
 
-	private int price;
-	private String isbnNumber;
-	
-	public Book(int cost, String isbn){
-		this.price=cost;
-		this.isbnNumber=isbn;
-	}
-	
-	public int getPrice() {
-		return price;
-	}
+Интерфейсът DocumentVisitor дефинира отделен метод visit() за всеки тип елемент. Така конкретният посетител знае как да обработи всеки от елементите.
 
-	public String getIsbnNumber() {
-		return isbnNumber;
-	}
+Класът HtmlExportVisitor реализира операция за експортиране в HTML формат, а StatisticsVisitor реализира операция за извличане на статистика. Добавянето на нова операция изисква създаване на нов посетител, без да се променят класовете Paragraph, ImageElement и TableElement.
 
-	@Override
-	public int accept(ShoppingCartVisitor visitor) {
-		return visitor.visit(this);
-	}
-}
-```
+> [!IMPORTANT]
+> Visitor е подходящ когато структурата от елементи е сравнително стабилна, но често се
+> добавят нови операции върху нея. Ако често се добавят нови типове елементи, шаблонът става
+> по-труден за поддръжка, защото интерфейсът Visitor трябва да бъде променян.
 
-```
-public class Fruit implements ItemElement {
-	
-	private int pricePerKg;
-	private int weight;
-	private String name;
-	
-	public Fruit(int priceKg, int wt, String nm){
-		this.pricePerKg=priceKg;
-		this.weight=wt;
-		this.name = nm;
-	}
-	
-	public int getPricePerKg() {
-		return pricePerKg;
-	}
+### Предимства
 
-	public int getWeight() {
-		return weight;
-	}
+* позволява добавяне на нови операции без промяна в класовете на елементите;
+* отделя операциите от структурата от обекти;
+* събира свързаната логика в отделен visitor клас;
+* улеснява работа със стабилни йерархии от обекти.
 
-	public String getName(){
-		return this.name;
-	}
-	
-	@Override
-	public int accept(ShoppingCartVisitor visitor) {
-		return visitor.visit(this);
-	}
-}
-```
+### Недостатъци
 
-Обърнете внимание на внедряването на метод accept() в конкретни класове, неговия извикващ метод visit() на Visitor и предаването му като аргумент. Имаме метод visit() за различен тип елементи в интерфейса на посетителя, който ще бъде имплементиран от конкретен клас посетител.
+* добавянето на нов тип елемент изисква промяна в интерфейса Visitor;
+* всички конкретни посетители трябва да бъдат актуализирани при добавяне на нов елемент;
+* може да наруши капсулацията, ако visitor класовете се нуждаят от много вътрешни данни на елементите;
+* структурата е по-сложна в сравнение с директно добавяне на методи в класовете.
 
-```
-public interface ShoppingCartVisitor {
+### Приложение
 
-	int visit(Book book);
-	int visit(Fruit fruit);
-}
-```
-
-Сега ще внедрим интерфейс за посетители и всеки артикул ще има собствена логика за изчисляване на разходите.
-
-```
-
-public class ShoppingCartVisitorImpl implements ShoppingCartVisitor {
-
-	@Override
-	public int visit(Book book) {
-		int cost=0;
-		//apply 5$ discount if book price is greater than 50
-		if (book.getPrice() > 50){
-			cost = book.getPrice()-5;
-		} else {
-			cost = book.getPrice();
-		}
-		return cost;
-	}
-
-	@Override
-	public int visit(Fruit fruit) {
-		int cost = fruit.getPricePerKg() * fruit.getWeight();
-		return (fruit.getName() + " cost = " + cost);
-	}
-}
-```
-
-```
-public class ShoppingCartClient {
-
-	public static void main(String[] args) {
-		List<ItemElement> items = new ArrayList<>();
-		items.add(new Book(20, "1234"));
-		items.add(new Book(100, "5678"));
-		items.add(new Fruit(10, 2, "Banana"));
-		items.add(new Fruit(5, 5, "Apple"));
-		
-		int total = calculatePrice(items);
-		System.out.println("Total Cost = " + total);
-	}
-
-	private static int calculatePrice(List<ItemElement> items) {
-		ShoppingCartVisitor visitor = new ShoppingCartVisitorImpl();
-		int sum = 0;
-		for (ItemElement item : items) {
-			sum = sum + item.accept(visitor);
-		}
-		return sum;
-	}
-}
-```
-
-
-Забележете, че имплементацията, ако методът accept() във всички елементи е еднакъв, но може да бъде различен, например може да има логика да се провери дали елементът е свободен, след което изобщо не се обаждайте на метода visit().
-
-#### Предимства на модела на посетителите
-
-Ползата от този модел е, че ако логиката на операцията се промени, тогава трябва да направим промяна само в имплементацията на посетителя, вместо да го правим във всички класове елементи. Друго предимство е, че добавянето на нов елемент към системата е лесно, ще изисква промяна само в интерфейса и изпълнението на посетителите и съществуващите класове елементи няма да бъдат засегнати.
-
-#### Ограничения на модела на посетителя
-
-Недостатъкът на модела на посетителите е, че трябва да знаем типа на връщане на методите за посещение по време на проектирането, в противен случай ще трябва да променим интерфейса и всички негови реализации. Друг недостатък е, че ако има твърде много реализации на интерфейса на посетителите, това затруднява удължаването. Това е всичко за модела на дизайна на посетителите, уведомете ме, ако съм пропуснал нещо. Моля, споделете го и с другите, ако ви е харесало.
+Visitor е подходящ когато:
+* има стабилна структура от различни типове обекти;
+* често се добавят нови операции върху тези обекти;
+* не е желателно класовете на елементите да се променят при всяка нова операция;
+* се работи с документи, синтактични дървета, графични елементи или други йерархични структури.

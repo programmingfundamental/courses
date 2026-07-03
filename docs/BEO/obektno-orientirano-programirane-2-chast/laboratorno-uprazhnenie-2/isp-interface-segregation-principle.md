@@ -8,61 +8,136 @@ nav_order: 4
 
 # ISP - Interface Segregation Principle
 
-Интерфейсна сегрегация означава, че **по-големите интерфейси трябва да бъдат разделени на по-малки. Като правим това, можем да гарантираме, че класовете по изпълнение трябва само да бъдат загрижени за методите, които представляват интерес за тях.**
+## Принцип за разделяне на интерфейсите
 
-За този пример ще работим заграждение за мечки в зоопарк.
+Принципът за разделяне на интерфейсите гласи, че един клас не трябва да бъде принуждаван да имплементира методи, които не използва.
 
-Нека започнем с интерфейс, който дефинира поведението на пазителите на мечки:
+По-добре е да съществуват няколко малки и специализирани интерфейса, отколкото един голям общ интерфейс.
+
+### Проблем
+
+Следният интерфейс описва многофункционално устройство.
 
 ```java
-public interface BearKeeper {
-    void washTheBear();
-    void feedTheBear();
-    void petTheBear();
+public interface Machine {
+
+    void print();
+
+    void scan();
+
+    void fax();
 }
 ```
-
-Тук в примера методите за хранене на мечка, чистене и милване на домашна мечка са на едно и също място, но милването на възрастна мечка може да не е толкова риятно. И по този начин интерфейсът ни представя много отговорности, това означава че интерфейсът е твърде голям.
-
-Нека **оправим това, като разделим големия си интерфейс на три отделни**:
-
+Модерен принтер може да поддържа всички операции:
 ```java
-public interface BearCleaner {
-    void washTheBear();
-}
+public class MultiFunctionPrinter implements Machine {
 
-public interface BearFeeder {
-    void feedTheBear();
-}
-
-public interface BearPetter {
-    void petTheBear();
-}
-```
-
-Сега, благодарение на интерфейсната сегрегация, ние сме свободни да внедрим само методите, които са важни за нас:
-
-```java
-public class BearCarer implements BearCleaner, BearFeeder {
-
-    public void washTheBear() {
-        //I think we missed a spot...
+    @Override
+    public void print() {
+        System.out.println("Printing...");
     }
 
-    public void feedTheBear() {
-        //Tuna Tuesdays...
+    @Override
+    public void scan() {
+        System.out.println("Scanning...");
+    }
+
+    @Override
+    public void fax() {
+        System.out.println("Sending fax...");
     }
 }
 ```
-
-И накрая, можем да оставим опасните неща на безразсъдните хора:
-
+Но обикновен принтер не може да сканира и да изпраща факс:
 ```java
-public class CrazyPerson implements BearPetter {
+public class SimplePrinter implements Machine {
 
-    public void petTheBear() {
-        //Good luck with that!
+    @Override
+    public void print() {
+        System.out.println("Printing...");
+    }
+
+    @Override
+    public void scan() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void fax() {
+        throw new UnsupportedOperationException();
     }
 }
 ```
+Това нарушава ISP, защото класът SimplePrinter е принуден да реализира методи, които не са част от неговото реално поведение.
 
+### Решение
+
+Големият интерфейс може да бъде разделен на няколко по-малки интерфейса.
+
+```java
+public interface Printable {
+
+    void print();
+}
+```
+```java
+public interface Scannable {
+
+    void scan();
+}
+```
+```java
+public interface Faxable {
+
+    void fax();
+}
+```
+```java
+public class SimplePrinter implements Printable {
+
+    @Override
+    public void print() {
+        System.out.println("Printing...");
+    }
+}
+```
+```java
+public class MultiFunctionPrinter implements Printable, Scannable, Faxable {
+
+    @Override
+    public void print() {
+        System.out.println("Printing...");
+    }
+
+    @Override
+    public void scan() {
+        System.out.println("Scanning...");
+    }
+
+    @Override
+    public void fax() {
+        System.out.println("Sending fax...");
+    }
+}
+```
+При тази имплементация всеки клас реализира само интерфейсите, които отговарят на реалното му поведение.
+
+### Предимства
+
+Прилагането на ISP води до:
+* по-малки и ясни интерфейси;
+* по-малко ненужни зависимости;
+* по-лесна поддръжка;
+* по-гъвкави реализации.
+
+### Недостатъци / трудности
+
+При прекалено раздробяване могат да се появят твърде много интерфейси, което усложнява структурата на проекта.
+
+### Приложение
+
+ISP се използва при:
+* проектиране на API;
+* създаване на интерфейси за услуги;
+* работа с различни реализации;
+* шаблони като Adapter, Facade, Proxy.

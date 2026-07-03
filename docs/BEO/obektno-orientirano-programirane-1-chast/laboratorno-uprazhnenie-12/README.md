@@ -3,28 +3,23 @@ layout: default
 title: Лабораторно упражнение 12
 parent: Обектно-ориентирано програмиране - 1 част
 has_children: true
-nav_order: 12
+nav_order: 13
 permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-12
 ---
+
 # Лабораторно упражнение 12
 
-**Входно-изходни операции в Java**
-
-
+## Входно-изходни операции в Java
 
 Входно-изходните операции в Java са базирани на концепцията на потоци (streams), като под „поток” се има предвид последователност от данни.
 
 Дадено Java-приложение използва входен поток за прочитане на данни от източник и изходен поток за запис на тези данни в приемник. Източникът и приемникът могат да бъдат файл, конзола, друго приложение или някакво периферно устройство, както е показано на фигурата по-долу.
 
-
-
 ![](<../../assets/image (118).png>)
-
-
 
 Потоците поддържат различни типове данни (байтове, данни от прост тип, символи, обекти), като някои потоци просто предават данните, докато други обработват тези данни и ги преобразуват в подходящ за конкретния случай вид.
 
-**Байтови потоци. ByteStream класове**
+## Байтови потоци. ByteStream класове
 
 Както подсказва името им, тези класове четат и записват данни в 8-битов формат, т.е. представляват байтови потоци. Намират се в пакета java.io.
 
@@ -76,19 +71,36 @@ permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhneni
 
 ·         public void close() – затваря текущия изходен поток.
 
-
-
 Важно е да се запомни, че всеки един входно-изходен поток трябва да бъде затворен.
 
 Байтовите потоци се използват за четене/запис на примитивни типове данни. Съществуват други типове потоци, за по-сложни данни – но всички те се базират на байтовите потоци.
 
 _Пример за използване на байтов поток:_
 
+```java
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
+public class ByteStreamExample {
 
-![](<../../assets/image (105).png>)
+    public static void main(String[] args) {
+        try (FileOutputStream outputStream = new FileOutputStream(file)) {
+            byte[] content = "Example of I/O operations using byte streams".getBytes();
 
-**Символни потоци. CharacterStream класове**
+            // Файлът трябва да е предварително създаден и като аргумент се подава пътят към него
+            File file = new File("C:\\io\\FirstExample");
+            FileOutputStream outputStream = new FileOutputStream(file);
+
+            outputStream.write(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+## Символни потоци. CharacterStream класове
 
 Класовете за работа с байтови потоци могат да оперират само с един байт и не са подходящи за директна работа с Unicode символи, които са 16-битови. За работа с потоци от такива символи се използват съответно символни потоци.
 
@@ -130,13 +142,63 @@ _Примери за използване на символни потоци:_
 
 Показаните два примера извършват едно и също: четат от един файл и записват прочетеното съдържание в друг. В първият пример са използвани само класове FileReader и FileWriter, докато вторият реализира същото с помощта на BufferedReader и PrintWriter.
 
+```java
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
+public class FileStreamsExample {
 
-![](<../../assets/image (92).png>)
+    public static void main(String[] args) {
+        FileReader fileReader;
+        FileWriter fileWriter;
+        int ch;
 
-![](<../../assets/image (133).png>)
+        try {
+            fileReader = new FileReader("C:\\io\\input");
+            fileWriter = new FileWriter("C:\\io\\output");
 
-**Клас Scanner**
+            while ((ch = fileReader.read()) != -1) {
+                fileWriter.write(ch);
+            }
+
+            fileReader.close();
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+```java
+import java.io.*;
+
+public class BufferedStreamsExample {
+
+    public static void main(String[] args) {
+        BufferedReader bufferedReader;
+        PrintWriter printWriter;
+        String line;
+
+        try {
+            bufferedReader = new BufferedReader(new FileReader("C:\\io\\input"));
+            printWriter = new PrintWriter(new FileWriter("C:\\io\\output"));
+
+            while ((line = bufferedReader.readLine()) != null) {
+                printWriter.writeln(line);
+            }
+
+            bufferedReader.close();
+            printWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+## Клас Scanner
 
 Този клас дава възможност за работа с текст като предоставя методи за неговото преобразуване в различни примитивни типове данни. За разлика от входно-изходните потоци, класът се намира в пакета java.util.
 
@@ -172,17 +234,60 @@ _Примери за използване на клас Scanner_:
 
 Примерът по-долу прочита входен символен низ и след това извежда всяка една дума на отделен ред.
 
+```java
+import java.util.Scanner;
 
+public class StringScannerExample {
 
-![](<../../assets/image (138).png>)
+    public static void main(String[] args) {
+        String input = "This is an example of using Scanner";
+        Scanner scanner = new Scanner(input);
+
+        while (scanner.hasNext()) {
+            System.out.println(scanner.next());
+        }
+
+        scanner.close();
+    }
+}
+```
+
+Методът next() прочита следващата дума от входния поток, като използва празните пространства (интервали, табулации и нови редове) като разделители по подразбиране. Методът hasNext() проверява дали има следваща дума за прочитане.
 
 Следващият пример чете от файл и сумира дробните числа, записани в него (пропуска данните от всички други типове, които се съдържат в този файл).
 
+```java
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
+public class MixedDataScannerExample {
 
-![](<../../assets/image (114).png>)
+    public static void main(String[] args) {
+        Scanner scanner;
+        double sum = 0;
 
-**Стандартни потоци. Клас Console**
+        try {
+            scanner = new Scanner(new File("C:\\io\\input"));
+
+            while (scanner.hasNext()) {
+                if (scanner.hasNextDouble()) {
+                    sum += scanner.nextDouble();
+                } else {
+                    scanner.next();
+                }
+            }
+
+            scanner.close();
+            System.out.println(sum);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+## Стандартни потоци. Клас Console
 
 Java поддържа три стандартни потока:
 
@@ -200,13 +305,27 @@ System.out и System.err са дефинирани като PrintWriter-обек
 
 _Пример за използване на стандартни потоци:_
 
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
+public class StandardStreamExample {
 
-![](<../../assets/image (86).png>)
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader =
+                new BufferedReader(new InputStreamReader(System.in));
 
+        System.out.print("Hello, please write your name: ");
 
+        String name = bufferedReader.readLine();
 
-**Даннови потоци. Интерфейси DataInput и DataOutput**
+        System.out.println("You have entered: " + name);
+    }
+}
+```
+
+## Даннови потоци. Интерфейси DataInput и DataOutput
 
 Данновите потоци поддържат входно-изходни операции върху всички прости типове данни, както и върху символни низове. Всички даннови потоци имплементират или интерфейс DataInput, или интерфейс DataOutput.
 
@@ -236,6 +355,64 @@ _Пример за използване на даннови потоци:_
 
 Примерът прочита файл чрез RandomAccessFile и запълва колекция от обекти. Файлът съдържа по един обект на ред.
 
-![](<../../assets/image (134).png>)
+```java
+public class Cat {
 
-![](<../../assets/image (117).png>)
+    private String name;
+    private double weight;
+    private int age;
+
+    public Cat() {
+    }
+
+    public Cat(String name, double weight, int age) {
+        this.name = name;
+        this.weight = weight;
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Cat{" +
+                "name='" + name + '\'' +
+                ", weight=" + weight +
+                ", age=" + age +
+                '}';
+    }
+}
+```
+
+```java
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CatCollection {
+
+    private List<Cat> cats = new ArrayList<>();
+
+    public CatCollection(String fileName) {
+
+        try {
+            RandomAccessFile myFile = new RandomAccessFile(fileName, "r"); // "r" - отваря файла за четене
+
+            String line;
+            String[] result;
+
+            while ((line = myFile.readLine()) != null && line.length() > 0) {
+                result = line.split(" ");
+
+                String catName = result[0];
+                double catWeight = Double.parseDouble(result[1]);
+                int catAge = Integer.parseInt(result[2]);
+
+                cats.add(new Cat(catName, catWeight, catAge));
+            }
+            myFile.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```

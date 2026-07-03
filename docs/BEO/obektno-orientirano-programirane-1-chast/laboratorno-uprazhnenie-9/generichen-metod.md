@@ -3,48 +3,85 @@ layout: default
 title: Генеричен метод
 parent: Лабораторно упражнение 9
 grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 1
+nav_order: 2
 ---
+
 # Генеричен метод
 
-Генеричният метод в Java приема параметър и връща някаква стойност след изпълнение на задача. Той е обикновен метод, но предвидените за неговите нужди типове са параметризирани. Това позволява генеричният метод да се използва по по-общ начин. Компилаторът се грижи за безопасното използване на типовете, което позволява на програмистите да пишат своя код лесно, тъй като не им се налага да извършват множество индивидуални кастинги на типове.
+Генеричният метод декларира собствен параметър на типа, който е валиден само в рамките на метода.
 
-Можем също да напишем генерични методи, които да бъдат извиквани с различни типове аргументи въз основа на типа аргументи, предадени на генеричния метод.
-
+Параметърът на типа се записва преди типа на връщания резултат.
 
 ```java
-class Test {
-	// A Generic method example
-	static <T> void genericDisplay(T element)
-	{
-		System.out.println(element.getClass().getName() + " = " + element);
-	}
+public class Printer {
+
+    public static <T> void print(T value) {
+        System.out.println(value);
+    }
 }
-
-	// Driver method
-	public static void main(String[] args)
-	{
-		// Calling generic method with Integer argument
-		Test.genericDisplay(11);
-
-		// Calling generic method with String argument
-		Test.genericDisplay("TU-Varna");
-
-		// Calling generic method with double argument
-		Test.genericDisplay(1.0);
-	}
-}
-
 ```
-
 
 Изпълнение:
+
+```java
+Printer.print("Java");
+Printer.print(100);
+Printer.print(3.14);
 ```
-java.lang.Integer = 11
 
-java.lang.String = TU-Varna
+При всяко извикване компилаторът определя типа въз основа на подадения аргумент.
 
-java.lang.Double = 1.0
+## Генеричен интерфейс
+
+Генеричният интерфейс е интерфейс, който декларира параметър на типа. Това позволява различни реализации да работят с различни типове данни.
+
+```java
+interface Repository<T> {
+
+    void save(T item);
+
+    T findById(int id);
+}
 ```
 
+Примерна реализация:
 
+```java
+public class StudentRepository implements Repository<Student> {
+
+    @Override
+    public void save(Student item) {
+        System.out.println("Saving student: " + item.getName());
+    }
+
+    @Override
+    public Student findById(int id) {
+        return new Student("Ivan", id);
+    }
+}
+```
+
+Примерен клас:
+
+```java
+public class Student {
+
+    private String name;
+    private int facultyNumber;
+
+    public Student(String name, int facultyNumber) {
+        this.name = name;
+        this.facultyNumber = facultyNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getFacultyNumber() {
+        return facultyNumber;
+    }
+}
+```
+
+Генеричните интерфейси се използват често при работа с колекции, хранилища на данни, услуги и други структури, които трябва да работят с различни типове обекти.

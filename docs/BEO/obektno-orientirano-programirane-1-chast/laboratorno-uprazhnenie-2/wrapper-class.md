@@ -3,38 +3,16 @@ layout: default
 title: Wrapper Class
 parent: Лабораторно упражнение 2
 grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 6
+nav_order: 3
 ---
+
 # Wrapper Class
 
-**Wrapper Class** е клас, чийто обект обвива или съдържа **примитивни типове данни**.  
-С други думи, Wrapper Class позволява на **примитивните типове** да се третират като **обекти**.
+Обгръщащите класове представляват специални класове от стандартната библиотека на Java, които предоставят обектно представяне на примитивните типове данни.
 
-Когато създаваме обект от Wrapper Class, той съдържа поле, в което можем да съхраняваме **примитивна стойност**. Това позволява:
+Всеки примитивен тип има съответстващ обгръщащ клас.
 
-* Използване на **примитивни типове** в структури от данни, които приемат само обекти (напр. `ArrayList`, `HashMap`).  
-* Извикване на методи върху стойности, които иначе са **примитивни типове**.  
-* Удобно преобразуване между **примитивни типове** и обекти чрез **boxing** и **unboxing**.
-
-
-## Преобразуване на примитивни типове в Wrapper Class
-
-Java предлага механизъм за **опаковане на примитивни типове в обекти**, наречен **boxing**, и обратно – **unboxing**.
-
-- **Boxing:** конвертира **примитивен тип** в обект на Wrapper Class.  
-- **Unboxing:** конвертира обект на Wrapper Class обратно в **примитивен тип**.  
-
-От Java 5 нататък тези операции се изпълняват **автоматично**:
-
-- **Autoboxing:** автоматично опаковане на **примитивен тип** в обект.  
-- **Auto unboxing:** автоматично разопаковане на обект обратно в **примитивен тип**.
-
-
-## Wrapper класове в Java
-
-Пакетът `java.lang` съдържа всички Wrapper класове за **примитивните типове**:
-
-| Primitive Type | Wrapper class |
+| Примитивен тип | Обгръщащ клас |
 | -------------- | ------------- |
 | boolean        | Boolean       |
 | char           | Character     |
@@ -45,91 +23,83 @@ Java предлага механизъм за **опаковане на прим
 | float          | Float         |
 | double         | Double        |
 
-## Пример за Boxing и Autoboxing
+## Необходимост от използване на обгръщащи класове
 
-Boxing е процесът, при който **примитивен тип** се преобразува в обект, за да може да се използва в обектно-ориентирани структури. Autoboxing е автоматичният вариант на този процес.
+Обгръщащите класове позволяват примитивните типове данни да бъдат използвани като обекти.
+
+Това е необходимо при:
+
+- работа с колекции (ArrayList, LinkedList, HashMap и др.), които съхраняват само обекти;
+- използване на методите, предоставени от съответния обгръщащ клас;
+- работа с генерични типове (Generics).
+
+## Boxing и Unboxing
+
+Java предоставя механизъм за преобразуване между примитивни типове и обекти от съответните обгръщащи класове.
+
+- **Boxing** – преобразуване на примитивен тип в обект.
+- **Unboxing** – преобразуване на обект в примитивен тип.
+
+От Java 5 тези операции могат да се извършват автоматично:
+
+- **Autoboxing** – автоматично преобразуване на примитивен тип в обект.
+- **Auto-unboxing** – автоматично преобразуване на обект в примитивен тип.
+
+Пример:
 
 ```java
-import java.lang.Integer;
- 
-public class Application {                                                                                                     
-    public static void main(String args[]) { 
-        //Конвертиране на int към Integer 
-        int a = 20; 
-        Integer i = Integer.valueOf(a);
-        Integer j = a;
-        System.out.println(a+" "+i+" "+j);
-    }
-}
+int number = 25;
+
+Integer integerObject = Integer.valueOf(number); // Boxing
+Integer autoBox = number;                        // Autoboxing
+
+int primitiveValue = integerObject.intValue();   // Unboxing
+int autoUnbox = integerObject;                   // Auto-unboxing
 ```
 
-- Integer i = Integer.valueOf(a); – ръчно създаване на обект от Wrapper Class.
-- Integer j = a; – автоматично преобразуване на примитивен тип int в Integer (autoboxing).
+## Полезни методи на обгръщащите класове
 
-## Пример за Unboxing и Auto Unboxing
+Обгръщащите класове предоставят множество готови методи за преобразуване, проверка и обработка на данни.
 
-Unboxing е процесът, при който обект на Wrapper Class се преобразува обратно в примитивен тип. Auto unboxing е автоматичният вариант, който компилаторът извършва сам.
+## Методи за преобразуване
+
+| Метод         | Предназначение                               |
+| ------------- | -------------------------------------------- |
+| valueOf()     | Създава обект от примитивна стойност или низ |
+| parseInt()    | Преобразува символен низ в int               |
+| parseDouble() | Преобразува символен низ в double            |
+| intValue()    | Връща стойността като int                    |
+| doubleValue() | Връща стойността като double                 |
+| toString()    | връща текстово представяне на стойността     |
+
+## Методи за проверка
+
+| Метод                       | Предназначение                               |
+| --------------------------- | -------------------------------------------- |
+| Character.isDigit()         | Проверява дали символът е цифра.             |
+| Character.isLetter()        | Проверява дали символът е буква.             |
+| Character.isLetterOrDigit() | Проверява дали символът е буква или цифра.   |
+| Character.isWhitespace()    | Проверява дали символът е интервален символ. |
+| Character.isUpperCase()     | Проверява дали символът е главна буква.      |
+| Character.isLowerCase()     | Проверява дали символът е малка буква.       |
+
+## Методи за сравнение
+
+| Метод       | Предназначение                                  |
+| ----------- | ----------------------------------------------- |
+| compare()   | Сравнява две стойности                          |
+| compareTo() | Сравява текущия обект с друг обект от същия тип |
+
+Пример:
 
 ```java
-import java.lang.Integer;
- 
-public class Application {   
-    public static void main(String args[]) {   
-        //Конвертиране на Integer в int   
-        Integer a=new Integer(3);   
-        int i=a.intValue(); //unboxing 
-        int j=a; //auto unboxing   
-     
-        System.out.println(a+" "+i+" "+j);   
-    }
-}
-```
+String value = "125";
 
--  i = a.intValue(); – извлича примитивната стойност ръчно.
-- int j = a; – компилаторът автоматично извиква a.intValue() (auto unboxing).
+int number = Integer.parseInt(value);
 
+System.out.println(number);
 
-## Създаване на Wrapper обекти и връщане обратно към примитивен тип
+char symbol = '7';
 
-```java
-class Application {
-    public static void main(String args[]) {
-    
-        byte a = 1;
-        Byte byteobj = new Byte(a);
- 
-        int b = 10;
-        Integer intobj = new Integer(b);
- 
-        float c = 18.6f;
-        Float floatobj = new Float(c);
- 
-        double d = 250.5;
-        Double doubleobj = new Double(d);
-
-        char e='a';
-        Character charobj=e;
- 
-        System.out.println("Boxing");
-        System.out.println("Byte обекта byteobj:  " + byteobj);
-        System.out.println("Integer обекта intobj:  " + intobj);
-        System.out.println("Float обекта floatobj:  " + floatobj);
-        System.out.println("Double обекта doubleobj:  " + doubleobj);
-        System.out.println("Character обекта charobj:  " + charobj);
- 
-        byte bv = byteobj;
-        int iv = intobj;
-        float fv = floatobj;
-        double dv = doubleobj;
-        char cv = charobj;
- 
-        System.out.println("Unboxing");
-        System.out.println("byte стойността на bv: " + bv);
-        System.out.println("int стойността на iv: " + iv);
-        System.out.println("float стойността на fv: " + fv);
-        System.out.println("double стойността на dv: " + dv);
-        System.out.println("char стойността на cv: " + cv);
-    }
-}
-
+System.out.println(Character.isDigit(symbol));
 ```

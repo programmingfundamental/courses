@@ -5,93 +5,211 @@ parent: Лабораторно упражнение 3
 grand_parent: Обектно-ориентирано програмиране - 1 част
 nav_order: 2
 ---
-# Ключовите думи this и super
 
-**this** и **super** не могат да се използват в статичен контекст.
+# Ключова дума super
 
-### Запазена дума – this
+Ключовата дума super представлява референция към непосредствения родителски клас. Тя се използва за достъп до неговите конструктори, методи и полета.
 
-Запазената дума „**this**“ сочи към текущия обект в метод или конструктор. Най-често „this”  се използва, за да предотврати объркването между атрибутите (на класа) и параметрите (на метода), които имат еднакви имена.
+super намира приложение единствено в класове наследници.
 
-`„this“` може също да се използва, за да :
+## Основни приложения на super
 
-·         извика конструктора на текущия клас;
+Ключовата дума super може да се използва за:
 
-·         извика метод от текущия клас;
+- извикване на конструктор на родителския клас;
+- достъп до методи на родителския клас;
+- достъп до полета на родителския клас.
 
-·         се връщане обект от текущия клас;
+## Извикване на конструктор на родителския клас
 
-·         се предаде като аргумент на метод;
+Конструкторът на родителския клас може да бъде извикан чрез super().
 
-·         се предаде като аргумент на конструктор
+Извикването трябва да бъде първата инструкция в конструктора на класа наследник.
 
+Пример:
 
 ```java
-public class Subject {
+class Person {
+
     String name;
-    double finalGrade;
-    int hours;
 
-    public Subject() {
-    }
-
-    public Subject(String name, int hours) {
+    Person(String name) {
         this.name = name;
-        this.hours = hours;
     }
+}
 
-    public Subject(String name, int hours, double finalGrade) {
-        this(name, hours); //invokes constructor with only two parameters
-        this.finalGrade = finalGrade;
+class Student extends Person {
+
+    int facultyNumber;
+
+    Student(String name, int facultyNumber) {
+        super(name);
+        this.facultyNumber = facultyNumber;
     }
-
-    public String getName(){
-        return this.name;
-    }
-
-    public Double getFinalGrade(){
-        return this.finalGrade;
-    }
-
-    public int getHours()
-    {
-        return this.hours;
-    }
-
-    public void printSubjectNameAndHours(){
-        System.out.println("Subject: " + this.getName() + " : " + this.getHours()); //method invoke
-    }
-
 }
 ```
 
-### Запазена дума – super
+В примера конструкторът на класа Student извиква конструктора на класа Person, който инициализира полето name.
 
-Запазената дума супер сочи към супер класа (родителския клас) на обекта. Използва се, за да се извикват атрибути,методи и конструктор наследени от родителския клас.
+## Извикване на метод от родителския клас
 
+Ключовата дума super позволява извикването на метод от родителския клас.
+
+Пример:
 
 ```java
-class Animal { // Superclass (parent)
-  public void animalSound() {
-    System.out.println("The animal makes a sound");
-  }
+class Person {
+
+    void printInformation() {
+        System.out.println("Person");
+    }
+}
+
+class Student extends Person {
+
+    void printInformation() {
+        super.printInformation();
+        System.out.println("Student");
+    }
+}
+```
+
+В примера първо се изпълнява методът на родителския клас, след което се изпълнява допълнителният код на класа наследник.
+
+## Достъп до поле на родителския клас
+
+Ако в родителския и наследения клас съществуват полета с едно и също име, чрез super може еднозначно да бъде достъпено полето на родителския клас.
+
+Пример:
+
+```java
+class Person {
+
+    String name = "Unknown";
+}
+
+class Student extends Person {
+
+    String name = "Ivan";
+
+    void printNames() {
+        System.out.println(super.name);
+        System.out.println(this.name);
+    }
+}
+```
+
+## Особености
+
+- super() трябва да бъде първата инструкция в конструктора.
+- Ако не бъде извикан изрично конструктор на родителския клас, компилаторът автоматично добавя извикване на конструктора без параметри (super()), ако такъв съществува.
+- Ключовата дума super не може да бъде използвана в статичен контекст.
+
+## Клас Object
+
+Класът **Object** е базовият клас на всички класове в Java. Независимо дали наследяването е указано изрично или не, всеки клас наследява пряко или косвено класа Object.
+
+Поради това всички класове получават неговите основни методи, които могат да бъдат използвани или предефинирани при необходимост.
+
+## Йерархия на наследяване
+
+Когато при декларацията на даден клас не е посочен родителски клас чрез ключовата дума extends, компилаторът автоматично приема, че той наследява класа Object.
+
+Например следните декларации са еквивалентни:
+
+```java
+class Person {
+
 }
 ```
 
 ```java
-class Dog extends Animal { // Subclass (child)
-  public void animalSound() {
-    super.animalSound(); // Call the superclass method
-    System.out.println("The dog says: bow wow");
-  }
+class Person extends Object {
+
 }
 ```
 
+## Основни методи на класа Object
+
+Класът Object предоставя множество методи, които са достъпни във всички класове.
+
+Най-често използваните са:
+
+| Метод              | Предназначение                              |
+| ------------------ | ------------------------------------------- |
+| toString()         | Връща текстово представяне на обекта.       |
+| equals(Object obj) | Сравнява два обекта за логическо равенство. |
+| hashCode()         | Връща хеш код на обекта.                    |
+| getClass()         | Връща информация за класа на обекта.        |
+
+## Метод toString()
+
+Методът toString() връща текстово представяне на обекта.
+
+При извеждане на обект чрез System.out.println() този метод се извиква автоматично.
+
+Пример:
+
 ```java
-public class Main {
-  public static void main(String args[]) {
-    Animal myDog = new Dog(); // Create a Dog object
-    myDog.animalSound(); // Call the method on the Dog object
-  }
+class Student {
+
+    String name = "Ivan";
+}
+
+public class Application {
+
+    public static void main(String[] args) {
+
+        Student student = new Student();
+
+        System.out.println(student.toString());
+    }
 }
 ```
+
+Ако методът toString() не бъде предефиниран, се използва реализацията от класа Object, която връща името на класа и неговия хеш код.
+
+## Метод equals()
+
+Методът equals() се използва за сравняване на два обекта.
+
+Реализацията в класа Object проверява дали двете референции сочат към един и същ обект.
+
+Много класове предефинират този метод, така че да сравняват съдържанието на обектите.
+
+## Метод hashCode()
+
+Методът hashCode() връща цяло число, което служи за идентифициране на обекта при работа с различни структури от данни, например HashMap и HashSet.
+
+Когато методът equals() бъде предефиниран, обикновено се предефинира и hashCode().
+
+## Метод getClass()
+
+Методът getClass() връща информация за класа, към който принадлежи даден обект.
+
+Пример:
+
+```java
+Student student = new Student();
+
+System.out.println(student.getClass().getSimpleName());
+```
+
+Резултат:
+
+```text
+Student
+```
+
+## Предефиниране на методи
+
+Методите, наследени от класа Object, могат да бъдат предефинирани в класовете наследници, когато е необходимо те да реализират специфично поведение.
+
+Това ще бъде разгледано по-подробно при изучаването на полиморфизма.
+
+## Обобщение
+Класът Object:
+
+- е родител на всички класове в Java;
+- предоставя основни методи, наследявани от всички класове;
+- осигурява общ интерфейс за работа с обекти.

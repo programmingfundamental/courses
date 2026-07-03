@@ -8,148 +8,158 @@ nav_order: 2
 
 # Mediator
 
-Шаблонът за проектиране Mediator е представител на поведенческите шаблони и - както подсказва името му - има за цел да осигури средство за комуникация между различни обекти. Използването на "посредник" при взаимодействието намалява степента на свързаност между различните обекти чрез насочване на цялата комуникация през този посредник и прави обектите независими един от друг.
+### Проблем
 
-За имплементиране на шаблона са необходими:
-- интерфейс - медиатор;
-- конкретна имплементация на медиатора, където е логиката за комуникация;
-- интерфейс или абстрактен клас с референция към медиатора (нарича се "колега");
-- конкретни имплементации на интерфейса, които могат да комуникират помежду си само през медиатора.
+В практиката често има група обекти, които трябва да комуникират помежду си. Ако всеки обект пази референции към всички останали, системата става силно свързана и трудна за поддръжка.
+
+Например в чат приложение всеки потребител може да изпраща съобщения до останалите. Ако всеки потребител трябва да познава всички други потребители, добавянето, премахването или промяната на участници ще усложни кода.
+
+### Решение
+
+Шаблонът Mediator въвежда посредник, през който минава комуникацията между обектите.
+
+Вместо обектите да комуникират директно помежду си, те изпращат съобщения към медиатора, а той решава как да ги разпространи.
+
+### Дефиниция
+
+Mediator е поведенчески шаблон за проектиране, който централизира комуникацията между група обекти чрез посредник и намалява директните зависимости между тях.
+
+Основни участници:
+* Mediator - Интерфейсът, който дефинира начина за комуникация между обектите.
+* Concrete Mediator - Конкретна реализация на посредника, която координира взаимодействието.
+* Colleague - Обект, който комуникира с други обекти чрез медиатора.
+* Concrete Colleague - Конкретна реализация на участник в комуникацията.
+
+### UML диаграма
+
+<img width="546" height="581" alt="Mediator" src="https://github.com/user-attachments/assets/26ab159d-e303-4d40-b896-4ffbf153065d" />
 
 
-По-долу е показана примерна имплементация на шаблона, в която имаме касиер, клиенти и се осъществяват плащания.
+### Примерна реализация
 
-Интерфейси за медиатор и за колега/клиент:
+Mediator
+```java
+public interface ChatMediator {
 
-```
-public interface PaymentMediator {
+    void addUser(User user);
 
-    String pay(double amount, String sender, String receiver);
-    void addClient(Client client);
+    String sendMessage(String message, User sender);
 }
 ```
-
-```
-public interface Client {
-
-    String getName();
-
-    String pay(double price, String clientName);
-}
-```
-
-Конкретни имплементации на двата интерфейса:
-
-```
-package mediator;
-
+Concrete Mediator
+```java
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaymentMediatorImpl implements PaymentMediator{
+public class ChatRoom implements ChatMediator {
 
-    private List<Client> clients = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 
     @Override
-    public String pay(double amount, String sender, String receiver) {
-        for (Client c : clients) {
-            if (sender.equalsIgnoreCase(c.getName())) {
-                return sender + " is paying " + amount + " to " + receiver;
+    public void addUser(User user) {
+        users.add(user);
+    }
+
+    @Override
+    public String sendMessage(String message, User sender) {
+        StringBuilder result = new StringBuilder();
+        for (User user : users) {
+            if (user != sender) {
+                result.append(user.receive(message, sender.getName()))
+                        .append("\n");
             }
         }
-        return "No payments were made";
-    }
-
-    @Override
-    public void addClient(Client client) {
-        clients.add(client);
+        return result.toString();
     }
 }
 ```
-
-```
-package mediator;
-
-public class Customer implements Client{
-
-    private String fullName;
-    private PaymentMediator paymentMediator;
-
-    public Customer(String fullName, PaymentMediator paymentMediator) {
-        this.fullName = fullName;
-        this.paymentMediator = paymentMediator;
-        paymentMediator.addClient(this);
-    }
-
-    @Override
-    public String getName() {
-        return fullName;
-    }
-
-    @Override
-    public String pay(double price, String receiver) {
-        return paymentMediator.pay(price, fullName, receiver);
-    }
-}
-```
-
-```
-public class Cashier implements Client{
+Colleague
+```java
+public abstract class User {
 
     private String name;
-    private PaymentMediator paymentMediator;
+    private ChatMediator mediator;
 
-    public Cashier(String name, PaymentMediator paymentMediator) {
+    public User(String name, ChatMediator mediator) {
         this.name = name;
-        this.paymentMediator = paymentMediator;
-        paymentMediator.addClient(this);
+        this.mediator = mediator;
+        mediator.addUser(this);
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
-    public String pay(double price, String sender) {
-        return paymentMediator.pay(price, sender, name);
+    public String send(String message) {
+        return mediator.sendMessage(message, this);
+    }
+
+    public String receive(String message, String sender) {
+        return name + " received message from "
+                + sender + ": " + message;
     }
 }
 ```
+Concrete Colleague
+```java
+public class ChatUser extends User {
 
-Клиентският код има следния вид:
-
+    public ChatUser(String name, ChatMediator mediator) {
+        super(name, mediator);
+    }
+}
 ```
-package mediator;
-
+Използване
+```java
 public class Application {
 
     public static void main(String[] args) {
-        PaymentMediator mediator = new PaymentMediatorImpl();
 
-        Client cashier = new Cashier("Cashier 1", mediator);
-        Client firstCustomer = new Customer("John Doe", mediator);
-        Client secondCustomer = new Customer("Jane Doe", mediator);
+        ChatMediator chatRoom = new ChatRoom();
 
-        System.out.println(firstCustomer.pay(15.23, cashier.getName()));
-        System.out.println(secondCustomer.pay(28.94, cashier.getName()));
+        User firstUser = new ChatUser("John", chatRoom);
+
+        User secondUser = new ChatUser("Anna", chatRoom);
+
+        User thirdUser = new ChatUser("Peter", chatRoom);
+
+        System.out.println(firstUser.send("Hello!"));
+        System.out.println(secondUser.send("Hi, John!"));
     }
 }
 ```
-Резултатът от главната функция е:
 
-```
-John Doe is paying 15.23 to Cashier 1
-Jane Doe is paying 28.94 to Cashier 1
+Интерфейсът ChatMediator дефинира действията, чрез които потребителите могат да бъдат регистрирани и да изпращат съобщения.
 
-```
+Класът ChatRoom е конкретният медиатор. Той пази списък от потребители и координира изпращането на съобщения между тях.
 
-Предимства на Mediator:
-- намаляване свързаността между обектите;
-- възможност за преизползване на медиаторите в различни контексти;
-- комуникацията между обектите е централизирана вместо да е разписана на много различни места.
+Класът User представлява участник в комуникацията. Той не познава останалите потребители и не изпраща съобщения директно към тях. Вместо това използва медиатора чрез метода send().
 
-Недостатъци на Mediator:
-- въпреки че намалява свързаността между обектите, всеки обект от своя страна е силно свързан с даден медиатор; това би могло да създаде проблеми при системи с производителността при по-сложни системи;
-- добавянето на медиатор внася допълнително ниво на абстракция, което понякога прави кода по-труден за разбиране;
-- не е подходящ за използване при по-прости системи, когато директната комуникация между обектите е за предпочитане.
+Класът ChatUser е конкретен потребител. Всички потребители комуникират чрез един и същ медиатор.
+
+> [!IMPORTANT]
+> Mediator не премахва комуникацията между обектите, а я централизира. Вместо всеки обект да
+> познава всички останали, всички участници познават само медиатора.
+
+### Предимства
+
+* намалява директните зависимости между обектите;
+* централизира логиката за комуникация;
+* улеснява добавянето и премахването на участници;
+* прави отделните обекти по-независими един от друг.
+
+### Недостатъци
+
+* медиаторът може да стане твърде сложен, ако поеме прекалено много логика;
+* добавя допълнително ниво на абстракция;
+* всички участници зависят от медиатора;
+* не е оправдан при малък брой обекти с проста комуникация.
+
+### Приложение
+
+Mediator е подходящ когато:
+* много обекти трябва да комуникират помежду си;
+* директните зависимости между тях стават твърде много;
+* логиката за комуникация трябва да бъде централизирана;
+* се реализират чат системи, GUI компоненти, контролери, диалогови прозорци или координация между модули.
+

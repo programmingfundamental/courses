@@ -8,143 +8,181 @@ nav_order: 1
 
 # Composite
 
-Композитният модел е един от моделите на структурния дизайн. Композитният модел на проектиране се използва, когато трябва да представим йерархия на част от цялото.
+### Проблем
 
-Когато трябва да създадем структура по начин, по който обектите в структурата трябва да бъдат третирани по същия начин, можем да приложим композитен модел на дизайн. Нека го илюстрираме със следния пример: Диаграмата е структура, която се състои от обекти като кръг, линии, триъгълник и т.н. Когато оцветим дадена диаграма с конкретен цвят (да речем червен), същият цвят се прилага и към обектите в чертежа. Тук чертежът се състои от различни части и всички те имат едни и същи операции.
+В практиката често се срещат ситуации, при които отделни обекти и групи от обекти трябва да бъдат обработвани по един и същ начин.
 
-Композитният модел се състои от следните обекти:
+Например една файлова система съдържа файлове и папки. Папките могат да съдържат както файлове, така и други папки, образувайки йерархична структура. Независимо дали работим с отделен файл или с цяла папка, клиентският код трябва да може да използва един и същ интерфейс.
 
-1. Базов компонент - Базов компонент е интерфейсът за всички обекти в композицията, клиентската програма използва **базов компонент** за работа с обектите в композицията. Тя може да бъде интерфейс или **абстрактен клас** с някои методи, общи за всички обекти.
-2. Лист - Определя поведението на елементите в състава. Това е градивният елемент за композицията и изпълнява базовия компонент. Той няма препратки към други компоненти.
-3. **Композитен** - Състои се от листни елементи и изпълнява операциите в базов компонент.
+<img width="259" height="195" alt="image" src="https://github.com/user-attachments/assets/72b8ef57-7ba2-48c4-87e6-e779bc65df3f" />
 
-Ще демонстрираме шаблона на проектиране чрез описания сценарий за рисуване.
+Всички елементи в дървото са от тип FileSystemItem.
 
-#### Композитен модел Базов компонент
+### Решение
 
-Композитният основен компонент на модела определя общите методи за листа и композити. Можем да създадем клас с метод за рисуване на формата с даден цвят.
+Composite организира обектите в дървовидна структура, при която както отделните елементи, така и техните групи реализират общ интерфейс.
 
-```
+По този начин клиентският код работи еднакво както с единичен обект, така и с цяла йерархия от обекти.
 
+### Дефиниция
 
-public interface Shape {
-	
-	public String draw(String fillColor);
-}
-```
+Composite е структурен шаблон за проектиране, който организира обекти в дървовидна структура и позволява отделните обекти и техните композиции да бъдат третирани по еднакъв начин.
 
-#### Композитен дизайн модел листни обекти
+В шаблона Composite основните участници са:
+* Компонент (Component) – общ интерфейс или абстрактен клас, реализиран от всички елементи в дървото.
+* Лист (Leaf) – елемент, който няма наследници и реализира конкретното поведение.
+* Композит (Composite) – елемент, който съдържа други компоненти и делегира операциите към тях.
 
-Композитен дизайн модел листа изпълнява основен компонент и това са градивния елемент за композита. Можем да създадем множество листни обекти като триъгълник, кръг и т.н.
+### UML диаграма
 
-```
+<img width="511" height="316" alt="Composite" src="https://github.com/user-attachments/assets/8ca3e732-71c5-488d-ae2a-300e8293deee" />
 
 
-public class Triangle implements Shape {
+### Примерна реализация
 
-	@Override
-	public String draw(String fillColor) {
-		return "Drawing Triangle with color " + fillColor;
-	}
+Компонент
+```java
+public interface FileSystemItem {
 
-}
-```
+    String getName();
 
-
-
-```
-
-
-public class Circle implements Shape {
-
-	@Override
-	public String draw(String fillColor) {
-		return "Drawing Circle with color " + fillColor;
-	}
+    int getSize();
 
 }
 ```
 
-#### Композитен обект
+Лист
+```java
+public class File implements FileSystemItem {
 
-Композитният обект съдържа група листни обекти и трябва да бъдат предоставени някои помощни методи за добавяне или изтриване на листа от групата. Възможно е също така да се предостави метод за премахване на всички елементи от групата.
+    private String name;
+    private int size;
 
+    public File(String name, int size) {
+        this.name = name;
+        this.size = size;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public int getSize() {
+        return size;
+    }
+
+}
 ```
 
-
+Композит
+```java
 import java.util.ArrayList;
 import java.util.List;
 
-public class Drawing implements Shape{
+public class Folder implements FileSystemItem {
 
-	
-	private List<Shape> shapes = new ArrayList<Shape>();
-	
-	@Override
-	public String draw(String fillColor) {
-		StringBuilder result = new StringBuilder();
-		for(Shape sh : shapes)
-		{
-			result.append(sh.draw(fillColor)).append("\n");
-		}
-		return result.toString();
-	}
-	
-	
-	public void add(Shape s){
-		this.shapes.add(s);
-	}
-	
-	
-	public void remove(Shape s){
-		shapes.remove(s);
-	}
-	
-	
-	public void clear(){
-		this.shapes.clear();
-	}
+    private String name;
+
+    private List<FileSystemItem> items = new ArrayList<>();
+
+    public Folder(String name) {
+        this.name = name;
+    }
+
+    public void add(FileSystemItem item) {
+        items.add(item);
+    }
+
+    public void remove(FileSystemItem item) {
+        items.remove(item);
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public int getSize() {
+
+        int totalSize = 0;
+
+        for (FileSystemItem item : items) {
+            totalSize += item.getSize();
+        }
+
+        return totalSize;
+    }
+
 }
 ```
 
-```
+Използване
+```java
 public class Application {
 
-	public static void main(String[] args) {
-		Shape tri = new Triangle();
-		Shape tri1 = new Triangle();
-		Shape cir = new Circle();
-		
-		Drawing drawing = new Drawing();
-		drawing.add(tri1);
-		drawing.add(tri1);
-		drawing.add(cir);
-		
-		System.out.println(drawing.draw("Red"));
+    public static void main(String[] args) {
 
-		System.out.println("Clearing all the shapes from drawing");
-		drawing.clear();
-		
-		drawing.add(tri);
-		drawing.add(cir);
-		System.out.println(drawing.draw("Green"));
-	}
+        FileSystemItem notes =
+                new File("notes.txt", 10);
+
+        FileSystemItem report =
+                new File("report.pdf", 120);
+
+        Folder documents =
+                new Folder("Documents");
+
+        documents.add(notes);
+        documents.add(report);
+
+        Folder root =
+                new Folder("Root");
+
+        root.add(documents);
+        root.add(new File("readme.md", 5));
+
+        System.out.println(root.getName());
+        System.out.println(root.getSize());
+
+    }
 
 }
 ```
 
-Изходът от горната композитна клиентска програма е:
+Интерфейсът FileSystemItem представлява общия компонент в дървовидната структура.
 
-```
-Drawing Triangle with color Red
-Drawing Triangle with color Red
-Drawing Circle with color Red
-Clearing all the shapes from drawing
-Drawing Triangle with color Green
-Drawing Circle with color Green
-```
+Класът File е листо (Leaf). Той не съдържа други елементи и реализира операциите директно.
 
-#### Композитен модел: важни точки
+Класът Folder е композит (Composite). Освен собствените си данни той съдържа колекция от обекти, реализиращи интерфейса FileSystemItem. Това позволява една папка да съдържа както файлове, така и други папки.
 
-* Композитният модел трябва да се прилага само когато групата обекти трябва да се държи като единичен обект.
-* Композитният дизайн може да се използва за създаване на дървовидна структура.
+При извикване на метода getSize() папката последователно извиква същия метод за всички свои елементи и сумира получения резултат. По този начин клиентският код работи еднакво както с отделен файл, така и с цяла йерархия от папки.
+
+> [!IMPORTANT]
+> За разлика от Adapter, Decorator и Bridge, при които референцията към друг обект служи за
+> делегиране на поведение, Composite използва йерархична структура от обекти. Всеки композит
+> съдържа колекция от компоненти, което позволява изграждането на дървовидни структури с
+> произволна дълбочина.
+
+### Предимства
+
+* позволява еднаква работа с отделни обекти и техните композиции;
+* естествено моделира дървовидни структури;
+* улеснява добавянето на нови типове елементи;
+* намалява необходимостта от проверки за конкретния тип на обекта;
+* подпомага спазването на принципа Open/Closed.
+
+### Недостатъци
+
+* затруднява налагането на ограничения върху допустимите елементи в дървото;
+* при големи йерархии обработката може да стане по-сложна;
+* не е подходящ за структури, които не са йерархични.
+
+### Приложение
+
+Composite е подходящ когато:
+* се моделират дървовидни структури;
+* отделните обекти и групите от обекти трябва да бъдат обработвани по еднакъв начин;
+* клиентският код не трябва да прави разлика между единичен обект и композиция от обекти;
+* се изграждат файлови системи, графични сцени, менюта, организационни структури и други йерархични модели.
