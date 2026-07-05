@@ -10,11 +10,100 @@ nav_order: 2
 
 ### Проблем
 
-В практиката често се налага създаването на голям брой обекти, които съдържат частично еднаква информация. Ако повтарящата се информация се съхранява във всеки обект поотделно, това води до излишно използване на памет.
+Да се разработи част от банкова система за съхраняване на информация за банкови карти.
 
-В банкова система например могат да съществуват хиляди банкови карти от един и същ тип — Visa Debit, Mastercard Credit и т.н. Всяка карта има индивидуални данни като номер, собственик и срок на валидност, но част от информацията е обща за всички карти от даден тип: доставчик, вид карта, валута, такса и дизайн.
+Всяка карта има индивидуални данни: номер, собственик и срок на валидност. Освен това картите съдържат информация за доставчик, тип карта, валута, такса и дизайн.
 
-### Решение
+### Решение без използване на шаблона
+
+Един възможен подход е всички данни да се съхраняват директно във всеки обект BankCard:
+
+```java
+public class BankCard {
+
+    private final String cardNumber;
+    private final String owner;
+    private final String expirationDate;
+
+    private final String provider;
+    private final String cardType;
+    private final String currency;
+    private final double fee;
+    private final String design;
+
+    public BankCard(String cardNumber, String owner, String expirationDate,
+                    String provider, String cardType, String currency,
+                    double fee, String design) {
+        this.cardNumber = cardNumber;
+        this.owner = owner;
+        this.expirationDate = expirationDate;
+        this.provider = provider;
+        this.cardType = cardType;
+        this.currency = currency;
+        this.fee = fee;
+        this.design = design;
+    }
+
+    public String getCardInfo() {
+        return cardNumber + " - " + owner + " - "
+                + expirationDate + " - "
+                + provider + " " + cardType + ", "
+                + currency + ", fee: " + fee
+                + ", design: " + design;
+    }
+}
+```
+Използване:
+```java
+public class Application {
+
+    public static void main(String[] args) {
+
+        BankCard firstCard = new BankCard(
+                "1111-2222-3333-4444",
+                "John Smith",
+                "12/28",
+                "Visa",
+                "Debit",
+                "EUR",
+                2.50,
+                "Blue");
+
+        BankCard secondCard = new BankCard(
+                "5555-6666-7777-8888",
+                "Anna Brown",
+                "09/27",
+                "Visa",
+                "Debit",
+                "EUR",
+                2.50,
+                "Blue");
+
+        BankCard thirdCard = new BankCard(
+                "9999-0000-1111-2222",
+                "Peter Johnson",
+                "03/29",
+                "Mastercard",
+                "Credit",
+                "EUR",
+                4.00,
+                "Silver");
+    }
+}
+```
+
+### Недостатъци на решението
+
+При този подход всяка карта съхранява както индивидуалните си данни, така и информацията, която е обща за много други карти.
+
+В примера първата и втората карта имат различни номер, собственик и срок на валидност, но повтарят едни и същи стойности за доставчик, тип карта, валута, такса и дизайн.
+
+При малък брой обекти това не е съществен проблем. При хиляди или милиони карти обаче съхраняването на една и съща информация във всеки обект води до излишно използване на памет и до дублиране на данни.
+
+Следователно е необходимо решение, което отделя повтарящата се информация и позволява тя да бъде споделяна между много обекти.
+
+
+### Шаблонът като решение
 
 Шаблонът Flyweight отделя споделеното състояние на обектите в самостоятелен обект, който може да бъде преизползван многократно.
 
