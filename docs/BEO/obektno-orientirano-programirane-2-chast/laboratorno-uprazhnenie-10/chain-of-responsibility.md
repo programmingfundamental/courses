@@ -10,11 +10,44 @@ nav_order: 2
 
 ### Проблем
 
-В практиката често постъпват заявки, които могат да бъдат обработени от различни обекти, като предварително не е известно кой точно трябва да ги обработи.
+Да се разработи система за обработка на вътрешни заявки.
 
-Например в информационна система могат да постъпват административни, счетоводни или технически заявки. Всеки отдел обработва само заявките, които попадат в неговата компетентност. Ако даден отдел не може да обработи заявката, тя трябва автоматично да бъде предадена към следващото звено.
+В системата могат да постъпват заявки от различен тип: счетоводни, административни и технически. Всяка заявка трябва да бъде обработена от подходящ отдел.
 
-### Решение
+### Решение без използване на шаблона
+
+```java
+// defined in advance class Request with public enum for request type
+
+public class RequestProcessor {
+
+    public String processRequest(Request request) {
+        if (Request.RequestType.ACCOUNTING == request.getRequestType()) {
+            return "Request has been processed by accounting department";
+        }
+
+        if (Request.RequestType.ADMINISTRATIVE == request.getRequestType()) {
+            return "Request has been processed by administrative department";
+        }
+
+        if (Request.RequestType.TECHNICAL == request.getRequestType()) {
+            return "Request has been processed by technical department";
+        }
+
+        return "No department to process request found!";
+    }
+}
+```
+### Недостатъци на решението
+
+При този подход класът RequestProcessor съдържа логиката за всички възможни типове заявки. При добавяне на нов тип заявка методът processRequest() трябва да бъде променян.
+
+Това увеличава условната логика, затруднява разширяването на системата и обвързва обработката на всички заявки в един клас.
+
+Следователно е необходимо решение, при което отделните обработващи звена могат да бъдат разделени в самостоятелни класове и подредени във верига.
+
+
+### Шаблонът като решение
 
 Chain of Responsibility организира обработващите обекти във верига. Всеки обработващ обект проверява дали може да обработи заявката. Ако не може, я предава на следващия обект във веригата.
 
@@ -79,7 +112,7 @@ public class AccountingDepartment implements RequestHandler {
 
     @Override
     public void setNextHandler(RequestHandler requestHandler) {
-        this.requestHandler = requestHandler;
+        this.nextHandler = requestHandler;
     }
 
     @Override
@@ -101,13 +134,13 @@ public class AdministrativeDepartment implements RequestHandler {
 
     @Override
     public void setNextHandler(RequestHandler requestHandler) {
-        this.requestHandler = requestHandler;
+        this.nextHandler = requestHandler;
     }
 
     @Override
     public String processRequest(Request request) {
         if (Request.RequestType.ADMINISTRATIVE == request.getRequestType()) {
-            return "Request has been processed by accounting department";
+            return "Request has been processed by administrative department";
         } else if (Objects.nonNull(nextHandler)) {
             return nextHandler.processRequest(request);
         } else {
@@ -123,13 +156,13 @@ public class TechnicalDepartment implements RequestHandler {
 
     @Override
     public void setNextHandler(RequestHandler requestHandler) {
-        this.requestHandler = requestHandler;
+        this.nextHandler = requestHandler;
     }
 
     @Override
     public String processRequest(Request request) {
         if (Request.RequestType.TECHNICAL == request.getRequestType()) {
-            return "Request has been processed by accounting department";
+            return "Request has been processed by technical department";
         } else if (Objects.nonNull(nextHandler)) {
             return nextHandler.processRequest(request);
         } else {
