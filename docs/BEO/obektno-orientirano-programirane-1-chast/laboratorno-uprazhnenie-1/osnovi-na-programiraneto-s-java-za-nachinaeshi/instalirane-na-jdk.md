@@ -53,7 +53,10 @@ java -version
 javac -version
 ```
 
-Ако инсталацията е извършена успешно, на екрана се извежда информация за използваната версия на Java и компилатора *javac*.
+Ако инсталацията е извършена успешно, на екрана се извежда информация за използваната версия на Java и компилатора *javac*:
+
+<img width="925" height="185" alt="image" src="https://github.com/user-attachments/assets/969dab30-4ea5-4803-8ba2-00637d049427" />
+
 
 ## Управление на версиите на Java
 
@@ -64,5 +67,12 @@ javac -version
 За всеки проект в IntelliJ IDEA може да бъде избрана различна версия на JDK. При създаване на нов проект е необходимо да бъде избрана подходящата версия на JDK.
 
 <img width="941" height="364" alt="image" src="https://github.com/user-attachments/assets/db90b7cc-f46c-49c3-a1a5-3621851d8c84" />
+
+
+След натискане на бутона *Edit* се отваря следния прозорец:
+
+
+<img width="1315" height="894" alt="image" src="https://github.com/user-attachments/assets/4e57e61e-8616-4357-bef4-614863652ee6" />
+
 
 Препоръчително е всички проекти в рамките на курса да използват една и съща версия на JDK.
