@@ -86,13 +86,42 @@ boolean addAll(Collection<? extends E> c)
 boolean removeAll(Collection<?> c)
 //премахва всички елементи от колекцията, които не присъстват в подавания списък от елементи
 boolean retainAll(Collection<?> c)
-//почиства паметта, към която сочи колекцията
+//премахва всички елементи от колекцията
 void clear()
 //преобразува колекцията в масив от класа Ojbect
 Object[] toArray()
 //преобразува колекцията в масив от програмно дефиниран клас
 <T> T[] toArray(T[] a)
 ```
+
+Пример:
+
+```java
+public class Application {
+    public static void main(String[] args) {
+        Collection<String> fruits = new ArrayList<>();
+
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Orange");
+
+        System.out.println(fruits.contains("Banana"));
+        System.out.println(fruits.size());
+
+        fruits.remove("Banana");
+
+        System.out.println(fruits);
+    }
+}
+```
+В примера към колекцията се добавят три елемента. След това се проверява дали тя съдържа определена стойност, премахва се един елемент и се извежда крайното съдържание:
+
+```java
+true
+3
+[Apple, Orange]
+```
+
 
 ## Интерфейс List
 
@@ -114,7 +143,7 @@ List представлява подредена колекция, която:
 
 -	**ArrayList** – бърз достъп по индекс, по-бавно вмъкване и изтриване в средата;
 -	**LinkedList** – по-бавно търсене, но бързо добавяне и премахване;
--	**Vector** – синхронизирана, по-стара реализация.
+-	**Vector** – синхронизирана, по-стара реализация; в съвременните приложения се използва сравнително рядко.
 
 Пример:
 
@@ -125,7 +154,17 @@ names.add("Ivan");
 names.add("Maria");
 names.add("Georgi");
 
+System.out.println(names.get(1));
+
+names.remove(0);
+
 System.out.println(names);
+```
+Методът get() извлича елемент по индекс, а remove() премахва елемент от списъка:
+
+```java
+Maria
+[Maria, Georgi]
 ```
 
 ## Интерфейс Set
@@ -159,6 +198,10 @@ cities.add("Varna");
 
 System.out.println(cities);
 ```
+Резултат:
+```java
+[Varna, Sofia]
+```
 
 ## Интерфейс Queue
 
@@ -180,6 +223,8 @@ System.out.println(cities);
 | add()    | remove()   | element() |
 | offer()  | poll()     | peek()    |
 
+Използването на add(), remove() и element() е подходящо, когато липсата на възможност за изпълнение се счита за програмна грешка и трябва незабавно да бъде сигнализирана чрез изключение. Ако подобна ситуация се очаква и трябва да бъде обработена по нормален начин, по-подходящи са offer(), poll() и peek().
+
 Най-често използвани реализации:
 
 - LinkedList
@@ -193,7 +238,17 @@ queue.offer("Task 1");
 queue.offer("Task 2");
 queue.offer("Task 3");
 
+System.out.println(queue.peek());
+
 System.out.println(queue.poll());
+
+System.out.println(queue.peek());
+```
+Методът peek() връща първия елемент, без да го премахва, а poll() го извлича и премахва от опашката:
+```java
+Task 1
+Task 1
+Task 2
 ```
 
 ## Итератори
