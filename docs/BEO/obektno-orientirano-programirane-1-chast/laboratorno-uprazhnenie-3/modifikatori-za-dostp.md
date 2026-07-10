@@ -134,6 +134,31 @@ for (Status status : Status.values()) {
 
 Това ги прави специален вид класове, а не просто списък от константи.
 
+Пример за подобна енумерация:
+
+```java
+public enum UserRole {
+
+    ADMIN("Administrator"),
+    MODERATOR("Moderator"),
+    USER("Standard user");
+
+    private final String description;
+
+    UserRole(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+}
+```
+Използване:
+```java
+System.out.println(UserRole.ADMIN.getDescription());
+```
+
 Използването на enum е препоръчително винаги, когато е необходимо дадена променлива да приема една от предварително известен и ограничен набор стойности (например статус на поръчка, ден от седмицата, сезон, вид плащане и др.).
 
 ## Записи (record)
@@ -206,3 +231,40 @@ public class Application {
     }
 }
 ```
+
+## Вложени класове (Nested Classes)
+
+Java позволява даден клас да бъде деклариран вътре в друг клас. В зависимост от начина на деклариране се различават:
+* статичен вложен клас (Static Nested Class);
+* вътрешен клас (Inner Class);
+* локален клас (Local Class);
+* анонимен клас (Anonymous Class).
+
+По-долу е показан пример за статичен вложен клас:
+
+```java
+public class Bank {
+
+    public static class Account {
+
+        private String iban;
+
+        public Account(String iban) {
+            this.iban = iban;
+        }
+
+        public String getIban() {
+            return iban;
+        }
+    }
+}
+```
+
+Класът Account е деклариран вътре в класа Bank и представлява статичен вложен клас (static nested class). Подобно на статичните полета и методи, той принадлежи на класа Bank, а не на конкретен негов обект. Поради тази причина обект от тип Account може да бъде създаден чрез името на външния клас:
+
+```java
+Bank.Account account = new Bank.Account("XYZ-000-123-456");
+```
+Статичните вложени класове се използват, когато даден клас има тясна логическа връзка с друг клас, но не е необходимо да има достъп до конкретен негов обект.
+
+В практиката най-често се използват статични вложени класове и вътрешни класове (inner classes). Останалите разновидности ще бъдат разгледани при необходимост в следващи теми.
