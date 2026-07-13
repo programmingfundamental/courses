@@ -24,7 +24,22 @@ permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhneni
 - предоставят бързо търсене по ключ
 - един ключ може да бъде свързан само с една стойност (при повторно добавяне старата стойност се заменя).
 
-Като пример за подобен тип структура могат да бъдат разгледани речник (дума - определение), телефонен указател (име - номер) и други подобни.
+Като пример за подобен тип структура могат да бъдат разгледани речник (дума - определение), телефонен указател (име - номер) и други подобни:
+
+```java
+Map<String, String> phoneBook = new HashMap<>();
+
+phoneBook.put("Ivan", "0888123456");
+phoneBook.put("Maria", "0888987654");
+phoneBook.put("Georgi", "0888456789");
+
+System.out.println(phoneBook);
+```
+В примера всеки ключ представлява име на човек, а съответната стойност – негов телефонен номер:
+
+```java
+{Ivan=0888123456, Georgi=0888456789, Maria=0888987654}
+```
 
 ## Map не наследява Collection
 
@@ -41,6 +56,33 @@ remove()
 containsKey()
 containsValue()
 ```
+
+```java
+Map<String, Integer> grades = new HashMap<>();
+
+grades.put("Ivan", 6);
+grades.put("Maria", 5);
+
+System.out.println(grades.get("Ivan"));
+
+System.out.println(grades.containsKey("Maria"));
+
+grades.remove("Maria");
+
+System.out.println(grades);
+```
+Методът put() добавя нова двойка ключ–стойност, get() извлича стойността по ключ, containsKey() проверява дали съществува даден ключ, а remove() премахва съответната двойка.
+
+
+```java
+Map<String, Integer> grades = new HashMap<>();
+
+grades.put("Ivan", 5);
+grades.put("Ivan", 6);
+
+```
+Тъй като ключовете трябва да бъдат уникални, второто извикване на put() не добавя нов елемент, а заменя стойността на съществуващия ключ.
+
 
 ## Операции, носещи информация за колекцията
 
@@ -78,22 +120,34 @@ public class Faculty {
     // pair specialty - number of students
     private Map<String, Integer> specialities = new HashMap<>();
 
-    public void displayPairs() {
+    public String pairsToString() {
+        StringBuilder result = new StringBuilder();
+
         for (Map.Entry<String, Integer> pair : specialities.entrySet()) {
-            System.out.println(pair.getKey() + " " + pair.getValue());
+            result.append(pair.getKey())
+                  .append(" ")
+                  .append(pair.getValue())
+                  .append("\n");
         }
+        return result.toString();
     }
 
-    public void displayKeys() {
+    public String keysToString() {
+        StringBuilder result = new StringBuilder();
+
         for (String key : specialities.keySet()) {
-            System.out.println(key);
+            result.append(key).append("\n");
         }
+        return result.toString();
     }
 
-    public void displayValues() {
+    public String valuesToString() {
+        StringBuilder result = new StringBuilder();
+
         for (Integer value : specialities.values()) {
-            System.out.println(value);
+            result.append(value).append("\n");
         }
+        return result.toString();
     }
 }
 ```
@@ -102,24 +156,20 @@ public class Faculty {
 
 Тъй като Map не е линейна структура, сортирането може да бъде направено или по ключ, или по стойност:
 
-## Подреждане по стойност
+## Подреждане по ключ
 
 ```java
 // за целта обекта, използван за ключ, трябва да имплементира Comparable
     public Map<String, Integer> sortByKey() {
         return new TreeMap<>(specialities);
     }
+```
 
+## Подреждане по стойност
+```java
     public void sortByValue() {
         List<Map.Entry<String, Integer>> specialtyList = new ArrayList<>(specialities.entrySet());
         specialtyList.sort(Map.Entry.comparingByValue()); // при сложен обект, може да се дефинира Comparator
     }
 ```
 
-## Подреждане по ключ
-
-Ключовете могат да бъдат автоматично поддържани в сортиран ред чрез използване на TreeMap.
-
-```java
-Map<String,Integer> sorted =  new TreeMap<>(specialities);
-```
