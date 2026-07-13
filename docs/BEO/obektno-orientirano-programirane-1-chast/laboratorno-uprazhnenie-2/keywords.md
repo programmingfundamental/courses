@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Ключови думи new, this, static, final
-parent: Лабораторно упражнение 3
+parent: Лабораторно упражнение 2
 grand_parent: Обектно-ориентирано програмиране - 1 част
 nav_order: 3
 ---

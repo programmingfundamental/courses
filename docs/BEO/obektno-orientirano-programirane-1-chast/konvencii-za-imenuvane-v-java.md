@@ -3,7 +3,6 @@ layout: default
 title: Конвенции за именуване в Java
 parent: Обектно-ориентирано програмиране - 1 част
 nav_order: 1
-permalink: /docs/obektno-orientirano-programirane-1-chast/konvencii-za-imenuvane-v-java
 ---
 
 # Конвенции за именуване в Java

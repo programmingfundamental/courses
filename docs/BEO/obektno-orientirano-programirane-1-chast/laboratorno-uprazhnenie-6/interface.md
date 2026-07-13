@@ -1,10 +1,9 @@
 ---
 layout: default
 title: Интерфейс
-parent: Обектно-ориентирано програмиране - 1 част
-has_children: true
+parent: Лабораторно упражнение 5
+grand_parent: Обектно-ориентирано програмиране - 1 част
 nav_order: 1
-permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-6
 ---
 
 # Интерфейс (Interface)

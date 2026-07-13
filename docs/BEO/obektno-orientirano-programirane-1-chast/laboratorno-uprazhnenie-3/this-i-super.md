@@ -3,7 +3,7 @@ layout: default
 title: Ключова дума super
 parent: Лабораторно упражнение 3
 grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 4
+nav_order: 2
 ---
 
 # Ключова дума super

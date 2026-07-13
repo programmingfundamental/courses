@@ -3,7 +3,7 @@ layout: default
 title: Абстрактен клас
 parent: Лабораторно упражнение 5
 grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 1
+nav_order: 2
 ---
 
 # Абстрактен клас
