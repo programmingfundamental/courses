@@ -1,13 +1,13 @@
 ---
 layout: default
-title: Лабораторно упражнение 7
+title: Лабораторно упражнение 8
 parent: Обектно-ориентирано програмиране - 1 част
 has_children: true
-nav_order: 8
+nav_order: 9
 permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-7
 ---
 
-# Лабораторно упражнение 7
+# Лабораторно упражнение 8
 
 ## Символни низове в Java
 

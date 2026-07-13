@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Wrapper Class
-parent: Лабораторно упражнение 2
+parent: Лабораторно упражнение 8
 grand_parent: Обектно-ориентирано програмиране - 1 част
 nav_order: 3
 ---

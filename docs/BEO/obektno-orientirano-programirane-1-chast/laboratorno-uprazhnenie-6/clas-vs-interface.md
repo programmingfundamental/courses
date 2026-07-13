@@ -1,10 +1,9 @@
 ---
 layout: default
 title: Абстрактен клас и интерфейс
-parent: Обектно-ориентирано програмиране - 1 част
-has_children: true
-nav_order: 7
-permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-6
+parent: Лабораторно упражнение 5
+grand_parent: Обектно-ориентирано програмиране - 1 част
+nav_order: 2
 ---
 
 ## Абстрактни класове и интерфейси
