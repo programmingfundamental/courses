@@ -10,11 +10,52 @@ nav_order: 1
 
 ### Проблем
 
-В практиката често съществуват различни начини за изпълнение на една и съща операция. Ако изборът между тях се реализира чрез множество условни конструкции, кодът става труден за поддръжка и разширяване.
+Да се разработи клас Order, който изчислява крайната цена на поръчка.
 
-Например крайната цена на поръчка може да бъде изчислена по различен начин според приложената отстъпка.
+Поръчката има начална цена, като в различни ситуации може да се приложи различен вид отстъпка: без отстъпка, студентска отстъпка или VIP отстъпка.
 
-### Решение
+
+### Решение без използване на шаблона
+
+```java
+public class Order {
+
+    private double initialPrice;
+    private String discountType;
+
+    public Order(double initialPrice, String discountType) {
+        this.initialPrice = initialPrice;
+        this.discountType = discountType;
+    }
+
+    public double getFinalPrice() {
+        if (discountType.equalsIgnoreCase("none")) {
+            return initialPrice;
+        }
+
+        if (discountType.equalsIgnoreCase("student")) {
+            return initialPrice * 0.90;
+        }
+
+        if (discountType.equalsIgnoreCase("vip")) {
+            return initialPrice * 0.80;
+        }
+
+        return initialPrice;
+    }
+}
+```
+
+### Недостатъци на решението
+
+При този подход класът Order съдържа логиката за всички видове отстъпки. При добавяне на нова отстъпка трябва да се променя методът getFinalPrice().
+
+Освен това изборът на алгоритъм е реализиран чрез условни конструкции, което прави кода по-труден за поддръжка при увеличаване на броя варианти.
+
+Следователно е необходимо решение, при което различните начини за изчисляване на крайната цена да бъдат отделени в самостоятелни класове и да могат да се заменят без промяна в класа Order.
+
+
+### Шаблонът като решение
 
 Strategy отделя различните алгоритми в самостоятелни класове и позволява те да бъдат взаимозаменяеми.
 
@@ -74,7 +115,7 @@ public class VipDiscountStrategy implements DiscountStrategy {
 public class Order {
 
     private final double initialPrice;
-    private DiscountStrategy discountStrategy;
+    private final DiscountStrategy discountStrategy;
 
     public Order(double initialPrice, DiscountStrategy discountStrategy) {
         this.initialPrice = initialPrice;
