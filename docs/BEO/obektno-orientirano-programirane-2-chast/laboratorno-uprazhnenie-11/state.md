@@ -10,15 +10,78 @@ nav_order: 3
 
 ### Проблем
 
-При някои обекти поведението зависи от тяхното текущо състояние. Често това води до използването на множество условни конструкции (if, switch), които постепенно усложняват логиката на програмата.
+Да се разработи клас Ticket, който моделира билет за събитие.
 
-Например билет може да бъде свободен, резервиран или продаден. В зависимост от текущото му състояние едни операции са позволени, а други – не. При добавяне на нови състояния или промяна в бизнес логиката условните конструкции стават все по-сложни и трудни за поддръжка.
+Билетът може да бъде свободен, резервиран или продаден. Върху него могат да се извършват три операции: резервиране, купуване и отказване на резервация.
 
-### Решение
 
-Шаблонът State разделя различните състояния в самостоятелни класове. Вместо контекстният обект да съдържа условна логика, той делегира изпълнението на текущото състояние.
+### Решение без използване на шаблона
+
+```java
+public class Ticket {
+
+    private String ticketState;
+    private int ticketId;
+
+    public Ticket(int ticketId) {
+        this.ticketState = "available";
+        this.ticketId = ticketId;
+    }
+
+    public String book() {
+        if (ticketState.equalsIgnoreCase("available")) {
+            ticketState = "booked";
+            return "Ticket with id = " + this.ticketId + " has been booked";
+        } else if (ticketState.equalsIgnoreCase("booked")) {
+            return "Ticket with id = " + this.ticketId + " has been already booked";
+        } else if (ticketState.equalsIgnoreCase("sold")) {
+            return "Ticket with id = " + this.ticketId + " has been already sold";
+        }
+        return "Unrecognized state";
+    }
+
+    public String buy() {
+        if (ticketState.equalsIgnoreCase("available") ||
+				ticketState.equalsIgnoreCase("booked")) {
+            ticketState = "sold";
+            return "Ticket with id = " + this.ticketId + " has been sold";
+        } else if (ticketState.equalsIgnoreCase("sold")) {
+            return "Ticket with id = " + this.ticketId + " has been already sold";
+        }
+        return "Unrecognized state";
+    }
+
+    public String cancel() {
+        if (ticketState.equalsIgnoreCase("available")) {
+            return "Available ticket cannot be cancelled";
+        } else if (ticketState.equalsIgnoreCase("booked")) {
+            ticketState = "available";
+            return "Ticket with id = " + this.ticketId + " has been cancelled";
+        } else if (ticketState.equalsIgnoreCase("sold")) {
+            return "Sold ticket cannot be cancelled";
+        }
+        return "Unrecognized state";
+    }
+
+}
+```
+
+
+### Недостатъци на решението
+
+При този подход класът Ticket съдържа логиката за всички възможни състояния. Всеки метод трябва да проверява текущото състояние и да решава какво действие е позволено.
+
+При добавяне на ново състояние или промяна в правилата трябва да бъдат променяни няколко метода в класа Ticket. Това увеличава условната логика и прави класа труден за поддръжка.
+
+Следователно е необходимо решение, при което логиката за всяко състояние да бъде отделена в самостоятелен клас.
+
+
+### Шаблонът като решение
+
+Шаблонът **State** разделя различните състояния в самостоятелни класове. Вместо контекстният обект да съдържа условна логика, той делегира изпълнението на текущото състояние.
 
 При промяна на състоянието поведението на обекта автоматично се променя чрез използването на друга реализация на интерфейса State.
+
 
 ### Дефиниция
 
