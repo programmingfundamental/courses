@@ -10,11 +10,86 @@ nav_order: 2
 
 ### Проблем
 
-В практиката често се срещат ситуации, при които един обект се характеризира от две независими характеристики, всяка от които може да се развива самостоятелно. Използването на наследяване за комбиниране на всички възможни варианти води до бързо нарастване на броя класове.
+Да се разработи част от система за банкови карти.
 
-Например при моделиране на банкови карти могат да съществуват различни типове карти (дебитни, кредитни, бизнес), както и различни доставчици на картови услуги (Visa, Mastercard, Borica). Ако всяка комбинация бъде реализирана чрез наследяване, ще е необходимо създаването на отделен клас за всеки възможен вариант.
+Системата трябва да поддържа различни типове карти — дебитни и кредитни. Картите могат да бъдат издавани от различни доставчици на картови услуги — Visa, Mastercard и Borica.
 
-### Решение
+### Решение без използване на шаблона
+
+Един възможен подход е всяка комбинация между тип карта и доставчик да бъде реализирана чрез отделен клас.
+
+```java
+public abstract class Card {
+
+    public abstract String getCardInformation();
+}
+```
+```java
+public class VisaDebitCard extends Card {
+
+    @Override
+    public String getCardInformation() {
+        return "Debit card - Visa";
+    }
+}
+```
+```java
+public class MastercardDebitCard extends Card {
+
+    @Override
+    public String getCardInformation() {
+        return "Debit card - Mastercard";
+    }
+}
+```
+```java
+public class VisaCreditCard extends Card {
+
+    @Override
+    public String getCardInformation() {
+        return "Credit card - Visa";
+    }
+}
+```
+```java
+public class MastercardCreditCard extends Card {
+
+    @Override
+    public String getCardInformation() {
+        return "Credit card - Mastercard";
+    }
+}
+```
+Ако се добави нов доставчик, например Borica, трябва да бъдат създадени нови класове:
+```java
+public class BoricaDebitCard extends Card {
+
+    @Override
+    public String getCardInformation() {
+        return "Debit card - Borica";
+    }
+}
+```
+```java
+public class BoricaCreditCard extends Card {
+
+    @Override
+    public String getCardInformation() {
+        return "Credit card - Borica";
+    }
+}
+```
+
+### Недостатъци на решението
+
+При този подход броят на класовете нараства с всяка нова комбинация между тип карта и доставчик. Ако се добави нов тип карта, трябва да се създадат класове за всички съществуващи доставчици. Ако се добави нов доставчик, трябва да се създадат класове за всички съществуващи типове карти.
+
+Така две независими характеристики — типът на картата и доставчикът — се комбинират чрез наследяване, което води до бързо нарастване на броя класове.
+
+Следователно е необходимо решение, което позволява типовете карти и доставчиците да се развиват независимо и да се комбинират свободно.
+
+
+### Шаблонът като решение
 
 Bridge разделя абстракцията от нейната имплементация, като изгражда две независими йерархии, свързани чрез референция между обектите.
 
@@ -113,7 +188,19 @@ public class CreditCard extends Card {
     public String getCardInformation() {
         return "Credit card - " + getProvider().getProviderName();
     }
+}
+```
+```java
+public class DebitCard extends Card {
 
+    public DebitCard(PaymentProvider provider) {
+        super(provider);
+    }
+
+    @Override
+    public String getCardInformation() {
+        return "Debit card - " + getProvider().getProviderName();
+    }
 }
 ```
 Използване
