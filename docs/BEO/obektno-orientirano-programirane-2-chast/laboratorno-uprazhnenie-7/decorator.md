@@ -10,9 +10,103 @@ nav_order: 3
 
 ### Проблем
 
-В практиката често се налага към даден обект да бъдат добавяни нови функционалности, без да се променя неговият клас. Ако всяка възможна комбинация от функционалности се реализира чрез наследяване, броят на класовете може бързо да нарасне.
+Да се разработи система за обработка на съобщения.
 
-### Решение
+В зависимост от конкретната ситуация към дадено съобщение може да бъде добавен времеви маркер, съобщението може да бъде криптирано или компресирано. Възможно е към едно и също съобщение да бъдат приложени няколко обработки едновременно.
+
+### Решение без използване на шаблона
+
+Един възможен подход е за всяка различна обработка да бъде създаден отделен клас.
+
+```java
+public interface Message {
+
+    String getContent();
+}
+```
+```java
+public class PlainMessage implements Message {
+
+    private String content;
+
+    public PlainMessage(String content) {
+        this.content = content;
+    }
+
+    @Override
+    public String getContent() {
+        return content;
+    }
+}
+```
+```java
+public class TimestampMessage implements Message {
+
+    private Message message;
+
+    public TimestampMessage(Message message) {
+        this.message = message;
+    }
+
+    @Override
+    public String getContent() {
+        return "[Timestamp] " + message.getContent();
+    }
+}
+```
+```java
+public class EncryptedMessage implements Message {
+
+    private Message message;
+
+    public EncryptedMessage(Message message) {
+        this.message = message;
+    }
+
+    @Override
+    public String getContent() {
+        return "Encrypted[" + message.getContent() + "]";
+    }
+}
+```
+На пръв поглед това решение работи, но при комбиниране на няколко обработки започва да се появява проблем. Ако не се използва общ механизъм за обгръщане, може да се стигне до създаване на класове за различни комбинации:
+```java
+public class TimestampEncryptedMessage implements Message {
+
+    private String content;
+
+    public TimestampEncryptedMessage(String content) {
+        this.content = content;
+    }
+
+    @Override
+    public String getContent() {
+        return "Encrypted[[Timestamp] " + content + "]";
+    }
+}
+```
+При добавяне на нови обработки ще се появяват все повече комбинации:
+```java
+TimestampMessage
+EncryptedMessage
+CompressedMessage
+TimestampEncryptedMessage
+TimestampCompressedMessage
+EncryptedCompressedMessage
+TimestampEncryptedCompressedMessage
+...
+```
+
+### Недостатъци на решението
+
+При този подход броят на класовете нараства бързо, защото всяка нова обработка може да се комбинира с вече съществуващите. Това усложнява структурата на приложението и затруднява поддръжката.
+
+Освен това част от логиката започва да се дублира в класовете, които представят различни комбинации от обработки. При промяна в начина на криптиране, компресиране или добавяне на времеви маркер може да се наложи промяна на повече от един клас.
+
+Следователно е необходимо решение, което позволява обработките да се добавят динамично и да се комбинират свободно, без създаване на отделен клас за всяка възможна комбинация.
+
+
+### Шаблонът като решение
 
 Шаблонът **Decorator** позволява динамично добавяне на ново поведение към обект чрез обгръщането му в друг обект със същия интерфейс.
 
@@ -24,7 +118,8 @@ Decorator е структурен шаблон за проектиране, ко
 
 ### UML диаграма
 
-<img width="1202" height="390" alt="Decorator" src="https://github.com/user-attachments/assets/0e8c867a-b0be-4059-96fc-11b04eb8a26b" />
+<img width="1232" height="390" alt="Decorator" src="https://github.com/user-attachments/assets/2176bc90-364e-4ccc-a978-1286968f6a68" />
+
 
 ### Примерна реализация
 
@@ -82,15 +177,15 @@ public class EncryptedMessageDecorator extends MessageDecorator {
 }
 ```
 ```java
-public class SignedMessageDecorator extends MessageDecorator {
+public class TimestampMessageDecorator extends MessageDecorator {
 
-    public SignedMessageDecorator(Message message) {
+    public TimestampMessageDecorator(Message message) {
         super(message);
     }
 
     @Override
     public String getContent() {
-        return super.getContent() + " | Signed";
+        return "[" + LocalDateTime.now() + "] " + super.getContent();
     }
 }
 ```
