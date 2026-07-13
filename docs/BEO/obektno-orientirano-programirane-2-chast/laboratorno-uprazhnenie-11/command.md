@@ -10,15 +10,90 @@ nav_order: 2
 
 ### Проблем
 
-В практиката често се налага дадено действие да бъде подадено, съхранено или изпълнено по-късно, без обектът, който го извиква, да знае как точно ще бъде реализирано то.
+Да се разработи дистанционно управление за музикален плеър.
 
-Например дистанционно управление на музикален плеър може да има бутони за стартиране, пауза и спиране. Самото дистанционно не трябва да знае как работи плеърът. То трябва единствено да изпълни зададената команда.
+Дистанционното управление трябва да позволява стартиране, пауза и спиране на възпроизвеждането.
 
-### Решение
 
-Шаблонът Command капсулира заявка като самостоятелен обект. Всеки команден обект съдържа необходимата информация за извикване на конкретно действие върху получателя.
+### Решение без използване на шаблона
 
-По този начин обектът, който извиква командата, не зависи директно от класа, който реално извършва действието.
+Един възможен подход е дистанционното управление директно да работи с класа MusicPlayer и да извиква неговите методи:
+
+```java
+public class MusicPlayer {
+
+    public String play() {
+        return "Music player started.";
+    }
+
+    public String pause() {
+        return "Music player paused.";
+    }
+
+    public String stop() {
+        return "Music player stopped.";
+    }
+}
+```
+```java
+public class RemoteControl {
+
+    private MusicPlayer player;
+
+    public RemoteControl(MusicPlayer player) {
+        this.player = player;
+    }
+
+    public String pressPlayButton() {
+        return player.play();
+    }
+
+    public String pressPauseButton() {
+        return player.pause();
+    }
+
+    public String pressStopButton() {
+        return player.stop();
+    }
+
+    public String pressNextButton() {
+        return player.nextSong();
+    }
+}
+```
+Използване:
+```java
+public class Application {
+
+    public static void main(String[] args) {
+
+        MusicPlayer player = new MusicPlayer();
+
+        RemoteControl remote = new RemoteControl(player);
+
+        System.out.println(remote.pressPlayButton());
+        System.out.println(remote.pressPauseButton());
+        System.out.println(remote.pressStopButton());
+        System.out.println(remote.pressNextButton());
+    }
+}
+```
+
+### Недостатъци на решението
+
+При този подход класът RemoteControl познава директно всички действия, които могат да бъдат изпълнявани от музикалния плеър.
+
+Ако се добави нова функционалност, например превключване към следваща песен или регулиране на звука, ще бъде необходимо да се променят както класът MusicPlayer, така и класът RemoteControl (nextSong(), previousSong(), increaseVolume(), decreaseVolume() и др.).
+
+Освен това дистанционното управление е тясно свързано с конкретния клас MusicPlayer и не може лесно да бъде използвано с друг тип устройство.
+
+Следователно е необходимо решение, при което отделните действия да бъдат представени като самостоятелни обекти и дистанционното управление да работи с тях по унифициран начин.
+
+
+### Шаблонът като решение
+
+Шаблонът **Command** капсулира заявка като самостоятелен обект. Всеки команден обект съдържа необходимата информация за извикване на конкретно действие върху получателя.
+
 
 ### Дефиниция
 
