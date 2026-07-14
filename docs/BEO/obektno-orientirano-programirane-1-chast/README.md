@@ -4,7 +4,6 @@ title: Обектно-ориентирано програмиране - 1 час
 parent: Български
 nav_order: 2
 has_children: true
-permalink: /docs/obektno-orientirano-programirane-1-chast
 ---
 
 # Обектно-ориентирано програмиране - Първа част

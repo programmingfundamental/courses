@@ -4,7 +4,6 @@ title: Лабораторно упражнение 2
 parent: Програмни системи
 has_children: true
 nav_order: 2
-permalink: /docs/software-systems/laboratorno-uprazhnenie-2
 ---
 
 # Упражнение #2
