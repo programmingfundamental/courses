@@ -4,7 +4,6 @@ title: Лабораторно упражнение 3
 parent: Софтуерно инженерство
 has_children: true
 nav_order: 3
-permalink: /docs/software-engineering/laboratorno-uprazhnenie-3
 ---
 
 # Лабораторно упражнение 3: Софтуерни изисквания и спецификации с UML диаграми

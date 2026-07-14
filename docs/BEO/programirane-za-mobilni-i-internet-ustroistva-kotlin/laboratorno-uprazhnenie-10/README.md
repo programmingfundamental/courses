@@ -4,7 +4,6 @@ title: Лабораторно упражнение 10
 parent: Програмиране за мобилни и Интернет устройства Kotlin
 has_children: true
 nav_order: 10
-permalink: /docs/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-10
 ---
 
 # Лабораторно упражнение 10

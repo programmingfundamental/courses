@@ -4,7 +4,6 @@ title: Лабораторно упражнение 12
 parent: Обектно-ориентирано програмиране - 1 част
 has_children: true
 nav_order: 13
-permalink: /docs/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-12
 ---
 
 # Лабораторно упражнение 12

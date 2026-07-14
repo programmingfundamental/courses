@@ -4,7 +4,6 @@ title: Лабораторно упражнение 4
 parent: Софтуерно инженерство
 has_children: true
 nav_order: 4
-permalink: /docs/software-engineering/laboratorno-uprazhnenie-4
 ---
 
 # Лабораторно упражнение 4: Практическа подготовка за моделиране с UML

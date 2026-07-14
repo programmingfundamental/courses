@@ -4,7 +4,6 @@ title: Лабораторно упражнение 8
 parent: Софтуерно инженерство
 has_children: true
 nav_order: 8
-permalink: /docs/software-engineering/laboratorno-uprazhnenie-8
 ---
 
 # Лабораторно упражнение 8: Гъвкавата рамка Scrum

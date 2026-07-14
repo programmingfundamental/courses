@@ -4,7 +4,6 @@ title: Лабораторно упражнение 9
 parent: Интернет технологии
 has_children: true
 nav_order: 9
-permalink: /docs/internet-tehnologii-2023/laboratorno-uprazhnenie-9
 ---
 
 # Лабораторно упражнение 9-10
