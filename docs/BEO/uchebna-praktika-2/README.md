@@ -2,7 +2,7 @@
 layout: default
 title: Учебна практика 2
 parent: Български
-nav_order: 11
+nav_order: 6
 has_children: true
 ---
 

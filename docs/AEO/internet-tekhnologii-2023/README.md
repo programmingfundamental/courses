@@ -2,7 +2,7 @@
 layout: default
 title: Internet Technologies
 parent: English
-nav_order: 5
+nav_order: 8
 has_children: true
 ---
 

@@ -7,7 +7,7 @@ has_children: true
 
 # Introduction to programming
 
-## Courses
+## Table of contents
 
 - [Internet Technologies](internet-tekhnologii-2023/)
 - [Object-oriented Programming - 1 part](obektno-orientirano-programirane-1-chast/)

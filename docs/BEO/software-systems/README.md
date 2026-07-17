@@ -2,7 +2,7 @@
 layout: default
 title: Програмни системи
 parent: Български
-nav_order: 7
+nav_order: 5
 has_children: true
 ---
 

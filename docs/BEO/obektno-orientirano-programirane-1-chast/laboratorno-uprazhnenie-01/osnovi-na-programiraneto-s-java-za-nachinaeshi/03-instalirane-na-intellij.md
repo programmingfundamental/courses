@@ -4,7 +4,7 @@ title: Инсталиране на IntelliJ
 parent: Лабораторно упражнение 1
 grand_parent: Обектно-ориентирано програмиране - 1 част
 has_children: true
-nav_order: 3
+nav_order: 2
 ---
 
 # Инсталиране на IntelliJ

@@ -1,100 +1,192 @@
 ---
 layout: default
-title: Връзки между класовете
+title: Наследяване и ключова дума super
 parent: Лабораторно упражнение 3
 grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 1
+nav_order: 2
 ---
 
-## Връзки между класовете
+# Наследяване и ключова дума `super`
 
-В Java класовете могат да бъдат свързани по различни начини. Някои отношения са по-тясни и показват, че един клас е част от друг, докато други са по-общи и показват, че един клас наследява характеристики от друг. Тези връзки помагат да се моделират реални обекти и да се организира кодът по логичен начин.
+Наследяването е механизъм в Java, чрез който един клас се дефинира като специализиран вариант на друг клас. Класът наследник получава достъп до наследимите полета и методи на родителския клас и може да добавя нови полета и методи.
 
-## Вложени класове (Nested Classes)
+Наследяването описва връзка от тип „е“. Ако `Student` наследява `Person`, това означава, че студентът е човек, но има и допълнителни характеристики, които не са общи за всички хора.
 
-Един от най-простите начини да се покаже връзка между класове е да се декларира един клас вътре в друг. Това означава, че вложеният клас има смисъл само в контекста на външния клас и е тясно свързан с него.
+## Родителски клас и клас наследник
 
-Java позволява няколко вида вложени класове:
-- статичен вложен клас (Static Nested Class);
-- вътрешен клас (Inner Class);
-- локален клас (Local Class);
-- анонимен клас (Anonymous Class).
-
-По-долу е показан пример за статичен вложен клас:
-
-```java
-public class Bank {
-
-    public static class Account {
-
-        private String iban;
-
-        public Account(String iban) {
-            this.iban = iban;
-        }
-
-        public String getIban() {
-            return iban;
-        }
-    }
-}
-```
-
-Класът Account е деклариран вътре в класа Bank и представлява статичен вложен клас (static nested class). Той принадлежи към класа Bank, а не към конкретен негов обект. Поради тази причина обект от тип Account може да бъде създаден чрез името на външния клас:
-
-```java
-Bank.Account account = new Bank.Account("XYZ-000-123-456");
-```
-
-Статичните вложени класове се използват, когато даден клас има тясна логическа връзка с друг клас, но не е необходимо да има достъп до конкретен негов обект.
-
-В практиката най-често се използват статични вложени класове и вътрешни класове. Останалите разновидности ще бъдат разгледани при необходимост в следващи теми.
-
-## Наследяване (Inheritance)
-
-Наследяването е следващата стъпка в отношенията между класовете. То описва по-широка връзка, при която един клас се основава на друг и наследява неговите полета и методи. По този начин може да се построи йерархия, в която общите характеристики се описват веднъж, а специализираните – в наследниците.
-
-В Java наследяването се реализира чрез ключовата дума *extends*.
-
-### Основни понятия
-
-При наследяването участват два вида класове:
-
-- родителски клас (superclass, parent class) – класът, чиито членове се наследяват;
-- клас наследник (subclass, child class) – класът, който наследява характеристиките на родителския клас и при необходимост добавя нови полета и методи.
-
-Синтаксис:
-
-```java
-class ChildClass extends ParentClass {
-
-}
-```
-
-Пример:
+Класът, от който се наследява, се нарича родителски клас, базов клас или суперклас. Класът, който наследява, се нарича клас наследник, производен клас или подклас.
 
 ```java
 class Person {
 
-    String name;
+    private String name;
 
-    void printName() {
-        System.out.println(name);
+    public Person(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+```
+
+Класът `Person` описва обща характеристика: име. Тази характеристика може да бъде използвана от по-специализирани класове.
+
+## Ключова дума `extends`
+
+Наследяването се декларира чрез ключовата дума `extends`.
+
+```java
+class Student extends Person {
+
+    private int facultyNumber;
+
+    public Student(String name, int facultyNumber) {
+        super(name);
+        this.facultyNumber = facultyNumber;
+    }
+
+    public int getFacultyNumber() {
+        return facultyNumber;
+    }
+}
+```
+
+Декларацията `class Student extends Person` означава, че `Student` наследява `Person`. Обект от тип `Student` има поведение, дефинирано в `Person`, и допълнително поведение, дефинирано в `Student`.
+
+```java
+Student student = new Student("Ivan Petrov", 12345);
+
+System.out.println(student.getName());
+System.out.println(student.getFacultyNumber());
+```
+
+Методът `getName()` е дефиниран в `Person`, но може да се извика чрез обект от тип `Student`, защото `Student` наследява `Person`.
+
+## Какво се наследява
+
+Класът наследник получава наследимите членове на родителския клас. Това включва достъпните полета и методи според модификаторите за достъп.
+
+Конструкторите не се наследяват. Класът наследник трябва да има собствен конструктор, който при нужда извиква конструктор на родителския клас чрез `super(...)`.
+
+```java
+class Employee extends Person {
+
+    private double salary;
+
+    public Employee(String name, double salary) {
+        super(name);
+        this.salary = salary;
+    }
+}
+```
+
+В примера `Employee` не наследява конструктора `Person(String name)`. Затова конструкторът на `Employee` извиква родителския конструктор чрез `super(name)`.
+
+## Наследяване и капсулация
+
+Наследяването не премахва правилата на капсулацията. Ако поле в родителски клас е `private`, то не може да се достъпва директно в класа наследник.
+
+```java
+class Person {
+
+    private String name;
+
+    public String getName() {
+        return name;
     }
 }
 
 class Student extends Person {
 
-    int facultyNumber;
+    public void printName() {
+        System.out.println(getName());
+    }
+}
+```
+
+Класът `Student` не може да използва директно полето `name`, защото то е `private`. Достъпът се извършва чрез публичния метод `getName()`.
+
+## Добавяне на нови членове
+
+Класът наследник може да добавя нови полета и методи, които не съществуват в родителския клас.
+
+```java
+class Teacher extends Person {
+
+    private String subject;
+
+    public Teacher(String name, String subject) {
+        super(name);
+        this.subject = subject;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+}
+```
+
+Класът `Teacher` наследява `getName()` от `Person` и добавя собствено поле `subject` с метод `getSubject()`.
+
+## Предефиниране на метод
+
+Класът наследник може да дефинира метод със същата сигнатура като метод от родителския клас. Това се нарича предефиниране на метод.
+
+```java
+class Person {
+
+    public String getInformation() {
+        return "Person";
+    }
+}
+
+class Student extends Person {
+
+    @Override
+    public String getInformation() {
+        return "Student";
+    }
+}
+```
+
+Анотацията `@Override` указва, че методът предефинира метод от родителски клас. Ако сигнатурата е написана грешно, компилаторът ще отчете грешка.
+
+```java
+Person person = new Person();
+Student student = new Student();
+
+System.out.println(person.getInformation());
+System.out.println(student.getInformation());
+```
+
+Първото извикване използва реализацията от `Person`. Второто извикване използва реализацията от `Student`.
+
+## Единично наследяване
+
+В Java един клас може да наследява директно само един родителски клас.
+
+```java
+class Student extends Person {
 
 }
 ```
 
-Класът Student наследява полето name и метода printName() от класа Person, като едновременно с това добавя собствено поле facultyNumber.
+Не е позволено един клас да има два директни родителски класа.
 
-### Многостепенно наследяване
+```java
+// не е позволено
+// class Student extends Person, User {
+//
+// }
+```
 
-В Java е възможно изграждането на йерархия от няколко нива:
+Това правило се нарича единично наследяване на класове.
+
+## Многостепенно наследяване
+
+Може да се създаде йерархия от няколко нива.
 
 ```java
 class Person {
@@ -110,22 +202,188 @@ class GraduateStudent extends Student {
 }
 ```
 
-Класът GraduateStudent наследява членовете както на Student, така и на Person.
+Класът `GraduateStudent` наследява директно `Student` и косвено `Person`.
 
-### Правила и особености в Java
+## Кога се използва наследяване
 
-Наследяването в Java притежава следните характеристики:
+Наследяване се използва, когато между два класа има ясна връзка „е“. Например `Dog` е `Animal`, `Student` е `Person`, `SavingsAccount` е `BankAccount`.
 
-- един клас може да наследява непосредствено само един родителски клас;
-- класът наследник получава достъп до наследимите членове на родителския клас;
-- наследникът може да добавя нови полета и методи;
-- наследникът може да променя поведението на наследени методи. Това ще бъде разгледано по-подробно при изучаването на полиморфизма.
+Ако връзката е „има“, наследяване не е подходящият механизъм. Например `Car` има `Engine`, но `Car` не е `Engine`.
 
-### Предимства
+## Ключова дума `super`
 
-Използването на наследяване предоставя следните предимства:
+Ключовата дума `super` се използва в клас наследник за достъп до непосредствения родителски клас. Тя може да се използва за извикване на конструктор, метод или поле от родителския клас.
 
-- повторно използване на вече реализиран код;
-- изграждане на логически йерархии между класовете;
-- по-лесно разширяване на съществуващи класове;
-- намаляване на дублирането на код.
+`super` има смисъл само при наследяване. В клас, който не наследява друг потребителски клас, не се използва `super` за достъп до собствените членове.
+
+## Извикване на конструктор чрез `super(...)`
+
+Конструкторът на родителския клас не се наследява от класа наследник. Ако родителският клас изисква стойности за своите полета, конструкторът на наследника трябва да извика подходящ родителски конструктор.
+
+```java
+class Person {
+
+    private String name;
+
+    public Person(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+class Student extends Person {
+
+    private int facultyNumber;
+
+    public Student(String name, int facultyNumber) {
+        super(name);
+        this.facultyNumber = facultyNumber;
+    }
+}
+```
+
+Изразът `super(name)` извиква конструктора `Person(String name)`. Така полето `name`, което принадлежи на родителската част на обекта, се инициализира от родителския клас.
+
+Извикването на родителски конструктор чрез `super(...)` трябва да бъде първата инструкция в конструктора на класа наследник.
+
+```java
+public Student(String name, int facultyNumber) {
+    super(name);
+    this.facultyNumber = facultyNumber;
+}
+```
+
+След извикването на родителския конструктор могат да се инициализират полетата, които принадлежат на класа наследник.
+
+## Автоматично извикване на `super()`
+
+Ако в конструктор на клас наследник не е написано изрично извикване на родителски конструктор, компилаторът се опитва автоматично да добави `super()`.
+
+```java
+class Person {
+
+    public Person() {
+        System.out.println("Person created");
+    }
+}
+
+class Student extends Person {
+
+    public Student() {
+        System.out.println("Student created");
+    }
+}
+```
+
+Конструкторът на `Student` се обработва така, сякаш е написано:
+
+```java
+public Student() {
+    super();
+    System.out.println("Student created");
+}
+```
+
+Ако родителският клас няма конструктор без параметри и наследникът не извика друг родителски конструктор чрез `super(...)`, програмата няма да се компилира.
+
+```java
+class Person {
+
+    public Person(String name) {
+
+    }
+}
+
+class Student extends Person {
+
+    public Student() {
+        // грешка: липсва извикване super(name)
+    }
+}
+```
+
+## Извикване на родителски метод
+
+Когато клас наследник предефинира метод от родителския клас, чрез `super` може да се извика оригиналната реализация.
+
+```java
+class Person {
+
+    public String getInformation() {
+        return "Person";
+    }
+}
+
+class Student extends Person {
+
+    private int facultyNumber;
+
+    public Student(int facultyNumber) {
+        this.facultyNumber = facultyNumber;
+    }
+
+    @Override
+    public String getInformation() {
+        return super.getInformation() + ", faculty number: " + facultyNumber;
+    }
+}
+```
+
+Изразът `super.getInformation()` извиква метода `getInformation()` от `Person`. След това резултатът се допълва с информацията от `Student`.
+
+## Достъп до родителско поле
+
+Ако родителският клас и класът наследник съдържат поле с едно и също име, чрез `super` може да се достъпи полето от родителския клас.
+
+```java
+class Person {
+
+    protected String name = "Unknown";
+}
+
+class Student extends Person {
+
+    private String name = "Ivan";
+
+    public void printNames() {
+        System.out.println(super.name);
+        System.out.println(this.name);
+    }
+}
+```
+
+`super.name` означава полето `name` от родителския клас. `this.name` означава полето `name` от текущия клас.
+
+Деклариране на полета с еднакви имена в родителски и наследен клас създава неяснота и не трябва да се използва без ясна причина. По-често `super` се използва за конструктори и за разширяване на родителски методи.
+
+## `super` и `this`
+
+`this` обозначава текущия обект. `super` обозначава родителската част на текущия обект.
+
+```java
+class Student extends Person {
+
+    private int facultyNumber;
+
+    public Student(String name, int facultyNumber) {
+        super(name);
+        this.facultyNumber = facultyNumber;
+    }
+}
+```
+
+В примера `super(name)` извиква конструктор от родителския клас. `this.facultyNumber` достъпва поле от текущия клас.
+
+`super` не може да се използва в статичен контекст, защото статичният метод не се изпълнява върху конкретен обект.
+
+```java
+class Student extends Person {
+
+    public static void print() {
+        // super.getName(); // не се компилира
+    }
+}
+```

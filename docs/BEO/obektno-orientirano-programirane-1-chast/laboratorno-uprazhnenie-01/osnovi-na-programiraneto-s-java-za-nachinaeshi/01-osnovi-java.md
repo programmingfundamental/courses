@@ -4,7 +4,7 @@ title: Основни характеристики на JAVA
 parent: Лабораторно упражнение 1
 grand_parent: Обектно-ориентирано програмиране - 1 част
 has_children: true
-nav_order: 1
+nav_order: 3
 ---
 
 # Основни характеристики на Java

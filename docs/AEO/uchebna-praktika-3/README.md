@@ -2,7 +2,7 @@
 layout: default
 title: Training Practice 3
 parent: English
-nav_order: 12
+nav_order: 10
 has_children: true
 ---
 

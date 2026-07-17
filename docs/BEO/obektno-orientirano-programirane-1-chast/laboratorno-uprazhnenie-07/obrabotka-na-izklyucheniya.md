@@ -8,206 +8,92 @@ nav_order: 1
 
 # Обработка на изключения
 
-## Какво представлява изключението?
 
-Изключението (**Exception**) е събитие, което възниква по време на изпълнение на програмата и нарушава нормалния поток на нейното изпълнение.
+Изключение е обект, който описва проблем, възникнал по време на изпълнение на програма. Когато възникне изключение и то не бъде обработено, нормалното изпълнение на програмата се прекъсва.
 
-Когато възникне изключение, Java прекъсва изпълнението на текущия код и търси подходящ механизъм за неговата обработка. Ако такъв не бъде намерен, програмата приключва принудително.
+```java
+int result = 10 / 0;
+```
 
-Механизмът за обработка на изключения позволява грешките да бъдат прихванати и обработени, без програмата задължително да бъде прекратена.
+В този пример възниква `ArithmeticException`, защото деление на нула не може да бъде извършено за цели числа.
+
+## `try` и `catch`
+
+Блокът `try` съдържа код, при който може да възникне изключение. Блокът `catch` съдържа код за обработка на конкретен тип изключение.
+
+```java
+try {
+    int result = 10 / 0;
+    System.out.println(result);
+} catch (ArithmeticException exception) {
+    System.out.println("Division by zero is not allowed.");
+}
+```
+
+Ако в `try` възникне `ArithmeticException`, изпълнението преминава към `catch`. Програмата не прекъсва аварийно, а изпълнява предвидената обработка.
 
 ## Йерархия на изключенията
 
-Всички изключения и грешки в Java наследяват класа Throwable.
+Всички изключения и грешки в Java наследяват класа `Throwable`. Двата основни наследника са `Error` и `Exception`.
 
-<p align="center"> <img width="729" height="491" alt="0_XrfSEZ-iZxaT3-qB" src="https://github.com/user-attachments/assets/edb74579-ec7f-4ca6-9c58-e1b3fa79546c" /> </p>
+`Error` описва сериозни проблеми на средата за изпълнение. Такива проблеми обикновено не се обработват в приложния код.
 
-Йерархията разделя възникналите проблеми в две основни групи:
+`Exception` описва ситуации, които могат да бъдат предвидени и обработени от програмата.
 
-- **Error** – критични грешки, възникващи в средата за изпълнение;
-- **Exception** – ситуации, които приложението може да обработи.
+## Checked и unchecked изключения
 
-## Error и Exception
+Checked изключенията се проверяват от компилатора. Ако метод може да предизвика checked изключение, то трябва да бъде обработено с `try-catch` или декларирано чрез `throws`.
 
-## Error
+Unchecked изключенията наследяват `RuntimeException`. Те не са задължителни за обработка от компилатора, но могат да бъдат обработени, когато това е необходимо.
 
-Класът Error описва сериозни проблеми, възникващи в JVM или операционната среда. Такива грешки обикновено не могат да бъдат обработени успешно от приложението.
+## `finally`
 
-Примери:
-
-- OutOfMemoryError;
-- StackOverflowError;
-- VirtualMachineError.
-
-При възникването им програмата най-често не може да продължи нормалното си изпълнение.
-
-## Exception
-
-Класът Exception описва ситуации, които могат да възникнат по време на работа на програмата и при които приложението има възможност да предприеме подходящи действия.
-
-Примери:
-
-- деление на нула;
-- липсващ файл;
-- невалиден вход от потребителя;
-- достъп до невалиден индекс на масив.
-
-## Checked и Unchecked изключения
-
-Изключенията се разделят на две основни категории.
-
-## Checked exceptions
-
-Checked изключенията се проверяват от компилатора.
-
-При извикване на метод, който може да хвърли checked изключение, програмистът е длъжен:
-
-- да обработи изключението чрез try-catch;
-- или да го декларира чрез throws.
-
-Типичен пример за такива изключения са:
-
-- IOException
-- SQLException
-- ClassNotFoundException
-
-## Unchecked exceptions
-
-Unchecked изключенията наследяват класа RuntimeException.
-
-Те не се проверяват от компилатора и най-често са резултат от логическа грешка в програмата.
-
-Типични представители са:
-
-- NullPointerException;
-- ArithmeticException;
-- ArrayIndexOutOfBoundsException;
-- NumberFormatException;
-- IllegalArgumentException.
-
-## Класът Throwable
-
-Всички изключения наследяват класа Throwable. Най-често използваните негови методи са:
-
-| Метод             | Предназначение                                                                   |
-| ----------------- | -------------------------------------------------------------------------------- |
-| getMessage()      | Връща текстовото описание на изключението.                                       |
-| printStackTrace() | Отпечатва пълната информация за възникналото изключение и стека на извикванията. |
-| getStackTrace()   | Връща стека като масив от StackTraceElement.                                     |
-
-## Обработка на изключения с try-catch
-
-Кодът, при който може да възникне изключение, се поставя в блок try.
-
-Ако по време на изпълнение възникне изключение, управлението се прехвърля към първия подходящ catch блок.
+Блокът `finally` се изпълнява след `try` и `catch`, независимо дали е възникнало изключение.
 
 ```java
-public class Example {
+try {
+    System.out.println("Open resource");
+} catch (RuntimeException exception) {
+    System.out.println("Handle error");
+} finally {
+    System.out.println("Close resource");
+}
+```
 
-    public static void main(String[] args) {
+`finally` се използва за освобождаване на ресурси, когато това не се управлява автоматично.
 
-        int[] numbers = {10, 20, 30};
+## `throw`
 
-        try {
-            for (int i = 0; i <= numbers.length; i++) {
-                System.out.println(numbers[i]);
-            }
-        } catch (ArrayIndexOutOfBoundsException ex) {
-            System.out.println(ex.getMessage());
-        }
+Ключовата дума `throw` създава и хвърля конкретно изключение.
+
+```java
+public void setAge(int age) {
+    if (age < 0) {
+        throw new IllegalArgumentException("Age cannot be negative.");
     }
 }
 ```
 
-В примера цикълът използва условието <=, което води до опит за достъп до несъществуващ елемент на масива. Възникналото изключение се прихваща и обработва в блока *catch*.
+Методът не допуска невалидно състояние. При отрицателна стойност се хвърля `IllegalArgumentException`.
 
-## Multiple catch
+## `throws`
 
-Един блок try може да бъде последван от няколко catch блока. Изключенията трябва да бъдат подредени **от най-конкретното към най-общото**, тъй като Java избира първия подходящ обработчик.
+Ключовата дума `throws` се използва в декларация на метод и показва, че методът може да предаде изключение към извикващия код.
 
 ```java
-try {
-
-    // код
-
-}
-catch (NumberFormatException ex) {
-    System.out.println("Invalid number.");
-}
-catch (RuntimeException ex) {
-    System.out.println("Runtime error.");
-}
-catch (Exception ex) {
-    System.out.println("General exception.");
+public static String readFirstLine(String path) throws IOException {
+    return Files.readAllLines(Path.of(path)).get(0);
 }
 ```
 
-След Java 7 е възможно няколко изключения да бъдат обработени в един общ блок.
+Кодът, който извиква този метод, трябва да обработи или също да декларира `IOException`.
+
+## Собствено изключение
+
+Собствено изключение се дефинира чрез клас, който наследява `Exception` или `RuntimeException`.
 
 ```java
-catch (IOException | SQLException ex) {
-    System.out.println(ex.getMessage());
-}
-```
-
-Тази конструкция се използва, когато обработката на различните изключения е еднаква.
-
-## Блок finally
-
-Блокът *finally* съдържа код, който трябва да бъде изпълнен независимо дали е възникнало изключение. Най-често в него се освобождават използваните ресурси.
-
-```java
-try {
-    System.out.println("Try block");
-}
-finally {
-    System.out.println("Finally block");
-}
-```
-
-Дори ако възникне изключение, блокът finally ще бъде изпълнен.
-
-## Ключова дума throws
-
-Когато даден метод не обработва възникналото изключение, той може да го предаде на извикващия го метод. Това става чрез ключовата дума *throws*.
-
-```java
-public static int divide(int a, int b) throws ArithmeticException {
-    return a / b;
-}
-```
-
-Извикващият метод трябва да обработи или отново да декларира изключението.
-
-## Ключова дума throw
-
-Понякога възникват ситуации, в които програмистът сам трябва да реши кога да бъде генерирано изключение. Това става чрез ключовата дума *throw*.
-
-```java
-public static int divide(int a, int b) {
-    if (b == 0) {
-        throw new ArithmeticException("Division by zero.");
-    }
-    return a / b;
-}
-```
-
-## Разлика между throw и throws
-
-| throw                               | throws                                               |
-| ----------------------------------- | ---------------------------------------------------- |
-| Генерира конкретно изключение.      | Декларира възможно изключение.                       |
-| Използва се в тялото на метода.     | Използва се в сигнатурата на метода.                 |
-| Генерира едно конкретно изключение. | Позволява деклариране на едно или повече изключения. |
-
-## Собствени (Custom) изключения
-
-Освен стандартните изключения Java позволява създаването на собствени класове за изключения. Обикновено те наследяват класа Exception или RuntimeException.
-
-Собствените изключения се използват, когато е необходимо описване на специфична бизнес логика.
-
-```java
-class InvalidGradeException extends Exception {
+class InvalidGradeException extends RuntimeException {
 
     public InvalidGradeException(String message) {
         super(message);
@@ -215,28 +101,18 @@ class InvalidGradeException extends Exception {
 }
 ```
 
-Използване:
+Такъв клас позволява грешките в конкретна предметна област да бъдат описани с по-точен тип.
+
+## `try-with-resources`
+
+`try-with-resources` се използва за ресурси, които трябва да бъдат затворени. Ресурсът се затваря автоматично след края на блока.
 
 ```java
-public static void validateGrade(int grade) throws InvalidGradeException {
-    if (grade < 2 || grade > 6) {
-        throw new InvalidGradeException("Invalid grade.");
+try (Scanner scanner = new Scanner(Path.of("input.txt"))) {
+    while (scanner.hasNextLine()) {
+        System.out.println(scanner.nextLine());
     }
 }
 ```
 
-## try-with-resources
-
-При работа с файлове, потоци или други ресурси, те трябва да бъдат затворени след приключване на работата. След Java 7 това най-често се реализира чрез конструкцията *try-with-resources*.
-
-```java
-try (BufferedReader reader = new BufferedReader(new FileReader("data.txt"))) {
-    String line = reader.readLine();
-    System.out.println(line);
-}
-catch (IOException ex) {
-    System.out.println(ex.getMessage());
-}
-```
-
-Всички ресурси, декларирани в скобите след try, се затварят автоматично, независимо дали е възникнало изключение.
+Тази конструкция намалява риска ресурсът да остане незатворен.
