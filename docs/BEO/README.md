@@ -7,7 +7,7 @@ has_children: true
 
 # Въведение в програмирането
 
-## Раздели
+## Table of contents
 
 - [Интернет технологии](internet-tekhnologii-2023/)
 - [Обектно-ориентирано програмиране - 1 част](obektno-orientirano-programirane-1-chast/)

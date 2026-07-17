@@ -8,49 +8,18 @@ nav_order: 10
 
 # Лабораторно упражнение 9
 
-## Generics в Java
-
-Генериците позволяват класове, интерфейси и методи да работят с различни типове данни, без да се губи типовата безопасност. Чрез тях типът на данните се подава като параметър.
-
-```java
-List<String> names = new ArrayList<>();
-List<Integer> numbers = new ArrayList<>();
-```
-
-В първия случай списъкът може да съдържа само обекти от тип String, а във втория – само обекти от тип Integer.
-
-## Необходимост от генерици
-
-Преди въвеждането на генериците често се е използвал типът Object, тъй като той е родителски клас на всички класове в Java.
-
-```java
-public class Storage {
-
-    private Object value;
-
-    public void setValue(Object value) {
-        this.value = value;
-    }
-
-    public Object getValue() {
-        return value;
-    }
-}
-```
-
-Този подход позволява съхраняване на стойности от различни типове, но води до два основни проблема:
-
-- липса на проверка на типа по време на компилация;
-- необходимост от явно преобразуване на типа при извличане на стойността.
-
-```java
-Storage storage = new Storage();
-
-storage.setValue("Java");
-
-String text = (String) storage.getValue();
-```
-
-Ако в обекта бъде записана стойност от друг тип, грешката ще се появи едва по време на изпълнение.
-
-Генериците решават този проблем, като позволяват типът да бъде зададен предварително.
+## Раздели
+- [Generics в Java](generics-v-java.md)
+  - [Необходимост от generics](generics-v-java.md#необходимост-от-generics)
+  - [Генеричен клас с повече от един параметър](generics-v-java.md#генеричен-клас-с-повече-от-един-параметър)
+  - [Генеричен метод](generics-v-java.md#генеричен-метод)
+  - [Генеричен интерфейс](generics-v-java.md#генеричен-интерфейс)
+  - [Generics и референтни типове](generics-v-java.md#generics-и-референтни-типове)
+  - [Raw типове](generics-v-java.md#raw-типове)
+  - [Предимства](generics-v-java.md#предимства)
+- [Упражнения за извънаудиторна заетост](uprazhneniya-za-izvnauditorna-zaetost.md)
+  - [Задача 1](uprazhneniya-za-izvnauditorna-zaetost.md#задача-1)
+  - [Задача 2](uprazhneniya-za-izvnauditorna-zaetost.md#задача-2)
+  - [Задача 3](uprazhneniya-za-izvnauditorna-zaetost.md#задача-3)
+  - [Задача 4](uprazhneniya-za-izvnauditorna-zaetost.md#задача-4)
+  - [Задача 5](uprazhneniya-za-izvnauditorna-zaetost.md#задача-5)

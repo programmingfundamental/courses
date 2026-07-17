@@ -2,7 +2,7 @@
 layout: default
 title: Обектно-ориентирано програмиране - 2 част
 parent: Български
-nav_order: 3
+nav_order: 4
 has_children: true
 ---
 
