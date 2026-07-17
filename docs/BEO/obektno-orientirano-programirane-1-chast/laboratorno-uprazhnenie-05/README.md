@@ -16,7 +16,7 @@ nav_order: 6
   - [Абстрактен клас](polimorfizam-i-abstraktni-klasove.md#абстрактен-клас)
   - [Наследяване на абстрактен клас](polimorfizam-i-abstraktni-klasove.md#наследяване-на-абстрактен-клас)
   - [Правила за абстрактни класове](polimorfizam-i-abstraktni-klasove.md#правила-за-абстрактни-класове)
-  - [Претоварване на методи](polimorfizam-i-abstraktni-klasove.md#претоварване-на-методи)
+  - [Предефиниране и претоварване](polimorfizam-i-abstraktni-klasove.md#предефиниране-и-претоварване)
 - [Упражнения за извънаудиторна заетост](uprazhneniya-za-izvnauditorna-zaetost.md)
   - [Задача 1:](uprazhneniya-za-izvnauditorna-zaetost.md#задача-1)
   - [Задача 2:](uprazhneniya-za-izvnauditorna-zaetost.md#задача-2)

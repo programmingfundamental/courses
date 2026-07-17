@@ -42,7 +42,9 @@ try {
 
 ## Checked и unchecked изключения
 
-Checked изключенията се проверяват от компилатора. Ако метод може да предизвика checked изключение, то трябва да бъде обработено с `try-catch` или декларирано чрез `throws`.
+Checked изключенията се проверяват от компилатора. Ако метод може да предизвика checked изключение, то трябва да бъде
+обработено в текущия код или да бъде обявено в декларацията на метода. Ключовата дума за обявяване на такова
+изключение се разглежда след ръчното хвърляне на изключения.
 
 Unchecked изключенията наследяват `RuntimeException`. Те не са задължителни за обработка от компилатора, но могат да бъдат обработени, когато това е необходимо.
 
@@ -157,11 +159,22 @@ class InvalidGradeException extends RuntimeException {
 `try-with-resources` се използва за ресурси, които трябва да бъдат затворени. Ресурсът се затваря автоматично след края на блока.
 
 ```java
-try (Scanner scanner = new Scanner(Path.of("input.txt"))) {
-    while (scanner.hasNextLine()) {
-        System.out.println(scanner.nextLine());
+class SimpleResource implements AutoCloseable {
+
+    public void use() {
+        System.out.println("Resource is used");
     }
+
+    @Override
+    public void close() {
+        System.out.println("Resource is closed");
+    }
+}
+
+try (SimpleResource resource = new SimpleResource()) {
+    resource.use();
 }
 ```
 
+Ресурсът трябва да реализира `AutoCloseable`. След приключване на `try` блока методът `close()` се извиква автоматично.
 Тази конструкция намалява риска ресурсът да остане незатворен.
