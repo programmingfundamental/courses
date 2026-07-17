@@ -15,6 +15,8 @@ nav_order: 8
   - [Checked и unchecked изключения](obrabotka-na-izklyucheniya.md#checked-и-unchecked-изключения)
   - [`finally`](obrabotka-na-izklyucheniya.md#finally)
   - [`throw`](obrabotka-na-izklyucheniya.md#throw)
+  - [`throw` в конструктор](obrabotka-na-izklyucheniya.md#throw-в-конструктор)
+  - [`throw` в `record`](obrabotka-na-izklyucheniya.md#throw-в-record)
   - [`throws`](obrabotka-na-izklyucheniya.md#throws)
   - [Собствено изключение](obrabotka-na-izklyucheniya.md#собствено-изключение)
   - [`try-with-resources`](obrabotka-na-izklyucheniya.md#try-with-resources)
