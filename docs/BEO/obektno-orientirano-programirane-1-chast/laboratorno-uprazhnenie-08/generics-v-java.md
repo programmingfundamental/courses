@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Generics в Java
-parent: Лабораторно упражнение 9
+parent: Лабораторно упражнение 8
 grand_parent: Обектно-ориентирано програмиране - 1 част
 nav_order: 1
 ---

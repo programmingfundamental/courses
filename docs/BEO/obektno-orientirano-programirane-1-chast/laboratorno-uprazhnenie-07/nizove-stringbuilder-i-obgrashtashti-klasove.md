@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Символни низове, StringBuilder и обгръщащи класове
-parent: Лабораторно упражнение 8
+parent: Лабораторно упражнение 7
 grand_parent: Обектно-ориентирано програмиране - 1 част
 nav_order: 1
 ---

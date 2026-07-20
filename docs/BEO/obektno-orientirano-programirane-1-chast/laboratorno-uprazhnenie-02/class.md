@@ -119,41 +119,6 @@ class Product {
 
 Методът `getDescription()` използва стойностите на полетата `name` и `price` и връща текст. Методът се извиква върху конкретен обект от класа `Product`.
 
-## Претоварване на методи
-
-Претоварване на методи се получава, когато в един клас има няколко метода с едно и също име, но с различен списък от
-параметри. Списъкът от параметри включва броя, типа и реда на параметрите.
-
-```java
-class Calculator {
-
-    int sum(int first, int second) {
-        return first + second;
-    }
-
-    double sum(double first, double second) {
-        return first + second;
-    }
-
-    int sum(int first, int second, int third) {
-        return first + second + third;
-    }
-}
-```
-
-При извикване на претоварен метод компилаторът избира коя версия да използва според подадените аргументи.
-
-```java
-Calculator calculator = new Calculator();
-
-int firstResult = calculator.sum(2, 3);
-double secondResult = calculator.sum(2.5, 3.5);
-int thirdResult = calculator.sum(2, 3, 4);
-```
-
-Претоварването не създава ново име за операцията. То позволява една операция да бъде представена с едно име, когато
-може да работи с различни параметри.
-
 ## Методи за достъп до полета
 
 Достъпът до стойности може да се реализира чрез методи за четене и методи за промяна. Метод за четене връща стойността на поле. Метод за промяна задава нова стойност на поле.
@@ -373,41 +338,6 @@ Student student = new Student("Ivan Petrov", 12345);
 ```
 
 Стойността `"Ivan Petrov"` се подава към параметъра `name`, а стойността `12345` се подава към параметъра `facultyNumber`.
-
-## Предефиниране на конструктори
-
-Един клас може да има повече от един конструктор. Това се нарича предефиниране на конструктори. Всеки конструктор трябва да има различен списък от параметри.
-
-```java
-class Student {
-
-    String name;
-    int facultyNumber;
-
-    Student() {
-        this.name = "Unknown";
-        this.facultyNumber = 0;
-    }
-
-    Student(String name) {
-        this.name = name;
-        this.facultyNumber = 0;
-    }
-
-    Student(String name, int facultyNumber) {
-        this.name = name;
-        this.facultyNumber = facultyNumber;
-    }
-}
-```
-
-При създаване на обект компилаторът избира конструктора според подадените аргументи.
-
-```java
-Student first = new Student();
-Student second = new Student("Ivan Petrov");
-Student third = new Student("Maria Ivanova", 67890);
-```
 
 ## Конструктор и задаване на начално състояние
 

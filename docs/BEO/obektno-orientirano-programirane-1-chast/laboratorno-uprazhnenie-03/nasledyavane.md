@@ -3,7 +3,7 @@ layout: default
 title: Наследяване и ключова дума super
 parent: Лабораторно упражнение 3
 grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 2
+nav_order: 3
 ---
 
 # Наследяване и ключова дума `super`
@@ -130,39 +130,6 @@ class Teacher extends Person {
 
 Класът `Teacher` наследява `getName()` от `Person` и добавя собствено поле `subject` с метод `getSubject()`.
 
-## Предефиниране на метод
-
-Класът наследник може да дефинира метод със същата сигнатура като метод от родителския клас. Това се нарича предефиниране на метод.
-
-```java
-class Person {
-
-    public String getInformation() {
-        return "Person";
-    }
-}
-
-class Student extends Person {
-
-    @Override
-    public String getInformation() {
-        return "Student";
-    }
-}
-```
-
-Анотацията `@Override` указва, че методът предефинира метод от родителски клас. Ако сигнатурата е написана грешно, компилаторът ще отчете грешка.
-
-```java
-Person person = new Person();
-Student student = new Student();
-
-System.out.println(person.getInformation());
-System.out.println(student.getInformation());
-```
-
-Първото извикване използва реализацията от `Person`. Второто извикване използва реализацията от `Student`.
-
 ## Единично наследяване
 
 В Java един клас може да наследява директно само един родителски клас.
@@ -231,40 +198,7 @@ Object value = student;
 ```
 
 Класът `Object` дефинира общи методи, които са налични за всички обекти. По-подробно методите `toString()`,
-`equals()` и `hashCode()` се разглеждат при полиморфизма и предефинирането на методи.
-
-## Вложени класове
-
-Вложен клас е клас, деклариран в тялото на друг клас. Външният клас създава логически контекст, а вложеният клас описва тип, който е тясно свързан с него.
-
-```java
-class Bank {
-
-    static class Account {
-
-        private String iban;
-
-        public Account(String iban) {
-            this.iban = iban;
-        }
-
-        public String getIban() {
-            return iban;
-        }
-    }
-}
-```
-
-Класът `Account` е деклариран в тялото на класа `Bank`. Понеже е деклариран като `static`, той принадлежи на класа `Bank`, а не на конкретен обект от `Bank`.
-
-Обект от статичен вложен клас се създава чрез името на външния клас.
-
-```java
-Bank.Account account = new Bank.Account("BG00BANK0000000000");
-System.out.println(account.getIban());
-```
-
-Статичният вложен клас се използва, когато даден тип има смисъл основно като част от друг тип. Той не получава автоматичен достъп до нестатичните полета на външния клас, защото не е свързан с конкретен обект от външния клас.
+`equals()` и `hashCode()` се разглеждат при полиморфизма.
 
 ## `final` клас и `final` метод
 
@@ -278,7 +212,7 @@ final class Configuration {
 // class AppConfiguration extends Configuration { } // не е позволено
 ```
 
-Метод, деклариран с `final`, се наследява, но не може да бъде предефиниран в клас наследник.
+Метод, деклариран с `final`, се наследява, но не може да бъде заменен с друга реализация в клас наследник.
 
 ```java
 class Parent {
@@ -299,7 +233,7 @@ class Child extends Parent {
 | Употреба | Предназначение |
 | -------- | -------------- |
 | `final` поле | Полето получава стойност само веднъж |
-| `final` метод | Методът не може да бъде предефиниран в клас наследник |
+| `final` метод | Методът не може да бъде заменен с друга реализация в клас наследник |
 | `final` клас | Класът не може да бъде наследяван |
 
 ## Кога се използва наследяване
@@ -436,13 +370,19 @@ class Student extends Person {
 
 ## Извикване на родителски метод
 
-Когато клас наследник предефинира метод от родителския клас, чрез `super` може да се извика оригиналната реализация.
+Чрез `super` може да се извика достъпен метод от родителския клас. Това е необходимо, когато метод от наследника трябва да използва вече дефинирана операция от родителския клас.
 
 ```java
 class Person {
 
-    public String getInformation() {
-        return "Person";
+    private String name;
+
+    public Person(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }
 
@@ -450,18 +390,18 @@ class Student extends Person {
 
     private int facultyNumber;
 
-    public Student(int facultyNumber) {
+    public Student(String name, int facultyNumber) {
+        super(name);
         this.facultyNumber = facultyNumber;
     }
 
-    @Override
-    public String getInformation() {
-        return super.getInformation() + ", faculty number: " + facultyNumber;
+    public String getStudentInformation() {
+        return super.getName() + ", faculty number: " + facultyNumber;
     }
 }
 ```
 
-Изразът `super.getInformation()` извиква метода `getInformation()` от `Person`. След това резултатът се допълва с информацията от `Student`.
+Изразът `super.getName()` извиква метода `getName()` от `Person`. След това резултатът се допълва с информацията от `Student`.
 
 ## Достъп до родителско поле
 
