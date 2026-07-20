@@ -13,7 +13,17 @@ nav_order: 1
 
 Компилаторът javac преобразува изходния код (.java) в **Java bytecode** (.class). Bytecode се изпълнява от Java Virtual Machine (JVM). Тъй като за всяка операционна система съществува реализация на JVM, един и същ bytecode може да бъде изпълнен без промяна под Windows, Linux, macOS и други операционни системи.
 
-<img width="213" height="294" alt="image" src="https://github.com/user-attachments/assets/a5cf871d-6307-4879-95f6-c7fa2e586c20" />
+```mermaid
+flowchart TD
+    A["Изходен код<br/>.java файл"] --> B["Компилатор javac"]
+    B --> C["Java bytecode<br/>.class файл"]
+    C --> D["JVM за Windows"]
+    C --> E["JVM за Linux"]
+    C --> F["JVM за macOS"]
+    D --> G["Изпълнение на програмата"]
+    E --> G
+    F --> G
+```
 
 ## Java е обектно-ориентиран език
 
@@ -74,8 +84,28 @@ Java Development Kit (JDK) представлява комплект от инс
 
 *Процес на компилация и изпълнение*
 
-<img width="144" height="345" alt="image" src="https://github.com/user-attachments/assets/c2ff6642-2a74-433c-9dd9-e176ca1ec23c" />
+```mermaid
+flowchart TD
+    A["Java source code<br/>Application.java"] --> B["javac"]
+    B --> C["Bytecode<br/>Application.class"]
+    C --> D["JVM"]
+    D --> E["Изпълнение на програмата"]
+```
 
 *Компоненти на Java платформата*
 
-<img width="346" height="296" alt="image" src="https://github.com/user-attachments/assets/d03a058f-d44a-4116-b910-66b880445da2" />
+```mermaid
+flowchart TD
+    subgraph JDK["JDK - Java Development Kit"]
+        Tools["Инструменти за разработка<br/>javac, jar, javadoc"]
+        subgraph JRE["JRE - Java Runtime Environment"]
+            Libraries["Стандартни библиотеки"]
+            JVM["JVM - Java Virtual Machine"]
+        end
+    end
+
+    Source["Java програма"] --> Tools
+    Tools --> JVM
+    Libraries --> JVM
+    JVM --> Runtime["Изпълнение"]
+```
