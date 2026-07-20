@@ -85,11 +85,11 @@ Student.university = "Technical University of Varna";
 - `private int facultyNumber`;
 - конструктор `Student(String name, int age, int facultyNumber)`;
 - метод `getFacultyNumber()`;
-- предефиниран метод `getInformation()`.
+- метод `getStudentInformation()`.
 
-В конструктора на `Student` трябва да се използва `super(name, age)`. В метода `getInformation()` трябва да се използва `super.getInformation()` и към резултата да се добави факултетният номер.
+В конструктора на `Student` трябва да се използва `super(name, age)`. В метода `getStudentInformation()` трябва да се използва `super.getInformation()` и към резултата да се добави факултетният номер.
 
-Да се създадат обекти от `Person` и `Student` и да се отпечата резултатът от `getInformation()`.
+Да се създадат обекти от `Person` и `Student`. За обекта от `Person` да се извика `getInformation()`, а за обекта от `Student` да се извика `getStudentInformation()`.
 
 ## Задача 4
 
@@ -109,14 +109,14 @@ Student.university = "Technical University of Varna";
 - `private String breed`;
 - `private int learnedCommands`;
 - конструктор `Dog(String name, int age, double weight, String breed, int learnedCommands)`;
-- метод `getDescription()`, който използва `super.getDescription()`.
+- метод `getDogDescription()`, който използва `super.getDescription()`.
 
 Класът `Cat` трябва да наследява `Animal` и да добавя:
 
 - `private String furColor`;
 - `private boolean indoor`;
 - конструктор `Cat(String name, int age, double weight, String furColor, boolean indoor)`;
-- метод `getDescription()`, който използва `super.getDescription()`.
+- метод `getCatDescription()`, който използва `super.getDescription()`.
 
 Да се създадат поне два обекта от `Dog` и два обекта от `Cat`. Да се отпечатат описанията им.
 
@@ -127,20 +127,16 @@ Student.university = "Technical University of Varna";
 В класа `Animal` да се добави метод:
 
 ```java
-double calculateDailyFood()
+double calculateBaseDailyFood()
 ```
 
 Методът трябва да връща примерна дневна дажба храна според теглото на животното. Формулата трябва да бъде избрана самостоятелно и да бъде описана с кратък коментар в кода.
 
-В класовете `Dog` и `Cat` методът `calculateDailyFood()` трябва да се предефинира. При предефинирането може да се използва `super.calculateDailyFood()` и към резултата да се приложи корекция според специфичните характеристики на куче или котка.
+В класа `Dog` да се добави метод `calculateDogDailyFood()`. Методът трябва да използва `super.calculateBaseDailyFood()` и към резултата да приложи корекция според специфичните характеристики на куче.
 
-Да се създаде масив от животни:
+В класа `Cat` да се добави метод `calculateCatDailyFood()`. Методът трябва да използва `super.calculateBaseDailyFood()` и към резултата да приложи корекция според специфичните характеристики на котка.
 
-```java
-Animal[] animals = new Animal[4];
-```
-
-В масива да се запишат обекти от `Dog` и `Cat`. Да се обходи масивът и да се изчисли общото количество храна за един ден.
+Да се създадат отделни обекти от `Dog` и `Cat`. Да се извикат съответните методи за изчисляване на дневна храна и да се изчисли общото количество храна за един ден.
 
 ## Задача 6
 
@@ -154,6 +150,6 @@ Animal[] animals = new Animal[4];
 - частни полета в класовете наследници;
 - поне едно `protected` поле или `protected` метод;
 - конструктори, които използват `super(...)`;
-- поне един предефиниран метод, който използва `super.methodName()`.
+- поне един метод в клас наследник, който използва `super.methodName()`.
 
 Да се създаде примерна програма, която създава обекти от всички класове наследници и демонстрира достъп до публичните методи. Директен достъп до частни полета не трябва да се използва.

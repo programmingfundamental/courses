@@ -3,7 +3,7 @@ layout: default
 title: Наследяване и ключова дума super
 parent: Лабораторно упражнение 3
 grand_parent: Обектно-ориентирано програмиране - 1 част
-nav_order: 2
+nav_order: 3
 ---
 
 # Наследяване и ключова дума `super`
@@ -130,39 +130,6 @@ class Teacher extends Person {
 
 Класът `Teacher` наследява `getName()` от `Person` и добавя собствено поле `subject` с метод `getSubject()`.
 
-## Предефиниране на метод
-
-Класът наследник може да дефинира метод със същата сигнатура като метод от родителския клас. Това се нарича предефиниране на метод.
-
-```java
-class Person {
-
-    public String getInformation() {
-        return "Person";
-    }
-}
-
-class Student extends Person {
-
-    @Override
-    public String getInformation() {
-        return "Student";
-    }
-}
-```
-
-Анотацията `@Override` указва, че методът предефинира метод от родителски клас. Ако сигнатурата е написана грешно, компилаторът ще отчете грешка.
-
-```java
-Person person = new Person();
-Student student = new Student();
-
-System.out.println(person.getInformation());
-System.out.println(student.getInformation());
-```
-
-Първото извикване използва реализацията от `Person`. Второто извикване използва реализацията от `Student`.
-
 ## Единично наследяване
 
 В Java един клас може да наследява директно само един родителски клас.
@@ -203,6 +170,71 @@ class GraduateStudent extends Student {
 ```
 
 Класът `GraduateStudent` наследява директно `Student` и косвено `Person`.
+
+## Клас `Object`
+
+В Java всеки клас пряко или непряко наследява класа `Object`. Ако даден клас не посочи родителски клас чрез `extends`,
+негов родителски клас по подразбиране е `Object`.
+
+```java
+class Student {
+
+}
+```
+
+Горният клас е еквивалентен на следната идея:
+
+```java
+class Student extends Object {
+
+}
+```
+
+Това означава, че всеки обект в Java може да бъде разглеждан и като обект от тип `Object`.
+
+```java
+Student student = new Student();
+Object value = student;
+```
+
+Класът `Object` дефинира общи методи, които са налични за всички обекти. По-подробно методите `toString()`,
+`equals()` и `hashCode()` се разглеждат при полиморфизма.
+
+## `final` клас и `final` метод
+
+Клас, деклариран с `final`, не може да бъде наследяван.
+
+```java
+final class Configuration {
+
+}
+
+// class AppConfiguration extends Configuration { } // не е позволено
+```
+
+Метод, деклариран с `final`, се наследява, но не може да бъде заменен с друга реализация в клас наследник.
+
+```java
+class Parent {
+
+    public final void printType() {
+        System.out.println("Parent");
+    }
+}
+
+class Child extends Parent {
+
+    // public void printType() { } // не е позволено
+}
+```
+
+`final` се използва, когато наследяването или промяната на конкретно поведение трябва да бъде забранена.
+
+| Употреба | Предназначение |
+| -------- | -------------- |
+| `final` поле | Полето получава стойност само веднъж |
+| `final` метод | Методът не може да бъде заменен с друга реализация в клас наследник |
+| `final` клас | Класът не може да бъде наследяван |
 
 ## Кога се използва наследяване
 
@@ -258,6 +290,37 @@ public Student(String name, int facultyNumber) {
 
 След извикването на родителския конструктор могат да се инициализират полетата, които принадлежат на класа наследник.
 
+## Ред на инициализация при наследяване
+
+При създаване на обект от клас наследник първо се инициализира частта, която принадлежи на родителския клас. След това
+се изпълнява конструкторът на класа наследник.
+
+```java
+class Parent {
+
+    Parent() {
+        System.out.println("Parent constructor");
+    }
+}
+
+class Child extends Parent {
+
+    Child() {
+        System.out.println("Child constructor");
+    }
+}
+```
+
+При създаване на обект от `Child` резултатът е:
+
+```text
+Parent constructor
+Child constructor
+```
+
+Този ред гарантира, че наследената част от обекта е създадена преди кодът в конструктора на наследника да започне да я
+използва.
+
 ## Автоматично извикване на `super()`
 
 Ако в конструктор на клас наследник не е написано изрично извикване на родителски конструктор, компилаторът се опитва автоматично да добави `super()`.
@@ -307,13 +370,19 @@ class Student extends Person {
 
 ## Извикване на родителски метод
 
-Когато клас наследник предефинира метод от родителския клас, чрез `super` може да се извика оригиналната реализация.
+Чрез `super` може да се извика достъпен метод от родителския клас. Това е необходимо, когато метод от наследника трябва да използва вече дефинирана операция от родителския клас.
 
 ```java
 class Person {
 
-    public String getInformation() {
-        return "Person";
+    private String name;
+
+    public Person(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }
 
@@ -321,18 +390,18 @@ class Student extends Person {
 
     private int facultyNumber;
 
-    public Student(int facultyNumber) {
+    public Student(String name, int facultyNumber) {
+        super(name);
         this.facultyNumber = facultyNumber;
     }
 
-    @Override
-    public String getInformation() {
-        return super.getInformation() + ", faculty number: " + facultyNumber;
+    public String getStudentInformation() {
+        return super.getName() + ", faculty number: " + facultyNumber;
     }
 }
 ```
 
-Изразът `super.getInformation()` извиква метода `getInformation()` от `Person`. След това резултатът се допълва с информацията от `Student`.
+Изразът `super.getName()` извиква метода `getName()` от `Person`. След това резултатът се допълва с информацията от `Student`.
 
 ## Достъп до родителско поле
 

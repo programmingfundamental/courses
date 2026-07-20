@@ -9,15 +9,12 @@ nav_order: 13
 # Лабораторно упражнение 12
 
 ## Раздели
+- [Обобщаващи задачи](obobshtavashti-zadachi.md)
+  - [Теми](obobshtavashti-zadachi.md#теми)
 - [Упражнения за извънаудиторна заетост](uprazhneniya-za-izvnauditorna-zaetost.md)
-  - [Задача](uprazhneniya-za-izvnauditorna-zaetost.md#задача)
-  - [Модел на данните](uprazhneniya-za-izvnauditorna-zaetost.md#модел-на-данните)
-  - [Файлов вход](uprazhneniya-za-izvnauditorna-zaetost.md#файлов-вход)
-  - [Клас `BookStore`](uprazhneniya-za-izvnauditorna-zaetost.md#клас-bookstore)
-  - [Файлов изход](uprazhneniya-za-izvnauditorna-zaetost.md#файлов-изход)
-- [Входно-изходни операции в Java](vhodno-izhodni-operacii-v-java.md)
-  - [Байтови потоци. ByteStream класове](vhodno-izhodni-operacii-v-java.md#байтови-потоци-bytestream-класове)
-  - [Символни потоци. CharacterStream класове](vhodno-izhodni-operacii-v-java.md#символни-потоци-characterstream-класове)
-  - [Клас Scanner](vhodno-izhodni-operacii-v-java.md#клас-scanner)
-  - [Стандартни потоци. Клас Console](vhodno-izhodni-operacii-v-java.md#стандартни-потоци-клас-console)
-  - [Даннови потоци. Интерфейси DataInput и DataOutput](vhodno-izhodni-operacii-v-java.md#даннови-потоци-интерфейси-datainput-и-dataoutput)
+  - [Задача 1](uprazhneniya-za-izvnauditorna-zaetost.md#задача-1)
+  - [Задача 2](uprazhneniya-za-izvnauditorna-zaetost.md#задача-2)
+  - [Клас `Worker`](uprazhneniya-za-izvnauditorna-zaetost.md#клас-worker)
+  - [Клас `Expert`](uprazhneniya-za-izvnauditorna-zaetost.md#клас-expert)
+  - [Клас `Manager`](uprazhneniya-za-izvnauditorna-zaetost.md#клас-manager)
+  - [Демонстрация](uprazhneniya-za-izvnauditorna-zaetost.md#демонстрация)
