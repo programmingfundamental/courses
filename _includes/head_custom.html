@@ -7,7 +7,7 @@
   });
 
   document.addEventListener("DOMContentLoaded", async () => {
-    const blocks = document.querySelectorAll("code.language-mermaid");
+    const blocks = document.querySelectorAll("code.language-mermaid, .language-mermaid code");
 
     blocks.forEach((codeBlock) => {
       const source = codeBlock.textContent;
@@ -26,8 +26,12 @@
       container.replaceWith(diagram);
     });
 
-    await mermaid.run({
-      querySelector: ".mermaid"
-    });
+    try {
+      await mermaid.run({
+        querySelector: ".mermaid"
+      });
+    } catch (error) {
+      console.error("Mermaid rendering failed", error);
+    }
   });
 </script>

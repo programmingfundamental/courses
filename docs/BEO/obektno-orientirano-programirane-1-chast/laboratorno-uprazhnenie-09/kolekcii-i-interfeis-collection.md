@@ -73,34 +73,17 @@ classDiagram
     Queue <|.. LinkedList
     Queue <|.. PriorityQueue
     Queue <|.. ArrayDeque
-
-    class Iterable {
-        iterator()
-    }
-
-    class Collection {
-        size()
-        add(element)
-        remove(element)
-        contains(element)
-        iterator()
-    }
-
-    class List {
-        get(index)
-        set(index, element)
-    }
-
-    class Set {
-        uniqueElements()
-    }
-
-    class Queue {
-        offer(element)
-        poll()
-        peek()
-    }
 ```
+
+Основните интерфейси в тази част от йерархията предоставят различни групи операции:
+
+| Интерфейс    | Основни операции                                      |
+| ------------ | ----------------------------------------------------- |
+| `Iterable`   | `iterator()`                                          |
+| `Collection` | `size()`, `add(element)`, `remove(element)`, `contains(element)`, `iterator()` |
+| `List`       | `get(index)`, `set(index, element)`                   |
+| `Set`        | съхраняване на уникални елементи                      |
+| `Queue`      | `offer(element)`, `poll()`, `peek()`                  |
 
 Интерфейсът Collection е базовият интерфейс в Java Collections Framework. Той дефинира общите операции, които се поддържат от повечето колекции. Най-често използваните методи са:
 
