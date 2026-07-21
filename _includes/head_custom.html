@@ -1,0 +1,33 @@
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+  mermaid.initialize({
+    startOnLoad: false,
+    securityLevel: "strict"
+  });
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    const blocks = document.querySelectorAll("code.language-mermaid");
+
+    blocks.forEach((codeBlock) => {
+      const source = codeBlock.textContent;
+      const preBlock = codeBlock.closest("pre");
+      const rougeBlock = codeBlock.closest(".highlighter-rouge");
+      const container = rougeBlock || preBlock;
+
+      if (!container) {
+        return;
+      }
+
+      const diagram = document.createElement("div");
+      diagram.className = "mermaid";
+      diagram.textContent = source;
+
+      container.replaceWith(diagram);
+    });
+
+    await mermaid.run({
+      querySelector: ".mermaid"
+    });
+  });
+</script>
