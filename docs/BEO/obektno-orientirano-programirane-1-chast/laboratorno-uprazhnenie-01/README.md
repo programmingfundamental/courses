@@ -70,7 +70,7 @@ nav_order: 2
   - [Метод println()](tipove-danni-operatori/05-sistemen-izkhod-v-java.md#метод-println)
   - [Метод printf()](tipove-danni-operatori/05-sistemen-izkhod-v-java.md#метод-printf)
   - [Метод `String.format()`](tipove-danni-operatori/05-sistemen-izkhod-v-java.md#метод-stringformat)
-  - [Най-често изпозлзвани спецификатори](tipove-danni-operatori/05-sistemen-izkhod-v-java.md#най-често-изпозлзвани-спецификатори)
+  - [Спецификатори за форматиран изход](tipove-danni-operatori/05-sistemen-izkhod-v-java.md#спецификатори-за-форматиран-изход)
 - [Оператори](tipove-danni-operatori/07-operatori.md)
   - [Особености при използване на оператори в Java](tipove-danni-operatori/07-operatori.md#особености-при-използване-на-оператори-в-java)
   - [Деление на цели числа](tipove-danni-operatori/07-operatori.md#деление-на-цели-числа)

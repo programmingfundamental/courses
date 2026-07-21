@@ -20,7 +20,7 @@ flowchart LR
     D --> E["Приемник на данни<br/>файл, конзола, мрежа, устройство"]
 ```
 
-Потоците поддържат различни типове данни (байтове, данни от прост тип, символи, обекти), като някои потоци просто предават данните, докато други обработват тези данни и ги преобразуват в подходящ за конкретния случай вид.
+В следващите раздели потоците се разглеждат според вида на данните, с които работят: байтове, текстови данни, стойности от примитивни типове и обекти. Някои потоци четат и записват данните директно, а други извършват преобразуване между външното представяне и стойностите в програмата.
 
 ## Използване на `import` при входно-изходни операции
 
@@ -51,212 +51,145 @@ java.util.Scanner scanner = new java.util.Scanner(System.in);
 
 Всеки един от класовете наследява или абстрактния клас InputStream, или абстрактния клас OutputStream.
 
-Към класовете, които наследяват InputStream, спадат:
+`InputStream` е базовият клас за байтов вход. Конкретните наследници определят откъде се четат байтовете или как се обработват.
 
-\-          BufferedInputStream – за прочитане на байтове от буфер;
+Към класовете, които наследяват `InputStream`, спадат:
 
-\-          ByteArrayInputStream – за прочитане на байтове от масив;
+- `BufferedInputStream` - чете байтове чрез буфер;
+- `ByteArrayInputStream` - чете байтове от масив;
+- `DataInputStream` - чете стойности от примитивни типове данни;
+- `FileInputStream` - чете байтове от файл;
+- `ObjectInputStream` - чете обекти.
 
-\-          DataInputStream – за прочитане на прости типове данни;
+Част от методите на класа `InputStream`:
 
-\-          FileInputStream – за четене на байтове от файл;
+- `public abstract int read()` - чете следващия байт от входния поток; при достигане на край на потока връща `-1`;
+- `public int available()` - връща броя байтове, които могат да бъдат прочетени без блокиране;
+- `public void close()` - затваря входния поток.
 
-\-          ObjectInputStream – за прочитане на обекти;
+`OutputStream` е базовият клас за байтов изход. Конкретните наследници определят къде се записват байтовете или как се обработват преди запис.
 
-\-          др.
+Към класовете, които наследяват `OutputStream`, спадат:
 
-Част от методите на класа InputStream:
+- `BufferedOutputStream` - записва байтове чрез буфер;
+- `ByteArrayOutputStream` - записва байтове в масив;
+- `DataOutputStream` - записва стойности от примитивни типове данни;
+- `FileOutputStream` - записва байтове във файл;
+- `ObjectOutputStream` - записва обекти.
 
-·         public abstract int read() – чете поредния байт данни от входния поток; при достигане на край на входния поток връща -1;
+Част от методите на класа `OutputStream`:
 
-·         public int available() – връща колко байта от текущия входен поток могат да бъдат прочетени;
+- `public void write(int value)` - записва един байт в изходния поток;
+- `public void write(byte[] data)` - записва масив от байтове в изходния поток;
+- `public void flush()` - принуждава записването на натрупаните в буфер данни;
+- `public void close()` - затваря изходния поток.
 
-·         public void close() – затваря текущия входен поток.
+Потоците, които работят с външни ресурси като файлове, трябва да бъдат затваряни след приключване на работата с тях. Стандартните потоци `System.in`, `System.out` и `System.err` обикновено не се затварят от приложния код. За файлови потоци се използва конструкцията `try-with-resources`.
 
-Аналогично, към класовете, наследяващи OutputStream, спадат:
+Байтовите потоци се използват за четене и запис на байтове. Те са подходящи за двоични данни. Когато се работи с текст, стойности от примитивни типове или обекти, се използват по-специализирани класове, които предоставят по-подходящ начин за представяне на данните.
 
-\-          BufferedOutputStream – за запис на байтове в буфер;
-
-\-          ByteArrayOutputStream – за запис на байтове в масив;
-
-\-          DataOutputStream – за запис на прости типове данни;
-
-\-          FileOutputStream – за запис на байтове във файл;
-
-\-          ObjectOutputStream – за запис на обекти;
-
-\-          др.
-
-Част от методите на класа OutputStream:
-
-·         public void write(int i) – записва подавания байт в текущия изходен поток;
-
-·         public void write(byte\[]) – записва масива байтове в текущия изходен поток;
-
-·         public void flush() – изчиства текущия изходен поток;
-
-·         public void close() – затваря текущия изходен поток.
-
-Важно е да се запомни, че всеки един входно-изходен поток трябва да бъде затворен.
-
-Байтовите потоци се използват за четене/запис на примитивни типове данни. Съществуват други типове потоци, за по-сложни данни – но всички те се базират на байтовите потоци.
-
-_Пример за използване на байтов поток:_
+Следва пример за запис на байтове във файл чрез `FileOutputStream`:
 
 ```java
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class ByteStreamExample {
 
     public static void main(String[] args) {
-        try (FileOutputStream outputStream = new FileOutputStream(file)) {
-            byte[] content = "Example of I/O operations using byte streams".getBytes();
+        byte[] content = "Example of I/O operations using byte streams".getBytes();
 
-            // Файлът трябва да е предварително създаден и като аргумент се подава пътят към него
-            File file = new File("C:\\io\\FirstExample");
-            FileOutputStream outputStream = new FileOutputStream(file);
-
+        try (FileOutputStream outputStream = new FileOutputStream("C:\\io\\FirstExample")) {
             outputStream.write(content);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            System.out.println("Cannot write to file.");
         }
     }
 }
 ```
+
+В примера `FileOutputStream` отваря изходен поток към файл. Блокът `try-with-resources` затваря потока автоматично след приключване на записа.
 
 ## Символни потоци. CharacterStream класове
 
-Класовете за работа с байтови потоци могат да оперират само с един байт и не са подходящи за директна работа с Unicode символи, които са 16-битови. За работа с потоци от такива символи се използват съответно символни потоци.
+Байтовите потоци четат и записват отделни байтове. Това е подходящо за двоични файлове, но не е достатъчно за текст, защото един видим символ може да бъде представен чрез повече от един байт. Символните потоци се използват за текстови данни и извършват преобразуване между байтове и символи.
 
 По подобие на класовете за работа с байтови потоци, класовете за работа със символни потоци също са два основни типа: наследници на абстрактен клас Reader или на абстрактен клас Writer.
 
-Класове, които наследяват клас Reader:
+`Reader` е базовият клас за символен вход. Неговите наследници определят откъде се четат символите или как се преобразуват входните данни.
 
-\-          BufferedReader;
+- `BufferedReader` - чете текст чрез буфер;
+- `FileReader` - чете текст от файл;
+- `InputStreamReader` - преобразува байтов входен поток в символен входен поток;
+- `StringReader` - чете текст от низ.
 
-\-          FileReader;
+Класът `Reader` и неговите наследници използват методи като `read()` и `close()`.
 
-\-          InputStreamReader – този клас предоставя методи за преобразуване на байтове в символи;
+`Writer` е базовият клас за символен изход. Неговите наследници определят къде се записват символите или как се преобразуват изходните данни.
 
-\-          StringReader;
+- `BufferedWriter` - записва текст чрез буфер;
+- `FileWriter` - записва текст във файл;
+- `OutputStreamWriter` - преобразува символен изходен поток към байтов изходен поток;
+- `StringWriter` - записва текст в низ.
 
-\-          др.
+Класът `Writer` и неговите наследници използват методи като `write()`, `flush()` и `close()`.
 
-Класът Reader и всички негови наследници имат сходни методи с тези на клас InputStream като _**int read()**_ и _**void close()**_.
-
-Класове, които наследяват клас Writer:
-
-\-          BufferedWriter;
-
-\-          FileWriter;
-
-\-          OutputStreamWriter;
-
-\-          StringWriter;
-
-\-          др.
-
-Класът Writer и всички негови наследници имат подобни на OutputStream методи: _**void write()**_, _**void write(int i)**_ за запис на един символ, _**void flush()**_ и _**void close()**_.
-
-Често символните потоци се явяват „обгръщащи” (wrappers) за байтовите потоци. Така например, FileReader използва FileInputStream, а FileWriter – FileOutputStream.
+Символните потоци могат да бъдат свързани с байтови потоци чрез класовете `InputStreamReader` и `OutputStreamWriter`. Те извършват преобразуване между байтове и символи според използваното текстово кодиране.
 
 Символните потоци поддържат всички символи за край на ред – “\r”, “\n” и “\r\n”. Това позволява работа с текстови файлове.
 
-_Примери за използване на символни потоци:_
-
-Показаните два примера извършват едно и също: четат от един файл и записват прочетеното съдържание в друг. В първият пример са използвани само класове FileReader и FileWriter, докато вторият реализира същото с помощта на BufferedReader и PrintWriter.
+Следва пример за четене на текст от един файл и записване на прочетените редове в друг файл чрез `BufferedReader` и `PrintWriter`:
 
 ```java
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
-public class FileStreamsExample {
-
-    public static void main(String[] args) {
-        FileReader fileReader;
-        FileWriter fileWriter;
-        int ch;
-
-        try {
-            fileReader = new FileReader("C:\\io\\input");
-            fileWriter = new FileWriter("C:\\io\\output");
-
-            while ((ch = fileReader.read()) != -1) {
-                fileWriter.write(ch);
-            }
-
-            fileReader.close();
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-}
-```
-
-```java
-import java.io.*;
+import java.io.PrintWriter;
 
 public class BufferedStreamsExample {
 
     public static void main(String[] args) {
-        BufferedReader bufferedReader;
-        PrintWriter printWriter;
-        String line;
+        try (
+                BufferedReader reader = new BufferedReader(new FileReader("C:\\io\\input.txt"));
+                PrintWriter writer = new PrintWriter(new FileWriter("C:\\io\\output.txt"))
+        ) {
+            String line;
 
-        try {
-            bufferedReader = new BufferedReader(new FileReader("C:\\io\\input"));
-            printWriter = new PrintWriter(new FileWriter("C:\\io\\output"));
-
-            while ((line = bufferedReader.readLine()) != null) {
-                printWriter.writeln(line);
+            while ((line = reader.readLine()) != null) {
+                writer.println(line);
             }
-
-            bufferedReader.close();
-            printWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            System.out.println("Cannot copy text file.");
         }
     }
 }
 ```
 
+В примера `BufferedReader` чете файла ред по ред, а `PrintWriter` записва всеки прочетен ред в изходния файл.
+
 ## Клас Scanner
 
-Този клас дава възможност за работа с текст като предоставя методи за неговото преобразуване в различни примитивни типове данни. За разлика от входно-изходните потоци, класът се намира в пакета java.util.
+Класът `Scanner` се използва за четене и разделяне на текстов вход на отделни части, наречени токени. Източникът на данни може да бъде низ, файл, стандартен вход или друг входен поток. Класът се намира в пакета `java.util`.
 
-Scanner разбива входа на токени чрез използване на разделител (по подразбиране това е интервала). Получените в резултат на това разделение токени могат да бъдат превърнати в стойности от различен тип, благодарение на различните next-методи.
+`Scanner` използва разделител, чрез който входът се разделя на токени. По подразбиране разделителят е празно пространство: интервал, табулация или нов ред.
 
-Често използвани методи от клас Scanner:
+Основни методи на класа `Scanner`:
 
-·         boolean hasNext() – връща истина ако има следващ токен;
+- `boolean hasNext()` - проверява дали има следващ токен;
+- `boolean hasNextInt()` - проверява дали следващият токен може да се прочете като `int`;
+- `boolean hasNextDouble()` - проверява дали следващият токен може да се прочете като `double`;
+- `boolean hasNextLong()` - проверява дали следващият токен може да се прочете като `long`;
+- `boolean hasNextLine()` - проверява дали входът съдържа следващ ред;
+- `String next()` - прочита и връща следващия токен;
+- `boolean nextBoolean()` - прочита следващия токен като булева стойност;
+- `int nextInt()` - прочита следващия токен като стойност от тип `int`;
+- `double nextDouble()` - прочита следващия токен като стойност от тип `double`;
+- `long nextLong()` - прочита следващия токен като стойност от тип `long`;
+- `Scanner useDelimiter(String pattern)` - задава разделител чрез шаблон;
+- `void close()` - затваря скенера.
 
-·         boolean hasNextInt() – връща истина ако следващия токен може да се интерпретира като цяло число;
-
-·         boolean hasNextDouble() – връща истина ако следващия токен може да се интерпретира като дробно число;
-
-·         boolean hasNextLong() – връща истина ако следващия токен може да се интерпретира като число от тип long;
-
-·         boolean hasNextLine() – връща истина ако входът има следващ/и ред/ове;
-
-·         String next() – намира и връща следващия токен;
-
-·         boolean nextBoolean() – намира и връща следващия токен, който може да се интерпретира като булева стойност;
-
-·         int nextInt() - намира и връща следващия токен, който може да се интерпретира като целочислена стойност;
-
-·         double nextDouble() - намира и връща следващия токен, който може да се интерпретира като дробно число;
-
-·         long nextLong() - намира и връща следващия токен, който може да се интерпретира като число от тип long;
-
-·         Scanner useDelimeter(String pattern) – задава какво да се използва за разделител;
-
-·         void close().
-
-_Примери за използване на клас Scanner_:
+Следват примери за използване на клас `Scanner`:
 
 Примерът по-долу прочита входен символен низ и след това извежда всяка една дума на отделен ред.
 
@@ -267,20 +200,19 @@ public class StringScannerExample {
 
     public static void main(String[] args) {
         String input = "This is an example of using Scanner";
-        Scanner scanner = new Scanner(input);
 
-        while (scanner.hasNext()) {
-            System.out.println(scanner.next());
+        try (Scanner scanner = new Scanner(input)) {
+            while (scanner.hasNext()) {
+                System.out.println(scanner.next());
+            }
         }
-
-        scanner.close();
     }
 }
 ```
 
 Методът next() прочита следващата дума от входния поток, като използва празните пространства (интервали, табулации и нови редове) като разделители по подразбиране. Методът hasNext() проверява дали има следваща дума за прочитане.
 
-Следващият пример чете от файл и сумира дробните числа, записани в него (пропуска данните от всички други типове, които се съдържат в този файл).
+Следва пример за четене на файл и сумиране на числата от тип `double`, които могат да бъдат прочетени от него:
 
 ```java
 import java.io.File;
@@ -290,12 +222,9 @@ import java.util.Scanner;
 public class MixedDataScannerExample {
 
     public static void main(String[] args) {
-        Scanner scanner;
         double sum = 0;
 
-        try {
-            scanner = new Scanner(new File("C:\\io\\input"));
-
+        try (Scanner scanner = new Scanner(new File("C:\\io\\input.txt"))) {
             while (scanner.hasNext()) {
                 if (scanner.hasNextDouble()) {
                     sum += scanner.nextDouble();
@@ -304,32 +233,27 @@ public class MixedDataScannerExample {
                 }
             }
 
-            scanner.close();
             System.out.println(sum);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException exception) {
+            System.out.println("Input file not found.");
         }
     }
 }
 ```
 
-## Стандартни потоци. Клас Console
+## Стандартни потоци
 
 Java поддържа три стандартни потока:
 
-\-          System.in – системен вход (от клавиатура);
+- `System.in` - стандартен вход, от който може да се чете информация;
+- `System.out` - стандартен изход, към който се извежда основният резултат от програмата;
+- `System.err` - стандартен поток за съобщения за грешки.
 
-\-          System.out – системен изход (на екран/конзола);
+Тези потоци се предоставят от класа `System`. Те не се създават с `new` от приложния код.
 
-\-          System.err – стандартен поко за грешки.
+`System.in` е байтов входен поток от тип `InputStream`. `System.out` и `System.err` са изходни потоци от тип `PrintStream`.
 
-Никой от тези потоци не трябва да бъде деклариран, те се създават автоматично.
-
-System.out и System.err са дефинирани като PrintWriter-обекти, т.е. символни потоци. От своя страна, System.in е дефиниран като байтов поток.
-
-Алтернатива на стандартните потоци е класът Console. Той предоставя функционалностите на стандартните потоци, както и допълнителни такива. Обектът Console предоставя входни и изходни символни потоци чрез методите си reader() и writer().
-
-_Пример за използване на стандартни потоци:_
+Следва пример за четене от стандартния вход и извеждане към стандартния изход:
 
 ```java
 import java.io.BufferedReader;
@@ -338,107 +262,73 @@ import java.io.InputStreamReader;
 
 public class StandardStreamExample {
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader bufferedReader =
+    public static void main(String[] args) {
+        BufferedReader reader =
                 new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.print("Hello, please write your name: ");
-
-        String name = bufferedReader.readLine();
-
-        System.out.println("You have entered: " + name);
-    }
-}
-```
-
-## Даннови потоци. Интерфейси DataInput и DataOutput
-
-Данновите потоци поддържат входно-изходни операции върху всички прости типове данни, както и върху символни низове. Всички даннови потоци имплементират или интерфейс DataInput, или интерфейс DataOutput.
-
-Методи на интерфейс DataInput:
-
-·         boolean readBoolean();
-
-·         byte readByte();
-
-·         char readChar();
-
-·         double readDouble();
-
-·          int reading();
-
-·         String readLine();
-
-·         и др.
-
-Всички тези методи имат своите съответстващи write() методи от интерфейса DataOutput: void writeBoolean(boolean value), void writeByte(byte value) и т.н.
-
-Класове, които имплементират DataInput: DataInputStream, FileImageInputStream, ObjectInputStream, RandomAccessFile.
-
-Класове, които имплементират DataOutput: DataOutputStream, FileImageOutputStream, ObjectOutputStream, RandomAccessFile.
-
-_Пример за използване на даннови потоци:_
-
-Примерът прочита файл чрез RandomAccessFile и запълва колекция от обекти. Файлът съдържа по един обект на ред.
-
-```java
-public class Cat {
-
-    private String name;
-    private double weight;
-    private int age;
-
-    public Cat() {
-    }
-
-    public Cat(String name, double weight, int age) {
-        this.name = name;
-        this.weight = weight;
-        this.age = age;
-    }
-
-    @Override
-    public String toString() {
-        return "Cat{" +
-                "name='" + name + '\'' +
-                ", weight=" + weight +
-                ", age=" + age +
-                '}';
-    }
-}
-```
-
-```java
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.util.ArrayList;
-import java.util.List;
-
-public class CatCollection {
-
-    private List<Cat> cats = new ArrayList<>();
-
-    public CatCollection(String fileName) {
-
         try {
-            RandomAccessFile myFile = new RandomAccessFile(fileName, "r"); // "r" - отваря файла за четене
+            System.out.print("Въведете име: ");
 
-            String line;
-            String[] result;
+            String name = reader.readLine();
 
-            while ((line = myFile.readLine()) != null && line.length() > 0) {
-                result = line.split(" ");
-
-                String catName = result[0];
-                double catWeight = Double.parseDouble(result[1]);
-                int catAge = Integer.parseInt(result[2]);
-
-                cats.add(new Cat(catName, catWeight, catAge));
-            }
-            myFile.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Въведено име: " + name);
+        } catch (IOException exception) {
+            System.err.println("Cannot read from standard input.");
         }
     }
 }
 ```
+
+## Потоци за структурирани данни. Интерфейси DataInput и DataOutput
+
+Потоците за структурирани данни позволяват запис и четене на стойности от примитивни типове и символни низове в машинно представяне. Тези потоци са подходящи, когато данните трябва да бъдат прочетени обратно в същия ред и със същите типове. Всички потоци за структурирани данни имплементират или интерфейс DataInput, или интерфейс DataOutput.
+
+Методите на `DataInput` четат стойности в същия ред, в който са записани чрез `DataOutput`.
+
+- `boolean readBoolean()`;
+- `byte readByte()`;
+- `char readChar()`;
+- `double readDouble()`;
+- `int readInt()`;
+- `String readUTF()`.
+
+При запис се използват съответстващи методи от `DataOutput`, например `writeBoolean(boolean value)`, `writeByte(int value)`, `writeInt(int value)`, `writeDouble(double value)` и `writeUTF(String value)`.
+
+Основните класове за работа с тези интерфейси са `DataInputStream` и `DataOutputStream`. Други класове, например `RandomAccessFile`, също реализират тези интерфейси, но се използват в по-специализирани случаи.
+
+Следва пример за запис и четене на структурирани данни чрез `DataOutputStream` и `DataInputStream`:
+
+```java
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class DataStreamExample {
+
+    public static void main(String[] args) {
+        String path = "C:\\io\\cat.dat";
+
+        try (DataOutputStream output = new DataOutputStream(new FileOutputStream(path))) {
+            output.writeUTF("Tom");
+            output.writeDouble(4.5);
+            output.writeInt(3);
+        } catch (IOException exception) {
+            System.out.println("Cannot write structured data.");
+        }
+
+        try (DataInputStream input = new DataInputStream(new FileInputStream(path))) {
+            String name = input.readUTF();
+            double weight = input.readDouble();
+            int age = input.readInt();
+
+            System.out.println(name + " " + weight + " " + age);
+        } catch (IOException exception) {
+            System.out.println("Cannot read structured data.");
+        }
+    }
+}
+```
+
+В примера данните се четат в същия ред, в който са записани: първо текст, след това дробно число и накрая цяло число.

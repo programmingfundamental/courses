@@ -13,7 +13,7 @@ nav_order: 7
   - [`try` и `catch`](obrabotka-na-izklyucheniya.md#try-и-catch)
   - [Йерархия на изключенията](obrabotka-na-izklyucheniya.md#йерархия-на-изключенията)
   - [Клас `Throwable`](obrabotka-na-izklyucheniya.md#клас-throwable)
-  - [Checked и unchecked изключения](obrabotka-na-izklyucheniya.md#checked-и-unchecked-изключения)
+  - [Проверявани (Checked) и непроверявани (unchecked) изключения](obrabotka-na-izklyucheniya.md#проверявани-checked-и-непроверявани-unchecked-изключения)
   - [`NullPointerException`](obrabotka-na-izklyucheniya.md#nullpointerexception)
   - [`NumberFormatException`](obrabotka-na-izklyucheniya.md#numberformatexception)
   - [Няколко `catch` блока](obrabotka-na-izklyucheniya.md#няколко-catch-блока)
