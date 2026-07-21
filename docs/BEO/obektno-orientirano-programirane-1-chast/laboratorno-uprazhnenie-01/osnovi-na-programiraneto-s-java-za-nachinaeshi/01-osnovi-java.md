@@ -17,12 +17,8 @@ nav_order: 1
 flowchart TD
     A["Изходен код<br/>.java файл"] --> B["Компилатор javac"]
     B --> C["Java bytecode<br/>.class файл"]
-    C --> D["JVM за Windows"]
-    C --> E["JVM за Linux"]
-    C --> F["JVM за macOS"]
-    D --> G["Изпълнение на програмата"]
-    E --> G
-    F --> G
+    C --> D["JVM за операционната система"]
+    D --> E["Изпълнение"]
 ```
 
 ## Java е обектно-ориентиран език
@@ -96,11 +92,11 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph JDK["JDK - Java Development Kit"]
-        Tools["Инструменти за разработка<br/>javac, jar, javadoc"]
-        subgraph JRE["JRE - Java Runtime Environment"]
-            Libraries["Стандартни библиотеки"]
-            JVM["JVM - Java Virtual Machine"]
+    subgraph JDK["JDK"]
+        Tools["Инструменти<br/>javac, jar, javadoc"]
+        subgraph JRE["JRE"]
+            Libraries["Библиотеки"]
+            JVM["JVM"]
         end
     end
 
