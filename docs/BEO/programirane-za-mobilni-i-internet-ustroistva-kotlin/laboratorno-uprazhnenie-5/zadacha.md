@@ -5,32 +5,33 @@ parent: Лабораторно упражнение 5
 grand_parent: Програмиране за мобилни и Интернет устройства Kotlin
 nav_order: 2
 ---
+
 # Задачи
 
 ## Задача 1
 
-Създайте Composable функция за поздравителен текст GreetingText с параметри: message: String и modifier: Modifier = Modifier. Визуализирайте функцията в панел за проектиране. Със съобщение "Happy Birthday Android!"
+Да се създаде композируема функция `GreetingText` с анотация `@Composable` и параметри `message: String` и `modifier: Modifier = Modifier`. Функцията да се визуализира чрез Compose Preview със съобщение "Happy Birthday Android!".
 
 ## Задача 2
 
-Поставете fontSize = 100.sp проверете резултата
+За параметъра `fontSize` на `Text` да се зададе стойност `100.sp`. Да се провери полученият резултат.
 
 ## Задача 3
 
-Поставете lineHeight = 116.sp проверете резултата
+За параметъра `lineHeight` на `Text` да се зададе стойност `116.sp`. Да се провери полученият резултат.
 
 ## Задача 4
 
-Добавете нов текстови елемен за съобщението от кого е поздрава използвайте fontSize = 36.sp
+Да се добави нов текстов елемент, който показва от кого е поздравът. За неговия параметър `fontSize` да се зададе `36.sp`.
 
 ## Задача 5
 
-Подредете текстовите елементи в ред и в колона. Изберете подходящ вариант за оформление.
+Текстовите елементи да се подредят последователно чрез `Row` и чрез `Column`. Да се сравнят резултатите и да се избере оформлението, което съответства на желания изглед.
 
 ## Задача 6
 
-Подравнете текста и елементите на потребителския изглед с padding, verticalArrangement , align и textAlign 
+Да се зададат отстояния чрез `Modifier.padding()`. При `Column` да се използват `verticalArrangement` и `horizontalAlignment`, а при `Row` — `horizontalArrangement` и `verticalAlignment`. Подравняването на текста в областта на `Text` да се зададе чрез `textAlign`. Да се провери разликата между подравняване на елемент и подравняване на текста в него.
 
 ## Задача 7
 
-https://tuvarnabg.sharepoint.com/:u:/s/msteams_230e9b/EXtfPyFQ_3tAnBwEYE7-4XgB3w6hd6boqpZEw_RJEj-sgg?e=HW2dfN
+Допълнителни ресурси за задачата: [връзка към SharePoint](https://tuvarnabg.sharepoint.com/:u:/s/msteams_230e9b/EXtfPyFQ_3tAnBwEYE7-4XgB3w6hd6boqpZEw_RJEj-sgg?e=HW2dfN).

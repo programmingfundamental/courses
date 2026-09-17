@@ -9,11 +9,14 @@ nav_order: 7
 # Лабораторно упражнение 6
 
 ## Раздели
+
 - [Обработка на изключения](obrabotka-na-izklyucheniya.md)
   - [`try` и `catch`](obrabotka-na-izklyucheniya.md#try-и-catch)
   - [Йерархия на изключенията](obrabotka-na-izklyucheniya.md#йерархия-на-изключенията)
+  - [Изключения и грешки](obrabotka-na-izklyucheniya.md#изключения-и-грешки)
   - [Клас `Throwable`](obrabotka-na-izklyucheniya.md#клас-throwable)
   - [Проверявани (Checked) и непроверявани (unchecked) изключения](obrabotka-na-izklyucheniya.md#проверявани-checked-и-непроверявани-unchecked-изключения)
+  - [Изключения при масиви и преобразуване на тип](obrabotka-na-izklyucheniya.md#изключения-при-масиви-и-преобразуване-на-тип)
   - [`NullPointerException`](obrabotka-na-izklyucheniya.md#nullpointerexception)
   - [`NumberFormatException`](obrabotka-na-izklyucheniya.md#numberformatexception)
   - [Няколко `catch` блока](obrabotka-na-izklyucheniya.md#няколко-catch-блока)
@@ -28,3 +31,6 @@ nav_order: 7
   - [`try-with-resources`](obrabotka-na-izklyucheniya.md#try-with-resources)
 - [Упражнения за извънаудиторна заетост](uprazhneniya-za-izvnauditorna-zaetost.md)
   - [Задача](uprazhneniya-za-izvnauditorna-zaetost.md#задача)
+  - [Задача 2 — Проследяване на `finally`](uprazhneniya-za-izvnauditorna-zaetost.md#задача-2-проследяване-на-finally)
+  - [Задача 3 — Проверявано изключение и `record`](uprazhneniya-za-izvnauditorna-zaetost.md#задача-3-проверявано-изключение-и-record)
+  - [Задача 4 — Йерархия и освобождаване на ресурс](uprazhneniya-za-izvnauditorna-zaetost.md#задача-4-йерархия-и-освобождаване-на-ресурс)

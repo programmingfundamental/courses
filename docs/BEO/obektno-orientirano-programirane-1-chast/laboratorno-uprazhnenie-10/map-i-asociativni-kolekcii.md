@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Map и асоциативни колекции
-parent: Лабораторно упражнение 10
+parent: Лабораторно упражнение 10
 grand_parent: Обектно-ориентирано програмиране - 1 част
 nav_order: 1
 ---
@@ -105,6 +105,47 @@ entrySet()
 | `HashMap`      | не гарантира ред  | O(1) средно                      | използва хеширане          |
 | `LinkedHashMap` | ред на добавяне   | O(1) средно                      | запазва реда на обхождане  |
 | `TreeMap`      | сортирани ключове | O(log n)                         | използва балансирано дърво |
+
+## Какво е `Map.Entry`
+
+`Map.Entry<K, V>` е вложен интерфейс в `Map`, който представя **една двойка ключ–стойност**. Правилното изписване е `Map.Entry`, а не `MapEntry`. `K` е типът на ключа, а `V` — типът на стойността.
+
+`Map<K, V>` съхранява множество такива съответствия. Неговият метод `entrySet()` връща `Set<Map.Entry<K, V>>` — изглед към двойките в картата.
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+class EntryExample {
+    public static void main(String[] args) {
+        Map<String, Integer> stock = new HashMap<>();
+        stock.put("pens", 3);
+        stock.put("books", 5);
+
+        for (Map.Entry<String, Integer> entry : stock.entrySet()) {
+            String product = entry.getKey();
+            int quantity = entry.getValue();
+            entry.setValue(quantity + 1);
+            System.out.println(product + ": " + entry.getValue());
+        }
+        System.out.println(stock.get("pens")); // 4
+    }
+}
+```
+
+`getKey()` чете ключа, а `getValue()` — стойността. За елементите от `HashMap.entrySet()` методът `setValue(...)` променя и съответната стойност в картата. Няма `setKey()`; промяна на ключ изисква премахване и добавяне на съответствието. Поддръжката на `setValue` зависи от реализацията.
+
+Отделна непроменяема двойка може да се създаде чрез:
+
+```java
+Map.Entry<String, Integer> fixed = Map.entry("pens", 3);
+System.out.println(fixed.getKey()); // pens
+// fixed.setValue(4); // не се поддържа
+```
+
+`Map.entry(...)` не добавя двойката към карта и не допуска `null` за ключ или стойност. За отделна двойка с изменяема стойност съществува `AbstractMap.SimpleEntry<K, V>`.
+
+Когато ви трябват и ключът, и стойността, обхождайте `entrySet()`. Не добавяйте и не премахвайте елементи чрез самата карта по време на това обхождане; за премахване използвайте итератор. Не пазете елемент от изгледа за по-късна употреба след промени в картата; при нужда направете отделно копие на данните. Поведението е описано в [документацията за Map.Entry](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html).
 
 ## Обхождане на Map
 

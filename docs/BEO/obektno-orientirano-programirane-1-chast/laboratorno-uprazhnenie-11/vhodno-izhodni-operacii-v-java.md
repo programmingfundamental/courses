@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Входно-изходни операции в Java
-parent: Лабораторно упражнение 11
+parent: Лабораторно упражнение 11
 grand_parent: Обектно-ориентирано програмиране - 1 част
 nav_order: 1
 ---
@@ -33,13 +33,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Scanner;
+import java.io.InputStream;
 ```
 
 Без `import` трябва да се използва пълното име на класа.
 
 ```java
-java.util.Scanner scanner = new java.util.Scanner(System.in);
+java.io.InputStream input = System.in;
 ```
 
 Използването на `import` не добавя нова функционалност към класа. То само позволява по-кратък и по-четим запис на
@@ -168,79 +168,6 @@ public class BufferedStreamsExample {
 
 В примера `BufferedReader` чете файла ред по ред, а `PrintWriter` записва всеки прочетен ред в изходния файл.
 
-## Клас Scanner
-
-Класът `Scanner` се използва за четене и разделяне на текстов вход на отделни части, наречени токени. Източникът на данни може да бъде низ, файл, стандартен вход или друг входен поток. Класът се намира в пакета `java.util`.
-
-`Scanner` използва разделител, чрез който входът се разделя на токени. По подразбиране разделителят е празно пространство: интервал, табулация или нов ред.
-
-Основни методи на класа `Scanner`:
-
-- `boolean hasNext()` - проверява дали има следващ токен;
-- `boolean hasNextInt()` - проверява дали следващият токен може да се прочете като `int`;
-- `boolean hasNextDouble()` - проверява дали следващият токен може да се прочете като `double`;
-- `boolean hasNextLong()` - проверява дали следващият токен може да се прочете като `long`;
-- `boolean hasNextLine()` - проверява дали входът съдържа следващ ред;
-- `String next()` - прочита и връща следващия токен;
-- `boolean nextBoolean()` - прочита следващия токен като булева стойност;
-- `int nextInt()` - прочита следващия токен като стойност от тип `int`;
-- `double nextDouble()` - прочита следващия токен като стойност от тип `double`;
-- `long nextLong()` - прочита следващия токен като стойност от тип `long`;
-- `Scanner useDelimiter(String pattern)` - задава разделител чрез шаблон;
-- `void close()` - затваря скенера.
-
-Следват примери за използване на клас `Scanner`:
-
-Примерът по-долу прочита входен символен низ и след това извежда всяка една дума на отделен ред.
-
-```java
-import java.util.Scanner;
-
-public class StringScannerExample {
-
-    public static void main(String[] args) {
-        String input = "This is an example of using Scanner";
-
-        try (Scanner scanner = new Scanner(input)) {
-            while (scanner.hasNext()) {
-                System.out.println(scanner.next());
-            }
-        }
-    }
-}
-```
-
-Методът next() прочита следващата дума от входния поток, като използва празните пространства (интервали, табулации и нови редове) като разделители по подразбиране. Методът hasNext() проверява дали има следваща дума за прочитане.
-
-Следва пример за четене на файл и сумиране на числата от тип `double`, които могат да бъдат прочетени от него:
-
-```java
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
-public class MixedDataScannerExample {
-
-    public static void main(String[] args) {
-        double sum = 0;
-
-        try (Scanner scanner = new Scanner(new File("C:\\io\\input.txt"))) {
-            while (scanner.hasNext()) {
-                if (scanner.hasNextDouble()) {
-                    sum += scanner.nextDouble();
-                } else {
-                    scanner.next();
-                }
-            }
-
-            System.out.println(sum);
-        } catch (FileNotFoundException exception) {
-            System.out.println("Input file not found.");
-        }
-    }
-}
-```
-
 ## Стандартни потоци
 
 Java поддържа три стандартни потока:
@@ -332,3 +259,98 @@ public class DataStreamExample {
 ```
 
 В примера данните се четат в същия ред, в който са записани: първо текст, след това дробно число и накрая цяло число.
+
+## Клас Scanner
+
+Класът `Scanner` се използва за четене и разделяне на текстов вход на отделни части, наречени токени. Източникът на данни може да бъде низ, файл, стандартен вход или друг входен поток. Класът се намира в пакета `java.util`.
+
+`Scanner` използва разделител, чрез който входът се разделя на токени. По подразбиране разделителят е празно пространство: интервал, табулация или нов ред.
+
+Основни методи на класа `Scanner`:
+
+- `boolean hasNext()` - проверява дали има следващ токен;
+- `boolean hasNextInt()` - проверява дали следващият токен може да се прочете като `int`;
+- `boolean hasNextDouble()` - проверява дали следващият токен може да се прочете като `double`;
+- `boolean hasNextLong()` - проверява дали следващият токен може да се прочете като `long`;
+- `boolean hasNextLine()` - проверява дали входът съдържа следващ ред;
+- `String next()` - прочита и връща следващия токен;
+- `String nextLine()` - прочита остатъка от текущия ред и преминава към следващия;
+- `boolean nextBoolean()` - прочита следващия токен като булева стойност;
+- `int nextInt()` - прочита следващия токен като стойност от тип `int`;
+- `double nextDouble()` - прочита следващия токен като стойност от тип `double`;
+- `long nextLong()` - прочита следващия токен като стойност от тип `long`;
+- `Scanner useDelimiter(String pattern)` - задава разделител чрез шаблон;
+- `void close()` - затваря скенера.
+
+Следват примери за използване на клас `Scanner`:
+
+Примерът по-долу прочита входен символен низ и след това извежда всяка една дума на отделен ред.
+
+```java
+import java.util.Scanner;
+
+public class StringScannerExample {
+
+    public static void main(String[] args) {
+        String input = "This is an example of using Scanner";
+
+        try (Scanner scanner = new Scanner(input)) {
+            while (scanner.hasNext()) {
+                System.out.println(scanner.next());
+            }
+        }
+    }
+}
+```
+
+Методът next() прочита следващата дума от входния поток, като използва празните пространства (интервали, табулации и нови редове) като разделители по подразбиране. Методът hasNext() проверява дали има следваща дума за прочитане.
+
+Следва пример за четене на файл и сумиране на числата от тип `double`, които могат да бъдат прочетени от него:
+
+```java
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class MixedDataScannerExample {
+
+    public static void main(String[] args) {
+        double sum = 0;
+
+        try (Scanner scanner = new Scanner(new File("C:\\io\\input.txt"))) {
+            while (scanner.hasNext()) {
+                if (scanner.hasNextDouble()) {
+                    sum += scanner.nextDouble();
+                } else {
+                    scanner.next();
+                }
+            }
+
+            System.out.println(sum);
+        } catch (FileNotFoundException exception) {
+            System.out.println("Input file not found.");
+        }
+    }
+}
+```
+
+
+### Смесване на `nextInt()` и `nextLine()`
+
+`nextInt()` прочита числото, но оставя разделителя след него. Следващо `nextLine()` връща остатъка от същия ред, който често е празен.
+
+```java
+Scanner scanner = new Scanner(System.in);
+System.out.print("Брой книги: ");
+if (scanner.hasNextInt()) {
+    int count = scanner.nextInt();
+    scanner.nextLine(); // консумира остатъка от реда с числото
+    System.out.print("Заглавие: ");
+    String title = scanner.nextLine();
+    System.out.println(count + " - " + title);
+} else {
+    System.out.println("Очаква се цяло число: " + scanner.nextLine());
+}
+```
+
+`hasNextInt()` проверява, без да консумира токена. При отказ трябва да се прочете или пропусне невалидният вход, за да не се обработва безкрайно един и същ токен. Затварянето на `Scanner` затваря и източника му; когато това е `System.in`, не го затваряйте преди всички части на приложението да приключат с конзолния вход.
