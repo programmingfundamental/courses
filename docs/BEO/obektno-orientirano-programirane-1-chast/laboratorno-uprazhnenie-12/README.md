@@ -9,6 +9,7 @@ nav_order: 13
 # Лабораторно упражнение 12
 
 ## Раздели
+
 - [Обобщаващи задачи](obobshtavashti-zadachi.md)
   - [Теми](obobshtavashti-zadachi.md#теми)
 - [Упражнения за извънаудиторна заетост](uprazhneniya-za-izvnauditorna-zaetost.md)
@@ -18,3 +19,4 @@ nav_order: 13
   - [Клас `Expert`](uprazhneniya-za-izvnauditorna-zaetost.md#клас-expert)
   - [Клас `Manager`](uprazhneniya-za-izvnauditorna-zaetost.md#клас-manager)
   - [Демонстрация](uprazhneniya-za-izvnauditorna-zaetost.md#демонстрация)
+  - [Разширение — Прилагане на изучените теми](uprazhneniya-za-izvnauditorna-zaetost.md#разширение-прилагане-на-изучените-теми)

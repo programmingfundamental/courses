@@ -6,28 +6,38 @@ grand_parent: Програмиране за мобилни и Интернет �
 nav_order: 2
 ---
 
-Задание:
+# Задача
 
-Да се създаде приложение, което извежда в изображение и текст като използвате различни List и Grid
+Да се създаде приложение, което показва изображения и текст чрез различни списъци и решетки в Jetpack Compose.
 
-1.	Създайте стрингови ресурси, които ще се използвате за текст към изображението – файл lab9_strings
+1. Да се добавят текстовите ресурси от предоставения файл `lab9_strings` в `app/src/main/res/values/strings.xml`.
+2. Изображенията от предоставения архив `lab9_images.zip` да се разархивират и добавят в `app/src/main/res/drawable`.
 
-2.	Добавете изображенията от lab9_images.zip към вашия проект – res/drawable
+В хранилището не са налични `lab9_strings` и `lab9_images.zip` и няма предоставена връзка за изтегляне. За изпълнение с конкретните учебни ресурси е необходимо те да бъдат предоставени от преподавателя. Имената и съдържанието им не се предполагат.
 
-3.	Създайте клас Place с атрибути:
--	 @StringRes val stringResourceId: Int,
--	 @DrawableRes val drawableResourceId: Int
+## Модел и данни
 
-4.	Създайте клас и метод, който връща списък с Places.
+3. Да се създаде клас за данни `Place` със следните свойства:
 
-5.	Създайте функция @Composable fun PlaceApp()
+```kotlin
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 
-6.	Създайте функция @Composable fun PlaceCard(place: Place, modifier: Modifier = Modifier), която извежда в Card изображение(Image) и текст (Text)
+data class Place(
+    @StringRes val stringResourceId: Int,
+    @DrawableRes val drawableResourceId: Int
+)
+```
 
-7.	Създайте функция @Composable fun PlaceColumn(places: List<Place>, modifier: Modifier = Modifier), която вика PlaceCard() в LazyColumn на зелен фон.
+4. Да се създаде клас с метод `loadPlaces(): List<Place>`, който връща списък от обекти `Place`, свързващи текстовите ресурси с изображенията. Да се използват действителните идентификатори от генерирания клас `R`.
 
-8.	Създайте функция  fun PlaceRow(places: List<Place>, modifier: Modifier = Modifier) , която вика PlaceCard() в LazyRow на син фон
+## Композируеми функции
 
-9.	Създайте функция @Composable fun PlaceVerticalGrid(places: List<Place>, modifier: Modifier = Modifier) , която вика PlaceCard() в LazyVerticalGrid на лилав фон
+5. Да се създаде функция `PlaceApp()` с `@Composable`, която получава списъка и показва избраното оформление. Функцията да се извика от `setContent`.
+6. Да се създаде функция `PlaceCard(place: Place, modifier: Modifier = Modifier)` с `@Composable`. В `Card` да се разположат `Image` и `Text`, като ресурсите се извлекат чрез `painterResource()` и `stringResource()`.
+7. Да се реализира `PlaceColumn(places: List<Place>, modifier: Modifier = Modifier)` с `@Composable`, която извиква `PlaceCard()` за всеки елемент в `LazyColumn` на **зелен фон**.
+8. Да се реализира `PlaceRow(places: List<Place>, modifier: Modifier = Modifier)` с `@Composable`, която извиква `PlaceCard()` за всеки елемент в `LazyRow` на **син фон**.
+9. Да се реализира `PlaceVerticalGrid(places: List<Place>, modifier: Modifier = Modifier)` с `@Composable`, която използва `LazyVerticalGrid` на **лилав фон**. Да се зададе `columns` чрез `GridCells.Fixed` или `GridCells.Adaptive`.
+10. Да се реализира `PlaceHorizontalGrid(places: List<Place>, modifier: Modifier = Modifier)` с `@Composable`, която използва `LazyHorizontalGrid` на **лилав фон**. Да се зададе `rows` и ограничена височина за хоризонталната решетка.
 
-10.	Създайте функция @Composable fun PlaceHorizontalGrid(places: List<Place>, modifier: Modifier = Modifier) , която вика PlaceCard() в LazyHorizontalGrid на лилав фон
+Параметърът `modifier` да се приложи към кореновия елемент на съответната функция. Да се проверят четирите оформления поотделно. При използване на ресурсен идентификатор като `key` да се гарантира, че той е уникален за всяко място в списъка.

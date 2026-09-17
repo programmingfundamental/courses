@@ -8,74 +8,97 @@ nav_order: 7
 
 # Лабораторно упражнение 7
 
-## Тема: Форми и елементи за въвеждане на данни и слушатели на събития  
-**Дисциплина:** Програмиране за мобилни и Интернет устройства  
-**Език:** Kotlin  
-**Среда:** Android Studio (Jetpack Compose)
+## Форми, въвеждане на данни и обработване на потребителски събития
 
----
+Формите събират въведени стойности чрез Compose компоненти. Състоянието определя показаните данни, а обработващите функции описват действията при взаимодействие.
 
-## 📘 1. Теоретична част
+### Входни компоненти
 
-### 1.1. Форми и елементи за въвеждане на данни
-В мобилните приложения често се налага потребителят да въвежда данни чрез различни елементи на интерфейса.  
-В Jetpack Compose се използват декларативни компоненти за изграждане на форми:
+| Компонент | Предназначение |
+| --- | --- |
+| `TextField` | Поле за текст; `singleLine = true` го ограничава до един ред. |
+| `OutlinedTextField` | Текстово поле с контур. |
+| `Checkbox` | Избор между отметнато и неотметнато състояние. |
+| `RadioButton` | Избор на една възможност от група, управлявана чрез общо състояние. |
+| `Switch` | Превключване на настройка. |
+| `Button` | Изпълнение на действие чрез `onClick`. |
 
-| Елемент | Описание | Пример |
-|----------|-----------|--------|
-| **TextField** | Едноредово поле за въвеждане на текст. | `TextField(value, onValueChange = { ... })` |
-| **OutlinedTextField** | С текстово поле с очертание (граница). | `OutlinedTextField(value, onValueChange = { ... })` |
-| **PasswordField** | Поле за парола (с маскиране на текста). | `OutlinedTextField(visualTransformation = PasswordVisualTransformation())` |
-| **Checkbox** | Поле за избор (да/не). | `Checkbox(checked, onCheckedChange = { ... })` |
-| **RadioButton** | Позволява избор от няколко опции. | `RadioButton(selected, onClick = { ... })` |
-| **Switch** | Превключвател (включено/изключено). | `Switch(checked, onCheckedChange = { ... })` |
-| **Button** | Изпълнява действие при натискане. | `Button(onClick = { ... })` |
+`PasswordField` не е стандартен самостоятелен Material Compose компонент. Поле за парола може да се реализира чрез `TextField` или `OutlinedTextField` с `PasswordVisualTransformation()`.
 
----
+### Управление на състоянието
 
-### 1.2. Управление на състоянието (State)
-В Jetpack Compose **състоянието** определя какво се визуализира в потребителския интерфейс.  
-За промяна на съдържанието се използва `remember` и `mutableStateOf()`.
+`mutableStateOf()` създава наблюдавано състояние, а `remember` запазва стойността между рекомпозиции. За подходящи UI стойности като име, имейл и отметка се използва `rememberSaveable`, за да могат да бъдат възстановени при пресъздаване. В примерите паролите се пазят с `remember` и при пресъздаване се въвеждат отново.
+
+Следният фрагмент е част от тялото на композируема функция и използва импортите, дадени по-долу:
 
 ```kotlin
-var username by remember { mutableStateOf("") }
+var username by rememberSaveable { mutableStateOf("") }
+```
 
-При промяна на стойността, интерфейсът автоматично се обновява.
+### Callback функции
 
-1.3. Слушатели на събития (Event Listeners)
+В Compose взаимодействията обикновено се обработват чрез callback параметри: `onClick`, `onValueChange` и `onCheckedChange`. Обработващата функция може да промени състоянието или да изпълни действие, например запис в Logcat.
 
-Слушателите на събития (event listeners) са функции, които реагират на действия на потребителя — натискане на бутон, промяна на текст, избор от списък и др.
-
-Примери:
-
-// Натискане на бутон
-Button(onClick = { Log.d("BTN", "Натиснат бутон!") }) { Text("Изпрати") }
-
-// Промяна на текст
-TextField(
-    value = text,
-    onValueChange = { newValue -> text = newValue }
-)
-
-
-1.4. Валидация на данни
-
-Преди да се изпратят въведените данни, често се извършва проверка (валидация):
-
-if (username.isBlank()) {
-    Toast.makeText(context, "Моля, въведете име!", Toast.LENGTH_SHORT).show()
+```kotlin
+@Composable
+fun EventsExample() {
+    var text by rememberSaveable { mutableStateOf("") }
+    var checked by rememberSaveable { mutableStateOf(false) }
+    Column {
+        TextField(value = text, onValueChange = { newValue -> text = newValue })
+        Checkbox(checked = checked, onCheckedChange = { checked = it })
+        Button(onClick = { Log.d("BTN", "Натиснат бутон") }) {
+            Text("Изпращане")
+        }
+    }
 }
+```
 
-## 💡 1.2. Примери за използване на елементите
+### Валидация на данните
 
-### 🟦 TextField
+Преди обработване на формата се проверяват различни условия:
+
+- `isBlank()` установява празна стойност или стойност само от празни знаци.
+- Имейлът се проверява отделно за подходящ формат; клавиатурата за имейл улеснява въвеждането, но не валидира стойността.
+- Паролата и нейното потвърждение трябва да съвпадат.
+- Грешката се показва чрез `isError` и поясняващ текст (`supportingText`) или чрез `Toast`.
+
+Съобщение за успех се показва само след успешното преминаване на всички приложими проверки. `Toast` се създава в обработващата функция, а не като действие при всяка рекомпозиция.
+
+## Примери за използване на компонентите
+
+Примерите използват Compose Material 3. Следните импорти се поставят в началото на Kotlin файла. Всяка показана функция може да се извика от `setContent` или от друга композируема функция.
+
+```kotlin
+import android.util.Log
+import android.widget.Toast
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+```
+
+### `TextField`
+
 ```kotlin
 @Composable
 fun SimpleTextFieldExample() {
-    var name by remember { mutableStateOf("") }
+    var name by rememberSaveable { mutableStateOf("") }
 
     Column(modifier = Modifier.padding(16.dp)) {
-        Text("Въведете име:")
+        Text("Име:")
         TextField(
             value = name,
             onValueChange = { name = it },
@@ -84,46 +107,56 @@ fun SimpleTextFieldExample() {
         Text("Здравей, $name")
     }
 }
+```
 
-OutlinedTextField
+### `OutlinedTextField`
 
+```kotlin
 @Composable
 fun OutlinedTextFieldExample() {
-    var email by remember { mutableStateOf("") }
+    var email by rememberSaveable { mutableStateOf("") }
 
     Column(modifier = Modifier.padding(16.dp)) {
-        Text("Въведете имейл:")
+        Text("Имейл:")
         OutlinedTextField(
             value = email,
             onValueChange = { email = it },
             label = { Text("Имейл адрес") },
-            placeholder = { Text("example@mail.com") }
+            placeholder = { Text("example@mail.com") },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            singleLine = true
         )
     }
 }
+```
 
-PasswordField
+### Поле за парола
 
+```kotlin
 @Composable
 fun PasswordFieldExample() {
     var password by remember { mutableStateOf("") }
 
     Column(modifier = Modifier.padding(16.dp)) {
-        Text("Въведете парола:")
+        Text("Парола:")
         OutlinedTextField(
             value = password,
             onValueChange = { password = it },
             label = { Text("Парола") },
-            visualTransformation = PasswordVisualTransformation()
+            visualTransformation = PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            singleLine = true
         )
     }
 }
+```
 
-Checkbox
+### `Checkbox`
 
+```kotlin
 @Composable
 fun CheckboxExample() {
-    var isChecked by remember { mutableStateOf(false) }
+    var isChecked by rememberSaveable { mutableStateOf(false) }
 
     Row(
         modifier = Modifier.padding(16.dp),
@@ -136,15 +169,17 @@ fun CheckboxExample() {
         Text(if (isChecked) "Съгласен съм" else "Не съм съгласен")
     }
 }
+```
 
-RadioButton
+### `RadioButton`
 
+```kotlin
 @Composable
 fun RadioButtonExample() {
-    var selectedOption by remember { mutableStateOf("Мъж") }
+    var selectedOption by rememberSaveable { mutableStateOf("Мъж") }
 
     Column(modifier = Modifier.padding(16.dp)) {
-        Text("Изберете пол:")
+        Text("Пол:")
         Row(verticalAlignment = Alignment.CenterVertically) {
             RadioButton(
                 selected = selectedOption == "Мъж",
@@ -162,12 +197,14 @@ fun RadioButtonExample() {
         Text("Избран: $selectedOption")
     }
 }
+```
 
-Switch
+### `Switch`
 
+```kotlin
 @Composable
 fun SwitchExample() {
-    var notificationsEnabled by remember { mutableStateOf(true) }
+    var notificationsEnabled by rememberSaveable { mutableStateOf(true) }
 
     Row(
         modifier = Modifier.padding(16.dp),
@@ -181,9 +218,11 @@ fun SwitchExample() {
         )
     }
 }
+```
 
-Button
+### `Button`
 
+```kotlin
 @Composable
 fun ButtonExample() {
     val context = LocalContext.current
@@ -194,24 +233,19 @@ fun ButtonExample() {
         },
         modifier = Modifier.padding(16.dp)
     ) {
-        Text("Натисни ме")
+        Text("Показване на съобщение")
     }
 }
+```
 
+### Примерна форма за вход
 
-Пример:
+Да се създаде екран с потребителско име, парола и бутон „Вход“. При празно поле да се покаже `Toast` за грешка, а при попълнени полета — съобщение с потребителското име. Примерът демонстрира локална проверка на формата; паролата не се показва в съобщението.
 
-Създайте екран за вход в мобилно приложение с две полета:
-
-Потребителско име
-
-Парола
-
-и бутон "Вход", който показва Toast съобщение с въведените данни.
-
+```kotlin
 @Composable
 fun LoginScreen() {
-    var username by remember { mutableStateOf("") }
+    var username by rememberSaveable { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     val context = LocalContext.current
 
@@ -238,21 +272,22 @@ fun LoginScreen() {
             value = password,
             onValueChange = { password = it },
             label = { Text("Парола") },
-            visualTransformation = PasswordVisualTransformation()
+            visualTransformation = PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            singleLine = true
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = {
             if (username.isBlank() || password.isBlank()) {
-                Toast.makeText(context, "Моля, попълнете всички полета!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Всички полета са задължителни.", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(context, "Вход: $username / $password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Попълнени данни за: $username", Toast.LENGTH_SHORT).show()
             }
         }) {
             Text("Вход")
         }
     }
 }
-
-
+```

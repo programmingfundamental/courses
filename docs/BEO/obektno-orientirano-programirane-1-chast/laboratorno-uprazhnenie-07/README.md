@@ -9,7 +9,8 @@ nav_order: 8
 # Лабораторно упражнение 7
 
 ## Раздели
-- [Символни низове, StringBuilder и обгръщащи класове](nizove-stringbuilder-i-obgrashtashti-klasove.md)
+
+- [Символни низове — статични и динамични. Обгръщащи класове](nizove-stringbuilder-i-obgrashtashti-klasove.md)
   - [Клас `String`](nizove-stringbuilder-i-obgrashtashti-klasove.md#клас-string)
   - [Създаване на низ](nizove-stringbuilder-i-obgrashtashti-klasove.md#създаване-на-низ)
   - [Основни операции със `String`](nizove-stringbuilder-i-obgrashtashti-klasove.md#основни-операции-със-string)
@@ -23,8 +24,7 @@ nav_order: 8
   - [`StringBuilder`](nizove-stringbuilder-i-obgrashtashti-klasove.md#stringbuilder)
   - [Mutable и immutable обекти](nizove-stringbuilder-i-obgrashtashti-klasove.md#mutable-и-immutable-обекти)
   - [Основни методи на `StringBuilder`](nizove-stringbuilder-i-obgrashtashti-klasove.md#основни-методи-на-stringbuilder)
-  - [`StringBuffer`](nizove-stringbuilder-i-obgrashtashti-klasove.md#stringbuffer)
-  - [Сравнение между `String`, `StringBuilder` и `StringBuffer`](nizove-stringbuilder-i-obgrashtashti-klasove.md#сравнение-между-string-stringbuilder-и-stringbuffer)
+  - [Сравнение между `String` и `StringBuilder`](nizove-stringbuilder-i-obgrashtashti-klasove.md#сравнение-между-string-и-stringbuilder)
   - [ASCII и Unicode](nizove-stringbuilder-i-obgrashtashti-klasove.md#ascii-и-unicode)
   - [Обгръщащи класове](nizove-stringbuilder-i-obgrashtashti-klasove.md#обгръщащи-класове)
   - [Boxing и unboxing](nizove-stringbuilder-i-obgrashtashti-klasove.md#boxing-и-unboxing)
@@ -42,3 +42,4 @@ nav_order: 8
   - [Задача 2](uprazhneniya-za-izvnauditorna-zaetost.md#задача-2)
   - [Задача 3](uprazhneniya-za-izvnauditorna-zaetost.md#задача-3)
   - [Задача 4](uprazhneniya-za-izvnauditorna-zaetost.md#задача-4)
+  - [Задача 5 — Неизменяем и изменяем текст](uprazhneniya-za-izvnauditorna-zaetost.md#задача-5-неизменяем-и-изменяем-текст)

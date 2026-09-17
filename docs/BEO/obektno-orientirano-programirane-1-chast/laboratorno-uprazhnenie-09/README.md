@@ -9,6 +9,7 @@ nav_order: 10
 # Лабораторно упражнение 9
 
 ## Раздели
+
 - [Колекции и интерфейс Collection](kolekcii-i-interfeis-collection.md)
   - [Структури от данни](kolekcii-i-interfeis-collection.md#структури-от-данни)
   - [Java Collections Framework](kolekcii-i-interfeis-collection.md#java-collections-framework)
@@ -29,3 +30,5 @@ nav_order: 10
   - [Задача 1](uprazhneniya-za-izvnauditorna-zaetost.md#задача-1)
   - [Задача 2](uprazhneniya-za-izvnauditorna-zaetost.md#задача-2)
   - [Задача 3](uprazhneniya-za-izvnauditorna-zaetost.md#задача-3)
+  - [Задача 4 — Сортиране и референции към методи](uprazhneniya-za-izvnauditorna-zaetost.md#задача-4-сортиране-и-референции-към-методи)
+  - [Задача 5 — Четирите форми на method reference](uprazhneniya-za-izvnauditorna-zaetost.md#задача-5-четирите-форми-на-method-reference)

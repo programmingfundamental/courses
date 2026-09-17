@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Колекции и интерфейс Collection
-parent: Лабораторно упражнение 9
+parent: Лабораторно упражнение 9
 grand_parent: Обектно-ориентирано програмиране - 1 част
 nav_order: 1
 ---
@@ -325,7 +325,22 @@ while (iterator.hasNext()) {
 ```java
 public class Book implements Comparable<Book> {
 
-    private int publishingYear;
+    private final String title;
+    private final String author;
+    private final int publishingYear;
+    private final double price;
+
+    public Book(String title, String author, int publishingYear, double price) {
+        this.title = title;
+        this.author = author;
+        this.publishingYear = publishingYear;
+        this.price = price;
+    }
+
+    public String getTitle() { return title; }
+    public String getAuthor() { return author; }
+    public int getPublishingYear() { return publishingYear; }
+    public double getPrice() { return price; }
 
     @Override
     public int compareTo(Book other) {
@@ -400,6 +415,56 @@ books.sort(Comparator.comparingInt(Book::getPublishingYear));
 
 Анонимен клас, lambda израз и method reference могат да опишат един и същ критерий за сортиране. Разликата е в
 синтаксиса и краткостта на записа.
+
+### Синтаксис и функционален интерфейс
+
+Method reference, или референция към метод, използва `::`. Това е описание на операция, съвместима с **функционален интерфейс**, а не незабавно извикване на метода. При `String::length` дължината се изчислява, когато операцията бъде извикана с конкретен низ.
+
+```java
+import java.util.function.ToIntFunction;
+
+ToIntFunction<String> length = String::length;
+System.out.println(length.applyAsInt("Java")); // 4
+```
+
+Типът отляво задава очакваните параметри и резултат. Например `ToIntFunction<String>` приема `String` и връща `int`. Не може да се напише `var operation = String::length;`, защото липсва целеви функционален интерфейс.
+
+### Четири форми на референция към метод
+
+| Форма | Пример | Съответстващ lambda израз |
+| --- | --- | --- |
+| Статичен метод | `Integer::parseInt` | `text -> Integer.parseInt(text)` |
+| Метод на конкретен обект | `System.out::println` | `text -> System.out.println(text)` |
+| Нестатичен метод на подаден обект | `String::length` | `text -> text.length()` |
+| Конструктор | `StringBuilder::new` | `() -> new StringBuilder()` |
+
+```java
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
+Function<String, Integer> parse = Integer::parseInt;
+Consumer<String> print = System.out::println;
+Supplier<StringBuilder> create = StringBuilder::new;
+
+int number = parse.apply("42");
+StringBuilder builder = create.get();
+builder.append(number);
+print.accept(builder.toString()); // 42
+```
+
+При `System.out::println` получателят е вече избраният обект `System.out`. При `String::length` получателят е аргументът, подаден при извикване на функционалната операция. Това е различно и от обикновена референция към обект като `String text`: method reference описва поведение, което ще бъде извикано чрез функционален интерфейс.
+
+### Приложение при сортиране
+
+```java
+books.sort(Comparator.comparing(Book::getAuthor)
+                     .thenComparing(Book::getTitle));
+```
+
+Първо се сравняват авторите, а при равенство — заглавията. Класът `Book` трябва да предоставя методите `getAuthor()` и `getTitle()`, които в този пример връщат ненулеви низове. Записът `Book::getAuthor` съответства на `book -> book.getAuthor()`.
+
+Използвайте method reference, когато действието е точно извикване на съществуващ метод. Ако трябва допълнително изчисление, условие или преобразуване на аргументите, lambda изразът е по-подходящ, например `book -> book.getTitle().trim()`. Формите са описани в [Method References — Java Tutorials](https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html).
 
 ## Comparable vs Comparator
 

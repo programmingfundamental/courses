@@ -8,13 +8,24 @@ nav_order: 9
 
 # Лабораторно упражнение 9
 
-## Lists and grids
+## Списъци и решетки в Jetpack Compose
 
-Много приложения трябва да показват колекции от елементи. Този документ обяснява как може ефективно да направи това в Jetpack Compose.
+Колекция от елементи може да се представи чрез `Column` или `Row`, когато броят е малък и не е необходимо отложено създаване. `Column` създава подаденото съдържание, включително елементите извън видимата област.
 
-Ако знаете, че вашият случай на употреба не изисква превъртане, може да използвайте Column или Row и излъчвайте съдържанието на всеки елемент чрез Итериране на списък по следния начин:
+Следните примери за съобщения използват общ модел и композируема функция:
 
-```koitlin
+```kotlin
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+
+data class Message(val id: Long, val text: String)
+
+@Composable
+fun MessageRow(message: Message) {
+    Text(message.text)
+}
+
 @Composable
 fun MessageList(messages: List<Message>) {
     Column {
@@ -25,87 +36,135 @@ fun MessageList(messages: List<Message>) {
 }
 ```
 
-Можем да направим превъртане с помощта на модификатора verticalScroll()
+За вертикално превъртане към `Column` може да се добави `Modifier.verticalScroll(rememberScrollState())`, с импорти на `verticalScroll` и `rememberScrollState` от `androidx.compose.foundation` и `Modifier` от `androidx.compose.ui`. Това не превръща `Column` в Lazy компонент — съдържанието пак се създава изцяло.
 
-## Мързеливи списъци
+## Списъци с отложено създаване на елементите (`LazyColumn` и `LazyRow`)
 
-Ако трябва да покажете голям брой елементи (или списък с неизвестна дължина), Използването на оформление Column може да причини проблеми с производителността, тъй като всички елементи ще бъдат съставени и подредени, независимо дали са видими или не.
+`LazyColumn` и `LazyRow` композират и подреждат необходимите елементи според видимата област и позицията на превъртане. Те са подходящи за голям или динамичен брой елементи. Възможно е предварително подготвяне на близки елементи, затова не се предполага, че се създават единствено видимите пиксели.
 
-Compose предоставя набор от компоненти, които композират и подреждат само елементи, които се виждат в прозореца за изглед на компонента. Тези компоненти включват LazyColumn, LazyRow, LazyVerticalGrid, LazyHorizontalGrid
+`LazyColumn` подрежда и превърта вертикално, а `LazyRow` — хоризонтално. Решетките използват съответно `LazyVerticalGrid` и `LazyHorizontalGrid`.
 
-Както подсказва името, разликата между тях е ориентацията, в която те подреждат своите елементи и превъртат.
+### `LazyListScope`
 
-Компонентите на Lazy са различни от повечето оформления в Compose. Вместо приемане на параметър на блок с елементи на потребителския интерфейс, което позволява на приложенията директно да излъчват Composable елементи, компонентите на Lazy осигуряват LazyListScope блок. Този LazyListScope блок предлага DSL (специфичен за домейна език), който позволява на приложенията да описват съдържанието на елемента. След това мързеливият компонент е отговорен за добавянето на съдържанието на всеки елемент като се изисква от оформлението и позицията на превъртане.
-
-DSL на LazyListScope предоставя редица функции за описване на елементи в оформлението. В най-основния случай item() добавя един елемент, а items(Int) добавя множество елементи:
+Блокът на Lazy списъка предоставя DSL — набор от функции за описание на съдържанието. В `LazyListScope` функцията `item` добавя един елемент, `items` — няколко елемента, а `itemsIndexed` предоставя и индекса.
 
 ```kotlin
-LazyColumn {
-    // Add a single item
-    item {
-        Text(text = "First item")
-    }
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 
-    // Add 5 items
-    items(5) { index ->
-        Text(text = "Item: $index")
-    }
-
-    // Add another single item
-    item {
-        Text(text = "Last item")
+@Composable
+fun NumberedList() {
+    LazyColumn {
+        item { Text("First item") }
+        items(5) { index -> Text("Item: $index") }
+        item { Text("Last item") }
     }
 }
 ```
 
-Има и редица функции за разширение, които ви позволяват да добавяте колекции от елементи, като например списък. Тези разширения ни позволяват лесно да мигрираме нашия пример за колона отгоре:
+За обхождане на колекция се използва разширението `items`. Примерът използва `Message` и `MessageRow` от началото на страницата:
 
 ```kotlin
-LazyColumn {
-    items(messages) { message ->
-        MessageRow(message)
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.runtime.Composable
+
+@Composable
+fun LazyMessageList(messages: List<Message>) {
+    LazyColumn {
+        items(messages) { message ->
+            MessageRow(message)
+        }
     }
 }
 ```
 
-Съществува и вариант на функцията за разширение items(), наречена itemsIndexed(), която предоставя индекса.
+`itemsIndexed` се импортира от `androidx.compose.foundation.lazy.itemsIndexed` и подава два аргумента на ламбда израза — индекс и елемент.
 
-## Lazy grids
+### Стабилни ключове
 
-Компонентите LazyVerticalGrid и LazyHorizontalGrid осигуряват поддръжка за показване на елементи в мрежа. Мързелива вертикална решетка ще показва елементите си във вертикално превъртащ се контейнер, разпръснат в множество колони, докато мързеливите хоризонтални решетки ще имат същото поведение на хоризонталната ос.
+Параметърът `key` помага на Compose да проследява идентичността на елемент при добавяне, премахване или пренареждане. Ключът трябва да е уникален в списъка и стабилен за същия елемент. За запазване на състояние в Android се използва поддържан от `Bundle` тип, например `Long` или `String`.
 
-Мрежите имат същите мощни API възможности като списъците и също така използват много подобен DSL - LazyGridScope.() за описание на съдържанието.
-
-Параметърът колони в LazyVerticalGrid и параметърът редове в LazyHorizontalGrid контролират как клетките се формират в колони или редове. Следният пример показва елементи в мрежа, като използва GridCells.Adaptive, за да настрои всяка колона да бъде поне 128.dp широка:
+Следният фрагмент заменя блока `items` в `LazyMessageList`. Приема се, че всяко съобщение има уникално `id`:
 
 ```kotlin
-LazyVerticalGrid(
-    columns = GridCells.Adaptive(minSize = 128.dp)
-) {
-    items(photos) { photo ->
-        PhotoItem(photo)
+items(messages, key = { it.id }) { message ->
+    MessageRow(message)
+}
+```
+
+## Решетки с отложено създаване на елементите
+
+`LazyVerticalGrid` разполага елементи в колони и превърта вертикално. `LazyHorizontalGrid` разполага елементи в редове и превърта хоризонтално. Блокът `LazyGridScope` предоставя функции `item` и `items`, подобни на тези за списъците.
+
+Броят и размерът на клетките се задават чрез `columns` при `LazyVerticalGrid` и `rows` при `LazyHorizontalGrid`:
+
+- `GridCells.Adaptive(minSize = 128.dp)` определя броя колони или редове според наличното място и желания минимален размер на клетката. При твърде малка област остава една клетка в наличния размер.
+- `GridCells.Fixed(2)` задава точно две колони или два реда.
+
+Примерът с изображения използва ресурсни идентификатори, подадени чрез `photos`:
+
+```kotlin
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+
+data class Photo(@DrawableRes val drawableResourceId: Int)
+
+@Composable
+fun PhotoItem(photo: Photo) {
+    Image(
+        painter = painterResource(photo.drawableResourceId),
+        contentDescription = "Снимка",
+        modifier = Modifier.fillMaxWidth().height(128.dp),
+        contentScale = ContentScale.Crop
+    )
+}
+
+@Composable
+fun PhotoGrid(photos: List<Photo>) {
+    LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 128.dp)) {
+        items(photos) { photo -> PhotoItem(photo) }
     }
 }
 ```
 
-LazyVerticalGrid ви позволява да зададете ширина за елементите и след това мрежата ще се побере във възможно най-много колони. Всяка оставаща ширина се разпределя по равно между колоните, след като се изчисли броят на колоните. Този адаптивен начин за оразмеряване е особено полезен за показване на набори от елементи на различни размери на екрана.
+При адаптивно оразмеряване оставащото място се разпределя между колоните. За фиксиран брой колони `GridCells.Adaptive(...)` може да се замени с `GridCells.Fixed(2)`.
 
-Ако знаете точния брой колони, които да се използват, можете вместо това да предоставите екземпляр на GridCells.Fixed, съдържащ броя на необходимите колони.
+### Елемент, който заема цял ред
 
-Ако вашият дизайн изисква само определени елементи да имат нестандартни размери, можете да използвате поддръжката на мрежата за предоставяне на персонализирани обхвати на колони за елементи. Посочете обхвата на колоната с параметъра за обхват на методите за елемент и елементи на LazyGridScope DSL. maxLineSpan, една от стойностите на обхвата на обхвата, е особено полезна, когато използвате адаптивно оразмеряване, тъй като броят на колоните не е фиксиран. Този пример показва как да предоставите пълен диапазон от редове:
+Параметърът `span` определя колко клетки заема елементът. `GridItemSpan(maxLineSpan)` е подходящ за заглавие, което обхваща всички колони, дори когато броят им е адаптивен.
 
 ```kotlin
-LazyVerticalGrid(
-    columns = GridCells.Adaptive(minSize = 30.dp)
-) {
-    item(span = {
-        // LazyGridItemSpanScope:
-        // maxLineSpan
-        GridItemSpan(maxLineSpan)
-    }) {
-        CategoryCard("Fruits")
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.dp
+
+@Composable
+fun CategoryCard(title: String) {
+    Text(title)
+}
+
+@Composable
+fun CategoryGrid() {
+    LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 30.dp)) {
+        item(span = { GridItemSpan(maxLineSpan) }) {
+            CategoryCard("Fruits")
+        }
+        items(6) { index -> Text("Item $index") }
     }
-    // ...
 }
 ```
-

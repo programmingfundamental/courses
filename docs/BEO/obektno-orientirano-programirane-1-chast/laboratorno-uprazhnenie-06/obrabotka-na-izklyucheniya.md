@@ -9,7 +9,7 @@ nav_order: 1
 # Обработка на изключения
 
 
-Изключение е обект, който описва проблем, възникнал по време на изпълнение на програма. Когато възникне изключение и то не бъде обработено, нормалното изпълнение на програмата се прекъсва.
+Изключение е обект, който описва необичайна ситуация по време на изпълнение на програма. При хвърляне на изключение нормалният поток на текущия блок се прекъсва и се търси подходящ обработчик. Ако никой извикващ метод не го обработи, засегнатата нишка приключва; в обикновена програма с една нишка това прекратява програмата.
 
 ```java
 int result = 10 / 0;
@@ -40,6 +40,42 @@ try {
 
 `Exception` описва ситуации, които могат да бъдат предвидени и обработени от програмата.
 
+Дървото показва част от йерархията. Стрелките водят **от родител към пряк наследник**.
+
+```mermaid
+flowchart LR
+    Throwable["Throwable"] --> Error["Error — unchecked"]
+    Throwable --> Exception["Exception"]
+    Error --> VirtualMachineError["VirtualMachineError"]
+    VirtualMachineError --> OutOfMemoryError["OutOfMemoryError"]
+    VirtualMachineError --> StackOverflowError["StackOverflowError"]
+    Exception --> IOException["IOException — checked"]
+    IOException --> FileNotFoundException["FileNotFoundException"]
+    Exception --> RuntimeException["RuntimeException — unchecked"]
+    RuntimeException --> ArithmeticException["ArithmeticException"]
+    RuntimeException --> NullPointerException["NullPointerException"]
+    RuntimeException --> IllegalArgumentException["IllegalArgumentException"]
+    IllegalArgumentException --> NumberFormatException["NumberFormatException"]
+    RuntimeException --> IndexOutOfBoundsException["IndexOutOfBoundsException"]
+    IndexOutOfBoundsException --> ArrayIndexOutOfBoundsException["ArrayIndexOutOfBoundsException"]
+    RuntimeException --> ClassCastException["ClassCastException"]
+```
+
+Клонът на `RuntimeException` и клонът на `Error` са непроверявани. `Exception` и неговите наследници извън клона `RuntimeException` са проверявани. Разделянето е описано в [Java Language Specification, §11.1.1](https://docs.oracle.com/javase/specs/jls/se21/html/jls-11.html#jls-11.1.1).
+
+## Изключения и грешки
+
+Думата „грешка“ в ежедневен смисъл е по-широка от Java класа `Error`.
+
+| Ситуация | Как се проявява | Подход |
+| --- | --- | --- |
+| Грешка при компилация | Липсващ `;`, несъвместим тип | Поправка на изходния код; `catch` не я обработва |
+| Логическа грешка | Грешна формула, но програмата продължава | Проверки с известни резултати и debugger |
+| `Exception` | Например невалидно число или недостъпен файл | Обработка там, където може да се предприеме смислено действие |
+| `Error` | Например изчерпана памет или стек | Обикновено отстраняване на причината; не е нормален начин за управление на програмата |
+
+`catch (Exception exception)` не прихваща `Error`, защото двата класа са различни наследници на `Throwable`. Не използвайте общ `catch (Throwable ...)`, за да скриете всички проблеми. Хващайте конкретни типове, за които можете да дадете полезно съобщение, да повторите операция или да възстановите състоянието.
+
 ## Клас `Throwable`
 
 `Throwable` е базовият клас за всички обекти, които могат да бъдат хвърляни и обработвани като проблеми по време на изпълнение. От него наследяват както `Exception`, така и `Error`.
@@ -68,7 +104,25 @@ try {
 компилаторът изисква това изключение да бъде обработено с `try-catch` или да бъде декларирано чрез `throws` в
 сигнатурата на метода.
 
-Непроверяваните изключения (unchecked) наследяват `RuntimeException`. Компилаторът не изисква задължителна обработка или деклариране на тези изключения, но те могат да бъдат обработени с `try-catch`, когато това е необходимо.
+Непроверяваните типове (unchecked) включват `RuntimeException`, `Error` и наследниците им. Компилаторът не изисква задължителна обработка или деклариране. „Проверявано“ не означава, че проблемът възниква при компилация: тогава се проверява задължението за обработка, а самото изключение възниква по време на изпълнение.
+
+## Изключения при масиви и преобразуване на тип
+
+При индекс извън границите на масив възниква `ArrayIndexOutOfBoundsException`:
+
+```java
+int[] numbers = {10, 20};
+// System.out.println(numbers[2]); // валидните индекси са 0 и 1
+```
+
+При несъвместимо явно преобразуване на референция възниква `ClassCastException`:
+
+```java
+Object value = "Java";
+// Integer number = (Integer) value; // обектът е String, а не Integer
+```
+
+Това са имената на проблемите, които срещнахме при масивите и полиморфизма. Правилните граници и съвместимите типове предотвратяват причините; `try-catch` не поправя автоматично погрешния алгоритъм.
 
 ## `NullPointerException`
 
@@ -151,7 +205,7 @@ try {
 
 ## `finally`
 
-Блокът `finally` се изпълнява след `try` и `catch`, независимо дали е възникнало изключение.
+Блокът `finally` задължително се изпълнява **при напускане на `try` или избрания `catch`**, независимо дали е възникнало изключение. Това включва нормален край, обработено или необработено изключение, `return`, `break` и `continue`.
 
 ```java
 try {
@@ -165,9 +219,25 @@ try {
 
 `finally` се използва за освобождаване на ресурси, когато това не се управлява автоматично.
 
+```java
+static int calculate() {
+    try {
+        return 42;
+    } finally {
+        System.out.println("Finally before return");
+    }
+}
+```
+
+При `System.out.println(calculate())` първо се отпечатва съобщението от `finally`, а после `42`.
+
+Гаранцията предполага, че JVM продължава изпълнението. При прекратяване на JVM, например чрез `System.exit(...)`, или принудително спиране на процеса, `finally` може да не се изпълни. Ако `try` никога не приключва, например при безкраен цикъл, до `finally` още не се достига. Това уточнение е част от [официалното описание на finally](https://docs.oracle.com/javase/tutorial/essential/exceptions/finally.html).
+
+Не поставяйте `return` или ново `throw` във `finally`: те могат да заменят първоначалния резултат или да скрият първоначалното изключение. За ресурси с `AutoCloseable` предпочитайте `try-with-resources`.
+
 ## `throw`
 
-Ключовата дума `throw` се използва за ръчно хвърляне на конкретно изключение. След `throw` се посочва обект от тип
+Ключовата дума `throw` се използва за явно сигнализиране на изключителна ситуация чрез хвърляне на конкретно изключение. След `throw` се посочва обект от тип
 изключение. Най-често този обект се създава чрез `new`.
 
 ```java
@@ -257,7 +327,7 @@ public static void validateAge(int age) {
 }
 ```
 
-В примера `throw` създава и хвърля конкретно изключение.
+В примера `new` създава обекта на изключението, а `throw` го хвърля. `throw` може да хвърли и вече съществуващ обект.
 
 ```java
 public static String readText(String path) throws IOException {

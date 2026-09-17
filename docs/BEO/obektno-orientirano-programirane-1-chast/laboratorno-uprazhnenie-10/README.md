@@ -9,6 +9,7 @@ nav_order: 11
 # Лабораторно упражнение 10
 
 ## Раздели
+
 - [Map и асоциативни колекции](map-i-asociativni-kolekcii.md)
   - [Интерфейс Map и асоциативни колекции](map-i-asociativni-kolekcii.md#интерфейс-map-и-асоциативни-колекции)
   - [Основни характеристики на колекции от тип Map:](map-i-asociativni-kolekcii.md#основни-характеристики-на-колекции-от-тип-map)
@@ -18,6 +19,7 @@ nav_order: 11
   - [Операции, носещи информация за колекцията](map-i-asociativni-kolekcii.md#операции-носещи-информация-за-колекцията)
   - [Операции, използвани при обхождане](map-i-asociativni-kolekcii.md#операции-използвани-при-обхождане)
   - [Основни имплементации на Map](map-i-asociativni-kolekcii.md#основни-имплементации-на-map)
+  - [Какво е `Map.Entry`](map-i-asociativni-kolekcii.md#какво-е-mapentry)
   - [Обхождане на Map](map-i-asociativni-kolekcii.md#обхождане-на-map)
   - [Сортиране на Map](map-i-asociativni-kolekcii.md#сортиране-на-map)
   - [Подреждане по ключ](map-i-asociativni-kolekcii.md#подреждане-по-ключ)
@@ -28,3 +30,4 @@ nav_order: 11
   - [Задача 3](uprazhneniya-za-izvnauditorna-zaetost.md#задача-3)
   - [Задача 4](uprazhneniya-za-izvnauditorna-zaetost.md#задача-4)
   - [Задача 5](uprazhneniya-za-izvnauditorna-zaetost.md#задача-5)
+  - [Задача 6 — Работа с `Map.Entry`](uprazhneniya-za-izvnauditorna-zaetost.md#задача-6-работа-с-mapentry)
