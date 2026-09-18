@@ -26,7 +26,6 @@ sidebar:
   - [Конструктор с параметри за всички полета](/courses/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-02/class/#конструктор-с-параметри-за-всички-полета)
   - [Конструктор и задаване на начално състояние](/courses/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-02/class/#конструктор-и-задаване-на-начално-състояние)
   - [Ключова дума `new`](/courses/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-02/class/#ключова-дума-new)
-  - [Какво е референция](/courses/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-02/class/#какво-е-референция)
   - [Предаване на референция към метод](/courses/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-02/class/#предаване-на-референция-към-метод)
   - [Ключова дума `this`](/courses/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-02/class/#ключова-дума-this)
   - [Извикване на метод чрез `this`](/courses/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-02/class/#извикване-на-метод-чрез-this)
