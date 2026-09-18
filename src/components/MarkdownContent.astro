@@ -1,7 +1,7 @@
 ---
 import DefaultContent from '@astrojs/starlight/components/MarkdownContent.astro';
 import { CardGrid, LinkCard } from '@astrojs/starlight/components';
-import { childrenOf, coursesFor, isLab, urlFor } from '../utils/courses';
+import { childrenOf, courseGroupsFor, isLab, urlFor } from '../utils/courses';
 const route = Astro.locals.starlightRoute;
 const bg = route.locale === 'bg';
 const home = route.id === route.locale;
@@ -9,13 +9,18 @@ const children = childrenOf(route.id).filter((doc) => !route.entry.body?.include
 ---
 <DefaultContent><slot /></DefaultContent>
 {home ? (
-  <section aria-label={bg ? 'Курсове' : 'Courses'} class="course-catalog">
-    <CardGrid>
-      {coursesFor(route.locale!).map((course) => (
-        <LinkCard title={course.data.title} href={urlFor(course.id)}
-          description={`${childrenOf(course.id).filter((doc) => isLab(doc.id.split('/').at(-1)!)).length} ${bg ? 'лабораторни упражнения' : 'labs'}`} />
-      ))}
-    </CardGrid>
+  <section aria-label={bg ? 'Дисциплини по курсове' : 'Courses by year'} class="course-catalog">
+    {courseGroupsFor(route.locale!).map((year) => (
+      <section class="course-year" aria-labelledby={year.id}>
+        <h2 id={year.id}>{year.label}</h2>
+        <CardGrid>
+          {year.courses.map((course) => (
+            <LinkCard title={course.data.title} href={urlFor(course.id)}
+              description={`${childrenOf(course.id).filter((doc) => isLab(doc.id.split('/').at(-1)!)).length} ${bg ? 'лабораторни упражнения' : 'labs'}`} />
+          ))}
+        </CardGrid>
+      </section>
+    ))}
   </section>
 ) : children.length > 0 && (
   <section class="sl-markdown-content course-index" aria-labelledby="course-content-title">
