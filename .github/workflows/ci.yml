@@ -1,22 +1,22 @@
-name: CI
+name: Validate courses
 
 on:
-  push:
-    branches: ["main"]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
-  # Build job
-  build:
+  check:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          ruby-version: '3.1' # Not needed with a .ruby-version file
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-          cache-version: 0 # Increment this number if you need to re-download cached gems
-      - name: Build with Jekyll
-        run: bundle exec jekyll build
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+      - run: npm run check:links
+      - run: npm run check:migration

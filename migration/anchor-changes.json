@@ -1,0 +1,97 @@
+[
+  {
+    "source": "src/content/docs/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-02/index.md",
+    "from": "задача-9-референции-и-this-като-аргумент",
+    "to": "задача-9--референции-и-this-като-аргумент"
+  },
+  {
+    "source": "src/content/docs/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/index.md",
+    "from": "задача-8-обект-само-за-четене-и-record",
+    "to": "задача-8--обект-само-за-четене-и-record"
+  },
+  {
+    "source": "src/content/docs/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-04/index.md",
+    "from": "задача-5-функционален-интерфейс",
+    "to": "задача-5--функционален-интерфейс"
+  },
+  {
+    "source": "src/content/docs/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-05/index.md",
+    "from": "задача-1-общ-тип-за-служители",
+    "to": "задача-1--общ-тип-за-служители"
+  },
+  {
+    "source": "src/content/docs/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-05/index.md",
+    "from": "задача-2-динамичен-полиморфизъм",
+    "to": "задача-2--динамичен-полиморфизъм"
+  },
+  {
+    "source": "src/content/docs/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-05/index.md",
+    "from": "задача-3-статичен-полиморфизъм",
+    "to": "задача-3--статичен-полиморфизъм"
+  },
+  {
+    "source": "src/content/docs/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-05/index.md",
+    "from": "задача-4-претоварване-и-предефиниране-заедно",
+    "to": "задача-4--претоварване-и-предефиниране-заедно"
+  },
+  {
+    "source": "src/content/docs/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-05/index.md",
+    "from": "задача-5-полиморфизъм-чрез-интерфейс",
+    "to": "задача-5--полиморфизъм-чрез-интерфейс"
+  },
+  {
+    "source": "src/content/docs/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-05/index.md",
+    "from": "задача-6-сравнение-и-безопасно-преобразуване",
+    "to": "задача-6--сравнение-и-безопасно-преобразуване"
+  },
+  {
+    "source": "src/content/docs/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-06/index.md",
+    "from": "задача-2-проследяване-на-finally",
+    "to": "задача-2--проследяване-на-finally"
+  },
+  {
+    "source": "src/content/docs/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-06/index.md",
+    "from": "задача-3-проверявано-изключение-и-record",
+    "to": "задача-3--проверявано-изключение-и-record"
+  },
+  {
+    "source": "src/content/docs/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-06/index.md",
+    "from": "задача-4-йерархия-и-освобождаване-на-ресурс",
+    "to": "задача-4--йерархия-и-освобождаване-на-ресурс"
+  },
+  {
+    "source": "src/content/docs/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-07/index.md",
+    "from": "и-equals-при-обекти",
+    "to": "-и-equals-при-обекти"
+  },
+  {
+    "source": "src/content/docs/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-07/index.md",
+    "from": "задача-5-неизменяем-и-изменяем-текст",
+    "to": "задача-5--неизменяем-и-изменяем-текст"
+  },
+  {
+    "source": "src/content/docs/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-09/index.md",
+    "from": "задача-4-сортиране-и-референции-към-методи",
+    "to": "задача-4--сортиране-и-референции-към-методи"
+  },
+  {
+    "source": "src/content/docs/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-09/index.md",
+    "from": "задача-5-четирите-форми-на-method-reference",
+    "to": "задача-5--четирите-форми-на-method-reference"
+  },
+  {
+    "source": "src/content/docs/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-10/index.md",
+    "from": "задача-6-работа-с-mapentry",
+    "to": "задача-6--работа-с-mapentry"
+  },
+  {
+    "source": "src/content/docs/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-11/index.md",
+    "from": "допълнителна-задача-scanner",
+    "to": "допълнителна-задача--scanner"
+  },
+  {
+    "source": "src/content/docs/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-12/index.md",
+    "from": "разширение-прилагане-на-изучените-теми",
+    "to": "разширение--прилагане-на-изучените-теми"
+  }
+]

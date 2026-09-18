@@ -1,0 +1,22 @@
+---
+import Select from '@astrojs/starlight/components/Select.astro';
+import { languageUrl } from '../utils/courses';
+const route = Astro.locals.starlightRoute;
+---
+<course-language-select>
+  <Select icon="translate" label={Astro.locals.t('languageSelect.accessibleLabel')} width="8em"
+    options={[
+      { label: 'Български', value: languageUrl(route.id, 'bg'), selected: route.locale === 'bg' },
+      { label: 'English', value: languageUrl(route.id, 'en'), selected: route.locale === 'en' },
+    ]} />
+</course-language-select>
+<script>
+  class CourseLanguageSelect extends HTMLElement {
+    connectedCallback() {
+      this.querySelector('select')?.addEventListener('change', (event) => {
+        if (event.target instanceof HTMLSelectElement) window.location.assign(event.target.value);
+      });
+    }
+  }
+  if (!customElements.get('course-language-select')) customElements.define('course-language-select', CourseLanguageSelect);
+</script>
