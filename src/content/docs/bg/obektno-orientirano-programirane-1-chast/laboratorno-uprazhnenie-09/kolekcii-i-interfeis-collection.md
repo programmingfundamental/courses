@@ -401,31 +401,7 @@ books.sort((b1, b2) -> Double.compare(b1.getPrice(), b2.getPrice()));
 
 ## Method Reference
 
-Method reference е още по-кратък запис, когато lambda изразът само извиква съществуващ метод. При сортиране може да се
-използва с помощни методи от `Comparator`.
-
-```java
-books.sort(Comparator.comparingInt(Book::getPublishingYear));
-```
-
-Записът `Book::getPublishingYear` означава, че за всеки обект от тип `Book` се извиква методът `getPublishingYear()`.
-Получената стойност се използва като критерий за сортиране.
-
-Анонимен клас, lambda израз и method reference могат да опишат един и същ критерий за сортиране. Разликата е в
-синтаксиса и краткостта на записа.
-
-### Синтаксис и функционален интерфейс
-
-Method reference, или референция към метод, използва `::`. Това е описание на операция, съвместима с **функционален интерфейс**, а не незабавно извикване на метода. При `String::length` дължината се изчислява, когато операцията бъде извикана с конкретен низ.
-
-```java
-import java.util.function.ToIntFunction;
-
-ToIntFunction<String> length = String::length;
-System.out.println(length.applyAsInt("Java")); // 4
-```
-
-Типът отляво задава очакваните параметри и резултат. Например `ToIntFunction<String>` приема `String` и връща `int`. Не може да се напише `var operation = String::length;`, защото липсва целеви функционален интерфейс.
+Method reference, или референция към метод, използва `::`. Това е описание на операция, съвместима с **функционален интерфейс**, а не незабавно извикване на метода.
 
 ### Четири форми на референция към метод
 
@@ -436,24 +412,14 @@ System.out.println(length.applyAsInt("Java")); // 4
 | Нестатичен метод на подаден обект | `String::length` | `text -> text.length()` |
 | Конструктор | `StringBuilder::new` | `() -> new StringBuilder()` |
 
+### Приложение при сортиране
+
 ```java
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
-
-Function<String, Integer> parse = Integer::parseInt;
-Consumer<String> print = System.out::println;
-Supplier<StringBuilder> create = StringBuilder::new;
-
-int number = parse.apply("42");
-StringBuilder builder = create.get();
-builder.append(number);
-print.accept(builder.toString()); // 42
+books.sort(Comparator.comparingInt(Book::getPublishingYear));
 ```
 
-При `System.out::println` получателят е вече избраният обект `System.out`. При `String::length` получателят е аргументът, подаден при извикване на функционалната операция. Това е различно и от обикновена референция към обект като `String text`: method reference описва поведение, което ще бъде извикано чрез функционален интерфейс.
-
-### Приложение при сортиране
+Записът `Book::getPublishingYear` означава, че за всеки обект от тип `Book` се извиква методът `getPublishingYear()`.
+Получената стойност се използва като критерий за сортиране.
 
 ```java
 books.sort(Comparator.comparing(Book::getAuthor)
