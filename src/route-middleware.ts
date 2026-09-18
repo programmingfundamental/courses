@@ -1,5 +1,5 @@
 import { defineRouteMiddleware, type StarlightRouteData } from '@astrojs/starlight/route-data';
-import { byId, childrenOf, coursesFor, isLab, translationFor, urlFor } from './utils/courses';
+import { byId, childrenOf, courseGroupsFor, isLab, translationFor, urlFor } from './utils/courses';
 
 type Item = StarlightRouteData['sidebar'][number];
 type Link = Extract<Item, { type: 'link' }>;
@@ -53,7 +53,11 @@ export const onRequest = defineRouteMiddleware((context) => {
     });
   }
   const originalCourse = route.sidebar.find((item) => item.type === 'group' && item.label === courseId.split('/')[1]);
-  const allCourses = coursesFor(locale).map((doc) => link(doc.id));
+  const allCourses = courseGroupsFor(locale).map((year) => group(
+    year.label,
+    year.courses.map((doc) => link(doc.id)),
+    Boolean(course) && !year.courses.some((doc) => doc.id === courseId),
+  ));
   if (course && originalCourse?.type === 'group') {
     const entries = clean(originalCourse.entries, courseId);
     const labEntries: Item[] = [];
@@ -69,11 +73,11 @@ export const onRequest = defineRouteMiddleware((context) => {
     const labRank = (item: Item) => labs.findIndex((doc) => item.type === 'link' ? item.href === urlFor(doc.id) : item.label === (doc.data.sidebar.label || doc.data.title));
     labEntries.sort((a,b) => labRank(a) - labRank(b));
     route.sidebar = [
-      link(locale, bg ? 'Всички курсове' : 'All courses'),
+      link(locale, bg ? 'Всички дисциплини' : 'All courses'),
       group(course.data.title, [link(courseId, overview)], false),
       ...(labEntries.length ? [group(bg ? 'Лабораторни упражнения' : 'Labs', labEntries, false)] : []),
       ...(otherEntries.length ? [group(bg ? 'Допълнителни материали' : 'Additional resources', otherEntries)] : []),
-      group(bg ? 'Други курсове' : 'Other courses', allCourses),
+      group(bg ? 'Други дисциплини' : 'Other courses', allCourses),
     ];
     const currentLab = labs.findIndex((doc) => doc.id === route.id);
     if (currentLab >= 0) {
@@ -88,7 +92,7 @@ export const onRequest = defineRouteMiddleware((context) => {
       route.pagination = { prev: sequence[position - 1], next: position >= 0 ? sequence[position + 1] : undefined };
     }
   } else {
-    route.sidebar = [group(bg ? 'Курсове' : 'Courses', allCourses, false)];
+    route.sidebar = allCourses;
     route.pagination = {prev: undefined, next: undefined};
   }
 });

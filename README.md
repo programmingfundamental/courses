@@ -57,14 +57,11 @@ src/content/docs/<language>/<course>/<lab>/<lesson>.md
 src/content/i18n/bg.json                  Bulgarian interface labels
 public/assets/                           Shared images and downloads
 public/docs/                             Existing lesson-local images
-public/OneDrive_2026-07-16*/              Original lecture PDFs
 ```
 
 Course folders and existing lab filenames retain the local repository's names.
 `index.md` is a directory's overview. Ordinary Markdown remains the authoring format.
 Six legacy drafts are retained with `draft: true`; they are excluded from production.
-The local editing journal in `docs/BEO/.../REDAKCIA-STATUS.md` is preserved outside
-the published content tree.
 
 ## Adding a course
 
@@ -108,6 +105,13 @@ Place new shared files in `public/assets/`. Reference them with the project base
 Use URL-encoded spaces in links. Do not use `/assets/...` or links ending in `.md`.
 Existing files in `public/docs/` keep their original public paths. If intentionally
 replacing a migrated asset, update its SHA-256 in `migration/assets.json`.
+
+When intentionally deleting a migrated asset, remove its record from
+`migration/assets.json` and remove any links or index pages that reference it.
+For a deleted migrated page, also update `migration/routes.json` so its old URLs
+do not redirect to a missing page. Keep `check:migration` enabled to detect
+accidentally missing files. The lecture PDFs and their two `lekcii.md` index pages
+have been removed; they are no longer part of the site or asset manifest.
 
 Fenced code blocks retain their language tags. Mermaid diagrams use ordinary
 `mermaid` fences and are rendered by a locally bundled dependency. Starlight note,

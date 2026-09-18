@@ -10,6 +10,8 @@
   --sl-color-accent-high: #163568;
 }
 .course-catalog, .course-index { margin-top: 2rem; }
+.course-year + .course-year { margin-top: 2.5rem; }
+.course-year > h2 { margin: 0 0 1rem; font-size: 1.5rem; line-height: 1.3; }
 .content-panel:has(.source-title-anchor) { padding-block: 0; }
 .content-panel:has(.source-title-anchor) + .content-panel { border-top: 0; }
 .sl-markdown-content img { height: auto; border-radius: 0.35rem; }
