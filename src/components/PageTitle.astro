@@ -1,0 +1,7 @@
+---
+import DefaultTitle from '@astrojs/starlight/components/PageTitle.astro';
+// Existing lessons already start with an H1. Keep that original heading and
+// avoid adding a second title above it; new pages can rely on frontmatter alone.
+const hasSourceTitle = /^#\s/.test(Astro.locals.starlightRoute.entry.body?.trimStart() || '');
+---
+{hasSourceTitle ? <span id="_top" class="source-title-anchor" /> : <DefaultTitle />}

@@ -1,0 +1,17 @@
+:root {
+  --sl-content-width: 52rem;
+  --sl-color-accent-low: #142b47;
+  --sl-color-accent: #619bf2;
+  --sl-color-accent-high: #c5dcff;
+}
+:root[data-theme='light'] {
+  --sl-color-accent-low: #e7efff;
+  --sl-color-accent: #235dbb;
+  --sl-color-accent-high: #163568;
+}
+.course-catalog, .course-index { margin-top: 2rem; }
+.content-panel:has(.source-title-anchor) { padding-block: 0; }
+.content-panel:has(.source-title-anchor) + .content-panel { border-top: 0; }
+.sl-markdown-content img { height: auto; border-radius: 0.35rem; }
+.sl-markdown-content pre.mermaid { overflow: auto; background: transparent; }
+.sl-markdown-content pre.mermaid svg { max-width: 100%; height: auto; }

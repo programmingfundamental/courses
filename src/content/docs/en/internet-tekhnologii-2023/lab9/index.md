@@ -1,0 +1,14 @@
+---
+title: Laboratory excercise 9
+sidebar:
+  order: 9
+---
+
+# Laboratory excercise 9-10
+
+Java Persistence API (JPA) is an ORM framework that is part of the Java EE platform. JPA simplifies the implementation of the data access layer by allowing developers to work with an object-oriented API instead of writing SQL queries by hand. The most popular implementations of JPA are Hibernate, EclipseLink, and OpenJPA.
+
+Spring Data is a general project that supports most of the popular data access technologies, including JPA, MongoDB, Redis, Cassandra, Solr, and ElasticSearch, in a consistent programming model. Spring Data JPA is one of the modules for working with relational databases using JPA.
+
+<figure><img src="/courses/assets/image%20(87).png" alt=""><figcaption></figcaption></figure>
+

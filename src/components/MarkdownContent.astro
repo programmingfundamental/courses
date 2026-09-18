@@ -1,0 +1,46 @@
+---
+import DefaultContent from '@astrojs/starlight/components/MarkdownContent.astro';
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { childrenOf, coursesFor, isLab, urlFor } from '../utils/courses';
+const route = Astro.locals.starlightRoute;
+const bg = route.locale === 'bg';
+const home = route.id === route.locale;
+const children = childrenOf(route.id).filter((doc) => !route.entry.body?.includes(urlFor(doc.id)));
+---
+<DefaultContent><slot /></DefaultContent>
+{home ? (
+  <section aria-label={bg ? 'Курсове' : 'Courses'} class="course-catalog">
+    <CardGrid>
+      {coursesFor(route.locale!).map((course) => (
+        <LinkCard title={course.data.title} href={urlFor(course.id)}
+          description={`${childrenOf(course.id).filter((doc) => isLab(doc.id.split('/').at(-1)!)).length} ${bg ? 'лабораторни упражнения' : 'labs'}`} />
+      ))}
+    </CardGrid>
+  </section>
+) : children.length > 0 && (
+  <section class="sl-markdown-content course-index" aria-labelledby="course-content-title">
+    <h2 id="course-content-title">{bg ? 'Материали в този раздел' : 'In this section'}</h2>
+    <ul>{children.map((doc) => <li><a href={urlFor(doc.id)}>{doc.data.title}</a></li>)}</ul>
+  </section>
+)}
+<script>
+  const diagrams = document.querySelectorAll<HTMLElement>('pre.mermaid');
+  if (diagrams.length) {
+    const { default: mermaid } = await import('mermaid');
+    const render = async () => {
+      mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'default' });
+      for (const [index, element] of [...diagrams].entries()) {
+        const source = element.dataset.source ||= element.textContent || '';
+        try {
+          const { svg } = await mermaid.render(`course-diagram-${index}`, source);
+          element.innerHTML = svg;
+        } catch (error) {
+          element.textContent = source;
+          console.error('Could not render course diagram', error);
+        }
+      }
+    };
+    await render();
+    new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  }
+</script>

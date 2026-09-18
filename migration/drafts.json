@@ -1,0 +1,32 @@
+[
+  {
+    "source": "docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-10/uprazhneniya-za-izvnauditorna-zaetost.md",
+    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-10/uprazhneniya-za-izvnauditorna-zaetost.md",
+    "reason": "Entire original body was commented out"
+  },
+  {
+    "source": "docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-11/uprazhneniya-za-izvnauditorna-zaetost.md",
+    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-11/uprazhneniya-za-izvnauditorna-zaetost.md",
+    "reason": "Entire original body was commented out"
+  },
+  {
+    "source": "docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-12/README.md",
+    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-12/index.md",
+    "reason": "Entire original body was commented out"
+  },
+  {
+    "source": "docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-12/uprazhneniya-za-izvnauditorna-zaetost.md",
+    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-12/uprazhneniya-za-izvnauditorna-zaetost.md",
+    "reason": "Entire original body was commented out"
+  },
+  {
+    "source": "docs/BEO/internet-tekhnologii-2023/laboratorno-uprazhnenie-2/szdavane-na-proekt-v-maven.md",
+    "target": "src/content/docs/bg/internet-tekhnologii-2023/laboratorno-uprazhnenie-2/szdavane-na-proekt-v-maven.md",
+    "reason": "Originally published: false"
+  },
+  {
+    "source": "docs/BEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-8/proxy.md",
+    "target": "src/content/docs/bg/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-8/proxy.md",
+    "reason": "Entire original body was commented out"
+  }
+]
