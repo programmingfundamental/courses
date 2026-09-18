@@ -10,15 +10,19 @@ source of truth. No repository was cloned or fetched. No commit or push was made
   There are 12 existing course areas in each language, including the project courses.
 - Six documents remain unpublished drafts: one had `published: false`; five were
   entirely commented out. Their locations are recorded in [drafts.json](drafts.json).
-- Two new Markdown indexes link the 22 existing lecture PDFs from OOP I and OOP II.
+- Two Markdown indexes were added for the 22 lecture PDFs from OOP I and OOP II.
+  The PDFs and both `lekcii.md` pages were intentionally deleted after migration;
+  the deleted PDFs have also been removed from the active asset manifest.
 - All 1,900 parsed fenced code blocks, including language identifiers, were verified
   unchanged against the original local files. Markdown bodies retain their original
   line endings; link and frontmatter changes are limited to migration needs.
-- All 279 static assets (110,904,973 bytes) retain their exact original bytes.
-  [assets.json](assets.json) records their original paths, new paths, and SHA-256 hashes.
-- The untracked editing journal at `docs/BEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/REDAKCIA-STATUS.md`
-  remains untouched outside the published site. It is a historical local note;
-  its source-relative links describe the former layout.
+- The initial migration preserved 279 static assets (110,904,973 bytes).
+  After the lecture PDFs were deleted, 257 assets (37,980,535 bytes) remain.
+  [assets.json](assets.json) records the retained files' original paths, new paths,
+  and SHA-256 hashes. [preservation.json](preservation.json) is the historical
+  snapshot of the initial migration, including its original asset counts.
+- The local editing journal at `docs/BEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/REDAKCIA-STATUS.md`
+  was retained during migration and deleted afterwards with the lecture materials.
 
 The old `_config.yml`, `Gemfile`, `Gemfile.lock`, root site `index.md`, and Mermaid
 Jekyll include were removed after a successful complete build. Both workflows were
@@ -111,7 +115,7 @@ anchors, and exact path casing are checked by `npm run check:links`.
 
 `npm run check:migration` checks page canonical URLs, all recorded old redirects,
 source and generated asset checksums, sidebar languages, and every lab overview's
-previous/next links. The final link audit passed 49,330 internal references across
+previous/next links. The initial migration's link audit passed 49,330 internal references across
 1,686 HTML files. Pagefind indexes exactly 342 Bulgarian and 237 English pages;
 the check also verifies that untranslated fallback routes redirect instead of being indexed.
 `npm audit` reports zero vulnerabilities. The build still emits Starlight's standard
