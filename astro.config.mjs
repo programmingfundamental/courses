@@ -16,6 +16,8 @@ export default defineConfig({
   markdown: { processor: unified({ remarkPlugins: [remarkMermaid] }) },
   integrations: [starlight({
     title: 'Programming Fundamentals',
+    favicon: '/favicon.svg',
+    logo: { src: './src/assets/java-tu-varna.svg', alt: 'Java × TU Varna' },
     defaultLocale: 'bg',
     locales: { bg: { label: 'Български', lang: 'bg' }, en: { label: 'English', lang: 'en' } },
     editLink: { baseUrl: 'https://github.com/programmingfundamental/courses/edit/main/' },
