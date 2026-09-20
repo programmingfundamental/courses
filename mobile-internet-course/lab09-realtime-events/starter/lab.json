@@ -1,0 +1,16 @@
+{
+  "lab": 9,
+  "project": "../../platform",
+  "files": [
+    "backend/activity-service/src/main/java/bg/tuvarna/mobile/EventPublisher.java",
+    "backend/activity-service/src/main/java/bg/tuvarna/mobile/ActivitiesResource.java",
+    "backend/notification-service/src/main/java/bg/tuvarna/mobile/EventConsumer.java",
+    "backend/mobile-bff/src/main/java/bg/tuvarna/mobile/RealtimeSocket.java",
+    "android/app/src/main/java/bg/tuvarna/mobile/RealtimeSource.kt",
+    "android/app/src/main/java/bg/tuvarna/mobile/EventPolicy.kt",
+    "infra/envoy.yaml"
+  ],
+  "build": "node ../../platform/tools/lab.mjs 09 build",
+  "guided": "L09-G",
+  "independent": "L09-I"
+}

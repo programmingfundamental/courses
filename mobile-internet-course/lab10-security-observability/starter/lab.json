@@ -1,0 +1,17 @@
+{
+  "lab": 10,
+  "project": "../../platform",
+  "files": [
+    "backend/mobile-bff/src/main/java/bg/tuvarna/mobile/HomeResource.java",
+    "backend/activity-service/src/main/java/bg/tuvarna/mobile/ActivitiesResource.java",
+    "backend/user-service/src/main/java/bg/tuvarna/mobile/UsersResource.java",
+    "backend/mobile-bff/src/main/resources/application.properties",
+    "infra/envoy.yaml",
+    "infra/otel.yaml",
+    "tools/token.mjs",
+    "compose.slow-user.yaml"
+  ],
+  "build": "node ../../platform/tools/lab.mjs 10 build",
+  "guided": "L10-G",
+  "independent": "L10-I"
+}

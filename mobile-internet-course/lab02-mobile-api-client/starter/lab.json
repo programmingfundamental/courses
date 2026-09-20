@@ -1,0 +1,12 @@
+{
+  "lab": 2,
+  "project": "../../platform",
+  "files": [
+    "android/app/src/main/java/bg/tuvarna/mobile/ApiClient.kt",
+    "android/app/src/main/java/bg/tuvarna/mobile/LabViewModel.kt",
+    "backend/mobile-bff/src/main/java/bg/tuvarna/mobile/FixtureResource.java"
+  ],
+  "build": "node ../../platform/tools/lab.mjs 02 build",
+  "guided": "L02-G",
+  "independent": "L02-I"
+}

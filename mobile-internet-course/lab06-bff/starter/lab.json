@@ -1,0 +1,13 @@
+{
+  "lab": 6,
+  "project": "../../platform",
+  "files": [
+    "backend/mobile-bff/src/main/java/bg/tuvarna/mobile/HomeResource.java",
+    "backend/mobile-bff/src/main/java/bg/tuvarna/mobile/ActivitiesClient.java",
+    "backend/mobile-bff/src/main/java/bg/tuvarna/mobile/UsersClient.java",
+    "infra/envoy.yaml"
+  ],
+  "build": "node ../../platform/tools/lab.mjs 06 build",
+  "guided": "L06-G",
+  "independent": "L06-I"
+}

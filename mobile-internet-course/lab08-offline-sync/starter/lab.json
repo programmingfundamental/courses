@@ -1,0 +1,15 @@
+{
+  "lab": 8,
+  "project": "../../platform",
+  "files": [
+    "android/app/src/main/java/bg/tuvarna/mobile/LocalDatabase.kt",
+    "android/app/src/main/java/bg/tuvarna/mobile/SyncWorker.kt",
+    "backend/mobile-bff/src/main/java/bg/tuvarna/mobile/HomeResource.java",
+    "backend/activity-service/src/main/java/bg/tuvarna/mobile/ActivityStore.java",
+    "backend/activity-service/src/main/java/bg/tuvarna/mobile/ActivitiesResource.java",
+    "tools/drop-response-proxy.mjs"
+  ],
+  "build": "node ../../platform/tools/lab.mjs 08 build",
+  "guided": "L08-G",
+  "independent": "L08-I"
+}

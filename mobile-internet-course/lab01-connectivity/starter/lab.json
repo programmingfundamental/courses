@@ -1,0 +1,11 @@
+{
+  "lab": 1,
+  "project": "../../platform",
+  "files": [
+    "android/app/src/main/java/bg/tuvarna/mobile/NetworkSource.kt",
+    "android/app/src/main/java/bg/tuvarna/mobile/LabViewModel.kt"
+  ],
+  "build": "node ../../platform/tools/lab.mjs 01 build",
+  "guided": "L01-G",
+  "independent": "L01-I"
+}

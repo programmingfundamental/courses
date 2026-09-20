@@ -1,0 +1,4 @@
+services:
+  users:
+    environment:
+      LAB_USER_DELAY_MS: "900"

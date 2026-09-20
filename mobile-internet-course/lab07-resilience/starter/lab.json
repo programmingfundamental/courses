@@ -1,0 +1,12 @@
+{
+  "lab": 7,
+  "project": "../../platform",
+  "files": [
+    "backend/mobile-bff/src/main/java/bg/tuvarna/mobile/DownstreamPolicy.java",
+    "backend/mobile-bff/src/main/java/bg/tuvarna/mobile/UnstableClient.java",
+    "backend/notification-service/src/main/java/bg/tuvarna/mobile/UnstableResource.java"
+  ],
+  "build": "node ../../platform/tools/lab.mjs 07 build",
+  "guided": "L07-G",
+  "independent": "L07-I"
+}
