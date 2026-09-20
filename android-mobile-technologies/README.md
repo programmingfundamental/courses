@@ -1,6 +1,6 @@
 # Android-базирани технологии за мобилни устройства
 
-Практически курс за магистри: **7 лабораторни упражнения по 135 минути**. Общият Kotlin проект **Mobile Context Monitor** постепенно придобива управление на state, локално съхранение, background processing, sensors, location, BLE и измерване на ресурсите.
+Практически курс за магистри: **7 лабораторни упражнения по 135 минути**. Общият Kotlin проект **Mobile Context Monitor** постепенно придобива управление на state, локално съхранение, Android Services и WorkManager обработка, sensors, location, BLE и измерване на ресурсите.
 
 Android се разглежда като мобилна система с прекъсвания, permissions, ненадежден hardware и ограничени ресурси. Compose е интерфейс за управление и наблюдение. Всяко занятие следва **проблем → теория → мини експеримент → водена задача → самостоятелна задача → edge cases → измерване → анализ**. Самостоятелната задача е задължителна работа **в часа**, а не домашно.
 
@@ -13,7 +13,8 @@ Android се разглежда като мобилна система с пре
 - Анализира lifetime на state, process и hardware resources.
 - Реализира immutable UI state и еднопосочен data flow през ViewModel.
 - Организира Room като local source of truth и DataStore като settings storage.
-- Проектира идемпотентна WorkManager обработка и cancellation.
+- Избира между lifecycle coroutine, Android Service и WorkManager според lifetime на задачата.
+- Реализира foreground notification, local binding и Stop за кратка Service операция; проектира идемпотентна WorkManager обработка.
 - Превръща шумни sensor streams в проверими събития с bounded buffers.
 - Обработва location uncertainty, permissions и lifecycle като част от нормалната логика.
 - Реализира BLE workflow с asynchronous callbacks, timeouts и recovery.
@@ -25,7 +26,7 @@ Android се разглежда като мобилна система с пре
 |---|---|---|---|
 | 1 | [Lifecycle, State и Compose](lab01-lifecycle-state/lab01.md) | Kotlin и Android основи | Experiment Tracker, state ownership, два екрана |
 | 2 | [Architecture и Local Persistence](lab02-architecture-persistence/lab02.md) | ViewModel/actions от Lab 1 | Experiment/Measurement, Room, settings Flow |
-| 3 | [Background Execution](lab03-background-work/lab03.md) | repository и Room | idempotent processing, work chain, progress |
+| 3 | [Android Service, Foreground Service и WorkManager](lab03-background-work/lab03.md) | repository и Room | service lifecycle, Binder, notification/Stop, persistent work chain |
 | 4 | [Sensors](lab04-sensors/lab04.md) | state, storage и cancellation | accelerometer source, filters, motion events |
 | 5 | [Location](lab05-location/lab05.md) | source abstraction и lifecycle от Lab 4 | location logger, route filtering, distance |
 | 6 | [Bluetooth Low Energy](lab06-bluetooth-le/lab06.md) | permissions, source state, history | GATT adapter, notifications, reconnect |
@@ -38,7 +39,7 @@ Lifecycle + State
 Architecture + Persistence
        |
        v
-Background Execution
+Android Services + WorkManager
        |
        v
 Sensors
@@ -87,7 +88,9 @@ BLE peripheral може да е ESP32 с готов firmware, втори Android
 
 API 33 остава минималната runtime версия за общия проект. Реалният BLE adapter използва новия API 37 `connectGatt(BluetoothGattConnectionSettings, Executor, BluetoothGattCallback)` зад version/capability guard. При API 33–36 този adapter е Unsupported и се използва fake; не добавяме deprecated connection overloads. Основанието е [актуалният BluetoothDevice API](https://developer.android.com/reference/android/bluetooth/BluetoothDevice). Emulator API 37 проверява guard/build, но не замества физически BLE radio test.
 
-Location лабораторията използва platform `LocationManager` и `android.location.LocationRequest`, без зависимост от Google Play Services. Нужни са само foreground permissions. UI е Compose; кратките XML фрагменти в Lab 5–6 са **manifest declarations**, не layouts.
+Location лабораторията използва platform `LocationManager` и `android.location.LocationRequest`, без зависимост от Google Play Services. Нужни са само foreground location permissions. UI е Compose; кратките XML фрагменти в Lab 3 и Lab 5–6 са **manifest declarations**, не layouts.
+
+Lab 3 включва `Service`, started/bound lifecycle, local Binder и кратък foreground export. На API 34+ използва `shortService`, а на API 33 — guarded fallback с type=0; и двата имат собствен budget до 60 секунди и Stop. Manifest декларира `FOREGROUND_SERVICE` и `POST_NOTIFICATIONS`; в часа се проверяват notification allow/deny, foreground start и timeout cleanup. Processor, migration, notification builder и binding adapter се подготвят предварително, за да останат 35 минути самостоятелна работа в рамките на 135-минутното занятие.
 
 ## Проект и общи contracts
 
@@ -97,7 +100,8 @@ presentation/       ViewModels, immutable UiState, user actions
 data/local/         Room entities, DAOs, migrations, DataStore
 data/repository/    experiments, processing, sensor/location/BLE adapters
 domain/             pure filters, reducer, distance policy, BLE state model
-work/               CoroutineWorkers и scheduling facade
+work/               ExportForegroundService, CoroutineWorkers, scheduling facade
+ui/service/         Activity-owned binding adapter и notification permission flow
 testing/            fake clock, replay sources, fake BLE transport
 ```
 
