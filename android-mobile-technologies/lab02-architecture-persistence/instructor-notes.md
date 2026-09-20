@@ -109,4 +109,4 @@ Database остава след process recreation; ephemeral loading state не 
 
 ## 16. Връзка със следващото упражнение
 
-Lab 3 обработва immutable measurements на приключили experiments. Stable IDs, transaction boundaries и error states правят повторното изпълнение на Worker безопасно и наблюдаемо.
+Lab 3 използва immutable measurements за кратък export с Android Service/foreground notification и за отложена WorkManager обработка. Stable IDs, transaction boundaries и error states правят повторното изпълнение безопасно и наблюдаемо; Service binding и persistent scheduling имат отделни lifetimes.
