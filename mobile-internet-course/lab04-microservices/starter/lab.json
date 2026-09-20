@@ -1,0 +1,12 @@
+{
+  "lab": 4,
+  "project": "../../platform",
+  "files": [
+    "backend/activity-service/src/main/java/bg/tuvarna/mobile/UsersClient.java",
+    "backend/activity-service/src/main/java/bg/tuvarna/mobile/ActivitiesResource.java",
+    "backend/notification-service/src/main/java/bg/tuvarna/mobile/NotificationsResource.java"
+  ],
+  "build": "node ../../platform/tools/lab.mjs 04 build",
+  "guided": "L04-G",
+  "independent": "L04-I"
+}

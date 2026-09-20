@@ -1,0 +1,12 @@
+{
+  "lab": 3,
+  "project": "../../platform",
+  "files": [
+    "backend/activity-service/src/main/java/bg/tuvarna/mobile/ActivitiesResource.java",
+    "backend/activity-service/src/main/java/bg/tuvarna/mobile/ActivityStore.java",
+    "backend/activity-service/src/main/java/bg/tuvarna/mobile/Contract.java"
+  ],
+  "build": "node ../../platform/tools/lab.mjs 03 build",
+  "guided": "L03-G",
+  "independent": "L03-I"
+}

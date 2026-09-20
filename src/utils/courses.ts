@@ -12,7 +12,7 @@ export const compare = (a: Doc, b: Doc) => order(a) - order(b) || a.id.localeCom
 export const coursesFor = (locale: string) => docs.filter((doc) => doc.id.startsWith(locale + '/') && doc.id.split('/').length === 2).sort(compare);
 export const childrenOf = (id: string) => docs.filter((doc) => doc.id.startsWith(id + '/') && doc.id.split('/').length === id.split('/').length + 1 && !doc.data.sidebar.hidden).sort(compare);
 
-// Share the academic-year grouping and subject order across both languages
+// Share the academic-year and degree grouping across both languages
 // and between the homepage catalog and sidebar navigation.
 const academicYears = [
   ['uchebna-praktika-1'],
@@ -32,17 +32,29 @@ const academicYears = [
   ],
 ];
 
+const mastersSubjects = [
+  'programirane-v-mrezhova-sreda',
+  'android-bazirani-tekhnologii-za-mobilni-ustroistva',
+  'internet-za-mobilni-ustroistva',
+];
+
 export function courseGroupsFor(locale: string) {
-  const groups = academicYears.map((subjects, index) => ({
-    id: `year-${index + 1}`,
-    label: locale === 'bg' ? `${index + 1} курс` : `Year ${index + 1}`,
+  const groups = [
+    ...academicYears.map((subjects, index) => ({
+      id: `year-${index + 1}`,
+      label: locale === 'bg' ? `${index + 1} курс` : `Year ${index + 1}`,
+      subjects,
+    })),
+    { id: 'masters', label: locale === 'bg' ? 'Магистри' : "Master's degree", subjects: mastersSubjects },
+  ].map(({ subjects, ...group }) => ({
+    ...group,
     courses: subjects.flatMap((subject) => {
       const course = byId.get(`${locale}/${subject}`);
       return course ? [course] : [];
     }),
   })).filter((group) => group.courses.length > 0);
-  // Keep newly added subjects discoverable until their year is assigned.
-  const assigned = new Set(academicYears.flat());
+  // Keep newly added subjects discoverable until their group is assigned.
+  const assigned = new Set([...academicYears.flat(), ...mastersSubjects]);
   const unassigned = coursesFor(locale).filter((course) => !assigned.has(course.id.split('/')[1]!));
   if (unassigned.length) groups.push({
     id: 'other-courses',

@@ -1,0 +1,12 @@
+{
+  "lab": 5,
+  "project": "../../platform",
+  "files": [
+    "infra/envoy.yaml",
+    "compose.yaml",
+    "android/app/src/main/java/bg/tuvarna/mobile/LabViewModel.kt"
+  ],
+  "build": "node ../../platform/tools/lab.mjs 05 build",
+  "guided": "L05-G",
+  "independent": "L05-I"
+}

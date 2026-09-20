@@ -1,0 +1,56 @@
+name: mobile-internet-lab
+x-app: &app
+  environment: &env
+    QUARKUS_HTTP_HOST: 0.0.0.0
+    USER_URL: http://users:8081
+    ACTIVITY_URL: http://activities:8082
+    NOTIFICATION_URL: http://notifications:8083
+    BFF_URL: http://bff:8084
+    KAFKA_BOOTSTRAP_SERVERS: broker:9092
+    QUARKUS_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: http://collector:4317
+    LAB_PUBLIC_KEY: file:/keys/publicKey.pem
+  volumes:
+    - ./.runtime/keys/publicKey.pem:/keys/publicKey.pem:ro
+services:
+  users:
+    <<: *app
+    build: ./backend/user-service
+  activities:
+    <<: *app
+    build: ./backend/activity-service
+    volumes:
+      - ./.runtime/keys/publicKey.pem:/keys/publicKey.pem:ro
+      - activity-data:/app/data
+  notifications:
+    <<: *app
+    build: ./backend/notification-service
+  bff:
+    <<: *app
+    build: ./backend/mobile-bff
+  gateway:
+    image: envoyproxy/envoy:v1.36.4
+    ports:
+      - "127.0.0.1:${LAB_GATEWAY_PORT:-8080}:8080"
+    volumes:
+      - ./infra/envoy.yaml:/etc/envoy/envoy.yaml:ro
+    depends_on: [users, activities, notifications, bff]
+  broker:
+    image: docker.redpanda.com/redpandadata/redpanda:v25.1.1
+    profiles: [events]
+    command: [redpanda, start, --smp, "1", --memory, 512M, --reserve-memory, 0M, --overprovisioned, --node-id, "0", --check=false, --kafka-addr, "0.0.0.0:9092", --advertise-kafka-addr, "broker:9092"]
+  collector:
+    image: otel/opentelemetry-collector:0.139.0
+    profiles: [observability]
+    command: [--config=/etc/otel/config.yaml]
+    volumes:
+      - ./infra/otel.yaml:/etc/otel/config.yaml:ro
+    depends_on: [jaeger]
+  jaeger:
+    image: jaegertracing/all-in-one:1.71.0
+    profiles: [observability]
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+    ports:
+      - "127.0.0.1:${LAB_JAEGER_PORT:-16686}:16686"
+volumes:
+  activity-data:

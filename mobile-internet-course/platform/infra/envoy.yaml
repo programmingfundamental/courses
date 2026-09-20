@@ -1,0 +1,92 @@
+static_resources:
+  listeners:
+    - name: public_api
+      address:
+        socket_address: { address: 0.0.0.0, port_value: 8080 }
+      filter_chains:
+        - filters:
+            - name: envoy.filters.network.http_connection_manager
+              typed_config:
+                "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+                stat_prefix: mobile_gateway
+                generate_request_id: true
+                preserve_external_request_id: false
+                always_set_request_id_in_response: true
+                use_remote_address: true
+                upgrade_configs: [{ upgrade_type: websocket }]
+                tracing:
+                  random_sampling: { value: 100 }
+                  provider:
+                    name: envoy.tracers.opentelemetry
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.config.trace.v3.OpenTelemetryConfig
+                      service_name: gateway
+                      grpc_service:
+                        envoy_grpc: { cluster_name: collector }
+                        timeout: 1s
+                access_log:
+                  - name: envoy.access_loggers.stdout
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.access_loggers.stream.v3.StdoutAccessLog
+                      log_format:
+                        json_format:
+                          request_id: "%REQ(X-REQUEST-ID)%"
+                          route: "%ROUTE_NAME%"
+                          status: "%RESPONSE_CODE%"
+                          duration_ms: "%DURATION%"
+                          response_bytes: "%BYTES_SENT%"
+                route_config:
+                  name: mobile_routes
+                  virtual_hosts:
+                    - name: api
+                      domains: ["*"]
+                      routes:
+                        - name: health
+                          match: { path: /health }
+                          direct_response: { status: 200, body: { inline_string: "gateway ready" } }
+                        - name: fixture
+                          match: { prefix: /api/fixture/ }
+                          route: { cluster: bff, prefix_rewrite: /fixture/, timeout: 5s }
+                        # TODO L05-G: /api/users и /api/activities path-segment routes, без /api/users-evil.
+                        # TODO L06-G: /api/mobile/ -> bff /mobile/, timeout: 4s.
+                        # TODO L09-G: /api/realtime -> bff /realtime; WS route timeout: 0s + heartbeat policy.
+                        # TODO L05-I: стандартна JSON грешка за неизвестен public route.
+                http_filters:
+                  - name: envoy.filters.http.router
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+  clusters:
+    - name: users
+      type: STRICT_DNS
+      connect_timeout: 0.5s
+      load_assignment:
+        cluster_name: users
+        endpoints: [{ lb_endpoints: [{ endpoint: { address: { socket_address: { address: users, port_value: 8081 } } } }] }]
+    - name: activities
+      type: STRICT_DNS
+      connect_timeout: 0.5s
+      load_assignment:
+        cluster_name: activities
+        endpoints: [{ lb_endpoints: [{ endpoint: { address: { socket_address: { address: activities, port_value: 8082 } } } }] }]
+    - name: notifications
+      type: STRICT_DNS
+      connect_timeout: 0.5s
+      load_assignment:
+        cluster_name: notifications
+        endpoints: [{ lb_endpoints: [{ endpoint: { address: { socket_address: { address: notifications, port_value: 8083 } } } }] }]
+    - name: bff
+      type: STRICT_DNS
+      connect_timeout: 0.5s
+      load_assignment:
+        cluster_name: bff
+        endpoints: [{ lb_endpoints: [{ endpoint: { address: { socket_address: { address: bff, port_value: 8084 } } } }] }]
+    - name: collector
+      type: STRICT_DNS
+      connect_timeout: 1s
+      typed_extension_protocol_options:
+        envoy.extensions.upstreams.http.v3.HttpProtocolOptions:
+          "@type": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions
+          explicit_http_config: { http2_protocol_options: {} }
+      load_assignment:
+        cluster_name: collector
+        endpoints: [{ lb_endpoints: [{ endpoint: { address: { socket_address: { address: collector, port_value: 4317 } } } }] }]
