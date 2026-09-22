@@ -1,8 +1,10 @@
 ---
-title: Task
+title: Tasks
 sidebar:
-  order: 4
+  order: 100
+  label: Tasks
+taskPage: true
 ---
+## Task
 
-# Task
-
+Tasks for this laboratory exercise have not been published yet.

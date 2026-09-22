@@ -122,5 +122,3 @@ fun CounterButton() {
 ```
 
 `remember` сам по себе си не запазва стойността при пресъздаване на `Activity`.
-
-Практическите задания и задачите за самостоятелна работа са на страницата [„Задачи“](/courses/bg/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/zadacha/).

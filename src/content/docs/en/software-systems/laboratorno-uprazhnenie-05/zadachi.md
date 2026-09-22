@@ -1,11 +1,10 @@
 ---
 title: Tasks
 sidebar:
-  order: 2
+  order: 100
+  label: Tasks
+taskPage: true
 ---
-
-# Independent Tasks
-
 ### 1. Task 1: Specialized Course Selection
 
 Create an application that allows a student to select a discipline from a `ListView`.

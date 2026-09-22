@@ -1,0 +1,52 @@
+name: applied-web-security
+services:
+  db:
+    image: postgres:17.6-alpine
+    environment:
+      POSTGRES_DB: lab
+      POSTGRES_USER: lab_owner
+      POSTGRES_PASSWORD: LocalLabOwner-2026
+    volumes:
+      - lab-db:/var/lib/postgresql/data
+      - ./infra/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U lab_owner -d lab"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    networks: [backend]
+  app:
+    build: ./vulnerable-app
+    environment:
+      BIND_ADDRESS: 0.0.0.0
+      DB_URL: jdbc:postgresql://db:5432/lab
+      DB_USER: lab_runtime
+      DB_PASSWORD: LocalLabRuntime-2026
+      SPRING_SQL_INIT_MODE: never
+      LAB_MODE: ${LAB_MODE:-secure}
+      LAB_KEY_FILE: /run/secrets/field_key
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      MAX_ATTEMPTS: ${MAX_ATTEMPTS:-5}
+      LOCK_DURATION: ${LOCK_DURATION:-PT60S}
+      RESET_AFTER_SUCCESS: ${RESET_AFTER_SUCCESS:-true}
+    secrets: [field_key]
+    depends_on:
+      db: {condition: service_healthy}
+    networks: [backend]
+  nginx:
+    image: nginx:1.28.0-alpine
+    ports: ["127.0.0.1:${LAB_HTTP_PORT:-8080}:80", "127.0.0.1:${LAB_CSRF_PORT:-8081}:81"]
+    volumes:
+      - ./infra/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./lab07-csrf-browser-security/resources/attacker.html:/usr/share/nginx/html/attacker.html:ro
+    depends_on: [app]
+    networks: [backend, frontend]
+networks:
+  frontend: {}
+  backend:
+    internal: true
+volumes:
+  lab-db:
+secrets:
+  field_key:
+    file: ./.secrets/field-key.txt

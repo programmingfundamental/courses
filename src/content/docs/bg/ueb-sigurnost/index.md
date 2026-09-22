@@ -4,23 +4,22 @@ sidebar:
   order: 11
 ---
 
-# Уеб сигурност
+Курсът разглежда защитата на уеб приложения и REST API, сигурната комуникация и работата с JWT. Ще изучавате SQL Injection, XSS, brute-force атаки и методи за защита на чувствителни данни.
 
+## Лабораторни упражнения
 
-
-## Сетъпване на средата
-## SSL в Docker -- Web сървър конфигурации, testowe wsqka sedmica
-## JWT и FIltri в спринг, testowe wsqka sedmica
-## Защита на REST API, testowe wsqka sedmica
-## brute force attack, testowe wsqka sedmica
-## SQL Injection, testowe wsqka sedmica
-## Cross-Site Scripting (XSS), testowe wsqka sedmica
-## Криптиране и декриптиране, testowe wsqka sedmica
-## манипулиране и подмяна на JWT токени, testowe wsqka sedmica
-## kontrolni
-## kontrolno
-## 60 test
-
-8 * 1 -> 8
-2 * 26
-1 * 40 -> 40
+- [Лабораторно упражнение 1 — Темата предстои](/courses/bg/ueb-sigurnost/laboratorno-uprazhnenie-1/)
+- [Лабораторно упражнение 2 — Темата предстои](/courses/bg/ueb-sigurnost/laboratorno-uprazhnenie-2/)
+- [Лабораторно упражнение 3 — Темата предстои](/courses/bg/ueb-sigurnost/laboratorno-uprazhnenie-3/)
+- [Лабораторно упражнение 4 — Темата предстои](/courses/bg/ueb-sigurnost/laboratorno-uprazhnenie-4/)
+- [Лабораторно упражнение 5 — Темата предстои](/courses/bg/ueb-sigurnost/laboratorno-uprazhnenie-5/)
+- [Лабораторно упражнение 6 — Темата предстои](/courses/bg/ueb-sigurnost/laboratorno-uprazhnenie-6/)
+- [Лабораторно упражнение 7 — Темата предстои](/courses/bg/ueb-sigurnost/laboratorno-uprazhnenie-7/)
+- [Лабораторно упражнение 8 — Темата предстои](/courses/bg/ueb-sigurnost/laboratorno-uprazhnenie-8/)
+- [Лабораторно упражнение 9 — Темата предстои](/courses/bg/ueb-sigurnost/laboratorno-uprazhnenie-9/)
+- [Лабораторно упражнение 10 — Темата предстои](/courses/bg/ueb-sigurnost/laboratorno-uprazhnenie-10/)
+- [Лабораторно упражнение 11 — Темата предстои](/courses/bg/ueb-sigurnost/laboratorno-uprazhnenie-11/)
+- [Лабораторно упражнение 12 — Темата предстои](/courses/bg/ueb-sigurnost/laboratorno-uprazhnenie-12/)
+- [Лабораторно упражнение 13 — Темата предстои](/courses/bg/ueb-sigurnost/laboratorno-uprazhnenie-13/)
+- [Лабораторно упражнение 14 — Темата предстои](/courses/bg/ueb-sigurnost/laboratorno-uprazhnenie-14/)
+- [Лабораторно упражнение 15 — Темата предстои](/courses/bg/ueb-sigurnost/laboratorno-uprazhnenie-15/)

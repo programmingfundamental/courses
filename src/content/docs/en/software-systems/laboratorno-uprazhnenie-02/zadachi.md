@@ -1,11 +1,10 @@
 ---
 title: Tasks
 sidebar:
-  order: 2
+  order: 100
+  label: Tasks
+taskPage: true
 ---
-
-# Independent Tasks
-
 Using FXML and the learned Layout Containers, complete the following tasks.
 
 ### Task 1: Login Screen

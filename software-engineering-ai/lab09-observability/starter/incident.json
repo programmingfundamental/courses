@@ -1,0 +1,23 @@
+{
+  "incident": "p95 increased five times after deployment",
+  "before": {
+    "version": "v1",
+    "p95_ms": 20,
+    "error_rate": 0.001,
+    "batch_size": 1
+  },
+  "after": {
+    "version": "v2",
+    "p95_ms": 100,
+    "error_rate": 0.002,
+    "batch_size": 16
+  },
+  "unknown": [
+    "hardware",
+    "concurrency",
+    "load duration",
+    "queue time",
+    "data shift"
+  ],
+  "TODO": "Design hypothesis-driven diagnosis; numbers are scenario fixtures, not benchmark results."
+}

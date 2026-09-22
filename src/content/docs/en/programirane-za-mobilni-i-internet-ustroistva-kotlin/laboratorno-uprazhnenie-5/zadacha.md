@@ -1,10 +1,10 @@
 ---
 title: Tasks
 sidebar:
-  order: 2
+  order: 100
+  label: Tasks
+taskPage: true
 ---
-# Tasks
-
 ## Task 1
 
 Create a Composable function for greeting text GreetingText with parameters: message: String and modifier: Modifier = Modifier. Visualize the function in the design panel. With the message "Happy Birthday Android!"

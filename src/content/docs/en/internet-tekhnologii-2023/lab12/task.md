@@ -1,9 +1,8 @@
 ---
-title: Task
+title: Tasks
 sidebar:
-  order: 3
+  order: 100
+  label: Tasks
+taskPage: true
 ---
-
-# Task
-
 Follow the steps outlined in "Security using JWT" and modify the project so the authentication and authorization are performed using JWT.

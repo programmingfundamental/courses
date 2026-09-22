@@ -1,0 +1,11 @@
+.venv
+__pycache__
+.pytest_cache
+.git
+.env
+reports
+tests
+artifacts/.pending-*
+*.log
+.coverage
+**/__pycache__

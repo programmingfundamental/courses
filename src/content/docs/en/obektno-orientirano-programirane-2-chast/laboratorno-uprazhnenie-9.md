@@ -3,7 +3,6 @@ title: Laboratory lesson 9
 sidebar:
   order: 9
 ---
-
 # Observer
 
 Observer is member of behavioural design patterns and is useful in situations when we need to monitor state of an object and want to receive notifications when there is some change. When such pattern is implemented, there is two type of objects - observers (monitoring objects) and subject (the monitored object).
@@ -143,10 +142,3 @@ public class Application{
 
 }
 ```
-
-
-# Practice
-
-### Task 1
-
-Create a program to register news and readers. Each news has topics, readers register for the topics, and when news is added to a topic for which a reader is registered, he is informed and marks the news as read by him. If the news content is updated, the reader is also notified and reads the new content.

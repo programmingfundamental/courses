@@ -1,10 +1,11 @@
 ---
-title: Excercises
+title: Tasks
 sidebar:
-  order: 6
+  order: 100
+  label: Tasks
+taskPage: true
 ---
-
-# Excercises
+## Excercises
 
 Complete the task from exercise 2 as follows:
 

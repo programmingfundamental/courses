@@ -1,10 +1,11 @@
 ---
-title: Задача
+title: Задачи
 sidebar:
-  order: 6
+  order: 100
+  label: Задачи
+taskPage: true
 ---
-
-# Задача 1
+## Задача 1
 
 Изграждане на проект с Maven
 
@@ -39,7 +40,7 @@ services:
 
 docker compose up
 
-# Задача 2
+## Задача 2
 
 ## Миграция на проекта от H2 към PostgreSQL.
 
@@ -101,7 +102,7 @@ services:
 
 ```
 
-# Обяснение на docker-compose.yml
+## Обяснение на docker-compose.yml
 
 Този файл се използва от :contentReference[oaicite:0]{index=0} за автоматично стартиране на няколко контейнера едновременно – в случая:
 
@@ -110,7 +111,7 @@ services:
 
 ---
 
-# Обяснение на docker-compose.yml
+## Обяснение на docker-compose.yml
 
 Този файл се използва от :contentReference[oaicite:0]{index=0} за автоматично стартиране на няколко контейнера едновременно – в случая:
 
@@ -121,7 +122,7 @@ Docker Compose позволява цялата система да бъде ст
 
 ---
 
-# Дефиниране на мрежа
+## Дефиниране на мрежа
 
 ```yaml
 networks:
@@ -140,7 +141,7 @@ Docker Compose автоматично създава вътрешен DNS сър
 
 ---
 
-# Services
+## Services
 
 ```yaml
 services:
@@ -152,7 +153,7 @@ services:
 
 ---
 
-# PostgreSQL контейнер
+## PostgreSQL контейнер
 
 ```yaml
 db:
@@ -242,7 +243,7 @@ networks:
 
 ---
 
-# Spring Boot приложение
+## Spring Boot приложение
 
 ```yaml
 app:
@@ -330,7 +331,7 @@ depends_on:
 
 ---
 
-# Environment Variables за Spring Boot
+## Environment Variables за Spring Boot
 
 ```yaml
 environment:
@@ -387,7 +388,7 @@ networks:
 
 ---
 
-# Стартиране на проекта
+## Стартиране на проекта
 
 ```bash
 docker compose up --build
@@ -403,7 +404,7 @@ Docker Compose автоматично следи зависимостите ме
 
 ---
 
-# Спиране на проекта
+## Спиране на проекта
 
 ```bash
 docker compose down
@@ -415,7 +416,7 @@ docker compose down
 
 ---
 
-# Изтриване на containers, images и volumes
+## Изтриване на containers, images и volumes
 
 ```bash
 docker compose down --rmi all -v

@@ -1,10 +1,11 @@
 ---
-title: Задачи за работа с Postman
+title: Задачи
 sidebar:
-  order: 3
+  order: 100
+  label: Задачи
+taskPage: true
 ---
-
-# Задачи за работа с Postman 
+## Задачи за работа с Postman 
 
 1\.      Изпратете заявка към следния URL https://www1.tu-varna.bg/tu-varna/, използвайки метода GET. Разгледайте полученият отговор:
 

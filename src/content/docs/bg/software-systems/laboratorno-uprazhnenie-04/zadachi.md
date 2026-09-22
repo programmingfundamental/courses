@@ -1,11 +1,10 @@
 ---
 title: Задачи
 sidebar:
-  order: 6
+  order: 100
+  label: Задачи
+taskPage: true
 ---
-
-# Задачи
-
 Да се създаде JavaFX приложение с FXML интерфейс за вход в система.
 
 Приложението трябва да съдържа:
@@ -30,4 +29,3 @@ sidebar:
 
 Бутонът „Вход“ да е disabled, докато:
 - username или password е празно, опитайте да го направите с BooleanBinding
-

@@ -1,0 +1,6 @@
+vulnerable-app/target/
+.secrets/
+.env
+*.cookies
+evidence/
+*.log

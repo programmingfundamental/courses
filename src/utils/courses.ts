@@ -68,6 +68,10 @@ export function courseGroupsFor(locale: string) {
 // Match these known naming conventions, but do not guess translated lesson titles.
 const translationKey = (id: string) => id.split('/').slice(1).map((part) => isLab(part) ? `lab${labNumber(part)}` : part).join('/');
 export function translationFor(id: string, locale: string): Doc | undefined {
+  if (byId.get(id)?.data.taskPage) {
+    const lab = id.split('/').slice(0, 3).join('/');
+    return docs.find((doc) => doc.data.taskPage && doc.id.startsWith(locale + '/') && translationKey(doc.id.split('/').slice(0, 3).join('/')) === translationKey(lab));
+  }
   return docs.find((doc) => doc.id.startsWith(locale + '/') && translationKey(doc.id) === translationKey(id));
 }
 export function languageUrl(id: string, locale: string) {

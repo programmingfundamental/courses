@@ -1,10 +1,10 @@
 ---
-title: Task
+title: Tasks
 sidebar:
-  order: 2
+  order: 100
+  label: Tasks
+taskPage: true
 ---
-# Tasks
-
 ## Task 1
 
 ![alt text](/courses/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-2/image-1.png)

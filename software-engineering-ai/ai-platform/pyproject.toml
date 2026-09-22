@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-prediction-platform"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+description = "CPU-only software engineering teaching platform"
+
+[project.scripts]
+ai-platform = "ai_platform.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["integration: real training, artifact and HTTP contract", "performance: measured benchmark; not a timing-sensitive unit gate"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+
+[tool.coverage.run]
+source = ["ai_platform"]
+omit = ["*/cli.py"]
+
+[tool.coverage.report]
+show_missing = true

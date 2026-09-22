@@ -1,11 +1,10 @@
 ---
 title: Задачи
 sidebar:
-  order: 2
+  order: 100
+  label: Задачи
+taskPage: true
 ---
-
-# Задачи
-
 ## Задача 1
 
 Да се създаде композируема функция `GreetingText` с анотация `@Composable` и параметри `message: String` и `modifier: Modifier = Modifier`. Функцията да се визуализира чрез Compose Preview със съобщение "Happy Birthday Android!".

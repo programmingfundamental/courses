@@ -1,0 +1,17 @@
+{
+  "module": "prediction",
+  "requirements": [
+    {
+      "id": "FR-01",
+      "statement": "POST /predict returns label, probability, model_version",
+      "measure": "response schema",
+      "acceptance": "TODO: define valid and invalid examples"
+    },
+    {
+      "id": "NFR-01",
+      "statement": "fast enough",
+      "measure": null,
+      "acceptance": "TODO: specify workload, hardware, p95, sample size"
+    }
+  ]
+}

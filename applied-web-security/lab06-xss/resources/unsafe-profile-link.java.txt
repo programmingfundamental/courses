@@ -1,0 +1,3 @@
+// Само учебен starter за новия homepage flow. НЕ е готово решение.
+// Какво става при кавичка? Какво става при javascript: scheme?
+String html = "<a href=\"" + homepage + "\">Homepage</a>";

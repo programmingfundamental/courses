@@ -1,11 +1,10 @@
 ---
 title: Tasks
 sidebar:
-  order: 4
+  order: 100
+  label: Tasks
+taskPage: true
 ---
-
-# Tasks
-
 1\.     Edit the application by adding a DTO to filter input data for reports. The class should provide validation for the following fields:       
 - Time must not be null and must start counting after midnight (LocalTime time);
 - Start date must be in the future and not null (LocalDateTime from);

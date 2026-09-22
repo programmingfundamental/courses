@@ -1,0 +1,4 @@
+# Local failure-injection fixture; never a release candidate.
+ARG BASE_IMAGE=ai-course:demo-v1
+FROM ${BASE_IMAGE}
+ENV AI_MODEL_VERSION=missing-version

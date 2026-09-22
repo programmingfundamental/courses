@@ -5,7 +5,9 @@ import { childrenOf, courseGroupsFor, isLab, urlFor } from '../utils/courses';
 const route = Astro.locals.starlightRoute;
 const bg = route.locale === 'bg';
 const home = route.id === route.locale;
-const children = childrenOf(route.id).filter((doc) => !route.entry.body?.includes(urlFor(doc.id)));
+// Bulgarian course overviews contain their complete, curated laboratory list.
+const courseOverview = bg && route.id.split('/').length === 2;
+const children = courseOverview ? [] : childrenOf(route.id).filter((doc) => !route.entry.body?.includes(urlFor(doc.id)));
 ---
 <DefaultContent><slot /></DefaultContent>
 {home ? (
