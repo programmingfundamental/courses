@@ -2,32 +2,8 @@
 title: Задачи — Properties и събития
 sidebar:
   order: 2
+  hidden: true
+taskRedirect: /courses/bg/software-systems/laboratorno-uprazhnenie-03/zadachi/
+pagefind: false
 ---
-
-# Задачи
-
-Да се създаде JavaFX приложение с FXML интерфейс за вход в система.
-
-Приложението трябва да съдържа:
-
-- поле за потребителско име
-- поле за парола
-- бутон „Вход“
-- текст (Label) за съобщения към потребителя
-
-Логика на бутона:
-
-Ако някое поле е празно → се показва съобщение:
-- "Моля, попълнете всички полета!"
-
-Ако username == "admin" и password == "1234" → се показва съобщение:
-- "Успешен вход!"
-
-Всеки друг случай → се показва съобщение:
-- "Невалидни данни!"
-
-Съобщението е празно при инициялизация на приложението.
-
-Бутонът „Вход“ да е disabled, докато:
-- username или password е празно, опитайте да го направите с BooleanBinding
-
+[Задачи](/courses/bg/software-systems/laboratorno-uprazhnenie-03/zadachi/)

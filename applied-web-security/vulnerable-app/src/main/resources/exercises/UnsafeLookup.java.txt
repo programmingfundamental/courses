@@ -1,0 +1,6 @@
+// Само starter за lab05 independent task; този файл НЕ е компилиран endpoint.
+// Интегрирайте като GET /api/lookup?title=, покажете red test, после поправете.
+// username трябва да идва от Authentication, не от request.
+String sql = "SELECT id,owner,title FROM documents WHERE owner='" + username
+    + "' AND title='" + title + "'";
+return jdbcTemplate.queryForList(sql);

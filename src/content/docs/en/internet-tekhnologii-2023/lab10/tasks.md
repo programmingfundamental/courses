@@ -1,9 +1,10 @@
 ---
 title: Tasks
 sidebar:
-  order: 2
+  order: 100
+  label: Tasks
+taskPage: true
 ---
-
 #Tasks
 
 1. Create a service layer for Report with CRUD functionalities

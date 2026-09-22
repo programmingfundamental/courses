@@ -1,11 +1,10 @@
 ---
 title: Задачи
 sidebar:
-  order: 2
+  order: 100
+  label: Задачи
+taskPage: true
 ---
-
-# Задачи
-
 Да се създаде приложение, което показва изображения и текст чрез различни списъци и решетки в Jetpack Compose.
 
 1. Да се добавят текстовите ресурси от предоставения файл `lab9_strings` в `app/src/main/res/values/strings.xml`.

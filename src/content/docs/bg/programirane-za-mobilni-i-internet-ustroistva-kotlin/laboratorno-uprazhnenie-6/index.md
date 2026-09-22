@@ -208,5 +208,3 @@ Log.wtf(tag, "Нарушено критично условие")
 `LifecycleOwner` предоставя обект `Lifecycle`; `ComponentActivity` реализира този интерфейс. `LifecycleOwner` не е заместител на базов клас. `LifecycleObserver` е интерфейс за наблюдатели, а `DefaultLifecycleObserver` предоставя callback методи като `onStart(owner)` и `onStop(owner)`. Наблюдател се регистрира чрез `lifecycle.addObserver(...)`.
 
 `DefaultLifecycleObserver` няма `onRestart()`. Ако това конкретно извикване трябва да бъде записано, то остава callback метод в `Activity`.
-
-Практическите задания и задачите за самостоятелна работа са на страницата [„Задачи“](/courses/bg/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-6/zadacha/).

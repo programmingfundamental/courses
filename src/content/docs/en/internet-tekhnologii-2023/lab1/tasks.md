@@ -1,11 +1,11 @@
 ---
-title: Tasks with Postman
+title: Tasks
 sidebar:
-  order: 4
+  order: 100
+  label: Tasks
+taskPage: true
 ---
-
-
-# Tasks for working with Postman
+## Tasks for working with Postman
 
 1\.      Send a request to the following URL https://www1.tu-varna.bg/tu-varna/ using the GET method. View the response received:
 

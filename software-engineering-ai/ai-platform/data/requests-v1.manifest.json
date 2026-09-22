@@ -1,0 +1,16 @@
+{
+  "version": "requests-v1",
+  "seed": 42,
+  "rows": 400,
+  "sha256": "f8a5e8459908a46b2bb5bc80c6cfb662b65660d2e6f04fc46828caf3db799930",
+  "schema": [
+    "request_id",
+    "token_count",
+    "keyword_score",
+    "previous_requests",
+    "cohort",
+    "label"
+  ],
+  "source": "synthetic; no personal data",
+  "license": "CC0-1.0"
+}

@@ -1,11 +1,11 @@
 ---
-title: Task
+title: Tasks
 sidebar:
-  order: 6
+  order: 100
+  label: Tasks
+taskPage: true
 ---
-
-
-# Task 1
+## Task 1
 
 Develop a Spring Boot application for managing tasks and their associated reports (will be enhanced in future exercises). The application should provide a REST API for creating, retrieving, updating, and deleting tasks and reports. Each task can have multiple reports associated with it.
 

@@ -243,5 +243,3 @@ fun GreetingScreenPreview() {
 | `res/values/themes.xml` | Android темата на приложението; Compose темата обикновено се конфигурира и чрез Kotlin код. |
 
 Манифестът описва компонентите, Gradle управлява изграждането и зависимостите, `MainActivity.kt` задава интерфейса, а `res` съдържа ресурсите. Android Studio обединява работата с тези файлове и стартира изграждането на APK или Android App Bundle (AAB).
-
-Практическите задания и задачите за самостоятелна работа са на страницата [„Задачи“](/courses/bg/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-4/task/).

@@ -1,0 +1,23 @@
+{
+  "notice": "Non-executable review fixture; no real credentials or personal data.",
+  "source_secret": "SYNTHETIC-NOT-A-REAL-SECRET",
+  "model": {
+    "artifact": "model-final-final.joblib",
+    "created_at": "2020-01-01",
+    "version": null
+  },
+  "dataset": {
+    "owner": null,
+    "source": null,
+    "retention": null
+  },
+  "log_example": {
+    "email": "student@example.invalid",
+    "input": "SYNTHETIC-PRIVATE-TEXT"
+  },
+  "dependency": {
+    "name": "retired-lab-adapter",
+    "status": "deprecated training fixture; not an installed package"
+  },
+  "TODO": "Create risk/debt register, owners, mitigations, acceptance tests and retirement policy."
+}

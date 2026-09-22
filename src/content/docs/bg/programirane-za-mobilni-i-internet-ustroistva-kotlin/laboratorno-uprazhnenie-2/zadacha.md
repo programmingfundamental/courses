@@ -1,11 +1,10 @@
 ---
 title: Задачи
 sidebar:
-  order: 2
+  order: 100
+  label: Задачи
+taskPage: true
 ---
-
-# Задачи
-
 ## Задача 1
 
 ![Диаграма на Animal и наследниците Duck, Fish и Zebra](/courses/docs/BEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-2/image-1.png)

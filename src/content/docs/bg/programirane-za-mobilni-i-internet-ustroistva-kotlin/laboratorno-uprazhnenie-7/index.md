@@ -289,5 +289,3 @@ fun LoginScreen() {
     }
 }
 ```
-
-Практическите задания и задачите за самостоятелна работа са на страницата [„Задачи“](/courses/bg/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-7/zadacha/).

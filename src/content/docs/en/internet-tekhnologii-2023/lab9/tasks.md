@@ -1,11 +1,10 @@
 ---
 title: Tasks
 sidebar:
-  order: 5
+  order: 100
+  label: Tasks
+taskPage: true
 ---
-
-# Tasks
-
 In the application developed so far, replace the storage in a collection with a PostgreSQL database.
 
 1\. Create entity classes with the following fields for:

@@ -1,11 +1,10 @@
 ---
 title: Tasks
 sidebar:
-  order: 3
+  order: 100
+  label: Tasks
+taskPage: true
 ---
-
-# Independent Tasks
-
 ### 1. Task 1: Creating a "Dark Mode"
 
 - Create a copy of the previous CSS file under the name `dark-style.css`.

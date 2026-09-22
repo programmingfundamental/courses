@@ -1,11 +1,10 @@
 ---
 title: Tasks
 sidebar:
-  order: 6
+  order: 100
+  label: Tasks
+taskPage: true
 ---
-
-# Tasks
-
 Create a JavaFX application with an FXML interface for system login.
 
 The application must contain:

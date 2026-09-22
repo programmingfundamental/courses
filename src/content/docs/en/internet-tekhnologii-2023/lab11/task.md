@@ -1,11 +1,10 @@
 ---
 title: Tasks
 sidebar:
-  order: 7
+  order: 100
+  label: Tasks
+taskPage: true
 ---
-
-# Task
-
 1\. Create functionalities for user registration and login in the task management application. Follow these steps:
 
 a. Create the following entity classes:

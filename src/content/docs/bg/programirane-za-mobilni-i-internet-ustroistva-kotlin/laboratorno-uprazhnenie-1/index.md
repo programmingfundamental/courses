@@ -21,5 +21,3 @@ Kotlin е представен през 2011 г., а през 2012 г. е пуб
 ## Съвместимост с Java
 
 При работа с JVM Kotlin се компилира до байткод и може да използва Java библиотеки. Java и Kotlin код могат да съществуват в един проект. IntelliJ IDEA и Android Studio предоставят инструменти за преобразуване на Java код в Kotlin, като полученият код подлежи на преглед.
-
-Практическите задания и задачите за самостоятелна работа са на страницата [„Задачи“](/courses/bg/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-1/zadacha/).

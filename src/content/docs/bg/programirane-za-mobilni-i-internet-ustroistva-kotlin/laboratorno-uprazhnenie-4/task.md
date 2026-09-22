@@ -1,11 +1,10 @@
 ---
 title: Задачи
 sidebar:
-  order: 2
+  order: 100
+  label: Задачи
+taskPage: true
 ---
-
-# Задачи
-
 Да се създаде Android приложение с Kotlin и Jetpack Compose, което визуализира заглавие и изображение, заредено от интернет.
 
 ## 1. Compose проект

@@ -1,11 +1,10 @@
 ---
 title: Tasks
 sidebar:
-  order: 7
+  order: 100
+  label: Tasks
+taskPage: true
 ---
-
-# Individual Tasks
-
 ### Task 1
 
 Extend the Calculator application by adding buttons for subtraction, multiplication, and division that perform the corresponding arithmetic operations on the entered values and display the result.

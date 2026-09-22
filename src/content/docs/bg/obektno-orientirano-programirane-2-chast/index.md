@@ -4,15 +4,22 @@ sidebar:
   order: 4
 ---
 
-# Обектно-ориентирано програмиране - 2 част
+Курсът надгражда обектно-ориентираното програмиране с връзки между класове, SOLID принципи и шаблони за проектиране. Ще прилагате създаващи, структурни и поведенчески шаблони за изграждане на поддържаем код.
 
-info
-Примерни проекти: [https://github.com/theVelislavKolesnichenko/DesignPrinciples](https://github.com/theVelislavKolesnichenko/DesignPrinciples)
+## Лабораторни упражнения
 
-**Дизайнерските модели** са типични решения на често срещани проблеми в софтуерния дизайн. Те са като предварително направени чертежи, които могат да се персонализират, за да се разрешат повтарящи се проблеми с дизайна в програмния код.
-
-Не можете просто да намерите шаблон и да го копирате в програмата си, по начина, по който можете с готови функции или библиотеки. Моделът не е конкретна част от кода, а обща концепция за решаване на конкретен проблем. Можете да следвате детайлите на модела и да внедрите решение, което отговаря на реалностите на вашата собствена програма.
-
-Моделите често се бъркат с алгоритмите, защото и двете понятия описват типични решения на някои известни проблеми. Докато алгоритъмът винаги дефинира ясен набор от действия, които могат да постигнат някаква цел, моделът е описание на решение на по-високо ниво. Кодът на един и същ модел, приложен към две различни програми, може да бъде различен.
-
-Аналогия на алгоритъма е рецепта за готвене: и двете имат ясни стъпки за постигане на цел. От друга страна, моделът е по-скоро като план: можете да видите какъв е резултатът и неговите характеристики, но точният ред на изпълнение зависи от вас.
+- [Лабораторно упражнение 1 — Асоциация, композиция и агрегация](/courses/bg/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/)
+- [Лабораторно упражнение 2 — SOLID принципи](/courses/bg/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-2/)
+- [Лабораторно упражнение 3 — Builder и Singleton](/courses/bg/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-3/)
+- [Лабораторно упражнение 4 — Abstract Factory](/courses/bg/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-4/)
+- [Лабораторно упражнение 5 — Самостоятелна работа](/courses/bg/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-5/)
+- [Лабораторно упражнение 6 — Adapter](/courses/bg/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-6/)
+- [Лабораторно упражнение 7 — Bridge и Decorator](/courses/bg/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-7/)
+- [Лабораторно упражнение 8 — Composite, Flyweight и Proxy](/courses/bg/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-8/)
+- [Лабораторно упражнение 9 — Самостоятелна работа](/courses/bg/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-9/)
+- [Лабораторно упражнение 10 — Chain of Responsibility и Observer](/courses/bg/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-10/)
+- [Лабораторно упражнение 11 — Command, State и Strategy](/courses/bg/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-11/)
+- [Лабораторно упражнение 12 — Mediator и Visitor](/courses/bg/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-12/)
+- [Лабораторно упражнение 13 — Самостоятелна работа](/courses/bg/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-13/)
+- [Лабораторно упражнение 14 — Добри практики](/courses/bg/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-14/)
+- [Лабораторно упражнение 15 — Темата предстои](/courses/bg/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-15/)

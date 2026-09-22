@@ -1,11 +1,10 @@
 ---
 title: Задачи
 sidebar:
-  order: 4
+  order: 100
+  label: Задачи
+taskPage: true
 ---
-
-# Задачи
-
 ### Задача 1
 
 Дефинирайте следния интерфейс:
@@ -221,4 +220,3 @@ public class UniversitySystem {
 }
 
 ```
-
