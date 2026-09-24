@@ -1,8 +1,8 @@
 ---
-title: Задачи
+title: Tasks
 sidebar:
   order: 100
-  label: Задачи
+  label: Tasks
 taskPage: true
 ---
 ## Упражнения за извънаудиторна заетост
