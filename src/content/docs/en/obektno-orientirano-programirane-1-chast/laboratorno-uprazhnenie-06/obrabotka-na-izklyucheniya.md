@@ -1,23 +1,22 @@
 ---
-title: Обработка на изключения
+title: Exception Handling
 sidebar:
   order: 1
 ---
 
-# Обработка на изключения
+# Exception Handling
 
-
-Изключение е обект, който описва необичайна ситуация по време на изпълнение на програма. При хвърляне на изключение нормалният поток на текущия блок се прекъсва и се търси подходящ обработчик. Ако никой извикващ метод не го обработи, засегнатата нишка приключва; в обикновена програма с една нишка това прекратява програмата.
+An exception is an object that describes an unusual situation while a program is running. When an exception is thrown, the normal flow of the current block is interrupted and Java looks for an appropriate handler. If no calling method handles it, the affected thread ends; in an ordinary single-threaded program, this terminates the program.
 
 ```java
 int result = 10 / 0;
 ```
 
-В този пример възниква `ArithmeticException`, защото деление на нула не може да бъде извършено за цели числа.
+This example causes an `ArithmeticException`, because integer division by zero is not possible.
 
-## `try` и `catch`
+## `try` and `catch`
 
-Блокът `try` съдържа код, при който може да възникне изключение. Блокът `catch` съдържа код за обработка на конкретен тип изключение.
+A `try` block contains code that might throw an exception. A `catch` block contains code to handle a particular exception type.
 
 ```java
 try {
@@ -28,17 +27,17 @@ try {
 }
 ```
 
-Ако в `try` възникне `ArithmeticException`, изпълнението преминава към `catch`. Програмата не прекъсва аварийно, а изпълнява предвидената обработка.
+If an `ArithmeticException` occurs in `try`, execution moves to `catch`. The program runs the planned handling code instead of terminating abruptly.
 
-## Йерархия на изключенията
+## Exception Hierarchy
 
-Всички изключения и грешки в Java наследяват класа `Throwable`. Двата основни наследника са `Error` и `Exception`.
+All Java exceptions and errors extend `Throwable`. Its two main subclasses are `Error` and `Exception`.
 
-`Error` описва сериозни проблеми на средата за изпълнение. Такива проблеми обикновено не се обработват в приложния код.
+`Error` describes serious problems in the runtime environment. Application code usually does not handle such problems.
 
-`Exception` описва ситуации, които могат да бъдат предвидени и обработени от програмата.
+`Exception` describes situations that a program can anticipate and handle.
 
-Дървото показва част от йерархията. Стрелките водят **от родител към пряк наследник**.
+The diagram shows part of the hierarchy. Arrows point **from a parent to its direct subclass**.
 
 ```mermaid
 flowchart LR
@@ -59,32 +58,32 @@ flowchart LR
     RuntimeException --> ClassCastException["ClassCastException"]
 ```
 
-Клонът на `RuntimeException` и клонът на `Error` са непроверявани. `Exception` и неговите наследници извън клона `RuntimeException` са проверявани. Разделянето е описано в [Java Language Specification, §11.1.1](https://docs.oracle.com/javase/specs/jls/se21/html/jls-11.html#jls-11.1.1).
+The `RuntimeException` branch and the `Error` branch are unchecked. `Exception` and its subclasses outside the `RuntimeException` branch are checked. See the [Java Language Specification, §11.1.1](https://docs.oracle.com/javase/specs/jls/se21/html/jls-11.html#jls-11.1.1).
 
-## Изключения и грешки
+## Exceptions and Errors
 
-Думата „грешка“ в ежедневен смисъл е по-широка от Java класа `Error`.
+The everyday meaning of “error” is broader than Java's `Error` class.
 
-| Ситуация | Как се проявява | Подход |
-| --- | --- | --- |
-| Грешка при компилация | Липсващ `;`, несъвместим тип | Поправка на изходния код; `catch` не я обработва |
-| Логическа грешка | Грешна формула, но програмата продължава | Проверки с известни резултати и debugger |
-| `Exception` | Например невалидно число или недостъпен файл | Обработка там, където може да се предприеме смислено действие |
-| `Error` | Например изчерпана памет или стек | Обикновено отстраняване на причината; не е нормален начин за управление на програмата |
+| Situation | How it appears | Approach |
+| --------- | -------------- | -------- |
+| Compilation error | Missing `;`, incompatible type | Fix the source code; `catch` does not handle it |
+| Logic error | Incorrect formula, but the program continues | Use known-result checks and a debugger |
+| `Exception` | For example, invalid number or unavailable file | Handle it where meaningful action can be taken |
+| `Error` | For example, exhausted memory or stack | Usually fix the cause; it is not normal program flow |
 
-`catch (Exception exception)` не прихваща `Error`, защото двата класа са различни наследници на `Throwable`. Не използвайте общ `catch (Throwable ...)`, за да скриете всички проблеми. Хващайте конкретни типове, за които можете да дадете полезно съобщение, да повторите операция или да възстановите състоянието.
+`catch (Exception exception)` does not catch `Error`, because the two classes are different subclasses of `Throwable`. Do not use `catch (Throwable ...)` to hide every problem. Catch specific types for which you can provide a useful message, retry the operation, or restore state.
 
-## Клас `Throwable`
+## The `Throwable` Class
 
-`Throwable` е базовият клас за всички обекти, които могат да бъдат хвърляни и обработвани като проблеми по време на изпълнение. От него наследяват както `Exception`, така и `Error`.
+`Throwable` is the base class for all objects that can be thrown and handled as runtime problems. Both `Exception` and `Error` extend it.
 
-Обект от тип изключение съдържа информация за възникналия проблем. Част от тази информация може да се достъпи чрез наследени методи.
+An exception object contains information about the problem. Some of this information is available through inherited methods.
 
-| Метод | Предназначение |
-| ----- | -------------- |
-| `getMessage()` | Връща текстовото описание на изключението |
-| `printStackTrace()` | Отпечатва информация за изключението и стека на извикванията |
-| `getStackTrace()` | Връща стека на извикванията като масив от `StackTraceElement` |
+| Method | Purpose |
+| ------ | ------- |
+| `getMessage()` | Returns the exception's description |
+| `printStackTrace()` | Prints information about the exception and the call stack |
+| `getStackTrace()` | Returns the call stack as an array of `StackTraceElement` |
 
 ```java
 try {
@@ -94,47 +93,44 @@ try {
 }
 ```
 
-Методът `getMessage()` връща съобщението, свързано с конкретното изключение. Стекът на извикванията показва през кои методи е преминало изпълнението преди възникване на проблема.
+`getMessage()` returns the message associated with the specific exception. The call stack shows which methods execution passed through before the problem occurred.
 
-## Проверявани (Checked) и непроверявани (unchecked) изключения
+## Checked and Unchecked Exceptions
 
-Проверяваните изключения (Checked) се проверяват от компилатора. Ако метод може да предизвика проверявано изключение,
-компилаторът изисква това изключение да бъде обработено с `try-catch` или да бъде декларирано чрез `throws` в
-сигнатурата на метода.
+The compiler checks **checked exceptions**. If a method can cause a checked exception, the compiler requires it to be handled with `try-catch` or declared with `throws` in the method signature.
 
-Непроверяваните типове (unchecked) включват `RuntimeException`, `Error` и наследниците им. Компилаторът не изисква задължителна обработка или деклариране. „Проверявано“ не означава, че проблемът възниква при компилация: тогава се проверява задължението за обработка, а самото изключение възниква по време на изпълнение.
+Unchecked types include `RuntimeException`, `Error`, and their subclasses. The compiler does not require them to be handled or declared. “Checked” does not mean that the problem occurs at compile time: the compiler checks the obligation to handle it, while the exception itself occurs at runtime.
 
-## Изключения при масиви и преобразуване на тип
+## Array and Type-Cast Exceptions
 
-При индекс извън границите на масив възниква `ArrayIndexOutOfBoundsException`:
+Accessing an array outside its bounds causes `ArrayIndexOutOfBoundsException`:
 
 ```java
 int[] numbers = {10, 20};
-// System.out.println(numbers[2]); // валидните индекси са 0 и 1
+// System.out.println(numbers[2]); // valid indices are 0 and 1
 ```
 
-При несъвместимо явно преобразуване на референция възниква `ClassCastException`:
+An incompatible explicit reference cast causes `ClassCastException`:
 
 ```java
 Object value = "Java";
-// Integer number = (Integer) value; // обектът е String, а не Integer
+// Integer number = (Integer) value; // the object is a String, not an Integer
 ```
 
-Това са имената на проблемите, които срещнахме при масивите и полиморфизма. Правилните граници и съвместимите типове предотвратяват причините; `try-catch` не поправя автоматично погрешния алгоритъм.
+These are the problems introduced when studying arrays and polymorphism. Correct bounds and compatible types prevent their causes; `try-catch` does not automatically fix an incorrect algorithm.
 
 ## `NullPointerException`
 
-`NullPointerException` е unchecked изключение. То възниква, когато чрез референция със стойност `null` се направи опит
-за достъп до поле или метод.
+`NullPointerException` is an unchecked exception. It occurs when code tries to access a field or method through a reference whose value is `null`.
 
 ```java
 String text = null;
 System.out.println(text.length());
 ```
 
-Променливата `text` не сочи към реален обект. Затова извикването на `length()` води до `NullPointerException`.
+The `text` variable does not refer to an actual object, so calling `length()` causes a `NullPointerException`.
 
-Това изключение показва, че преди използване на референцията трябва да бъде гарантирано, че тя сочи към обект.
+Before using the reference, make sure it refers to an object.
 
 ```java
 if (text != null) {
@@ -144,15 +140,14 @@ if (text != null) {
 
 ## `NumberFormatException`
 
-`NumberFormatException` е unchecked изключение. То възниква, когато текст не може да бъде преобразуван до число.
+`NumberFormatException` is an unchecked exception. It occurs when text cannot be converted to a number.
 
 ```java
 String value = "abc";
 int number = Integer.parseInt(value);
 ```
 
-Методът `Integer.parseInt(value)` очаква текст, който съдържа валидно цяло число. Текстът `"abc"` не може да бъде
-преобразуван до `int`, затова възниква `NumberFormatException`.
+`Integer.parseInt(value)` expects text containing a valid integer. The text `"abc"` cannot be converted to an `int`, so a `NumberFormatException` occurs.
 
 ```java
 try {
@@ -163,11 +158,11 @@ try {
 }
 ```
 
-Този тип изключение се среща често при работа с входни данни, защото въведената стойност първоначално е текст.
+This exception is common when working with input, because the value entered is initially text.
 
-## Няколко `catch` блока
+## Multiple `catch` Blocks
 
-Един `try` блок може да бъде последван от няколко `catch` блока. Всеки `catch` блок обработва различен тип изключение.
+A `try` block can be followed by several `catch` blocks. Each one handles a different exception type.
 
 ```java
 try {
@@ -181,13 +176,13 @@ try {
 }
 ```
 
-Ако текстът не може да бъде преобразуван до число, се изпълнява първият `catch` блок. Ако индексът е извън границите на масива, се изпълнява вторият `catch` блок.
+If the text cannot be converted to a number, the first `catch` block runs. If the index is outside the array bounds, the second one runs.
 
-Редът на `catch` блоковете има значение. По-специфичните типове трябва да бъдат поставени преди по-общите типове.
+The order of `catch` blocks matters. Put more specific types before more general types.
 
 ## Multi-catch
 
-Когато няколко типа изключения трябва да бъдат обработени по един и същ начин, може да се използва `multi-catch`. Типовете се разделят със символа `|`.
+When several exception types need the same handling, use `multi-catch`. Separate the types with `|`.
 
 ```java
 try {
@@ -199,11 +194,11 @@ try {
 }
 ```
 
-В този пример двата типа изключения водят до една и съща обработка. Променливата `exception` съдържа конкретния обект на възникналото изключение.
+Here, both exception types lead to the same handling. The `exception` variable contains the specific exception object that occurred.
 
 ## `finally`
 
-Блокът `finally` задължително се изпълнява **при напускане на `try` или избрания `catch`**, независимо дали е възникнало изключение. Това включва нормален край, обработено или необработено изключение, `return`, `break` и `continue`.
+A `finally` block runs **when leaving the `try` block or its selected `catch` block**, whether or not an exception occurred. This includes normal completion, a handled or unhandled exception, `return`, `break`, and `continue`.
 
 ```java
 try {
@@ -215,7 +210,7 @@ try {
 }
 ```
 
-`finally` се използва за освобождаване на ресурси, когато това не се управлява автоматично.
+Use `finally` to release resources when that is not handled automatically.
 
 ```java
 static int calculate() {
@@ -227,15 +222,15 @@ static int calculate() {
 }
 ```
 
-При `System.out.println(calculate())` първо се отпечатва съобщението от `finally`, а после `42`.
+Calling `System.out.println(calculate())` first prints the message from `finally`, then `42`.
 
-Гаранцията предполага, че JVM продължава изпълнението. При прекратяване на JVM, например чрез `System.exit(...)`, или принудително спиране на процеса, `finally` може да не се изпълни. Ако `try` никога не приключва, например при безкраен цикъл, до `finally` още не се достига. Това уточнение е част от [официалното описание на finally](https://docs.oracle.com/javase/tutorial/essential/exceptions/finally.html).
+This guarantee assumes that the JVM continues running. If the JVM exits, for example through `System.exit(...)`, or the process is forcibly stopped, `finally` may not run. If `try` never completes, for example because of an infinite loop, `finally` is not reached yet. See the [official description of finally](https://docs.oracle.com/javase/tutorial/essential/exceptions/finally.html).
 
-Не поставяйте `return` или ново `throw` във `finally`: те могат да заменят първоначалния резултат или да скрият първоначалното изключение. За ресурси с `AutoCloseable` предпочитайте `try-with-resources`.
+Do not put `return` or a new `throw` in `finally`: either can replace the original result or hide the original exception. For `AutoCloseable` resources, prefer `try-with-resources`.
 
 ## `throw`
 
-Ключовата дума `throw` се използва за явно сигнализиране на възникнало изключение чрез хвърляне на конкретен обект от тип изключение.
+Use the `throw` keyword to explicitly signal an exception by throwing a specific exception object.
 
 ```java
 public void setAge(int age) {
@@ -245,15 +240,13 @@ public void setAge(int age) {
 }
 ```
 
-Методът не допуска невалидно състояние. При отрицателна стойност се хвърля `IllegalArgumentException`.
+The method rejects an invalid state. A negative value causes an `IllegalArgumentException`.
 
-`throw` прекъсва нормалното изпълнение на текущия блок. След хвърлянето на изключението изпълнението се прехвърля към
-подходящ `catch` блок. Ако такъв блок не съществува, изключението се предава към извикващия код.
+`throw` interrupts normal execution of the current block. After the exception is thrown, execution transfers to an appropriate `catch` block. If there is no handler, the exception is passed to the calling code.
 
-## `throw` в конструктор
+## `throw` in a Constructor
 
-Конструкторът може да проверява дали подадените стойности са валидни. Ако стойностите не позволяват създаване на
-коректен обект, може да се хвърли изключение.
+A constructor can validate supplied values. If the values cannot create a valid object, it can throw an exception.
 
 ```java
 class Product {
@@ -272,13 +265,11 @@ class Product {
 }
 ```
 
-В примера не се допуска създаване на продукт с отрицателна цена. Обектът се създава само ако началното му състояние е
-коректно.
+This example does not allow a product with a negative price. An object is created only if its initial state is valid.
 
-## `throw` в `record`
+## `throw` in a `record`
 
-В `record` може да се дефинира компактен конструктор. Той се използва, когато подадените стойности трябва да бъдат
-проверени преди създаване на обекта.
+A `record` can define a compact constructor to validate values before creating an object.
 
 ```java
 record Product(String name, double price) {
@@ -291,13 +282,11 @@ record Product(String name, double price) {
 }
 ```
 
-В компактния конструктор не се присвояват ръчно стойности към полетата. След изпълнение на проверките компилаторът
-автоматично записва параметрите в съответните компоненти. Ако бъде хвърлено изключение, обект от този `record` не се
-създава.
+A compact constructor does not assign values to fields manually. After the checks, the compiler assigns the parameters to their corresponding components automatically. If an exception is thrown, the record object is not created.
 
 ## `throws`
 
-Ключовата дума `throws` се използва в декларация на метод и показва, че методът може да предаде изключение към извикващия код.
+Use `throws` in a method declaration to indicate that the method can pass an exception to its caller.
 
 ```java
 public static String readFirstLine(String path) throws IOException {
@@ -305,16 +294,16 @@ public static String readFirstLine(String path) throws IOException {
 }
 ```
 
-Кодът, който извиква този метод, трябва да обработи или също да декларира `IOException`.
+The code calling this method must handle `IOException` or declare it as well.
 
-## Разлика между `throw` и `throws`
+## The Difference Between `throw` and `throws`
 
-`throw` и `throws` имат различно предназначение, въпреки че и двете ключови думи са свързани с изключения.
+`throw` and `throws` serve different purposes, although both keywords relate to exceptions.
 
-| Ключова дума | Място на използване | Предназначение |
-| ------------ | ------------------- | -------------- |
-| `throw` | в тяло на метод, конструктор или блок | Хвърля конкретен обект от тип изключение |
-| `throws` | в декларация на метод или конструктор | Обявява, че изключение може да бъде предадено към извикващия код |
+| Keyword | Where it is used | Purpose |
+| ------- | ---------------- | ------- |
+| `throw` | In a method, constructor, or block body | Throws a specific exception object |
+| `throws` | In a method or constructor declaration | Declares that an exception may be passed to the caller |
 
 ```java
 public static void validateAge(int age) {
@@ -324,7 +313,7 @@ public static void validateAge(int age) {
 }
 ```
 
-В примера `new` създава обекта на изключението, а `throw` го хвърля. `throw` може да хвърли и вече съществуващ обект.
+In this example, `new` creates the exception object and `throw` throws it. `throw` can also throw an object that already exists.
 
 ```java
 public static String readText(String path) throws IOException {
@@ -332,11 +321,11 @@ public static String readText(String path) throws IOException {
 }
 ```
 
-В този пример `throws IOException` не хвърля изключение само по себе си. То показва, че методът може да предаде `IOException` към кода, който го извиква.
+Here, `throws IOException` does not throw an exception by itself. It indicates that the method may pass an `IOException` to its caller.
 
-## Собствено изключение
+## Custom Exceptions
 
-Собствено изключение се дефинира чрез клас, който наследява `Exception` или `RuntimeException`.
+Define a custom exception with a class that extends `Exception` or `RuntimeException`.
 
 ```java
 class InvalidGradeException extends RuntimeException {
@@ -347,11 +336,11 @@ class InvalidGradeException extends RuntimeException {
 }
 ```
 
-Такъв клас позволява грешките в конкретна предметна област да бъдат описани с по-точен тип.
+A custom exception describes an error in a particular domain with a more specific type.
 
 ## `try-with-resources`
 
-`try-with-resources` се използва за ресурси, които трябва да бъдат затворени. Ресурсът се затваря автоматично след края на блока.
+Use `try-with-resources` for resources that must be closed. The resource is closed automatically when the block ends.
 
 ```java
 class SimpleResource implements AutoCloseable {
@@ -371,5 +360,4 @@ try (SimpleResource resource = new SimpleResource()) {
 }
 ```
 
-Ресурсът трябва да реализира `AutoCloseable`. След приключване на `try` блока методът `close()` се извиква автоматично.
-Тази конструкция намалява риска ресурсът да остане незатворен.
+The resource must implement `AutoCloseable`. After the `try` block ends, `close()` is called automatically. This construct reduces the risk of leaving a resource open.

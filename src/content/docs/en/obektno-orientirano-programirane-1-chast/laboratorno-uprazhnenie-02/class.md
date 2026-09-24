@@ -1,20 +1,20 @@
 ---
-title: 'Класове, обекти, конструктори и ключови думи'
+title: "Classes, Objects, Constructors, and Keywords"
 sidebar:
   order: 1
 ---
 
-# Класове, обекти, конструктори и ключови думи
+# Classes, Objects, Constructors, and Keywords
 
-Обектно-ориентираното програмиране в Java използва класове и обекти за описание и представяне на данни. Класът описва тип данни, а обектът е конкретна стойност, създадена по това описание. Конструкторът участва в създаването на обекта и задава началното му състояние. Ключовите думи `new`, `this` и `static` определят как се създават обекти, как се достъпва текущият обект и как се декларират членове, които принадлежат на самия клас.
+Java uses classes and objects to describe and represent data. A class describes a data type, while an object is a specific value created from that description. A constructor participates in creating the object and sets its initial state. The `new`, `this`, and `static` keywords determine how objects are created, how the current object is accessed, and how class members are declared.
 
-## Клас
+## Class
 
-Класът е механизъм за създаване на потребителски тип данни в Java. Чрез клас се описва какви данни и какво поведение ще имат обектите от този тип.
+A class is a mechanism for creating a user-defined data type in Java. It describes the data and behavior that objects of that type will have.
 
-Класът не е самият обект. Той е описание на структурата, по която могат да се създават конкретни обекти. Ако `Student` е клас, тогава конкретен студент с име и факултетен номер е обект от този клас.
+A class is not the object itself. It describes the structure used to create concrete objects. If `Student` is a class, a particular student with a name and faculty number is an object of that class.
 
-Клас се декларира чрез ключовата дума `class`, следвана от име на класа и тяло, оградено с фигурни скоби.
+Declare a class with the `class` keyword, followed by its name and a body in curly braces:
 
 ```java
 class Student {
@@ -22,20 +22,20 @@ class Student {
 }
 ```
 
-Декларацията на клас съдържа:
+A class declaration contains:
 
-- ключова дума `class`;
-- име на класа;
-- тяло на класа;
-- членове на класа, когато са необходими.
+- the `class` keyword;
+- the class name;
+- the class body;
+- class members, as needed.
 
-Имената на класовете в Java започват с главна буква и се записват в стил `PascalCase`. Примери за такива имена са `Student`, `BankAccount`, `Car` и `ProductOrder`.
+Java class names start with a capital letter and use `PascalCase`, for example `Student`, `BankAccount`, `Car`, and `ProductOrder`.
 
-## Членове на клас
+## Class Members
 
-Тялото на класа може да съдържа полета, конструктори и методи.
+A class body can contain fields, constructors, and methods.
 
-Полетата съхраняват данните на обекта. Методите описват операции, които могат да използват тези данни. Конструкторите задават началното състояние на нов обект.
+Fields store an object's data. Methods describe operations that can use this data. Constructors set the initial state of a new object.
 
 ```java
 class Student {
@@ -54,16 +54,16 @@ class Student {
 }
 ```
 
-В примера класът `Student` съдържа:
+In this example, `Student` contains:
 
-- поле `name`, което съхранява име;
-- поле `facultyNumber`, което съхранява факултетен номер;
-- конструктор `Student(String name, int facultyNumber)`;
-- метод `getInformation()`, който връща текстово представяне на данните.
+- a `name` field;
+- a `facultyNumber` field;
+- a `Student(String name, int facultyNumber)` constructor;
+- a `getInformation()` method that returns a text representation of the data.
 
-## Полета
+## Fields
 
-Полето е променлива, декларирана в тялото на клас. То описва част от състоянието на обекта.
+A field is a variable declared in a class body. It describes part of an object's state.
 
 ```java
 class Product {
@@ -73,35 +73,33 @@ class Product {
 }
 ```
 
-Всеки обект от класа `Product` има собствена стойност за `name` и собствена стойност за `price`. Това означава, че два различни обекта могат да бъдат създадени по един и същ клас, но да имат различно състояние.
+Each `Product` object has its own `name` and `price` values. Two objects created from the same class can therefore have different states.
 
-## Поле, локална променлива и параметър
+## Fields, Local Variables, and Parameters
 
-Полето се декларира в тялото на клас и описва състояние на обект. Всеки обект има собствено копие на нестатичните
-полета.
+A field is declared in a class body and describes an object's state. Every object has its own copy of non-static fields.
 
-Локалната променлива се декларира в тяло на метод, конструктор или блок. Тя съществува само докато се изпълнява
-съответният блок.
+A local variable is declared inside a method, constructor, or block. It exists only while that block is executing.
 
-Параметърът се декларира в скобите на метод или конструктор. Той получава стойност при извикване.
+A parameter is declared in the parentheses of a method or constructor. It receives a value when the method or constructor is called.
 
 ```java
 class Product {
 
-    String name; // поле
+    String name; // field
 
-    Product(String name) { // параметър
-        String trimmedName = name.trim(); // локална променлива
+    Product(String name) { // parameter
+        String trimmedName = name.trim(); // local variable
         this.name = trimmedName;
     }
 }
 ```
 
-В примера `name` в класа е поле, `name` в конструктора е параметър, а `trimmedName` е локална променлива.
+Here, the class-level `name` is a field, the constructor's `name` is a parameter, and `trimmedName` is a local variable.
 
-## Методи
+## Methods
 
-Методът е именуван блок от инструкции. Чрез методите се описва поведение на обектите.
+A method is a named block of instructions. Methods describe the behavior of objects.
 
 ```java
 class Product {
@@ -115,11 +113,11 @@ class Product {
 }
 ```
 
-Методът `getDescription()` използва стойностите на полетата `name` и `price` и връща текст. Методът се извиква върху конкретен обект от класа `Product`.
+The `getDescription()` method uses the `name` and `price` field values and returns text. It is called on a particular `Product` object.
 
-## Методи за достъп до полета
+## Methods for Accessing Fields
 
-Достъпът до стойности може да се реализира чрез методи за четене и методи за промяна. Метод за четене връща стойността на поле. Метод за промяна задава нова стойност на поле.
+You can access values through getter and setter methods. A getter returns a field's value. A setter assigns a new value to a field.
 
 ```java
 class Student {
@@ -136,32 +134,32 @@ class Student {
 }
 ```
 
-Методът `getName()` връща текущата стойност на полето `name`. Методът `setName(String name)` задава нова стойност на същото поле.
+The `getName()` method returns the current value of `name`. The `setName(String name)` method assigns a new value to that field.
 
-## Клас като тип данни
+## A Class as a Data Type
 
-След като бъде деклариран клас, името му може да се използва като тип.
+Once a class has been declared, its name can be used as a type.
 
 ```java
 Student student;
 Product product;
 ```
 
-Тези декларации създават променливи, които могат да съхраняват референции към обекти от съответния тип. Самият обект още не е създаден. За създаване на обект се използва ключовата дума `new`.
+These declarations create variables that can store references to objects of the corresponding type. The objects themselves have not been created yet. Use the `new` keyword to create an object.
 
-## Обект
+## Object
 
-Обектът е конкретна инстанция на клас. Класът описва структурата и поведението, а обектът е реално създаден екземпляр по това описание.
+An object is a specific instance of a class. A class describes structure and behavior; an object is an actual instance created from that description.
 
-Ако `Student` е клас, тогава студентът с име `Ivan Petrov` и факултетен номер `12345` е конкретен обект от този клас.
+If `Student` is a class, a student named `Ivan Petrov` with faculty number `12345` is a specific object of that class.
 
-Обектът има:
+An object has:
 
-- състояние;
-- поведение;
-- идентичност.
+- state;
+- behavior;
+- identity.
 
-Състоянието се определя от стойностите на полетата. Поведението се определя от методите. Идентичността означава, че всеки създаден обект е отделна единица в паметта, дори когато стойностите му съвпадат със стойностите на друг обект.
+The field values determine its state, and its methods determine its behavior. Identity means that each object is a separate entity in memory, even if its values match those of another object.
 
 ```java
 class Student {
@@ -171,69 +169,69 @@ class Student {
 }
 ```
 
-За обект от класа `Student` състоянието се състои от стойностите на `name` и `facultyNumber`.
+For a `Student` object, the state consists of the values of `name` and `facultyNumber`.
 
-## Създаване на обект
+## Creating an Object
 
-Обект се създава чрез ключовата дума `new`. При създаването се извиква конструктор на класа.
+Create an object with the `new` keyword. A class constructor is called during creation.
 
 ```java
 Student student = new Student();
 ```
 
-В този пример:
+In this example:
 
-- `Student` вляво е типът на променливата;
-- `student` е името на референтната променлива;
-- `new Student()` създава нов обект;
-- резултатът от `new Student()` е референция към създадения обект;
-- референцията се записва в променливата `student`.
+- the `Student` on the left is the variable's type;
+- `student` is the reference variable's name;
+- `new Student()` creates an object;
+- the result of `new Student()` is a reference to that object;
+- the reference is stored in `student`.
 
-## Референция към обект
+## Object References
 
-Референцията е стойност, чрез която програмата достига до обект. Променлива от класов тип съхранява референция, а не самия обект. Референцията не е достъпен за аритметични операции адрес на паметта.
+A reference is a value that lets the program access an object. A variable of a class type stores a reference, not the object itself. A reference is not a memory address that can be accessed for arithmetic operations.
 
 ```java
 Student first = new Student();
 Student second = first;
 ```
 
-В примера се създава един обект. Променливите `first` и `second` съдържат референция към един и същ обект. Ако чрез едната променлива се промени поле на обекта, промяната ще бъде видима и чрез другата променлива.
+This creates one object. Both `first` and `second` contain a reference to it. If you change a field through one variable, the change is visible through the other variable as well.
 
 ```java
 first.name = "Ivan";
 System.out.println(second.name);
 ```
 
-Резултатът е `Ivan`, защото двете променливи сочат към един и същ обект.
+The result is `Ivan`, because both variables refer to the same object.
 
-Присвояването `second = first` копира референцията, а `new Student()` създава отделен обект. При референции `==` проверява дали се сочи към същия обект; `equals()` може да сравнява съдържание според реализацията на класа.
+The assignment `second = first` copies the reference, while `new Student()` creates a separate object. For references, `==` checks whether they refer to the same object. `equals()` may compare content, depending on how the class implements it.
 
-## Стойност `null`
+## The `null` Value
 
-Променлива от референтен тип може да не сочи към обект. Това състояние се представя със стойността `null`.
+A reference variable may not refer to an object. This state is represented by `null`.
 
 ```java
 Student student = null;
 ```
 
-В примера променливата `student` съществува, но не сочи към обект от тип `Student`.
+The variable `student` exists, but does not refer to a `Student` object.
 
-`null` не е обект. Чрез `null` не могат да се достъпват полета и методи.
+`null` is not an object. You cannot access fields or methods through `null`.
 
 ```java
 Student student = null;
 
-// student.name = "Ivan"; // грешка по време на изпълнение
+// student.name = "Ivan"; // runtime error
 ```
 
-Преди използване на референция, която може да бъде `null`, трябва да бъде ясно дали тя сочи към реален обект.
+Before using a reference that might be `null`, make sure it refers to an actual object.
 
-## Конструктор
+## Constructor
 
-Конструкторът е специален член на класа, който се изпълнява при създаване на нов обект. Основното му предназначение е да зададе началното състояние на обекта.
+A constructor is a special class member that runs when a new object is created. Its main purpose is to set the object's initial state.
 
-Конструкторът не е обикновен метод. Той няма тип на връщана стойност, не използва `void` и името му винаги съвпада с името на класа.
+A constructor is not an ordinary method. It has no return type, does not use `void`, and always has the same name as the class.
 
 ```java
 class Student {
@@ -248,11 +246,11 @@ class Student {
 }
 ```
 
-В примера `Student(String name, int facultyNumber)` е конструктор. Той приема две стойности и ги записва в полетата на новия обект.
+Here, `Student(String name, int facultyNumber)` is a constructor. It accepts two values and assigns them to the new object's fields.
 
-## Конструктор без параметри
+## No-Argument Constructor
 
-Конструктор без параметри е конструктор, който не приема аргументи. Той може да бъде дефиниран явно в класа и да задава начални стойности на полетата.
+A no-argument constructor accepts no arguments. You can define it explicitly and use it to set initial field values.
 
 ```java
 class Student {
@@ -267,15 +265,15 @@ class Student {
 }
 ```
 
-При извикване на този конструктор се създава обект със стойности, зададени в тялото на конструктора.
+Calling this constructor creates an object with the values assigned in its body:
 
 ```java
 Student student = new Student();
 ```
 
-## Конструктор по подразбиране
+## Default Constructor
 
-Ако в даден клас не е дефиниран нито един конструктор, Java компилаторът създава автоматично конструктор по подразбиране. Той не приема параметри и не съдържа допълнителна логика.
+If a class declares no constructors, the Java compiler automatically provides a default constructor. It has no parameters and contains no additional logic.
 
 ```java
 class Student {
@@ -285,15 +283,15 @@ class Student {
 }
 ```
 
-Горният клас може да се използва така:
+You can use the class like this:
 
 ```java
 Student student = new Student();
 ```
 
-Това е възможно, защото компилаторът добавя конструктор по подразбиране. Той има формата на конструктор без параметри, но не е изписан в програмния код.
+This works because the compiler supplies a default constructor. It has the form of a no-argument constructor, but does not appear in the source code.
 
-Ако в класа бъде дефиниран поне един собствен конструктор, компилаторът не добавя автоматично конструктор по подразбиране.
+If you declare at least one constructor yourself, the compiler does not automatically add a default constructor.
 
 ```java
 class Student {
@@ -306,17 +304,17 @@ class Student {
 }
 ```
 
-Следната инструкция няма да се компилира:
+The following statement will not compile:
 
 ```java
 Student student = new Student();
 ```
 
-Причината е, че в класа има дефиниран конструктор с параметър, но няма дефиниран конструктор без параметри.
+The class has a constructor with a parameter, but no no-argument constructor.
 
-## Конструктор с параметри за всички полета
+## Constructor with Parameters for All Fields
 
-Конструктор с параметри за всички полета приема стойности при създаване на обекта. Тези стойности се използват за инициализиране на всички полета, които описват началното състояние на обекта.
+A constructor with parameters for all fields accepts values when an object is created. It uses these values to initialize all fields that describe the object's initial state.
 
 ```java
 class Student {
@@ -331,18 +329,17 @@ class Student {
 }
 ```
 
-Създаване на обект:
+Create an object:
 
 ```java
 Student student = new Student("Ivan Petrov", 12345);
 ```
 
-Стойността `"Ivan Petrov"` се подава към параметъра `name`, а стойността `12345` се подава към параметъра `facultyNumber`. Така всяко поле получава стойност още при създаването на обекта.
+The value `"Ivan Petrov"` is passed to `name`, and `12345` is passed to `facultyNumber`. Each field receives its value when the object is created.
 
-## Конструктор и задаване на начално състояние
+## Constructors and Initial State
 
-Конструкторът задава началните стойности на полетата. Стойностите, които се подават към конструктора, трябва да
-съответстват на смисъла на обекта.
+A constructor sets initial field values. The values supplied to it should make sense for the object.
 
 ```java
 class Product {
@@ -357,46 +354,45 @@ class Product {
 }
 ```
 
-В примера стойностите на параметрите `name` и `price` се записват в полетата на новия обект. Така създаденият обект
-получава начално състояние още при извикване на конструктора.
+The parameter values `name` and `price` are assigned to the new object's fields. The object therefore has an initial state as soon as the constructor is called.
 
-## Ключова дума `new`
+## The `new` Keyword
 
-Ключовата дума `new` се използва за създаване на нов обект в паметта. Тя свързва класа и конструктора: класът определя типа на обекта, а конструкторът определя как обектът ще бъде инициализиран.
+Use the `new` keyword to create an object in memory. It connects the class and its constructor: the class determines the object's type, and the constructor determines how it is initialized.
 
-При използване на `new` се извършват няколко действия:
+Using `new` performs several actions:
 
-- заделя се памет за новия обект;
-- извиква се подходящ конструктор;
-- полетата получават начални стойности;
-- връща се референция към създадения обект.
+- memory is allocated for a new object;
+- an appropriate constructor is called;
+- fields receive initial values;
+- a reference to the object is returned.
 
-Общ синтаксис:
+General syntax:
 
 ```java
 ClassName variableName = new ClassName(arguments);
 ```
 
-Пример:
+Example:
 
 ```java
 Student student = new Student("Ivan Petrov", 12345);
 ```
 
-В примера `new Student("Ivan Petrov", 12345)` създава нов обект от класа `Student`. Извиква се конструкторът с два параметъра. Получената референция се записва в променливата `student`.
+`new Student("Ivan Petrov", 12345)` creates a new `Student` object and calls the constructor with two parameters. The resulting reference is stored in `student`.
 
-Всеки израз с `new` създава нов обект.
+Every `new` expression creates a new object:
 
 ```java
 Student first = new Student("Ivan Petrov", 12345);
 Student second = new Student("Ivan Petrov", 12345);
 ```
 
-В примера се създават два различни обекта. Те могат да имат еднакви стойности в полетата си, но са отделни обекти в паметта.
+This creates two separate objects. Their field values may be identical, but they are distinct objects in memory.
 
-## Предаване на референция към метод
+## Passing an Object Reference to a Method
 
-Java винаги предава аргументите **по стойност**. При обект се копира стойността на референцията. Методът може да промени обекта чрез това копие, но присвояването на нова референция на параметъра не променя променливата на извикващия код.
+Java always passes arguments **by value**. For an object, the value being copied is the reference. A method can change the object through this copy, but assigning a new reference to the parameter does not change the caller's variable.
 
 ```java
 class StudentOperations {
@@ -410,13 +406,13 @@ class StudentOperations {
 }
 ```
 
-При `StudentOperations.rename(first)` името на обекта се променя. При `StudentOperations.replace(first)` променливата `first` продължава да сочи към същия обект.
+Calling `StudentOperations.rename(first)` changes the object's name. Calling `StudentOperations.replace(first)` leaves the caller's `first` variable referring to the same object.
 
-## Ключова дума `this`
+## The `this` Keyword
 
-Ключовата дума `this` е референция към текущия обект. Текущ обект е обектът, върху който в момента се изпълнява нестатичен метод или конструктор.
+The `this` keyword is a reference to the current object. The current object is the object on which a non-static method or constructor is running.
 
-`this` се използва, когато трябва ясно да се посочи член на текущия обект. Това е необходимо при съвпадение между имена на параметри и имена на полета.
+Use `this` to refer explicitly to a member of the current object. This is especially useful when a parameter and a field have the same name.
 
 ```java
 class Student {
@@ -431,18 +427,18 @@ class Student {
 }
 ```
 
-В примера:
+In this example:
 
-- `this.name` означава полето `name` на текущия обект;
-- `name` означава параметъра на конструктора;
-- `this.facultyNumber` означава полето `facultyNumber` на текущия обект;
-- `facultyNumber` означава параметъра на конструктора.
+- `this.name` refers to the current object's `name` field;
+- `name` refers to the constructor parameter;
+- `this.facultyNumber` refers to the current object's `facultyNumber` field;
+- `facultyNumber` refers to the constructor parameter.
 
-Без `this` инструкцията `name = name;` би присвоила параметъра на самия него и полето на обекта няма да бъде зададено по желания начин.
+Without `this`, `name = name;` would assign the parameter to itself, leaving the object's field unchanged.
 
-## Извикване на метод чрез `this`
+## Calling a Method with `this`
 
-Ключовата дума `this` може да се използва и при извикване на нестатичен метод на текущия обект. Когато методът се извиква без изрично посочен обект, Java приема, че извикването е към текущия обект.
+You can also use `this` when calling a non-static method on the current object. If you call a method without explicitly naming an object, Java assumes that the current object is the target.
 
 ```java
 class Student {
@@ -463,11 +459,11 @@ class Student {
 }
 ```
 
-В метода `getInformation()` изразът `this.getName()` извиква метода `getName()` върху същия обект. В този пример `getName()` и `this.getName()` имат еднакъв резултат. Използването на `this` прави явно, че методът принадлежи на текущия обект.
+In `getInformation()`, `this.getName()` calls `getName()` on the same object. In this example, `getName()` and `this.getName()` produce the same result. Writing `this` makes it explicit that the method belongs to the current object.
 
-## Подаване на `this` като аргумент на метод
+## Passing `this` as a Method Argument
 
-`this` може да се подаде на метод, който приема обект от съвместим тип. В декларацията се описва **параметърът**, а при извикването `this` е **аргументът** — референцията към текущия обект.
+You can pass `this` to a method that accepts an object of a compatible type. A declaration describes the **parameter**; when the method is called, `this` is the **argument**—a reference to the current object.
 
 ```java
 class Student {
@@ -489,13 +485,13 @@ class CardPrinter {
 }
 ```
 
-Извикването `new Student("Ivan").printCard()` подава същия студент към `print`. Не се създава копие на обекта. Получаващият метод може да промени достъпното му състояние. `this` не може да се използва в статичен метод, защото той няма текущ обект.
+Calling `new Student("Ivan").printCard()` passes the same student object to `print`; it does not create a copy. The receiving method can change the object's accessible state. You cannot use `this` in a static method because it has no current object.
 
-## Извикване на друг конструктор чрез `this()`
+## Calling Another Constructor with `this()`
 
-Ключовата дума `this` може да се използва и като `this(...)` за извикване на друг конструктор от същия клас. Това извикване трябва да бъде първата инструкция в конструктора.
+You can also use `this(...)` to call another constructor in the same class. This call must be the first statement in the constructor.
 
-Такъв запис е подходящ, когато конструктор без параметри трябва да използва същата логика за начално състояние като конструктора с параметри за всички полета.
+This is useful when a no-argument constructor should use the same initial-state logic as the constructor with parameters for all fields.
 
 ```java
 class Student {
@@ -514,43 +510,43 @@ class Student {
 }
 ```
 
-Конструкторът без параметри използва конструктора с параметри за всички полета. Така логиката за задаване на началните стойности остава в един конструктор.
+The no-argument constructor delegates to the constructor with parameters for all fields. This keeps the initialization logic in one constructor.
 
-`this` може да се използва само в нестатичен контекст. Тя не може да се използва в статични методи и статични блокове, защото там няма текущ обект.
+You can use `this` only in a non-static context. It is not available in static methods or static blocks because there is no current object there.
 
 ```java
 class Example {
 
     static void print() {
-        // this не може да се използва тук
+        // this cannot be used here
     }
 }
 ```
 
-## Ключова дума `static`
+## The `static` Keyword
 
-Ключовата дума `static` се използва за деклариране на членове, които принадлежат на класа. Те не принадлежат на отделен обект.
+Use the `static` keyword to declare members that belong to a class rather than to individual objects.
 
-Статични могат да бъдат:
+The following can be static:
 
-- полета;
-- методи;
-- блокове за инициализация;
-- вложени класове.
+- fields;
+- methods;
+- initialization blocks;
+- nested classes.
 
-Разликата между нестатичен и статичен член е свързана със собствеността. Нестатичното поле принадлежи на конкретен обект. Статичното поле принадлежи на класа и има една обща стойност за този клас.
+The difference between static and non-static members is ownership. A non-static field belongs to a particular object. A static field belongs to the class and has one shared value for that class.
 
-## Основни употреби на `static`
+## Common Uses of `static`
 
-| Елемент | Предназначение |
-| ------- | -------------- |
-| статично поле | Съхранява стойност, обща за целия клас |
-| статичен метод | Принадлежи на класа и може да бъде извикан без създаване на обект |
-| статичен блок | Изпълнява се при инициализацията на класа |
+| Member | Purpose |
+| ------ | ------- |
+| static field | Stores a value shared by the entire class. |
+| static method | Belongs to the class and can be called without creating an object. |
+| static block | Runs when the class is initialized. |
 
-## Статично поле
+## Static Fields
 
-Статичното поле е общо за класа. Съществува една стойност, която се споделя от всички обекти.
+A static field belongs to the class. One value is shared by all objects.
 
 ```java
 class Student {
@@ -565,22 +561,22 @@ class Student {
 }
 ```
 
-Полето `university` принадлежи на класа `Student`, а не на конкретен студент. Достъпът до него се извършва чрез името на класа.
+The `university` field belongs to `Student`, not to a particular student. Access it using the class name:
 
 ```java
 System.out.println(Student.university);
 ```
 
-Достъпът до статично поле чрез обект е синтактично възможен, но не показва правилно собствеността на полето.
+Accessing a static field through an object is syntactically possible, but does not clearly show that the field belongs to the class:
 
 ```java
 Student student = new Student("Ivan");
-System.out.println(student.university); // не е препоръчителен запис
+System.out.println(student.university); // not recommended
 ```
 
-Правилният запис използва името на класа, защото полето `university` принадлежи на класа `Student`.
+Use the class name because `university` belongs to `Student`.
 
-Полето `name` е нестатично. Всеки обект от класа `Student` има собствена стойност за него.
+The `name` field is non-static, so each `Student` object has its own value:
 
 ```java
 Student first = new Student("Ivan");
@@ -591,9 +587,9 @@ System.out.println(second.name);
 System.out.println(Student.university);
 ```
 
-## Константа чрез `static final`
+## Constants with `static final`
 
-Когато дадена стойност принадлежи на класа и не трябва да се променя, може да се използва комбинацията `static final`.
+Use `static final` for a value that belongs to the class and must not change.
 
 ```java
 class MathConstants {
@@ -602,19 +598,18 @@ class MathConstants {
 }
 ```
 
-`static` означава, че стойността принадлежи на класа, а не на отделен обект. `final` означава, че след задаване на
-стойността не може да бъде извършено ново присвояване.
+`static` means the value belongs to the class rather than to an individual object. `final` means it cannot be assigned a new value after initialization.
 
-Имената на константите обикновено се записват с главни букви и думи, разделени с долна черта.
+Constant names are conventionally written in uppercase, with words separated by underscores.
 
-| Употреба | Предназначение |
-| -------- | -------------- |
-| `final` променлива | Стойността не може да бъде променяна след инициализация |
-| `static final` поле | Стойността принадлежи на класа и се използва като константа |
+| Usage | Purpose |
+| ----- | ------- |
+| `final` variable | The value cannot be changed after initialization. |
+| `static final` field | The value belongs to the class and is used as a constant. |
 
-## Статичен метод
+## Static Methods
 
-Статичният метод се извиква чрез името на класа и не изисква създаване на обект.
+A static method is called through the class name and does not require an object.
 
 ```java
 class Calculator {
@@ -625,15 +620,15 @@ class Calculator {
 }
 ```
 
-Извикване:
+Call it like this:
 
 ```java
 int result = Calculator.square(5);
 ```
 
-Статичният метод може директно да достъпва само статични членове на същия клас. Той няма текущ обект и затова не може да използва `this`.
+A static method can directly access only static members of the same class. It has no current object, so it cannot use `this`.
 
-Статичният метод не може да използва и `super`, защото `super` изисква текущ обект от клас наследник. В статичен контекст няма конкретен обект, върху който да се изпълнява методът.
+A static method also cannot use `super`, which requires a current object of a subclass. There is no specific object in a static context on which the method could run.
 
 ```java
 class Example {
@@ -643,16 +638,16 @@ class Example {
 
     static void printCounter() {
         System.out.println(counter);
-        // System.out.println(this.name); // не се компилира
+        // System.out.println(this.name); // does not compile
     }
 }
 ```
 
-Ако статичен метод трябва да работи с нестатично поле, трябва да получи обект като параметър или да създаде обект.
+If a static method needs to use a non-static field, it must receive an object as a parameter or create one.
 
-## Метод `main`
+## The `main` Method
 
-В Java методът `main` обикновено е статичен, защото трябва да бъде извикан от Java Virtual Machine без предварително създаване на обект от класа.
+The `main` method is usually static because the Java Virtual Machine must be able to call it without first creating an object of the class.
 
 ```java
 public class Application {
@@ -663,9 +658,9 @@ public class Application {
 }
 ```
 
-## Статичен блок
+## Static Initialization Blocks
 
-Статичният блок е блок от инструкции, който се изпълнява при инициализацията на класа, например преди първото създаване на негов обект или първото извикване на негов статичен метод. Зареждането на класа и инициализацията му са различни етапи.
+A static block is a block of instructions that runs when a class is initialized, for example before its first object is created or its first static method is called. Class loading and class initialization are separate stages.
 
 ```java
 class Configuration {
@@ -678,11 +673,11 @@ class Configuration {
 }
 ```
 
-Статичните блокове се използват за начална подготовка на статични полета, когато инициализацията изисква повече от една инструкция.
+Static blocks are useful for initializing static fields when initialization requires more than one statement.
 
-## Общ пример
+## Complete Example
 
-Следният пример обединява клас, обекти, конструктор, `new`, `this` и `static`.
+The following example combines a class, objects, a constructor, `new`, `this`, and `static`.
 
 ```java
 class Student {
@@ -714,4 +709,4 @@ public class Application {
 }
 ```
 
-В примера `Student` е клас. Променливите `first` и `second` съдържат референции към два различни обекта. Изразите с `new` създават тези обекти и извикват параметризирания конструктор. В конструктора `this.name` и `this.facultyNumber` обозначават полетата на текущия обект. Полето `university` е статично и принадлежи на класа `Student`, затова стойността му е обща за всички обекти от този клас.
+Here, `Student` is a class. The `first` and `second` variables refer to two different objects. The `new` expressions create those objects and call the parameterized constructor. In the constructor, `this.name` and `this.facultyNumber` refer to the current object's fields. The static `university` field belongs to `Student`, so all objects of this class share its value.

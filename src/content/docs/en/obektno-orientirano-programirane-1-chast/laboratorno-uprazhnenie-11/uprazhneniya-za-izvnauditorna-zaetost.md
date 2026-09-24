@@ -5,92 +5,50 @@ sidebar:
   label: Tasks
 taskPage: true
 ---
-## Упражнения за извънаудиторна заетост
 
-## Задача
+## Independent Study Exercise
 
-Да се създаде програма за книжарница, която чете данни от файл, обработва ги като обекти и записва резултати в нов файл.
+Create a bookstore program that reads data from a file, processes it as objects, and writes results to a new file.
 
-## Модел на данните
+## Data model
 
-Да се дефинира изключение `InvalidDataException`, което се хвърля при невалидни данни.
+Define `InvalidDataException` for invalid data.
 
-Да се дефинира интерфейс `CoverType` с метод:
+Define a `CoverType` interface with `boolean isHardCover()`.
 
-```java
-boolean isHardCover();
-```
+Define an abstract `Person` class with `firstName` and `lastName` fields of type `String`. Add a constructor, accessors, `equals()`, `hashCode()`, and `toString()`.
 
-Да се дефинира абстрактен клас `Person` с полета:
+Define `Author` extending `Person` with `country` and `genre` fields of type `String`.
 
-- `firstName` от тип `String`;
-- `lastName` от тип `String`.
+Define `Book` implementing `CoverType` with `title` of type `String`, an `Author`, `publishingYear` of type `int`, `quantity` of type `int`, and `price` of type `double`.
 
-Да се дефинират конструктор, методи за четене, `equals()`, `hashCode()` и `toString()`.
+`quantity` must be greater than 5 and `price` greater than 9.99. Throw `InvalidDataException` for an invalid value. `isHardCover()` returns `true` if the book was published before 2000 and its price is greater than 14 BGN.
 
-Да се дефинира клас `Author`, който наследява `Person` и добавя:
+## File input
 
-- `country` от тип `String`;
-- `genre` от тип `String`.
+Read book data from a text file, with one book per line. Fields are separated by `;`. Titles containing spaces may use underscores to simplify parsing.
 
-Да се дефинира клас `Book`, който имплементира `CoverType` и съдържа:
-
-- `title` от тип `String`;
-- `author` от тип `Author`;
-- `publishingYear` от тип `int`;
-- `quantity` от тип `int`;
-- `price` от тип `double`.
-
-Полето `quantity` трябва да приема стойност по-голяма от `5`. Полето `price` трябва да приема стойност по-голяма от `9.99`. При невалидна стойност трябва да се хвърля `InvalidDataException`.
-
-Методът `isHardCover()` трябва да връща `true`, ако книгата е издадена преди 2000 година и цената е над 14 лв.
-
-## Файлов вход
-
-Данните за книгите трябва да се четат от текстов файл. Един ред от файла описва една книга.
-
-Примерен формат:
+Example:
 
 ```text
-Под_игото;Иван;Вазов;България;класика;1985;12;15.00
-На_изток_от_Рая;Джон;Стайнбек;САЩ;класика;1998;18;12.58
+Under_the_Yoke;Ivan;Vazov;Bulgaria;classic;1985;12;15.00
+East_of_Eden;John;Steinbeck;USA;classic;1998;18;12.58
 ```
 
-Разделителят между стойностите е `;`. Заглавията с няколко думи могат да се записват с `_`, за да се улесни разделянето на реда.
+## The `BookStore` class
 
-## Клас `BookStore`
+Define a `BookStore` class with a `name` and a collection of unique books. Choose an appropriate collection. Its constructor accepts a bookstore name and a filename, then loads the books from that file.
 
-Да се дефинира клас `BookStore`, който съдържа:
+Implement `addBook(Book book)`, `calculateTotalPrice()`, `calculateAveragePriceByGenre(String genre)`, `findAuthorWithMostBooks()`, `countAuthorsAfterYear(int year)`, `getBooksSortedByAuthorCountry()`, `countHardCoverBooks()`, and `toString()`.
 
-- `name` от тип `String`;
-- колекция от уникални книги.
+## File output
 
-Да се избере подходяща колекция за уникални стойности. Да се дефинира конструктор, който приема име на книжарница и име на файл. Конструкторът трябва да зарежда книгите от файла.
+The `Application` class should create a `BookStore` using an input file, add at least two new books, calculate all method results, and write them to an output file.
 
-Да се реализират методи:
+Handle exceptions while reading and writing. Use `try-with-resources` for file resources.
 
-- `addBook(Book book)`;
-- `calculateTotalPrice()`;
-- `calculateAveragePriceByGenre(String genre)`;
-- `findAuthorWithMostBooks()`;
-- `countAuthorsAfterYear(int year)`;
-- `getBooksSortedByAuthorCountry()`;
-- `countHardCoverBooks()`;
-- `toString()`.
+## Additional task — `Scanner`
 
-## Файлов изход
+After implementing the solution with text streams, read the same input file line by line using `Scanner` and compare the resulting books. Use UTF-8 and close the file resource with `try-with-resources`.
 
-Класът `Application` трябва да:
-
-- създаде обект `BookStore` чрез входен файл;
-- добави поне две нови книги;
-- изчисли всички резултати от методите;
-- запише резултатите в изходен файл.
-
-При четене и запис трябва да се използва обработка на изключения. При работа с файлови ресурси трябва да се използва `try-with-resources`.
-
-## Допълнителна задача — `Scanner`
-
-След решението с текстови потоци прочетете същия входен файл чрез `Scanner`, ред по ред, и сравнете получените книги. Използвайте UTF-8 и затворете файловия ресурс чрез `try-with-resources`.
-
-Направете отделен кратък пример за въвеждане на брой книги чрез `nextInt()` и заглавие чрез `nextLine()`. Обяснете защо трябва да се обработи остатъкът от текущия ред. Проверете коректно число, нечислов токен и заглавие с интервали.
+Also create a short example that reads a book count with `nextInt()` and a title with `nextLine()`. Explain why the remainder of the current line must be consumed. Check a valid integer, a non-numeric token, and a title containing spaces.

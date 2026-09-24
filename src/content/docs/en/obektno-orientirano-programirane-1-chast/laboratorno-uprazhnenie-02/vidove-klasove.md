@@ -1,22 +1,22 @@
 ---
-title: Видове класове
+title: Types of Classes
 sidebar:
   order: 2
 ---
 
-# Видове класове: `record` и `enum`
+# Types of Classes: `record` and `enum`
 
-Класът е основният механизъм за дефиниране на потребителски типове данни в Java. Освен обикновените класове езикът предоставя специализирани конструкции, които също дефинират типове. Такива конструкции са `record` и `enum`.
+A class is Java's main mechanism for defining user-defined data types. The language also provides specialized constructs for defining types: `record` and `enum`.
 
-Обикновеният клас се използва, когато трябва да се опишат данни и поведение с пълен контрол върху полетата, конструкторите и методите. Записът `record` се използва основно за компактно представяне на данни. Изброеният тип `enum` се използва за фиксиран набор от допустими стойности.
+Use an ordinary class when you need full control over an object's data and behavior, including its fields, constructors, and methods. A `record` is primarily a concise way to represent data. An `enum` defines a fixed set of permitted values.
 
-## Записи (`record`)
+## Records (`record`)
 
-Записът `record` е специален вид клас, предназначен за моделиране на обекти, които основно съхраняват данни. Той е подходящ, когато даден тип трябва да съдържа няколко стойности и не се очаква тези стойности да се променят след създаване на обекта.
+A `record` is a special kind of class for objects that primarily store data. It is useful when a type contains several values that are not expected to change after the object is created.
 
-Обикновеният клас изисква ръчно деклариране на полета, конструктор, методи за достъп и често методи като `toString()`, `equals()` и `hashCode()`. При `record` голяма част от този код се генерира автоматично от компилатора.
+An ordinary class requires you to declare fields, a constructor, and access methods manually, and often methods such as `toString()`, `equals()`, and `hashCode()` as well. The compiler generates much of this code automatically for a `record`.
 
-## Декларация на `record`
+## Declaring a `record`
 
 ```java
 record Student(String name, int facultyNumber) {
@@ -24,46 +24,46 @@ record Student(String name, int facultyNumber) {
 }
 ```
 
-В този пример `Student` е запис с два компонента:
+Here, `Student` is a record with two components:
 
-- `name` от тип `String`;
-- `facultyNumber` от тип `int`.
+- `name` of type `String`;
+- `facultyNumber` of type `int`.
 
-Компонентите в заглавната част на `record` описват данните, които записът съхранява. За всеки компонент компилаторът автоматично създава частно финално поле и публичен метод за достъп.
+The components in the record header describe the data it stores. The compiler automatically creates a private final field and a public accessor method for each component.
 
-## Създаване на обект от `record`
+## Creating a `record` Object
 
-Обект от `record` се създава чрез ключовата дума `new`, както при обикновен клас.
+Create a record object with `new`, just as you would an ordinary class object.
 
 ```java
 Student student = new Student("Ivan Petrov", 12345);
 ```
 
-При създаването се извиква автоматично генерираният конструктор. Подадените аргументи трябва да съответстват по ред, тип и брой на компонентите в декларацията на `record`.
+Creation calls the generated constructor. The arguments must match the number, order, and types of the components in the record declaration.
 
-## Достъп до стойностите
+## Accessing Component Values
 
-При `record` методите за достъп не използват стандартната форма `getName()`. Вместо това всеки метод има същото име като съответния компонент.
+Record accessors do not use the usual `getName()` form. Each accessor has the same name as its component.
 
 ```java
 System.out.println(student.name());
 System.out.println(student.facultyNumber());
 ```
 
-Методът `name()` връща стойността на компонента `name`. Методът `facultyNumber()` връща стойността на компонента `facultyNumber`.
+The `name()` method returns the `name` component. The `facultyNumber()` method returns the `facultyNumber` component.
 
-## Автоматично генерирани елементи
+## Generated Members
 
-За един `record` компилаторът автоматично създава:
+For a `record`, the compiler automatically creates:
 
-- частни финални полета за компонентите;
-- конструктор, който приема стойности за всички компоненти;
-- методи за достъп до компонентите;
-- метод `toString()`;
-- метод `equals(Object other)`;
-- метод `hashCode()`.
+- private final fields for the components;
+- a constructor that accepts values for every component;
+- accessor methods for the components;
+- a `toString()` method;
+- an `equals(Object other)` method;
+- a `hashCode()` method.
 
-Това означава, че два обекта от един и същ `record` могат да бъдат сравнявани по стойност чрез `equals()`. При обикновен клас такова поведение трябва да се дефинира ръчно, ако е необходимо.
+As a result, `equals()` compares two objects of the same record type by value. An ordinary class needs to define this behavior manually if it is required.
 
 ```java
 record Point(int x, int y) {
@@ -82,11 +82,11 @@ public class Application {
 }
 ```
 
-Резултатът от `first.equals(second)` е `true`, защото двата обекта са от един и същ `record` тип и съдържат еднакви стойности в компонентите си.
+`first.equals(second)` returns `true` because the two objects have the same record type and equal component values.
 
-## Обикновен клас и `record` с едни и същи данни
+## An Ordinary Class and a `record` with the Same Data
 
-За координати можем да напишем обикновен клас:
+We can define an ordinary class for coordinates:
 
 ```java
 final class PointClass {
@@ -103,7 +103,7 @@ final class PointClass {
 }
 ```
 
-Същите данни могат да се представят със запис:
+The same data can be represented by a record:
 
 ```java
 record PointRecord(int x, int y) {
@@ -116,21 +116,21 @@ PointClass secondClass = new PointClass(2, 3);
 PointRecord firstRecord = new PointRecord(2, 3);
 PointRecord secondRecord = new PointRecord(2, 3);
 
-System.out.println(firstClass.getX());              // 2
-System.out.println(firstRecord.x());                // 2
-System.out.println(firstClass.equals(secondClass)); // false
+System.out.println(firstClass.getX());                // 2
+System.out.println(firstRecord.x());                  // 2
+System.out.println(firstClass.equals(secondClass));   // false
 System.out.println(firstRecord.equals(secondRecord)); // true
-System.out.println(firstRecord == secondRecord);    // false
-System.out.println(firstRecord);                    // PointRecord[x=2, y=3]
+System.out.println(firstRecord == secondRecord);      // false
+System.out.println(firstRecord);                      // PointRecord[x=2, y=3]
 ```
 
-Този обикновен клас наследява сравнението по идентичност от `Object`. За сравнение по стойности трябва изрично да се добавят `equals()` и съгласуван `hashCode()`. Записът ги генерира, както и `toString()`. Следователно показаният клас има същите данни, но все още няма цялото поведение на записа.
+The ordinary class inherits identity-based equality from `Object`. To compare values, you must explicitly implement `equals()` and a matching `hashCode()`. A record generates these methods as well as `toString()`. The ordinary class shown here stores the same data but does not yet have all the behavior of the record.
 
-`record` е `final`: не може да има наследници или да наследява произволен клас, но може да имплементира интерфейси. Той може да има собствени методи, например `distanceFromOrigin()`. Подходящ е за резултат от изчисление, координати или описание на данни. Обикновен клас е подходящ, когато е необходимо изменяемо състояние или друга класова йерархия.
+A `record` is `final`: it cannot be extended and cannot extend an arbitrary class, but it can implement interfaces. It can have its own methods, such as `distanceFromOrigin()`. Records are suitable for calculation results, coordinates, or data descriptions. Use an ordinary class when you need mutable state or a different class hierarchy.
 
-## Неизменимост на `record`
+## Immutability of a `record`
 
-Полетата за компонентите на `record` са `final`. Стойностите им се задават чрез конструктора и след това не могат да бъдат променяни чрез ново присвояване. При референтен компонент това гарантира постоянна референция, а не непременно неизменяемо съдържание на сочения обект.
+The component fields of a `record` are `final`. Their values are assigned through the constructor and cannot later be reassigned. For a reference component, this guarantees a fixed reference, but not necessarily immutable contents in the referenced object.
 
 ```java
 record Product(String name, double price) {
@@ -139,14 +139,14 @@ record Product(String name, double price) {
 
 Product product = new Product("Keyboard", 59.90);
 
-// product.price = 49.90; // не е позволено
+// product.price = 49.90; // not allowed
 ```
 
-Тази особеност прави `record` подходящ за пренасяне на данни между различни части на програмата, когато не трябва да се допуска случайна промяна на състоянието.
+This makes a `record` useful for passing data between parts of a program when its state should not be changed accidentally.
 
-## Повърхностна неизменяемост и защитно копиране
+## Shallow Immutability and Defensive Copies
 
-`record` гарантира, че полетата на компонентите не се пренасочват след създаването. Ако компонентът е референция към изменяем обект, неговото съдържание все още може да се промени. Това се нарича **повърхностна неизменяемост**.
+A `record` prevents its component fields from being reassigned after creation. If a component refers to a mutable object, that object's contents can still change. This is called **shallow immutability**.
 
 ```java
 record Grades(int[] values) {
@@ -156,10 +156,10 @@ int[] source = {5, 6};
 Grades grades = new Grades(source);
 source[0] = 2;
 System.out.println(grades.values()[0]); // 2
-grades.values()[1] = 3;                // променя същия масив
+grades.values()[1] = 3;                // changes the same array
 ```
 
-За защита на масива се копира както входът, така и резултатът от метода за достъп:
+To protect the array, copy both the input and the value returned by the accessor:
 
 ```java
 record SafeGrades(int[] values) {
@@ -173,14 +173,13 @@ record SafeGrades(int[] values) {
 }
 ```
 
-Примерът приема непразна референция към масив. Копирането на `int[]` е достатъчно, защото елементите са примитивни стойности; при масив от изменяеми обекти трябва да се помисли и за самите елементи. Генерираното `equals()` на запис с масив сравнява референциите към масивите, а не елементите им — защитното копиране не променя това правило.
+This example assumes a non-null array reference. Copying an `int[]` is sufficient because its elements are primitive values. For an array of mutable objects, consider whether the elements themselves also need to be copied. The generated `equals()` method for a record with an array compares array references, not their elements; defensive copying does not change this rule.
 
-Декларираните компоненти и генерираните членове са описани в [документацията за record класове](https://docs.oracle.com/en/java/javase/21/language/records.html).
+The declared components and generated members are described in the [documentation for record classes](https://docs.oracle.com/en/java/javase/21/language/records.html).
 
-## Компактен конструктор в `record`
+## Compact Constructors in a `record`
 
-В `record` може да се дефинира компактен конструктор. Той се използва, когато при създаване на обекта трябва да се
-изпълни допълнителен код, без да се изписва пълният списък с параметри.
+A `record` can declare a compact constructor. Use it to run additional code when an object is created without writing the full parameter list.
 
 ```java
 record Product(String name, double price) {
@@ -191,25 +190,24 @@ record Product(String name, double price) {
 }
 ```
 
-В компактния конструктор не се присвояват ръчно стойности към полетата. След изпълнение на допълнителния код
-компилаторът автоматично записва параметрите в съответните компоненти.
+A compact constructor does not assign values to the fields manually. After the additional code runs, the compiler automatically assigns the parameters to their corresponding components.
 
-## Кога се използва `record`
+## When to Use a `record`
 
-`record` е подходящ, когато:
+A `record` is suitable when:
 
-- типът основно съхранява данни;
-- всички основни стойности са известни при създаване на обекта;
-- не е необходима промяна на стойностите след създаване;
-- трябва да се намали шаблонният код за конструктор, достъп до стойности и сравнение.
+- the type primarily stores data;
+- all main values are known when the object is created;
+- the values do not need to change afterward;
+- you want to reduce boilerplate for constructors, accessors, and equality.
 
-`record` не е подходящ, когато обектът трябва да има променливо състояние, сложен жизнен цикъл или много операции, които променят вътрешните му данни.
+A `record` is not suitable when an object needs mutable state, a complex lifecycle, or many operations that change its internal data.
 
-## Изброени типове (`enum`)
+## Enumerated Types (`enum`)
 
-Изброеният тип `enum` е специален вид клас, който дефинира фиксиран набор от именувани константи. Той се използва, когато дадена стойност трябва да бъде избрана само измежду предварително известни допустими стойности.
+An `enum` is a special kind of class that defines a fixed set of named constants. Use it when a value must be selected from a known set of permitted values.
 
-Пример:
+Example:
 
 ```java
 enum Status {
@@ -222,15 +220,15 @@ enum Status {
 }
 ```
 
-В този пример `Status` е тип, а `NEW`, `IN_PROGRESS`, `COMPLETED` и `CANCELLED` са неговите допустими стойности. Не може да се създаде произволна стойност от тип `Status`, която не е описана в декларацията на `enum`.
+Here, `Status` is a type, and `NEW`, `IN_PROGRESS`, `COMPLETED`, and `CANCELLED` are its permitted values. You cannot create an arbitrary `Status` value that is not listed in the declaration.
 
-## Използване на `enum`
+## Using an `enum`
 
 ```java
 Status status = Status.NEW;
 ```
 
-Стойностите на `enum` се достъпват чрез името на типа и името на константата. Това прави кода по-четим и намалява риска от грешки, които биха възникнали при използване на обикновени текстови стойности.
+Access enum values through the type name and constant name. This makes code easier to read and reduces errors that can occur with ordinary strings.
 
 ```java
 if (status == Status.COMPLETED) {
@@ -238,38 +236,38 @@ if (status == Status.COMPLETED) {
 }
 ```
 
-Стойностите на `enum` могат да се сравняват чрез оператора `==`, защото всяка константа е единствена предварително създадена инстанция на съответния изброен тип.
+You can compare enum values with `==` because each constant is a unique, pre-created instance of its enum type.
 
-## `enum` вместо текстови стойности
+## Using an `enum` Instead of Strings
 
-Без `enum` често се използват низове.
+Strings are often used when there is no `enum`:
 
 ```java
 String status = "COMPLETED";
 ```
 
-Този подход допуска грешки, защото компилаторът не може да провери дали текстът е валиден статус.
+This approach allows errors because the compiler cannot check whether the text is a valid status.
 
 ```java
-String status = "COMPLETEDD"; // технически валиден String, но невалиден статус
+String status = "COMPLETEDD"; // valid String, but not a valid status
 ```
 
-При `enum` подобна грешка се открива още при компилация.
+An `enum` lets the compiler detect this kind of error:
 
 ```java
 Status status = Status.COMPLETED;
 ```
 
-## Вградени методи на `enum`
+## Built-in `enum` Methods
 
-| Метод           | Предназначение                       |
-| --------------- | ------------------------------------ |
-| values()        | Връща масив с всички константи.      |
-| valueOf(String) | Връща константа по име.              |
-| ordinal()       | Връща поредния номер на константата. |
-| name()          | Връща името на константата.          |
+| Method | Purpose |
+| ------ | ------- |
+| `values()` | Returns an array of all constants. |
+| `valueOf(String)` | Returns a constant by its name. |
+| `ordinal()` | Returns the constant's position. |
+| `name()` | Returns the constant's name. |
 
-Пример:
+Example:
 
 ```java
 for (Status status : Status.values()) {
@@ -277,7 +275,7 @@ for (Status status : Status.values()) {
 }
 ```
 
-Методът `values()` връща всички константи в реда, в който са декларирани. Методът `valueOf(String)` връща константа по точно име. Ако такова име не съществува, се получава грешка по време на изпълнение.
+`values()` returns every constant in declaration order. `valueOf(String)` returns the constant with the exact specified name. If no such name exists, a runtime error occurs.
 
 ```java
 Status status = Status.valueOf("NEW");
@@ -285,11 +283,11 @@ System.out.println(status.name());
 System.out.println(status.ordinal());
 ```
 
-Методът `name()` връща името на константата като текст. Методът `ordinal()` връща позицията на константата, започвайки от `0`. Не се препоръчва програмната логика да зависи от `ordinal()`, защото промяна в реда на константите променя и числовите им позиции.
+`name()` returns the constant's name as text. `ordinal()` returns its position, starting at `0`. Avoid making program logic depend on `ordinal()`, because reordering the constants changes their numeric positions.
 
-## Полета, конструктори и методи в `enum`
+## Fields, Constructors, and Methods in an `enum`
 
-Изброеният тип може да съдържа полета, конструктори и методи. Това е възможно, защото `enum` е специален вид клас.
+An enum can contain fields, constructors, and methods because it is a special kind of class.
 
 ```java
 enum UserRole {
@@ -310,29 +308,29 @@ enum UserRole {
 }
 ```
 
-В този пример всяка константа има собствена стойност за `description`. Конструкторът на `enum` се извиква автоматично при създаване на константите. Той не се извиква с `new` от външен код.
+Each constant in this example has its own `description`. The enum constructor is called automatically when the constants are created. External code does not call it with `new`.
 
 ```java
 System.out.println(UserRole.ADMIN.getDescription());
 ```
 
-## Особености на `enum`
+## Enum Characteristics
 
-Конструкторът на `enum` не може да бъде публичен, защото константите са предварително определени в самата декларация. Нови стойности не могат да се създават извън изброения тип.
+An enum constructor cannot be public because its constants are defined in the enum declaration itself. You cannot create additional values outside that type.
 
-Използването на enum:
+Using an enum:
 
-- ограничава допустимите стойности;
-- подобрява четимостта на програмния код;
-- осигурява проверка на типовете още при компилация;
-- намалява вероятността от грешки.
+- restricts the allowed values;
+- makes code easier to read;
+- provides type checking at compile time;
+- reduces the likelihood of errors.
 
-`enum` е подходящ за статус на поръчка, ден от седмицата, сезон, вид плащане, потребителска роля или друг ограничен набор от стойности.
+An `enum` is suitable for an order status, day of the week, season, payment type, user role, or another limited set of values.
 
-## Сравнение между `class`, `record` и `enum`
+## Comparing `class`, `record`, and `enum`
 
-| Конструкция | Основно предназначение | Създаване на стойности |
-| ----------- | ---------------------- | ---------------------- |
-| `class` | Описание на обекти с данни и поведение. | Чрез `new`, според дефинираните конструктори. |
-| `record` | Компактно описание на данни с финални полета; неизменяемостта е повърхностна. | Чрез `new`, с генериран или изрично дефиниран конструктор. |
-| `enum` | Описание на фиксиран набор от именувани стойности. | Само чрез константите, декларирани в `enum`. |
+| Construct | Main purpose | Creating values |
+| --------- | ------------ | --------------- |
+| `class` | Describes objects with data and behavior. | With `new`, using the declared constructors. |
+| `record` | Concisely describes data with final fields; immutability is shallow. | With `new`, using a generated or explicitly declared constructor. |
+| `enum` | Describes a fixed set of named values. | Only through the constants declared in the `enum`. |

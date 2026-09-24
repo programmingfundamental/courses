@@ -1,32 +1,31 @@
 ---
-title: Статичен и динамичен полиморфизъм
+title: Static and Dynamic Polymorphism
 sidebar:
   order: 1
 ---
 
-# Статичен и динамичен полиморфизъм
+# Static and Dynamic Polymorphism
 
+Polymorphism is an object-oriented programming principle in which the same operation can have different implementations depending on the object's specific type. In Java, this appears through method and constructor overloading and method overriding. Overriding is also sometimes called redefining a method.
 
-Полиморфизмът е принцип в обектно-ориентираното програмиране, при който една и съща операция може да има различна реализация според конкретния тип на обекта. В Java това се проявява чрез претоварване на методи и конструктори и чрез предефиниране на методи. Предефинирането на метод се среща и като презаписване на метод.
+This topic follows [abstraction, abstract classes, and interfaces](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-04/abstrakciya-abstraktni-klasove-i-interfeisi/).
 
-Преди тази тема се изучават [абстракцията, абстрактните класове и интерфейсите](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-04/abstrakciya-abstraktni-klasove-i-interfeisi/).
+## Types of Polymorphism
 
-## Видове полиморфизъм
+In Java, polymorphism can be classified by when the implementation of an operation is selected.
 
-В Java полиморфизмът може да се разглежда според момента, в който се избира конкретната реализация на операцията.
+Here, **static** means “determined at compile time” and **dynamic** means “determined at runtime”. These terms describe when a method is selected; they do not indicate whether it is declared with the `static` keyword. Overloaded methods can be non-static. Dynamic polymorphism applies to overridden non-static methods.
 
-**Статично** тук означава „определено при компилация“, а **динамично** — „определено по време на изпълнение“. Това са моменти на избор на метод, а не указание дали той е деклариран с ключовата дума `static`. Претоварените методи могат да бъдат нестатични. Динамичният полиморфизъм работи с предефинирани нестатични методи.
+Compile-time polymorphism occurs when the compiler selects which method or constructor to call based on the supplied arguments. This is associated with overloading.
 
-Полиморфизъм по време на компилация се получава, когато компилаторът избира кой метод или конструктор да бъде извикан според подадените аргументи. Това е свързано с претоварване.
+Runtime polymorphism occurs when the choice of an overridden method depends on the object's actual type. This is associated with inheritance and method overriding.
 
-Полиморфизъм по време на изпълнение се получава, когато изборът на предефиниран, или презаписан, метод зависи от реалния тип на обекта. Това е свързано с наследяване и предефиниране на методи.
+| Type | Mechanism | When the implementation is selected |
+| ---- | --------- | ----------------------------------- |
+| Static polymorphism | Method and constructor overloading | At compile time, based on the declared argument types |
+| Dynamic polymorphism | Overriding non-static methods | At runtime, based on the actual type of the receiver object |
 
-| Вид | Механизъм | Кога се избира реализацията |
-| --- | --------- | --------------------------- |
-| Статичен полиморфизъм | претоварване на методи и конструктори | при компилация според декларираните типове на аргументите |
-| Динамичен полиморфизъм | предефиниране на нестатични методи | по време на изпълнение според реалния тип на обекта получател |
-
-## Две стъпки при избора на метод
+## Two Steps in Method Selection
 
 ```java
 class Animal {
@@ -53,13 +52,13 @@ class DispatchExample {
 }
 ```
 
-Компилаторът избира `describe(Animal)`, защото аргументът `animal` е деклариран с тип `Animal`. За `animal.sound()` сигнатурата е известна при компилация, но реализацията се избира според действителния обект `Dog`. Претоварването не търси автоматично „най-конкретния“ тип по време на изпълнение.
+The compiler selects `describe(Animal)` because the declared type of `animal` is `Animal`. For `animal.sound()`, the method signature is known at compile time, but the implementation is selected based on the actual `Dog` object. Overloading does not automatically search for the “most specific” type at runtime.
 
-Полетата и статичните методи не участват в динамично предефиниране. Статичен метод със същата сигнатура в наследник **скрива** родителския метод. За ясна употреба извиквайте статичните методи чрез името на класа. `private` методите не се наследяват, а `final` методите не могат да бъдат предефинирани.
+Fields and static methods do not participate in dynamic overriding. A static method with the same signature in a subclass **hides** the parent method. For clarity, call static methods through the class name. Private methods are not inherited, and final methods cannot be overridden.
 
-## Претоварване на методи
+## Method Overloading
 
-Претоварване на методи се получава, когато в един клас има няколко метода с едно и също име, но с различен списък от параметри. Списъкът от параметри включва броя, типа и реда на параметрите.
+Method overloading occurs when one class has several methods with the same name but different parameter lists. A parameter list includes the number, types, and order of parameters.
 
 ```java
 class Calculator {
@@ -78,7 +77,7 @@ class Calculator {
 }
 ```
 
-При извикване на претоварен метод компилаторът избира коя версия да използва според подадените аргументи.
+When an overloaded method is called, the compiler chooses a version based on the supplied arguments.
 
 ```java
 Calculator calculator = new Calculator();
@@ -88,13 +87,13 @@ double secondResult = calculator.sum(2.5, 3.5);
 int thirdResult = calculator.sum(2, 3, 4);
 ```
 
-Претоварването не създава ново име за операцията. То позволява една операция да бъде представена с едно име, когато може да работи с различни параметри.
+Overloading does not give the operation a new name. It lets one operation use the same name when it can work with different parameters.
 
-Претоварването е форма на полиморфизъм по време на компилация, защото конкретната версия на метода се избира преди изпълнение на програмата.
+Overloading is a form of compile-time polymorphism because the specific method version is selected before the program runs.
 
-## Претоварване на конструктори
+## Constructor Overloading
 
-Конструкторите могат да бъдат претоварвани по същото правило като методите. В един клас може да има няколко конструктора със същото име, защото името на конструктора винаги съвпада с името на класа. Разликата между тях се определя от броя, типа и реда на параметрите.
+Constructors can be overloaded in the same way as methods. A class can have several constructors with the same name, since a constructor always has the same name as its class. The number, types, and order of parameters distinguish them.
 
 ```java
 class Product {
@@ -117,7 +116,7 @@ class Product {
 }
 ```
 
-При създаване на обект компилаторът избира конструктора според аргументите в израза с `new`.
+When an object is created, the compiler selects a constructor based on the arguments in the `new` expression.
 
 ```java
 Product first = new Product();
@@ -125,11 +124,11 @@ Product second = new Product("Keyboard");
 Product third = new Product("Monitor", 250.0);
 ```
 
-Това е форма на полиморфизъм по време на компилация, защото изборът на конкретен конструктор се извършва преди стартиране на програмата.
+This is compile-time polymorphism because the constructor is selected before the program starts.
 
-## Предефиниране на метод
+## Method Overriding
 
-Предефиниране на метод се получава, когато клас наследник дефинира метод със същата сигнатура като метод от родителския клас. Същото понятие може да бъде наречено и презаписване на метод.
+Method overriding occurs when a subclass defines a method with the same signature as a method in its parent class. This is also called redefining a method.
 
 ```java
 class Animal {
@@ -148,17 +147,17 @@ class Dog extends Animal {
 }
 ```
 
-Методът `sound()` съществува в `Animal`, но класът `Dog` предоставя собствена реализация. Анотацията `@Override` указва, че методът трябва да предефинира наследен метод.
+The `sound()` method exists in `Animal`, but `Dog` provides its own implementation. The `@Override` annotation indicates that the method is intended to override an inherited method.
 
-## Изисквания за предефиниране на метод
+## Requirements for Overriding a Method
 
-За да бъде един метод предефиниран коректно, трябва да са изпълнени няколко условия:
+For a method to be overridden correctly:
 
-- методът в класа наследник трябва да има същото име;
-- списъкът с параметри трябва да съвпада;
-- върнатият тип трябва да бъде същият или съвместим;
-- видимостта не трябва да бъде по-ограничена от тази в родителския клас;
-- методът от родителския клас не трябва да бъде деклариран като `final`, `static` или `private`.
+- the subclass method must have the same name;
+- the parameter list must match;
+- the return type must be the same or compatible;
+- visibility must not be more restrictive than in the parent class;
+- the parent method must not be declared `final`, `static`, or `private`.
 
 ```java
 class Parent {
@@ -177,21 +176,20 @@ class Child extends Parent {
 }
 ```
 
-Анотацията `@Override` не е задължителна, но позволява на компилатора да провери дали действително се предефинира
-наследен метод.
+The `@Override` annotation is optional, but lets the compiler check that a method is actually overriding an inherited method.
 
-## Методи, наследени от `Object`
+## Methods Inherited from `Object`
 
-Всеки клас в Java наследява класа `Object`. Затова всеки обект разполага с методи, дефинирани в `Object`.
+Every Java class extends `Object`. Therefore, every object has the methods defined in `Object`.
 
-Основни методи, наследени от `Object`, са:
+Important methods inherited from `Object` include:
 
-- `toString()` - връща текстово представяне на обекта;
-- `equals(Object other)` - сравнява текущия обект с друг обект;
-- `hashCode()` - връща числова стойност, свързана с логическата идентичност на обекта;
-- `getClass()` - връща обект, който описва реалния клас на текущия обект.
+- `toString()` — returns a text representation of the object;
+- `equals(Object other)` — compares the current object with another object;
+- `hashCode()` — returns a number associated with the object's logical identity;
+- `getClass()` — returns an object describing the current object's actual class.
 
-`toString()`, `equals()` и `hashCode()` могат да бъдат предефинирани в собствен клас. `getClass()` е `final` и не може да бъде предефиниран.
+You can override `toString()`, `equals()`, and `hashCode()` in your own class. `getClass()` is `final` and cannot be overridden.
 
 ```java
 class Student {
@@ -211,18 +209,18 @@ class Student {
 }
 ```
 
-Методът `toString()` се използва, когато обектът трябва да бъде представен като текст.
+Use `toString()` when an object needs to be represented as text.
 
 ```java
 Student student = new Student("Ivan", 12345);
 System.out.println(student);
 ```
 
-При извеждане на обекта се използва предефинираният `toString()`.
+Printing the object calls the overridden `toString()` method.
 
-## Метод `getClass()`
+## The `getClass()` Method
 
-Методът `getClass()` е наследен от `Object`. Той връща информация за реалния клас на обекта по време на изпълнение.
+The `getClass()` method is inherited from `Object`. It returns information about an object's actual class at runtime.
 
 ```java
 Animal animal = new Dog();
@@ -230,14 +228,13 @@ Animal animal = new Dog();
 System.out.println(animal.getClass().getSimpleName());
 ```
 
-В примера типът на променливата е `Animal`, но реалният обект е `Dog`. Затова `getClass().getSimpleName()` връща
-името `Dog`.
+The variable's type is `Animal`, but the actual object is a `Dog`. Therefore, `getClass().getSimpleName()` returns `Dog`.
 
-`getClass()` не заменя полиморфизма. Той се използва само когато е необходима информация за реалния клас на обекта.
+`getClass()` does not replace polymorphism. Use it only when you need information about an object's actual class.
 
-## Оператор `instanceof`
+## The `instanceof` Operator
 
-Операторът `instanceof` проверява дали дадена референция сочи към обект от определен тип.
+The `instanceof` operator checks whether a reference points to an object of a particular type.
 
 ```java
 Animal animal = new Dog();
@@ -247,13 +244,11 @@ if (animal instanceof Dog) {
 }
 ```
 
-Проверката чрез `instanceof` се използва преди явно преобразуване, когато не е сигурно какъв е реалният тип на обекта.
-Тя се използва и при предефиниране на `equals()`, защото параметърът на метода е от тип `Object`.
+Use `instanceof` before an explicit cast when you are not sure of the object's actual type. It is also used when overriding `equals()`, because the method parameter has type `Object`.
 
-## `equals()` и `hashCode()`
+## `equals()` and `hashCode()`
 
-Методът `equals()` се използва за логическо сравнение на обекти. Ако два различни обекта трябва да се считат за равни
-според стойностите на полетата си, `equals()` трябва да бъде предефиниран.
+Use `equals()` to compare objects logically. If two distinct objects should be considered equal based on their field values, override `equals()`.
 
 ```java
 class Student {
@@ -285,11 +280,11 @@ class Student {
 }
 ```
 
-Когато се предефинира `equals()`, трябва да се предефинира и `hashCode()`. Двата метода трябва да бъдат съгласувани: ако два обекта са равни според `equals()`, те трябва да връщат една и съща стойност от `hashCode()`.
+When you override `equals()`, you must also override `hashCode()`. The methods must agree: if two objects are equal according to `equals()`, they must return the same `hashCode()` value.
 
-## Полиморфна референция
+## Polymorphic References
 
-Променлива от родителски тип може да сочи към обект от клас наследник.
+A variable of a parent type can refer to an object of a subclass.
 
 ```java
 Animal animal = new Dog();
@@ -297,33 +292,31 @@ Animal animal = new Dog();
 System.out.println(animal.sound());
 ```
 
-Типът на променливата е `Animal`, но реалният обект е `Dog`. При извикване на `sound()` се изпълнява реализацията от `Dog`. Изборът на метода се извършва по време на изпълнение според реалния тип на обекта.
+The variable's type is `Animal`, but the actual object is a `Dog`. Calling `sound()` runs the implementation in `Dog`. The implementation is selected at runtime based on the object's actual type.
 
-## Преобразуване при наследяване
+## Type Conversion with Inheritance
 
-Обект от клас наследник може да бъде записан в променлива от родителски тип. Това преобразуване се извършва
-автоматично.
+You can assign a subclass object to a parent-type variable. This conversion happens automatically.
 
 ```java
 Dog dog = new Dog();
 Animal animal = dog;
 ```
 
-Обратното преобразуване от родителски тип към тип на наследник трябва да бъде явно.
+Converting from a parent type to a subclass type must be explicit.
 
 ```java
 Animal animal = new Dog();
 Dog dog = (Dog) animal;
 ```
 
-Явното преобразуване е коректно само ако реалният обект е от съответния тип. Ако реалният обект не е от този тип, при
-изпълнение възниква грешка по време на изпълнение (обработката се изучава в упражнение 6).
+The cast is valid only if the actual object has the corresponding type. Otherwise, a runtime error occurs (handling this is covered in Exercise 6).
 
-## Масив от родителски тип
+## An Array of the Parent Type
 
-Полиморфизмът позволява различни наследници да се обработват чрез общ родителски тип.
+Polymorphism lets you process different subclasses through one common parent type.
 
-Към `Animal` и `Dog` от предходния пример добавяме:
+Add these classes to the previous `Animal` and `Dog` example:
 
 ```java
 class Cat extends Animal {
@@ -349,21 +342,19 @@ for (Animal animal : animals) {
 }
 ```
 
-Всеки елемент от масива има тип `Animal`, но може да съдържа различен конкретен наследник. При обхождане се извиква подходящата реализация на `sound()`.
+Each array element has type `Animal`, but can contain a different concrete subclass. Iteration calls the appropriate implementation of `sound()`.
 
-## Предефиниране и претоварване
+## Overriding and Overloading
 
-Предефинирането не е същото като претоварване. Претоварването се избира при компилация според параметрите на метода или конструктора.
+Overriding and overloading are different. Overloading is selected at compile time based on the method or constructor parameters.
 
-Предефинирането е свързано с наследяване. При него клас наследник предоставя нова реализация на метод със същата
-сигнатура като метод от родителския клас. Изборът на предефиниран метод се извършва по време на изпълнение според
-реалния тип на обекта.
+Overriding is related to inheritance. A subclass provides a new implementation of a method with the same signature as one in the parent class. The overridden method is selected at runtime based on the object's actual type.
 
-## Основни понятия
+## Key Concepts
 
-| Понятие | Предназначение |
-| ------- | -------------- |
-| Претоварване | Един метод или конструктор има няколко версии с различни параметри |
-| Предефиниране | Клас наследник предоставя нова реализация на наследен метод |
-| Полиморфизъм | Различни обекти се обработват чрез общ родителски тип |
-| Абстрактен клас | Базов клас, който не може да бъде инстанциран и може да съдържа абстрактни методи |
+| Concept | Purpose |
+| ------- | ------- |
+| Overloading | A method or constructor has several versions with different parameters. |
+| Overriding | A subclass provides a new implementation of an inherited method. |
+| Polymorphism | Different objects are handled through a common parent type. |
+| Abstract class | A base class that cannot be instantiated and may contain abstract methods. |

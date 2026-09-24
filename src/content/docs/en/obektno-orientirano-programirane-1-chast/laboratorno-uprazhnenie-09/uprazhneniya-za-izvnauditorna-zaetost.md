@@ -5,70 +5,33 @@ sidebar:
   label: Tasks
 taskPage: true
 ---
-## Упражнения за извънаудиторна заетост
 
-## Задача 1
+## Independent Study Exercises
 
-Да се дефинира клас `Article`, който описва статия в блог.
+## Task 1
 
-Класът трябва да съдържа:
+Define an `Article` class representing a blog post, with `title`, `author`, and `editor` of type `String`, and `comments` and `editorsHistory` of type `List<String>`. Add a constructor and accessors, as well as `addComment(String comment)`, `edit(String editor, String newTitle)`, `getCommentsCount()`, and `getEditsCount()`.
 
-- `title` от тип `String`;
-- `author` от тип `String`;
-- `editor` от тип `String`;
-- `comments` от тип `List<String>`;
-- `editorsHistory` от тип `List<String>`.
+`edit` must update the title and record the editor's name in `editorsHistory`. If the author and editor are the same person, do not count the change as an external edit.
 
-Да се дефинират конструктор и методи за четене. Да се дефинират методи:
+## Task 2
 
-- `addComment(String comment)`;
-- `edit(String editor, String newTitle)`;
-- `getCommentsCount()`;
-- `getEditsCount()`.
+Define a `Blog` class that manages articles in a collection. It must contain a static collection, `private static List<Article> articles;`, and static methods `addArticle(Article article)`, `editArticle(String title, String editor, String newTitle)`, `findAuthorWithMostComments()`, `findAuthorWithMostArticles()`, `findEditorWithMostEdits()`, and `printArticles()`.
 
-Методът `edit` трябва да променя заглавието и да записва името на редактора в `editorsHistory`. Ако авторът и редакторът са един и същ човек, редакцията не трябва да се брои като външна редакция.
+Use appropriate collection traversal. Calculate the author or editor with the most occurrences from the collection data rather than hard-coding the result.
 
-## Задача 2
+## Task 3
 
-Да се дефинира клас `Blog`, който управлява статии чрез колекция.
+Create a program that adds at least five articles by at least three authors, adds differing numbers of comments, edits some articles using different editors, prints all articles, and reports the author with the most comments, the author with the most articles, and the editor with the most edits.
 
-Класът трябва да съдържа статична колекция:
+Choose an appropriate collection for each operation. Use `ArrayList` for articles and, if needed, `HashSet` for unique names. `Map` is covered in the next lab.
 
-```java
-private static List<Article> articles;
-```
+## Task 4 — Sorting and method references
 
-Да се реализират следните статични методи:
+Add `getAuthor()`, `getTitle()`, and `getCommentsCount()` to `Article`. Sort copies of the list by comment count in three ways: a named `Comparator`, a lambda expression, and `Comparator.comparingInt(Article::getCommentsCount)`. Verify that all methods produce the same order for the same initial data.
 
-- `addArticle(Article article)`;
-- `editArticle(String title, String editor, String newTitle)`;
-- `findAuthorWithMostComments()`;
-- `findAuthorWithMostArticles()`;
-- `findEditorWithMostEdits()`;
-- `printArticles()`.
+Add a secondary title criterion with `thenComparing(Article::getTitle)` and print results using `forEach(System.out::println)`. Implement a useful `toString()` in `Article`. Include equal comment counts, different titles, and an empty list. For each method reference, write the corresponding lambda expression.
 
-Да се използват подходящи обхождания на колекцията. Когато се търси автор или редактор с най-голям брой срещания, резултатът трябва да се изчислява от данните в колекцията, а не да се задава ръчно.
+## Task 5 — Four forms of method reference
 
-## Задача 3
-
-Да се създаде примерна програма, която:
-
-- създава поне пет статии от поне трима автори;
-- добавя различен брой коментари към статиите;
-- редактира част от статиите от различни редактори;
-- извежда всички статии;
-- извежда автора с най-много коментари;
-- извежда автора с най-много статии;
-- извежда редактора с най-много редакции.
-
-Да се избере подходяща изучена колекция за всяка операция. Използвайте `ArrayList` за статиите и при нужда `HashSet` за уникалните имена. Картите `Map` се разглеждат в следващото упражнение.
-
-## Задача 4 — Сортиране и референции към методи
-
-Добавете методите `getAuthor()`, `getTitle()` и `getCommentsCount()` в `Article`. Сортирайте копия на списъка по брой коментари по три начина: с именуван `Comparator`, lambda израз и `Comparator.comparingInt(Article::getCommentsCount)`. Проверете, че редът е еднакъв при едни и същи начални данни.
-
-Добавете вторичен критерий по заглавие чрез `thenComparing(Article::getTitle)` и отпечатайте резултатите чрез `forEach(System.out::println)`. Реализирайте смислен `toString()` в `Article`. Включете равен брой коментари, различни заглавия и празен списък. За всяка референция към метод напишете съответстващ lambda израз.
-
-## Задача 5 — Четирите форми на method reference
-
-Използвайте `Integer::parseInt`, `System.out::println`, `String::length` и `StringBuilder::new` с подходящите функционални интерфейси от теорията. За всеки пример посочете входните параметри, резултата и момента на реалното извикване. Използвайте получения `StringBuilder`, за да изградите кратък отчет за статиите.
+Use `Integer::parseInt`, `System.out::println`, `String::length`, and `StringBuilder::new` with suitable functional interfaces from the lesson. For each example, identify the input parameters, result, and when the method is actually called. Use the resulting `StringBuilder` to build a short article report.

@@ -5,40 +5,41 @@ sidebar:
   label: Tasks
 taskPage: true
 ---
-## Упражнения за извънаудиторна заетост
 
-## Задача
+## Independent Study Exercises
 
-Да се създаде система за блог.
+## Task 1 — Blog System
 
-За целта са необходими:
+Create a blog system.
 
-- Клас редакция (Version) с полета за създател и редактирал, в който да се съхраняват имената на автор и имената на автор, който е направил редакция. Следвайте принципите за капсулация при създаването на обекти от класа;
-- Клас за изключения, които възникват в класа Version (VersionException), наследяващ базовия клас Exception и да приемащ съобщение за грешка като параметър на конструктора си. Да се приложи VersionException при сетване на стойностите за полетата на клас Verison, като се обработват нулева и празна стойност на полетата за създател и редактор, и се хвърлят изключения с текст "Created by cannot be null" и "Modified by cannot be null";
-- Клас коментар (Comment), наследяващ Version и разширяващ го с поле за съдържание. Следвайте принципите за капсулация при създаването на обекти от класа;
-- Клас за изключения, които възникват в класа Comment (CommentException), наследяващ базовия клас Exception и приемащ съобщение за грешка като параметър на конструктора си. Да се приложи CommentException при сетване на стойностите за полето на клас Comment като се обработват нулева и празна стойност на полетата, и се хвърлят изключения с текст "Comment cannot be empty";
-- Клас статия (Article), наследяващ Version и разширяващ го с полета за заглавие, съдържание и масив от коментари (до 50 коментара). Следвайте принципите за капсулация при създаването на обекти от класа;
-- Клас за изключения, които възникват в класа Article (ArticleException). Класът за изключенията трябва да наследява базовия клас Exception и да приема съобщение за грешка като параметър на конструктора си. Да се приложи ArticleException при сетване на стойностите за полетата. Да се обработват нулева и празна стойност на полетата, като се хвърля изключение с текст "Article title cannot be empty", "Article content cannot be empty", "Comment cannot be null";
-- Клас Blog със статичен масив от 1000 статии и име на автор. Конструкторът приема името на автора като параметър и има:
-  - Метод за добавяне на статия, който предава изключенията от класа Article;
-  - Метод за добавяне на коментар по заглавие на статия и коментар; ако няма такава статия се хвърля изключение "Missing article", и се предават изключенията от класа Comment.
+It must include:
 
-В main да се създадат два обекта  Blog с различни автори и да се добавят статии от двамата автори и коментари за тези статии. Да се обработят изключенията като се извеждат съобщенията за грешка в конзолата.
+- A `Version` class with fields for the creator and the person who edited the item. Store the creator's name and the editor's name. Follow encapsulation principles when creating objects of this class.
+- A `VersionException` class that extends `Exception` and accepts an error message in its constructor. Use it when setting fields in `Version`: handle `null` and empty creator or editor values, and throw exceptions with the messages `"Created by cannot be null"` and `"Modified by cannot be null"`.
+- A `Comment` class that extends `Version` and adds a content field. Follow encapsulation principles when creating objects of this class.
+- A `CommentException` class that extends `Exception` and accepts an error message in its constructor. Use it when setting the `Comment` content; handle `null` and empty values and throw an exception with the message `"Comment cannot be empty"`.
+- An `Article` class that extends `Version` and adds title, content, and an array of comments (up to 50). Follow encapsulation principles when creating objects of this class.
+- An `ArticleException` class that extends `Exception` and accepts an error message in its constructor. Use it when setting fields in `Article`. Handle `null` and empty values by throwing exceptions with the messages `"Article title cannot be empty"`, `"Article content cannot be empty"`, and `"Comment cannot be null"`.
+- A `Blog` class with a static array of 1,000 articles and an author name. Its constructor accepts the author's name. It must have:
+  - a method for adding an article that passes through exceptions from `Article`;
+  - a method for adding a comment by article title and comment. If there is no such article, throw `"Missing article"`; pass through exceptions from `Comment`.
 
-## Задача 2 — Проследяване на `finally`
+In `main`, create two `Blog` objects with different authors, add articles by both authors, and add comments to those articles. Handle exceptions by printing their messages to the console.
 
-Напишете метод `readGrade(String text)`, който преобразува текста в цяло число, допуска оценки от 2 до 6 и връща оценката. При число извън диапазона използвайте `throw new IllegalArgumentException(...)`. В `finally` отпечатвайте `Проверката приключи`.
+## Task 2 — Tracing `finally`
 
-В `main` извикайте метода с `"6"`, `"9"` и `"abc"`. Обработете `NumberFormatException` преди `IllegalArgumentException`, защото първият е наследник на втория. Преди изпълнение запишете очаквания ред на съобщенията. Проверете, че `finally` се изпълнява и при `return`, и при изключение. Обяснете защо в този блок не трябва да има `return`.
+Write a `readGrade(String text)` method that converts text to an integer, accepts grades from 2 through 6, and returns the grade. For a number outside the range, use `throw new IllegalArgumentException(...)`. Print `"Validation complete"` from `finally`.
 
-## Задача 3 — Проверявано изключение и `record`
+In `main`, call the method with `"6"`, `"9"`, and `"abc"`. Handle `NumberFormatException` before `IllegalArgumentException`, because the former is a subclass of the latter. Before running the program, write down the expected order of messages. Verify that `finally` runs both when the method returns and when an exception occurs. Explain why you should not use `return` in this block.
 
-Създайте `InvalidTitleException extends Exception` с конструктор за съобщение и метод `validateTitle(String title) throws InvalidTitleException`. Той трябва да хвърля изключението при `null` или празен текст след `trim()`.
+## Task 3 — Checked Exception and `record`
 
-Създайте отделно `record Book(String title, double price)` с компактен конструктор, който отхвърля отрицателна цена чрез `IllegalArgumentException`. Сравнете задължението на извикващия код за обработка на двата вида изключения. Проверете валидни данни, цена `-1`, празно заглавие и `null`.
+Create `InvalidTitleException extends Exception` with a message constructor, and a `validateTitle(String title) throws InvalidTitleException` method. It must throw the exception if `title` is `null` or empty after `trim()`.
 
-## Задача 4 — Йерархия и освобождаване на ресурс
+Separately, create `record Book(String title, double price)` with a compact constructor that rejects a negative price with `IllegalArgumentException`. Compare the caller's obligation to handle these two exception types. Test valid data, price `-1`, an empty title, and `null`.
 
-Поставете `IOException`, `NumberFormatException`, `StackOverflowError` и собствените изключения от задачите в дървото на йерархията. Посочете кои са checked и unchecked и кои ще бъдат прихванати от `catch (Exception ...)`, без да предизвиквате реално изчерпване на ресурси.
+## Task 4 — Exception Hierarchy and Resource Cleanup
 
-Реализирайте `DemoResource implements AutoCloseable`, който отпечатва съобщение в `close()`. Използвайте го с `try-with-resources` веднъж с нормален край и веднъж с изключение в тялото. Проверете, че затварянето предхожда външния `catch`.
+Place `IOException`, `NumberFormatException`, `StackOverflowError`, and the custom exceptions from the tasks in the exception hierarchy. Identify which are checked and unchecked, and which are caught by `catch (Exception ...)`, without actually exhausting runtime resources.
+
+Implement `DemoResource implements AutoCloseable`, which prints a message from `close()`. Use it with `try-with-resources` once with normal completion and once with an exception in the body. Verify that closing happens before the outer `catch`.

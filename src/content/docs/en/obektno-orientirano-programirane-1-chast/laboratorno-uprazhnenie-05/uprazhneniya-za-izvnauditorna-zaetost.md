@@ -5,45 +5,46 @@ sidebar:
   label: Tasks
 taskPage: true
 ---
-## Упражнения за извънаудиторна заетост
 
-Използвайте абстрактните класове и интерфейсите от предходното упражнение. За всяко извикване посочвайте кое се определя при компилация и кое — по време на изпълнение.
+## Independent Study Exercises
 
-## Задача 1 — Общ тип за служители
+Use the abstract classes and interfaces from the previous exercise. For each call, identify what is determined at compile time and what is determined at runtime.
 
-Дефинирайте `abstract class Employee` с частни полета `name`, `employeeId` и `baseSalary`, статични полета `companyName` и `createdCount`, конструктор и методи за четене. Броячът да се увеличава при създаване на служител.
+## Task 1 — A Common Type for Employees
 
-Добавете абстрактен метод `double calculateSalary()` и `toString()`, който връща името, идентификатора и изчислената заплата. Използвайте неотрицателни заплати. Обяснете защо общият клас няма смислена единствена формула за всички служители.
+Define an `abstract class Employee` with private `name`, `employeeId`, and `baseSalary` fields; static `companyName` and `createdCount` fields; a constructor; and getter methods. Increment the counter whenever an employee is created.
 
-## Задача 2 — Динамичен полиморфизъм
+Add an abstract `double calculateSalary()` method and a `toString()` method that returns the name, ID, and calculated salary. Use non-negative salaries. Explain why there is no single meaningful salary formula for the base class.
 
-Създайте `Manager` с поле `department` и `Clerk` с поле `bonusPercent`. И двата класа наследяват `Employee` и предефинират `calculateSalary()` с `@Override`. Мениджърът получава основната заплата, а чиновникът — `baseSalary * (1 + bonusPercent / 100.0)`. Частното родителско поле се използва чрез getter.
+## Task 2 — Dynamic Polymorphism
 
-Създайте масив `Employee[]` с двама мениджъри и четирима чиновници. Обходете го с едно и също извикване `employee.calculateSalary()` и изчислете общата сума, без проверки за конкретния клас. Проверете чиновник с основна заплата 1000 и бонус 10% → 1100. Изведете фирмата и броя създадени служители чрез името на класа.
+Create a `Manager` class with a `department` field and a `Clerk` class with a `bonusPercent` field. Both extend `Employee` and override `calculateSalary()` with `@Override`. The manager receives the base salary; the clerk receives `baseSalary * (1 + bonusPercent / 100.0)`. Access the private parent field through a getter.
 
-## Задача 3 — Статичен полиморфизъм
+Create an `Employee[]` with two managers and four clerks. Iterate with the same `employee.calculateSalary()` call and calculate the total, without checking the concrete class. Verify that a clerk with a base salary of 1000 and a 10% bonus earns 1100. Print the company name and employee count through the class name.
 
-В `Manager` дефинирайте претоварени методи:
+## Task 3 — Static Polymorphism
+
+In `Manager`, define these overloaded methods:
 
 - `double calculateEarnings(int days, double dailyPay)`;
-- `double calculateEarnings(double dailyPay)`, който използва 22 работни дни.
+- `double calculateEarnings(double dailyPay)`, which uses 22 workdays.
 
-Вторият метод трябва да извиква първия. Проверете `calculateEarnings(18, 100.0)` → 1800 и `calculateEarnings(100.0)` → 2200. Посочете защо изборът е статичен, въпреки че методите не са декларирани със `static`.
+The second method must call the first. Check that `calculateEarnings(18, 100.0)` returns 1800 and `calculateEarnings(100.0)` returns 2200. Explain why selection is static even though the methods are not declared with `static`.
 
-## Задача 4 — Претоварване и предефиниране заедно
+## Task 4 — Overloading and Overriding Together
 
-Създайте `SalaryPrinter` с претоварени `describe(Employee employee)` и `describe(Manager manager)`, връщащи различими съобщения.
+Create a `SalaryPrinter` class with overloaded `describe(Employee employee)` and `describe(Manager manager)` methods that return distinguishable messages.
 
-Използвайте `Employee employee = new Manager(...)`. Предвидете коя версия се избира при `describe(employee)` и коя реализация — при `employee.calculateSalary()`. Сравнете с извикване през променлива от тип `Manager`. Запишете обяснение за декларирания тип на аргумента и реалния тип на обекта получател.
+Use `Employee employee = new Manager(...)`. Predict which overload is selected by `describe(employee)` and which implementation runs for `employee.calculateSalary()`. Compare this with a call through a variable of type `Manager`. Explain the declared type of the argument and the actual type of the receiver object.
 
-## Задача 5 — Полиморфизъм чрез интерфейс
+## Task 5 — Polymorphism Through an Interface
 
-Използвайте `Movement`, `Dog`, `Bird` и `Fish` от упражнение 4. Създайте `Movement[]` и изведете `move()` за всеки елемент. Добавете нов клас, например `Robot`, който имплементира същия интерфейс. Кодът за обхождане трябва да работи без промяна.
+Use `Movement`, `Dog`, `Bird`, and `Fish` from Exercise 4. Create a `Movement[]` and print `move()` for each element. Add a new class, such as `Robot`, that implements the same interface. The iteration code must work without changes.
 
-Сравнете общ тип `Movement` с общ тип `Animal`. Обяснете защо роботът може да има способност за движение, без да е животно.
+Compare the common type `Movement` with the common type `Animal`. Explain why a robot can have the capability to move without being an animal.
 
-## Задача 6 — Сравнение и безопасно преобразуване
+## Task 6 — Equality and Safe Casting
 
-Създайте отделен `final class EmployeeId` с едно поле `String value`. Реализирайте `equals()` и `hashCode()` по стойността. Проверете един и същ обект, два различни обекта с еднакъв идентификатор, различен идентификатор, `null` и обект от друг тип.
+Create a separate `final class EmployeeId` with one `String value` field. Implement `equals()` and `hashCode()` based on that value. Test the same object, two different objects with the same ID, a different ID, `null`, and an object of another type.
 
-В масива от задача 2 използвайте `instanceof Manager` преди достъп до специфичния метод `getDepartment()`. Обяснете защо тази проверка е нужна за специфичната операция, но не и за общото `calculateSalary()`. Покажете чрез `getClass()` реалните типове, без да опитвате да предефинирате този финален метод.
+In the array from Task 2, use `instanceof Manager` before calling the specific `getDepartment()` method. Explain why this check is needed for the specific operation but not for the common `calculateSalary()` method. Use `getClass()` to display actual types, without trying to override this final method.

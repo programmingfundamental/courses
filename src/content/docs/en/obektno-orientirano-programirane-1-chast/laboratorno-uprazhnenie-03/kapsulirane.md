@@ -1,14 +1,14 @@
 ---
-title: Капсулация и модификатори за достъп
+title: Encapsulation and Access Modifiers
 sidebar:
   order: 3
 ---
 
-# Капсулация и модификатори за достъп
+# Encapsulation and Access Modifiers
 
-Капсулацията е принцип в обектно-ориентираното програмиране, при който данните на обекта и операциите върху тези данни се поставят в един клас. Външният код не работи директно с вътрешното състояние на обекта, а използва методите, които класът предоставя.
+Encapsulation is an object-oriented programming principle that places an object's data and the operations on that data in one class. External code does not work directly with the object's internal state; it uses the methods provided by the class.
 
-Вътрешно състояние се наричат стойностите на полетата в даден обект. Ако тези полета са достъпни директно отвън, всяка част от програмата може да ги промени без проверка. Така обектът може да попадне в невалидно състояние.
+An object's internal state consists of the values of its fields. If these fields are directly accessible from outside, any part of the program can change them without validation. This can leave the object in an invalid state.
 
 ```java
 class Student {
@@ -18,18 +18,18 @@ class Student {
 }
 ```
 
-При такава декларация полетата могат да бъдат променяни директно.
+With this declaration, the fields can be changed directly:
 
 ```java
 Student student = new Student();
 student.age = -5;
 ```
 
-Стойността `-5` не е валидна възраст, но директният достъп до полето позволява такава промяна. Капсулацията решава този проблем чрез ограничаване на достъпа до полетата.
+An age of `-5` is invalid, but direct access allows it. Encapsulation addresses this problem by restricting access to fields.
 
-## Частни полета
+## Private Fields
 
-Поле, декларирано с `private`, е достъпно само в класа, в който е дефинирано.
+A field declared `private` is accessible only within the class where it is defined.
 
 ```java
 class Student {
@@ -39,19 +39,19 @@ class Student {
 }
 ```
 
-След тази промяна полетата `name` и `age` не могат да бъдат достъпени директно извън класа `Student`.
+After this change, `name` and `age` cannot be accessed directly outside `Student`.
 
 ```java
 Student student = new Student();
 
-// student.age = -5; // не се компилира
+// student.age = -5; // does not compile
 ```
 
-Обектът все още има полетата `name` и `age`, но достъпът до тях трябва да се реализира чрез методи.
+The object still has the `name` and `age` fields, but access to them must be provided through methods.
 
-## Методи за четене
+## Getter Methods
 
-Метод за четене връща стойността на поле. Такъв метод често се нарича getter.
+A getter returns the value of a field.
 
 ```java
 class Student {
@@ -69,11 +69,11 @@ class Student {
 }
 ```
 
-Методите `getName()` и `getAge()` са публични. Те позволяват стойностите да бъдат прочетени, без полетата да стават директно достъпни.
+The public `getName()` and `getAge()` methods let callers read the values without exposing the fields directly.
 
-## Методи за промяна
+## Setter Methods
 
-Метод за промяна задава нова стойност на поле. Такъв метод често се нарича setter.
+A setter assigns a new value to a field.
 
 ```java
 class Student {
@@ -93,11 +93,11 @@ class Student {
 }
 ```
 
-Методът `setAge(int age)` проверява стойността преди присвояване. Ако подадената стойност е отрицателна, полето не се променя. Така класът контролира собственото си състояние.
+The `setAge(int age)` method checks a value before assigning it. If the supplied value is negative, the field is not changed. The class therefore controls its own state.
 
-## Капсулация чрез конструктор
+## Encapsulation Through a Constructor
 
-Стойностите могат да се задават и чрез конструктор. Това е подходящо, когато обектът трябва да бъде създаден с валидно начално състояние.
+You can also set values through a constructor. This is appropriate when an object must be created with a valid initial state.
 
 ```java
 class Student {
@@ -122,11 +122,11 @@ class Student {
 }
 ```
 
-В конструктора се използва `setAge(age)`, защото проверката за валидна възраст вече е описана в метода `setAge`. Така условието за валидност се намира на едно място.
+The constructor calls `setAge(age)` because the age validation is already implemented there. This keeps the validity rule in one place.
 
-## Обект само за четене
+## Read-Only Objects
 
-Понякога стойностите трябва да се зададат при създаване на обекта и след това да не се променят. В такъв случай се дефинират частни полета и методи за четене, но не се дефинират методи за промяна.
+Sometimes values should be set when an object is created and never changed afterward. In that case, define private fields and getters but no setters.
 
 ```java
 final class StudentCard {
@@ -149,35 +149,34 @@ final class StudentCard {
 }
 ```
 
-Полетата са `private final`. Те се задават в конструктора и след това не могат да получат нова стойност.
+The fields are `private final`. They are assigned in the constructor and cannot be assigned again.
 
-В този пример `String` е неизменяем, а `final` върху класа забранява наследници, които биха могли да променят поведението му. Липсата на setter сама по себе си не гарантира неизменяем обект: друг метод може да променя поле, а getter може да върне изменяем масив или друг вътрешен обект.
+Here, `String` is immutable, and declaring the class `final` prevents subclasses from changing its behavior. However, the absence of setters alone does not guarantee an immutable object: another method could change a field, or a getter could return a mutable array or another internal object.
 
-## Сравнение на обект само за четене с `record`
+## Comparing a Read-Only Class with a `record`
 
-Същите данни могат да се опишат компактно:
+The same data can be described more concisely:
 
 ```java
 record StudentCard(String number, String ownerName) {
 }
 ```
 
-Двата варианта са алтернативни определения и се изпробват поотделно.
+These are alternative definitions and should be tried separately.
 
-| Характеристика | Обикновен клас само за четене | `record` |
-| --- | --- | --- |
-| Полета и конструктор | Декларират се изрично | Генерират се от компонентите |
-| Четене | Например `getNumber()` | `number()` |
-| Промяна | Забранява се чрез дизайна на класа | Полетата на компонентите са `final` |
-| Сравнение | `equals()` и `hashCode()` се реализират при нужда | Генерират се по компонентите |
-| Наследяване | Може да се забрани с `final` | Класът винаги е `final` |
+| Feature | Read-only ordinary class | `record` |
+| ------- | ------------------------ | ---------- |
+| Fields and constructor | Declared explicitly | Generated from components |
+| Reading values | For example, `getNumber()` | `number()` |
+| Changing values | Prevented by the class design | Component fields are `final` |
+| Equality | Implement `equals()` and `hashCode()` if needed | Generated from components |
+| Inheritance | Can be prohibited with `final` | The class is always `final` |
 
-И при двата подхода `final` референция не прави сочения обект неизменяем. За масиви се използват защитни копия при приемане и връщане. Пример е даден в [Видове класове](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-02/vidove-klasove/#повърхностна-неизменяемост-и-защитно-копиране).
+With either approach, a `final` reference does not make the referenced object immutable. For arrays, use defensive copies on input and output. See [Types of Classes](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-02/vidove-klasove/).
 
-## `final` поле
+## `final` Fields
 
-Поле, декларирано с `final`, може да получи стойност само веднъж. След това към него не може да бъде присвоена нова
-стойност.
+A field declared `final` can be assigned only once. It cannot be assigned a new value afterward.
 
 ```java
 class Student {
@@ -194,16 +193,15 @@ class Student {
 }
 ```
 
-`final` поле трябва да бъде инициализирано при декларацията или в конструктор. Това позволява създаване на обекти, при
-които определени части от състоянието не могат да се променят след създаване.
+A `final` field must be initialized when it is declared or in a constructor. This lets you create objects whose state cannot be changed after creation in certain ways.
 
-## Публичен интерфейс на клас
+## A Class's Public Interface
 
-Публичният интерфейс на клас се състои от публичните конструктори и публичните методи, които могат да се използват от външен код. Частните полета и частните помощни методи са част от вътрешната реализация.
+A class's public interface consists of its public constructors and methods that external code can use. Private fields and private helper methods are part of its internal implementation.
 
-Тук **интерфейс** означава начинът за използване на класа. Например клиентът на банкова сметка извиква `deposit(...)` и `getBalance()`, без да знае как се съхранява балансът.
+Here, **interface** means how to use the class. For example, a bank account client calls `deposit(...)` and `getBalance()` without knowing how the balance is stored.
 
-Това понятие се различава от ключовата дума **`interface`**, с която Java декларира отделен тип и договор за поведение.
+This meaning differs from the **`interface`** keyword, which declares a separate Java type and behavior contract.
 
 ```java
 class BankAccount {
@@ -228,22 +226,22 @@ class BankAccount {
 }
 ```
 
-Класът `BankAccount` не позволява директна промяна на `balance`. Промяната се извършва чрез метод `deposit(double amount)`, който приема само положителна стойност.
+`BankAccount` does not allow direct changes to `balance`. Changes go through `deposit(double amount)`, which accepts only positive values.
 
-## Модификатори за достъп
+## Access Modifiers
 
-Модификаторите за достъп определят откъде може да се използва даден клас, поле, конструктор или метод. Те са механизъм за контрол на видимостта в Java и са основен инструмент за реализиране на капсулация.
+Access modifiers determine where a class, field, constructor, or method can be used. They control visibility in Java and are a key tool for implementing encapsulation.
 
-В Java има четири нива на достъп за членове на клас:
+Java has four access levels for class members:
 
 - `private`;
-- достъп на ниво пакет, когато не е указан модификатор;
+- package-private access, when no modifier is specified;
 - `protected`;
 - `public`.
 
 ## `private`
 
-Модификаторът `private` ограничава достъпа само до класа, в който е деклариран съответният член.
+The `private` modifier restricts access to the class in which the member is declared.
 
 ```java
 class Student {
@@ -258,13 +256,13 @@ class Student {
 }
 ```
 
-Полето `age` може да се използва директно само в класа `Student`. Външен код трябва да използва публичен метод, ако класът предоставя такъв.
+The `age` field can be used directly only inside `Student`. External code must use a public method, if the class provides one.
 
-`private` се използва за полета, които описват вътрешното състояние на обекта, и за помощни методи, които не трябва да бъдат част от публичния интерфейс.
+Use `private` for fields that represent an object's internal state and for helper methods that should not be part of the public interface.
 
-## Достъп на ниво пакет
+## Package-Private Access
 
-Когато не е указан модификатор, се използва достъп на ниво пакет. Такъв член е достъпен само за класове от същия пакет.
+When no modifier is specified, the member has package-private access. It is accessible only to classes in the same package.
 
 ```java
 class Student {
@@ -273,13 +271,13 @@ class Student {
 }
 ```
 
-Полето `name` няма изрично указан модификатор. То е достъпно за класове от същия пакет, но не е достъпно от класове в други пакети.
+The `name` field has no explicit modifier. Classes in the same package can access it, but classes in other packages cannot.
 
-Пакетът представлява група от свързани класове. В начални примери често не се декларира пакет, но правилото за достъп на ниво пакет остава същото.
+A package is a group of related classes. Introductory examples often omit a package declaration, but the same package-private rule still applies.
 
 ## `protected`
 
-Модификаторът `protected` позволява достъп от класове в същия пакет и от класове наследници.
+The `protected` modifier allows access from classes in the same package and from subclasses.
 
 ```java
 class Person {
@@ -295,15 +293,15 @@ class Student extends Person {
 }
 ```
 
-Класът `Student` наследява `Person` и може да използва полето `name`, защото то е `protected`.
+`Student` extends `Person` and can use the `name` field because it is `protected`.
 
-За наследник в друг пакет достъпът до нестатичен `protected` член е ограничен: той може да го използва чрез `this`, `super` или референция от тип на този наследник (или негов наследник), но не чрез произволна референция от родителския тип. В същия пакет важи пакетният достъп.
+For a subclass in another package, access to an instance `protected` member is restricted: it can use the member through `this`, `super`, or a reference whose type is that subclass (or one of its subclasses), but not through an arbitrary parent-type reference. Within the same package, package access also applies.
 
-`protected` трябва да се използва внимателно. То прави член на родителски клас достъпен за наследници, но също така увеличава зависимостта между родителския клас и класовете наследници.
+Use `protected` carefully. It exposes a parent class member to subclasses and increases the dependency between the parent class and its subclasses.
 
 ## `public`
 
-Модификаторът `public` прави елемента достъпен от всяка част на програмата, ако самият клас е достъпен.
+The `public` modifier makes a member accessible from anywhere in the program, provided the class itself is accessible.
 
 ```java
 public class Student {
@@ -314,11 +312,11 @@ public class Student {
 }
 ```
 
-Публичните методи формират начина, по който външният код работи с обекта. При капсулация полетата обикновено не се декларират като `public`, защото това позволява директна промяна без контрол.
+Public methods form the way external code interacts with an object. Encapsulated fields are usually not declared `public`, because that would allow uncontrolled direct changes.
 
-## Модификатори при класове
+## Access Modifiers on Classes
 
-Клас на най-горно ниво може да бъде `public` или без изричен модификатор.
+A top-level class can be `public` or have no explicit modifier.
 
 ```java
 public class Student {
@@ -326,17 +324,17 @@ public class Student {
 }
 ```
 
-Публичен клас е достъпен от други пакети. Ако класът няма модификатор, той е достъпен само в рамките на същия пакет.
+A public class can be accessed from other packages. A class without a modifier is accessible only within its own package.
 
-## Таблица за видимост
+## Visibility Table
 
-| Модификатор | Същият клас | Същият пакет | Наследник в друг пакет | Външен пакет |
-| ----------- | ----------- | ------------ | ---------------------- | ------------ |
-| `private` | Да | Не | Не | Не |
-| без модификатор | Да | Да | Не | Не |
-| `protected` | Да | Да | Да | Не |
-| `public` | Да | Да | Да | Да |
+| Modifier | Same class | Same package | Subclass in another package | Other package |
+| -------- | ---------- | ------------ | --------------------------- | ------------- |
+| `private` | Yes | No | No | No |
+| no modifier | Yes | Yes | No | No |
+| `protected` | Yes | Yes | Yes | No |
+| `public` | Yes | Yes | Yes | Yes |
 
-При избор на модификатор се използва най-ограниченият достъп, който позволява класът да изпълнява предназначението си. Полетата се ограничават с `private`, когато няма причина да бъдат достъпни директно отвън.
+Choose the most restrictive access that still lets the class do its job. Use `private` for fields unless there is a reason to expose them directly.
 
-Таблицата описва отделни класове на най-горно ниво. Вложени класове в рамките на един и същ обгръщащ клас могат да достъпват негови частни членове. Това е право на достъп, а не наследяване на `private` членове.
+This table describes top-level classes. Nested classes within the same enclosing class can access its private members. This is an access privilege, not inheritance of `private` members.
