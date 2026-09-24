@@ -5,57 +5,68 @@ sidebar:
   label: Tasks
 taskPage: true
 ---
-## Упражнения за извънаудиторна заетост
 
-## Задача 1
+## Independent Study Exercises
 
-Опишете абстракцията „геометрична фигура“: всяка фигура има име и може да изчисли лице, но конкретните размери и формули са различни.
+## Task 1
 
-Дефинирайте `abstract class Shape` с частно поле `name`, конструктор, реализиран метод `getName()` и абстрактен метод `double calculateSurface()`. Реализирайте `toString()`, който връща името и лицето.
+Describe the abstraction “geometric shape”: every shape has a name and can calculate its area, but the specific dimensions and formulas differ.
 
-Създайте `Rectangle` с ширина и височина, `Triangle` с основа и съответната височина и `Circle` с радиус. Размерите да бъдат полета на конкретните класове. Формулите са `width * height`, `base * height / 2.0` и `Math.PI * radius * radius`. Входните размери за тази задача са положителни.
+Define an `abstract class Shape` with a private `name` field, a constructor, an implemented `getName()` method, and an abstract `double calculateSurface()` method. Implement `toString()` to return the name and area.
 
-Създайте конкретните фигури и проверете резултатите: правоъгълник 3 × 4 → 12, триъгълник с основа 3 и височина 4 → 6, кръг с радиус 1 → π. Оставете `new Shape(...)` като коментар и обяснете защо не се компилира. Обяснете защо абстрактният клас все пак има конструктор.
+Create a `Rectangle` with width and height, a `Triangle` with a base and corresponding height, and a `Circle` with a radius. Store dimensions in the concrete classes. Use the formulas `width * height`, `base * height / 2.0`, and `Math.PI * radius * radius`. Assume positive dimensions for this task.
 
-## Задача 2
+Create each shape and verify the results: a 3 × 4 rectangle → 12, a triangle with base 3 and height 4 → 6, and a circle with radius 1 → π. Leave `new Shape(...)` as a comment and explain why it does not compile. Explain why an abstract class still has a constructor.
 
-Дефинирайте интерфейс движение (Movement) с метод move - връща като резултат типа движение като текст.
+## Task 2
 
-Дефинирайте класове Dog, Bird и Fish. Имплементирайте методите от интерфейса.
+Define a `Movement` interface with a `move` method that returns the type of movement as text.
 
-Създайте по един обект от трите класа и извикайте `move()`. Обяснете защо методът трябва да е `public` и защо `new Movement()` не се компилира.
+Define `Dog`, `Bird`, and `Fish` classes and implement the interface methods.
 
-## Задача 3
+Create one object of each class and call `move()`. Explain why the method must be `public` and why `new Movement()` does not compile.
 
-Дефинирайте интерфейс движение (Movement) с метод move - връща като резултат типа на движението като текст.
+## Task 3
 
-Дефинирайте интерфейси Домашно животно (Pet) и Диво животно (Wild).
+Define a `Movement` interface with a `move` method that returns the type of movement as text.
 
-Дефинирайте абстрактен клас `Animal`, който имплементира `Movement` и съхранява частни полета за име и възраст. Добавете конструктор, методи за четене, абстрактен метод `sound()` и метод за текстово представяне на обекта. `Animal` може да остави `move()` нереализиран, защото е абстрактен.
+Define the `Pet` and `Wild` interfaces.
 
-Дефинирайте класове наследници на Animal – Dog, Bird и Fish. Имплементирайте методите от интерфейса и абстрактния клас.
+Define an abstract `Animal` class that implements `Movement` and stores private fields for name and age. Add a constructor, getter methods, an abstract `sound()` method, and a method that returns a text representation of the object. `Animal` can leave `move()` unimplemented because it is abstract.
 
-Създайте конкретните животни и изведете движението и звука им. Изберете кои имплементират `Pet` и кои `Wild` и обяснете защо тези интерфейси са маркиращи. Посочете кое състояние е общо за йерархията и коя способност е описана чрез интерфейс. Обработването на общ масив с динамичен избор на поведение се упражнява в следващото упражнение.
+Define subclasses `Dog`, `Bird`, and `Fish` that extend `Animal`. Implement the methods from the interface and abstract class.
 
-## Задача 4
+Create concrete animals and print their movement and sounds. Choose which classes implement `Pet` and which implement `Wild`, and explain why these are marker interfaces. Identify the state shared by the hierarchy and the capability described by the interface. Processing a common array with dynamic behavior selection is covered in the next exercise.
 
-Дефинирайте интерфейс за превозно средство (Vehicle), който има 3 метода:
+## Task 4
 
-- changeGear, който приема параметър за брой предавки;
-- speedUp - с колко се ускорява;
-- applyBrakes - с колко се намалява.
+Define a `Vehicle` interface with three methods:
 
-Дефинирайте два класа, който имплементират интерфейса за превозно средство: Колело и Кола.
+- `changeGear`, which accepts the number of gears;
+- `speedUp`, which specifies how much to accelerate;
+- `applyBrakes`, which specifies how much to slow down.
 
-- За класа Колело при изчисляване на ускорението да се вземе предвид теглото на водача.
-- При изчисление на ускорението на колата да се вземе предвид нейната мощност.
+Define two classes, `Bicycle` and `Car`, that implement the interface.
 
-В `main` създайте колело и кола, извикайте всички методи и изведете резултатите. Добавете `default` метод за описание в интерфейса и `static` метод, който връща името на категорията. Посочете как се извикват двата вида методи.
+- When calculating bicycle acceleration, account for the rider's weight.
+- When calculating car acceleration, account for the car's power.
 
-## Задача 5 — Функционален интерфейс
+In `main`, create a bicycle and a car, call all the methods, and print the results. Add a `default` description method and a `static` method that returns the category name to the interface. Explain how to call each kind of method.
 
-Дефинирайте `@FunctionalInterface Operation` с метод `int apply(int first, int second)` и клас `Addition`, който го имплементира. Проверете резултатите за `(2, 3)`, `(0, 0)` и `(-2, 3)`. Опитайте временно да добавите втори абстрактен метод и обяснете съобщението на компилатора, след което го премахнете. Сравнете този интерфейс с маркиращите `Pet` и `Wild`.
+## Task 5 — Functional Interface
 
-## Бонус
+Define an `@FunctionalInterface Operation` with an `int apply(int first, int second)` method, and an `Addition` class that implements it. Check the results for `(2, 3)`, `(0, 0)`, and `(-2, 3)`. Temporarily try adding a second abstract method and explain the compiler message, then remove it. Compare this interface with the marker interfaces `Pet` and `Wild`.
 
-Дадена банка предлага различни типове сметки за нейните клиенти: депозитни сметки, сметки за кредит и ипотечни сметки. Клиентите могат да бъдат физически лица или фирми. Всички сметки имат клиент, баланс и месечен лихвен процент. Депозитните сметки дават възможност да се внасят и теглят пари. Сметките за кредит и ипотечните сметки позволяват само да се внасят пари. Всички сметки могат да изчисляват стойността на лихвата си за даден период (в месеци). В общия случай това става като се умножи броят\_на\_месеците \* месечния\_лихвен\_процент. Кредитните сметки нямат лихва за първите три месеца, ако са на физически лица. Ако са на фирми – нямат лихва за първите два месеца. Депозитните сметки нямат лихва, ако техният баланс е положителен и по-малък от 1000. Ипотечните сметки имат ½ лихва за първите 12 месеца за фирми и нямат лихва за първите 6 месеца за физически лица. Вашата задача е да напишете обектно-ориентиран модел на банковата система чрез класове и интерфейси. Трябва да моделирате класовете, интерфейсите, базовите класове и абстрактните операции и да имплементирате съответните изчисления за лихвите.
+## Bonus
+
+A bank offers several types of accounts: deposit accounts, credit accounts, and mortgage accounts. Its clients may be individuals or companies. Every account has a client, a balance, and a monthly interest rate.
+
+Deposit accounts allow deposits and withdrawals. Credit and mortgage accounts allow deposits only. Every account can calculate its interest for a given number of months. The general formula is:
+
+```text
+number_of_months * monthly_interest_rate
+```
+
+Credit accounts charge no interest during the first three months for individual clients and the first two months for companies. Deposit accounts charge no interest when their balance is positive and less than 1,000. Mortgage accounts charge half the interest for the first 12 months for companies and no interest for the first six months for individuals.
+
+Design an object-oriented model of the banking system using classes and interfaces. Model the classes, interfaces, base classes, and abstract operations, then implement the corresponding interest calculations.

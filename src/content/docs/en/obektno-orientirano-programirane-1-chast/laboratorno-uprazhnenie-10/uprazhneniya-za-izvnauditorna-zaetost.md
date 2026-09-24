@@ -5,79 +5,35 @@ sidebar:
   label: Tasks
 taskPage: true
 ---
-## Упражнения за извънаудиторна заетост
 
-## Задача 1
+## Independent Study Exercises
 
-Да се дефинира клас `Page`, който описва страница от книга.
+## Task 1
 
-Класът трябва да съдържа:
+Define a `Page` class representing a book page, with `number` of type `int` and `content` of type `String`. Add a constructor, accessors and mutators, `toString()`, and `compareTo(Page other)`. Implement `Comparable<Page>` so pages are compared by number.
 
-- `number` от тип `int`;
-- `content` от тип `String`.
+## Task 2
 
-Да се реализират конструктор, методи за четене и промяна, `toString()` и `compareTo(Page other)`. Класът трябва да имплементира `Comparable<Page>`, като страниците се сравняват по номер.
+Define `InvalidPageException` for an invalid page number or an impossible page operation. Extend `RuntimeException` and provide a `InvalidPageException(String message)` constructor.
 
-## Задача 2
+## Task 3
 
-Да се дефинира изключение `InvalidPageException`, което се използва при невалиден номер на страница или невъзможна операция със страници.
+Define a `BookEditor` interface with `generateBook(String title, int numberPages)`, `swapPages(int firstPageNumber, int secondPageNumber)`, `updatePage(int pageNumber, String content)`, and `removePage(int pageNumber)`. Throw `InvalidPageException` when an operation cannot be completed.
 
-Класът трябва да наследява `RuntimeException` и да съдържа конструктор:
+## Task 4
 
-```java
-InvalidPageException(String message)
-```
+Define a `Book` class implementing `BookEditor`. It must contain `title` of type `String` and `pages` of type `Map<Integer, Page>`. Use a `Map` implementation that iterates over pages in page-number order.
 
-## Задача 3
+Implement `Book(String title, int numberPages)`, `addPage(Page page)`, the `BookEditor` methods, and `toString()`. `generateBook` should create a book with empty pages. `swapPages` must swap the contents of two pages, not their page numbers.
 
-Да се дефинира интерфейс `BookEditor`.
+## Task 5
 
-Интерфейсът трябва да съдържа методи:
+Create an `Application` class demonstrating book creation, adding a page, changing its content, removing a page, swapping two pages, and handling `InvalidPageException`. Use `try-catch` for operations that may throw it.
 
-- `generateBook(String title, int numberPages)`;
-- `swapPages(int firstPageNumber, int secondPageNumber)`;
-- `updatePage(int pageNumber, String content)`;
-- `removePage(int pageNumber)`.
+## Task 6 — Working with `Map.Entry`
 
-Когато дадена операция не може да бъде изпълнена, трябва да се хвърля `InvalidPageException`.
+In `Book`, create a report by traversing `pages.entrySet()`. Each line must include the key, the page number from the `Page` object, and the content length. Verify that the key matches the page number. Do not call `get(key)` when the value is already available through `entry.getValue()`.
 
-## Задача 4
+Create a separate `HashMap<String, Integer>` of book stock counts. Increase every count by 1 using `Map.Entry.setValue` during traversal. Compare this with a separate pair created using `Map.entry(...)`: it does not modify a map and does not support `setValue`. Check initial values of 0, 1, and 10.
 
-Да се дефинира клас `Book`, който имплементира `BookEditor`.
-
-Класът трябва да съдържа:
-
-- `title` от тип `String`;
-- `pages` от тип `Map<Integer, Page>`.
-
-Ключът в картата трябва да бъде номерът на страницата, а стойността обектът от тип `Page`. Да се използва такава реализация на `Map`, която позволява страниците да се извеждат подредени по номер.
-
-Да се реализират:
-
-- конструктор `Book(String title, int numberPages)`;
-- метод `addPage(Page page)`;
-- методите от `BookEditor`;
-- `toString()`.
-
-Методът `generateBook` трябва да създава книга с празни страници. Методът `swapPages` трябва да разменя съдържанието на две страници, а не номерата им.
-
-## Задача 5
-
-Да се създаде клас `Application`, който демонстрира:
-
-- създаване на книга;
-- добавяне на страница;
-- промяна на съдържание на страница;
-- премахване на страница;
-- размяна на две страници;
-- обработка на `InvalidPageException`.
-
-Да се използва `try-catch` при операции, които могат да завършат с изключение.
-
-## Задача 6 — Работа с `Map.Entry`
-
-В `Book` реализирайте отчет чрез обхождане на `pages.entrySet()`. Всеки ред трябва да съдържа ключа, номера от обекта `Page` и дължината на съдържанието. Проверете, че ключът съвпада с номера на страницата. Не използвайте допълнително `get(key)`, когато стойността вече е достъпна чрез `entry.getValue()`.
-
-Създайте отделен `HashMap<String, Integer>` с наличности на книги. Увеличете всяка наличност с 1 чрез `Map.Entry.setValue` по време на обхождането. Сравнете с отделна двойка, създадена чрез `Map.entry(...)`: тя не променя картата и не допуска `setValue`. Проверете първоначални стойности 0, 1 и 10.
-
-Направете списък от двойките и го сортирайте по стойност чрез `Map.Entry.comparingByValue()`. Обяснете защо сортирането на списъка не променя реда на обхождане на оригиналния `HashMap`.
+Copy the entries into a list and sort it by value using `Map.Entry.comparingByValue()`. Explain why sorting the list does not change the iteration order of the original `HashMap`.

@@ -1,18 +1,18 @@
 ---
-title: Наследяване и ключова дума super
+title: Inheritance and the `super` Keyword
 sidebar:
   order: 1
 ---
 
-# Наследяване и ключова дума `super`
+# Inheritance and the `super` Keyword
 
-Наследяването е механизъм в Java, чрез който един клас се дефинира като специализиран вариант на друг клас. Класът наследник получава достъп до наследимите полета и методи на родителския клас и може да добавя нови полета и методи.
+Inheritance lets one Java class be defined as a specialized version of another. A subclass can use the inheritable fields and methods of its parent class and add its own fields and methods.
 
-Наследяването описва връзка от тип „е“. Ако `Student` наследява `Person`, това означава, че студентът е човек, но има и допълнителни характеристики, които не са общи за всички хора.
+Inheritance describes an “is-a” relationship. If `Student` extends `Person`, a student is a person, with additional characteristics that are not shared by all people.
 
-## Родителски клас и клас наследник
+## Parent Class and Subclass
 
-Класът, от който се наследява, се нарича родителски клас, базов клас или суперклас. Класът, който наследява, се нарича клас наследник, производен клас или подклас.
+The class being inherited from is called the parent class, base class, or superclass. The class that inherits is called the subclass, derived class, or child class.
 
 ```java
 class Person {
@@ -29,11 +29,11 @@ class Person {
 }
 ```
 
-Класът `Person` описва обща характеристика: име. Тази характеристика може да бъде използвана от по-специализирани класове.
+`Person` describes a general characteristic—a name—that can be used by more specialized classes.
 
-## Ключова дума `extends`
+## The `extends` Keyword
 
-Наследяването се декларира чрез ключовата дума `extends`.
+Declare inheritance with the `extends` keyword.
 
 ```java
 class Student extends Person {
@@ -51,7 +51,7 @@ class Student extends Person {
 }
 ```
 
-Декларацията `class Student extends Person` означава, че `Student` наследява `Person`. Обект от тип `Student` има поведение, дефинирано в `Person`, и допълнително поведение, дефинирано в `Student`.
+The declaration `class Student extends Person` means that `Student` inherits from `Person`. A `Student` object has behavior defined in `Person` as well as additional behavior defined in `Student`.
 
 ```java
 Student student = new Student("Ivan Petrov", 12345);
@@ -60,19 +60,19 @@ System.out.println(student.getName());
 System.out.println(student.getFacultyNumber());
 ```
 
-Методът `getName()` е дефиниран в `Person`, но може да се извика чрез обект от тип `Student`, защото `Student` наследява `Person`.
+`getName()` is defined in `Person`, but can be called through a `Student` object because `Student` extends `Person`.
 
-## Какво се наследява
+## What Is Inherited?
 
-Класът наследник получава наследимите членове на родителския клас. Това включва достъпните полета и методи според модификаторите за достъп.
+A subclass inherits the inheritable members of its parent class. Which fields and methods are accessible depends on their access modifiers.
 
-**Членовете с `private` не се наследяват.** Публичните и защитените членове могат да бъдат наследени, а членовете с достъп на ниво пакет — когато наследникът е в същия пакет. Подробностите за видимостта са разгледани след връзките между класовете, в [Капсулация и модификатори за достъп](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/kapsulirane/).
+**Members declared `private` are not inherited.** Public and protected members can be inherited, as can package-private members when the subclass is in the same package. See [Encapsulation and Access Modifiers](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/kapsulirane/) for more about visibility.
 
-Това не означава, че частните полета на родителя изчезват: обектът от наследника съдържа състоянието, определено от родителския клас. Родителският конструктор и родителските методи работят с тези полета. Например `student.getName()` използва полето `name`, декларирано в `Person`, без `Student` да наследява самото частно поле. Частен метод също не се наследява и не може да бъде предефиниран. Едноименен метод в наследника е отделен метод.
+This does not mean the parent's private fields disappear: a subclass object contains the state defined by its parent class. The parent's constructor and methods work with those fields. For example, `student.getName()` uses the `name` field declared in `Person` without `Student` inheriting that private field. A private method is also not inherited and cannot be overridden. A same-named method in a subclass is a separate method.
 
-Правилото е описано в [Java Language Specification, §8.2](https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.2).
+This rule is described in the [Java Language Specification, §8.2](https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.2).
 
-Конструкторите не се наследяват. Класът наследник трябва да има собствен конструктор, който при нужда извиква конструктор на родителския клас чрез `super(...)`.
+Constructors are not inherited. A subclass must have its own constructor, which can call a parent constructor through `super(...)`.
 
 ```java
 class Employee extends Person {
@@ -86,11 +86,11 @@ class Employee extends Person {
 }
 ```
 
-В примера `Employee` не наследява конструктора `Person(String name)`. Затова конструкторът на `Employee` извиква родителския конструктор чрез `super(name)`.
+`Employee` does not inherit the `Person(String name)` constructor. Its constructor calls the parent constructor with `super(name)`.
 
-## Наследяване и капсулация
+## Inheritance and Encapsulation
 
-Наследяването не премахва правилата на капсулацията. Ако поле в родителски клас е `private`, то не може да се достъпва директно в класа наследник.
+Inheritance does not remove encapsulation rules. A field declared `private` in the parent class cannot be accessed directly from a subclass.
 
 ```java
 class Person {
@@ -110,11 +110,11 @@ class Student extends Person {
 }
 ```
 
-Класът `Student` не може да използва директно полето `name`, защото то е `private`. Достъпът се извършва чрез публичния метод `getName()`.
+`Student` cannot access `name` directly because it is `private`. It accesses the value through the public `getName()` method.
 
-## Добавяне на нови членове
+## Adding New Members
 
-Класът наследник може да добавя нови полета и методи, които не съществуват в родителския клас.
+A subclass can add fields and methods that do not exist in the parent class.
 
 ```java
 class Teacher extends Person {
@@ -132,11 +132,11 @@ class Teacher extends Person {
 }
 ```
 
-Класът `Teacher` наследява `getName()` от `Person` и добавя собствено поле `subject` с метод `getSubject()`.
+`Teacher` inherits `getName()` from `Person` and adds its own `subject` field and `getSubject()` method.
 
-## Единично наследяване
+## Single Inheritance
 
-В Java един клас може да наследява директно само един родителски клас.
+In Java, a class can directly extend only one parent class.
 
 ```java
 class Student extends Person {
@@ -144,20 +144,20 @@ class Student extends Person {
 }
 ```
 
-Не е позволено един клас да има два директни родителски класа.
+A class cannot have two direct parent classes:
 
 ```java
-// не е позволено
+// Not allowed:
 // class Student extends Person, User {
 //
 // }
 ```
 
-Това правило се нарича единично наследяване на класове.
+This rule is called single inheritance of classes.
 
-## Многостепенно наследяване
+## Multilevel Inheritance
 
-Може да се създаде йерархия от няколко нива.
+You can create a hierarchy with several levels.
 
 ```java
 class Person {
@@ -173,12 +173,11 @@ class GraduateStudent extends Student {
 }
 ```
 
-Класът `GraduateStudent` наследява директно `Student` и косвено `Person`.
+`GraduateStudent` directly extends `Student` and indirectly extends `Person`.
 
-## Клас `Object`
+## The `Object` Class
 
-В Java всеки клас пряко или непряко наследява класа `Object`. Ако даден клас не посочи родителски клас чрез `extends`,
-негов родителски клас по подразбиране е `Object`.
+Every Java class directly or indirectly extends `Object`. If a class does not specify a parent with `extends`, its default parent class is `Object`.
 
 ```java
 class Student {
@@ -186,7 +185,7 @@ class Student {
 }
 ```
 
-Горният клас е еквивалентен на следната идея:
+The class above is equivalent in principle to:
 
 ```java
 class Student extends Object {
@@ -194,29 +193,28 @@ class Student extends Object {
 }
 ```
 
-Това означава, че всеки обект в Java може да бъде разглеждан и като обект от тип `Object`.
+This means that every Java object can also be treated as an object of type `Object`.
 
 ```java
 Student student = new Student();
 Object value = student;
 ```
 
-Класът `Object` дефинира общи методи, които са налични за всички обекти. По-подробно методите `toString()`,
-`equals()` и `hashCode()` се разглеждат при полиморфизма.
+The `Object` class defines common methods available to all objects. The `toString()`, `equals()`, and `hashCode()` methods are covered in more detail when we study polymorphism.
 
-## `final` клас и `final` метод
+## `final` Classes and Methods
 
-Клас, деклариран с `final`, не може да бъде наследяван.
+A class declared `final` cannot be extended.
 
 ```java
 final class Configuration {
 
 }
 
-// class AppConfiguration extends Configuration { } // не е позволено
+// class AppConfiguration extends Configuration { } // not allowed
 ```
 
-Метод, деклариран с `final`, се наследява, но не може да бъде заменен с друга реализация в клас наследник.
+A `final` method is inherited, but a subclass cannot replace its implementation.
 
 ```java
 class Parent {
@@ -228,33 +226,33 @@ class Parent {
 
 class Child extends Parent {
 
-    // public void printType() { } // не е позволено
+    // public void printType() { } // not allowed
 }
 ```
 
-`final` се използва, когато наследяването или промяната на конкретно поведение трябва да бъде забранена.
+Use `final` when inheritance or changing a particular behavior must be prohibited.
 
-| Употреба | Предназначение |
-| -------- | -------------- |
-| `final` поле | Полето получава стойност само веднъж |
-| `final` метод | Методът не може да бъде заменен с друга реализация в клас наследник |
-| `final` клас | Класът не може да бъде наследяван |
+| Usage | Purpose |
+| ----- | ------- |
+| `final` field | The field can be assigned only once. |
+| `final` method | A subclass cannot replace the implementation. |
+| `final` class | The class cannot be extended. |
 
-## Кога се използва наследяване
+## When to Use Inheritance
 
-Наследяване се използва, когато между два класа има ясна връзка „е“. Например `Dog` е `Animal`, `Student` е `Person`, `SavingsAccount` е `BankAccount`.
+Use inheritance when there is a clear “is-a” relationship between two classes. For example, a `Dog` is an `Animal`, a `Student` is a `Person`, and a `SavingsAccount` is a `BankAccount`.
 
-Ако връзката е „има“, наследяване не е подходящият механизъм. Например `Car` има `Engine`, но `Car` не е `Engine`.
+If the relationship is “has-a”, inheritance is not appropriate. A `Car` has an `Engine`, but a car is not an engine.
 
-## Ключова дума `super`
+## The `super` Keyword
 
-Ключовата дума `super` се използва в клас наследник за достъп до непосредствения родителски клас. Тя може да се използва за извикване на конструктор, метод или поле от родителския клас.
+Use `super` in a subclass to access its immediate parent class. It can call a constructor, method, or field from the parent.
 
-`super` има смисъл само при наследяване. В клас, който не наследява друг потребителски клас, не се използва `super` за достъп до собствените членове.
+`super` is meaningful only with inheritance. A class that does not extend another user-defined class does not use `super` to access its own members.
 
-## Извикване на конструктор чрез `super(...)`
+## Calling a Constructor with `super(...)`
 
-Конструкторът на родителския клас не се наследява от класа наследник. Ако родителският клас изисква стойности за своите полета, конструкторът на наследника трябва да извика подходящ родителски конструктор.
+The subclass does not inherit its parent's constructors. If the parent requires values for its fields, the subclass constructor must call an appropriate parent constructor.
 
 ```java
 class Person {
@@ -281,9 +279,9 @@ class Student extends Person {
 }
 ```
 
-Изразът `super(name)` извиква конструктора `Person(String name)`. Така полето `name`, което принадлежи на родителската част на обекта, се инициализира от родителския клас.
+`super(name)` calls `Person(String name)`. The parent class initializes `name`, which belongs to the parent part of the object.
 
-Извикването на родителски конструктор чрез `super(...)` трябва да бъде първата инструкция в конструктора на класа наследник.
+A call to a parent constructor using `super(...)` must be the first statement in the subclass constructor.
 
 ```java
 public Student(String name, int facultyNumber) {
@@ -292,12 +290,11 @@ public Student(String name, int facultyNumber) {
 }
 ```
 
-След извикването на родителския конструктор могат да се инициализират полетата, които принадлежат на класа наследник.
+After the parent constructor runs, the subclass constructor can initialize its own fields.
 
-## Ред на инициализация при наследяване
+## Initialization Order in Inheritance
 
-При създаване на обект от клас наследник първо се инициализира частта, която принадлежи на родителския клас. След това
-се изпълнява конструкторът на класа наследник.
+When a subclass object is created, the parent-class part is initialized first. Then the subclass constructor runs.
 
 ```java
 class Parent {
@@ -315,19 +312,18 @@ class Child extends Parent {
 }
 ```
 
-При създаване на обект от `Child` резултатът е:
+Creating a `Child` object prints:
 
 ```text
 Parent constructor
 Child constructor
 ```
 
-Този ред гарантира, че наследената част от обекта е създадена преди кодът в конструктора на наследника да започне да я
-използва.
+This order ensures that the inherited part of the object is initialized before the subclass constructor starts using it.
 
-## Автоматично извикване на `super()`
+## Automatic `super()` Calls
 
-Ако в конструктор на клас наследник не е написано изрично извикване на родителски конструктор, компилаторът се опитва автоматично да добави `super()`.
+If a subclass constructor does not explicitly call a parent constructor, the compiler tries to insert `super()` automatically.
 
 ```java
 class Person {
@@ -345,7 +341,7 @@ class Student extends Person {
 }
 ```
 
-Конструкторът на `Student` се обработва така, сякаш е написано:
+The `Student` constructor is treated as if it were written as follows:
 
 ```java
 public Student() {
@@ -354,7 +350,7 @@ public Student() {
 }
 ```
 
-Ако родителският клас няма конструктор без параметри и наследникът не извика друг родителски конструктор чрез `super(...)`, програмата няма да се компилира.
+If the parent class has no no-argument constructor and the subclass does not call another parent constructor with `super(...)`, the program will not compile.
 
 ```java
 class Person {
@@ -367,14 +363,14 @@ class Person {
 class Student extends Person {
 
     public Student() {
-        // грешка: липсва извикване super(name)
+        // Error: missing call to super(name)
     }
 }
 ```
 
-## Извикване на родителски метод
+## Calling a Parent Method
 
-Чрез `super` може да се извика достъпен метод от родителския клас. Това е необходимо, когато метод от наследника трябва да използва вече дефинирана операция от родителския клас.
+Use `super` to call an accessible method from the parent class. This is useful when a subclass method needs to reuse an operation already defined in the parent.
 
 ```java
 class Person {
@@ -405,11 +401,11 @@ class Student extends Person {
 }
 ```
 
-Изразът `super.getName()` извиква метода `getName()` от `Person`. След това резултатът се допълва с информацията от `Student`.
+`super.getName()` calls `Person`'s `getName()` method. Its result is combined with information from `Student`.
 
-## Достъп до родителско поле
+## Accessing a Parent Field
 
-Ако родителският клас и класът наследник съдържат поле с едно и също име, чрез `super` може да се достъпи полето от родителския клас.
+If the parent class and subclass have fields with the same name, use `super` to access the parent's field.
 
 ```java
 class Person {
@@ -428,13 +424,13 @@ class Student extends Person {
 }
 ```
 
-`super.name` означава полето `name` от родителския клас. `this.name` означава полето `name` от текущия клас.
+`super.name` refers to the parent class's `name` field. `this.name` refers to the current class's `name` field.
 
-Деклариране на полета с еднакви имена в родителски и наследен клас създава неяснота и не трябва да се използва без ясна причина. По-често `super` се използва за конструктори и за разширяване на родителски методи.
+Declaring fields with the same name in a parent and subclass can cause confusion and should be avoided unless there is a clear reason. More often, `super` is used for constructors and to extend parent methods.
 
-## `super` и `this`
+## `super` and `this`
 
-`this` обозначава текущия обект. `super` обозначава родителската част на текущия обект.
+`this` refers to the current object. `super` refers to the parent-class part of the current object.
 
 ```java
 class Student extends Person {
@@ -448,15 +444,15 @@ class Student extends Person {
 }
 ```
 
-В примера `super(name)` извиква конструктор от родителския клас. `this.facultyNumber` достъпва поле от текущия клас.
+Here, `super(name)` calls a parent-class constructor. `this.facultyNumber` accesses a field in the current class.
 
-`super` не може да се използва в статичен контекст, защото статичният метод не се изпълнява върху конкретен обект.
+You cannot use `super` in a static context because a static method does not run on a particular object.
 
 ```java
 class Student extends Person {
 
     public static void print() {
-        // super.getName(); // не се компилира
+        // super.getName(); // does not compile
     }
 }
 ```

@@ -1,25 +1,25 @@
 ---
-title: Връзки между класовете
+title: Relationships Between Classes
 sidebar:
   order: 2
 ---
 
-# Връзки между класовете
+# Relationships Between Classes
 
-В обектно-ориентираното програмиране класовете не се разглеждат само като отделни описания на обекти. Между класовете могат да съществуват връзки, чрез които се моделира как обектите си взаимодействат, как един обект използва друг обект и дали жизненият цикъл на един обект зависи от друг.
+In object-oriented programming, classes are not only separate descriptions of objects. They can have relationships that model how objects interact, how one object uses another, and whether one object's lifecycle depends on another.
 
-В Java връзка между класове се реализира чрез:
+In Java, relationships between classes can be implemented through:
 
-- поле от тип на друг клас;
-- параметър от тип на друг клас;
-- върната стойност от тип на друг клас;
-- наследяване чрез `extends`;
-- имплементиране на интерфейс чрез `implements`;
-- вложен клас.
+- a field of another class's type;
+- a parameter of another class's type;
+- a return value of another class's type;
+- inheritance with `extends`;
+- implementing an interface with `implements`;
+- a nested class.
 
-## Връзка от тип „е“
+## “Is-a” Relationship
 
-Връзката от тип „е“ се реализира чрез наследяване. Класът наследник е специализиран вариант на родителския клас.
+An “is-a” relationship is implemented through inheritance. A subclass is a specialized kind of its parent class.
 
 ```java
 class Person {
@@ -46,11 +46,11 @@ class Student extends Person {
 }
 ```
 
-Класът `Student` е `Person`, защото наследява `Person`. Наследяването се използва само когато наследникът може да бъде разглеждан като обект от родителския тип.
+A `Student` is a `Person` because `Student` extends `Person`. Use inheritance only when a subclass can be treated as an object of its parent type.
 
-## Връзка от тип „има“
+## “Has-a” Relationship
 
-Връзката от тип „има“ се реализира чрез поле, което сочи към обект от друг клас. Един клас съдържа или използва друг клас като част от своето състояние.
+A “has-a” relationship is implemented with a field that refers to an object of another class. One class contains or uses another class as part of its state.
 
 ```java
 class Engine {
@@ -80,11 +80,11 @@ class Car {
 }
 ```
 
-Класът `Car` има поле от тип `Engine`. Това означава, че обект от тип `Car` използва обект от тип `Engine`. `Car` не е `Engine`, затова наследяване не е подходяща връзка.
+`Car` has an `Engine` field. A `Car` object uses an `Engine` object; a car is not an engine, so inheritance would be inappropriate.
 
-## Асоциация
+## Association
 
-Асоциацията е обща връзка между два класа, при която обект от единия клас използва или познава обект от другия клас. Тя описва взаимодействие, но не определя задължително собственост или зависим жизнен цикъл.
+An association is a general relationship in which an object of one class uses or knows about an object of another class. It describes interaction but does not necessarily define ownership or a dependent lifecycle.
 
 ```java
 class Student {
@@ -114,11 +114,11 @@ class Course {
 }
 ```
 
-Методът `enroll(Course course)` приема обект от тип `Course`. Така между `Student` и `Course` има връзка, защото обект от `Student` използва обект от `Course`.
+The `enroll(Course course)` method accepts a `Course` object. This creates a relationship between `Student` and `Course`, because a `Student` object uses a `Course` object.
 
-## Агрегация
+## Aggregation
 
-Агрегацията е връзка от тип „част - цяло“, при която частта може да съществува независимо от цялото. Обектът, който съдържа връзката, не създава задължително съставния обект и не управлява изцяло неговия жизнен цикъл.
+Aggregation is a “part–whole” relationship in which the part can exist independently of the whole. The object holding the reference does not necessarily create the component object or fully control its lifecycle.
 
 ```java
 class Teacher {
@@ -150,7 +150,7 @@ class Course {
 }
 ```
 
-Обектът `Teacher` се създава извън `Course` и се подава към конструктора. Ако обектът `Course` вече не се използва, обектът `Teacher` може да продължи да съществува и да бъде използван от друг курс.
+The `Teacher` object is created outside `Course` and passed to its constructor. If a `Course` object is no longer used, the `Teacher` object can continue to exist and be used by another course.
 
 ```java
 Teacher teacher = new Teacher("Ivan Petrov");
@@ -159,11 +159,11 @@ Course first = new Course("Programming", teacher);
 Course second = new Course("Databases", teacher);
 ```
 
-В този пример един и същ преподавател участва в два курса. Това показва, че преподавателят не е собственост само на един курс.
+Here, the same teacher is associated with two courses. The teacher is therefore not owned by just one course.
 
-## Композиция
+## Composition
 
-Композицията е връзка от тип „част - цяло“, при която частта принадлежи на цялото и се създава като негова вътрешна част. Жизненият цикъл на частта зависи от жизнения цикъл на цялото.
+Composition is a “part–whole” relationship in which the part belongs to the whole and is created as an internal part of it. The part's lifecycle depends on the whole.
 
 ```java
 class Address {
@@ -195,24 +195,24 @@ class Building {
 }
 ```
 
-Класът `Building` създава обекта `Address` в своя конструктор. Външният код не подава готов адрес, а подава стойности, от които сградата изгражда своя вътрешен обект. Това означава, че адресът е част от състоянието на сградата.
+`Building` creates the `Address` object in its constructor. External code supplies values rather than an existing address, and the building constructs its internal object from those values. The address is part of the building's state.
 
-## Агрегация и композиция
+## Aggregation and Composition
 
-Агрегацията и композицията моделират връзка „част - цяло“, но се различават по силата на зависимостта между обектите.
+Both aggregation and composition model a “part–whole” relationship, but they differ in how strongly the objects depend on each other.
 
-| Критерий | Агрегация | Композиция |
-| -------- | --------- | ---------- |
-| Създаване на частта | Частта се подава отвън | Частта се създава вътре в цялото |
-| Жизнен цикъл | Частта може да съществува самостоятелно | Частта зависи от цялото |
-| Споделяне | Един обект може да участва в няколко други обекта | Частта обикновено принадлежи на един обект |
-| Пример | Курс има преподавател | Сграда има адрес |
+| Criterion | Aggregation | Composition |
+| --------- | ----------- | ----------- |
+| Creating the part | The part is passed in from outside. | The part is created inside the whole. |
+| Lifecycle | The part can exist independently. | The part depends on the whole. |
+| Sharing | An object can participate in several other objects. | A part usually belongs to one object. |
+| Example | A course has a teacher. | A building has an address. |
 
-Изборът между агрегация и композиция зависи от това дали съставният обект трябва да бъде самостоятелен. Ако обектът трябва да се създава и използва независимо, връзката е агрегация. Ако обектът има смисъл само като вътрешна част от друг обект, връзката е композиция.
+Choose between aggregation and composition based on whether the component object should exist independently. If it is created and used independently, the relationship is aggregation. If it makes sense only as an internal part of another object, it is composition.
 
-## Зависимост чрез параметър
+## Dependency Through a Parameter
 
-Клас има зависимост от друг тип, когато го използва за извършване на операция, без непременно да го пази като свое поле. Например принтерът използва студент само докато отпечатва данните:
+A class depends on another type when it uses it for an operation without necessarily storing it in a field. For example, a printer uses a student only while printing the student's information:
 
 ```java
 class CardPrinter {
@@ -222,13 +222,13 @@ class CardPrinter {
 }
 ```
 
-Тук `CardPrinter` зависи от `Student` и неговия метод `getName()`. При асоциация често се съхранява референция в поле за по-дълготрайна връзка, а зависимостта може да е временна употреба чрез параметър.
+Here, `CardPrinter` depends on `Student` and its `getName()` method. An association often stores a reference in a field for a longer-term relationship, while a dependency can be temporary use through a parameter.
 
-Композицията и агрегацията описват собственост и жизнен цикъл в модела. Java не ги реализира чрез отделни ключови думи и не унищожава автоматично „частите“ при излизане на „целия“ обект от обхват. Garbage collector освобождава паметта според достижимостта на обектите.
+Composition and aggregation describe ownership and lifecycle in the model. Java has no separate keywords for them and does not automatically destroy “parts” when the “whole” goes out of scope. The garbage collector reclaims memory based on object reachability.
 
-## Вложени класове
+## Nested Classes
 
-Вложен клас е клас, деклариран в тялото на друг клас. Външният клас създава логически контекст, а вложеният клас описва тип, който е тясно свързан с него.
+A nested class is declared in the body of another class. The outer class provides a logical context, while the nested class describes a type closely related to it.
 
 ```java
 class Bank {
@@ -248,13 +248,13 @@ class Bank {
 }
 ```
 
-Класът `Account` е деклариран в тялото на класа `Bank`. Понеже е деклариран като `static`, той принадлежи на класа `Bank`, а не на конкретен обект от `Bank`.
+`Account` is declared in the body of `Bank`. Because it is declared `static`, it belongs to the `Bank` class, not to a particular `Bank` object.
 
-Обект от статичен вложен клас се създава чрез името на външния клас.
+Create an object of a static nested class using the outer class name:
 
 ```java
 Bank.Account account = new Bank.Account("BG00BANK0000000000");
 System.out.println(account.getIban());
 ```
 
-Статичният вложен клас се използва, когато даден тип има смисъл основно като част от друг тип. Той не получава автоматичен достъп до нестатичните полета на външния клас, защото не е свързан с конкретен обект от външния клас.
+A static nested class is useful when a type makes sense mainly as part of another type. It does not automatically access the outer class's non-static fields because it is not associated with a particular outer-class object.

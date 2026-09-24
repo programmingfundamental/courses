@@ -1,27 +1,25 @@
 ---
-title: Map и асоциативни колекции
+title: Map and Associative Collections
 sidebar:
   order: 1
 ---
 
-# Map и асоциативни колекции
+# Map and Associative Collections
 
-## Интерфейс Map и асоциативни колекции
+## The `Map` interface and associative collections
 
-**Map** е интерфейс от Java Collections Framework, предназначен за съхраняване на асоциативни двойки **ключ–стойност (key–value)**. Всеки ключ в картата е уникален и служи за достъп до съответната стойност.
+`Map` is an interface in the Java Collections Framework for storing key–value associations. Each key in a map is unique and is used to access its associated value. Unlike `List`, `Set`, and `Queue`, which store individual elements, `Map` stores key–value pairs.
 
-За разлика от интерфейсите **List**, **Set** и **Queue**, които съхраняват отделни елементи, **Map** работи с двойки ключ–стойност.
+## Main characteristics of `Map` collections
 
-## Основни характеристики на колекции от тип Map:
+- Data is stored as key–value associations.
+- Each key is unique within a map.
+- Values may be repeated.
+- Maps do not have indexes.
+- Lookup by key is generally efficient.
+- A key can be associated with only one value; adding the same key again replaces its previous value.
 
-- съхранява данни като асоциации (двойки ключ-стойност)
-- всеки ключ е уникален за дадената колекция
-- стойностите от своя страна могат да се повтарят
-- няма индекси
-- предоставят бързо търсене по ключ
-- един ключ може да бъде свързан само с една стойност (при повторно добавяне старата стойност се заменя).
-
-Като пример за подобен тип структура могат да бъдат разгледани речник (дума - определение), телефонен указател (име - номер) и други подобни:
+A dictionary (word–definition) or phone book (name–number) are examples:
 
 ```java
 Map<String, String> phoneBook = new HashMap<>();
@@ -32,83 +30,65 @@ phoneBook.put("Georgi", "0888456789");
 
 System.out.println(phoneBook);
 ```
-В примера всеки ключ представлява име на човек, а съответната стойност – негов телефонен номер:
 
-```java
+Each key is a person's name and each value is a phone number. A possible output is:
+
+```text
 {Ivan=0888123456, Georgi=0888456789, Maria=0888987654}
 ```
 
-## Map не наследява Collection
+(The iteration order of a `HashMap` is not guaranteed.)
 
-Причината е, че Collection работи с единични елементи, докато Map работи с двойки ключ–стойност и затова образува отделна йерархия.
+## `Map` does not extend `Collection`
 
-## Методи за работа с Map
+`Collection` works with individual elements, while `Map` works with key–value pairs. Therefore, `Map` belongs to a separate interface hierarchy.
 
-## Основни операции
+## Methods for working with `Map`
 
-```java
-put()
-get()
-remove()
-containsKey()
-containsValue()
-```
+### Basic operations
+
+Common basic operations are `put()`, `get()`, `remove()`, `containsKey()`, and `containsValue()`.
 
 ```java
 Map<String, Integer> grades = new HashMap<>();
 
 grades.put("Ivan", 6);
 grades.put("Maria", 5);
-
 System.out.println(grades.get("Ivan"));
-
 System.out.println(grades.containsKey("Maria"));
-
 grades.remove("Maria");
-
 System.out.println(grades);
 ```
-Методът put() добавя нова двойка ключ–стойност, get() извлича стойността по ключ, containsKey() проверява дали съществува даден ключ, а remove() премахва съответната двойка.
 
+`put()` adds a key–value association, `get()` retrieves a value by key, `containsKey()` checks whether a key exists, and `remove()` removes an association.
 
 ```java
 Map<String, Integer> grades = new HashMap<>();
-
 grades.put("Ivan", 5);
 grades.put("Ivan", 6);
-
-```
-Тъй като ключовете трябва да бъдат уникални, второто извикване на put() не добавя нов елемент, а заменя стойността на съществуващия ключ.
-
-
-## Операции, носещи информация за колекцията
-
-```java
-size()
-isEmpty()
 ```
 
-## Операции, използвани при обхождане
+Because keys are unique, the second `put()` replaces the value of the existing key; it does not add another entry.
 
-```java
-keySet()
-values()
-entrySet()
-```
+### Operations that describe the collection
 
-## Основни имплементации на Map
+`size()` returns the number of mappings. `isEmpty()` checks whether there are any mappings.
 
-| Имплементация  | Подредба          | Очаквана сложност за `get`/`put` | Особености                 |
-| -------------- | ----------------- | -------------------------------- | -------------------------- |
-| `HashMap`      | не гарантира ред  | O(1) средно                      | използва хеширане          |
-| `LinkedHashMap` | ред на добавяне   | O(1) средно                      | запазва реда на обхождане  |
-| `TreeMap`      | сортирани ключове | O(log n)                         | използва балансирано дърво |
+### Operations used for traversal
 
-## Какво е `Map.Entry`
+`keySet()` returns the keys, `values()` the values, and `entrySet()` the key–value entries.
 
-`Map.Entry<K, V>` е вложен интерфейс в `Map`, който представя **една двойка ключ–стойност**.
+## Main `Map` implementations
 
-`Map<K, V>` съхранява множество такива съответствия. Неговият метод `entrySet()` връща `Set<Map.Entry<K, V>>` — изглед към двойките в картата.
+| Implementation | Ordering | Expected `get`/`put` complexity | Characteristics |
+| --- | --- | --- | --- |
+| `HashMap` | No guaranteed order | Average O(1) | Uses hashing |
+| `LinkedHashMap` | Insertion order | Average O(1) | Preserves iteration order |
+| `TreeMap` | Sorted keys | O(log n) | Uses a balanced tree |
+
+## What is `Map.Entry`?
+
+`Map.Entry<K, V>` is a nested interface in `Map` representing one key–value pair. A `Map<K, V>` stores many such mappings. Its `entrySet()` method returns a `Set<Map.Entry<K, V>>`, a view of the map's entries.
 
 ```java
 import java.util.HashMap;
@@ -131,37 +111,35 @@ class EntryExample {
 }
 ```
 
-`getKey()` чете ключа, а `getValue()` — стойността. За елементите от `HashMap.entrySet()` методът `setValue(...)` променя и съответната стойност в картата. Няма `setKey()`; промяна на ключ изисква премахване и добавяне на съответствието. Поддръжката на `setValue` зависи от реализацията.
+`getKey()` reads the key and `getValue()` reads the value. For entries obtained from a `HashMap`'s `entrySet()`, `setValue(...)` also changes the corresponding value in the map. There is no `setKey()`; changing a key requires removing and adding a mapping. Support for `setValue` depends on the implementation.
 
-Отделна непроменяема двойка може да се създаде чрез:
+An independent immutable pair can be created with:
 
 ```java
 Map.Entry<String, Integer> fixed = Map.entry("pens", 3);
 System.out.println(fixed.getKey()); // pens
-// fixed.setValue(4); // не се поддържа
+// fixed.setValue(4); // unsupported
 ```
 
-`Map.entry(...)` не добавя двойката към карта и не допуска `null` за ключ или стойност. За отделна двойка с изменяема стойност съществува `AbstractMap.SimpleEntry<K, V>`.
+`Map.entry(...)` does not add the pair to a map and does not allow `null` keys or values. `AbstractMap.SimpleEntry<K, V>` is available for an independent pair with a mutable value.
 
-Когато ви трябват и ключът, и стойността, обхождайте `entrySet()`. Не добавяйте и не премахвайте елементи чрез самата карта по време на това обхождане; за премахване използвайте итератор. Не пазете елемент от изгледа за по-късна употреба след промени в картата; при нужда направете отделно копие на данните. Поведението е описано в [документацията за Map.Entry](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html).
+When both key and value are needed, traverse `entrySet()`. Do not add or remove elements through the map itself during that traversal; use an iterator to remove. Do not keep a view entry for later use after changing the map; make a separate copy if needed. See the [Map.Entry documentation](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Map.Entry.html).
 
-## Обхождане на Map
+## Traversing a `Map`
 
-Методът `entrySet()` връща множество от двойки ключ-стойност. Той е подходящ при обхождане, когато са необходими и ключът, и стойността. Методът `keySet()` връща само ключовете, а стойността може да бъде получена допълнително чрез `get(key)`.
+`entrySet()` returns a set of key–value pairs and is suitable when both are needed. `keySet()` returns only keys; a value can then be retrieved separately with `get(key)`.
 
 ```java
 import java.util.HashMap;
 import java.util.Map;
 
 public class Faculty {
-
-    // pair specialty - number of students
-    private Map<String, Integer> specialities = new HashMap<>();
+    // specialty - number of students
+    private Map<String, Integer> specialties = new HashMap<>();
 
     public String pairsToString() {
         StringBuilder result = new StringBuilder();
-
-        for (Map.Entry<String, Integer> pair : specialities.entrySet()) {
+        for (Map.Entry<String, Integer> pair : specialties.entrySet()) {
             result.append(pair.getKey())
                   .append(" ")
                   .append(pair.getValue())
@@ -172,8 +150,7 @@ public class Faculty {
 
     public String keysToString() {
         StringBuilder result = new StringBuilder();
-
-        for (String key : specialities.keySet()) {
+        for (String key : specialties.keySet()) {
             result.append(key).append("\n");
         }
         return result.toString();
@@ -181,8 +158,7 @@ public class Faculty {
 
     public String valuesToString() {
         StringBuilder result = new StringBuilder();
-
-        for (Integer value : specialities.values()) {
+        for (Integer value : specialties.values()) {
             result.append(value).append("\n");
         }
         return result.toString();
@@ -190,23 +166,28 @@ public class Faculty {
 }
 ```
 
-## Сортиране на Map
+## Sorting a `Map`
 
-Тъй като Map не е линейна структура, сортирането може да бъде направено или по ключ, или по стойност:
+Since `Map` is not a linear structure, sorting is performed either by key or by value.
 
-## Подреждане по ключ
+### Ordering by key
+
+The key type must implement `Comparable` for this example:
 
 ```java
-// за целта обекта, използван за ключ, трябва да имплементира Comparable
-    public Map<String, Integer> sortByKey() {
-        return new TreeMap<>(specialities);
-    }
+public Map<String, Integer> sortByKey() {
+    return new TreeMap<>(specialties);
+}
 ```
 
-## Подреждане по стойност
+### Ordering by value
+
+Create and sort a list of entries. For more complex values, define a `Comparator`.
+
 ```java
-    public void sortByValue() {
-        List<Map.Entry<String, Integer>> specialtyList = new ArrayList<>(specialities.entrySet());
-        specialtyList.sort(Map.Entry.comparingByValue()); // при сложен обект, може да се дефинира Comparator
-    }
+public void sortByValue() {
+    List<Map.Entry<String, Integer>> specialtyList =
+        new ArrayList<>(specialties.entrySet());
+    specialtyList.sort(Map.Entry.comparingByValue());
+}
 ```

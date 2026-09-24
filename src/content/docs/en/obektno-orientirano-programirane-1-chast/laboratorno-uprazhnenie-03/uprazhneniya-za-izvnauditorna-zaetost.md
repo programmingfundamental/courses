@@ -5,165 +5,165 @@ sidebar:
   label: Tasks
 taskPage: true
 ---
-## Упражнения за извънаудиторна заетост
 
-Задачите следват реда: наследяване и `super`, връзки между класовете, капсулация и модификатори за достъп. В началните задачи са зададени имена на класове и методи, а в последните структурата се избира самостоятелно.
+## Independent Study Exercises
 
-## Задача 1
+The tasks follow this order: inheritance and `super`, relationships between classes, encapsulation, and access modifiers. The first tasks specify class and method names; later tasks leave the structure up to you.
 
-Да се дефинира родителски клас `Person` и клас наследник `Student`.
+## Task 1
 
-Класът `Person` трябва да съдържа:
+Define a parent class `Person` and a subclass `Student`.
+
+The `Person` class must contain:
 
 - `private String name`;
 - `private int age`;
-- конструктор `Person(String name, int age)`;
-- метод `getName()`;
-- метод `getAge()`;
-- метод `getInformation()`, който връща текст с името и възрастта.
+- a `Person(String name, int age)` constructor;
+- a `getName()` method;
+- a `getAge()` method;
+- a `getInformation()` method that returns text containing the name and age.
 
-Класът `Student` трябва да наследява `Person` и да съдържа:
+The `Student` class must extend `Person` and contain:
 
 - `private int facultyNumber`;
-- конструктор `Student(String name, int age, int facultyNumber)`;
-- метод `getFacultyNumber()`;
-- метод `getStudentInformation()`.
+- a `Student(String name, int age, int facultyNumber)` constructor;
+- a `getFacultyNumber()` method;
+- a `getStudentInformation()` method.
 
-В конструктора на `Student` трябва да се използва `super(name, age)`. В метода `getStudentInformation()` трябва да се използва `super.getInformation()` и към резултата да се добави факултетният номер.
+The `Student` constructor must use `super(name, age)`. The `getStudentInformation()` method must use `super.getInformation()` and add the faculty number to the result.
 
-Да се създадат обекти от `Person` и `Student`. За обекта от `Person` да се извика `getInformation()`, а за обекта от `Student` да се извика `getStudentInformation()`.
+Create `Person` and `Student` objects. Call `getInformation()` on the `Person` object and `getStudentInformation()` on the `Student` object.
 
-## Задача 2
+## Task 2
 
-Да се дефинира йерархия от класове за животни.
+Define a class hierarchy for animals.
 
-Родителският клас `Animal` трябва да съдържа:
+The parent class `Animal` must contain:
 
 - `private String name`;
 - `private int age`;
 - `protected double weight`;
-- конструктор `Animal(String name, int age, double weight)`;
-- методи за четене на полетата;
-- метод `getDescription()`.
+- an `Animal(String name, int age, double weight)` constructor;
+- getter methods for its fields;
+- a `getDescription()` method.
 
-Класът `Dog` трябва да наследява `Animal` и да добавя:
+The `Dog` class must extend `Animal` and add:
 
 - `private String breed`;
 - `private int learnedCommands`;
-- конструктор `Dog(String name, int age, double weight, String breed, int learnedCommands)`;
-- метод `getDogDescription()`, който използва `super.getDescription()`.
+- a `Dog(String name, int age, double weight, String breed, int learnedCommands)` constructor;
+- a `getDogDescription()` method that uses `super.getDescription()`.
 
-Класът `Cat` трябва да наследява `Animal` и да добавя:
+The `Cat` class must extend `Animal` and add:
 
 - `private String furColor`;
 - `private boolean indoor`;
-- конструктор `Cat(String name, int age, double weight, String furColor, boolean indoor)`;
-- метод `getCatDescription()`, който използва `super.getDescription()`.
+- a `Cat(String name, int age, double weight, String furColor, boolean indoor)` constructor;
+- a `getCatDescription()` method that uses `super.getDescription()`.
 
-Да се създадат поне два обекта от `Dog` и два обекта от `Cat`. Да се отпечатат описанията им.
+Create at least two `Dog` objects and two `Cat` objects. Print their descriptions.
 
-## Задача 3
+## Task 3
 
-Да се разшири йерархията от задача 2.
+Extend the hierarchy from Task 2.
 
-В класа `Animal` да се добави метод:
+Add this method to `Animal`:
 
 ```java
 double calculateBaseDailyFood()
 ```
 
-Методът трябва да връща примерна дневна дажба храна според теглото на животното. Формулата трябва да бъде избрана самостоятелно и да бъде описана с кратък коментар в кода.
+The method must return a sample daily food allowance based on the animal's weight. Choose the formula yourself and explain it in a short code comment.
 
-В класа `Dog` да се добави метод `calculateDogDailyFood()`. Методът трябва да използва `super.calculateBaseDailyFood()` и към резултата да приложи корекция според специфичните характеристики на куче.
+Add a `calculateDogDailyFood()` method to `Dog`. It must use `super.calculateBaseDailyFood()` and adjust the result based on characteristics specific to dogs.
 
-В класа `Cat` да се добави метод `calculateCatDailyFood()`. Методът трябва да използва `super.calculateBaseDailyFood()` и към резултата да приложи корекция според специфичните характеристики на котка.
+Add a `calculateCatDailyFood()` method to `Cat`. It must use `super.calculateBaseDailyFood()` and adjust the result based on characteristics specific to cats.
 
-Да се създадат отделни обекти от `Dog` и `Cat`. Да се извикат съответните методи за изчисляване на дневна храна и да се изчисли общото количество храна за един ден.
+Create separate `Dog` and `Cat` objects. Call the corresponding daily food calculation methods and calculate the total food needed for one day.
 
-## Задача 4
+## Task 4
 
-Моделирайте връзките между `University`, `Student`, `StudentCard` и `CardPrinter`. Използвайте масив от студенти, подаден отвън, за агрегация в университета. Картата да се създава и управлява от студента като част от неговото състояние, а принтерът да получава студент само като параметър на операция за печат.
+Model the relationships between `University`, `Student`, `StudentCard`, and `CardPrinter`. Use an array of students supplied from outside to model aggregation in the university. The student should create and manage a student card as part of its state, while the printer should receive a student only as a parameter to its print operation.
 
-Начертайте връзките „има“, асоциация, агрегация, композиция и зависимост. Обяснете собствеността и жизнения цикъл на обектите. Добавете отделно `Student extends Person` и обяснете защо тази връзка е „е“, а не „има“. За композицията уточнете, че Java не унищожава автоматично обектите при излизане на собственика от обхват: това е правило на модела, а паметта се управлява от garbage collector.
+Draw the “has-a”, association, aggregation, composition, and dependency relationships. Explain object ownership and lifecycles. Separately add `Student extends Person` and explain why this is an “is-a” rather than a “has-a” relationship. For composition, note that Java does not automatically destroy objects when their owner goes out of scope: this is a rule of the model, while memory is managed by the garbage collector.
 
-## Задача 5
+## Task 5
 
-Да се дефинира клас `BankAccount`, който използва капсулация.
+Define an encapsulated `BankAccount` class.
 
-Класът трябва да съдържа следните частни полета:
+The class must contain these private fields:
 
-- `ownerName` от тип `String`;
-- `balance` от тип `double`.
+- `ownerName` of type `String`;
+- `balance` of type `double`.
 
-Да се дефинира параметризиран конструктор:
+Define this parameterized constructor:
 
 ```java
 BankAccount(String ownerName, double balance)
 ```
 
-Конструкторът трябва да задава стойността на `ownerName`. Стойността на `balance` трябва да се задава само ако е по-голяма или равна на `0`.
+The constructor must set `ownerName`. Set `balance` only if its value is greater than or equal to `0`.
 
-Да се дефинират следните методи:
+Define these methods:
 
 - `getOwnerName()`;
 - `getBalance()`;
 - `deposit(double amount)`;
 - `withdraw(double amount)`.
 
-Методът `deposit(double amount)` трябва да увеличава баланса само ако `amount` е положително число. Методът `withdraw(double amount)` трябва да намалява баланса само ако `amount` е положително число и има достатъчна наличност.
+`deposit(double amount)` must increase the balance only when `amount` is positive. `withdraw(double amount)` must decrease the balance only when `amount` is positive and sufficient funds are available.
 
-Да се създаде клас `Application` с метод `main`, в който се създава обект от `BankAccount` и се демонстрира работата на всички методи.
+Create an `Application` class with a `main` method. Create a `BankAccount` object there and demonstrate all its methods.
 
-## Задача 6
+## Task 6
 
-Да се дефинира клас `Student`, който използва различни модификатори за достъп.
+Define a `Student` class that uses different access modifiers.
 
-Класът трябва да съдържа:
+The class must contain:
 
 - `private String name`;
 - `private int facultyNumber`;
 - `protected String specialty`;
 - `public static String university`.
 
-Да се дефинира конструктор:
+Define this constructor:
 
 ```java
 Student(String name, int facultyNumber, String specialty)
 ```
 
-Да се дефинират методи за четене на всички нестатични полета. Да не се дефинират методи за директна промяна на `facultyNumber`.
+Define getter methods for all non-static fields. Do not define a method that directly changes `facultyNumber`.
 
-Да се създаде клас `Application`, в който се създават два обекта от `Student`. Да се покаже достъпът до публичното статично поле чрез името на класа.
+Create an `Application` class and create two `Student` objects in it. Demonstrate access to the public static field through the class name.
 
-Пример:
+Example:
 
 ```java
 Student.university = "Technical University of Varna";
 ```
 
-Да се направи опит за директен достъп до частно поле от `Application` и този ред да се остави като коментар, защото не се компилира.
+Try to access a private field directly from `Application` and leave that line commented out because it does not compile.
 
-Проверете достъпа и от наследник в друг пакет. За `private` поле покажете, че наследеният getter работи, но директният достъп не се компилира. Обяснете разликата между състояние, присъстващо в обекта, и член, наследен от класа.
+Also check access from a subclass in another package. For the `private` field, show that the inherited getter works but direct access does not compile. Explain the difference between state present in an object and a member inherited by a class.
 
-## Задача 7
+## Task 7
 
-Да се дефинира собствена йерархия от класове по избор. Темата може да бъде учебна система, магазин, транспорт, библиотека или друга реална област.
+Design a class hierarchy of your choice. The topic can be an educational system, shop, transport, library, or another real-world area.
 
-Йерархията трябва да съдържа:
+The hierarchy must contain:
 
-- един родителски клас;
-- поне два класа наследници;
-- частни полета в родителския клас;
-- частни полета в класовете наследници;
-- поне едно `protected` поле или `protected` метод;
-- конструктори, които използват `super(...)`;
-- поне един метод в клас наследник, който използва `super.methodName()`.
+- one parent class;
+- at least two subclasses;
+- private fields in the parent class;
+- private fields in the subclasses;
+- at least one `protected` field or method;
+- constructors that use `super(...)`;
+- at least one subclass method that calls `super.methodName()`.
 
-Да се създаде примерна програма, която създава обекти от всички класове наследници и демонстрира достъп до публичните методи. Директен достъп до частни полета не трябва да се използва.
+Create a sample program that instantiates all subclasses and demonstrates access through public methods. Do not access private fields directly.
 
+## Task 8 — Read-Only Object and `record`
 
-## Задача 8 — Обект само за четене и `record`
+Implement a `final class StudentCard` with `private final` fields for the card number and owner, a constructor, and getters only. Represent the same data with a `record StudentCardRecord`. Compare object creation, accessors, `equals()`, and `toString()`.
 
-Реализирайте `final class StudentCard` с `private final` полета за номер и притежател, конструктор и само getters. Реализирайте същите данни чрез `record StudentCardRecord`. Сравнете създаването, четенето, `equals()` и `toString()`.
-
-Добавете отделен запис с компонент `int[] grades`. Покажете как промяна на подадения масив или на масива, върнат от accessor, променя видимото съдържание. Добавете защитни копия на входа и изхода и повторете проверката. Обяснете защо `final` референция не е достатъчна.
+Also define a separate record with an `int[] grades` component. Show how changing the supplied array or the array returned by the accessor changes the visible contents. Add defensive copies on input and output, then repeat the check. Explain why a `final` reference alone is not enough.

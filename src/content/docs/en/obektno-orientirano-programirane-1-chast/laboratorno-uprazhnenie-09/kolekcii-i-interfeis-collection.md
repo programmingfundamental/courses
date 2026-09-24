@@ -1,60 +1,37 @@
 ---
-title: Колекции и интерфейс Collection
+title: Collections and the Collection Interface
 sidebar:
   order: 1
 ---
 
-# Колекции и интерфейс Collection
+# Collections and the Collection Interface
 
-## Структури от данни
+## Data structures
 
-Структурата от данни представлява начин за организиране и съхраняване на информацията, така че достъпът до нея и обработката ѝ да бъдат ефективни.
+A data structure organizes and stores information so it can be accessed and processed efficiently. Common examples include arrays, linked lists, hash tables, and trees.
 
-Най-често използваните структури от данни са:
-
-  - Масиви (Arrays)
-  - Свързани списъци (Linked Lists)
-  - Хеш таблици (Hash Tables)
-  - Дървета (Trees)
-
-Независимо от конкретната структура, най-често върху нея се извършват следните операции:
-
-  - добавяне
-  - триене
-  - търсене
-  - обхождане
-
-В Java структурите от данни се реализират чрез масиви и чрез Java Collections Framework (JCF). В настоящото упражнение ще бъдат разгледани интерфейсите, наследяващи Collection, а интерфейсът Map ще бъде представен отделно.
+Typical operations include adding, deleting, searching, and traversing elements. Java implements data structures through arrays and the Java Collections Framework (JCF). This lesson covers interfaces that extend `Collection`; `Map` is introduced separately.
 
 ## Java Collections Framework
 
-Java Collections Framework (JCF) представлява набор от интерфейси и класове, предназначени за работа с групи от обекти.
+The Java Collections Framework is a set of interfaces and classes for working with groups of objects. It provides ready-made data structures and a common set of operations for adding, removing, searching, traversing, and sorting elements.
 
-Framework-ът предоставя готови реализации на различни структури от данни и унифициран набор от операции за работа с тях: добавяне; премахване; търсене; обхождане; сортиране.
+Collections are dynamic and flexible, offer extensive functionality, and work with objects (reference types) rather than primitive values.
 
-Колекциите са:
+## Arrays and collections
 
--	динамични
--	гъвкави
--	предоставят богата функционалност;
--	работят само с обекти (референтни типове)
+| Property | Array | Collection |
+| --- | --- | --- |
+| Size | Fixed | Dynamic |
+| Data types | Primitive and reference | Reference types only |
+| Duplicates | Allowed | Depends on the collection |
+| Access | By index | Depends on the collection |
+| Functionality | Limited | Extensive |
+| Flexibility | Low | High |
 
-## Масиви и колекции
+Arrays are suitable when the size is known in advance and fast indexed access is needed. Collections are often preferable when the number of elements changes or elements must be added, removed, searched, or sorted frequently.
 
-| Характеристика | Масив                   | Колекция                    |
-| -------------- | ----------------------- | --------------------------- |
-| Размер         | Фиксиран                | Динамичен                   |
-| Типове данни   | Примитивни и референтни | Само референтни             |
-| Дублиране      | Позволява               | Зависи от типа              |
-| Достъп         | По индекс               | Според конкретната колекция |
-| Функционалност | Ограничена              | Богата                      |
-| Гъвкавост      | Ниска                   | Висока                      |
-
-Масивите са подходящи, когато размерът на данните е известен предварително и е необходим бърз достъп по индекс.
-
-Колекциите са предпочитан избор, когато броят на елементите се променя динамично или се налага често добавяне, премахване, търсене и сортиране.
-
-## Интерфейс Collection
+## The `Collection` interface
 
 ```mermaid
 classDiagram
@@ -73,256 +50,179 @@ classDiagram
     Queue <|.. ArrayDeque
 ```
 
-Основните интерфейси в тази част от йерархията предоставят различни групи операции:
+The main interfaces in this hierarchy provide different operations:
 
-| Интерфейс    | Основни операции                                      |
-| ------------ | ----------------------------------------------------- |
-| `Iterable`   | `iterator()`                                          |
+| Interface | Main operations |
+| --- | --- |
+| `Iterable` | `iterator()` |
 | `Collection` | `size()`, `add(element)`, `remove(element)`, `contains(element)`, `iterator()` |
-| `List`       | `get(index)`, `set(index, element)`                   |
-| `Set`        | съхраняване на уникални елементи                      |
-| `Queue`      | `offer(element)`, `poll()`, `peek()`                  |
+| `List` | `get(index)`, `set(index, element)` |
+| `Set` | Stores unique elements |
+| `Queue` | `offer(element)`, `poll()`, `peek()` |
 
-Интерфейсът Collection е базовият интерфейс в Java Collections Framework. Той дефинира общите операции, които се поддържат от повечето колекции. Най-често използваните методи са:
+`Collection` is the base interface in the Java Collections Framework. Common methods include:
 
 ```java
-//връща броя на елементите в колекцията
-int size()
-//проверява и връща дали е празна колекцията
-boolean isEmpty()
-//проверява и връща дали колекцията съдържа предавания като параметър елемент
-boolean contains(Object element)
-//добавя елемент в колекция (връща истина при успешно добавяне)
-boolean add(E element)
-//премахва елемент от колекция (връща истина при успешно изтриване)
-boolean remove(Object element)
-//извлича и връща итератора на колекцията
-Iterator<E> iterator()
-//проверява и връща дали всички елементи се съдържат в колекцията
-boolean containsAll(Collection<?> c)
-//добавя всички обекти от списъка към колекцията
-boolean addAll(Collection<? extends E> c)
-//премахва всички обекти от списъка към колекцията
-boolean removeAll(Collection<?> c)
-//премахва всички елементи от колекцията, които не присъстват в подавания списък от елементи
-boolean retainAll(Collection<?> c)
-//премахва всички елементи от колекцията
-void clear()
-//преобразува колекцията в масив от класа Ojbect
-Object[] toArray()
-//преобразува колекцията в масив от програмно дефиниран клас
-<T> T[] toArray(T[] a)
+int size();                         // number of elements
+boolean isEmpty();                  // whether the collection is empty
+boolean contains(Object element);   // whether an element is present
+boolean add(E element);             // add an element
+boolean remove(Object element);     // remove an element
+Iterator<E> iterator();             // obtain an iterator
+boolean containsAll(Collection<?> c);
+boolean addAll(Collection<? extends E> c);
+boolean removeAll(Collection<?> c);
+boolean retainAll(Collection<?> c); // keep only elements also in c
+void clear();
+Object[] toArray();
+<T> T[] toArray(T[] a);
 ```
 
-Пример:
+Example:
 
 ```java
 public class Application {
     public static void main(String[] args) {
         Collection<String> fruits = new ArrayList<>();
-
         fruits.add("Apple");
         fruits.add("Banana");
         fruits.add("Orange");
 
         System.out.println(fruits.contains("Banana"));
         System.out.println(fruits.size());
-
         fruits.remove("Banana");
-
         System.out.println(fruits);
     }
 }
 ```
-В примера към колекцията се добавят три елемента. След това се проверява дали тя съдържа определена стойност, премахва се един елемент и се извежда крайното съдържание:
 
-```java
+Three elements are added, membership and size are checked, one element is removed, and the remaining contents are printed:
+
+```text
 true
 3
 [Apple, Orange]
 ```
 
+## The `List` interface
 
-## Интерфейс List
+`List` is an ordered collection that allows duplicates, preserves insertion order, supports indexed access, and permits access to any element by index.
 
-List представлява подредена колекция, която:
+It is useful for lists, sequences, work queues, and collections where order matters. Common implementations include:
 
--	позволява дублиране на елементи;
--	запазва реда на добавяне;
--	поддържа достъп по индекс;
--	позволява произволен достъп до елементите.
-
-Подходящ е за:
-
-- списъци;
-- последователности;
-- работни опашки;
-- колекции, в които редът има значение.
-
-Най-често използвани реализации::
-
--	**ArrayList** – бърз достъп по индекс, по-бавно вмъкване и изтриване в средата;
--	**LinkedList** – по-бавно търсене, но бързо добавяне и премахване;
--	**Vector** – синхронизирана, по-стара реализация; в съвременните приложения се използва сравнително рядко.
-
-Пример:
+- `ArrayList`: fast indexed access; insertion and deletion in the middle can be slower.
+- `LinkedList`: slower searching, but insertion and removal can be efficient.
+- `Vector`: an older synchronized implementation, now relatively uncommon.
 
 ```java
 List<String> names = new ArrayList<>();
-
 names.add("Ivan");
 names.add("Maria");
 names.add("Georgi");
 
 System.out.println(names.get(1));
-
 names.remove(0);
-
 System.out.println(names);
 ```
-Методът get() извлича елемент по индекс, а remove() премахва елемент от списъка:
 
-```java
+`get()` retrieves an element by index; `remove()` removes an element:
+
+```text
 Maria
 [Maria, Georgi]
 ```
 
-## Интерфейс Set
+## The `Set` interface
 
-Set представлява колекция, която:
+`Set` stores unique elements, does not support indexes, and does not allow duplicates. It is useful for removing duplicates, representing mathematical sets, and quickly checking whether a unique element is present.
 
--	не позволява дублиране на елементи;
--	не поддържа индекси;
--	съхранява само уникални елементи.
+Common implementations:
 
-Подходящ е при:
-
-- филтриране на дублирани стойности;
-- работа с множества;
-- бързо търсене на уникални елементи.
-
-Най-често използвани реализации:
-
-- HashSet – най-бърза реализация, без гарантиран ред;
-- LinkedHashSet – запазва реда на добавяне;
-- TreeSet – поддържа автоматично сортирани елементи.
-
-Пример:
+- `HashSet`: generally fast, with no guaranteed iteration order.
+- `LinkedHashSet`: preserves insertion order.
+- `TreeSet`: keeps elements sorted.
 
 ```java
 Set<String> cities = new HashSet<>();
-
 cities.add("Varna");
 cities.add("Sofia");
 cities.add("Varna");
-
 System.out.println(cities);
 ```
-Резултат:
-```java
+
+The duplicate value appears only once:
+
+```text
 [Varna, Sofia]
 ```
 
-## Интерфейс Queue
+## The `Queue` interface
 
-**Queue** (опашка) реализира принципа **FIFO (First In – First Out)**.
+A `Queue` follows the FIFO (First In, First Out) principle: new elements are added at the end and processing starts with the earliest element. Queues are used for requests, buffers, producer–consumer tasks, and algorithms such as breadth-first search (BFS).
 
-Новите елементи се добавят в края на опашката, а обработката започва от първия добавен елемент.
+| Operation | Add | Remove | Inspect |
+| --- | --- | --- | --- |
+| May throw an exception | `add()` | `remove()` | `element()` |
+| Returns a special value on failure/empty queue | `offer()` | `poll()` | `peek()` |
 
-Използва се при:
+Use `add()`, `remove()`, and `element()` when failure is considered a programming error that should be signalled immediately with an exception. If the condition is expected and should be handled normally, prefer `offer()`, `poll()`, and `peek()`.
 
-- обработка на заявки;
-- буфери;
-- producer-consumer задачи;
-- алгоритми като BFS.
-
-Основните методи са:
-
-| Добавяне | Премахване | Преглед   |
-| -------- | ---------- | --------- |
-| add()    | remove()   | element() |
-| offer()  | poll()     | peek()    |
-
-Използването на add(), remove() и element() е подходящо, когато липсата на възможност за изпълнение се счита за програмна грешка и трябва незабавно да бъде сигнализирана чрез изключение. Ако подобна ситуация се очаква и трябва да бъде обработена по нормален начин, по-подходящи са offer(), poll() и peek().
-
-Най-често използвани реализации:
-
-- LinkedList
-- PriorityQueue
-- ArrayDeque
+Common implementations include `LinkedList`, `PriorityQueue`, and `ArrayDeque`.
 
 ```java
 Queue<String> queue = new LinkedList<>();
-
 queue.offer("Task 1");
 queue.offer("Task 2");
 queue.offer("Task 3");
 
 System.out.println(queue.peek());
-
 System.out.println(queue.poll());
-
 System.out.println(queue.peek());
 ```
-Методът peek() връща първия елемент, без да го премахва, а poll() го извлича и премахва от опашката:
-```java
+
+`peek()` returns the first element without removing it; `poll()` retrieves and removes it:
+
+```text
 Task 1
 Task 1
 Task 2
 ```
 
-## Итератори
+## Iterators
 
-Всички колекции, наследяващи Collection, имплементират интерфейса **Iterable**, което позволява използването на **foreach**. За по-гъвкаво обхождане се използва интерфейсът **Iterator**.
-
-Итераторът е интерфейс, който предоставя стандартен механизъм за последователно обхождане на елементите в дадена колекция, без да е необходимо да се познава вътрешната й реализация. Концептуално той може да се разглежда като курсор, който последователно преминава през елементите на колекцията.
+All collections that extend `Collection` implement `Iterable`, which enables the enhanced `for` loop. For more flexible traversal, use an `Iterator`. It provides a standard way to visit elements without knowing the collection's internal implementation; conceptually, it is a cursor moving through the elements.
 
 ```java
 public interface Iterable<T> {
     Iterator<T> iterator();
 }
-```
 
-```java
 public interface Iterator<E> {
-
     boolean hasNext();
-
     E next();
-
     void remove();
 }
 ```
 
-Основните методи са:
-
-- hasNext() – проверява дали има следващ елемент;
-- next() – връща следващия елемент;
-- remove() – премахва последния върнат елемент.
-
-Пример:
+The main methods are `hasNext()`, which checks whether another element exists; `next()`, which returns it; and `remove()`, which removes the last returned element.
 
 ```java
 Iterator<String> iterator = names.iterator();
-
 while (iterator.hasNext()) {
     System.out.println(iterator.next());
 }
 ```
 
-## Сортиране на колекции
+## Sorting collections
 
-Сортирането на елементите в колекции от тип List може да се реализира чрез интерфейсите **Comparable** и **Comparator**.
+Elements in `List` collections can be sorted using `Comparable` and `Comparator`.
 
-## Comparable
+## `Comparable`
 
-Интерфейсът Comparable определя естествения ред на обектите.
-
-Пример:
+`Comparable` defines the natural order of objects.
 
 ```java
 public class Book implements Comparable<Book> {
-
     private final String title;
     private final String author;
     private final int publishingYear;
@@ -347,19 +247,18 @@ public class Book implements Comparable<Book> {
 }
 ```
 
-Използване:
+Sort using the natural order:
 
 ```java
 Collections.sort(books);
 ```
 
-## Comparator
+## `Comparator`
 
-Интерфейсът Comparator позволява дефиниране на външни критерии за сортиране.
+`Comparator` defines an external sorting criterion.
 
 ```java
 public class AuthorComparator implements Comparator<Book> {
-
     @Override
     public int compare(Book b1, Book b2) {
         return b1.getAuthor().compareTo(b2.getAuthor());
@@ -367,16 +266,13 @@ public class AuthorComparator implements Comparator<Book> {
 }
 ```
 
-Използване:
-
 ```java
 Collections.sort(books, new AuthorComparator());
 ```
 
-## Анонимен Comparator
+## Anonymous `Comparator`
 
-Анонимен клас може да се използва, когато критерият за сортиране е необходим само на едно място. В този случай не се
-създава отделен именуван клас.
+An anonymous class is useful when a sorting rule is needed in only one place, so there is no need for a separate named class.
 
 ```java
 books.sort(new Comparator<Book>() {
@@ -387,54 +283,51 @@ books.sort(new Comparator<Book>() {
 });
 ```
 
-## Lambda израз
+## Lambda expressions
 
-Lambda изразът е кратък синтаксис за реализиране на функционален интерфейс. Функционален интерфейс е интерфейс с един
-абстрактен метод. `Comparator` има един основен абстрактен метод - `compare`, затова може да бъде записан чрез lambda
-израз.
+A lambda is concise syntax for implementing a functional interface, an interface with one abstract method. `Comparator` has one main abstract method, `compare`, so it can be expressed as a lambda.
 
 ```java
 books.sort((b1, b2) -> Double.compare(b1.getPrice(), b2.getPrice()));
 ```
 
-Параметрите `b1` и `b2` са двата обекта, които се сравняват. Изразът след `->` връща резултат от сравнението.
+`b1` and `b2` are the objects being compared. The expression after `->` returns the comparison result.
 
-## Method Reference
+## Method references
 
-Method reference, или референция към метод, използва `::`. Това е описание на операция, съвместима с **функционален интерфейс**, а не незабавно извикване на метода.
+A method reference uses `::`. It describes an operation compatible with a functional interface; it does not call the method immediately.
 
-### Четири форми на референция към метод
+### Four forms of method reference
 
-| Форма | Пример | Съответстващ lambda израз |
+| Form | Example | Equivalent lambda |
 | --- | --- | --- |
-| Статичен метод | `Integer::parseInt` | `text -> Integer.parseInt(text)` |
-| Метод на конкретен обект | `System.out::println` | `text -> System.out.println(text)` |
-| Нестатичен метод на подаден обект | `String::length` | `text -> text.length()` |
-| Конструктор | `StringBuilder::new` | `() -> new StringBuilder()` |
+| Static method | `Integer::parseInt` | `text -> Integer.parseInt(text)` |
+| Method on a specific object | `System.out::println` | `text -> System.out.println(text)` |
+| Instance method of a supplied object | `String::length` | `text -> text.length()` |
+| Constructor | `StringBuilder::new` | `() -> new StringBuilder()` |
 
-### Приложение при сортиране
+### Use in sorting
 
 ```java
 books.sort(Comparator.comparingInt(Book::getPublishingYear));
 ```
 
-Записът `Book::getPublishingYear` означава, че за всеки обект от тип `Book` се извиква методът `getPublishingYear()`.
-Получената стойност се използва като критерий за сортиране.
+`Book::getPublishingYear` means that `getPublishingYear()` is called on each `Book`. The returned value is used as the sort key.
 
 ```java
 books.sort(Comparator.comparing(Book::getAuthor)
                      .thenComparing(Book::getTitle));
 ```
 
-Първо се сравняват авторите, а при равенство — заглавията. Класът `Book` трябва да предоставя методите `getAuthor()` и `getTitle()`, които в този пример връщат ненулеви низове. Записът `Book::getAuthor` съответства на `book -> book.getAuthor()`.
+Authors are compared first, then titles when authors are equal. `Book` must provide `getAuthor()` and `getTitle()`, which return non-null strings in this example. `Book::getAuthor` is equivalent to `book -> book.getAuthor()`.
 
-Използвайте method reference, когато действието е точно извикване на съществуващ метод. Ако трябва допълнително изчисление, условие или преобразуване на аргументите, lambda изразът е по-подходящ, например `book -> book.getTitle().trim()`. Формите са описани в [Method References — Java Tutorials](https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html).
+Use a method reference when the operation is exactly a call to an existing method. If additional computation, a condition, or argument transformation is required, a lambda is clearer, for example `book -> book.getTitle().trim()`. See [Method References — Java Tutorials](https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html).
 
-## Comparable vs Comparator
+## `Comparable` vs. `Comparator`
 
-| Comparable               | Comparator                                  |
-| ------------------------ | ------------------------------------------- |
-| Определя естествения ред | Определя външен критерий                    |
-| Реализира се в класа     | Реализира се в отделен клас или чрез lambda |
-| Един критерий            | Възможни са множество критерии              |
-| Метод compareTo()        | Метод compare()                             |
+| `Comparable` | `Comparator` |
+| --- | --- |
+| Defines natural order | Defines an external criterion |
+| Implemented in the class | Implemented separately or with a lambda |
+| One natural criterion | Multiple criteria are possible |
+| `compareTo()` | `compare()` |

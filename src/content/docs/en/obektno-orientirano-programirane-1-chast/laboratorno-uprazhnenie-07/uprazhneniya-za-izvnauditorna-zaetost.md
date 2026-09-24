@@ -5,67 +5,37 @@ sidebar:
   label: Tasks
 taskPage: true
 ---
-## Упражнения за извънаудиторна заетост
 
-## Задача 1
+## Independent Study Exercises
 
-Да се дефинира клас `Employee`, който описва служител.
+## Task 1
 
-Класът трябва да съдържа:
+Define an `Employee` class with these fields: `firstName`, `middleName`, and `lastName` of type `String`; `baseSalary` of type `double`; and `position` of type `String`. Add a constructor, accessor methods, and `getFullName()`, which returns all three names as one string.
 
-- `firstName` от тип `String`;
-- `middleName` от тип `String`;
-- `lastName` от тип `String`;
-- `baseSalary` от тип `double`;
-- `position` от тип `String`.
+## Task 2
 
-Да се дефинират конструктор, методи за четене и метод `getFullName()`, който връща трите имена като един низ.
+Define a `Company` class with a `name` and an array of employees. Add `getInfo()`, which builds the company information through `String` concatenation; `getInformation()`, which returns the same information using `StringBuilder`; and `findEmployeesByName(String name)`, which returns text describing employees whose names contain the supplied value.
 
-## Задача 2
+Create at least 1,000 employees and compare the execution time of `getInfo()` and `getInformation()`. Use `System.nanoTime()` to measure the time. Before comparing performance, use `equals()` to verify that both methods return identical text. Run several warm-up and measured iterations. Treat one measurement as an observation, not as general proof of performance.
 
-Да се дефинира клас `Company`, който описва фирма.
+## Task 3
 
-Класът трябва да съдържа:
+Define classes for vehicles: `Car` with a registration number, width, and length; `Truck` with a registration number, width, length, and load capacity; and `Bus` with a registration number, width, length, and number of seats. Decide whether a common parent class `Vehicle` is appropriate. If you use one, place the common fields in it.
 
-- `name` от тип `String`;
-- `employees` като масив от служители.
+## Task 4
 
-Да се дефинират методи:
+Define a `Parking` class that creates vehicles from a formatted string.
 
-- `getInfo()`, който връща информация за фирмата чрез конкатенация на `String`;
-- `getInformation()`, който връща същата информация чрез `StringBuilder`;
-- `findEmployeesByName(String name)`, който връща текст със служителите, чието име съдържа подадената стойност.
-
-Да се създадат поне 1000 служители и да се сравни времето за изпълнение на `getInfo()` и `getInformation()`. За измерване може да се използва `System.nanoTime()`.
-
-Преди сравнението проверете чрез `equals()`, че двата метода връщат еднакъв текст. Направете няколко предварителни и няколко измервани изпълнения. Еднократното време е само наблюдение, а не общо доказателство за производителността.
-
-## Задача 3
-
-Да се дефинират класове за превозни средства:
-
-- `Car` с номер, ширина и дължина;
-- `Truck` с номер, ширина, дължина и товароносимост;
-- `Bus` с номер, ширина, дължина и брой седящи места.
-
-Да се прецени дали е необходим общ родителски клас `Vehicle`. Ако се използва такъв клас, общите полета трябва да бъдат поставени в него.
-
-## Задача 4
-
-Да се дефинира клас `Parking`, който създава превозни средства от форматиран низ.
-
-Примерен вход:
+Example input:
 
 ```text
 Car:B4747KK,4,6;Truck:B1111TT,4,8,3;Bus:B2222BB,4,10,59
 ```
 
-Класът трябва да раздели входа по `;`, да разпознае типа на превозното средство и да създаде съответния обект. При изграждане на текстово описание на паркинга трябва да се използва `StringBuilder`.
+Split the input on `;`, identify each vehicle type, and create the corresponding object. Use `StringBuilder` when building a textual description of the parking lot. Demonstrate the class with at least five vehicles.
 
-Да се демонстрира работата на класа с поне пет превозни средства.
+## Task 5 — Immutable and mutable text
 
-## Задача 5 — Неизменяем и изменяем текст
+Create `String original = "Java"` and `String alias = original`. Append text using `original += " OOP"` and explain why `alias` remains `"Java"`. Repeat with two references to the same `StringBuilder` and `append(" OOP")`; check why both references see the change.
 
-Създайте `String original = "Java"` и `String alias = original`. Добавете текст чрез `original += " OOP"` и обяснете защо `alias` остава `"Java"`. Повторете с две референции към един `StringBuilder` и `append(" OOP")`; проверете защо и двете виждат промяната.
-
-Повторете с `final StringBuilder`: покажете, че съдържанието може да се променя, но ново присвояване на референцията не се компилира. Оставете невалидния ред като коментар. Обяснете защо думата „статични“ в заглавието не означава модификатор `static`.
+Repeat with a `final StringBuilder`. Show that its contents can change but assigning a different object to the reference does not compile. Leave the invalid reassignment as a comment. Explain why “static” in the lesson title does not mean the `static` modifier.

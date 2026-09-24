@@ -5,173 +5,82 @@ sidebar:
   label: Tasks
 taskPage: true
 ---
-## Обобщаващи задачи
 
+# Review Exercises
 
-Лабораторното упражнение съдържа обобщаващи задачи върху класове и референции, наследяване, връзки и капсулация, абстракция, абстрактни класове, интерфейси, статичен и динамичен полиморфизъм, изключения, низове, `record`, шаблонни класове, колекции, `Map.Entry` и референции към методи.
+This lab reviews classes and references, inheritance, relationships and encapsulation, abstraction, abstract classes, interfaces, static and dynamic polymorphism, exceptions, strings, `record`, generic classes, collections, `Map.Entry`, and method references.
 
-Задачите изискват самостоятелно проектиране на йерархии от класове. Трябва да се изберат подходящи модификатори за достъп, конструктори, методи, интерфейси и колекции според описаното поведение.
+The tasks require you to design class hierarchies independently. Choose access modifiers, constructors, methods, interfaces, and collections to match the required behavior.
 
-## Теми
+## Topics
 
-1. [Упражнения за извънаудиторна заетост](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-12/obobshtavashti-zadachi/)
+1. [Independent Study Exercises](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-12/obobshtavashti-zadachi/)
 
-## Упражнения за извънаудиторна заетост
+## Independent Study Exercises
 
-## Задача 1
+## Task 1
 
-Да се реализира система за животни, която използва интерфейси, абстрактен клас и полиморфизъм.
+Implement an animal system using interfaces, an abstract class, and polymorphism.
 
-Да се дефинира интерфейс `Movement` с метод:
+Define a `Movement` interface with `String move()`. The method should return a textual description of how the animal moves.
 
-```java
-String move();
-```
+Define `Pet` and `Wild` interfaces. Each should have a method that returns a textual description of the animal's type. Choose clear method names that describe the action.
 
-Методът трябва да връща текстово описание на начина на движение.
+Define an abstract `Animal` class implementing `Movement`. Give it protected fields `name` of type `String`, `age` of type `int`, and `weight` of type `double`. Add a parameterized constructor and accessors.
 
-Да се дефинират интерфейси:
+Declare abstract methods `String sound()` and `String eats(int count)`. `sound()` returns the animal's sound; `eats(int count)` returns text describing it eating the specified amount. Add `getDescription()` to return a textual description of the animal's common data.
 
-- `Pet`;
-- `Wild`.
+Define `Dog`, `Bird`, and `Fish` as subclasses of `Animal`. Each class must call the `Animal` constructor with `super(...)`, implement `move()`, `sound()`, and `eats(int count)`, implement either `Pet` or `Wild` according to its behavior, and add at least one field of its own.
 
-Всеки от тях трябва да съдържа метод, който връща текстово описание на типа животно. Имената на методите трябва да бъдат избрани така, че да са ясни и да описват действието.
+Create an `Animal[]` containing dogs, birds, and fish. Traverse it and print each animal's description, movement, sound, feeding result, and whether it is a pet or wild animal according to its implemented interface.
 
-Да се дефинира абстрактен клас `Animal`, който имплементира `Movement`.
+## Task 2
 
-Класът трябва да съдържа защитени полета:
+Implement an employee system for an organization with three employee types: workers, experts, and managers.
 
-- `name` от тип `String`;
-- `age` от тип `int`;
-- `weight` от тип `double`.
+Define an `ExecuteWork` interface with `boolean execute(String taskName)`. The method accepts a task name and returns whether the task was completed successfully.
 
-Да се дефинира параметризиран конструктор. Да се дефинират методи за четене на полетата.
+Define an abstract `Employee` class implementing `ExecuteWork`. It must have private `name` (`String`), `totalTasks` (`int`), and `successfulTasks` (`int`) fields. Add a constructor, accessors, protected methods for incrementing assigned and successful task counts, and `double successRate()`. The success rate must be in `[0, 1]`; return `0` when there are no assigned tasks.
 
-Да се дефинират абстрактни методи:
+## Class `Worker`
 
-- `String sound()`;
-- `String eats(int count)`.
+Define `Worker` extending `Employee` with a private `failedTaskNumber` field of type `int`.
 
-Методът `sound()` трябва да връща звука на животното. Методът `eats(int count)` трябва да връща текст, който описва хранене с подаденото количество храна.
+The worker must fail every `failedTaskNumber`-th task. For example, if it is `3`, the first two tasks succeed, the third fails, and the cycle repeats.
 
-Да се дефинира метод `getDescription()`, който връща текстово представяне на общите данни за животното.
+Implement `execute(String taskName)`. It must increment the number of assigned tasks and increment successful tasks only when execution succeeds. Add a private helper method that determines whether the current task will succeed.
 
-Да се дефинират класове `Dog`, `Bird` и `Fish`, които наследяват `Animal`. Всеки клас трябва:
+## Class `Expert`
 
-- да извиква конструктора на `Animal` чрез `super(...)`;
-- да реализира `move()`;
-- да реализира `sound()`;
-- да реализира `eats(int count)`;
-- да имплементира `Pet` или `Wild` според избраното поведение;
-- да добави поне едно собствено поле.
+Define `Expert` extending `Employee`. An expert always completes an assigned task successfully. Its `execute(String taskName)` method must increment both assigned and successful task counts and return `true`.
 
-Да се създаде масив от тип `Animal[]`, който съдържа кучета, птици и риби. Да се обходи масивът и за всяко животно да се изведат:
+## Class `Manager`
 
-- описание;
-- начин на движение;
-- звук;
-- резултат от хранене;
-- дали е домашно или диво животно според имплементирания интерфейс.
-
-## Задача 2
-
-Да се реализира система за служители в организация.
-
-В организацията има три типа служители:
-
-- изпълнители;
-- експерти;
-- началници.
-
-Да се дефинира интерфейс `ExecuteWork` с метод:
-
-```java
-boolean execute(String taskName);
-```
-
-Методът приема име на задача и връща дали задачата е изпълнена успешно.
-
-Да се дефинира абстрактен клас `Employee`, който имплементира `ExecuteWork`.
-
-Класът трябва да съдържа частни полета:
-
-- `name` от тип `String`;
-- `totalTasks` от тип `int`;
-- `successfulTasks` от тип `int`.
-
-Да се дефинират:
-
-- конструктор;
-- методи за четене;
-- защитени методи за увеличаване на броя поставени и успешни задачи;
-- метод `double successRate()`.
-
-Методът `successRate()` трябва да връща стойност в интервала `[0, 1]`. Ако няма поставени задачи, резултатът трябва да бъде `0`.
-
-## Клас `Worker`
-
-Да се дефинира клас `Worker`, който наследява `Employee`.
-
-Класът трябва да съдържа частно поле:
-
-- `failedTaskNumber` от тип `int`.
-
-Изпълнителят трябва да се проваля на всяка `failedTaskNumber`-та задача. Например ако стойността е `3`, първите две задачи са успешни, третата е неуспешна, след това цикълът се повтаря.
-
-Да се реализира методът `execute(String taskName)`. Методът трябва да увеличава броя поставени задачи и да увеличава броя успешни задачи само при успешно изпълнение.
-
-Да се дефинира частен помощен метод, който определя дали текущата задача ще бъде успешна.
-
-## Клас `Expert`
-
-Да се дефинира клас `Expert`, който наследява `Employee`.
-
-Експертът винаги изпълнява успешно поставената задача. Методът `execute(String taskName)` трябва да увеличава броя поставени и успешни задачи и да връща `true`.
-
-## Клас `Manager`
-
-Да се дефинира клас `Manager`, който наследява `Employee`.
-
-Класът трябва да съдържа колекция от подчинени:
+Define `Manager` extending `Employee` with a collection of subordinates:
 
 ```java
 private List<Employee> employees;
 ```
 
-Когато на началник се постави задача, той трябва да я възложи на подчинения с най-малък брой поставени задачи. Началникът се счита за успешен, ако избраният подчинен изпълни задачата успешно.
+When assigned a task, a manager must delegate it to the subordinate with the fewest assigned tasks. The manager succeeds if the selected subordinate completes the task successfully.
 
-Да се реализират:
+Implement a constructor, `addEmployee(Employee employee)`, `execute(String taskName)`, and `printStatus()`. `printStatus()` should display the names and current success rates of all subordinates.
 
-- конструктор;
-- метод `addEmployee(Employee employee)`;
-- метод `execute(String taskName)`;
-- метод `printStatus()`.
+## Demonstration
 
-Методът `printStatus()` трябва да извежда имената и текущата успеваемост на всички подчинени.
+Create a sample program that creates two workers with different `failedTaskNumber` values and one expert; assigns several tasks directly to them; creates a manager whose subordinates are those employees; assigns tasks to the manager; prints subordinate status; and displays each employee's success rate.
 
-## Демонстрация
+Then create a second manager with a new employee and the first manager as subordinates. Demonstrate that tasks can be delegated to another manager as well.
 
-Да се създаде примерна програма, която:
+## Extension — Applying the topics covered
 
-- създава двама изпълнители с различна стойност на `failedTaskNumber`;
-- създава един експерт;
-- възлага няколко задачи директно на изпълнителите и експерта;
-- създава началник с вече създадените служители като подчинени;
-- възлага задачи на началника;
-- извежда статуса на подчинените;
-- извежда успеваемостта на всеки служител.
+Extend the employee system as follows:
 
-След това да се създаде втори началник, който има за подчинени нов служител и първия началник. Да се демонстрира, че задачите могат да се делегират и към друг началник.
+1. Create a snapshot record `EmployeeReport(String name, int totalTasks, int successfulTasks)`. Show that executing another task changes the employee but not an existing report. Compare this with a regular read-only class.
+2. Use a custom `record KeyValue<K, V>(K key, V value)` for an “employee ID — report” result. State the types of both components and distinguish the pair from a complete `Map`.
+3. Store reports in `Map<Integer, EmployeeReport>`. Traverse with `Map.Entry<Integer, EmployeeReport>` and build a text report using `StringBuilder`. Use unique IDs as keys because names may repeat.
+4. Sort a copy of the employee list by success rate using `Comparator.comparingDouble(Employee::successRate)`, then add a secondary name criterion. Explain the method reference using its equivalent lambda expression.
+5. Add an overloaded `execute(String taskName, int repetitions)` method. Distinguish compile-time selection of the overload from dynamic execution of `execute(String)` on a specific employee.
+6. Reject `failedTaskNumber <= 0` and delegating to a manager with no subordinates using appropriate exceptions. Use `finally` to report that the delegation attempt has finished. Check both successful and unsuccessful attempts.
 
-## Разширение — Прилагане на изучените теми
-
-Разширете системата за служители със следните операции:
-
-1. Създавайте отчетен `record EmployeeReport(String name, int totalTasks, int successfulTasks)`. Той трябва да представя моментно състояние. Покажете, че следващо изпълнение на задача променя служителя, но не и вече създадения отчет. Сравнете с обикновен клас само за четене.
-2. Използвайте собствен `record KeyValue<K, V>(K key, V value)` за резултат „идентификатор на служител — отчет“. Посочете типовете на двата компонента и разграничете двойката от цяла `Map`.
-3. Съхранявайте отчетите в `Map<Integer, EmployeeReport>`. Обходете ги чрез `Map.Entry<Integer, EmployeeReport>` и съставете текстов отчет със `StringBuilder`. Ключовете да са отделни уникални идентификатори, тъй като имената могат да се повтарят.
-4. Сортирайте копие на списъка от служители по успеваемост чрез `Comparator.comparingDouble(Employee::successRate)` и добавете втори критерий по име. Обяснете референцията към метод чрез съответстващ lambda израз.
-5. Добавете претоварен метод `execute(String taskName, int repetitions)`. Разграничете статичния избор на претоварен метод от динамичното изпълнение на `execute(String)` в конкретен служител.
-6. Отхвърляйте `failedTaskNumber <= 0` и възлагане към началник без подчинени чрез подходящи изключения. Използвайте `finally` за съобщение, че опитът за възлагане е приключил. Проверете както успешен, така и неуспешен опит.
-
-Проверете празен списък, равна успеваемост, повтарящи се имена и служител без поставени задачи. Поставете breakpoint при делегиране и проследете как две референции могат да достигат един и същ служител. Начертайте отделно наследяването и връзката „началник има подчинени“.
+Also check an empty list, equal success rates, duplicate names, and an employee with no assigned tasks. Set a breakpoint during delegation and trace how two references can reach the same employee. Draw inheritance and the “manager has subordinates” relationship separately.

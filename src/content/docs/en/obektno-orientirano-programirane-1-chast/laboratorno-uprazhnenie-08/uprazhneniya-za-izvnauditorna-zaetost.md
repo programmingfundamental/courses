@@ -5,67 +5,39 @@ sidebar:
   label: Tasks
 taskPage: true
 ---
-## Упражнения за извънаудиторна заетост
 
-## Задача 1
+## Independent Study Exercises
 
-Да се дефинира generic клас `Box<T>`.
+## Task 1
 
-Класът трябва да съдържа:
+Define a generic class `Box<T>` with a `value` field of type `T`, `setValue(T value)`, `getValue()`, and `isEmpty()`, which reports whether the value is `null`.
 
-- поле `value` от тип `T`;
-- метод `setValue(T value)`;
-- метод `getValue()`;
-- метод `isEmpty()`, който връща дали стойността е `null`.
+Create `Box<String>`, `Box<Integer>`, and `Box<Double>` objects. Demonstrate that each object works with the specific type supplied when it was created.
 
-Да се създадат обекти `Box<String>`, `Box<Integer>` и `Box<Double>`. Да се демонстрира, че всеки обект работи с конкретния тип, зададен при създаването му.
+## Task 2
 
-## Задача 2
+Define a generic class `Pair<K, V>` with `key` of type `K`, `value` of type `V`, a constructor, accessors, and `getDescription()`.
 
-Да се дефинира generic клас `Pair<K, V>`.
+Create pairs for a student's name and grade, a product code and price, and a city name and population. Use `Pair<String, Integer>`, `Pair<String, Double>`, and `Pair<String, Long>`. Make the fields `private final`. Add an invalid pair as a comment and explain why the compiler rejects the mismatched type.
 
-Класът трябва да съдържа:
+Represent the same data using `record KeyValue<K, V>(K key, V value)`. Compare the accessors and `equals()` results for two distinct objects with the same data. Also create `record StudentGrade(String studentName, int grade)` and explain when this named type is clearer than a generic pair.
 
-- поле `key` от тип `K`;
-- поле `value` от тип `V`;
-- конструктор;
-- методи за четене;
-- метод `getDescription()`.
+## Task 3
 
-Да се създадат двойки:
-
-- име на студент и оценка;
-- код на продукт и цена;
-- име на град и население.
-
-Използвайте `Pair<String, Integer>`, `Pair<String, Double>` и `Pair<String, Long>`. Полетата да бъдат `private final`. Добавете неправилна двойка като коментар и обяснете защо компилаторът отхвърля несъответстващ тип.
-
-Реализирайте същото представяне чрез `record KeyValue<K, V>(K key, V value)`. Сравнете методите за достъп и резултатите от `equals()` за два отделни обекта с еднакви данни. За оценката създайте и именуван `record StudentGrade(String studentName, int grade)` и обяснете кога този тип е по-ясен от обща двойка.
-
-## Задача 3
-
-Да се дефинира generic метод:
+Define a generic method:
 
 ```java
 public static <T> void printArray(T[] array)
 ```
 
-Методът трябва да обхожда масива и да отпечатва всички елементи. Да се тества с масив от `String`, масив от `Integer` и масив от `Double`.
+Traverse the array and print all its elements. Test it with arrays of `String`, `Integer`, and `Double`.
 
-## Задача 4
+## Task 4
 
-Да се дефинира generic интерфейс `Repository<T>`.
+Define a generic interface `Repository<T>` with `save(T item)`, `findById(int id)`, and `size()`.
 
-Интерфейсът трябва да съдържа методи:
+Define `Student` with a student ID, and `StudentRepository` implementing `Repository<Student>`. Use a fixed-capacity `Student[]` array and a record count. If the array is full, `save` should signal the condition using an appropriate exception already covered in class; if an ID is not found, `findById` should return `null`. Using `List<T>` is introduced after Lab Exercise 9. Check an empty repository, successful saving and lookup, a missing ID, and a full repository.
 
-- `void save(T item)`;
-- `T findById(int id)`;
-- `int size()`.
+## Task 5
 
-Да се дефинират `Student` с факултетен номер и `StudentRepository`, който имплементира `Repository<Student>`. Използвайте масив `Student[]` с фиксиран капацитет и брояч на записите. При пълен масив `save` да сигнализира с подходящо вече изучено изключение; при липсващ номер `findById` да връща `null`. Работа с `List<T>` се добавя след упражнение 9. Проверете празно хранилище, успешно записване и търсене, липсващ номер и запълнен капацитет.
-
-## Задача 5
-
-Да се демонстрира защо raw типовете не трябва да се използват.
-
-Да се създаде пример с raw `Box`, в който се записва стойност от един тип и след това се прави грешно преобразуване към друг тип. След това същият пример да се реализира чрез `Box<String>` или `Box<Integer>`, така че грешката да бъде открита от компилатора.
+Demonstrate why raw types should not be used. Create an example using raw `Box`, store a value of one type, and then incorrectly cast it to another type. Implement the same example using `Box<String>` or `Box<Integer>` so the compiler catches the error.

@@ -1,129 +1,101 @@
 ---
-title: Шаблонни класове и методи (Generics)
+title: Generic Classes and Methods
 sidebar:
   order: 1
 ---
 
-# Шаблонни класове и методи (Generics)
+# Generic Classes and Methods
 
+Here, “generic” means parameterized by types, not an IntelliJ IDEA project template. Java generics are not the C++ `template` mechanism; they are generally implemented through type erasure, without a separate class version for every type argument.
 
-В тази тема „шаблонни“ означава **параметризирани с типове** (generic), а не шаблон за създаване на проект в IntelliJ IDEA. Java generics не са механизмът `template` от C++; обичайно се реализират чрез изтриване на типовите параметри (type erasure), без отделна версия на класа за всеки типов аргумент.
-
-Generics позволяват класове, интерфейси и методи да работят с тип, който се задава при използване. Така един и същ код може да бъде използван с различни типове, без да се губи типова безопасност.
+Generics let classes, interfaces, and methods work with a type supplied when they are used. The same code can then serve different types while retaining type safety.
 
 ```java
 class Box<T> {
-
     private T value;
-
-    public void setValue(T value) {
-        this.value = value;
-    }
-
-    public T getValue() {
-        return value;
-    }
+    public void setValue(T value) { this.value = value; }
+    public T getValue() { return value; }
 }
 ```
 
-`T` е параметър на типа. Той се заменя с конкретен тип при създаване на обект.
+`T` is a type parameter. It is replaced by a concrete type when the object is used.
 
 ```java
 Box<String> textBox = new Box<>();
 textBox.setValue("Java");
-
 String value = textBox.getValue();
 ```
 
-В този пример `T` се заменя със `String`.
+Here, `T` is `String`.
 
-## Параметри на типа
+## Type parameters
 
-Параметърът на типа е име, което временно представлява конкретен тип. Той се записва в ъглови скоби след името на
-класа, интерфейса или метода.
+A type parameter is a name that temporarily represents a concrete type. It is written in angle brackets after a class, interface, or method name.
 
 ```java
 class Box<T> {
-
     private T value;
 }
 ```
 
-В примера `T` не е конкретен клас. Той е параметър, който ще бъде заменен при използване на `Box`.
+`T` is not a concrete class; it is a parameter that is supplied when using `Box`.
 
 ```java
 Box<String> textBox = new Box<>();
 Box<Integer> numberBox = new Box<>();
 ```
 
-При `Box<String>` параметърът `T` се разглежда като `String`. При `Box<Integer>` параметърът `T` се разглежда като
-`Integer`.
+In `Box<String>`, `T` is treated as `String`; in `Box<Integer>`, it is treated as `Integer`.
 
-В Java съществуват утвърдени конвенции за именуване на параметрите на типа.
+| Name | Meaning | Common use |
+| --- | --- | --- |
+| `T` | Type | A general type |
+| `E` | Element | Elements in collections such as `List` and `Set` |
+| `K` | Key | Keys in a `Map` |
+| `V` | Value | Values in a `Map` |
+| `R` | Result | Result type of an operation or function |
+| `U` | A second free type | When `T` is already used |
 
-| Име | Значение | Къде се използва |
-| --- | -------- | ---------------- |
-| `T` | Type | общ тип |
-| `E` | Element | елементи в колекции като `List` и `Set` |
-| `K` | Key | ключове в `Map` |
-| `V` | Value | стойности в `Map` |
-| `R` | Result | резултат от операция или функция |
-| `U` | Втори свободен тип | когато `T` вече се използва |
+These names are conventions. They do not change program behavior, but make generic declarations easier to recognize.
 
-Тези имена са конвенция. Те не променят поведението на програмата, но правят generic декларациите по-разпознаваеми.
+## Why generics are needed
 
-## Необходимост от generics
-
-Без generics стойностите често трябва да се съхраняват като `Object`. Това позволява запис на всякакъв тип и измества грешките към времето на изпълнение.
+Without generics, values often have to be stored as `Object`. This accepts any type and defers errors until runtime.
 
 ```java
 class Box {
-
     private Object value;
-
-    public void setValue(Object value) {
-        this.value = value;
-    }
-
-    public Object getValue() {
-        return value;
-    }
+    public void setValue(Object value) { this.value = value; }
+    public Object getValue() { return value; }
 }
 ```
 
-При такъв клас е необходимо явно преобразуване.
+An explicit cast is then needed:
 
 ```java
 Box box = new Box();
 box.setValue("Java");
-
 String value = (String) box.getValue();
 ```
 
-Generics премахват нуждата от такова преобразуване и позволяват компилаторът да проверява типовете.
+Generics remove that cast and let the compiler check types.
 
-## Типова безопасност
+## Type safety
 
-Типова безопасност означава, че компилаторът проверява дали се използват стойности от правилния тип. При generics
-грешка от несъвместим тип се открива при компилация, а не чак при изпълнение.
+Type safety means the compiler checks that values of the expected type are used. With generics, an incompatible value is rejected at compile time rather than causing an error later at runtime.
 
 ```java
 Box<String> box = new Box<>();
-
 box.setValue("Java");
-// box.setValue(10); // не се компилира
+// box.setValue(10); // does not compile
 ```
 
-В примера `box` е деклариран като `Box<String>`. Затова в него може да бъде записан `String`, но не и `int` или
-`Integer`.
+Because `box` is a `Box<String>`, it accepts a `String`, not an `int` or `Integer`. Type safety reduces casts and runtime errors.
 
-Типовата безопасност намалява нуждата от явно преобразуване и намалява риска от грешки по време на изпълнение.
-
-## Шаблонен клас с повече от един параметър
+## A generic class with more than one parameter
 
 ```java
 final class Pair<K, V> {
-
     private final K key;
     private final V value;
 
@@ -131,67 +103,51 @@ final class Pair<K, V> {
         this.key = key;
         this.value = value;
     }
-
-    public K getKey() {
-        return key;
-    }
-
-    public V getValue() {
-        return value;
-    }
+    public K getKey() { return key; }
+    public V getValue() { return value; }
 }
 ```
 
-Класът `Pair<K, V>` използва два параметъра на типа. `K` може да представлява тип на ключ, а `V` тип на стойност.
+`Pair<K, V>` has two type parameters. `K` can represent a key type and `V` a value type.
 
 ```java
 Pair<String, Integer> grade = new Pair<>("Ivan", 6);
 ```
 
-Типовете на ключа и стойността са независими. Например `Pair<Integer, String>` може да описва факултетен номер и име, а `Pair<String, Double>` — код на продукт и цена. Чрез `grade.getKey()` получаваме `String`, а чрез `grade.getValue()` — `Integer`, без явно преобразуване.
+The key and value types are independent. For example, `Pair<Integer, String>` could store a student ID and name, and `Pair<String, Double>` a product code and price. `grade.getKey()` has type `String` and `grade.getValue()` has type `Integer`; no cast is needed.
 
-## Видове двойки ключ–стойност
+## Common key–value pair types
 
-Генериците в Java могат да съдържат повече от един типов параметър. По-долу са дадени често използвани
-двойки имена и тяхната роля. Само `K, V` обозначава конкретно ключ и стойност; останалите двойки могат да
-описват и други роли на типовете.
+A generic declaration can contain more than one type parameter. The following names and roles are common. Only `K, V` specifically suggests a key and value; the other pairs can describe other roles.
 
-| Параметри | Значение | Къде се ползват |
+| Parameters | Meaning | Common use |
 | --- | --- | --- |
-| **K, V** | Key, Value — ключ и стойност | `Map`, `HashMap`, `TreeMap` |
-| **T, U** | Два произволни типа | Двойки, сравнения, помощни класове |
-| **T, R** | Type, Result — входен тип и тип на резултата | Функции и трансформации (`Function`) |
-| **E, T** | Element, Type — тип на елемент и допълнителен тип | Колекции, използващи допълнителен тип |
-| **N, T** | Number, Type — числов тип и допълнителен тип | Помощни класове за числови операции и математика |
-| **T, S** | Type, Second type — тип и втори тип | Генерици с два свободни типа |
+| `K, V` | Key, Value | `Map`, `HashMap`, `TreeMap` |
+| `T, U` | Two arbitrary types | Pairs, comparisons, helper classes |
+| `T, R` | Type, Result | Functions and transformations such as `Function` |
+| `E, T` | Element, Type | Collections with an additional type |
+| `N, T` | Number, Type | Helpers for numeric operations and mathematics |
+| `T, S` | Type, second type | Generics with two free types |
 
-Разликата между `T, U` и `T, S` е само семантична — свързана е със значението, което програмистът влага
-в имената, а не с поведението на Java:
+The difference between `T, U` and `T, S` is semantic: it reflects the meaning a programmer gives the names, not Java behavior.
 
-- **`T` и `U`** могат да се използват за два независими, произволни типа. В такава декларация `U`
-  обозначава втория типов параметър; то няма установено значение „Unknown“ или „Unused“ в Java.
-- **`T` и `S`** също могат да се използват за два произволни типа. `S` може да се чете като „Second Type“
-  или „secondary“. Авторът може да избере това име, за да подскаже концептуална връзка с първия тип,
-  но това е негово решение, а не общо правило, което прави `U` неподходящо.
+- `T` and `U` can represent two independent arbitrary types. `U` means the second type parameter here; it has no fixed Java meaning such as “Unknown” or “Unused”.
+- `T` and `S` can also represent two arbitrary types. `S` may suggest “second” or “secondary”, but that is a naming choice, not a rule that makes `U` unsuitable.
 
-Имената сами по себе си не налагат ограничения: `S` не е автоматично подтип на `T`, а `N` не е автоматично
-числов тип. Такива ограничения се задават изрично, например чрез `S extends T` или `N extends Number`.
+Names do not impose constraints: `S` is not automatically a subtype of `T`, and `N` is not automatically numeric. Constraints must be stated, for example with `S extends T` or `N extends Number`.
 
-Двойката ключ–стойност може да бъде представена по няколко начина:
+A key–value pair can be represented in several ways:
 
-| Представяне | Пример | Подходящо използване |
+| Representation | Example | Suitable when |
 | --- | --- | --- |
-| Шаблонен клас | `Pair<K, V>` | Собствено поведение и контрол върху промяната |
-| Шаблонен запис | `KeyValue<K, V>` | Компактно представяне с финални компоненти и генерирано сравнение |
-| Именуван тип за конкретната задача | `StudentGrade` | Когато имената на данните носят повече смисъл от `key` и `value` |
-| Елемент на речник | `Map.Entry<K, V>` | При обхождане на `Map`; разглежда се в упражнение 10 |
+| Generic class | `Pair<K, V>` | Custom behavior and control over mutability are needed |
+| Generic record | `KeyValue<K, V>` | A compact value with final components and generated equality is suitable |
+| Named task-specific type | `StudentGrade` | Descriptive field names are clearer than `key` and `value` |
+| Map entry | `Map.Entry<K, V>` | Traversing a `Map`; covered in Lab Exercise 10 |
 
 ```java
-record KeyValue<K, V>(K key, V value) {
-}
-
-record StudentGrade(String studentName, int grade) {
-}
+record KeyValue<K, V>(K key, V value) {}
+record StudentGrade(String studentName, int grade) {}
 ```
 
 ```java
@@ -204,39 +160,38 @@ StudentGrade studentGrade = new StudentGrade("Ivan", 6);
 System.out.println(studentGrade.studentName());
 ```
 
-`Pair` и `KeyValue` са типове, дефинирани в тези примери, а не общ стандартен клас `Pair` от `java.util`. Една двойка съхранява две стойности; тя сама по себе си не осигурява уникалност на ключове или търсене по ключ като `Map`.
+`Pair` and `KeyValue` are types defined in these examples, not a standard `Pair` class in `java.util`. A pair stores two values; by itself it does not provide key uniqueness or lookup like a `Map`.
 
-## Добри практики при шаблонни класове
+## Good practices for generic classes
 
-- Посочвайте типовите аргументи: `Pair<String, Integer>`, а не raw `Pair`.
-- Използвайте `K` и `V` за ключ и стойност, `T` за общ тип и `E` за елемент. Когато ролите са конкретни, предпочитайте именуван тип като `StudentGrade`.
-- Използвайте `<>` при конструктора, когато компилаторът може да изведе типовете.
-- Използвайте обгръщащи типове: `Integer`, а не `int`, като типов аргумент.
-- Не заобикаляйте проверките чрез `Object` и ненужни преобразувания. Неподходящ тип трябва да бъде отхвърлен при компилация.
-- За двойка без промяна използвайте финални полета или `record`. Ако компонент е изменяем обект, преценете нуждата от защитно копиране.
-- Определете допуска ли се `null`. В примерите с `gradeValue` се приема ненулев `Integer`, защото разопаковането на `null` не е валидно.
+- Specify type arguments, for example `Pair<String, Integer>`, instead of using raw `Pair`.
+- Use `K` and `V` for a key and value, `T` for a general type, and `E` for an element. Prefer a named type such as `StudentGrade` when the roles are specific.
+- Use `<>` with a constructor when the compiler can infer the types.
+- Use reference wrapper types such as `Integer`, not `int`, as type arguments.
+- Do not bypass compiler checks with `Object` and unnecessary casts. Incompatible types should be rejected during compilation.
+- For an immutable pair, use final fields or a `record`. Consider defensive copying if a component is mutable.
+- Decide whether `null` is allowed. The `gradeValue` example assumes a non-null `Integer` because unboxing `null` is invalid.
 
 ```java
 Pair<String, Integer> count = new Pair<>("books", 3);
-// Pair<String, Integer> wrong = new Pair<>("books", "three"); // не се компилира
+// Pair<String, Integer> wrong = new Pair<>("books", "three"); // does not compile
 ```
 
-Основите са описани в [Generic Types — Java Tutorials](https://docs.oracle.com/javase/tutorial/java/generics/types.html).
+See [Generic Types — Java Tutorials](https://docs.oracle.com/javase/tutorial/java/generics/types.html) for the fundamentals.
 
-## Шаблонен метод
+## Generic methods
 
-Генеричен метод декларира собствен параметър на типа преди типа на връщаната стойност.
+A generic method declares its own type parameter before the return type.
 
 ```java
 class Printer {
-
     public static <T> void print(T value) {
         System.out.println(value);
     }
 }
 ```
 
-Методът може да бъде извикан с различни типове.
+It can be called with different types:
 
 ```java
 Printer.print("Java");
@@ -244,29 +199,23 @@ Printer.print(100);
 Printer.print(12.5);
 ```
 
-## Шаблонен интерфейс
+## Generic interfaces
 
-Интерфейс също може да има параметър на типа.
+An interface can also have a type parameter.
 
 ```java
 interface Repository<T> {
-
     void save(T item);
-
     T findById(int id);
 }
 ```
 
-Клас, който имплементира интерфейса, задава конкретен тип или остава генеричен.
+An implementing class supplies a concrete type or remains generic.
 
 ```java
 class StudentRepository implements Repository<Student> {
-
     @Override
-    public void save(Student item) {
-
-    }
-
+    public void save(Student item) {}
     @Override
     public Student findById(int id) {
         return null;
@@ -274,31 +223,31 @@ class StudentRepository implements Repository<Student> {
 }
 ```
 
-## Generics и референтни типове
+## Generics and reference types
 
-Generics работят с референтни типове. Не може да се използва примитивен тип като `int`, `double` или `boolean`.
+Generics work with reference types. Primitive types such as `int`, `double`, and `boolean` cannot be used directly.
 
 ```java
-// Box<int> box = new Box<>(); // не се компилира
+// Box<int> box = new Box<>(); // does not compile
 Box<Integer> box = new Box<>();
 ```
 
-За примитивни стойности се използват обгръщащи класове като `Integer`, `Double` и `Boolean`.
+Use wrapper classes such as `Integer`, `Double`, and `Boolean` for primitive values.
 
-## Raw типове
+## Raw types
 
-Raw тип се получава, когато generic клас се използва без параметър на типа.
+A raw type is a generic class used without a type parameter.
 
 ```java
 Box box = new Box();
 ```
 
-Този подход премахва част от проверките на компилатора и не трябва да се използва в нов код. Правилната форма е:
+This removes some compiler checks and should not be used in new code. Use the parameterized form instead:
 
 ```java
 Box<String> box = new Box<>();
 ```
 
-## Предимства
+## Benefits
 
-Generics осигуряват типова безопасност, намаляват нуждата от явно преобразуване и позволяват повторно използване на класове, интерфейси и методи с различни типове.
+Generics provide type safety, reduce explicit casting, and make classes, interfaces, and methods reusable with different types.

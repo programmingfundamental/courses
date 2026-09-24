@@ -1,62 +1,19 @@
 ---
-title: Лабораторно упражнение 3
+title: Lab Exercise 3
 sidebar:
   order: 4
 ---
 
-# Лабораторно упражнение 3
+# Lab Exercise 3
 
-## Раздели
+## Sections
 
-- [Наследяване и ключова дума `super`](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/nasledyavane/)
-  - [Родителски клас и клас наследник](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/nasledyavane/#родителски-клас-и-клас-наследник)
-  - [Ключова дума `extends`](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/nasledyavane/#ключова-дума-extends)
-  - [Какво се наследява](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/nasledyavane/#какво-се-наследява)
-  - [Наследяване и капсулация](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/nasledyavane/#наследяване-и-капсулация)
-  - [Добавяне на нови членове](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/nasledyavane/#добавяне-на-нови-членове)
-  - [Единично наследяване](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/nasledyavane/#единично-наследяване)
-  - [Многостепенно наследяване](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/nasledyavane/#многостепенно-наследяване)
-  - [Клас `Object`](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/nasledyavane/#клас-object)
-  - [`final` клас и `final` метод](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/nasledyavane/#final-клас-и-final-метод)
-  - [Кога се използва наследяване](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/nasledyavane/#кога-се-използва-наследяване)
-  - [Ключова дума `super`](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/nasledyavane/#ключова-дума-super)
-  - [Извикване на конструктор чрез `super(...)`](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/nasledyavane/#извикване-на-конструктор-чрез-super)
-  - [Ред на инициализация при наследяване](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/nasledyavane/#ред-на-инициализация-при-наследяване)
-  - [Автоматично извикване на `super()`](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/nasledyavane/#автоматично-извикване-на-super)
-  - [Извикване на родителски метод](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/nasledyavane/#извикване-на-родителски-метод)
-  - [Достъп до родителско поле](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/nasledyavane/#достъп-до-родителско-поле)
-  - [`super` и `this`](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/nasledyavane/#super-и-this)
-- [Връзки между класовете](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/vrazki-mezhdu-klasovete/)
-  - [Връзка от тип „е“](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/vrazki-mezhdu-klasovete/#връзка-от-тип-е)
-  - [Връзка от тип „има“](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/vrazki-mezhdu-klasovete/#връзка-от-тип-има)
-  - [Асоциация](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/vrazki-mezhdu-klasovete/#асоциация)
-  - [Агрегация](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/vrazki-mezhdu-klasovete/#агрегация)
-  - [Композиция](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/vrazki-mezhdu-klasovete/#композиция)
-  - [Агрегация и композиция](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/vrazki-mezhdu-klasovete/#агрегация-и-композиция)
-  - [Зависимост чрез параметър](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/vrazki-mezhdu-klasovete/#зависимост-чрез-параметър)
-  - [Вложени класове](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/vrazki-mezhdu-klasovete/#вложени-класове)
-- [Капсулация и модификатори за достъп](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/kapsulirane/)
-  - [Частни полета](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/kapsulirane/#частни-полета)
-  - [Методи за четене](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/kapsulirane/#методи-за-четене)
-  - [Методи за промяна](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/kapsulirane/#методи-за-промяна)
-  - [Капсулация чрез конструктор](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/kapsulirane/#капсулация-чрез-конструктор)
-  - [Обект само за четене](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/kapsulirane/#обект-само-за-четене)
-  - [Сравнение на обект само за четене с `record`](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/kapsulirane/#сравнение-на-обект-само-за-четене-с-record)
-  - [`final` поле](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/kapsulirane/#final-поле)
-  - [Публичен интерфейс на клас](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/kapsulirane/#публичен-интерфейс-на-клас)
-  - [Модификатори за достъп](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/kapsulirane/#модификатори-за-достъп)
-  - [`private`](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/kapsulirane/#private)
-  - [Достъп на ниво пакет](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/kapsulirane/#достъп-на-ниво-пакет)
-  - [`protected`](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/kapsulirane/#protected)
-  - [`public`](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/kapsulirane/#public)
-  - [Модификатори при класове](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/kapsulirane/#модификатори-при-класове)
-  - [Таблица за видимост](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/kapsulirane/#таблица-за-видимост)
-- [Упражнения за извънаудиторна заетост](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/uprazhneniya-za-izvnauditorna-zaetost/)
-  - [Задача 1](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/uprazhneniya-za-izvnauditorna-zaetost/#задача-1)
-  - [Задача 2](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/uprazhneniya-za-izvnauditorna-zaetost/#задача-2)
-  - [Задача 3](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/uprazhneniya-za-izvnauditorna-zaetost/#задача-3)
-  - [Задача 4](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/uprazhneniya-za-izvnauditorna-zaetost/#задача-4)
-  - [Задача 5](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/uprazhneniya-za-izvnauditorna-zaetost/#задача-5)
-  - [Задача 6](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/uprazhneniya-za-izvnauditorna-zaetost/#задача-6)
-  - [Задача 7](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/uprazhneniya-za-izvnauditorna-zaetost/#задача-7)
-  - [Задача 8 — Обект само за четене и `record`](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/uprazhneniya-za-izvnauditorna-zaetost/#задача-8--обект-само-за-четене-и-record)
+### Inheritance and Relationships
+
+- [Inheritance and the `super` Keyword](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/nasledyavane/)
+- [Relationships Between Classes](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/vrazki-mezhdu-klasovete/)
+
+### Encapsulation and Practice
+
+- [Encapsulation and Access Modifiers](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/kapsulirane/)
+- [Independent Study Exercises](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/uprazhneniya-za-izvnauditorna-zaetost/)

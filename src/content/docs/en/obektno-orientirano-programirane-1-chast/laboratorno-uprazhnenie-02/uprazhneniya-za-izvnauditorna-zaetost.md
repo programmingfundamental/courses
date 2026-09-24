@@ -5,31 +5,32 @@ sidebar:
   label: Tasks
 taskPage: true
 ---
-## Упражнения за извънаудиторна заетост
 
-Задачите са подредени по нарастваща сложност. В първите задачи са зададени конкретни имена на класове, полета и методи. В следващите задачи част от решенията трябва да бъдат избрани самостоятелно.
+## Independent Study Exercises
 
-## Задача 1
+The tasks are arranged in increasing order of difficulty. The first tasks specify class, field, and method names. In later tasks, you will choose some of the implementation details yourself.
 
-Да се дефинира клас `Cat`, който описва котка.
+## Task 1
 
-Класът трябва да съдържа следните полета:
+Define a `Cat` class that describes a cat.
 
-- `name` от тип `String`;
-- `breed` от тип `String`;
-- `age` от тип `int`;
-- `weight` от тип `double`.
+The class must have these fields:
 
-За всяко поле трябва да се дефинират методи за четене и промяна на стойността:
+- `name` of type `String`;
+- `breed` of type `String`;
+- `age` of type `int`;
+- `weight` of type `double`.
 
-- `getName()` и `setName(String name)`;
-- `getBreed()` и `setBreed(String breed)`;
-- `getAge()` и `setAge(int age)`;
-- `getWeight()` и `setWeight(double weight)`.
+Define getter and setter methods for every field:
 
-Да се създаде клас `Application` с метод `main`. В него да се създаде обект от класа `Cat`, да се зададат стойности чрез `set` методите и да се отпечатат стойностите чрез `get` методите.
+- `getName()` and `setName(String name)`;
+- `getBreed()` and `setBreed(String breed)`;
+- `getAge()` and `setAge(int age)`;
+- `getWeight()` and `setWeight(double weight)`.
 
-Пример за използване:
+Create an `Application` class with a `main` method. In it, create a `Cat` object, set its values using the setter methods, and print them using the getter methods.
+
+Example:
 
 ```java
 Cat cat = new Cat();
@@ -45,53 +46,53 @@ System.out.println(cat.getAge());
 System.out.println(cat.getWeight());
 ```
 
-## Задача 2
+## Task 2
 
-Да се дефинира клас `Room`, който описва стая.
+Define a `Room` class that describes a room.
 
-Класът трябва да съдържа следните полета:
+The class must have these fields:
 
-- `number` от тип `String`;
-- `length` от тип `double`;
-- `width` от тип `double`;
-- `height` от тип `double`.
+- `number` of type `String`;
+- `length` of type `double`;
+- `width` of type `double`;
+- `height` of type `double`.
 
-Обектите от класа `Room` трябва да се инициализират чрез параметризиран конструктор:
+Initialize `Room` objects using this parameterized constructor:
 
 ```java
 Room(String number, double length, double width, double height)
 ```
 
-Да се дефинират само методи за четене:
+Define getter methods only:
 
 - `getNumber()`;
 - `getLength()`;
 - `getWidth()`;
 - `getHeight()`.
 
-Не трябва да се дефинират методи за промяна на стойностите. Така стойностите се задават при създаване на обекта и след това се четат чрез методи.
+Do not define setter methods. Set the values when creating the object, then read them using methods.
 
-Да се създадат два обекта от класа `Room` и да се отпечатат данните за всяка стая.
+Create two `Room` objects and print the information for each room.
 
-Пример за създаване на обект:
+Example:
 
 ```java
 Room room = new Room("A101", 6.0, 4.0, 3.0);
 ```
 
-## Задача 3
+## Task 3
 
-Да се разшири решението от задача 2 или да се дефинира нов клас `Room`, който освен полетата от задача 2 съдържа и методи за изчисления.
+Extend your solution to Task 2, or define a new `Room` class with the same fields and additional calculation methods.
 
-Да се реализират следните методи:
+Implement these methods:
 
-- `calculateArea()`, който връща площта на пода;
-- `calculateVolume()`, който връща обема на стаята;
-- `getDescription()`, който връща текстово описание на стаята.
+- `calculateArea()`, which returns the floor area;
+- `calculateVolume()`, which returns the room volume;
+- `getDescription()`, which returns a text description of the room.
 
-Площта на пода се изчислява чрез `length * width`. Обемът се изчислява чрез `length * width * height`.
+Calculate the floor area as `length * width` and the volume as `length * width * height`.
 
-Пример за очаквано използване:
+Expected usage:
 
 ```java
 Room room = new Room("B202", 5.0, 4.0, 2.8);
@@ -101,69 +102,67 @@ System.out.println(room.calculateVolume());
 System.out.println(room.getDescription());
 ```
 
-Методът `getDescription()` трябва да върне текст, който съдържа номера на стаята, площта и обема.
+The `getDescription()` method must return text containing the room number, area, and volume.
 
-## Задача 4
+## Task 4
 
-Да се дефинира клас `House`, който описва къща.
+Define a `House` class that describes a house.
 
-Класът трябва да съдържа поне следните полета:
+The class must have at least these fields:
 
-- `address` от тип `String`;
-- `floors` от тип `int`;
-- `area` от тип `double`;
-- `hasGarage` от тип `boolean`.
+- `address` of type `String`;
+- `floors` of type `int`;
+- `area` of type `double`;
+- `hasGarage` of type `boolean`.
 
-Обектите трябва да се инициализират чрез параметризиран конструктор. Да се дефинират методи за четене на стойностите.
+Initialize objects with a parameterized constructor and define getter methods for the values.
 
-Да се реализират и следните методи:
+Also implement:
 
-- `getDescription()`, който връща текстово описание на къщата;
-- `isLargerThan(House other)`, който връща `true`, ако текущата къща има по-голяма площ от подадената къща;
-- `hasMoreFloorsThan(House other)`, който връща `true`, ако текущата къща има повече етажи от подадената къща.
+- `getDescription()`, which returns a text description of the house;
+- `isLargerThan(House other)`, which returns `true` if this house has a larger area than the supplied house;
+- `hasMoreFloorsThan(House other)`, which returns `true` if this house has more floors than the supplied house.
 
-Да се създадат поне два обекта от класа `House`. Да се отпечатат описанията им и да се сравнят по площ и брой етажи.
+Create at least two `House` objects. Print their descriptions and compare their areas and floor counts.
 
-## Задача 5
+## Task 5
 
-Да се дефинира клас `Student`, който описва студент.
+Define a `Student` class with:
 
-Класът трябва да съдържа:
+- a non-static `name` field of type `String`;
+- a non-static `facultyNumber` field of type `int`;
+- a static `university` field of type `String`.
 
-- нестатично поле `name` от тип `String`;
-- нестатично поле `facultyNumber` от тип `int`;
-- статично поле `university` от тип `String`.
-
-Да се дефинира параметризиран конструктор:
+Define this parameterized constructor:
 
 ```java
 Student(String name, int facultyNumber)
 ```
 
-Да се дефинира метод `getInformation()`, който връща текст с името, факултетния номер и университета.
+Define a `getInformation()` method that returns text containing the student's name, faculty number, and university.
 
-Да се създадат поне три обекта от класа `Student`. Да се отпечатат данните за тях чрез `getInformation()`. След това да се промени стойността на статичното поле `university` чрез името на класа и отново да се отпечатат данните.
+Create at least three `Student` objects and print their information with `getInformation()`. Then change the static `university` field through the class name and print the information again.
 
-Пример:
+Example:
 
 ```java
 Student.university = "Technical University of Varna";
 ```
 
-Целта е да се покаже, че статичното поле принадлежи на класа и е общо за всички обекти.
+The goal is to show that a static field belongs to the class and is shared by all its objects.
 
-## Задача 6
+## Task 6
 
-Да се дефинира `record` с име `Book`, който съхранява данни за книга.
+Define a `record` named `Book` to store information about a book.
 
-Записът трябва да съдържа следните компоненти:
+The record must have these components:
 
-- `title` от тип `String`;
-- `author` от тип `String`;
-- `year` от тип `int`;
-- `price` от тип `double`.
+- `title` of type `String`;
+- `author` of type `String`;
+- `year` of type `int`;
+- `price` of type `double`.
 
-Да се създадат поне два обекта от тип `Book`. Да се използват автоматично генерираните методи:
+Create at least two `Book` objects and use the generated methods:
 
 - `title()`;
 - `author()`;
@@ -172,17 +171,17 @@ Student.university = "Technical University of Varna";
 - `toString()`;
 - `equals(Object other)`.
 
-Да се провери какъв е резултатът от `equals()`, когато две книги имат еднакви стойности, и когато поне една стойност е различна.
+Check the result of `equals()` when two books have identical values and when at least one value differs.
 
-Да се добави компактен конструктор, който премахва крайните интервали от заглавието. За тази задача входът съдържа непразна референция за заглавието и неотрицателна цена. Отказът при невалидни данни чрез изключение се упражнява в упражнение 6.
+Add a compact constructor that removes leading and trailing whitespace from the title. For this task, assume the title reference is non-null and the price is non-negative. Handling invalid data with exceptions is covered in Exercise 6.
 
-Да се създаде и обикновен клас `BookClass` със същите данни, конструктор и методи за четене. Да се сравнят обемът на кода, имената на методите за четене и резултатите от `==`, `equals()` и `toString()` за два отделни обекта с еднакви данни.
+Also define a regular `BookClass` with the same data, a constructor, and getter methods. Compare the amount of code, getter method names, and the results of `==`, `equals()`, and `toString()` for two distinct objects with identical data.
 
-## Задача 7
+## Task 7
 
-Да се дефинира `enum` с име `OrderStatus`, който описва статус на поръчка.
+Define an `enum` named `OrderStatus` to represent an order's status.
 
-Изброеният тип трябва да съдържа поне следните стойности:
+It must contain at least these values:
 
 - `NEW`;
 - `PAID`;
@@ -190,36 +189,36 @@ Student.university = "Technical University of Varna";
 - `DELIVERED`;
 - `CANCELLED`.
 
-Да се дефинира клас `Order`, който описва поръчка. Задължително трябва да има поле за статус от тип `OrderStatus`. Останалите полета трябва да бъдат избрани самостоятелно според това какви данни са необходими за една поръчка.
+Define an `Order` class. It must have a field for the status, of type `OrderStatus`. Choose the other fields yourself based on the information an order needs.
 
-Класът `Order` трябва да съдържа:
+The `Order` class must have:
 
-- параметризиран конструктор;
-- методи за четене на полетата;
-- метод `getDescription()`, който връща текстово описание на поръчката;
-- метод `changeStatus(OrderStatus status)`, който променя текущия статус на поръчката.
+- a parameterized constructor;
+- getter methods for its fields;
+- a `getDescription()` method that returns a text description of the order;
+- a `changeStatus(OrderStatus status)` method that changes the order's current status.
 
-Да се създадат няколко поръчки с различни статуси. Да се използват условни оператори за проверка дали дадена поръчка е доставена, отказана или все още се обработва.
+Create several orders with different statuses. Use conditional statements to check whether an order has been delivered, cancelled, or is still being processed.
 
-## Задача 8
+## Task 8
 
-Да се дефинира клас по избор, който описва реален обект от учебна, търговска или битова система. Примери за възможни класове са `Course`, `Product`, `Vehicle`, `BankAccount` или `HotelReservation`.
+Define a class of your choice that describes a real object from an educational, commercial, or household system. Examples include `Course`, `Product`, `Vehicle`, `BankAccount`, or `HotelReservation`.
 
-За избрания клас трябва самостоятелно да се определят:
+For your class, decide:
 
-- име на класа;
-- поне четири полета с подходящи типове;
-- кои стойности трябва да се задават чрез конструктор;
-- кои методи за четене са необходими;
-- дали са необходими методи за промяна;
-- поне два метода, които извършват изчисление, проверка или връщат текстово описание.
+- its name;
+- at least four fields with suitable types;
+- which values should be set through a constructor;
+- which getter methods are needed;
+- whether setter methods are needed;
+- at least two methods that calculate something, perform a check, or return a text description.
 
-Да се използва поне една от ключовите думи `this` или `static` по смислен начин.
+Use at least one of the `this` or `static` keywords meaningfully.
 
-Да се създаде примерна програма, която създава поне три обекта от избрания клас и демонстрира всички дефинирани методи.
+Create a sample program that instantiates at least three objects and demonstrates all the methods you defined.
 
-## Задача 9 — Референции и `this` като аргумент
+## Task 9 — References and `this` as an Argument
 
-Използвайте `Student` от задача 5. Създайте две променливи, сочещи към един студент, и трета променлива, сочеща към отделен студент със същите данни. Предвидете резултатите от `==`, след което ги проверете. Променете името през втората референция и проследете първата с debugger.
+Use the `Student` class from Task 5. Create two variables that refer to the same student and a third variable that refers to a separate student with the same data. Predict the results of `==`, then verify them. Change the name through the second reference and inspect the first reference with a debugger.
 
-Добавете `StudentPrinter.print(Student student)` и метод `printCard()` в `Student`, който извиква `StudentPrinter.print(this)`. Посочете кое е параметърът и кое — аргументът. Реализирайте отделни методи за промяна на името и за присвояване на нов обект на параметъра. Покажете защо само първият променя видимото състояние на първоначалния студент.
+Add `StudentPrinter.print(Student student)` and a `printCard()` method to `Student` that calls `StudentPrinter.print(this)`. Identify the parameter and the argument. Implement separate methods for changing the name and assigning a new object to a parameter. Show why only the first method changes the state visible through the original student reference.

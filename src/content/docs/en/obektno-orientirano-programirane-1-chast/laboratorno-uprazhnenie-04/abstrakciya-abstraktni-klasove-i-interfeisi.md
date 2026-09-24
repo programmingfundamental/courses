@@ -1,20 +1,20 @@
 ---
-title: 'Абстракция, абстрактни класове и интерфейси'
+title: Abstraction, Abstract Classes, and Interfaces
 sidebar:
   order: 1
 ---
 
-# Абстракция, абстрактни класове и интерфейси
+# Abstraction, Abstract Classes, and Interfaces
 
-## Абстракция
+## Abstraction
 
-Абстракцията означава да опишем съществените свойства и действия на обекта за дадена задача, като оставим подробностите на реализацията на заден план. За геометрична фигура ни интересува операцията за лице, но формулата зависи от вида на фигурата. Абстракцията определя **какво** може да се прави; капсулацията контролира достъпа до състоянието и реализацията.
+Abstraction means describing the essential properties and actions of an object for a given task while leaving implementation details in the background. For a geometric shape, we care that it can calculate its area, but the formula depends on the shape. Abstraction defines **what** can be done; encapsulation controls access to state and implementation.
 
-В Java общ модел с частична реализация може да се опише чрез абстрактен клас, а договор за поведение — чрез интерфейс. Първо ще разгледаме тези конструкции, а в упражнение 5 ще използваме общите им типове за полиморфно поведение.
+In Java, an abstract class can describe a common model with partial implementation, while an interface describes a behavior contract. We will study these constructs here and use their common types for polymorphic behavior in Exercise 5.
 
-## Абстрактен клас
+## Abstract Classes
 
-Абстрактен клас се декларира с ключовата дума `abstract`.
+Declare an abstract class with the `abstract` keyword.
 
 ```java
 abstract class Shape {
@@ -33,13 +33,13 @@ abstract class Shape {
 }
 ```
 
-Класът `Shape` съдържа поле, конструктор, обикновен метод и абстрактен метод. Абстрактният метод `calculateArea()` няма тяло. Всеки конкретен наследник трябва да предостави реализация.
+The `Shape` class contains a field, a constructor, a regular method, and an abstract method. The abstract `calculateArea()` method has no body. Every concrete subclass must provide an implementation.
 
-Абстрактният клас се използва като общ базов тип, когато няколко класа имат общи характеристики, но не всички операции могат да бъдат реализирани на това ниво. В него могат да се поставят общи полета, конструктори и методи, а различното поведение да се остави като абстрактен метод.
+Use an abstract class as a common base type when several classes share characteristics but not every operation can be implemented at that level. It can contain common fields, constructors, and methods, while leaving different behavior as abstract methods.
 
-В примера всяка фигура има цвят, затова полето `color` и методът `getColor()` са дефинирани в `Shape`. Изчисляването на лице зависи от конкретната фигура, затова `calculateArea()` е абстрактен метод и трябва да бъде реализиран от наследниците.
+Every shape in this example has a color, so `Shape` defines the `color` field and `getColor()` method. Area calculation depends on the specific shape, so `calculateArea()` is abstract and must be implemented by subclasses.
 
-## Наследяване на абстрактен клас
+## Extending an Abstract Class
 
 ```java
 class Rectangle extends Shape {
@@ -60,27 +60,27 @@ class Rectangle extends Shape {
 }
 ```
 
-Класът `Rectangle` наследява `Shape`, извиква конструктора на родителския клас чрез `super(color)` и реализира абстрактния метод `calculateArea()`.
+`Rectangle` extends `Shape`, calls the parent constructor with `super(color)`, and implements the abstract `calculateArea()` method.
 
-## Правила за абстрактни класове
+## Rules for Abstract Classes
 
-От абстрактен клас не може да се създава директен обект.
+You cannot create an object directly from an abstract class.
 
 ```java
-// Shape shape = new Shape("red"); // не се компилира
+// Shape shape = new Shape("red"); // does not compile
 ```
 
-Абстрактен клас може да съдържа полета, конструктори, обикновени методи и абстрактни методи. Ако един клас съдържа поне един абстрактен метод, самият клас трябва да бъде деклариран като `abstract`.
+An abstract class can contain fields, constructors, regular methods, and abstract methods. If a class contains at least one abstract method, the class itself must be declared `abstract`.
 
-Абстрактен клас може и да няма абстрактни методи. Конструкторът му се изпълнява при създаване на конкретен наследник. Абстрактен метод няма тяло и не може да бъде `private`, `static` или `final`, защото трябва да може да получи реализация в наследник.
+An abstract class does not have to contain abstract methods. Its constructor runs when a concrete subclass is created. An abstract method has no body and cannot be `private`, `static`, or `final`, because a subclass must be able to implement it.
 
-## Интерфейси и сравнение с абстрактни класове
+## Interfaces and Comparison with Abstract Classes
 
-Интерфейсът в Java описва договор за поведение. Той задава какви методи трябва да бъдат реализирани от класовете, които го имплементират. Интерфейсът не описва конкретен обект самостоятелно, а описва способност или роля, която различни класове могат да имат.
+A Java interface describes a behavior contract. It specifies methods that implementing classes must provide. An interface does not describe a concrete object on its own; it describes a capability or role that different classes can share.
 
-## Декларация на интерфейс
+## Declaring an Interface
 
-Интерфейс се декларира чрез ключовата дума `interface`, следвана от име и тяло, оградено с фигурни скоби. В тялото се описват методите, които класовете трябва да реализират.
+Declare an interface with the `interface` keyword, followed by a name and a body in curly braces. The body describes the methods that implementing classes must provide.
 
 ```java
 interface Printable {
@@ -89,11 +89,11 @@ interface Printable {
 }
 ```
 
-Методът `print()` няма тяло. Той описва действие, което трябва да съществува във всеки конкретен клас, който имплементира интерфейса `Printable`.
+The `print()` method has no body. It describes an action that must exist in each concrete class implementing `Printable`.
 
-## Имплементиране на интерфейс
+## Implementing an Interface
 
-Клас имплементира интерфейс чрез ключовата дума `implements`.
+A class implements an interface with the `implements` keyword.
 
 ```java
 class Document implements Printable {
@@ -105,24 +105,24 @@ class Document implements Printable {
 }
 ```
 
-Методите от интерфейс са публични като договор. При реализацията им в клас трябва да се използва `public`, защото не може да се намалява видимостта на наследеното поведение.
+Interface methods are public as part of the contract. Their implementations in a class must use `public`, because an implementation cannot reduce the visibility of inherited behavior.
 
-Ако конкретен клас имплементира интерфейс, той трябва да реализира всички абстрактни методи от този интерфейс. Ако не ги реализира, самият клас трябва да бъде деклариран като `abstract`.
+A concrete class that implements an interface must implement all of its abstract methods. Otherwise, the class itself must be declared `abstract`.
 
-## Интерфейс като тип
+## An Interface as a Type
 
-Интерфейсът може да се използва като тип на променлива, параметър или масив.
+An interface can be used as the type of a variable, parameter, or array.
 
 ```java
 Printable printable = new Document();
 printable.print();
 ```
 
-Променливата има тип `Printable`, а реалният обект е `Document`. Това позволява различни класове да се обработват еднакво, ако имплементират един и същ интерфейс.
+The variable's type is `Printable`, while the actual object is a `Document`. This lets you handle different classes in the same way when they implement the same interface.
 
-## Няколко интерфейса
+## Multiple Interfaces
 
-Един клас може да имплементира повече от един интерфейс.
+A class can implement more than one interface.
 
 ```java
 interface Movable {
@@ -149,17 +149,17 @@ class ElectricCar implements Movable, Chargeable {
 }
 ```
 
-Това е възможно, защото интерфейсите описват поведение, а не наследяване на състояние от няколко класа.
+This is possible because interfaces describe behavior rather than inherited state from multiple classes.
 
-## Съдържание на интерфейс
+## Interface Members
 
-Интерфейс може да съдържа:
+An interface can contain:
 
-- абстрактни методи;
-- `default` методи;
-- `static` методи;
-- `private` помощни методи с тяло;
-- константи.
+- abstract methods;
+- `default` methods;
+- `static` methods;
+- private helper methods with bodies;
+- constants.
 
 ```java
 interface Identifiable {
@@ -178,11 +178,11 @@ interface Identifiable {
 }
 ```
 
-Поле в интерфейс е константа. То се третира като `public static final`, дори когато тези модификатори не са изписани.
+A field in an interface is a constant. It is treated as `public static final`, even if those modifiers are not written explicitly.
 
-## Абстрактни методи в интерфейс
+## Abstract Methods in an Interface
 
-Метод без тяло в интерфейс е абстрактен метод. Той описва действие, което класът трябва да реализира.
+A method without a body in an interface is an abstract method. It describes an action the class must implement.
 
 ```java
 interface Printable {
@@ -191,12 +191,11 @@ interface Printable {
 }
 ```
 
-Методът `print()` няма тяло. Всеки конкретен клас, който имплементира `Printable`, трябва да предостави реализация.
+The `print()` method has no body. Every concrete class implementing `Printable` must provide an implementation.
 
-## `default` методи
+## `default` Methods
 
-`default` методът е метод в интерфейс, който има тяло. Той предоставя стандартна реализация, която класовете могат да
-използват директно или да предефинират.
+A `default` method is an interface method with a body. It provides a standard implementation that classes can use directly or override.
 
 ```java
 interface Printable {
@@ -209,12 +208,11 @@ interface Printable {
 }
 ```
 
-`default` методите позволяват добавяне на ново поведение към интерфейс, без всеки съществуващ клас задължително да бъде
-променян.
+`default` methods make it possible to add behavior to an interface without necessarily requiring every existing class to change.
 
-## Статични методи в интерфейс
+## Static Methods in Interfaces
 
-Интерфейс може да съдържа `static` методи. Те принадлежат на самия интерфейс и се извикват чрез неговото име.
+An interface can contain `static` methods. They belong to the interface itself and are called through its name.
 
 ```java
 interface TextUtils {
@@ -225,17 +223,17 @@ interface TextUtils {
 }
 ```
 
-Извикване:
+Call it like this:
 
 ```java
 boolean result = TextUtils.isEmpty("");
 ```
 
-Статичният метод в интерфейс не се извиква чрез обект от клас, който имплементира интерфейса.
+A static interface method is not called through an object of a class that implements the interface.
 
-## Наследяване на интерфейси
+## Extending Interfaces
 
-Един интерфейс може да наследява друг интерфейс чрез ключовата дума `extends`.
+An interface can extend another interface with the `extends` keyword.
 
 ```java
 interface Readable {
@@ -249,7 +247,7 @@ interface Editable extends Readable {
 }
 ```
 
-Клас, който имплементира `Editable`, трябва да реализира както `edit()`, така и наследения метод `read()`.
+A class implementing `Editable` must implement both `edit()` and the inherited `read()` method.
 
 ```java
 class Document implements Editable {
@@ -266,9 +264,9 @@ class Document implements Editable {
 }
 ```
 
-## Обикновен интерфейс
+## A Regular Interface
 
-Обикновен интерфейс описва набор от действия, които могат да бъдат реализирани от различни класове. Той може да съдържа един или повече абстрактни методи.
+A regular interface describes actions that can be implemented by different classes. It can contain one or more abstract methods.
 
 ```java
 interface Drawable {
@@ -293,16 +291,16 @@ class Rectangle implements Drawable {
 }
 ```
 
-И двата класа имплементират `Drawable`, затова могат да бъдат обработвани чрез общия тип `Drawable`.
+Both classes implement `Drawable`, so they can be handled through the common `Drawable` type.
 
 ```java
 Drawable shape = new Circle();
 shape.draw();
 ```
 
-## Функционален интерфейс
+## Functional Interfaces
 
-Функционален интерфейс е интерфейс с точно един абстрактен метод. Той описва една операция, която трябва да бъде реализирана от клас или от друг механизъм за предоставяне на поведение.
+A functional interface has exactly one abstract method. It describes a single operation that must be implemented by a class or another mechanism that provides behavior.
 
 ```java
 @FunctionalInterface
@@ -312,13 +310,11 @@ interface Operation {
 }
 ```
 
-Анотацията `@FunctionalInterface` не е задължителна, но позволява на компилатора да провери дали интерфейсът остава
-функционален.
+The `@FunctionalInterface` annotation is optional, but it lets the compiler verify that the interface remains functional.
 
-## Маркиращ интерфейс
+## Marker Interfaces
 
-Маркиращ интерфейс е интерфейс без методи. Той се използва за означаване, че даден клас има определено свойство или
-може да бъде обработван по специален начин.
+A marker interface has no methods. It marks a class as having a particular property or as eligible for special handling.
 
 ```java
 interface Auditable {
@@ -330,27 +326,27 @@ class Payment implements Auditable {
 }
 ```
 
-В примера `Payment` е маркиран като тип, който може да участва в логика за одит.
+Here, `Payment` is marked as a type that can participate in auditing logic.
 
-## Особености при работа с интерфейси
+## Working with Interfaces
 
-От интерфейс не може да се създаде директен обект.
+You cannot create an object directly from an interface.
 
 ```java
-// Printable printable = new Printable(); // не се компилира
+// Printable printable = new Printable(); // does not compile
 ```
 
-Интерфейсът може да се използва като тип, но реалният обект трябва да бъде от клас, който го имплементира.
+An interface can be used as a type, but the actual object must be an instance of a class that implements it.
 
 ```java
 Printable printable = new Document();
 ```
 
-Един клас може да имплементира няколко интерфейса, а един интерфейс може да наследява друг интерфейс. Полетата, декларирани в интерфейс, са константи и се третират като `public static final`. Абстрактните методи в интерфейс трябва да бъдат реализирани от конкретния клас.
+A class can implement multiple interfaces, and an interface can extend another interface. Fields declared in an interface are constants treated as `public static final`. A concrete class must implement the interface's abstract methods.
 
-## Абстрактен клас и интерфейс
+## Abstract Classes and Interfaces
 
-Абстрактният клас се използва, когато класовете наследници имат обща основа, общо състояние или обща частична реализация. Интерфейсът се използва, когато трябва да се опише поведение, което може да бъде реализирано от несвързани класове.
+Use an abstract class when subclasses share a common base, common state, or a partial implementation. Use an interface when you need to describe behavior that unrelated classes can implement.
 
 ```java
 abstract class Animal {
@@ -391,18 +387,18 @@ class Dog extends Animal implements Trainable {
 }
 ```
 
-Обектът `Dog` включва състоянието, зададено в `Animal`, наследява достъпните му методи и имплементира способността `Trainable`. Частното поле `name` остава член на `Animal`; то не се наследява като член на `Dog`.
+A `Dog` object includes the state initialized in `Animal`, inherits its accessible methods, and implements the `Trainable` capability. The private `name` field remains a member of `Animal`; `Dog` does not inherit it as a member.
 
-## Избор между абстрактен клас и интерфейс
+## Choosing Between an Abstract Class and an Interface
 
-Абстрактен клас се използва, когато има обща йерархия от тип „е“. Интерфейс се използва, когато различни класове трябва да поддържат еднакво действие, без непременно да имат общ родителски клас.
+Use an abstract class when there is an “is-a” hierarchy. Use an interface when different classes need to support the same action without necessarily sharing a parent class.
 
-Например `Dog` е `Animal`, затова наследяването от абстрактен клас е подходящо. `Document`, `Image` и `Report` могат да бъдат `Printable`, но не е необходимо да наследяват един и същ родителски клас.
+For example, a `Dog` is an `Animal`, so extending an abstract class is appropriate. A `Document`, `Image`, and `Report` can all be `Printable` without needing to extend the same parent class.
 
-| Абстрактен клас | Интерфейс |
+| Abstract class | Interface |
 | --------------- | --------- |
-| Използва се, когато класовете споделят общо състояние и част от поведението си | Използва се, когато различни класове трябва да предоставят еднакво поведение |
-| Може да съдържа полета със състояние | Декларираните полета са константи |
-| Един клас може да наследи само един абстрактен клас | Един клас може да имплементира множество интерфейси |
-| Може да съдържа конструктори, абстрактни методи и обикновени методи | Може да съдържа константи, абстрактни методи, `default` методи и `static` методи |
-| Подходящ е при наличие на обща частична реализация | Подходящ е за описание на роля или способност |
+| Used when classes share state and part of their behavior | Used when different classes must provide the same behavior |
+| Can contain state fields | Declared fields are constants |
+| A class can extend only one abstract class | A class can implement multiple interfaces |
+| Can contain constructors, abstract methods, and regular methods | Can contain constants, abstract methods, `default` methods, and `static` methods |
+| Suitable for a shared partial implementation | Suitable for describing a role or capability |

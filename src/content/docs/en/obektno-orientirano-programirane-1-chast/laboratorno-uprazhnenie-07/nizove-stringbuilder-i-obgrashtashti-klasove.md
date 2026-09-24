@@ -1,19 +1,18 @@
 ---
-title: Символни низове — статични и динамични. Обгръщащи класове
+title: Strings: Immutable and Mutable. Wrapper Classes
 sidebar:
   order: 1
 ---
 
-# Символни низове — статични и динамични. Обгръщащи класове
+# Strings: Immutable and Mutable. Wrapper Classes
 
+A Java string is a sequence of characters. The `String` class is used for text, `StringBuilder` for mutable text construction, and wrapper classes represent primitive values as objects.
 
-Символен низ в Java представлява последователност от символи. Най-често се използва класът `String`. За изменяемо изграждане на текст се използва `StringBuilder`. Обгръщащите класове представят примитивни стойности като обекти.
+In the original title, “static” refers to immutable strings (`String`) and “dynamic” to mutable text construction (`StringBuilder`). The precise Java terms are **immutable** and **mutable**. This is unrelated to the `static` modifier: both kinds of objects are created at runtime.
 
-В заглавието „статични“ означава низове с неизменяемо съдържание (`String`), а „динамични“ — изменяемо изграждане на текст (`StringBuilder`). Точните термини в Java са **неизменяем** и **изменяем**. Това разграничение не е свързано с модификатора `static`; и двата вида обекти се създават по време на изпълнение.
+## The `String` class
 
-## Клас `String`
-
-`String` е клас за работа с текст. Обектите от тип `String` са неизменими. След създаване на низ неговото съдържание не се променя. Операции като конкатенация, замяна или преобразуване връщат нов низ.
+`String` objects are immutable: their contents cannot change after creation. Operations such as concatenation, replacement, or case conversion return a new string.
 
 ```java
 String text = "Java";
@@ -23,43 +22,31 @@ System.out.println(text);
 System.out.println(result);
 ```
 
-Променливата `text` продължава да сочи към `"Java"`. Променливата `result` сочи към нов низ.
+`text` still refers to `"Java"`; `result` refers to a new string.
 
-## Създаване на низ
+## Creating strings
 
-Низ може да се създаде чрез литерал.
+Strings are usually created with literals:
 
 ```java
 String name = "Ivan";
 ```
 
-Може да се създаде и чрез конструктор, но това не е необходимо в обичайния случай.
+A constructor can also be used, although it is unnecessary in ordinary cases:
 
 ```java
 String name = new String("Ivan");
 ```
 
-Литералната форма е по-кратка и се използва за стандартно създаване на текстови стойности.
-
-Низ може да се създаде и чрез друга променлива от тип `String`.
+A string can be assigned from another variable or built from an expression:
 
 ```java
 String first = "Java";
 String second = first;
+String message = "Hello, " + first + "!";
 ```
 
-В този пример `second` получава същата текстова стойност като `first`.
-
-Низ може да бъде резултат и от израз.
-
-```java
-String name = "Ivan";
-String message = "Hello, " + name + "!";
-```
-
-Изразът `"Hello, " + name + "!"` създава нов низ, който се записва в променливата `message`.
-
-## Основни операции със `String`
+## Common `String` operations
 
 ```java
 String text = "Java Programming";
@@ -70,11 +57,9 @@ String upper = text.toUpperCase();
 String part = text.substring(0, 4);
 ```
 
-Методът `length()` връща броя символи. Методът `contains(String value)` проверява дали даден текст се съдържа в низа. Методът `toUpperCase()` връща нов низ с главни букви. Методът `substring(int start, int end)` извлича част от низа.
+`length()` returns the number of characters. `contains(String value)` checks whether text occurs in the string. `toUpperCase()` returns an uppercase string. `substring(int start, int end)` extracts a portion.
 
-## Търсене в `String`
-
-Методите за търсене проверяват дали даден символ или низ се съдържа в друг низ.
+## Searching in a `String`
 
 ```java
 String text = "Java Programming";
@@ -86,12 +71,9 @@ boolean startsWithJava = text.startsWith("Java");
 boolean endsWithIng = text.endsWith("ing");
 ```
 
-`contains()` връща булева стойност. `indexOf()` връща индекса на първото срещане или `-1`, ако търсената стойност не е
-намерена.
+`contains()` returns a boolean. `indexOf()` returns the first matching index, or `-1` if the value was not found.
 
-## Извличане от `String`
-
-Извличането създава нов низ от част от съществуващ низ.
+## Extracting from a `String`
 
 ```java
 String text = "Java Programming";
@@ -100,12 +82,11 @@ String firstWord = text.substring(0, 4);
 char firstLetter = text.charAt(0);
 ```
 
-Методът `substring(int start, int end)` използва начален индекс включително и краен индекс изключително. Методът
-`charAt(int index)` връща символа на посочения индекс.
+`substring(int start, int end)` includes the start index and excludes the end index. `charAt(int index)` returns the character at the specified index.
 
-## Замяна и промяна на `String`
+## Replacing and changing a `String`
 
-Тъй като `String` е immutable, методите за промяна връщат нов низ.
+Because `String` is immutable, methods that appear to change it return a new string.
 
 ```java
 String text = "Java Programming";
@@ -115,18 +96,18 @@ String lower = text.toLowerCase();
 String trimmed = " Java ".trim();
 ```
 
-Оригиналният низ не се променя. Резултатът трябва да бъде записан в променлива, ако трябва да се използва по-късно.
+The original string remains unchanged. Assign the result to a variable if it is needed later.
 
-## Разделяне и конкатенация
+## Splitting and concatenation
 
-Методът `split()` разделя низ на масив от низове.
+`split()` divides a string into an array of strings.
 
 ```java
 String names = "Ivan,Petar,Maria";
 String[] parts = names.split(",");
 ```
 
-Конкатенацията обединява текстови стойности.
+Concatenation combines text values:
 
 ```java
 String firstName = "Ivan";
@@ -134,11 +115,11 @@ String lastName = "Petrov";
 String fullName = firstName + " " + lastName;
 ```
 
-При много последователни промени на текст е по-подходящо да се използва `StringBuilder`.
+For many successive text changes, prefer `StringBuilder`.
 
-## Сравнение на низове
+## Comparing strings
 
-Низове се сравняват по съдържание чрез `equals()`.
+Use `equals()` to compare string contents.
 
 ```java
 String first = "Java";
@@ -147,13 +128,11 @@ String second = "Java";
 System.out.println(first.equals(second));
 ```
 
-Операторът `==` сравнява референции, а не съдържание на обекти. Затова за проверка на текстово съдържание се използва `equals()`.
+The `==` operator compares references, not object contents. Use `equals()` to compare text.
 
-## `==` и `equals()` при обекти
+## `==` and `equals()` with objects
 
-Операторът `==` има различно значение при примитивни и референтни типове.
-
-При примитивни типове `==` сравнява стойностите.
+For primitive types, `==` compares values:
 
 ```java
 int first = 10;
@@ -162,7 +141,7 @@ int second = 10;
 System.out.println(first == second);
 ```
 
-При референтни типове `==` сравнява дали двете променливи сочат към един и същ обект.
+For reference types, `==` checks whether two variables refer to the same object.
 
 ```java
 String first = new String("Java");
@@ -172,23 +151,22 @@ System.out.println(first == second);
 System.out.println(first.equals(second));
 ```
 
-Първото сравнение връща `false`, защото променливите сочат към два различни обекта. Второто сравнение връща `true`,
-защото съдържанието на двата низа е еднакво.
+The first comparison is `false` because the variables refer to two different objects. The second is `true` because their string contents are equal.
 
-## Escape последователности
+## Escape sequences
 
-Escape последователностите позволяват запис на специални символи в низ.
+Escape sequences allow special characters to be written in a string.
 
 ```java
 String line = "First line\nSecond line";
 String quoted = "He said: \"Java\"";
 ```
 
-Последователността `\n` означава нов ред. Последователността `\"` позволява кавичка вътре в текст.
+`\n` represents a new line. `\"` allows a quotation mark inside a string.
 
 ## `StringBuilder`
 
-`StringBuilder` е изменяем клас за изграждане на текст. Той е подходящ, когато текстът се променя многократно.
+`StringBuilder` is mutable and is useful when text must be changed repeatedly.
 
 ```java
 StringBuilder builder = new StringBuilder();
@@ -200,30 +178,29 @@ builder.append("Programming");
 String result = builder.toString();
 ```
 
-Методът `append()` добавя текст към текущото съдържание. Методът `toString()` връща готовия резултат като `String`.
+`append()` adds text to the current contents. `toString()` returns the result as a `String`.
 
-## Mutable и immutable обекти
+## Mutable and immutable objects
 
-Обект е immutable, когато състоянието му не може да бъде променено след създаване. `String` е immutable тип. Операции
-като конкатенация не променят съществуващия низ, а създават нов низ.
+An immutable object's state cannot change after it is created. `String` is immutable. Concatenation creates a new string instead of changing the existing one.
 
 ```java
 String text = "Java";
 text = text + " language";
 ```
 
-След втория ред променливата `text` сочи към нов обект.
+After the second line, `text` refers to a new object.
 
-Обект е mutable, когато състоянието му може да бъде променяно след създаване. `StringBuilder` е mutable тип.
+A mutable object's state can change after creation. `StringBuilder` is mutable.
 
 ```java
 StringBuilder builder = new StringBuilder("Java");
 builder.append(" language");
 ```
 
-Методът `append()` променя съществуващия обект от тип `StringBuilder`.
+`append()` changes the existing `StringBuilder` object.
 
-## Основни методи на `StringBuilder`
+## Common `StringBuilder` methods
 
 ```java
 StringBuilder builder = new StringBuilder("Java");
@@ -235,50 +212,49 @@ builder.delete(0, 2);
 builder.reverse();
 ```
 
-`StringBuilder` променя собственото си съдържание. Това го прави по-подходящ за цикли и натрупване на текст.
+`StringBuilder` changes its own contents, which makes it suitable for loops and accumulating text.
 
-| Метод | Предназначение |
-| ----- | -------------- |
-| `append()` | добавя стойност в края |
-| `insert()` | вмъква стойност на зададена позиция |
-| `delete()` | изтрива част от съдържанието |
-| `replace()` | заменя част от съдържанието |
-| `charAt()` | връща символ по индекс |
-| `length()` | връща текущата дължина |
-| `capacity()` | връща размера на вътрешния буфер |
-| `toString()` | връща резултата като `String` |
+| Method | Purpose |
+| --- | --- |
+| `append()` | Adds a value at the end |
+| `insert()` | Inserts a value at a given position |
+| `delete()` | Deletes part of the contents |
+| `replace()` | Replaces part of the contents |
+| `charAt()` | Returns the character at an index |
+| `length()` | Returns the current length |
+| `capacity()` | Returns the internal buffer size |
+| `toString()` | Returns the result as a `String` |
 
-## Сравнение между `String` и `StringBuilder`
+## Comparing `String` and `StringBuilder`
 
-| Характеристика | `String` | `StringBuilder` |
+| Property | `String` | `StringBuilder` |
 | --- | --- | --- |
-| Съдържание | Неизменяемо след създаване | Може да се променя |
-| Операция за добавяне | Конкатенацията връща резултат като низ | `append()` променя текущия обект |
-| Подходящ за | Готов текст, ключове, съобщения | Постепенно изграждане на текст, особено в цикъл |
-| Резултат | Вече е `String` | `toString()` връща `String` |
+| Contents | Immutable after creation | Can be changed |
+| Adding text | Concatenation returns a string | `append()` changes the current object |
+| Best suited for | Finished text, keys, messages | Building text gradually, especially in a loop |
+| Result | Already a `String` | `toString()` returns a `String` |
 
-Изборът зависи от начина на работа с текста. За кратко съобщение конкатенацията е достатъчна; при многократно натрупване в цикъл използвайте `StringBuilder`.
+Choose according to how the text is used. Concatenation is sufficient for a short message; use `StringBuilder` when accumulating text repeatedly in a loop.
 
-## ASCII и Unicode
+## ASCII and Unicode
 
-Символите в Java се представят чрез Unicode. Типът `char` съхранява един Unicode символ.
+Java represents characters using Unicode. A `char` stores one Unicode character.
 
-ASCII е по-стар стандарт, който съдържа ограничен набор от символи, основно латински букви, цифри и управляващи
-символи. Unicode поддържа много по-голям набор от символи от различни езици.
+ASCII is an older standard with a limited set of characters, mainly Latin letters, digits, and control characters. Unicode supports a much larger set of characters from different languages.
 
 ```java
 char latinLetter = 'A';
-char cyrillicLetter = 'Я';
+char greekLetter = 'Ω';
 ```
 
-И двата символа могат да бъдат съхранени в променлива от тип `char`, защото Java използва Unicode.
+Both characters fit in a `char`, because Java uses Unicode.
 
-## Обгръщащи класове
+## Wrapper classes
 
-Обгръщащите класове представят примитивните типове като обекти.
+Wrapper classes represent primitive types as objects.
 
-| Примитивен тип | Обгръщащ клас |
-| -------------- | ------------- |
+| Primitive type | Wrapper class |
+| --- | --- |
 | `boolean` | `Boolean` |
 | `char` | `Character` |
 | `byte` | `Byte` |
@@ -288,7 +264,7 @@ char cyrillicLetter = 'Я';
 | `float` | `Float` |
 | `double` | `Double` |
 
-Колекциите и generic типовете в Java работят с обекти, затова за примитивни стойности се използват обгръщащи класове.
+Java collections and generic types work with objects, so wrapper classes are used for primitive values.
 
 ```java
 Integer number = 10;
@@ -296,25 +272,20 @@ Double price = 15.50;
 Boolean active = true;
 ```
 
-Обгръщащите класове са необходими, когато примитивна стойност трябва да се използва като обект. Това се среща при:
+Wrappers are useful when primitive values must be used as objects, for example in collections, generic types, conversion or comparison methods, and when `null` represents a missing value where permitted by the logic.
 
-- съхраняване на стойности в колекции;
-- използване на generic типове;
-- извикване на методи за преобразуване, сравнение или проверка;
-- представяне на липсваща стойност чрез `null`, когато това е допустимо за конкретната логика.
+## Boxing and unboxing
 
-## Boxing и unboxing
-
-Boxing е преобразуване от примитивен тип към обгръщащ клас. Unboxing е преобразуване от обгръщащ клас към примитивен тип.
+Boxing converts a primitive value to a wrapper object. Unboxing converts a wrapper object to a primitive value.
 
 ```java
 Integer number = 10;
 int value = number;
 ```
 
-В първия ред стойността `10` се обгръща в `Integer`. Във втория ред стойността се извлича обратно като `int`.
+In the first line, `10` is wrapped in an `Integer`. In the second, the value is extracted as an `int`.
 
-## Полезни методи
+## Useful conversion methods
 
 ```java
 int number = Integer.parseInt("123");
@@ -323,42 +294,29 @@ boolean digit = Character.isDigit('5');
 boolean letter = Character.isLetter('A');
 ```
 
-Методите `parseInt()` и `parseDouble()` преобразуват текст към числова стойност. Методите на `Character` позволяват проверка на символи.
+`parseInt()` and `parseDouble()` convert text to numeric primitive values. `Character` methods can inspect characters.
 
-Методите `parseInt()` и `parseDouble()` връщат примитивни стойности.
-
-```java
-int number = Integer.parseInt("123");
-double price = Double.parseDouble("12.50");
-```
-
-Методът `valueOf()` връща обект от съответния обгръщащ клас.
+`valueOf()` returns an object of the corresponding wrapper class:
 
 ```java
 Integer number = Integer.valueOf("123");
 Double price = Double.valueOf("12.50");
 ```
 
-Ако текстът не съдържа валидна числова стойност, възниква `NumberFormatException`.
+If the text is not a valid number, a `NumberFormatException` is thrown. This exception is covered in the lesson on exception handling.
 
-```java
-int number = Integer.parseInt("abc");
-```
+| Method | Purpose |
+| --- | --- |
+| `valueOf()` | Creates an object from a primitive value or string |
+| `parseInt()` | Converts a string to `int` |
+| `parseDouble()` | Converts a string to `double` |
+| `intValue()` | Returns the value as `int` |
+| `doubleValue()` | Returns the value as `double` |
+| `toString()` | Returns a textual representation |
 
-Изключението `NumberFormatException` се разглежда при обработката на изключения.
+## Character checks in wrapper classes
 
-| Метод | Предназначение |
-| ----- | -------------- |
-| `valueOf()` | създава обект от примитивна стойност или низ |
-| `parseInt()` | преобразува символен низ в `int` |
-| `parseDouble()` | преобразува символен низ в `double` |
-| `intValue()` | връща стойността като `int` |
-| `doubleValue()` | връща стойността като `double` |
-| `toString()` | връща текстово представяне на стойността |
-
-## Методи за проверка в обгръщащи класове
-
-Класът `Character` съдържа методи за проверка на символи.
+`Character` includes methods for checking characters.
 
 ```java
 boolean digit = Character.isDigit('5');
@@ -366,20 +324,20 @@ boolean letter = Character.isLetter('A');
 boolean whitespace = Character.isWhitespace(' ');
 ```
 
-Тези методи връщат `true` или `false` според вида на символа.
+These methods return `true` or `false` depending on the character.
 
-| Метод | Предназначение |
-| ----- | -------------- |
-| `Character.isDigit()` | проверява дали символът е цифра |
-| `Character.isLetter()` | проверява дали символът е буква |
-| `Character.isLetterOrDigit()` | проверява дали символът е буква или цифра |
-| `Character.isWhitespace()` | проверява дали символът е интервален символ |
-| `Character.isUpperCase()` | проверява дали символът е главна буква |
-| `Character.isLowerCase()` | проверява дали символът е малка буква |
+| Method | Purpose |
+| --- | --- |
+| `Character.isDigit()` | Checks whether a character is a digit |
+| `Character.isLetter()` | Checks whether a character is a letter |
+| `Character.isLetterOrDigit()` | Checks whether a character is a letter or digit |
+| `Character.isWhitespace()` | Checks whether a character is whitespace |
+| `Character.isUpperCase()` | Checks whether a character is uppercase |
+| `Character.isLowerCase()` | Checks whether a character is lowercase |
 
-## Методи за сравнение в обгръщащи класове
+## Comparison methods in wrapper classes
 
-Обгръщащите класове съдържат методи за сравнение на стойности.
+Wrapper classes provide methods for comparing values.
 
 ```java
 int result = Integer.compare(10, 20);
@@ -387,19 +345,17 @@ int max = Integer.max(10, 20);
 int min = Integer.min(10, 20);
 ```
 
-`Integer.compare(first, second)` връща отрицателна стойност, нула или положителна стойност според това дали първата
-стойност е по-малка, равна или по-голяма от втората.
+`Integer.compare(first, second)` returns a negative value, zero, or a positive value depending on whether the first value is less than, equal to, or greater than the second.
 
-| Метод | Предназначение |
-| ----- | -------------- |
-| `equals()` | проверява две стойности за равенство |
-| `compare()` | сравнява две стойности |
-| `compareTo()` | сравнява текущия обект с друг обект от същия тип |
+| Method | Purpose |
+| --- | --- |
+| `equals()` | Checks whether two values are equal |
+| `compare()` | Compares two values |
+| `compareTo()` | Compares this object with another object of the same type |
 
-## Клас `Math`
+## The `Math` class
 
-Класът `Math` съдържа статични методи за често използвани математически операции. Не се създава обект от `Math`.
-Методите се извикват чрез името на класа.
+`Math` contains static methods for common mathematical operations. You do not create a `Math` object; call methods using the class name.
 
 ```java
 int absolute = Math.abs(-10);
@@ -407,37 +363,35 @@ double power = Math.pow(2, 3);
 double root = Math.sqrt(25);
 ```
 
-`Math.abs(-10)` връща абсолютната стойност. `Math.pow(2, 3)` повдига 2 на трета степен. `Math.sqrt(25)` връща квадратен
-корен.
+`Math.abs(-10)` returns the absolute value. `Math.pow(2, 3)` raises 2 to the third power. `Math.sqrt(25)` returns the square root.
 
-## Основни методи на `Math`
+## Common `Math` methods
 
-| Метод | Предназначение |
-| ----- | -------------- |
-| `Math.abs(value)` | връща абсолютна стойност |
-| `Math.max(first, second)` | връща по-голямата стойност |
-| `Math.min(first, second)` | връща по-малката стойност |
-| `Math.pow(base, exponent)` | степенуване |
-| `Math.sqrt(value)` | квадратен корен |
-| `Math.round(value)` | закръгляне до най-близко цяло число |
-| `Math.ceil(value)` | закръгляне нагоре |
-| `Math.floor(value)` | закръгляне надолу |
+| Method | Purpose |
+| --- | --- |
+| `Math.abs(value)` | Returns the absolute value |
+| `Math.max(first, second)` | Returns the larger value |
+| `Math.min(first, second)` | Returns the smaller value |
+| `Math.pow(base, exponent)` | Raises a value to a power |
+| `Math.sqrt(value)` | Returns the square root |
+| `Math.round(value)` | Rounds to the nearest integer |
+| `Math.ceil(value)` | Rounds up |
+| `Math.floor(value)` | Rounds down |
 
-## Константи в `Math`
+## Constants in `Math`
 
-Класът `Math` съдържа и готови математически константи.
+`Math` also provides common mathematical constants.
 
 ```java
 double circleArea = Math.PI * radius * radius;
 double e = Math.E;
 ```
 
-`Math.PI` представя числото π. `Math.E` представя основата на естествения логаритъм.
+`Math.PI` represents π. `Math.E` represents the base of the natural logarithm.
 
-## Клас `Random`
+## The `Random` class
 
-Класът `Random` се използва за генериране на псевдослучайни стойности. За разлика от `Math`, при `Random` се създава
-обект.
+`Random` generates pseudorandom values. Unlike with `Math`, you create an object.
 
 ```java
 import java.util.Random;
@@ -449,38 +403,34 @@ boolean flag = random.nextBoolean();
 double value = random.nextDouble();
 ```
 
-Стойностите са псевдослучайни, защото се генерират от алгоритъм. При всяко извикване се получава следваща стойност от
-поредицата.
+Values are pseudorandom because they are produced by an algorithm. Each call returns the next value in the sequence.
 
-## Генериране на число в диапазон
+## Generating a number in a range
 
-Методът `nextInt(int bound)` връща цяло число от 0 включително до зададената граница изключително.
+`nextInt(int bound)` returns an integer from 0 inclusive to the bound exclusive.
 
 ```java
 Random random = new Random();
-
 int number = random.nextInt(10);
 ```
 
-В примера възможните стойности са от 0 до 9.
-
-За диапазон от 1 до 10 се добавя 1 към резултата.
+The possible values are 0 through 9. Add 1 to get a range from 1 through 10:
 
 ```java
 int number = random.nextInt(10) + 1;
 ```
 
-За диапазон между `min` и `max` включително може да се използва следната формула:
+To generate a value from `min` through `max`, inclusive:
 
 ```java
 int number = random.nextInt(max - min + 1) + min;
 ```
 
-## Основни методи на `Random`
+## Common `Random` methods
 
-| Метод | Предназначение |
-| ----- | -------------- |
-| `nextInt()` | връща произволна стойност от тип `int` |
-| `nextInt(bound)` | връща `int` в диапазона от 0 до `bound - 1` |
-| `nextDouble()` | връща `double` в диапазона от 0.0 до 1.0 |
-| `nextBoolean()` | връща `true` или `false` |
+| Method | Purpose |
+| --- | --- |
+| `nextInt()` | Returns a random `int` |
+| `nextInt(bound)` | Returns an `int` from 0 through `bound - 1` |
+| `nextDouble()` | Returns a `double` from 0.0 inclusive to 1.0 exclusive |
+| `nextBoolean()` | Returns `true` or `false` |
