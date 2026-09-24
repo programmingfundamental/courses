@@ -567,9 +567,9 @@
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/index.md",
+    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-01/index.md",
     "sourceSha256": "89925aa8444d0bea4aa72aae0690cb7c29efde0c61dc47ac11bc74dae439443a",
-    "url": "/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/",
+    "url": "/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-01/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/README.html",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/",
@@ -600,9 +600,9 @@
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-3/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-3/index.md",
+    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/index.md",
     "sourceSha256": "109b9954f9e5b5cb5046e460265ff3ee21abc7c852052d79f1ad390a0fc41b76",
-    "url": "/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-3/",
+    "url": "/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-3/README.html",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-3/",
@@ -611,9 +611,9 @@
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-5/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-5/index.md",
+    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-05/index.md",
     "sourceSha256": "615c911f0cb846be5965ed8152d32bbe286b6880c54c2e15acf495646b7a35f0",
-    "url": "/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-5/",
+    "url": "/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-05/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-5/README.html",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-5/",
@@ -622,9 +622,9 @@
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-6/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-6/index.md",
+    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-06/index.md",
     "sourceSha256": "b19bce95006ed8b75d3d0cd1ee389c2d5934839898bd911f0fadea6cb2f91799",
-    "url": "/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-6/",
+    "url": "/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-06/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-6/README.html",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-6/",
@@ -633,9 +633,9 @@
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-7/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-7/index.md",
+    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-07/index.md",
     "sourceSha256": "dca960a26e6aa65f8a8a7f11a0f2d569f2a6179e473acb8670cdecc22613f2f1",
-    "url": "/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-7/",
+    "url": "/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-07/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-7/README.html",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-7/",
@@ -644,9 +644,9 @@
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-8/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-8/index.md",
+    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-08/index.md",
     "sourceSha256": "87d560a036eb6737e5db4c6ae33b1d6f3f0e5820ba89002f37a89d93057623fe",
-    "url": "/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-8/",
+    "url": "/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-08/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-8/README.html",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-8/",
