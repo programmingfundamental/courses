@@ -8,7 +8,7 @@ const docs = fs.readdirSync(root, { recursive: true }).filter((file) => file.end
   id: file.replaceAll('\\', '/').replace(/(?:\/index)?\.md$/, '').toLowerCase().replaceAll(' ', '-'),
   ...matter(fs.readFileSync(`${root}/${file}`, 'utf8')),
 })).filter((doc) => !doc.data.draft);
-const labs = docs.filter((doc) => /^(bg|en)\/[^/]+\/(?:laboratorno-uprazhnenie-|laboratory-exercise-|lab)\d+$/.test(doc.id));
+const labs = docs.filter((doc) => !doc.data.contentRedirect && /^(bg|en)\/[^/]+\/(?:laboratorno-uprazhnenie-|laboratory-exercise-|lab)\d+$/.test(doc.id));
 for (const lab of labs) {
   const children = docs.filter((doc) => doc.id.startsWith(lab.id + '/'));
   const tasks = children.filter((doc) => doc.data.taskPage);
@@ -29,6 +29,11 @@ for (const lab of labs) {
 }
 for (const doc of docs.filter((doc) => doc.data.taskRedirect)) {
   assert.ok(docs.some((target) => target.data.taskPage && `/courses/${target.id}/` === doc.data.taskRedirect), `Missing task redirect target: ${doc.id}`);
+  assert.equal(doc.data.pagefind, false, doc.id);
+  assert.equal(doc.data.sidebar?.hidden, true, doc.id);
+}
+for (const doc of docs.filter((doc) => doc.data.contentRedirect)) {
+  assert.ok(docs.some((target) => !target.data.contentRedirect && `/courses/${target.id}/` === doc.data.contentRedirect), `Missing current student material: ${doc.id}`);
   assert.equal(doc.data.pagefind, false, doc.id);
   assert.equal(doc.data.sidebar?.hidden, true, doc.id);
 }

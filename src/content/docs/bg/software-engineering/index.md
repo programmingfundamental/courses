@@ -1,22 +1,20 @@
 ---
-title: Софтуерно инженерство
+title: "Софтуерно инженерство за AI системи"
 sidebar:
   order: 12
 ---
 
-Курсът въвежда процесите и методологиите за разработка на софтуер, формулирането на изисквания и моделирането с UML. Ще изучавате жизнения цикъл на софтуера, Agile принципите и организацията на екипната работа със Scrum.
+Курсът разглежда превръщането на AI експеримент в поддържана софтуерна система с Python. Ще изучавате изисквания, архитектура, тестване, CI/CD, MLOps, наблюдаемост, сигурност и поддръжка.
 
 ## Лабораторни упражнения
 
-- [Лабораторно упражнение 1 — Въведение в софтуерното инженерство](/courses/bg/software-engineering/laboratorno-uprazhnenie-1/)
-- [Лабораторно упражнение 2 — Методологии за разработка на софтуер](/courses/bg/software-engineering/laboratorno-uprazhnenie-2/)
-- [Лабораторно упражнение 3 — Софтуерни изисквания и спецификации с UML](/courses/bg/software-engineering/laboratorno-uprazhnenie-3/)
-- [Лабораторно упражнение 4 — Практическа подготовка за UML моделиране](/courses/bg/software-engineering/laboratorno-uprazhnenie-4/)
-- [Лабораторно упражнение 5 — Контролна работа върху UML моделиране](/courses/bg/software-engineering/laboratorno-uprazhnenie-5/)
-- [Лабораторно упражнение 6 — Принципи на софтуерното инженерство и жизнен цикъл](/courses/bg/software-engineering/laboratorno-uprazhnenie-6/)
-- [Лабораторно упражнение 7 — Agile — ценности и принципи](/courses/bg/software-engineering/laboratorno-uprazhnenie-7/)
-- [Лабораторно упражнение 8 — Scrum — роли, артефакти, събития и user stories](/courses/bg/software-engineering/laboratorno-uprazhnenie-8/)
-- [Лабораторно упражнение 9 — Sprint Planning, оценяване и Planning Poker](/courses/bg/software-engineering/laboratorno-uprazhnenie-9/)
-- [Лабораторно упражнение 10 — Daily Scrum, Sprint Review и Sprint Retrospective](/courses/bg/software-engineering/laboratorno-uprazhnenie-10/)
-- [Лабораторно упражнение 11 — Темата предстои](/courses/bg/software-engineering/laboratorno-uprazhnenie-11/)
-- [Лабораторно упражнение 12 — Темата предстои](/courses/bg/software-engineering/laboratorno-uprazhnenie-12/)
+- [Лабораторно упражнение 1 — Софтуерен жизнен цикъл и инженерни процеси](/courses/bg/software-engineering/laboratorno-uprazhnenie-1/)
+- [Лабораторно упражнение 2 — Изисквания и спецификация на AI-базирани системи](/courses/bg/software-engineering/laboratorno-uprazhnenie-2/)
+- [Лабораторно упражнение 3 — Софтуерна архитектура и архитектурни стилове](/courses/bg/software-engineering/laboratorno-uprazhnenie-3/)
+- [Лабораторно упражнение 4 — Модулност, слоеве и разделяне на отговорностите](/courses/bg/software-engineering/laboratorno-uprazhnenie-4/)
+- [Лабораторно упражнение 5 — Design Patterns и принципи за качествен код](/courses/bg/software-engineering/laboratorno-uprazhnenie-5/)
+- [Лабораторно упражнение 6 — Тестване на софтуер и AI компоненти](/courses/bg/software-engineering/laboratorno-uprazhnenie-6/)
+- [Лабораторно упражнение 7 — Version Control, CI/CD и автоматизация](/courses/bg/software-engineering/laboratorno-uprazhnenie-7/)
+- [Лабораторно упражнение 8 — MLOps и управление на модели и данни](/courses/bg/software-engineering/laboratorno-uprazhnenie-8/)
+- [Лабораторно упражнение 9 — Наблюдаемост, надеждност и управление на грешки](/courses/bg/software-engineering/laboratorno-uprazhnenie-9/)
+- [Лабораторно упражнение 10 — Сигурност, етика, технически дълг и поддръжка](/courses/bg/software-engineering/laboratorno-uprazhnenie-10/)

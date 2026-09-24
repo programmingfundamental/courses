@@ -24,7 +24,7 @@ for (const {target,url,oldUrls} of routes) {
 let labs = 0;
 for (const course of docs.filter(d=>d.id.split('/').length===2)) {
   const url = '/courses/'+course.id+'/';
-  const sequence=docs.filter(d=>d.id.startsWith(course.id+'/') && d.id.split('/').length===3 && /(?:laboratorno-uprazhnenie-|laboratory-exercise-|lab)\d+$/.test(d.id)).sort((a,b)=>(a.data.sidebar?.order??999)-(b.data.sidebar?.order??999)||a.id.localeCompare(b.id,undefined,{numeric:true}));
+  const sequence=docs.filter(d=>!d.data.sidebar?.hidden && d.id.startsWith(course.id+'/') && d.id.split('/').length===3 && /(?:laboratorno-uprazhnenie-|laboratory-exercise-|lab)\d+$/.test(d.id)).sort((a,b)=>(a.data.sidebar?.order??999)-(b.data.sidebar?.order??999)||a.id.localeCompare(b.id,undefined,{numeric:true}));
   for (const [i,lab] of sequence.entries()) {
     const $=readPage('/courses/'+lab.id+'/');
     assert.equal($('a[rel="prev"]').attr('href'),i?'/courses/'+sequence[i-1].id+'/':url,'Previous: '+lab.id);

@@ -7,14 +7,15 @@
     "build": "astro build",
     "postbuild": "node scripts/legacy-redirects.mjs",
     "preview": "astro preview",
-    "precheck": "node scripts/sync-network-labs.mjs --check && node scripts/sync-android-labs.mjs --check && node scripts/sync-mobile-internet-labs.mjs --check && node scripts/check-lab-tasks.mjs",
+    "precheck": "node scripts/sync-network-labs.mjs --check && node scripts/sync-android-labs.mjs --check && node scripts/sync-mobile-internet-labs.mjs --check && node scripts/sync-student-courses.mjs --check && node scripts/check-lab-tasks.mjs",
     "check": "astro check",
     "sync:network-labs": "node scripts/sync-network-labs.mjs",
     "sync:android-labs": "node scripts/sync-android-labs.mjs",
     "sync:mobile-internet-labs": "node scripts/sync-mobile-internet-labs.mjs",
     "check:links": "node scripts/check-links.mjs",
     "check:tasks": "node scripts/check-lab-tasks.mjs",
-    "check:migration": "node scripts/check-migration.mjs"
+    "check:migration": "node scripts/check-migration.mjs",
+    "sync:student-courses": "node scripts/sync-student-courses.mjs"
   },
   "engines": {
     "node": ">=22.12.0",

@@ -11,6 +11,9 @@ export const onRequest = defineRouteMiddleware((context) => {
   const courseId = route.id.split('/').slice(0, 2).join('/');
   const course = byId.get(courseId);
   const overview = bg ? 'Преглед' : 'Overview';
+  if (route.entry.data.contentRedirect) {
+    route.head.push({ tag: 'meta', attrs: { 'http-equiv': 'refresh', content: `0;url=${route.entry.data.contentRedirect}` } });
+  }
   if (route.entry.data.taskRedirect) {
     route.head.push({ tag: 'meta', attrs: { 'http-equiv': 'refresh', content: `0;url=${route.entry.data.taskRedirect}` } });
   }

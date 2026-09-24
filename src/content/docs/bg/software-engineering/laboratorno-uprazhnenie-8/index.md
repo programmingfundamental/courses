@@ -1,56 +1,70 @@
 ---
-title: Лабораторно упражнение 8
+title: "Лабораторно упражнение 8 — MLOps и управление на модели и данни"
 sidebar:
   order: 8
+  label: "Упражнение 8"
 ---
 
-# Лабораторно упражнение 8: Гъвкавата рамка Scrum
+# Лабораторно упражнение 8 — MLOps и управление на модели и данни
 
-## Цел на упражнението
-Студентите трябва да се запознаят с практическото приложение на Agile принципите чрез рамката Scrum. Целта е да се разберат основните роли, артефакти и събития, които структурират процеса на разработка.
+**Аудитория:** IV курс, бакалавър „Изкуствен интелект“. **Време:** 110 минути.
+Работи се само с предоставения CPU проект и synthetic dataset, без платени услуги.
 
-## 1. Въведение в Scrum
-Scrum е най-популярната итеративна рамка (framework) за управление на проекти в софтуерното инженерство. Тя предоставя структура, която помага на екипите да доставят стойност на клиента чрез кратки работни цикли, наречени **Спринтове (Sprints)**.
+## 2. Инженерен сценарий
 
----
+В директория има model-final.joblib и model-final2.joblib. Вторият има по-висока accuracy, но е обучен върху различен split; dataset origin липсва. Екипът не може да избере release или да възстанови предишното поведение.
 
-## 2. Ключови компоненти на Scrum
+## 3. Учебни цели
 
-### 2.1 Роли в Scrum екипа
-Scrum дефинира три основни роли с ясно разпределени отговорности:
+След упражнението студентът:
 
-| Роля | Отговорност | Описание |
-| :--- | :--- | :--- |
-| **Product Owner** | Максимизиране на бизнес стойността | Представлява интересите на клиента и управлява списъка със задачи (Product Backlog). Дефинира *какво* трябва да бъде изградено. |
-| **Scrum Master** | Улесняване на процеса | Грижи се за правилното прилагане на Scrum принципите, отстранява пречките пред екипа и подпомага комуникацията. |
-| **Development Team** | Техническа реализация | Самоорганизиран екип от специалисти, които превръщат задачите в работещ софтуер. |
+- анализира model/data lineage;
+- реализира experiment tracking с пълни metadata;
+- автоматизира data/model version checks;
+- сравнява release кандидати по инженерни критерии;
+- тества immutable versions и rollback;
+- аргументира champion/challenger promotion;
 
-### 2.2 Scrum артефакти
-Артефактите осигуряват прозрачност и споделено разбиране за състоянието на проекта:
+## 4. Предварителни знания
 
-| Артефакт | Описание |
-| :--- | :--- |
-| **Product Backlog** | Приоритизиран списък с всички функционалности, подобрения и корекции, необходими за продукта. |
-| **Sprint Backlog** | Подмножество от задачи от Product Backlog, които екипът се ангажира да изпълни в рамките на текущия спринт. |
-| **Increment** | Сумата от всички завършени задачи в края на спринта, които формират работеща и потенциално готова за внедряване функционалност. |
+Python, основи на ML/Jupyter, Git, REST API, Docker, scikit-learn/pandas/numpy, Linux и бази данни. Използвайте резултатите от предходните 7 упражнения като engineering input. Не преговаряме елементарни Python конструкции.
 
-### 2.3 Scrum събития (Церемонии)
-Тези периодични срещи гарантират ритъма на работа и възможността за инспекция и адаптация:
+## 5. Инструменти
 
-| Събитие | Цел | Продължителност (за 4-седмичен спринт) |
-| :--- | :--- | :--- |
-| **Sprint Planning** | Планиране на работата за предстоящия спринт. | До 8 часа |
-| **Daily Scrum** | Кратка ежедневна среща за синхронизация на екипа. | 15 минути |
-| **Sprint Review** | Демонстрация на готовия продукт пред заинтересованите страни. | До 4 часа |
-| **Sprint Retrospective** | Анализ на вътрешните процеси и планиране на подобрения за следващия спринт. | До 3 часа |
+Python 3.12, virtual environment, Jupyter Notebook по избор за notebook UI, pytest/coverage, Git, Docker, FastAPI/Pydantic и стандартните Python logging/JSON инструменти. Използвайте pinned environment от [README](/courses/bg/software-engineering/podgotovka/). Training е върху 400 synthetic rows на CPU. Tracking/data versioning са local journal + Git/SHA manifest; не е необходим cloud account.
 
----
+## 6. Архитектурен контекст
 
-## 3. Дефиниране на потребителски истории (User Stories)
-В Scrum изискванията често се описват под формата на потребителски истории в Product Backlog.
+```text
+Dataset + manifest
+       |
+Validation / Features
+       |
+Offline Training Pipeline
+       |
+Experiment metadata + immutable Model Registry
+       |
+Inference Service -> FastAPI -> Client
+       |
+Logs / Metrics -> CI/CD and maintenance feedback
+```
 
-**Стандартен формат:**
-> Като **<роля/тип потребител>** искам **<действие/функционалност>**, за да **<бизнес полза/цел>**.
+**Фокус в това упражнение:** Dataset manifest → experiment journal → immutable registry → promotion/rollback. Вижте [общата архитектура](/courses/bg/software-engineering/materiali/architecture/system-overview/). Отбележете данните, зависимостите и owner на всяка граница.
 
-**Пример:**
-> Като **Студент** искам **да имам достъп до учебните материали онлайн**, за да **мога да се подготвям за изпити дистанционно**.
+## 7. Теоретична подготовка
+
+MLOps свързва ML lifecycle с автоматизация и operations. Experiment tracking пази parameters, metrics, artifacts и контекста на run; model registry управлява version identities и promotion state. Lineage проследява model → dataset → source/config/dependencies → evaluation. Име на файл и timestamp не са достатъчни за възпроизводимост.
+
+В курса local immutable experiment journal е еквивалент на основните tracking функции: всеки version folder съдържа model и metadata с params/metrics/data hash/git commit/source hash/lock hash. Git+CSV manifest е малък data-versioning workflow, еквивалентен за този dataset на DVC pointer/content workflow. Не е разпределен MLflow/DVC service. Champion е избраната версия; challenger е кандидатът. Promotion сменя registry pointer, deployment сменя running immutable bundle. Rollback трябва да запази стария artifact и runtime compatibility; само alias update не променя вече работещия процес.
+
+Следвайте [източниците и version scope](/courses/bg/software-engineering/materiali/architecture/references/). Теорията трябва да обяснява engineering избора, не да замества evidence.
+
+## 8. Лош / проблемен пример
+
+```text
+models/model-final.joblib
+models/model-final-new.joblib
+# няма dataset identity, split, params, metrics или source version
+```
+
+Работещият starter и неговият TODO contract са в [starter/README.md](/courses/bg/software-engineering/materiali/lab08-mlops/starter/readme/). Примерът е за анализ: първо запишете observable behavior и failure risks, после refactor-вайте. Не броим просто преименуване на файлове за архитектурна промяна.

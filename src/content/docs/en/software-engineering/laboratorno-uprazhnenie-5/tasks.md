@@ -1,8 +1,10 @@
 ---
 title: Tasks
-taskPage: true
 sidebar:
   label: Tasks
   order: 100
+  hidden: true
+contentRedirect: /courses/bg/software-engineering/laboratorno-uprazhnenie-5/
+pagefind: false
 ---
-Tasks for this laboratory exercise have not been published yet.
+[Current student materials](/courses/bg/software-engineering/laboratorno-uprazhnenie-5/)

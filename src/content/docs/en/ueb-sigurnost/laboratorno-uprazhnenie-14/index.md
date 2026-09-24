@@ -2,7 +2,8 @@
 title: Laboratory exercise 14
 sidebar:
   order: 14
+  hidden: true
+contentRedirect: /courses/bg/ueb-sigurnost/
+pagefind: false
 ---
-
-# Laboratory exercise 14
-
+[Current student materials](/courses/bg/ueb-sigurnost/)

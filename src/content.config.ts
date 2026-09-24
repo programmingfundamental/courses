@@ -7,6 +7,7 @@ export const collections = {
   docs: defineCollection({ loader: docsLoader(), schema: docsSchema({ extend: z.object({
     taskPage: z.boolean().default(false),
     taskRedirect: z.string().optional(),
+    contentRedirect: z.string().optional(),
   }) }) }),
   i18n: defineCollection({ loader: i18nLoader(), schema: i18nSchema() }),
 };

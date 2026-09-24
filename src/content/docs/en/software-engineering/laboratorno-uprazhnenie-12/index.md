@@ -2,7 +2,8 @@
 title: Laboratory exercise 12
 sidebar:
   order: 12
+  hidden: true
+contentRedirect: /courses/bg/software-engineering/
+pagefind: false
 ---
-
-# Laboratory exercise 12
-
+[Current student materials](/courses/bg/software-engineering/)

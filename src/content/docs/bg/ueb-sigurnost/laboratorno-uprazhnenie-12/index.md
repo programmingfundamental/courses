@@ -2,7 +2,8 @@
 title: Лабораторно упражнение 12
 sidebar:
   order: 12
+  hidden: true
+contentRedirect: /courses/bg/ueb-sigurnost/
+pagefind: false
 ---
-
-# Лабораторно упражнение 12
-
+[Актуални студентски материали](/courses/bg/ueb-sigurnost/)

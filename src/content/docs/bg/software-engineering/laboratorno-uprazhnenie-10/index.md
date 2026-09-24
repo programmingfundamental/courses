@@ -1,50 +1,71 @@
 ---
-title: Лабораторно упражнение 10
+title: "Лабораторно упражнение 10 — Сигурност, етика, технически дълг и поддръжка"
 sidebar:
   order: 10
+  label: "Упражнение 10"
 ---
 
-# Лабораторно упражнение 10: Ежедневна синхронизация, преглед и ретроспекция
+# Лабораторно упражнение 10 — Сигурност, етика, технически дълг и поддръжка
 
-## Цел на упражнението
-Целта на упражнението е студентите да се запознаят с динамиката на Scrum събитията, които се провеждат по време на и в края на спринта: Daily Scrum, Sprint Review и Sprint Retrospective.
+**Аудитория:** IV курс, бакалавър „Изкуствен интелект“. **Време:** 110 минути.
+Работи се само с предоставения CPU проект и synthetic dataset, без платени услуги.
 
----
+## 2. Инженерен сценарий
 
-## 1. Ежедневна среща (Daily Scrum)
-**Daily Scrum** е 15-минутно събитие за синхронизация на екипа по разработка. Тя се провежда по едно и също време и на едно и също място всеки ден.
+Review открива secret в source, стар model artifact без version, недокументиран dataset, sensitive logs и deprecated dependency. Високият F1 не отговаря дали системата е безопасна, поддържаема или подходяща за употреба.
 
-### Основни правила:
--   **Продължителност:** Строго ограничена до 15 минути.
--   **Участници:** Провежда се от екипа по разработка. Scrum Master-ът следи за спазване на времето и правилата.
--   **Фокус:** Синхронизация на прогреса към **Целта на спринта (Sprint Goal)**.
+## 3. Учебни цели
 
-### Трите класически въпроса:
-1.  Какво направих вчера, което помогна на екипа да се доближи до целта на спринта?
-2.  Какво ще направя днес, за да помогна на екипа?
-3.  Виждам ли някакви пречки (блокери), които пречат на мен или на екипа?
+След упражнението студентът:
 
----
+- анализира trust boundaries и privacy risks;
+- проектира risk/technical-debt register;
+- реализира проверими security/ethics constraints;
+- тества access control и log redaction;
+- аргументира fairness/explainability ограничения;
+- планира maintenance, deprecation и retirement;
 
-## 2. Преглед на спринта (Sprint Review)
-**Sprint Review** се провежда в края на спринта, за да се инспектира създаденият продукт и да се адаптира Product Backlog.
+## 4. Предварителни знания
 
-### Ключови аспекти:
--   **Демонстрация:** Екипът представя само функционалности, които отговарят на **Definition of Done (DoD)**.
--   **Обратна връзка:** Stakeholder-ите (клиенти, мениджъри) дават мнения и предложения.
--   **Резултат:** Актуализиран Product Backlog на базата на новата информация.
+Python, основи на ML/Jupyter, Git, REST API, Docker, scikit-learn/pandas/numpy, Linux и бази данни. Използвайте резултатите от предходните 9 упражнения като engineering input. Не преговаряме елементарни Python конструкции.
 
----
+## 5. Инструменти
 
-## 3. Ретроспекция на спринта (Sprint Retrospective)
-**Sprint Retrospective** е събитие, насочено към подобряване на **процеса, инструментите и взаимоотношенията** в екипа.
+Python 3.12, virtual environment, Jupyter Notebook по избор за notebook UI, pytest/coverage, Git, Docker, FastAPI/Pydantic и стандартните Python logging/JSON инструменти. Използвайте pinned environment от [README](/courses/bg/software-engineering/podgotovka/). Training е върху 400 synthetic rows на CPU. Tracking/data versioning са local journal + Git/SHA manifest; не е необходим cloud account.
 
-### Техника: "Метеорологична прогноза" (Team Weather Report)
-Това е лесен и визуален начин за оценка на емоционалното състояние на екипа през изминалия спринт.
+## 6. Архитектурен контекст
 
-**Категории:**
--   ☀️ **Слънчево:** Всичко премина гладко, отлична екипна работа.
--   ⛅ **Разкъсана облачност:** Имаше малки предизвикателства, но се справихме.
--   ☁️ **Облачно:** Чести трудности и напрежение.
--   🌧️ **Дъждовно:** Сериозни проблеми с процеса или комуникацията.
--   ⛈️ **Буря:** Критични блокери, конфликти или хаос.
+```text
+Dataset + manifest
+       |
+Validation / Features
+       |
+Offline Training Pipeline
+       |
+Experiment metadata + immutable Model Registry
+       |
+Inference Service -> FastAPI -> Client
+       |
+Logs / Metrics -> CI/CD and maintenance feedback
+```
+
+**Фокус в това упражнение:** API/model/data trust boundaries → risk/debt register → maintenance/retirement. Вижте [общата архитектура](/courses/bg/software-engineering/materiali/architecture/system-overview/). Отбележете данните, зависимостите и owner на всяка граница.
+
+## 7. Теоретична подготовка
+
+Secure coding включва input validation, server-side access control, bounded requests, trusted artifacts и secret handling. Pickle/joblib loading може да изпълни код; checksum не прави непознат artifact безопасен. API key е учебен access mechanism, не пълна identity/authorization система. Sensitive inputs не се логват; retention и deletion трябва да имат policy и owner.
+
+Responsible AI изисква intended use, limitations, data provenance, fairness/explainability reasoning и human oversight според риска. Synthetic cohort A/B показва mechanics на slice analysis, не сертифицира fairness. Technical debt включва code/dependency debt, model debt (неясен lifecycle/validation) и data debt (липсващ provenance/quality ownership). Deprecation има срок, migration path и измерване на usage; retirement включва отказ на стар model, запазване/изтриване на artifacts според policy и комуникация с users.
+
+Следвайте [източниците и version scope](/courses/bg/software-engineering/materiali/architecture/references/). Теорията трябва да обяснява engineering избора, не да замества evidence.
+
+## 8. Лош / проблемен пример
+
+```text
+API_KEY = "SYNTHETIC-NOT-A-REAL-SECRET"
+model-final-final.joblib; version = null
+log: {"email": "student@example.invalid", "input": "..."}
+# non-executable review fixture; няма реални credentials
+```
+
+Работещият starter и неговият TODO contract са в [starter/README.md](/courses/bg/software-engineering/materiali/lab10-security-ethics-maintenance/starter/readme/). Примерът е за анализ: първо запишете observable behavior и failure risks, после refactor-вайте. Не броим просто преименуване на файлове за архитектурна промяна.

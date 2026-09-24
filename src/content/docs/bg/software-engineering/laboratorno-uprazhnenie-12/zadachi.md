@@ -1,8 +1,10 @@
 ---
 title: Задачи
-taskPage: true
 sidebar:
   label: Задачи
   order: 100
+  hidden: true
+contentRedirect: /courses/bg/software-engineering/
+pagefind: false
 ---
-Задачите за това упражнение предстои да бъдат добавени.
+[Актуални студентски материали](/courses/bg/software-engineering/)

@@ -1,8 +1,10 @@
 ---
 title: Tasks
-taskPage: true
 sidebar:
   label: Tasks
   order: 100
+  hidden: true
+contentRedirect: /courses/bg/ueb-sigurnost/laboratorno-uprazhnenie-1/zadachi/
+pagefind: false
 ---
-Tasks for this laboratory exercise have not been published yet.
+[Current student materials](/courses/bg/ueb-sigurnost/laboratorno-uprazhnenie-1/zadachi/)

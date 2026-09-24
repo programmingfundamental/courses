@@ -132,6 +132,16 @@ tip, and caution blocks are available using `:::note`, `:::tip`, and `:::caution
 
 ## Deployment
 
+The student courses in `applied-web-security/` and `software-engineering-ai/`
+are published under the existing Bulgarian `ueb-sigurnost` and
+`software-engineering` routes. Run `npm run sync:student-courses` after editing
+their student files. The synchronizer produces ten theory pages and ten separate
+task pages per course, plus preparation, architecture, resources, and starter
+instructions. It rewrites local Markdown links and excludes instructor notes.
+`npm run check` verifies that the generated pages match their sources.
+Retired exercises and outdated English lessons retain their URLs and redirect to
+the current Bulgarian student material via `contentRedirect` frontmatter.
+
 Pushes or merges to `main`, and manual runs of `.github/workflows/pages.yml`,
 validate the site, run the official `withastro/action`, upload `dist/` as the Pages
 artifact, and deploy with `actions/deploy-pages`. In GitHub repository settings,
