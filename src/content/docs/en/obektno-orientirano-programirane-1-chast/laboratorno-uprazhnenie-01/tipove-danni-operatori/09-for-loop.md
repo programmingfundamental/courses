@@ -1,40 +1,40 @@
 ---
-title: Оператори за цикъл
+title: Loop Statements
 sidebar:
   order: 9
 ---
 
-# Оператори за цикъл
+# Loop Statements
 
-Операторите за цикъл позволяват многократно изпълнение на блок инструкции, докато е изпълнено определено условие.
+Loop statements execute a block of instructions repeatedly while a condition is satisfied.
 
-В Java съществуват три основни конструкции за реализиране на цикъл:
+Java has three main loop constructs:
 
-- for
-- while
-- do-while
+- `for`
+- `while`
+- `do-while`
 
-Изборът на подходящ цикъл зависи от конкретната задача и начина, по който се управлява повторението.
+Choose a loop based on the task and how repetition is controlled.
 
-## Цикъл for
+## The `for` Loop
 
-Цикълът *for* е подходящ, когато броят на повторенията е предварително известен или може да бъде определен преди началото на изпълнението.
+Use a `for` loop when the number of repetitions is known in advance or can be determined before the loop starts.
 
-Синтаксис:
+Syntax:
 
 ```java
-for (инициализация; условие; промяна) {
-    // инструкции
+for (initialization; condition; update) {
+    // statements
 }
 ```
 
-където:
+Where:
 
-- инициализация - изпълнява се еднократно преди началото на цикъла;
-- условие - проверява се преди всяка итерация;
-- промяна - изпълнява се след всяка итерация.
+- initialization runs once before the loop starts;
+- the condition is checked before each iteration;
+- the update runs after each iteration.
 
-Пример:
+Example:
 
 ```java
 int[] numbers = {5, 10, 15, 20};
@@ -44,21 +44,21 @@ for (int i = 0; i < numbers.length; i++) {
 }
 ```
 
-В примера всички елементи на масива се извеждат последователно чрез използване на техния индекс.
+The example prints each array element in sequence using its index.
 
-## Разширен цикъл for
+## Enhanced `for` Loop
 
-Разширеният цикъл for (enhanced for или for-each) се използва за последователно обхождане на всички елементи на масив или колекция, когато не е необходим достъп до индекса на елементите.
+Use the enhanced `for` loop (also called `for-each`) to visit every element in an array or collection when you do not need the element's index.
 
-Синтаксис:
+Syntax:
 
 ```java
-for (тип променлива : колекция) {
-    // инструкции
+for (type variable : collection) {
+    // statements
 }
 ```
 
-Пример:
+Example:
 
 ```java
 int[] numbers = {5, 10, 15, 20};
@@ -68,23 +68,23 @@ for (int number : numbers) {
 }
 ```
 
-Примерът има същото действие като този по-горе, но синтаксисът е различен. Разширеният цикъл е по-кратък и по-четим, когато е необходимо единствено последователно обхождане на всички елементи.
+This has the same effect as the previous example but uses different syntax. The enhanced loop is shorter and easier to read when you only need to visit every element.
 
-## Цикъл while
+## The `while` Loop
 
-Цикълът *while* се използва, когато броят на повторенията не е известен предварително и изпълнението трябва да продължи, докато дадено условие е изпълнено.
+Use a `while` loop when the number of repetitions is not known in advance and execution should continue as long as a condition is true.
 
-Условието се проверява **преди** всяка итерация.
+The condition is checked **before** each iteration.
 
-Синтаксис:
+Syntax:
 
 ```java
-while (условие) {
-    // инструкции
+while (condition) {
+    // statements
 }
 ```
 
-Пример:
+Example:
 
 ```java
 int counter = 0;
@@ -94,30 +94,30 @@ while (counter < 5) {
     counter++;
 }
 ```
-Променливата *counter* се инициализира със стойност 0.
 
-Преди всяка итерация се проверява условието counter < 5. Докато то е изпълнено, тялото на цикъла се изпълнява, отпечатва текущата стойност на променливата и след това тя се увеличава с единица чрез оператора ++.
+The variable `counter` is initialized to 0.
 
-След като counter стане 5, условието вече не е изпълнено и цикълът приключва.
+Before each iteration, the loop checks whether `counter < 5`. While this is true, the loop body prints the current value and then increases it by one with the `++` operator.
 
-Ако условието още при първата проверка има стойност *false*, тялото на цикъла няма да бъде изпълнено.
+When `counter` becomes 5, the condition is false and the loop ends.
 
-## Цикъл do-while
+If the condition is false at the first check, the loop body does not run.
 
-Цикълът *do-while* е подобен на *while*, но условието се проверява **след** изпълнение на тялото на цикъла.
+## The `do-while` Loop
 
-Това гарантира, че инструкциите ще бъдат изпълнени **поне веднъж**.
+A `do-while` loop is similar to a `while` loop, but it checks the condition **after** executing the loop body.
 
-Синтаксис:
+This guarantees that the statements run **at least once**.
+
+Syntax:
 
 ```java
 do {
-    // инструкции
-}
-while (условие);
+    // statements
+} while (condition);
 ```
 
-Пример:
+Example:
 
 ```java
 int counter = 0;
@@ -125,18 +125,16 @@ int counter = 0;
 do {
     System.out.println(counter);
     counter++;
-}
-while (counter < 5);
+} while (counter < 5);
 ```
 
-Примерът има същото действие като посочения пример за използване на оператор *while*, но без значение каква е началната стойност на променливата *counter*, тя ще бъде изведена поне веднъж на конзола.
+This behaves like the earlier `while` example, but whatever the initial value of `counter`, it is printed at least once.
 
+## Comparing Loop Statements
 
-## Сравнение на операторите за цикъл
-
-| Цикъл        | Особености                                                                                                      |
-| ------------ | --------------------------------------------------------------------------------------------------------------- |
-| for          | Използва се, когато броят на повторенията е известен предварително                                              |
-| while        | Подходящ, когато броят на повотренията не е известен предварително. Условието се проверява преди всяка итерация |
-| do-while     | Условието се проверява след изпълнение на тялото на цикъла, поради което то се изпълнява поне веднъж            |
-| разширен for | Използва се за последователно обхождане на масиви и колекции без използване на индекс                           |
+| Loop | Characteristics |
+| ---- | --------------- |
+| `for` | Use when the number of repetitions is known in advance. |
+| `while` | Use when the number of repetitions is unknown. The condition is checked before each iteration. |
+| `do-while` | The condition is checked after the loop body, so the body runs at least once. |
+| Enhanced `for` | Use to visit array or collection elements without an index. |

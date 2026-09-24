@@ -1,35 +1,35 @@
 ---
-title: Откриване и отстраняване на грешки (Debug)
+title: Debugging
 sidebar:
   order: 13
 ---
 
-# Откриване и отстраняване на грешки (Debug)
+# Debugging
 
-Отстраняването на грешки е процес: възпроизвеждаме проблема, сравняваме очаквания и действителния резултат, проследяваме изпълнението, поправяме причината и повтаряме проверката. Debugger е инструмент за наблюдение на този процес.
+Debugging is a process: reproduce the problem, compare expected and actual results, trace execution, fix the cause, and repeat the check. A debugger is a tool for observing this process.
 
-## Видове грешки
+## Types of Errors
 
-Грешка в програма е състояние, при което кодът не се компилира, прекъсва изпълнението си или дава резултат, различен от очаквания. Откриването на грешки изисква последователно наблюдение на изпълнението, стойностите на променливите и пътя, по който програмата преминава през условни оператори, цикли и методи.
+A program error is a condition in which code does not compile, stops while running, or produces a result different from the expected one. Finding errors requires observing the program's execution, variable values, and the paths it takes through conditionals, loops, and methods.
 
-Синтактична грешка възниква, когато кодът не спазва правилата на езика Java. Такава грешка се открива от компилатора преди стартиране на програмата.
+A syntax error occurs when code does not follow Java's rules. The compiler detects it before the program starts.
 
 ```java
 int number = 10
 System.out.println(number);
 ```
 
-В примера липсва `;` след първата инструкция. Програмата не може да бъде компилирана.
+The first statement is missing a semicolon, so the program cannot be compiled.
 
-Грешка по време на изпълнение възниква след успешно компилиране, когато програмата достигне до операция, която не може да бъде изпълнена.
+A runtime error occurs after successful compilation, when the program reaches an operation that cannot be performed.
 
 ```java
 int result = 10 / 0;
 ```
 
-В примера делението на нула води до прекъсване на програмата по време на изпълнение.
+Dividing by zero stops the program at runtime.
 
-Логическа грешка възниква, когато програмата се компилира и изпълнява, но резултатът е неправилен.
+A logic error occurs when the program compiles and runs but produces an incorrect result.
 
 ```java
 int width = 5;
@@ -37,23 +37,23 @@ int height = 10;
 int perimeter = width * height;
 ```
 
-Кодът се изпълнява, но изчислява лице, а не периметър. Такава грешка се открива чрез проверка на стойностите и очаквания резултат.
+The code runs, but calculates area instead of perimeter. Detect this kind of error by checking values and comparing them with the expected result.
 
-## Debug режим
+## Debug Mode
 
-Debug режимът позволява програмата да се изпълнява контролирано. Вместо да се стартира цялата програма наведнъж, изпълнението може да бъде спирано на избрани редове. Така се наблюдават стойностите на променливите и редът на изпълнение.
+Debug mode lets you run a program under controlled conditions. Instead of running the entire program at once, you can pause it on selected lines and inspect variable values and the execution order.
 
-Програмата може да бъде стартирана в debug режим от менюто **Run**, от иконата до метода `main`, от контекстното меню или от лентата с инструменти на IntelliJ IDEA.
+You can start a program in debug mode from the **Run** menu, the icon next to `main`, the context menu, or the IntelliJ IDEA toolbar.
 
-<img width="448" height="255" alt="Стартиране на Debug режим от менюто Run в IntelliJ IDEA" src="https://github.com/user-attachments/assets/137eed19-8820-4a65-8448-f1ffbe20b432" />
+<img width="448" height="255" alt="Starting Debug mode from the Run menu in IntelliJ IDEA" src="https://github.com/user-attachments/assets/137eed19-8820-4a65-8448-f1ffbe20b432" />
 
-<img width="434" height="169" alt="Стартиране на Debug режим от иконата до метода main" src="https://github.com/user-attachments/assets/f2b3e502-f88a-4858-a48a-1316d1134fea" />
+<img width="434" height="169" alt="Starting Debug mode from the icon next to the main method" src="https://github.com/user-attachments/assets/f2b3e502-f88a-4858-a48a-1316d1134fea" />
 
-<img width="418" height="380" alt="Стартиране на Debug режим от контекстното меню" src="https://github.com/user-attachments/assets/5d82fcb1-33d5-4e17-8d0e-cdb7150fa634" />
+<img width="418" height="380" alt="Starting Debug mode from the context menu" src="https://github.com/user-attachments/assets/5d82fcb1-33d5-4e17-8d0e-cdb7150fa634" />
 
-<img width="331" height="87" alt="Стартиране на Debug режим от лентата с инструменти" src="https://github.com/user-attachments/assets/66a44873-c1b2-44f8-a93b-8a9950e48809" />
+<img width="331" height="87" alt="Starting Debug mode from the toolbar" src="https://github.com/user-attachments/assets/66a44873-c1b2-44f8-a93b-8a9950e48809" />
 
-Точка на прекъсване се поставя върху ред от програмата. Когато изпълнението достигне този ред, програмата спира временно. След спирането може да се провери текущото състояние на програмата.
+A breakpoint is placed on a line of the program. When execution reaches that line, the program pauses temporarily so that you can inspect its current state.
 
 ```java
 int first = 10;
@@ -63,22 +63,22 @@ int sum = first + second;
 System.out.println(sum);
 ```
 
-Ако точка на прекъсване се постави на реда със `sum`, може да се види какви стойности имат `first` и `second` преди изчислението.
+If you place a breakpoint on the line with `sum`, you can inspect the values of `first` and `second` before the calculation.
 
-## Точки на прекъсване
+## Breakpoints
 
-Точка на прекъсване е маркер върху конкретен ред от програмата. Когато изпълнението достигне този ред в debug режим, програмата спира временно преди изпълнението на инструкцията.
+A breakpoint is a marker on a specific line. When execution reaches that line in debug mode, the program pauses before running the instruction.
 
-Точка на прекъсване се поставя чрез кликване в лентата с номерата на редовете. IntelliJ IDEA визуализира маркера вляво от реда, на който изпълнението трябва да спре.
+Click in the gutter beside the line numbers to set a breakpoint. IntelliJ IDEA displays a marker beside the line where execution should stop.
 
-<img width="600" height="240" alt="Поставена точка на прекъсване в IntelliJ IDEA" src="https://github.com/user-attachments/assets/b1262d5c-056c-429d-ba37-ebbe29e4b74e" />
+<img width="600" height="240" alt="Breakpoint set in IntelliJ IDEA" src="https://github.com/user-attachments/assets/b1262d5c-056c-429d-ba37-ebbe29e4b74e" />
 
-Точка на прекъсване се използва, когато трябва да се провери:
+Use a breakpoint to check:
 
-- дали даден ред от програмата се достига;
-- какви са текущите стойности на променливите;
-- кой клон на условен оператор се изпълнява;
-- колко пъти се изпълнява даден цикъл.
+- whether a line is reached;
+- the current values of variables;
+- which branch of a conditional runs;
+- how many times a loop runs.
 
 ```java
 int total = 0;
@@ -88,51 +88,51 @@ for (int i = 1; i <= 5; i++) {
 }
 ```
 
-Ако точка на прекъсване се постави в тялото на цикъла, може да се наблюдава как стойностите на `i` и `total` се променят при всяка итерация.
+A breakpoint inside the loop lets you observe how `i` and `total` change during each iteration.
 
-Към точка на прекъсване може да бъде зададено условие. В този случай изпълнението спира само когато условието има стойност `true`.
+You can add a condition to a breakpoint. Execution then pauses only when that condition is `true`.
 
-<img width="532" height="307" alt="Условие към точка на прекъсване в IntelliJ IDEA" src="https://github.com/user-attachments/assets/b9c1e909-3fef-49ee-aba2-abdd668230e3" />
+<img width="532" height="307" alt="Breakpoint condition in IntelliJ IDEA" src="https://github.com/user-attachments/assets/b9c1e909-3fef-49ee-aba2-abdd668230e3" />
 
-## Постъпково изпълнение
+## Stepping Through a Program
 
-Постъпковото изпълнение позволява преминаване през програмата ред по ред.
+Stepping lets you move through a program one line at a time.
 
-`Step Over` изпълнява текущия ред и преминава към следващия. Ако текущият ред съдържа извикване на метод, методът се изпълнява без влизане в неговото тяло.
+`Step Over` runs the current line and moves to the next one. If the line calls a method, the method runs without entering its body.
 
-`Step Into` влиза в извиквания метод. Използва се, когато трябва да се проследи как работи методът отвътре.
+`Step Into` enters a method call. Use it to trace how a method works internally.
 
-`Step Out` завършва текущия метод и връща изпълнението към мястото, от което методът е извикан.
+`Step Out` finishes the current method and returns execution to the place where the method was called.
 
-## Пауза, възобновяване и спиране на debugger
+## Pausing, Resuming, and Stopping the Debugger
 
-Debug изпълнението може да бъде управлявано чрез команди за пауза, възобновяване и спиране.
+You can control a debug session with pause, resume, and stop commands.
 
-`Pause` спира временно изпълняваната програма. Използва се, когато програмата работи дълго или е попаднала в цикъл и трябва да се провери текущото място на изпълнение.
+`Pause` temporarily suspends the running program. Use it if the program is taking a long time or appears to be stuck in a loop and you need to inspect the current execution point.
 
-`Resume Program` продължава изпълнението след спиране на точка на прекъсване. Програмата се изпълнява до следващата точка на прекъсване или до края си.
+`Resume Program` continues execution after a breakpoint. The program runs until it reaches another breakpoint or finishes.
 
-`Stop` прекратява debug сесията. След прекратяване програмата вече не се изпълнява под контрола на debugger.
+`Stop` ends the debug session. The program is no longer controlled by the debugger.
 
-## Прозорец за отстраняване на грешки
+## The Debugger Window
 
-Прозорецът за отстраняване на грешки показва информация за текущото състояние на програмата, когато изпълнението е спряло. В него се наблюдават текущият метод, стекът на извикванията, стойностите на променливите и изходът на програмата.
+The debugger window shows information about the program's current state while execution is paused. It displays the current method, the call stack, variable values, and program output.
 
-<img width="1048" height="242" alt="Прозорец за отстраняване на грешки в IntelliJ IDEA" src="https://github.com/user-attachments/assets/315adf03-e376-40af-9220-a90305ef1adc" />
+<img width="1048" height="242" alt="Debugger window in IntelliJ IDEA" src="https://github.com/user-attachments/assets/315adf03-e376-40af-9220-a90305ef1adc" />
 
-| Част | Предназначение |
-| ---- | -------------- |
-| `Debugger` | Показва управлението на debug сесията и текущото място на изпълнение |
-| `Console` | Показва стандартния изход и съобщенията от програмата |
-| `Frames` | Показва последователността от извикани методи до текущия момент |
-| `Variables` | Показва локални променливи, параметри и полета на достъпните обекти |
-| `Watches` | Позволява наблюдение на избрани изрази по време на debug изпълнение |
+| Panel | Purpose |
+| ----- | ------- |
+| `Debugger` | Shows debug-session controls and the current execution point. |
+| `Console` | Shows standard output and program messages. |
+| `Frames` | Shows the sequence of method calls up to the current point. |
+| `Variables` | Shows local variables, parameters, and fields of accessible objects. |
+| `Watches` | Lets you monitor selected expressions while debugging. |
 
-Стекът във `Frames` е полезен, когато един метод е извикан от друг метод. Чрез него може да се проследи пътят, по който изпълнението е достигнало до текущия ред.
+The `Frames` call stack is useful when one method calls another. It shows how execution reached the current line.
 
-## Прозорец за променливи
+## The Variables Window
 
-При спиране на програмата debugger показва текущите стойности на локалните променливи, параметрите и обектите. Ако дадена променлива сочи към обект, могат да се разгледат и полетата на този обект.
+When the program is paused, the debugger shows the current values of local variables, parameters, and objects. If a variable refers to an object, you can inspect that object's fields as well.
 
 ```java
 class Student {
@@ -147,11 +147,11 @@ class Student {
 }
 ```
 
-При спиране след създаване на обект от `Student` може да се провери дали полетата `name` и `facultyNumber` са инициализирани правилно.
+After creating a `Student` object, pause the program to check whether its `name` and `facultyNumber` fields were initialized correctly.
 
-## Оценяване на изрази
+## Evaluating Expressions
 
-Оценяването на изрази позволява да се изчисли Java израз по време на debug изпълнение. Изразът се оценява с текущите стойности на променливите.
+Expression evaluation calculates a Java expression using the current values of variables while the program is paused.
 
 ```java
 int price = 50;
@@ -159,17 +159,17 @@ int quantity = 3;
 int discount = 10;
 ```
 
-По време на debug изпълнение може да се оцени израз:
+During a debug session, evaluate this expression:
 
 ```java
 price * quantity - discount
 ```
 
-Резултатът е `140`. Така може да се провери дали формула, условие или метод връща очакваната стойност.
+The result is `140`. This lets you check whether a formula, condition, or method produces the expected value.
 
 ## Quick Evaluate Expression
 
-`Quick Evaluate Expression` се използва за бърза проверка на избран израз по време на debug изпълнение. Опцията е налична, когато програмата е спряла на точка на прекъсване.
+Use `Quick Evaluate Expression` to quickly inspect a selected expression while debugging. This option is available when the program is paused at a breakpoint.
 
 ```java
 int first = 10;
@@ -177,13 +177,13 @@ int second = 20;
 int result = first + second;
 ```
 
-Ако изпълнението е спряло преди или след изчисляването на `result`, може да се избере изразът `first + second` и да се провери неговата стойност. В IntelliJ IDEA това действие може да се изпълни чрез `Run -> Debugging Actions -> Quick Evaluate Expression`, чрез клавишна комбинация `Ctrl+Alt+F8` или чрез `Alt` и кликване върху избрания израз.
+If execution is paused before or after `result` is calculated, select `first + second` to check its value. In IntelliJ IDEA, use `Run -> Debugging Actions -> Quick Evaluate Expression`, the `Ctrl+Alt+F8` shortcut, or `Alt`-click the selected expression.
 
 ## Evaluate Expression
 
-`Evaluate Expression` позволява оценяване на израз или кратък кодов фрагмент в текущия контекст на изпълнение. Тази операция е по-гъвкава от бързото оценяване, защото може да се въведе нов израз, който не е директно избран от редактора.
+`Evaluate Expression` lets you evaluate an expression or a short code fragment in the current execution context. It is more flexible than quick evaluation because you can enter an expression that is not selected in the editor.
 
-<img width="581" height="333" alt="Evaluate Expression в IntelliJ IDEA" src="https://github.com/user-attachments/assets/e9427a70-f74c-4a97-97d5-7abb3839f090" />
+<img width="581" height="333" alt="Evaluate Expression in IntelliJ IDEA" src="https://github.com/user-attachments/assets/e9427a70-f74c-4a97-97d5-7abb3839f090" />
 
 ```java
 int price = 50;
@@ -191,23 +191,23 @@ int quantity = 3;
 int discount = 10;
 ```
 
-При спиране на програмата може да се оцени изразът:
+While the program is paused, evaluate:
 
 ```java
 price * quantity - discount
 ```
 
-Може да се оцени и условие:
+You can also evaluate a condition:
 
 ```java
 price * quantity > 100
 ```
 
-В IntelliJ IDEA действието се отваря чрез `Run -> Debugging Actions -> Evaluate Expression` или с клавишна комбинация `Alt+F8`. Оценяването се извършва спрямо текущия стеков кадър, затова могат да се използват само променливи и обекти, които са достъпни на мястото, където програмата е спряла.
+In IntelliJ IDEA, open this action through `Run -> Debugging Actions -> Evaluate Expression` or with `Alt+F8`. Evaluation uses the current stack frame, so only variables and objects accessible where the program paused can be used.
 
-## Оценяване на условие
+## Evaluating a Condition
 
-Оценяването на изрази е полезно при условни оператори.
+Expression evaluation is useful with conditional statements.
 
 ```java
 int age = 17;
@@ -219,11 +219,11 @@ if (age >= 18) {
 }
 ```
 
-Ако изпълнението спре преди `if`, може да се оцени изразът `age >= 18`. Резултатът показва кой клон на условието ще бъде изпълнен.
+If execution pauses before the `if`, evaluate `age >= 18` to see which branch will run.
 
-## Аргументи към `main`
+## Arguments to `main`
 
-Методът `main` може да получава аргументи чрез масива `String[] args`.
+The `main` method can receive arguments through the `String[] args` array.
 
 ```java
 public class Application {
@@ -234,8 +234,8 @@ public class Application {
 }
 ```
 
-Ако програмата се стартира без аргументи, достъпът до `args[0]` води до грешка по време на изпълнение. Debug режимът позволява да се провери дължината на масива чрез `args.length` и да се установи причината за грешката.
+If the program starts without arguments, accessing `args[0]` causes a runtime error. Use debug mode to inspect the array length with `args.length` and find the cause.
 
-Аргументите към метода `main` се задават в конфигурацията за стартиране чрез полето **Program arguments**.
+Set arguments to `main` in the run configuration's **Program arguments** field.
 
-<img width="524" height="543" alt="Задаване на аргументи към main в IntelliJ IDEA" src="https://github.com/user-attachments/assets/cbd8c6fd-d795-44ce-b3a1-4c17866fad11" />
+<img width="524" height="543" alt="Setting arguments for main in IntelliJ IDEA" src="https://github.com/user-attachments/assets/cbd8c6fd-d795-44ce-b3a1-4c17866fad11" />

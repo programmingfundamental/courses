@@ -1,25 +1,25 @@
 ---
-title: Условни оператори
+title: Conditional Statements
 sidebar:
   order: 8
 ---
 
-# Условни оператори
+# Conditional Statements
 
-Условните оператори позволяват изпълнението на различни части от програмата в зависимост от резултата на логически израз. В Java основните условни конструкции са:
+Conditional statements let a program execute different sections of code depending on the result of a boolean expression. Java's main conditional constructs are:
 
-- if
-- if-else
-- if-else-if
-- switch
+- `if`
+- `if-else`
+- `if-else-if`
+- `switch`
 
-## Оператор If
+## The `if` Statement
 
-Операторът if изпълнява даден блок код само ако зададеното условие има стойност *true*:
+An `if` statement executes a block of code only when its condition is `true`:
 
 ```java
-if (условие){
-  // инструкции
+if (condition) {
+    // statements
 }
 ```
 
@@ -27,130 +27,123 @@ if (условие){
 int number = 70;
 
 if (number < 100) {
-	System.out.println("Числото е по-малко от 100");
+    System.out.println("The number is less than 100");
 }
 ```
 
-В примера се проверява дали стойността на променливата *number* е по-малка от 100. При изпълнено условие се изпълняват инструкциите, разположени в тялото на оператора if, в случая – извеждане на съобщение на конзолата.
+The example checks whether `number` is less than 100. Because the condition is true, the statement in the body of the `if` is executed and a message is printed.
 
-## Оператор if-else
+## The `if-else` Statement
 
-Операторът *if-else* се използва, когато трябва да бъде избрана една от две възможности.
+Use `if-else` when you need to choose between two alternatives.
 
-Синтаксис:
+Syntax:
 
 ```java
-if (условие){
-  // инструкции при true
+if (condition) {
+    // statements when true
 } else {
-  // инструкции при false
+    // statements when false
 }
 ```
 
-Пример:
+Example:
 
 ```java
 int number = 120;
 
 if (number < 100) {
-	System.out.println("Числото е по-малко от 100");
+    System.out.println("The number is less than 100");
 } else {
-	System.out.println("Числото е по-голямо или равно на 100");
+    System.out.println("The number is greater than or equal to 100");
 }
 ```
 
-ПОператорът if-else позволява избор между две алтернативни последователности от инструкции. При изпълнено условие се изпълнява блокът *if*, а при неизпълнено – блокът *else*. В разглеждания пример условието не е изпълнено, поради което се изпълняват инструкциите от блока else.
+The `if-else` statement selects one of two instruction sequences. If the condition is true, the `if` block runs; otherwise, the `else` block runs. In this example, the condition is false, so the `else` block is executed.
 
-## Оператор if-else-if
+## The `if-else-if` Statement
 
-Конструкцията *if-else-if* се използва, когато трябва последователно да бъдат проверени няколко условия.
+Use `if-else-if` to check several conditions in sequence.
 
-Синтаксис:
+Syntax:
 
 ```java
-if (условие1) {
+if (condition1) {
 
-}
-else if (условие2) {
+} else if (condition2) {
 
-}
-else if (условие3) {
+} else if (condition3) {
 
-}
-else {
+} else {
 
 }
 ```
 
-Условията се проверяват последователно. След изпълнение на първото удовлетворено условие останалите проверки не се извършват.
+Conditions are checked in order. After the first condition evaluates to true, the remaining conditions are not checked.
 
-Пример:
+Example:
 
 ```java
 int number = 1234;
 
 if (number < 100) {
-    System.out.println("Двуцифрено число");
-}
-else if (number < 1000) {
-    System.out.println("Трицифрено число");
-}
-else if (number < 10000) {
-    System.out.println("Четирицифрено число");
-}
-else {
-    System.out.println("Числото съдържа повече от четири цифри.");
+    System.out.println("Two-digit number");
+} else if (number < 1000) {
+    System.out.println("Three-digit number");
+} else if (number < 10000) {
+    System.out.println("Four-digit number");
+} else {
+    System.out.println("The number has more than four digits.");
 }
 ```
 
-Конструкцията if-else if-else позволява последователно проверяване на няколко условия. Те се оценяват едно след друго до момента, в който някое от тях бъде изпълнено. След това се изпълняват инструкциите в съответния блок, а останалите условия не се проверяват. Ако нито едно от условията не е изпълнено, се изпълнява блокът else.
+The `if-else-if` construct checks several conditions in sequence until one is true. The statements in its block then run, and the other conditions are skipped. If no condition is true, the `else` block runs.
 
-В разглеждания пример според стойността на променливата number се определя броят на цифрите в числото. Тъй като number има стойност 1234, първите две условия не са изпълнени, изпълнява се третото условие (number < 10000) и на конзолата се извежда съобщението „Четирицифрено число“.
+In this example, the program determines the number of digits in `number`. Since its value is 1234, the first two conditions are false and the third condition (`number < 10000`) is true. The console displays “Four-digit number”.
 
-## Вложени условни оператори
+## Nested Conditional Statements
 
-Възможно е в тялото на един оператор *if* да бъде разположен друг такъв оператор. Подобна конструкция се нарича **вложен условен оператор**.
+You can place one `if` statement inside another. This is called a **nested conditional statement**.
 
-Пример:
+Example:
 
 ```java
 int number = 70;
 
 if (number < 100) {
-    System.out.println("Числото е по-малко от 100.");
+    System.out.println("The number is less than 100.");
 
     if (number > 50) {
-        System.out.println("Числото е по-голямо от 50.");
+        System.out.println("The number is greater than 50.");
     }
 }
 ```
 
-Вложеният условен оператор позволява проверката на едно условие да зависи от изпълнението на друго. В примера вътрешният оператор if се изпълнява само след като външното условие е изпълнено. Тъй като и двете условия са изпълнени, на конзолата се извеждат и двете съобщения.
+A nested conditional lets one check depend on another. In this example, the inner `if` runs only if the outer condition is true. Both conditions are true, so both messages are printed.
 
+## The `switch` Statement
 
-## Оператор switch
+Use `switch` to choose between multiple alternatives based on the value of one expression.
 
-Операторът switch се използва, когато изборът трябва да бъде направен между множество възможности въз основа на стойността на един израз.
-
-Синтаксис:
+Syntax:
 
 ```java
-switch (израз) {
+switch (expression) {
 
-    case стойност1:
-        инструкции;
+    case value1:
+        statements;
 
-    case стойност2:
-        инструкции;
+    case value2:
+        statements;
 
     ...
 
     default:
-        инструкции;
+        statements;
 }
 ```
 
-Пример:
+Example:
 
 ```java
 int number = 2;
@@ -171,7 +164,7 @@ switch (number) {
 }
 ```
 
-Резултат:
+Output:
 
 ```text
 Case 2
@@ -179,13 +172,13 @@ Case 3
 Default
 ```
 
-Операторът switch избира кой блок от инструкции да бъде изпълнен според стойността на даден израз. Изпълнението започва от съответния case, чиято стойност съвпада със стойността на израза.
+The `switch` statement selects a block based on the value of an expression. Execution starts at the `case` that matches that value.
 
-В разглеждания пример стойността на променливата number е 2, затова изпълнението започва от case 2. Тъй като след отделните case липсват инструкции break, изпълнението продължава последователно и през следващите блокове. В резултат на конзолата се извеждат съобщенията „Case 2“, „Case 3“ и „Default“.
+Here, `number` is 2, so execution starts at `case 2`. Because the cases do not contain `break` statements, execution continues through the following blocks. The console therefore displays “Case 2”, “Case 3”, and “Default”.
 
-От Java 14 операторът switch може да бъде записан и чрез нов синтаксис, използващ оператора ->. При него не е необходимо използването на инструкции break, тъй като след изпълнение на съответния case управлението автоматично напуска конструкцията switch.
+Since Java 14, `switch` can also use the newer arrow (`->`) syntax. It does not require `break`: after a case runs, control automatically exits the `switch` construct.
 
-В разглеждания пример стойността на променливата number е 2, поради което се изпълнява единствено блокът case 2 и на конзолата се извежда съобщението „Case 2“:
+In the following example, `number` is 2, so only `case 2` runs and the console displays “Case 2”:
 
 ```java
 int number = 2;
@@ -197,4 +190,3 @@ switch (number) {
     default -> System.out.println("Default");
 }
 ```
-

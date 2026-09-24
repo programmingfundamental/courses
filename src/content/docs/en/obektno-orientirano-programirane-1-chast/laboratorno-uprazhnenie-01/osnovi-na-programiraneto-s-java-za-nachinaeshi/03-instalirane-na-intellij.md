@@ -1,90 +1,88 @@
 ---
-title: Инсталиране на IntelliJ
+title: Installing IntelliJ
 sidebar:
   order: 3
 ---
 
-# Инсталиране на IntelliJ
+# Installing IntelliJ
 
-За разработване на Java приложения в рамките на курса ще бъде използвана интегрираната среда за разработка IntelliJ IDEA.
+This course uses the IntelliJ IDEA integrated development environment for Java application development.
 
-Средата може да бъде изтеглена от официалния сайт на JetBrains. Студентите могат да използват предоставения университетски лиценз, който отключва пълната функционалност (Ultimate).
+Download the IDE from JetBrains' official website. Students can use the university-provided license to unlock the full Ultimate feature set.
 
-Линк за изтегляне IntelliJ IDEA:
+Download IntelliJ IDEA:
 
-[Директен линк](https://www.jetbrains.com/idea/download/?section=windows)
+[Direct download](https://www.jetbrains.com/idea/download/?section=windows)
 
+Run the installer and follow the standard installation steps.
 
-След стартиране на инсталационната програма се следват стандартните стъпки на инсталационния процес.
+During installation, we recommend associating files with the **.java** extension with IntelliJ IDEA. Then double-clicking a Java file will open it in the IDE.
 
-По време на инсталацията е препоръчително да бъде избрана асоциация на файловете с разширение **.java** към IntelliJ IDEA, така че при двукратно кликване върху тях автоматично да се отварят в средата за разработка.
+After installation, you should be able to:
 
-След приключване на инсталацията трябва да бъде възможно:
+- start IntelliJ IDEA;
+- create a new Java project;
+- select an installed JDK version;
+- compile and run a Java application.
 
-- стартиране на IntelliJ IDEA;
-- създаване на нов Java проект;
-- избор на инсталирана версия на JDK;
-- компилиране и изпълнение на Java приложение.
+## Installing a JDK Through IntelliJ IDEA
 
-## Инсталиране на JDK чрез IntelliJ IDEA
+IntelliJ IDEA can use an existing JDK or download one when you create a project. This lets you configure Java directly through the IDE without manually locating an installation directory.
 
-IntelliJ IDEA може да използва вече инсталиран JDK или да изтегли JDK при създаване на нов проект. Това позволява настройването на Java средата да се извърши директно от IDE, без ръчно търсене на инсталационна директория.
+When creating a project, select `New Project`. In the project setup window, specify:
 
-При създаване на нов проект се избира `New Project`. В прозореца за настройка на проекта се задават:
+- the project name;
+- the project location;
+- the `Java` language;
+- the build system;
+- the JDK to use for the project.
 
-- име на проекта;
-- директория за съхранение;
-- език `Java`;
-- build system;
-- JDK, който ще бъде използван от проекта.
+If no version is selected in the `JDK` field, use the option to add or download a JDK. Depending on your IntelliJ IDEA version, this may appear as `Add JDK`, `Download JDK`, or in the dropdown next to the `JDK` field.
 
-Ако в полето `JDK` няма избрана версия, може да се използва опцията за добавяне или изтегляне на JDK. В зависимост от версията на IntelliJ IDEA тази опция може да бъде показана като `Add JDK`, `Download JDK` или чрез падащия списък до полето `JDK`.
+When downloading a JDK through IntelliJ IDEA, select:
 
-При изтегляне на JDK през IntelliJ IDEA се избира:
+- the JDK version;
+- the JDK vendor;
+- the directory where the JDK will be installed.
 
-- версия на JDK;
-- доставчик на JDK;
-- директория, в която JDK ще бъде инсталиран.
+After you confirm, IntelliJ IDEA downloads the selected version and adds it to the available SDK configurations. You can then select that version as the JDK for the current project.
 
-След потвърждение IntelliJ IDEA изтегля избраната версия и я добавя към списъка с налични SDK конфигурации. След това същата версия може да бъде избрана като JDK за текущия проект.
+## Selecting a JDK for a Project
 
-## Избор на JDK за проект
+Each Java project in IntelliJ IDEA uses a specific JDK version. This version determines which compiler is used and which language features are available.
 
-Всеки Java проект в IntelliJ IDEA използва конкретна версия на JDK. Тази версия определя с кой компилатор ще се компилира кодът и кои възможности на езика могат да се използват.
-
-При вече създаден проект JDK се проверява и променя от настройките на проекта:
+For an existing project, check or change the JDK in the project settings:
 
 ```text
 File -> Project Structure -> Project
 ```
 
-В полето `SDK` се избира JDK версията, която трябва да се използва от проекта. Ако липсва подходяща версия, тя може да бъде добавена чрез `Add SDK`.
+Select the JDK version for the project in the `SDK` field. If the required version is missing, add it using `Add SDK`.
 
-В същия прозорец може да се зададе и `Language level`. Тази настройка определя кои синтактични възможности на Java са разрешени в проекта. Обичайно `Language level` трябва да съответства на избраната JDK версия.
+You can also set the `Language level` in the same window. This setting determines which Java syntax features are allowed in the project. Usually, the language level should match the selected JDK version.
 
-## Управление на версиите на Java в IntelliJ IDEA
+## Managing Java Versions in IntelliJ IDEA
 
-На един компютър могат да бъдат инсталирани няколко версии на JDK. Операционната система може да използва една версия при изпълнение на командите `java` и `javac`, а IntelliJ IDEA може да използва друга версия за конкретен проект.
+A computer can have several JDK versions installed. The operating system may use one version when running `java` and `javac` from the command line, while IntelliJ IDEA uses another version for a particular project.
 
-Версията, използвана от командния ред, се проверява чрез:
+Check the command-line version with:
 
 ```text
 java -version
 javac -version
 ```
 
-Версията, използвана от IntelliJ IDEA, се проверява от `File -> Project Structure -> Project`. При несъответствие между версиите може да се получи ситуация, при която програмата се компилира в IDE, но не се компилира от командния ред, или обратно.
+Check the IntelliJ IDEA version in `File -> Project Structure -> Project`. If these versions do not match, a program might compile in the IDE but fail to compile from the command line, or vice versa.
 
-За всеки проект трябва да бъде избрана версия на JDK, която е подходяща за използваните езикови конструкции. Ако в проекта се използват възможности от по-нова версия на Java, по-стара JDK версия няма да може да компилира кода.
+Choose a JDK version suitable for the language features used in each project. An older JDK cannot compile code that uses features from a newer Java version.
 
-## JDK и стартиране на първа програма
+## JDK and Running Your First Program
 
-Преди стартиране на първата Java програма в IntelliJ IDEA трябва да са изпълнени следните условия:
+Before running your first Java program in IntelliJ IDEA, make sure that:
 
-- проектът трябва да има избрана JDK версия;
-- файлът с програмата трябва да се намира в директорията `src`;
-- класът, който се стартира, трябва да съдържа метод `main`;
-- конфигурацията за стартиране трябва да използва същия проектен JDK.
+- a JDK version is selected for the project;
+- the source file is in the `src` directory;
+- the class to run contains a `main` method;
+- the run configuration uses the same JDK as the project.
 
-Ако IntelliJ IDEA показва съобщение, че няма избран JDK, проектът не може да бъде компилиран. В този случай се избира наличен JDK или се изтегля нов JDK през настройките на проекта.
-
+If IntelliJ IDEA reports that no JDK is selected, the project cannot be compiled. Select an installed JDK or download one through the project settings.

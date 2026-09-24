@@ -1,104 +1,104 @@
 ---
-title: Основни характеристики на JAVA
+title: Key Features of Java
 sidebar:
   order: 1
 ---
 
-# Основни характеристики на Java
+# Key Features of Java
 
-## Java е платформено независим език
+## Java Is Platform-Independent
 
-Компилаторът javac преобразува изходния код (.java) в **Java bytecode** (.class). Bytecode се изпълнява от Java Virtual Machine (JVM). Тъй като за всяка операционна система съществува реализация на JVM, един и същ bytecode може да бъде изпълнен без промяна под Windows, Linux, macOS и други операционни системи.
+The `javac` compiler converts source code (`.java`) into **Java bytecode** (`.class`). Bytecode is executed by the Java Virtual Machine (JVM). Because a JVM implementation exists for each operating system, the same bytecode can run without modification on Windows, Linux, macOS, and other operating systems.
 
 ```mermaid
 flowchart TD
-    A["Изходен код<br/>.java файл"] --> B["Компилатор javac"]
-    B --> C["Java bytecode<br/>.class файл"]
-    C --> D["JVM за операционната система"]
-    D --> E["Изпълнение"]
+    A["Source code<br/>.java file"] --> B["javac compiler"]
+    B --> C["Java bytecode<br/>.class file"]
+    C --> D["JVM for the operating system"]
+    D --> E["Execution"]
 ```
 
-## Java е обектно-ориентиран език
+## Java Is an Object-Oriented Language
 
-Java е обектно-ориентиран език за програмиране. Обектно-ориентираното програмиране (ООП) е парадигма, при която програмата се моделира чрез взаимодействащи класове и обекти. Всеки обект представлява екземпляр на определен клас.
+Java is an object-oriented programming language. Object-oriented programming (OOP) is a paradigm in which a program is modeled through interacting classes and objects. Each object is an instance of a particular class.
 
-Основните принципи на ООП са:
+The main principles of OOP are:
 
-1. Абстракция
-2. Капсулация
-3. Наследяване
-4. Полиморфизъм
+1. Abstraction
+2. Encapsulation
+3. Inheritance
+4. Polymorphism
 
-Подробно разглеждане на принципите на обектно-ориентираното програмиране е представено в следващите лабораторни упражнения.
+The principles of object-oriented programming are explored in detail in later lab exercises.
 
-## Java е надежден език
+## Java Is Reliable
 
-Java е проектиран с акцент върху надеждността. Компилаторът открива голяма част от потенциалните грешки още по време на компилация, а автоматичното управление на паметта намалява риска от възникване на грешки при работа с паметта.
+Java was designed with reliability in mind. The compiler detects many potential errors during compilation, while automatic memory management reduces the risk of memory-related errors.
 
-**Java използва механизъм за автоматично управление на паметта (Garbage Collector, GC)**, който освобождава динамично заделена памет, когато тя вече не е достижима чрез изпълняваната програма. Това намалява риска от грешки, свързани с изрично управление на жизнения цикъл на динамично заделената памет.
+**Java uses an automatic memory management mechanism called the Garbage Collector (GC)**. It releases dynamically allocated memory when that memory is no longer reachable by the running program. This reduces errors associated with explicitly managing the lifecycle of dynamically allocated memory.
 
-## Java разполага с богата стандартна библиотека
+## Java Has a Rich Standard Library
 
-Java предоставя богата стандартна библиотека, която включва готови класове за работа с колекции, файлове, мрежови приложения, многонишкови програмиране, дати и други.
+Java provides a rich standard library with ready-to-use classes for collections, files, network applications, multithreaded programming, dates, and more.
 
-## Java поддържа разработване на разпределени приложения
+## Java Supports Distributed Application Development
 
-Java предоставя средства за разработване на приложения, които обменят данни по мрежа.
+Java provides tools for developing applications that exchange data over a network.
 
-## Java поддържа многонишковост
+## Java Supports Multithreading
 
-Java предоставя езикови и библиотечни средства за изпълнение на няколко нишки в рамките на една програма.
+Java provides language and library features for running multiple threads within a program.
 
-## Общи термини в Java
+## Common Java Terms
 
-Преди да се пристъпи към разработването на Java приложения, е необходимо да бъдат изяснени някои основни понятия, свързани с процеса на компилация и изпълнение на програмите. Най-важните от тях са **Java bytecode**, **JVM**, **JRE (Java Runtime Environment)** и **JDK (Java Development Kit)**.
+Before developing Java applications, it is useful to understand several basic concepts related to compilation and program execution. The most important are **Java bytecode**, **JVM**, **JRE (Java Runtime Environment)**, and **JDK (Java Development Kit)**.
 
-## Java bytecode
+## Java Bytecode
 
-**Java bytecode** представлява междинен код, който се генерира след компилиране на дадена Java програма. Той се записва във файлове с разширение *.class* и се изпълнява от Java Virtual Machine.
+**Java bytecode** is an intermediate form of code generated when a Java program is compiled. It is stored in files with the `.class` extension and executed by the Java Virtual Machine.
 
-Използването на bytecode позволява една и съща Java програма да бъде изпълнявана върху различни операционни системи без необходимост от повторно компилиране.
+Bytecode allows the same Java program to run on different operating systems without being recompiled.
 
 ## Java Virtual Machine (JVM)
 
-Java Virtual Machine (JVM) представлява виртуална машина, която осигурява среда за изпълнение на Java bytecode. Тя не е физическо устройство, а спецификация, реализирана по различен начин за различните операционни системи.
+The Java Virtual Machine (JVM) is a virtual machine that provides an environment for executing Java bytecode. It is not a physical device; it is a specification implemented differently for each operating system.
 
-Основните задачи на JVM са: зареждане на класовете; проверка на bytecode; изпълнение на bytecode; управление на паметта по време на изпълнение чрез Garbage Collector.
+The JVM's main tasks are loading classes, verifying bytecode, executing bytecode, and managing memory at runtime with the Garbage Collector.
 
 ## Java Runtime Environment (JRE)
 
-Java Runtime Environment (JRE) представлява средата, необходима за изпълнение на Java приложения. Тя включва JVM и стандартните библиотеки, използвани по време на изпълнение на програмата.
+The Java Runtime Environment (JRE) provides the environment needed to run Java applications. It includes the JVM and the standard libraries used while a program is running.
 
-Ако на даден компютър е инсталирана само JRE, могат да се изпълняват готови Java приложения, но не могат да се компилират нови програми.
+If a computer has only the JRE installed, it can run existing Java applications, but it cannot compile new programs.
 
 ## Java Development Kit (JDK)
 
-Java Development Kit (JDK) представлява комплект от инструменти за разработване на Java приложения. Освен JRE, той включва компилатора *javac*, документиращи и помощни инструменти, необходими за разработката и тестването на програми.
+The Java Development Kit (JDK) is a set of tools for developing Java applications. In addition to the JRE, it includes the `javac` compiler, documentation tools, and other utilities needed to develop and test programs.
 
-*Процес на компилация и изпълнение*
+*Compilation and execution process*
 
 ```mermaid
 flowchart TD
     A["Java source code<br/>Application.java"] --> B["javac"]
     B --> C["Bytecode<br/>Application.class"]
     C --> D["JVM"]
-    D --> E["Изпълнение на програмата"]
+    D --> E["Program execution"]
 ```
 
-*Компоненти на Java платформата*
+*Components of the Java platform*
 
 ```mermaid
 flowchart TD
     subgraph JDK["JDK"]
-        Tools["Инструменти<br/>javac, jar, javadoc"]
+        Tools["Tools<br/>javac, jar, javadoc"]
         subgraph JRE["JRE"]
-            Libraries["Библиотеки"]
+            Libraries["Libraries"]
             JVM["JVM"]
         end
     end
 
-    Source["Java програма"] --> Tools
+    Source["Java program"] --> Tools
     Tools --> JVM
     Libraries --> JVM
-    JVM --> Runtime["Изпълнение"]
+    JVM --> Runtime["Runtime"]
 ```
