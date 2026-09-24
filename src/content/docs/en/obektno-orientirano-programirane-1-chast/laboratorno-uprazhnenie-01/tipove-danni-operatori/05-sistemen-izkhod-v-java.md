@@ -1,98 +1,96 @@
 ---
-title: Системен изход в Java
+title: System Output in Java
 sidebar:
   order: 6
 ---
 
-# Системен изход в Java
+# System Output in Java
 
-В Java извеждането на информация в конзолата най-често се извършва чрез обекта System.out.
+In Java, information is most often printed to the console using the `System.out` object.
 
-Например:
+For example:
 
 ```java
 System.out.println("This is an example");
 ```
 
-Изразът **System.out.println()** се състои от три части:
+The expression **System.out.println()** has three parts:
 
-- System – клас от стандартната библиотека на Java, който предоставя достъп до системни ресурси.
-- out – предварително създаден обект, представляващ стандартния изходен поток (конзолата).
-- println() – метод, който извежда подадената стойност и преминава на нов ред.
+- `System` — a class in the Java standard library that provides access to system resources.
+- `out` — a pre-created object representing the standard output stream (the console).
+- `println()` — a method that prints the supplied value and moves to a new line.
 
-## Метод print()
+## The `print()` Method
 
-Методът print() извежда информация на конзолата, без да преминава на нов ред.
+The `print()` method prints information to the console without moving to a new line.
 
 ```java
 System.out.print("This is ");
 System.out.print("an example!");
 ```
 
-Резултатът е:
+The output is:
 
 ```text
-This is an example
+This is an example!
 ```
 
-## Метод println()
+## The `println()` Method
 
-Методът println() извежда информация на конзолата и след това преминава на нов ред.
+The `println()` method prints information to the console and then moves to a new line.
 
 ```java
 System.out.println("This is ");
 System.out.println("an example!");
 ```
 
-Резултатът е:
+The output is:
 
 ```text
 This is
-an example
+an example!
 ```
 
-## Метод printf()
+## The `printf()` Method
 
-Методът printf() позволява форматирано извеждане на информация чрез използване на форматиращи спецификатори.
+The `printf()` method prints formatted information using format specifiers.
 
 ```java
 String name = "Ivan";
 int age = 20;
 
-System.out.printf("Име: %s, възраст: %d%n", name, age);
+System.out.printf("Name: %s, age: %d%n", name, age);
 ```
 
-Резултатът е:
+The output is:
 
 ```text
-Име: Ivan, възраст: 20
+Name: Ivan, age: 20
 ```
 
-## Метод `String.format()`
+## The `String.format()` Method
 
-Методът `String.format()` използва същия вид форматиращи спецификатори като `printf`, но не извежда резултата директно
-на конзолата. Той създава нов текст от зададения формат и подадените стойности.
+The `String.format()` method uses the same format specifiers as `printf`, but it does not print the result directly to the console. It creates a new string from the specified format and values.
 
 ```java
 String name = "Ivan";
 int age = 20;
 
-String message = String.format("Име: %s, възраст: %d", name, age);
+String message = String.format("Name: %s, age: %d", name, age);
 System.out.println(message);
 ```
 
-`printf` се използва, когато резултатът трябва да бъде изведен веднага. `String.format()` се използва, когато
-форматираният текст трябва да бъде запазен в променлива или подаден към друг метод.
+Use `printf` when the result should be printed immediately. Use `String.format()` when the formatted text should be stored in a variable or passed to another method.
 
-## Спецификатори за форматиран изход
+## Format Specifiers
 
-| Спецификатор | Предназначение  |
-| ------------ | --------------- |
-| %d           | Цяло число      |
-| %f           | Дробно число    |
-| %c           | Символ          |
-| %s           | Низ             |
-| %b           | Булева стойност |
-| %n           | Нов ред         |
+| Specifier | Purpose |
+| --------- | ------- |
+| %d        | Integer |
+| %f        | Floating-point number |
+| %c        | Character |
+| %s        | String |
+| %b        | Boolean value |
+| %n        | New line |
 
-*Забележка:* Методът *printf()* е особено подходящ при извеждане на таблици, числови резултати и информация, която трябва да бъде форматирана по определен начин.
+*Note:* The `printf()` method is especially useful for printing tables, numeric results, and information that must follow a specific format.

@@ -1,54 +1,51 @@
 ---
-title: Масиви
+title: Arrays
 sidebar:
   order: 10
 ---
 
-# Масиви
+# Arrays
 
-Масивът представлява структура от данни, предназначена за съхраняване на фиксиран брой елементи от един и същи тип.
-Всеки елемент се достъпва чрез индекс. Индексирането започва от 0.
+An array is a data structure for storing a fixed number of elements of the same type. Each element is accessed by an index. Indexing starts at 0.
 
-Масивите се разглеждат след операторите за цикъл, защото елементите на масив често се обхождат чрез цикъл.
+Arrays are covered after loops because array elements are often visited using a loop.
 
-## Деклариране на масив
+## Declaring an Array
 
-Декларирането на масив задава типа на елементите и името на променливата.
+An array declaration specifies the element type and the variable name.
 
 ```java
 int[] numbers;
 String[] names;
 ```
 
-Записът `int[] numbers` означава, че променливата `numbers` може да сочи към масив от цели числа.
+The declaration `int[] numbers` means that `numbers` can refer to an array of integers.
 
-## Създаване на масив
+## Creating an Array
 
-Масив може да бъде създаден чрез ключовата дума `new`. При този запис се посочва броят на елементите.
+Create an array with the `new` keyword and specify the number of elements.
 
-Ключовата дума `new` заделя памет за нов масив. В тази памет се съхраняват елементите на масива. След създаването
-променливата може да сочи към новосъздадения масив.
+The `new` keyword allocates memory for a new array. The elements are stored in this memory, and the variable can then refer to the new array.
 
 ```java
 int[] numbers = new int[5];
 ```
 
-Създаденият масив има пет елемента. Променливата `numbers` сочи към този масив. Индексите на елементите са от 0 до 4.
+The array has five elements. `numbers` refers to this array, whose indices range from 0 to 4.
 
-## Инициализация на масив със стойности
+## Initializing an Array with Values
 
-Когато началните стойности са известни предварително, масивът може да бъде създаден и инициализиран чрез списък със
-стойности.
+When the initial values are known, create and initialize an array with a list of values:
 
 ```java
 int[] numbers = {1, 5, 0, 10, 1};
 ```
 
-Подобна дефиниция създава масив от целочислени стойности с пет елемента.
+This declaration creates an integer array with five elements.
 
-## Достъп до елемент
+## Accessing an Element
 
-Всеки елемент от даден масив се достъпва чрез неговия индекс.
+Access an array element by its index.
 
 ```java
 int[] numbers = {1, 5, 0, 10, 1};
@@ -57,11 +54,11 @@ System.out.println(numbers[0]);
 numbers[2] = 14;
 ```
 
-Изразът `numbers[0]` достъпва първия елемент. Изразът `numbers[2] = 14` променя третия елемент.
+The expression `numbers[0]` accesses the first element. The expression `numbers[2] = 14` changes the third element.
 
-## Размер на масив
+## Array Length
 
-Всеки масив има свойство `length`, което съдържа броя на елементите.
+Every array has a `length` property that contains the number of elements.
 
 ```java
 int[] numbers = {1, 5, 0, 10, 1};
@@ -69,11 +66,11 @@ int[] numbers = {1, 5, 0, 10, 1};
 System.out.println(numbers.length);
 ```
 
-Стойността на `numbers.length` е 5.
+The value of `numbers.length` is 5.
 
-## Обхождане на масив с цикъл
+## Iterating over an Array with a Loop
 
-Елементите на масив могат да бъдат обходени чрез цикъл `for`.
+Use a `for` loop to visit array elements:
 
 ```java
 int[] numbers = {1, 5, 0, 10, 1};
@@ -83,12 +80,11 @@ for (int index = 0; index < numbers.length; index++) {
 }
 ```
 
-Променливата `index` приема последователно стойностите от 0 до `numbers.length - 1`. Така се достъпва всеки елемент от
-масива.
+The `index` variable takes values from 0 to `numbers.length - 1), so every array element is accessed.
 
-## Обхождане с разширен `for`
+## Iterating with Enhanced `for`
 
-Когато е необходима само стойността на елемента, може да се използва разширен цикъл `for`.
+When you only need each element's value, use an enhanced `for` loop:
 
 ```java
 int[] numbers = {1, 5, 0, 10, 1};
@@ -98,12 +94,11 @@ for (int number : numbers) {
 }
 ```
 
-При този запис променливата `number` приема стойността на текущия елемент. Индексът на елемента не се използва.
+The `number` variable takes the value of the current element. The element's index is not used.
 
-## Индекс извън границите на масив
+## Array Index Out of Bounds
 
-Достъпът до елемент е валиден само ако индексът е в границите на масива. За масив с дължина 5 валидните индекси са от
-0 до 4.
+An element can be accessed only when its index is within the array bounds. For an array of length 5, valid indices are 0 through 4.
 
 ```java
 int[] numbers = {1, 5, 0, 10, 1};
@@ -111,13 +106,11 @@ int[] numbers = {1, 5, 0, 10, 1};
 System.out.println(numbers[5]);
 ```
 
-В примера индексът 5 е невалиден, защото последният валиден индекс е 4. При изпълнение възниква
-грешка по време на изпълнение (обработката ѝ се изучава в упражнение 6).
+Index 5 is invalid because 4 is the last valid index. Running this code causes a runtime error (handling this error is covered in Exercise 6).
 
-## Многоизмерни масиви
+## Multidimensional Arrays
 
-Многоизмерният масив е масив, чиито елементи също са масиви. Най-често се използва двумерен масив за представяне на
-таблични данни.
+A multidimensional array is an array whose elements are also arrays. A two-dimensional array is commonly used to represent tabular data.
 
 ```java
 int[][] matrix = {
@@ -126,17 +119,17 @@ int[][] matrix = {
 };
 ```
 
-Достъпът до елемент в двумерен масив се извършва чрез два индекса.
+Access an element in a two-dimensional array with two indices:
 
 ```java
 System.out.println(matrix[0][1]);
 ```
 
-Първият индекс избира реда, а вторият индекс избира елемента в този ред. В примера се извежда стойността 2.
+The first index selects a row, and the second selects an element in that row. This example prints 2.
 
-## Обхождане на двумерен масив
+## Iterating over a Two-Dimensional Array
 
-Двумерен масив може да бъде обходен чрез вложени цикли.
+Use nested loops to visit a two-dimensional array:
 
 ```java
 for (int row = 0; row < matrix.length; row++) {
@@ -146,4 +139,4 @@ for (int row = 0; row < matrix.length; row++) {
 }
 ```
 
-Външният цикъл обхожда редовете. Вътрешният цикъл обхожда елементите в текущия ред.
+The outer loop visits the rows. The inner loop visits the elements in the current row.

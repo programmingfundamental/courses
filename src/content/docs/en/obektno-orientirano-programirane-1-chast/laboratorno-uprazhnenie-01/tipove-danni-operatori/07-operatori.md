@@ -1,47 +1,47 @@
 ---
-title: Оператори
+title: Operators
 sidebar:
   order: 7
 ---
 
-# Оператори
+# Operators
 
-Операторите извършват различни операции върху една или повече стойности. Повечето оператори в Java са аналогични на тези, използвани в други езици за програмиране. При сложни изрази е препоръчително използването на скоби, дори когато приоритетът на операторите е известен. Това подобрява четимостта на кода.
+Operators perform operations on one or more values. Most Java operators are similar to those used in other programming languages. For complex expressions, use parentheses even when you know the operator precedence. This makes the code easier to read.
 
 ```mermaid
 flowchart LR
-    A["Оператори в Java"] --> B["Аритметични<br/>+ - * / %"]
-    A --> C["Присвояване<br/>= += -= *= /="]
-    A --> D["Сравнение<br/>== != &gt; &gt;= &lt; &lt;="]
-    A --> E["Логически<br/>&amp;&amp; || !"]
-    A --> F["Побитови<br/>&amp; | ^ ~ &lt;&lt; &gt;&gt;"]
-    A --> G["Инкрементиране<br/>++ --"]
+    A["Java operators"] --> B["Arithmetic<br/>+ - * / %"]
+    A --> C["Assignment<br/>= += -= *= /="]
+    A --> D["Comparison<br/>== != &gt; &gt;= &lt; &lt;="]
+    A --> E["Logical<br/>&amp;&amp; || !"]
+    A --> F["Bitwise<br/>&amp; | ^ ~ &lt;&lt; &gt;&gt;"]
+    A --> G["Increment and decrement<br/>++ --"]
 ```
 
-## Деление на цели числа
+## Integer Division
 
-При делението на две цели числа резултатът също е цяло число. Дробната част се отрязва:
+When two integers are divided, the result is also an integer. The fractional part is discarded:
 
 ```java
 int result = 5/2;
-System.out.println(result);			// 2
+System.out.println(result);          // 2
 
 double secondResult = 5/2;
-System.out.println(secondResult);		// 2.0
+System.out.println(secondResult);    // 2.0
 ```
 
-*secondResult* е със стойност 2.0, тъй като отново делението е целочислено, въпреки различния тип на променливата, съхраняваща резултата.
+`secondResult` is 2.0 because the division is still integer division, even though the result is stored in a different variable type.
 
-## Остатък при деление
+## Remainder
 
 ```java
-int reminder = 10 % 3;
-System.out.println(reminder);			// 1
+int remainder = 10 % 3;
+System.out.println(remainder);       // 1
 ```
 
-Операторът *%* връща остатъка при деление.
+The `%` operator returns the remainder after division.
 
-## Инкрементиране и декрементиране
+## Increment and Decrement
 
 ```java
 int number = 6;
@@ -49,52 +49,52 @@ number++;
 number--;
 ```
 
-Операторите *++* и *--* увеличават или намаляват стойността на променливата с единица.
+The `++` and `--` operators increase or decrease a variable's value by one.
 
-## Кратко оценяване на изрази
+## Short-Circuit Evaluation
 
 ```java
 if (number != 0 && 10/number > 1) {
-	System.out.println("Valid");
+    System.out.println("Valid");
 }
 ```
 
-При оператора *&&*, ако първото условие е *false*, второто не се оценява. Аналогично, при оператор *||*, ако първото условие е *true*, второто не се оценява.
+With the `&&` operator, if the first condition is `false`, the second is not evaluated. Similarly, with `||`, if the first condition is `true`, the second is not evaluated.
 
-## Логически оператори
+## Logical Operators
 
-Логическите оператори се използват за комбиниране или отрицание на булеви изрази. Резултатът от тях винаги е стойност от тип *boolean* (*true* или *false*).
+Logical operators combine or negate boolean expressions. Their result is always a `boolean` value (`true` or `false`).
 
-| Оператор | Значение        | Пример                 | Резултат |
-| -------- | --------------- | ---------------------- | -------- |
-| `&&`     | логическо И     | `true && true`         | `true`   |
-| `&&`     | логическо И     | `true && false`        | `false`  |
-| `&&`     | логическо И     | `false && true`        | `false`  |
-| `&&`     | логическо И     | `false && false`       | `false`  |
-| `||`     | логическо ИЛИ   | `true || true`         | `true`   |
-| `||`     | логическо ИЛИ   | `true || false`        | `true`   |
-| `||`     | логическо ИЛИ   | `false || true`        | `true`   |
-| `||`     | логическо ИЛИ   | `false || false`       | `false`  |
-| `!`      | логическо НЕ    | `!true`                | `false`  |
-| `!`      | логическо НЕ    | `!false`               | `true`   |
+| Operator | Meaning | Example | Result |
+| -------- | ------- | ------- | ------ |
+| `&&` | logical AND | `true && true` | `true` |
+| `&&` | logical AND | `true && false` | `false` |
+| `&&` | logical AND | `false && true` | `false` |
+| `&&` | logical AND | `false && false` | `false` |
+| `||` | logical OR | `true || true` | `true` |
+| `||` | logical OR | `true || false` | `true` |
+| `||` | logical OR | `false || true` | `true` |
+| `||` | logical OR | `false || false` | `false` |
+| `!` | logical NOT | `!true` | `false` |
+| `!` | logical NOT | `!false` | `true` |
 
-## Побитови оператори
+## Bitwise Operators
 
-Побитовите оператори работят с битовото представяне на числата. Тяхното използване е важно при проследяване на изрази, работа с флагове и операции от ниско ниво.
+Bitwise operators work with the binary representation of numbers. They are useful when tracing expressions, working with flags, and performing low-level operations.
 
-Побитовите операции използват същите логически принципи като логическите оператори, но ги прилагат върху отделните битове на числата. Всеки бит със стойност 1 може да се разглежда като логическа истина (*true*), а този със стойност 0 - като логическа лъжа (*false*). Следващата таблица показва резултата от побитовите операции AND, OR и XOR.
+Bitwise operations follow the same logical principles as logical operators, but apply them to individual bits. A bit with value 1 can be treated as logical true, and a bit with value 0 as logical false. The table shows the results of bitwise AND, OR, and XOR.
 
-| Оператор | Значение | Пример  | Резултат |
-| -------- | -------- | ------- | -------- |
-| `&`      | AND      | `1 & 1` | `1`      |
-| `&`      | AND      | `1 & 0` | `0`      |
-| `&`      | AND      | `0 & 1` | `0`      |
-| `&`      | AND      | `0 & 0` | `0`      |
-| `|`      | OR       | `1 | 1` | `1`      |
-| `|`      | OR       | `1 | 0` | `1`      |
-| `|`      | OR       | `0 | 1` | `1`      |
-| `|`      | OR       | `0 | 0` | `0`      |
-| `^`      | XOR      | `1 ^ 1` | `0`      |
-| `^`      | XOR      | `1 ^ 0` | `1`      |
-| `^`      | XOR      | `0 ^ 1` | `1`      |
-| `^`      | XOR      | `0 ^ 0` | `0`      |
+| Operator | Meaning | Example | Result |
+| -------- | ------- | ------- | ------ |
+| `&` | AND | `1 & 1` | `1` |
+| `&` | AND | `1 & 0` | `0` |
+| `&` | AND | `0 & 1` | `0` |
+| `&` | AND | `0 & 0` | `0` |
+| `|` | OR | `1 | 1` | `1` |
+| `|` | OR | `1 | 0` | `1` |
+| `|` | OR | `0 | 1` | `1` |
+| `|` | OR | `0 | 0` | `0` |
+| `^` | XOR | `1 ^ 1` | `0` |
+| `^` | XOR | `1 ^ 0` | `1` |
+| `^` | XOR | `0 ^ 1` | `1` |
+| `^` | XOR | `0 ^ 0` | `0` |

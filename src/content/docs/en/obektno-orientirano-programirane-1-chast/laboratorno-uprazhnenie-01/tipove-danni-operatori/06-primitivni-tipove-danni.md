@@ -1,108 +1,108 @@
 ---
-title: Типове данни
+title: Data Types
 sidebar:
   order: 5
 ---
 
-# Типове данни
+# Data Types
 
-## Теория
+## Theory
 
-**Типът данни** определя какви стойности може да съхранява една променлива, колко памет е необходима за нейното съхранение и какви операции могат да бъдат извършвани с нея.
+A **data type** determines which values a variable can store, how much memory is needed to store it, and which operations can be performed on it.
 
-В настоящото упражнение се разглеждат основните примитивни типове данни и типът `String`, който се използва за работа с текст. `String` не е примитивен тип, но е необходим още при първите Java програми.
+This exercise covers the main primitive data types and the `String` type, which is used for text. `String` is not a primitive type, but it is needed in even the first Java programs.
 
-Следващата таблица обобщава основните типове, които ще бъдат използвани:
+The table summarizes the main types used in this exercise:
 
-| Тип       | Размер | Стойности                       |
-| --------- | ------ | ------------------------------- |
-| `byte`    | 8 bit  | -128 до 127                     |
-| `short`   | 16 bit | -32 768 до 32 767               |
-| `int`     | 32 bit | -2 147 483 648 до 2 147 483 647 |
-| `long`    | 64 bit | -2^63 до 2^63-1                 |
-| `float`   | 32 bit | реално число                    |
-| `double`  | 64 bit | реално число                    |
-| `char`    | 16 bit | единична символна стойност      |
-| `boolean` | -      | `true` или `false`              |
-| `String`  | -      | текст                           |
+| Type      | Size  | Values |
+| --------- | ----- | ------ |
+| `byte`    | 8 bit  | -128 to 127 |
+| `short`   | 16 bit | -32,768 to 32,767 |
+| `int`     | 32 bit | -2,147,483,648 to 2,147,483,647 |
+| `long`    | 64 bit | -2^63 to 2^63-1 |
+| `float`   | 32 bit | Real number |
+| `double`  | 64 bit | Real number |
+| `char`    | 16 bit | Single character value |
+| `boolean` | —     | `true` or `false` |
+| `String`  | —     | Text |
 
-## Примери за типове данни
+## Examples of Data Types
 
-### byte
+### `byte`
 
-`byte` се използва за малки цели числа.
+Use `byte` for small whole numbers.
 
 ```java
 byte age = 25;
 byte minTemperature = -10;
 ```
 
-### short
+### `short`
 
-`short` се използва за цели числа, които са по-големи от диапазона на `byte`, но не изискват `int`.
+Use `short` for whole numbers outside the range of `byte` that do not require `int`.
 
 ```java
 short year = 2026;
 short depth = 1500;
 ```
 
-### int
+### `int`
 
-`int` е най-често използваният целочислен тип.
+`int` is the most commonly used integer type.
 
 ```java
 int studentsCount = 32;
 int currentYear = 2026;
 ```
 
-### long
+### `long`
 
-`long` се използва за много големи цели числа. При директно записване на `long` литерал в края се поставя `L`.
+Use `long` for very large whole numbers. Add the suffix `L` when writing a `long` literal directly.
 
 ```java
 long population = 6500000000L;
 long distanceInMeters = 123456789L;
 ```
 
-### float
+### `float`
 
-`float` се използва за реални числа с по-малка точност. При директно записване на `float` литерал в края се поставя `f`.
+Use `float` for real numbers with lower precision. Add the suffix `f` when writing a `float` literal directly.
 
 ```java
 float price = 10.25f;
 float temperature = 36.6f;
 ```
 
-### double
+### `double`
 
-`double` е стандартният тип за реални числа в Java.
+`double` is Java's standard type for real numbers.
 
 ```java
 double area = 33.14;
 double averageScore = 5.75;
 ```
 
-### char
+### `char`
 
-`char` съхранява единична символна стойност. Стойността се записва в единични кавички.
+`char` stores a single character. Write the value in single quotation marks.
 
 ```java
 char grade = 'A';
 char symbol = '#';
 ```
 
-### boolean
+### `boolean`
 
-`boolean` може да приема само две стойности: `true` или `false`.
+A `boolean` can have only two values: `true` or `false`.
 
 ```java
 boolean isValid = true;
 boolean hasAccess = false;
 ```
 
-### String
+### `String`
 
-`String` се използва за съхраняване на текст. Стойностите от тип `String` се записват в двойни кавички.
+Use `String` to store text. Write string values in double quotation marks.
 
 ```java
 String firstName = "Ivan";
@@ -110,14 +110,14 @@ String lastName = "Petrov";
 String city = "Varna";
 ```
 
-Важно е да се прави разлика между `char` и `String`:
+It is important to distinguish between `char` and `String`:
 
 ```java
-char grade = 'A';      // един символ, записан в единични кавички
-String text = "A";     // текст, записан в двойни кавички
+char grade = 'A';      // a single character in single quotes
+String text = "A";     // text in double quotes
 ```
 
-Текстови стойности могат да се обединяват чрез оператора `+`. Това действие се нарича конкатенация:
+You can join strings with the `+` operator. This is called concatenation:
 
 ```java
 String firstName = "Ivan";
@@ -127,7 +127,7 @@ String fullName = firstName + " " + lastName;
 System.out.println(fullName);
 ```
 
-Когато `String` се събере с число чрез `+`, резултатът е текст:
+When a number is added to a `String` with `+`, the result is text:
 
 ```java
 int age = 20;
@@ -136,58 +136,58 @@ String message = "Age: " + age;
 System.out.println(message);
 ```
 
-В това упражнение `String` ще бъде използван само като тип за съхраняване и извеждане на текст. Вградените методи на класа `String` няма да бъдат разглеждани тук.
+In this exercise, `String` is introduced only as a type for storing and printing text. The built-in methods of the `String` class are not covered here.
 
-## Особености
+## Key Points
 
-- `int` е най-често използваният тип за цели числа.
-- `double` е стандартният тип за реални числа.
-- `char` съхранява точно един символ и използва единични кавички.
-- `String` съхранява текст и използва двойни кавички.
-- `boolean` може да приема единствено стойности `true` и `false`.
-- При `long` литерали е добра практика да се използва наставка `L`.
-- При `float` литерали трябва да се използва наставка `f`.
+- `int` is the most commonly used type for whole numbers.
+- `double` is the standard type for real numbers.
+- `char` stores exactly one character and uses single quotes.
+- `String` stores text and uses double quotes.
+- `boolean` can only be `true` or `false`.
+- It is good practice to use the `L` suffix for `long` literals.
+- `float` literals must use the `f` suffix.
 
-## Променливи
+## Variables
 
-Променливата представлява именувана област от паметта, в която се съхранява стойност от определен тип. В Java всяка променлива има тип, име и стойност.
+A variable is a named area of memory that stores a value of a particular type. In Java, every variable has a type, a name, and a value.
 
-Java е статично типизиран език. Типът на всяка променлива се определя по време на компилация и не може да бъде променян по време на изпълнение на програмата.
+Java is statically typed. The type of each variable is determined at compile time and cannot be changed while the program runs.
 
-## Деклариране на променлива
+## Declaring a Variable
 
-Декларирането на променлива задава нейния тип и име:
+A variable declaration specifies its type and name:
 
 ```java
 int number;
 double price;
 ```
 
-## Инициализация на променлива
+## Initializing a Variable
 
-Инициализацията представлява задаване на начална стойност на променливата:
+Initialization assigns an initial value to a variable:
 
 ```java
 int number = 15;
 double price = 13.78;
 ```
 
-## Литерали
+## Literals
 
-Литерал е фиксирана стойност, записана директно в програмния код. Тя се използва за инициализация на променливи, като аргумент на метод или като част от израз:
+A literal is a fixed value written directly in source code. Literals can initialize variables, be passed as method arguments, or be part of an expression:
 
 ```java
-10          // целочислен литерал
-3.14        // литерал с плаваща запетая
-'A'         // символен литерал
-"Java"      // низов литерал
-true        // булев литерал
-null        // null литерал
+10          // integer literal
+3.14        // floating-point literal
+'A'         // character literal
+"Java"      // string literal
+true        // boolean literal
+null        // null literal
 ```
 
-## Присвояване на стойност
+## Assigning a Value
 
-След като променливата е декларирана, на нея може да бъде присвоена нова стойност:
+After a variable is declared, you can assign a new value to it:
 
 ```java
 int number;
@@ -195,23 +195,23 @@ number = 10;
 number = 15;
 ```
 
-## Дефиниция на променлива
+## Variable Definition
 
-Изразът **дефиниране на променлива** в контекста на Java обикновено означава деклариране на променлива, а при наличие на начална стойност - деклариране с инициализация.
+In the context of Java, **defining a variable** usually means declaring it, with or without an initial value.
 
-## final променливи
+## `final` Variables
 
-Ключовата дума *final* указва, че след първоначалното присвояване на стойност на променливата не може да бъде извършено ново присвояване:
+The `final` keyword means that the variable cannot be assigned a different value after its initial assignment:
 
 ```java
 final int maxAttempts = 5;
 ```
 
-Подобна декларация означава, че не е възможно на променливата *maxAttemts* след това да се присвои нова различна стойност.
+After this declaration, you cannot assign a new value to `maxAttempts`.
 
-## Var
+## `var`
 
-Ключовата дума *var* позволява типът на локална променлива да бъде изведен автоматично от компилатора въз основа на присвоената стойност:
+The `var` keyword lets the compiler infer the type of a local variable from its assigned value:
 
 ```java
 var count = 10;    // int
@@ -219,18 +219,17 @@ var prefix = "T";  // String
 var price = 1.33;  // double
 ```
 
-Използването на *var* не означава, че Java става динамично типизиран език. Типът отново се определя по време на компилация и не може да бъде променян след това. Ако се използват дефинираните по-горе променливи, следният запис ще бъде невалиден:
+Using `var` does not make Java dynamically typed. The type is still determined at compile time and cannot be changed later. Given the declarations above, this assignment is invalid:
 
 ```java
 count = "text";
 ```
 
-## Преобразуване на примитивни типове
+## Converting Primitive Types
 
-Преобразуването на примитивни типове представлява използване на стойност от един примитивен тип като стойност от друг
-примитивен тип.
+Primitive type conversion uses a value of one primitive type as a value of another primitive type.
 
-Когато преобразуването не води до загуба на информация, то може да бъде извършено автоматично от компилатора.
+When conversion does not lose information, the compiler can perform it automatically:
 
 ```java
 int count = 10;
@@ -238,17 +237,15 @@ long biggerCount = count;
 double price = count;
 ```
 
-В примера стойност от тип `int` се използва като `long` и като `double`. Това е позволено, защото `long` и `double`
-могат да представят по-широк диапазон от стойности.
+Here, an `int` value is used as a `long` and as a `double`. This is allowed because `long` and `double` can represent a wider range of values.
 
-Когато преобразуването може да доведе до загуба на информация, трябва да се използва явно преобразуване. То се записва
-чрез типа в скоби.
+When conversion might lose information, use an explicit cast. Write the target type in parentheses:
 
 ```java
 double price = 12.75;
 int wholePart = (int) price;
 ```
 
-След преобразуването стойността на `wholePart` е 12. Дробната част се премахва.
+After the conversion, `wholePart` is 12; the fractional part is removed.
 
-Явното преобразуване трябва да се използва внимателно, защото може да промени стойността.
+Use explicit casts carefully because they can change a value.

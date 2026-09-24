@@ -5,41 +5,42 @@ sidebar:
   label: Tasks
 taskPage: true
 ---
-## Задача 1
 
-Да се изведат на конзола всички нечетни числа в диапазона 0-300.
+## Task 1
 
-Създайте проекта чрез **New Project → Java**. Посочете кои файлове са създадени от средата и кои сте добавили вие. Отделете проверката в метод `isOdd(int number)` и обяснете аналогията му с функция, която приема число и връща логическа стойност.
+Print all odd numbers in the range 0–300.
 
-## Задача 2
+Create the project with **New Project → Java**. Identify which files were created by the IDE and which ones you added. Put the check in a method named `isOdd(int number)`, and explain how it is similar to a function that accepts a number and returns a boolean value.
 
-Да се създаде масив {5, 6, 7, 9} с количеството на касети в дрогерия и масив {2.5, 3.6, 8.9, 7.5} с цените на една 1 касета. Да се изведе общата цена на всички касети.
+## Task 2
 
-## Задача 3
+Create an array `{5, 6, 7, 9}` containing the quantities of cases of goods in a drugstore, and an array `{2.5, 3.6, 8.9, 7.5}` containing the price of one case of each item. Print the total price of all cases.
 
-Да се изведат стойностите на съответните артикули за почивка при обща стойност 10000 ако:
+## Task 3
 
-1. Нощувката е 50% от общата стойност;
-2. Наемът на плажни артикули е 5% от общата стойност;
-3. Разходите за ресторант са 30% от общата стойност;
-4. Допълнителните забавления са 10% от общата стойност;
-5. Другите разходи са 5% от общата стойност.
+For a total vacation budget of 10,000, print the amounts allocated to each category:
 
-## Задача 4
+1. Accommodation is 50% of the total.
+2. Rental of beach equipment is 5% of the total.
+3. Restaurant expenses are 30% of the total.
+4. Additional entertainment is 10% of the total.
+5. Other expenses are 5% of the total.
 
-Да се изведат всички комбинации на думи, където първите 2 символа са цифри, вторите 2 букви, а петия символ е цифра.
+## Task 4
 
-## Задача 5
+Print all five-character strings whose first two characters are digits, next two are letters, and fifth character is a digit.
 
-Да се напише програма, която извежда простите числа в интервала 1-300.
+## Task 5
 
-## Задача 6
+Write a program that prints the prime numbers in the range 1–300.
 
-Да се напише програма, която изчислява и извежда какъв процент от числата в интервала 1-300 се делят на простите числа в същия интервал.
+## Task 6
 
-## Задача 7
+Write a program that calculates and prints what percentage of the numbers in the range 1–300 are divisible by prime numbers in the same range.
 
-С помощта на debugger да се проследи изпълнението на програмата:
+## Task 7
+
+Use a debugger to trace the execution of the following program:
 
 ```java
 package bg.tu_varna.sit;
@@ -69,21 +70,21 @@ public class Calculator {
 }
 ```
 
-Изпълнението на цикъла да бъде спряно при всяко число, чиято цяла част е четна. Да се провери защо изчислената средна стойност е неправилна.
+Pause the loop for each number whose integer part is even. Find out why the calculated average is incorrect.
 
-Използвайте [страницата за Debug](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-01/otkrivane-i-otstranyavane-na-greshki/): поставете условна точка на прекъсване, наблюдавайте `sum` и `i` и влезте в `getAverage()` чрез **Step Into**. Запишете очакваната и действителната стойност преди поправката. След поправката проверете резултат `4.041666...` с допустима разлика `0.000001`, както и масив с един елемент.
+Use the [debugging guide](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-01/otkrivane-i-otstranyavane-na-greshki/): set a conditional breakpoint, watch `sum` and `i`, and enter `getAverage()` with **Step Into**. Record the expected and actual values before fixing the code. After the fix, verify the result `4.041666...` with a tolerance of `0.000001`, as well as an array containing one element.
 
-## Задача 8
+## Task 8
 
-Да се анализира задачата и да се идентифицират грешките, без да се пренаписва целият код. Програмата трябва да изпълнява следните инструкции:
+Analyze the task and identify the errors without rewriting all the code. The program should execute the following instructions:
 
-- `INC <операнд1>` - инкрементира операнд 1;
-- `DEC <операнд1>` - декрементира операнд 1;
-- `ADD <операнд1> <операнд2>` - събира операнд 1 и операнд 2;
-- `MLA <операнд1> <операнд2>` - умножава операнд 1 и операнд 2;
-- `END` - край на входа.
+- `INC <operand1>` — increment operand 1;
+- `DEC <operand1>` — decrement operand 1;
+- `ADD <operand1> <operand2>` — add operand 1 and operand 2;
+- `MLA <operand1> <operand2>` — multiply operand 1 and operand 2;
+- `END` — end of input.
 
-Като аргументи на програмата да се използват:
+Use the following program arguments:
 
 ```text
 "INC 0 END" "ADD 1323134 421315521 END" "DEC 57314183" "MLA 252621 324532 EN"

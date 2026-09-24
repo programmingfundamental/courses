@@ -1,93 +1,92 @@
 ---
-title: Първа програма на Java
+title: Your First Java Program
 sidebar:
   order: 4
 ---
 
-# Първа програма на Java
+# Your First Java Program
 
-## Какво е шаблон на проект
+## What Is a Project Template?
 
-Шаблонът на проект е предварително подготвена начална структура: директории, настройки и при нужда примерен код. IntelliJ IDEA използва избрания тип проект и настройките в **New Project**, за да създаде тази основа. След това студентът добавя собствените класове и логика.
+A project template is a prepared starting structure that may include directories, settings, and sample code. IntelliJ IDEA uses the selected project type and the settings in **New Project** to create this foundation. You can then add your own classes and logic.
 
-Например при **Java** и система за изграждане **IntelliJ** се подготвя Java проект с директория за изходния код. Опцията **Add sample code** добавя и примерна програма. При Maven или Gradle структурата и конфигурационните файлове са други. JDK определя с коя версия на Java се компилира програмата; той не е шаблон.
+For example, selecting **Java** and **IntelliJ** as the build system creates a Java project with a source-code directory. The **Add sample code** option also adds an example program. Maven and Gradle use different structures and configuration files. The JDK determines which Java version compiles the program; it is not a project template.
 
-## Създаване на проект в IntelliJ IDEA
+## Creating a Project in IntelliJ IDEA
 
-1. Изберете **New Project** от началния екран или **File → New → Project**.
-2. Изберете **Java**, име `JavaBasics` и място за проекта.
-3. Изберете **IntelliJ** за **Build system** и JDK 17 или 21 за примерите в курса.
-4. Включете **Add sample code**, ако искате средата да създаде начален пример. При изключена опция ще създадете класа сами.
-5. Натиснете **Create**, разгледайте `src` и стартирайте примерния `main`, ако е добавен.
+1. Select **New Project** on the welcome screen, or choose **File → New → Project**.
+2. Select **Java**, enter the name `JavaBasics`, and choose a project location.
+3. Select **IntelliJ** as the **Build system** and JDK 17 or 21 for the examples in this course.
+4. Select **Add sample code** if you want the IDE to create a starter example. If you leave it unchecked, you will create the class yourself.
+5. Select **Create**, inspect `src`, and run the sample `main` method if one was added.
 
-Шаблонът на **проект** подготвя цялата структура. Шаблонът на **файл**, използван при **New → Java Class**, подготвя един `.java` файл. И двата спестяват повтарящ се начален код. Настройките са описани в [ръководството за нов проект](https://www.jetbrains.com/help/idea/new-project-wizard.html) и [шаблоните за файлове](https://www.jetbrains.com/help/idea/using-file-and-code-templates.html).
+A **project** template prepares the entire project structure. A **file** template, used with **New → Java Class**, prepares a single `.java` file. Both save you from writing the same initial code repeatedly. See JetBrains' guides to [creating a new project](https://www.jetbrains.com/help/idea/new-project-wizard.html) and [file templates](https://www.jetbrains.com/help/idea/using-file-and-code-templates.html).
 
-След стартиране на средата за разработка IntelliJ IDEA се избира опцията **New Project**, след което се отворя прозорец за конфигурация на новия проект:
+After starting IntelliJ IDEA, select **New Project** to open the project configuration window:
 
-<img width="709" height="734" alt="image" src="https://github.com/user-attachments/assets/7314ceab-1f2d-4341-9b4c-0f3fdd114534" />
+<img width="709" height="734" alt="New project configuration in IntelliJ IDEA" src="https://github.com/user-attachments/assets/7314ceab-1f2d-4341-9b4c-0f3fdd114534" />
 
-Попълват се следните основни настройки:
+Set the following options:
 
-- Name - име на проекта; в примера от фигурата е *JavaBsics*
-- Location - директория, в която ще бъде съхранен проектът; в горният пример е *Desktop*
-- Build System - IntelliJ;
-- JDK - версията на Java, която ще бъде използвана от проекта; в примера от фигурата е *OpenJDK-17*
+- **Name** — the project name; the example in the figure uses *JavaBsics*.
+- **Location** — the directory where the project will be stored; the example uses *Desktop*.
+- **Build System** — IntelliJ.
+- **JDK** — the Java version used by the project; the example uses *OpenJDK-17*.
 
-## Структура на проекта
+## Project Structure
 
-След създаването на проекта IntelliJ IDEA генерира неговата начална структура.
+After creating the project, IntelliJ IDEA generates its initial structure.
 
-<img width="586" height="379" alt="image" src="https://github.com/user-attachments/assets/6a0f6c36-02c4-4912-a1e8-5e9306eca9a8" />
+<img width="586" height="379" alt="Initial project structure" src="https://github.com/user-attachments/assets/6a0f6c36-02c4-4912-a1e8-5e9306eca9a8" />
 
-Основните елементи са:
+The main elements are:
 
-- Проект - основната директория;
-- src - директория, съдържаща изходния код;
-- out - директория, съдържаща компилираните .class файлове;
-- External Libraries - библиотеките, използвани от проекта.
+- **Project** — the root directory;
+- **src** — the directory containing source code;
+- **out** — the directory containing compiled `.class` files;
+- **External Libraries** — the libraries used by the project.
 
-*Забележка:* Директорията **out** се създава автоматично след първото успешно компилиране на проекта.
+*Note:* The **out** directory is created automatically after the project is compiled successfully for the first time.
 
-## Организация чрез пакети
+## Organizing Code with Packages
 
-Преди създаването на класове е препоръчително първо да бъде създаден пакет.
+Before creating classes, it is good practice to create a package.
 
-Пакетите служат за:
+Packages are used to:
 
-- логическо групиране на класове;
-- избягване на конфликти между имената на класовете;
-- организиране на структурата на пакета.
+- group classes logically;
+- avoid class-name conflicts;
+- organize the project structure.
 
-За създаване на нов пакет върху директорията **src** от контекстното меню се избира:
+To create a package, open the context menu on the **src** directory and select:
 
 ## New -> Package
 
-В рамките на курса ще бъде използвана следната структура на основния пакет:
+This course uses the following structure for the main package:
 
 ```java
-bg.tu_varna.sit.<група>.<факултетен_номер>.task<номер_на_задача>
+bg.tu_varna.sit.<group>.<faculty_number>.task<task_number>
 ```
 
-<img width="495" height="364" alt="image" src="https://github.com/user-attachments/assets/c2bfacd2-8176-4c79-bd1b-c41a01bbad06" />
+<img width="495" height="364" alt="Creating a package in IntelliJ IDEA" src="https://github.com/user-attachments/assets/c2bfacd2-8176-4c79-bd1b-c41a01bbad06" />
 
-*Забележка:* Предварително дефинираните конвенции за именуване и организация на проектите позволяват различни инструменти автоматично да анализират, компилират, тестват и оценяват програмния код. Поради тази причина и в рамките на курса се използва единна структура на пакетите.
+*Note:* Consistent naming and project organization allow tools to analyze, compile, test, and grade code automatically. For this reason, the course uses a common package structure.
 
-## Използване на `import`
+## Using `import`
 
-Ключовата дума `import` се използва, когато в даден файл трябва да се използва клас от друг пакет. Така пълното име на
-класа не се изписва при всяка употреба.
+Use the `import` keyword when a file needs to use a class from another package. This avoids writing the class's fully qualified name every time.
 
 ```java
 import java.time.LocalDate;
 ```
 
-След този запис класът `LocalDate` може да бъде използван чрез краткото си име.
+After this declaration, you can refer to the class by its short name:
 
 ```java
 LocalDate today = LocalDate.now();
 ```
 
-Декларациите `import` се записват след декларацията `package` и преди декларацията на класа.
+Write `import` declarations after the `package` declaration and before the class declaration.
 
 ```java
 package bg.tu_varna.example;
@@ -99,30 +98,30 @@ public class Application {
 }
 ```
 
-## Създаване на първи клас
+## Creating Your First Class
 
-След създаването на пакета се създава първия Java клас, като от контекстното меню на пакета се избира **New -> Java Class**.
+After creating the package, create your first Java class by opening the package's context menu and selecting **New -> Java Class**.
 
-Името на класа трябва да бъде смислено и да описва предназначението му. В примерите от курса класът, съдържащ метода *main*, ще бъде именуван **Application**.
+Choose a meaningful class name that describes its purpose. In this course, the class containing the `main` method will be named **Application**.
 
-<img width="976" height="276" alt="image" src="https://github.com/user-attachments/assets/1e0b4cbd-a47d-4f3b-8719-7f2ff933f150" />
+<img width="976" height="276" alt="Creating a Java class" src="https://github.com/user-attachments/assets/1e0b4cbd-a47d-4f3b-8719-7f2ff933f150" />
 
-## Методът main
+## The `main` Method
 
-Изпълнението на всяко Java приложение започва от метода main:
+Every Java application starts execution in the `main` method:
 
-<img width="604" height="310" alt="image" src="https://github.com/user-attachments/assets/f4dc6382-25e3-4e66-9447-3d3b8a2fa2c7" />
+<img width="604" height="310" alt="The main method" src="https://github.com/user-attachments/assets/f4dc6382-25e3-4e66-9447-3d3b8a2fa2c7" />
 
-Този метод представлява входната точка на Java приложението. При стартиране на програмата JVM започва изпълнението именно от този метод. В примерите от курса той винаги ще бъде дефиниран в класа **Application**. Това следва широко използваната практика в Java екосистемата, при която класът, преставляващ входната точка на приложението, се именува по този начин.
+This method is the application's entry point. When the program starts, the JVM begins execution here. In this course, the method will always be defined in the **Application** class. This follows a common Java practice of naming the class that represents an application's entry point this way.
 
-Стартирането на методът main може да стане по няколко начина, като фигурата по-долу показва част от тези възможности:
+There are several ways to run the `main` method. The figure below shows some of them:
 
-<img width="571" height="229" alt="image" src="https://github.com/user-attachments/assets/ab060380-1467-492c-ace8-b0b42f064dac" />
+<img width="571" height="229" alt="Ways to run the main method" src="https://github.com/user-attachments/assets/ab060380-1467-492c-ace8-b0b42f064dac" />
 
-Изборът на която и да е от посочените опции ще стартира изпълнението на програмата. Резултатът от конкретния код ще бъде извеждане на конзолата на съобщението (обикновено се отваря в прозорец отдолу):
+Selecting any of these options runs the program. This example prints the following message to the console (usually shown in a panel at the bottom):
 
-```java
+```text
 This is an example
 ```
 
-След основните конструкции и методите преминете към [Откриване и отстраняване на грешки (Debug)](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-01/otkrivane-i-otstranyavane-na-greshki/).
+After learning the basic constructs and methods, continue to [Debugging](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-01/otkrivane-i-otstranyavane-na-greshki/).

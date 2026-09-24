@@ -1,25 +1,24 @@
 ---
-title: Оператори за управление на изпълнението
+title: Flow Control Statements
 sidebar:
   order: 11
 ---
 
-# Оператори за управление на изпълнението
+# Flow Control Statements
 
-Операторите `break` и `continue` управляват изпълнението на цикли. `break` прекратява изпълнението на цикъл или
-`switch`, а `continue` пропуска текущата итерация на цикъл.
+The `break` and `continue` statements control loop execution. `break` exits a loop or a `switch` statement, while `continue` skips the current loop iteration.
 
-## Оператор break
+## The `break` Statement
 
-Операторът *break* прекратява изпълнението на най-вътрешния цикъл (for, while или do-while) или оператор switch, в който се намира, след което изпълнението продължава с първата инструкция след него.
+The `break` statement exits the innermost loop (`for`, `while`, or `do-while`) or `switch` statement that contains it. Execution then continues with the first statement after it.
 
-Синтаксис:
+Syntax:
 
 ```java
 break;
 ```
 
-Пример с оператор for:
+Example with a `for` loop:
 
 ```java
 for (int i = 1; i <= 10; i++) {
@@ -32,7 +31,7 @@ for (int i = 1; i <= 10; i++) {
 }
 ```
 
-Резултат:
+Output:
 
 ```text
 1
@@ -41,11 +40,11 @@ for (int i = 1; i <= 10; i++) {
 4
 ```
 
-Инструкцията break прекратява незабавно изпълнението на най-вътрешния цикъл или конструкцията switch, в която се намира. След изпълнението ѝ управлението преминава към първата инструкция след приключилия цикъл.
+The `break` statement immediately exits the innermost loop or `switch` statement that contains it. Control then moves to the first statement after that construct.
 
-В разглеждания пример цикълът започва да извежда стойностите от 1 до 10. При достигане на стойност 5 условието е изпълнено и се изпълнява инструкцията break, поради което цикълът приключва предсрочно. В резултат на конзолата се отпечатват числата 1, 2, 3 и 4.
+In this example, the loop starts printing values from 1 to 10. When it reaches 5, the condition is true and `break` runs, ending the loop early. The console displays 1, 2, 3, and 4.
 
-Пример със switch:
+Example with `switch`:
 
 ```java
 int day = 2;
@@ -63,22 +62,21 @@ switch (day) {
 }
 ```
 
-Операторът switch избира кой блок от инструкции да бъде изпълнен според стойността на даден израз. След изпълнение на инструкциите в съответния case операторът break прекратява изпълнението на конструкцията switch и управлението преминава към следващата инструкция след нея.
+The `switch` statement selects a block based on the value of an expression. After the instructions in the matching case run, `break` exits the `switch` and control moves to the next statement.
 
-В разглеждания пример стойността на променливата day е 2, поради което се изпълняват инструкциите в case 2. След извеждане на съобщението „Tuesday“ операторът break прекратява изпълнението на конструкцията и останалите case блокове не се изпълняват.
+Here, `day` is 2, so the statements in `case 2` run. After “Tuesday” is printed, `break` exits the construct and the other cases do not run.
 
+## The `continue` Statement
 
-## Оператор continue
+The `continue` statement ends the current loop iteration and moves to the next one.
 
-Операторът *continue* прекратява изпълнението на текущата итерация на цикъла и преминава към следващата.
-
-Синтаксис:
+Syntax:
 
 ```java
 continue;
 ```
 
-Пример:
+Example:
 
 ```java
 for (int i = 1; i <= 5; i++) {
@@ -91,7 +89,7 @@ for (int i = 1; i <= 5; i++) {
 }
 ```
 
-Резултат:
+Output:
 
 ```text
 1
@@ -100,13 +98,13 @@ for (int i = 1; i <= 5; i++) {
 5
 ```
 
-Операторът continue прекратява изпълнението на текущата итерация на цикъла и преминава директно към следващата. Инструкциите, разположени след continue в тялото на цикъла, не се изпълняват за текущата итерация.
+The `continue` statement skips the rest of the current iteration and moves directly to the next one. Statements after `continue` in the loop body are not executed during that iteration.
 
-В разглеждания пример цикълът обхожда стойностите от 1 до 5. При стойност 3 условието е изпълнено и се изпълнява операторът continue, поради което извеждането на числото се пропуска. В резултат на конзолата се отпечатват числата 1, 2, 4 и 5.
+Here, the loop visits values from 1 to 5. When `i` is 3, `continue` skips printing it. The console displays 1, 2, 4, and 5.
 
-## Сравнение
+## Comparison
 
-| Оператор   | Предназначение                                                 |
-| ---------- | -------------------------------------------------------------- |
-| `break`    | Прекратява изпълнението на цикъл или `switch`                   |
-| `continue` | Пропуска текущата итерация на цикъл и преминава към следващата |
+| Statement | Purpose |
+| --------- | ------- |
+| `break` | Exits a loop or `switch` statement. |
+| `continue` | Skips the current loop iteration and moves to the next one. |

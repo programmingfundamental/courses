@@ -1,30 +1,29 @@
 ---
-title: Методи
+title: Methods
 sidebar:
   order: 12
 ---
 
-# Методи
+# Methods
 
-Методът е именуван блок от инструкции, който изпълнява конкретна операция. Методът може да бъде извикан от друго място
-в програмата.
+A method is a named block of instructions that performs a specific operation. It can be called from another part of the program.
 
-Използването на методи:
+Methods:
 
-- намалява повторението на код;
-- прави програмите по-четими;
-- позволява разделяне на програмата на по-малки части;
-- улеснява поддръжката и разширяването на програмата.
+- reduce code repetition;
+- make programs easier to read;
+- divide a program into smaller parts;
+- make a program easier to maintain and extend.
 
-## Аналогия между метод и функция
+## Methods and Functions
 
-Методът е аналог на функция в други езици за програмиране: има име, приема параметри, изпълнява инструкции и може да връща резултат. Например функцията за сбор на две числа се представя в Java чрез метод `sum(int a, int b)`.
+A method is similar to a function in other programming languages: it has a name, accepts parameters, runs instructions, and may return a result. For example, a function that adds two numbers can be represented in Java by the method `sum(int a, int b)`.
 
-В Java методът принадлежи на клас или интерфейс. Статичният метод се извиква чрез класа, а нестатичният — върху конкретен обект и може да използва неговото състояние. За разлика от математическа функция, методът може да променя данни или да извежда текст, а метод с резултат `void` не връща стойност. Не всеки изпълним блок е метод: съществуват и конструктори и блокове за инициализация.
+In Java, a method belongs to a class or interface. A static method is called through its class; a non-static method is called on a particular object and can use that object's state. Unlike a mathematical function, a method can change data or print text, and a method with a `void` return type does not return a value. Not every executable block is a method: constructors and initialization blocks also exist.
 
-## Деклариране на метод
+## Declaring a Method
 
-Декларирането на метод определя неговото име, параметри, тип на върнатата стойност и тяло.
+A method declaration specifies its name, parameters, return type, and body.
 
 ```java
 public static void printGreeting() {
@@ -32,12 +31,11 @@ public static void printGreeting() {
 }
 ```
 
-Методът `printGreeting()` не получава входни данни и не връща резултат. При всяко извикване той изпълнява една и съща
-инструкция.
+The `printGreeting()` method accepts no input and returns no result. Each time it is called, it runs the same instruction.
 
-## Извикване на метод
+## Calling a Method
 
-Методът се изпълнява само когато бъде извикан.
+A method runs only when it is called.
 
 ```java
 public class Main {
@@ -53,11 +51,11 @@ public class Main {
 }
 ```
 
-Методът `printGreeting()` се извиква два пъти от метода `main()`. Поради това текстът се извежда два пъти.
+The `main()` method calls `printGreeting()` twice, so the text is printed twice.
 
-## Метод с параметър
+## A Method with a Parameter
 
-Параметърът позволява към метода да бъде подадена стойност.
+A parameter lets you pass a value to a method.
 
 ```java
 public static void printName(String name) {
@@ -65,16 +63,16 @@ public static void printName(String name) {
 }
 ```
 
-Параметърът `name` има тип `String`. При различни извиквания към метода може да се подава различна стойност.
+The `name` parameter has type `String`. You can pass a different value each time you call the method.
 
 ```java
 printName("Anna");
 printName("Ivan");
 ```
 
-## Метод с няколко параметъра
+## A Method with Multiple Parameters
 
-Методът може да има повече от един параметър.
+A method can have more than one parameter.
 
 ```java
 public static void printSum(int firstNumber, int secondNumber) {
@@ -82,16 +80,15 @@ public static void printSum(int firstNumber, int secondNumber) {
 }
 ```
 
-При извикване на метода трябва да бъдат подадени стойности за всички параметри.
+When calling the method, provide a value for every parameter.
 
 ```java
 printSum(5, 7);
 ```
 
-## Метод с върната стойност
+## A Method That Returns a Value
 
-Метод може да върне резултат към мястото, от което е извикан. Типът на върнатата стойност се записва пред името на
-метода.
+A method can return a result to the code that called it. The return type is written before the method name.
 
 ```java
 public static int calculateSum(int firstNumber, int secondNumber) {
@@ -99,19 +96,18 @@ public static int calculateSum(int firstNumber, int secondNumber) {
 }
 ```
 
-В примера методът `calculateSum()` връща стойност от тип `int`.
+Here, `calculateSum()` returns an `int`.
 
 ```java
 int result = calculateSum(5, 7);
 System.out.println(result);
 ```
 
-## Оператор `return`
+## The `return` Statement
 
-Операторът `return` прекратява изпълнението на текущия метод и връща управлението към мястото, откъдето методът е бил
-извикан.
+The `return` statement ends the current method and returns control to the code that called it.
 
-Ако методът връща стойност, операторът `return` трябва да върне резултат от съответния тип.
+If a method has a return type, `return` must provide a value of the corresponding type.
 
 ```java
 public static int square(int number) {
@@ -119,10 +115,9 @@ public static int square(int number) {
 }
 ```
 
-Методът `square()` приема цяло число като параметър и връща неговия квадрат. Стойността след `return` се предава на
-извикващия код и изпълнението на метода приключва.
+The `square()` method accepts an integer parameter and returns its square. The value after `return` is passed to the calling code, and the method ends.
 
-При методи с тип `void` операторът `return` може да бъде използван само за преждевременно прекратяване на изпълнението.
+In a `void` method, `return` can be used only to end execution early.
 
 ```java
 public static void printNumber(int number) {
@@ -135,11 +130,11 @@ public static void printNumber(int number) {
 }
 ```
 
-Ако подаденото число е отрицателно, методът приключва веднага и не достига до извеждането на стойността.
+If the supplied number is negative, the method ends immediately and does not print the value.
 
-## Променлив брой аргументи
+## Variable Number of Arguments
 
-Метод може да приема променлив брой аргументи от един и същи тип. Това се записва чрез `...` след типа на параметъра.
+A method can accept a variable number of arguments of the same type. Write `...` after the parameter type.
 
 ```java
 public static int sum(int... numbers) {
@@ -153,20 +148,18 @@ public static int sum(int... numbers) {
 }
 ```
 
-Параметърът `numbers` се използва като масив в тялото на метода. При извикване могат да бъдат подадени различен брой
-аргументи.
+The `numbers` parameter is used as an array inside the method. A call can pass different numbers of arguments:
 
 ```java
 int first = sum(1, 2);
 int second = sum(1, 2, 3, 4);
 ```
 
-В един метод може да има само един параметър с променлив брой аргументи. Той трябва да бъде последен в списъка с
-параметри.
+A method can have only one variable-argument parameter. It must be the last parameter in the list.
 
-## Методът `main`
+## The `main` Method
 
-Методът `main` е входна точка на Java програмата. Когато програмата се стартира, изпълнението започва от този метод.
+The `main` method is the entry point of a Java program. Program execution starts here.
 
 ```java
 public static void main(String[] args) {
@@ -179,4 +172,4 @@ public static void main(String[] args) {
 }
 ```
 
-В примера `main` извиква няколко други метода. Така основната последователност на програмата остава кратка и четима.
+In this example, `main` calls several other methods. This keeps the main sequence of the program short and readable.
