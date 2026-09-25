@@ -3876,15 +3876,6 @@
     ]
   },
   {
-    "source": "docs/BEO/obektno-orientirano-programirane-2-chast/homework.md",
-    "target": "src/content/docs/bg/obektno-orientirano-programirane-2-chast/homework.md",
-    "sourceSha256": "8b7bb25db8796a3db372fdc7d60792c082d15b0f0dbd6b4f681cbb0c526597c6",
-    "url": "/courses/bg/obektno-orientirano-programirane-2-chast/homework/",
-    "oldUrls": [
-      "/docs/BEO/obektno-orientirano-programirane-2-chast/homework.html"
-    ]
-  },
-  {
     "source": "docs/BEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/README.md",
     "target": "src/content/docs/bg/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/index.md",
     "sourceSha256": "f75f5eabf962d79cee51af79816903f5a4726727509545e024b44c7367bc1413",
@@ -4371,7 +4362,8 @@
     "oldUrls": [
       "/docs/BEO/obektno-orientirano-programirane-2-chast/README.html",
       "/docs/BEO/obektno-orientirano-programirane-2-chast/",
-      "/docs/BEO/obektno-orientirano-programirane-2-chast/index.html"
+      "/docs/BEO/obektno-orientirano-programirane-2-chast/index.html",
+      "/docs/BEO/obektno-orientirano-programirane-2-chast/homework.html"
     ]
   },
   {
