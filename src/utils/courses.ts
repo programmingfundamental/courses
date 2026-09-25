@@ -22,6 +22,7 @@ const academicYears = [
     'obektno-orientirano-programirane-2-chast',
     'software-systems',
     'uchebna-praktika-2',
+    'uchebna-praktika-2-kibersigurnost',
   ],
   ['obektno-orientirano-programirane-2-chast-project', 'internet-tekhnologii-2023'],
   [
