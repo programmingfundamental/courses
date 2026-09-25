@@ -1,9 +1,9 @@
 name: Software Engineering AI
 on:
   push:
-    paths: ['software-engineering-ai/**', '.github/workflows/software-engineering-ai.yml']
+    paths: ['course-materials/software-engineering-ai/**', '.github/workflows/software-engineering-ai.yml']
   pull_request:
-    paths: ['software-engineering-ai/**', '.github/workflows/software-engineering-ai.yml']
+    paths: ['course-materials/software-engineering-ai/**', '.github/workflows/software-engineering-ai.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -12,14 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: software-engineering-ai/ai-platform
+        working-directory: course-materials/software-engineering-ai/ai-platform
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12.14'
           cache: pip
-          cache-dependency-path: software-engineering-ai/ai-platform/requirements.lock
+          cache-dependency-path: course-materials/software-engineering-ai/ai-platform/requirements.lock
       - name: Install pinned environment
         run: |
           python -m pip install -r requirements.lock
@@ -58,6 +58,6 @@ jobs:
         with:
           name: validated-model-${{ github.sha }}
           path: |
-            software-engineering-ai/ai-platform/artifacts/
-            software-engineering-ai/ai-platform/coverage.xml
+            course-materials/software-engineering-ai/ai-platform/artifacts/
+            course-materials/software-engineering-ai/ai-platform/coverage.xml
           retention-days: 7

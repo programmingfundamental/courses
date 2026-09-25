@@ -82,15 +82,15 @@ the other language's course overview when a lesson has no counterpart.
 
 ## Adding a lab
 
-The Java networking master's course is authored in [`network-programming-java/`](network-programming-java/README.md).
+The Java networking master's course is authored in [`course-materials/network-programming-java/`](course-materials/network-programming-java/README.md).
 Run `npm run sync:network-labs` after editing its student `labXX.md` files to update the seven site pages.
 `npm run check` verifies that those pages match their sources. Instructor notes are kept outside the site content tree.
 
-The Android master's course is authored in [`android-mobile-technologies/`](android-mobile-technologies/README.md).
+The Android master's course is authored in [`course-materials/android-mobile-technologies/`](course-materials/android-mobile-technologies/README.md).
 Run `npm run sync:android-labs` after editing its student `labXX.md` files.
 The same `npm run check` also verifies these seven pages; Android instructor notes stay outside the site content tree.
 
-The Mobile Internet master's course is authored in [`mobile-internet-course/`](mobile-internet-course/README.md).
+The Mobile Internet master's course is authored in [`course-materials/mobile-internet-course/`](course-materials/mobile-internet-course/README.md).
 Its ten 90-minute labs share a buildable Android/Quarkus starter under `platform/`.
 Run `npm run sync:mobile-internet-labs` after editing the student files; `npm run check` verifies the generated pages.
 Instructor notes and starter source projects remain outside the site content tree.

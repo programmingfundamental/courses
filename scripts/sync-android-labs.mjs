@@ -4,7 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const sourceRoot = path.join(root, 'android-mobile-technologies');
+const sourceRoot = path.join(root, 'course-materials', 'android-mobile-technologies');
 const targetRoot = path.join(root, 'src/content/docs/bg/android-bazirani-tekhnologii-za-mobilni-ustroistva');
 const folders = [
   'lab01-lifecycle-state',

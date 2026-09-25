@@ -1,1247 +1,1370 @@
 [
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab1/http.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab1/http.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "0da42abc0294d8ce71e8f17c03c751f90e31fecf0de77553ec3f84f31793c455",
-    "url": "/courses/en/internet-tekhnologii-2023/lab1/http/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab1/http.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab1/postman.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab1/postman.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "8dd5f3da1ea03718671e5143cbde8d8940a42697882a1e6cf150596004d6aeff",
-    "url": "/courses/en/internet-tekhnologii-2023/lab1/postman/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab1/postman.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab1/README.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab1/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "2703834c961d7c83d7b3c09a45f48044fa4a868b547d1a29c1d4973aafb668b7",
-    "url": "/courses/en/internet-tekhnologii-2023/lab1/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab1/README.html",
       "/docs/AEO/internet-tekhnologii-2023/lab1/",
       "/docs/AEO/internet-tekhnologii-2023/lab1/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab1/tasks.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab1/tasks.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "075e81d23756f4284cabddb8c56c1be72eeb2a19bbb3ce8ff80463a552c4ec5a",
-    "url": "/courses/en/internet-tekhnologii-2023/lab1/tasks/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab1/tasks.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab10/README.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab10/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "0a89a65161bd5b29d506d91e9bcbc06bd8f2c8922eb48e39759ccb7c18f8d8e2",
-    "url": "/courses/en/internet-tekhnologii-2023/lab10/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab10/README.html",
       "/docs/AEO/internet-tekhnologii-2023/lab10/",
       "/docs/AEO/internet-tekhnologii-2023/lab10/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab10/repository_layer.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab10/repository_layer.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "d87f2064a81ecc619905529402e09ca8b85f53ccd2c61a24349f8aafb6f2b453",
-    "url": "/courses/en/internet-tekhnologii-2023/lab10/repository_layer/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab10/repository_layer.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab10/tasks.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab10/tasks.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "2c20fe54ff9905ef53f0f706736bd4318790eaf3cc618d2897a7e8f942ab9014",
-    "url": "/courses/en/internet-tekhnologii-2023/lab10/tasks/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab10/tasks.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab11/filter-config.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab11/filter-config.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "9e6a3b42026dfc0f4a2757ae2f48b2f2348c13c6fe54f9a55cecbafdf628d1d7",
-    "url": "/courses/en/internet-tekhnologii-2023/lab11/filter-config/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab11/filter-config.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab11/filter.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab11/filter.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "931df9d75c8b1745be5aecb01417443002918f471686e86b663b59c017a2680d",
-    "url": "/courses/en/internet-tekhnologii-2023/lab11/filter/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab11/filter.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab11/method-security.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab11/method-security.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "71f0893152e7959fb32857f32daaa2459567ffbdd19d2e47fd4d242b430fdd50",
-    "url": "/courses/en/internet-tekhnologii-2023/lab11/method-security/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab11/method-security.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab11/README.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab11/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "a0934a1b0cb891972702a6d8180a0066c3224df39ea074a6f5bc87f9c1edce20",
-    "url": "/courses/en/internet-tekhnologii-2023/lab11/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab11/README.html",
       "/docs/AEO/internet-tekhnologii-2023/lab11/",
       "/docs/AEO/internet-tekhnologii-2023/lab11/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab11/session.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab11/session.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "7fb61198ae5c75d2e83ba76aa5de926e5ea923b51660e16a45fbff484ae367e9",
-    "url": "/courses/en/internet-tekhnologii-2023/lab11/session/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab11/session.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab11/spring-security.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab11/spring-security.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "44ea44339dc9916a44be954f5ebac72b5e9090c13eff6ae9903d007127877826",
-    "url": "/courses/en/internet-tekhnologii-2023/lab11/spring-security/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab11/spring-security.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab11/task.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab11/task.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "9d6bf70ebc825436e315872def8ce48568dca20b45220a462ac6842e38868e59",
-    "url": "/courses/en/internet-tekhnologii-2023/lab11/task/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab11/task.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab11/udostoveryavane.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab11/udostoveryavane.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "74f702836996c019a01168a7dcf0aa86ab0e9f032189ed319a2cb12a1600c4a2",
-    "url": "/courses/en/internet-tekhnologii-2023/lab11/udostoveryavane/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab11/udostoveryavane.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab12/jwt.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab12/jwt.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "d1bdd5362ced50dc09222e63818acbe2ef7de802402e708ecaf65fa9f76e9160",
-    "url": "/courses/en/internet-tekhnologii-2023/lab12/jwt/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab12/jwt.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab12/README.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab12/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "0aec929593c6a4e4ab96f9d9ccf17b2ad9f3e098a4d22eeaf643964fb65efa25",
-    "url": "/courses/en/internet-tekhnologii-2023/lab12/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab12/README.html",
       "/docs/AEO/internet-tekhnologii-2023/lab12/",
       "/docs/AEO/internet-tekhnologii-2023/lab12/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab12/security-using-JWT.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab12/security-using-JWT.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "04b4e431f695fc3ef80d82e407e66dc95219b61c2989d0c00abf2c14351bddcf",
-    "url": "/courses/en/internet-tekhnologii-2023/lab12/security-using-jwt/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab12/security-using-JWT.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab12/task.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab12/task.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "8171fe607cc7bdfe45f5678216aa3a5c50ae14c810d3fd71574ef98d68319919",
-    "url": "/courses/en/internet-tekhnologii-2023/lab12/task/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab12/task.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab2/excercises.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab2/excercises.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "e61d24a6e983dda1890ee6335e62f312a3654385dc54323a9970dc6e369d8318",
-    "url": "/courses/en/internet-tekhnologii-2023/lab2/excercises/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab2/excercises.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab2/java-servlets.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab2/java-servlets.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "4f723ca8b57d22f0d8e47c38d68f76f2b15f839fe4313aa9517f0395e74de304",
-    "url": "/courses/en/internet-tekhnologii-2023/lab2/java-servlets/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab2/java-servlets.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab2/maven-project.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab2/maven-project.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "2da139baddc498e5d4f23c5514f6e67b399fb9c38d417f660df2bcd74a15b9c2",
-    "url": "/courses/en/internet-tekhnologii-2023/lab2/maven-project/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab2/maven-project.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab2/maven.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab2/maven.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "560075cc0cd0ce8cdb08cc5322f761e4a7e9d0f76e40149f4412ecd8297b87b4",
-    "url": "/courses/en/internet-tekhnologii-2023/lab2/maven/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab2/maven.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab2/README.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab2/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "d39b43d01b4d924001234d44674f6b1ff8d5c750895a13e4e87e9108a2706618",
-    "url": "/courses/en/internet-tekhnologii-2023/lab2/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab2/README.html",
       "/docs/AEO/internet-tekhnologii-2023/lab2/",
       "/docs/AEO/internet-tekhnologii-2023/lab2/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab2/servlet-creation.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab2/servlet-creation.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "ce13c9939e153a682f921da25796e888d1be47e91429bc24f326d68ba44d2b80",
-    "url": "/courses/en/internet-tekhnologii-2023/lab2/servlet-creation/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab2/servlet-creation.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab2/servlet-lifecycle.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab2/servlet-lifecycle.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "ca5ae767c419ba51dd1545833b7f6f07070faf32bb6e9d414bc5b35c400549e4",
-    "url": "/courses/en/internet-tekhnologii-2023/lab2/servlet-lifecycle/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab2/servlet-lifecycle.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab2/tomcat.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab2/tomcat.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "9084c592a468247321d671a8c63ebf8a66d0aecd16fe1230f7a62fa1b92fbc10",
-    "url": "/courses/en/internet-tekhnologii-2023/lab2/tomcat/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab2/tomcat.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab3/extensible-markup-language.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab3/extensible-markup-language.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "2a1ad4b324be0d85eb1eafebed2146a62c04165f3f991da2be9824114c76dc49",
-    "url": "/courses/en/internet-tekhnologii-2023/lab3/extensible-markup-language/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab3/extensible-markup-language.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab3/java-architecture-for-xml-binding.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab3/java-architecture-for-xml-binding.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "cbdd65b633aa80564641bc352ebd994e1c27d103e0f712f99f5f02b8c1685b5e",
-    "url": "/courses/en/internet-tekhnologii-2023/lab3/java-architecture-for-xml-binding/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab3/java-architecture-for-xml-binding.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab3/README.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab3/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "78932255bb58b5a14bdcf65e36cbeb2a13237a1c6ca4fdcbb7c0b7efd2bf258e",
-    "url": "/courses/en/internet-tekhnologii-2023/lab3/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab3/README.html",
       "/docs/AEO/internet-tekhnologii-2023/lab3/",
       "/docs/AEO/internet-tekhnologii-2023/lab3/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab3/zadachi.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab3/zadachi.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "bbebe585cc29d6ce4d58f0ce005803b324ce769d8aa91f159d5dffe07081fa9f",
-    "url": "/courses/en/internet-tekhnologii-2023/lab3/zadachi/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab3/zadachi.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab4/excercises.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab4/excercises.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "cbb3c7ecf80593d16ba061a995f62c423f3a6e97ed502641ce05fff2de99303b",
-    "url": "/courses/en/internet-tekhnologii-2023/lab4/excercises/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab4/excercises.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab4/README.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab4/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "8b6a5122a1061fb7281b245018e72288de301973e7f135867b8558ea80fecd86",
-    "url": "/courses/en/internet-tekhnologii-2023/lab4/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab4/README.html",
       "/docs/AEO/internet-tekhnologii-2023/lab4/",
       "/docs/AEO/internet-tekhnologii-2023/lab4/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab5/README.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab5/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "8d55262fc2e83eb03af3eab81de2ce5686ca6f173a6b38b1db246ac887471320",
-    "url": "/courses/en/internet-tekhnologii-2023/lab5/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab5/README.html",
       "/docs/AEO/internet-tekhnologii-2023/lab5/",
       "/docs/AEO/internet-tekhnologii-2023/lab5/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab6/create_SB_project.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab6/create_SB_project.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "900d43701118567f3b278e2bca7d0fed0023adbcd745b97a4573046396fb6c31",
-    "url": "/courses/en/internet-tekhnologii-2023/lab6/create_sb_project/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab6/create_SB_project.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab6/izbrani-anotacii.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab6/izbrani-anotacii.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "b2414b1f5340a46f81f6b2f6b663150cefdaf32e1b2f17b2de58a058d1795c13",
-    "url": "/courses/en/internet-tekhnologii-2023/lab6/izbrani-anotacii/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab6/izbrani-anotacii.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab6/README.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab6/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "c0013fef544ea05a63143fa174237feaf8f0f1e38bc31e6a1f2ba3256931d1ce",
-    "url": "/courses/en/internet-tekhnologii-2023/lab6/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab6/README.html",
       "/docs/AEO/internet-tekhnologii-2023/lab6/",
       "/docs/AEO/internet-tekhnologii-2023/lab6/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab6/spring-boot.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab6/spring-boot.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "873567059be992ccfedce90af275727d6769b732fc6378217b12cd96aee56586",
-    "url": "/courses/en/internet-tekhnologii-2023/lab6/spring-boot/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab6/spring-boot.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab6/zadacha-individual.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab6/zadacha-individual.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "29a9b9bc8bb1efb0742481fdd6beb45b033b106f320d53fc6b69c974a38c002d",
-    "url": "/courses/en/internet-tekhnologii-2023/lab6/zadacha-individual/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab6/zadacha-individual.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab6/zadacha.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab6/zadacha.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "55a0c1df47cb716794cceae1b0aa9e996304f850bf7d9daac260a4ed66b2747e",
-    "url": "/courses/en/internet-tekhnologii-2023/lab6/zadacha/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab6/zadacha.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab7/communication-flow.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab7/communication-flow.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "b5283830bd4c33da60e832c236a8b188ac00de4ee88eede986db7be1f042495f",
-    "url": "/courses/en/internet-tekhnologii-2023/lab7/communication-flow/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab7/communication-flow.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab7/dto.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab7/dto.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "af83ae9d2e5076f05f0b687348ee509967720da2c72ee826cab5563df16fefc7",
-    "url": "/courses/en/internet-tekhnologii-2023/lab7/dto/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab7/dto.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab7/json.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab7/json.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "6307f0acea5c286714d6b78e836beeef71c13b9912e8dc3728104887deab366d",
-    "url": "/courses/en/internet-tekhnologii-2023/lab7/json/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab7/json.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab7/lombok.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab7/lombok.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "b2ee302fc95a899d2828e260eb6dd278d0c3176fb0ca09bc8499f8cfbd22e5bd",
-    "url": "/courses/en/internet-tekhnologii-2023/lab7/lombok/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab7/lombok.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab7/README.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab7/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "430caf70f8014791ee9d984ab4a4dbf5715a85cae55349baf2a27fde28d5f9f2",
-    "url": "/courses/en/internet-tekhnologii-2023/lab7/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab7/README.html",
       "/docs/AEO/internet-tekhnologii-2023/lab7/",
       "/docs/AEO/internet-tekhnologii-2023/lab7/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab7/response-entity.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab7/response-entity.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "331f4db790870d7d75b5a62af96cf99770f25e7088d1f6713ca8aa7aca8fb31b",
-    "url": "/courses/en/internet-tekhnologii-2023/lab7/response-entity/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab7/response-entity.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab7/task.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab7/task.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "d154c326b41b99fde929374474d12b1cffc787eba1848f5578e48d37f7f2782e",
-    "url": "/courses/en/internet-tekhnologii-2023/lab7/task/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab7/task.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab8/exception-handler.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab8/exception-handler.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "b158688ecace8df9e912884c4f9babbd35c1ea9b9075706054930111c53cb93b",
-    "url": "/courses/en/internet-tekhnologii-2023/lab8/exception-handler/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab8/exception-handler.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab8/personalizirani-validatori.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab8/personalizirani-validatori.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "240e038405ad5bc42da0e502e6f07f9f83f96dfa51cb56fbc00ec6316cd8dbdd",
-    "url": "/courses/en/internet-tekhnologii-2023/lab8/personalizirani-validatori/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab8/personalizirani-validatori.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab8/README.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab8/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "c6cdd0814b367081d7e849baf71544b8272218f0adeb7a56219c63b885763f79",
-    "url": "/courses/en/internet-tekhnologii-2023/lab8/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab8/README.html",
       "/docs/AEO/internet-tekhnologii-2023/lab8/",
       "/docs/AEO/internet-tekhnologii-2023/lab8/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab8/request-data-validation.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab8/request-data-validation.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "a04b3bcbf8d624e72c3916241a0dfa13ef9b05674c6c3bffd652b00ce0559fa4",
-    "url": "/courses/en/internet-tekhnologii-2023/lab8/request-data-validation/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab8/request-data-validation.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab8/task-ex8.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab8/task-ex8.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "47a85ef019670a9fa3d70978968e7ae289abbd658f195c8ecc18b4a5efe030db",
-    "url": "/courses/en/internet-tekhnologii-2023/lab8/task-ex8/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab8/task-ex8.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab9/jakarta-persistence-anotacii.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab9/jakarta-persistence-anotacii.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "39569dbe64b7cedfbe536ae85828e176f7ab1e3cbc66d21556275410018b3bee",
-    "url": "/courses/en/internet-tekhnologii-2023/lab9/jakarta-persistence-anotacii/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab9/jakarta-persistence-anotacii.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab9/konfigurirane-na-postgresql-db.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab9/konfigurirane-na-postgresql-db.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "4b44c651fc3024ce661bbaa0c5da69a330d89674f53e7a22572856cf6e5dfc69",
-    "url": "/courses/en/internet-tekhnologii-2023/lab9/konfigurirane-na-postgresql-db/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab9/konfigurirane-na-postgresql-db.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab9/model-mapper.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab9/model-mapper.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "0423534719bc6a681b4e96c545c791bdc0e72d8e7090e6027c20c3cd8b199400",
-    "url": "/courses/en/internet-tekhnologii-2023/lab9/model-mapper/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab9/model-mapper.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab9/README.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab9/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "184e3ede249bd110966b1cb6e7d125f68b3b0ef9d726df7900e2f3c551fd50b1",
-    "url": "/courses/en/internet-tekhnologii-2023/lab9/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab9/README.html",
       "/docs/AEO/internet-tekhnologii-2023/lab9/",
       "/docs/AEO/internet-tekhnologii-2023/lab9/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab9/repository-sloi.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab9/repository-sloi.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "72325a1076397827270e490cc2cb8f4da6406276a5741490837fa533e7eeffd4",
-    "url": "/courses/en/internet-tekhnologii-2023/lab9/repository-sloi/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab9/repository-sloi.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab9/service-sloi.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab9/service-sloi.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "8de5bb89d20f76838454e6515ed351e4035db31eaf65ee352780a808ee95fc26",
-    "url": "/courses/en/internet-tekhnologii-2023/lab9/service-sloi/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab9/service-sloi.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/lab9/tasks.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/lab9/tasks.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "cb68ebc5c50ff7c72de50d9f89b0a54e01a363f9ca07ec72fa7de2ca7f2fd2fc",
-    "url": "/courses/en/internet-tekhnologii-2023/lab9/tasks/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/lab9/tasks.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/internet-tekhnologii-2023/README.md",
-    "target": "src/content/docs/en/internet-tekhnologii-2023/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "f320c7b479241e3169e92fd4b5ea2c827cb3a529cf5707873375b7f5ee9e37d5",
-    "url": "/courses/en/internet-tekhnologii-2023/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/internet-tekhnologii-2023/README.html",
       "/docs/AEO/internet-tekhnologii-2023/",
       "/docs/AEO/internet-tekhnologii-2023/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-01/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "89925aa8444d0bea4aa72aae0690cb7c29efde0c61dc47ac11bc74dae439443a",
-    "url": "/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-01/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/README.html",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-1/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-10/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-10/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "84b5bd77a6eb74c64548fff6f22522307e3d9eacee93a1526d8bdff1d58f7245",
-    "url": "/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-10/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-10/README.html",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-10/",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-10/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-11/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-11/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "b5fc0eedf3be94198e0c5fb28f6df94fd0a2aad3bfe10923ea459d4533d8c6db",
-    "url": "/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-11/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-11/README.html",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-11/",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-11/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-3/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "109b9954f9e5b5cb5046e460265ff3ee21abc7c852052d79f1ad390a0fc41b76",
-    "url": "/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-03/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-3/README.html",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-3/",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-3/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-5/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-05/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "615c911f0cb846be5965ed8152d32bbe286b6880c54c2e15acf495646b7a35f0",
-    "url": "/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-05/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-5/README.html",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-5/",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-5/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-6/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-06/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "b19bce95006ed8b75d3d0cd1ee389c2d5934839898bd911f0fadea6cb2f91799",
-    "url": "/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-06/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-6/README.html",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-6/",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-6/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-7/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-07/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "dca960a26e6aa65f8a8a7f11a0f2d569f2a6179e473acb8670cdecc22613f2f1",
-    "url": "/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-07/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-7/README.html",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-7/",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-7/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-8/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-08/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "87d560a036eb6737e5db4c6ae33b1d6f3f0e5820ba89002f37a89d93057623fe",
-    "url": "/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-08/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-8/README.html",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-8/",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-8/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-1-chast/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "f65259e4984ff641a1c554aa9c830fd8235ea18c5397d2f19d255129ba96f614",
-    "url": "/courses/en/obektno-orientirano-programirane-1-chast/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-1-chast/README.html",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/",
       "/docs/AEO/obektno-orientirano-programirane-1-chast/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-1-chast-project/laboratorno-uprazhnenie-01/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast-project/laboratorno-uprazhnenie-01/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "43b77d5af9e4b9535c584c5d2d58a0306f5ded6fbfb5c06172d273341e714242",
-    "url": "/courses/en/obektno-orientirano-programirane-1-chast-project/laboratorno-uprazhnenie-01/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-1-chast-project/laboratorno-uprazhnenie-01/README.html",
       "/docs/AEO/obektno-orientirano-programirane-1-chast-project/laboratorno-uprazhnenie-01/",
       "/docs/AEO/obektno-orientirano-programirane-1-chast-project/laboratorno-uprazhnenie-01/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-1-chast-project/laboratorno-uprazhnenie-02/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast-project/laboratorno-uprazhnenie-02/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "cc05f60cfcf8ddc11fb9f338cab8edd9bdc18df4f72e78e7b20f714d21f0a9f9",
-    "url": "/courses/en/obektno-orientirano-programirane-1-chast-project/laboratorno-uprazhnenie-02/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-1-chast-project/laboratorno-uprazhnenie-02/README.html",
       "/docs/AEO/obektno-orientirano-programirane-1-chast-project/laboratorno-uprazhnenie-02/",
       "/docs/AEO/obektno-orientirano-programirane-1-chast-project/laboratorno-uprazhnenie-02/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-1-chast-project/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-1-chast-project/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "d118df9a3b44e115e57cff7ff21b0b90511c9dc48e5598323e85d24cfb4e48ae",
-    "url": "/courses/en/obektno-orientirano-programirane-1-chast-project/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-1-chast-project/README.html",
       "/docs/AEO/obektno-orientirano-programirane-1-chast-project/",
       "/docs/AEO/obektno-orientirano-programirane-1-chast-project/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/ocp-open-closed-principle/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/ocp-open-closed-principle/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "36138b1f4ec4c1de84c99cd38f3e2f92128667b22e5df1036a418efdaaa48f39",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/ocp-open-closed-principle/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/ocp-open-closed-principle/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/ocp-open-closed-principle/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/ocp-open-closed-principle/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/ocp-open-closed-principle/zadachi.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/ocp-open-closed-principle/zadachi.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "a8ce2b7523d44eaa2cae092177f7d9a86c7a2a2627d18ebffdb5173a228c4f7b",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/ocp-open-closed-principle/zadachi/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/ocp-open-closed-principle/zadachi.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "20b0990143eae8c2cfb0b28c8234344486df364e3b2913ed28473b897019b642",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/srp-single-responsibility-principle/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/srp-single-responsibility-principle/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "108b9e00d3674a14afd5d23d884cc35831a35e342db3b3df943bfe53afe33fc2",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/srp-single-responsibility-principle/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/srp-single-responsibility-principle/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/srp-single-responsibility-principle/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-1/srp-single-responsibility-principle/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-10/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-10/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "a9b8ffbfe0e9a56b2a4bca61f99b6691d6fec697d9e76274c810e09b221b4094",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-10/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-10/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-10/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-10/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-11/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-11/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "ea3319e16b159e7fd6cb3f7da2dd81fa721f8c0578f69cbb0e0bd72209b51235",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-11/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-11/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-11/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-11/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-12/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-12/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "5d6502d4a13d735d23bef79640455dd1aa13679c7ae35b1af67b43757a008daf",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-12/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-12/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-12/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-12/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-13.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-13.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "b57029db21505e7cf5e0ef9db4190ae401ba57fe1dc6deffc7003712361eff5b",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-13/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-13.html",
       "/docs/obektno-orientirano-programirane-2-chast-aeo/laboratorno-uprazhnenie-13"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-2/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-2/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "a68fa2298d50554130057c4d05d479b2dd1bf9f3b5411ac2d202b1cb78931dca",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-2/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-2/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-2/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-2/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-3/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-3/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "a903a1328e422e2d7ce64553590745485889b4fcb0be2e953223eb76c6c95949",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-3/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-3/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-3/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-3/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-4/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-4/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "5657c6887d71c715ef9354dc825a287ff8d926e18f4070d389e6b54f3817ec0e",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-4/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-4/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-4/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-4/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-5.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-5.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "f42fb9a326e93046eab130d7da97bd14e062dd1c593272e98ab7449bf81c7983",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-5/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-5.html",
       "/docs/obektno-orientirano-programirane-2-chast-aeo/laboratorno-uprazhnenie-5"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-6/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-6/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "4b34607f6cd3c52d53342a6a582c0b68fca77bd21d76883a26686c164f736f2b",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-6/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-6/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-6/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-6/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-7/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-7/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "1128e00f7a6ca4c0507fdf89d2559fdff56ffb08d58087cc871fc76ea730a825",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-7/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-7/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-7/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-7/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-8/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-8/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "25c0eed0aeaa9092aad3bc69b7f1ec7cef118434ac243f6bc0b89e03250bbf2f",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-8/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-8/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-8/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-8/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-9.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-9.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "25b90ab8583a3c381b53f64dd195c93c09df97efd50f6c8e054c9764cabc7abe",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-9/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast/laboratorno-uprazhnenie-9.html",
       "/docs/obektno-orientirano-programirane-2-chast-aeo/laboratorno-uprazhnenie-9"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "ba48b786d3d41ee023659de190d59cc12bad15ad1f048f8255fabc0eaca66a5f",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-1/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-1/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "d1c1119af6d26bcbb364b217705f9efe00355b71f7e9797774ae7f679f806a28",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-1/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-1/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-1/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-1/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-10/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-10/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "5a55afa500455117c1446763ca1813becb36ef4db4bb3228a11c482b69a1c26a",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-10/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-10/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-10/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-10/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-11/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-11/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "35b2019c878d57c751e9f0c5d9dad74940b9624745828c50b2df1a0bbbb04ea0",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-11/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-11/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-11/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-11/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-12/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-12/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "24381ab250c6bcdcdfca24d241e73a86477ed1c170ffceb4b375583adf63161b",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-12/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-12/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-12/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-12/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-13/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-13/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "c867a5e5601d373ff0b863b640e4d460ab852f5b77d45c7066d492df072c2d9d",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-13/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-13/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-13/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-13/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-14/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-14/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "86cd11689e6caf47b1e830b67f4e44fbce4de9b86354b4698ac395644cf9e551",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-14/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-14/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-14/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-14/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-15/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-15/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "ccc27bbd3a7a03618094018828da8f7c39807fd8c90495bb48f310e2c22a76b7",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-15/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-15/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-15/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-15/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-2/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-2/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "97c06d7131a4efcfe0b505ee70ecc024068b7630b4f67d3253aec5823c14d902",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-2/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-2/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-2/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-2/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-3/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-3/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "4bc1b214e19b5b539b927c5d9a91e9de0a865567e5976bbc55f15da2e225ce9a",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-3/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-3/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-3/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-3/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-4/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-4/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "03ca2a08ad1ff790b4091a9696cdec2abbd6eab9cf91afc084f6abae361dae49",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-4/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-4/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-4/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-4/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-5/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-5/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "e8cd74c6b3745b5ee3e42454159d4a05eef80a5ba23de7a1bb9ab01ec26acdbf",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-5/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-5/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-5/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-5/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-6/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-6/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "2c9e1b075c445c0a80bd7789b2f9f40a5813dd1733104211b02decfc414ac016",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-6/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-6/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-6/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-6/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-7/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-7/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "50d4301a0f98a374082a5e741c9d0dee4eccda47a108a33d9c15efa965b0d514",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-7/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-7/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-7/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-7/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-8/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-8/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "0d4cae4af1f8ead27798982e9a5662c0207b1f25dca1db03ce21394a8c1b97c8",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-8/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-8/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-8/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-8/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-9/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-9/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "232e38c7d8ab950dce264d810772481bf757b8f34072febee11bd06c870eafc2",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-9/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-9/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-9/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/laboratorno-uprazhnenie-9/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/obektno-orientirano-programirane-2-chast-project/README.md",
-    "target": "src/content/docs/en/obektno-orientirano-programirane-2-chast-project/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "c66285d1a200afcec842132f477302aac9fa67916495591dbc10e837db883d62",
-    "url": "/courses/en/obektno-orientirano-programirane-2-chast-project/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/README.html",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/",
       "/docs/AEO/obektno-orientirano-programirane-2-chast-project/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-1/kotlin-uvod copy.md",
-    "target": "src/content/docs/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-1/kotlin-uvod copy.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "ad1cc3dde3141d8019abfe626b08c23b9012d5d678fdc1c423c3157de8e3d1bb",
-    "url": "/courses/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-1/kotlin-uvod-copy/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-1/kotlin-uvod copy.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-1/kotlin-uvod.md",
-    "target": "src/content/docs/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-1/kotlin-uvod.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "fc15ae23537e631ad2279f4979159614bdbed593ccddcf6727131f527a6e3607",
-    "url": "/courses/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-1/kotlin-uvod/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-1/kotlin-uvod.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-1/README.md",
-    "target": "src/content/docs/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-1/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "1d3efa8a872bde7088c114f8365acf989ffb82e8a6afcaa9de4ae52b53d2eb79",
-    "url": "/courses/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-1/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-1/README.html",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-1/",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-1/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-1/zadacha.md",
-    "target": "src/content/docs/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-1/zadacha.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "5f9bb1d3882b44e8fd18673c9a93add635d7524701554e12c7b2f222181b50d9",
-    "url": "/courses/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-1/zadacha/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-1/zadacha.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-10/README.md",
-    "target": "src/content/docs/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-10/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "a6b62df76c5a7dcf429961d0a57c2b411ad7961591d369208c21803a521269e5",
-    "url": "/courses/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-10/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-10/README.html",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-10/",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-10/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-11/README.md",
-    "target": "src/content/docs/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-11/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "50ef4c1b13c74e6d5b9d363b58a4be9b633d48ccd4246d1926323c075f3ca45f",
-    "url": "/courses/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-11/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-11/README.html",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-11/",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-11/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-12/README.md",
-    "target": "src/content/docs/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-12/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "c844d32495bd254d78410174ed8df984d4ab46b26e042ab67e86be96d669de01",
-    "url": "/courses/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-12/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-12/README.html",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-12/",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-12/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-2/README.md",
-    "target": "src/content/docs/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-2/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "22a8b0b7663c5b8a6c2d3422bef59931fec09e8a43d424879b2422689da8b3ba",
-    "url": "/courses/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-2/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-2/README.html",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-2/",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-2/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-2/zadacha.md",
-    "target": "src/content/docs/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-2/zadacha.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "91c39eb1a2b7a5847985b4b97acc7473dc7af1d774d92acd8fbb6947c878f695",
-    "url": "/courses/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-2/zadacha/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-2/zadacha.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-3/README.md",
-    "target": "src/content/docs/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-3/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "6c8e7497ffefacab5a4b8b12d68a99567c3cecd607cda762287b4c195f56f369",
-    "url": "/courses/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-3/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-3/README.html",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-3/",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-3/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-4/README.md",
-    "target": "src/content/docs/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-4/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "4acc63cde7811745831e386fee59b17f7968fff1ae4d1abbcf980bea321def2f",
-    "url": "/courses/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-4/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-4/README.html",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-4/",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-4/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/README.md",
-    "target": "src/content/docs/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "94f49239c557a2e55727fb59b4993d28b2b308bc1c736522c2792f29cccb2579",
-    "url": "/courses/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/README.html",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/zadacha.md",
-    "target": "src/content/docs/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/zadacha.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "1e506df8c1eebe57b5f6d0cafb5627d33cd445858e469d10155d2f68cfb088ac",
-    "url": "/courses/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/zadacha/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/zadacha.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-6/README.md",
-    "target": "src/content/docs/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-6/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "923b3791c3baf351c6847a1ffff4f1a1c6d7f80216cad880680472b4cbf73e50",
-    "url": "/courses/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-6/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-6/README.html",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-6/",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-6/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-7/README.md",
-    "target": "src/content/docs/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-7/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "a9ee19a6188402720511f539f1f3bc46c936c99fff8fcb1c184ac28b79452819",
-    "url": "/courses/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-7/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-7/README.html",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-7/",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-7/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-8/README.md",
-    "target": "src/content/docs/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-8/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "724edb12e116208a4e99a35e40094366f82df4d6d8db007b0f19f26f59ad6798",
-    "url": "/courses/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-8/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-8/README.html",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-8/",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-8/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-9/README.md",
-    "target": "src/content/docs/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-9/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "97c12ad9eb0f46868d761e250e4cd0abd67dae68f79aeab0aea3a7948dd900c3",
-    "url": "/courses/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-9/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-9/README.html",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-9/",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-9/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/README.md",
-    "target": "src/content/docs/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "6deea6a8b3462f7ec7206b9cf74f7502eadd6666ded057e58955d34e6f6839bd",
-    "url": "/courses/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/README.html",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/",
       "/docs/AEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/README.md",
@@ -1256,197 +1379,215 @@
   },
   {
     "source": "docs/AEO/software-engineering/laboratorno-uprazhnenie-1/README.md",
-    "target": "src/content/docs/en/software-engineering/laboratorno-uprazhnenie-1/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "08c5dda136ed610ca28e1ed304a27d8f86e04876f6f815c0a6fc3b1e31deb5df",
-    "url": "/courses/en/software-engineering/laboratorno-uprazhnenie-1/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-1/README.html",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-1/",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-1/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-engineering/laboratorno-uprazhnenie-10/README.md",
-    "target": "src/content/docs/en/software-engineering/laboratorno-uprazhnenie-10/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "610d1df9f86c0f9f399002d90e2fcf6e3d09898436c8dbcfecabe686b235f487",
-    "url": "/courses/en/software-engineering/laboratorno-uprazhnenie-10/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-10/README.html",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-10/",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-10/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-engineering/laboratorno-uprazhnenie-11/README.md",
-    "target": "src/content/docs/en/software-engineering/laboratorno-uprazhnenie-11/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "6c11e225674fbcb2ebc83048e977b3e4b1dd7f77e99170d0d7d00c2bc5bec429",
-    "url": "/courses/en/software-engineering/laboratorno-uprazhnenie-11/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-11/README.html",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-11/",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-11/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-engineering/laboratorno-uprazhnenie-12/README.md",
-    "target": "src/content/docs/en/software-engineering/laboratorno-uprazhnenie-12/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "6bcfc2706ca01f6ebc2b269311036db4e1d4ad31d0fe1b9ff4200a56a10444b2",
-    "url": "/courses/en/software-engineering/laboratorno-uprazhnenie-12/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-12/README.html",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-12/",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-12/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-engineering/laboratorno-uprazhnenie-2/README.md",
-    "target": "src/content/docs/en/software-engineering/laboratorno-uprazhnenie-2/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "d3c4340a0c3e0006c185c8eeb9ea16609e09667e1d013c490fb0390ab7961c5f",
-    "url": "/courses/en/software-engineering/laboratorno-uprazhnenie-2/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-2/README.html",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-2/",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-2/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-engineering/laboratorno-uprazhnenie-3/README.md",
-    "target": "src/content/docs/en/software-engineering/laboratorno-uprazhnenie-3/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "b7755614c8e9f031ab88650381f45ef35e863c7efe41970581070cef557b75b1",
-    "url": "/courses/en/software-engineering/laboratorno-uprazhnenie-3/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-3/README.html",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-3/",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-3/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-engineering/laboratorno-uprazhnenie-4/README.md",
-    "target": "src/content/docs/en/software-engineering/laboratorno-uprazhnenie-4/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "bd2f0ecac4ce0b70b71dd46fe092a01ebe43a60a0414e24a522a8419ac03a660",
-    "url": "/courses/en/software-engineering/laboratorno-uprazhnenie-4/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-4/README.html",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-4/",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-4/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-engineering/laboratorno-uprazhnenie-5/README.md",
-    "target": "src/content/docs/en/software-engineering/laboratorno-uprazhnenie-5/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "ec59f72205a06b51b50b20113b2b5910f526f5e43da3770881cdea5c6703aa45",
-    "url": "/courses/en/software-engineering/laboratorno-uprazhnenie-5/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-5/README.html",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-5/",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-5/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-engineering/laboratorno-uprazhnenie-6/README.md",
-    "target": "src/content/docs/en/software-engineering/laboratorno-uprazhnenie-6/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "da94ce5894faa77886dcd041b09029cd00ebbf0eda95ac1cbfbf2de91936c3bf",
-    "url": "/courses/en/software-engineering/laboratorno-uprazhnenie-6/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-6/README.html",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-6/",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-6/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-engineering/laboratorno-uprazhnenie-7/README.md",
-    "target": "src/content/docs/en/software-engineering/laboratorno-uprazhnenie-7/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "7a0efcfbbc5e83e62d7e3c8284ecc4830df6d869cc2abbc50f11cb24c758db46",
-    "url": "/courses/en/software-engineering/laboratorno-uprazhnenie-7/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-7/README.html",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-7/",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-7/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-engineering/laboratorno-uprazhnenie-8/README.md",
-    "target": "src/content/docs/en/software-engineering/laboratorno-uprazhnenie-8/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "8bfb3075fbb85b3b080eeae7a27614494eec9594606516cbd210f31290831ab5",
-    "url": "/courses/en/software-engineering/laboratorno-uprazhnenie-8/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-8/README.html",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-8/",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-8/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-engineering/laboratorno-uprazhnenie-9/README.md",
-    "target": "src/content/docs/en/software-engineering/laboratorno-uprazhnenie-9/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "a9c3ce283afe476f49a57e962b4464b989ebbf9793eb7cf8bb39fff049dba5b9",
-    "url": "/courses/en/software-engineering/laboratorno-uprazhnenie-9/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-9/README.html",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-9/",
       "/docs/AEO/software-engineering/laboratorno-uprazhnenie-9/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-engineering/README.md",
-    "target": "src/content/docs/en/software-engineering/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "ac596d65391a76248bc7b68063e4ecc5311b124483cf863334d23270e40c7a1a",
-    "url": "/courses/en/software-engineering/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-engineering/README.html",
       "/docs/AEO/software-engineering/",
       "/docs/AEO/software-engineering/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-01/ide-installation/README.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-01/ide-installation/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "56020609a0496f63d3a923294de42b7df9cf983200f8d30a392e9eac10f517a2",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-01/ide-installation/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-01/ide-installation/README.html",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-01/ide-installation/",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-01/ide-installation/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-01/instalirane-na-sreda/README.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-01/instalirane-na-sreda/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "68c1b0488021347323ab788a87b112a8c5c5e5ea9239f71337b76781fcaf8682",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-01/instalirane-na-sreda/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-01/instalirane-na-sreda/README.html",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-01/instalirane-na-sreda/",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-01/instalirane-na-sreda/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-02/primerna-zadacha.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-02/primerna-zadacha.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "f3da121a7073e41d3b28c8366076d2199eaabb45aa8de1bcf3a2dbe296b22ab2",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-02/primerna-zadacha/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-02/primerna-zadacha.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-02/README.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-02/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "4b50f1d7cdfe1a9458add3f9fd241910d0d422213a40ce0d2cea22cc6e9ec2da",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-02/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-02/README.html",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-02/",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-02/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-02/zadachi.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-02/zadachi.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "78a5e3451ecf787c2fc1c193b4c6f3609f6db9fd3dd7690715840c073ec4a51f",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-02/zadachi/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-02/zadachi.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-03/primerna-zadacha.md",
@@ -1485,1011 +1626,1106 @@
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-04/binding-api.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-04/binding-api.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "a2c8d1fef1b6ca3706ae57a4050a29f4103bbdb217ec8b183e8a48c1a3de5baf",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-04/binding-api/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-04/binding-api.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-04/controller.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-04/controller.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "ed93a5d72317b2b09df3be91f75f7419442ad7ff27a093856cbeaf9d98b2e763",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-04/controller/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-04/controller.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-04/fxml-anotation.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-04/fxml-anotation.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "17fbca90bf58465dafff28338de0cc237406090d38470e3f3c00c4ac91583100",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-04/fxml-anotation/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-04/fxml-anotation.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-04/imperativ-reactiv.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-04/imperativ-reactiv.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "6664ffe747dd44cf7891f953701ec781771afd26f3844b3d6df079efdc329a10",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-04/imperativ-reactiv/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-04/imperativ-reactiv.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-04/primerna-zadacha.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-04/primerna-zadacha.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "b27ea5336c9addfbabdb3b5ea8915339944649fd503553e78c7dd6b66782de68",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-04/primerna-zadacha/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-04/primerna-zadacha.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-04/README.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-04/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "81b224cae5d69ea68ef7605e51d20b95a0ec34ef53f46c58aef5812c34f907c9",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-04/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-04/README.html",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-04/",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-04/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-04/zadachi.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-04/zadachi.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "6c92e9e5e94486560c7e4accfb9bc9a4463e9c6c1ed3d74da07b1991df441e0b",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-04/zadachi/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-04/zadachi.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-05/primerna-zadacha.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-05/primerna-zadacha.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "edf8fc059db963da32e7e3c2e3ff2abf4c116f9c019bb68dc95ad8005f0e0be2",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-05/primerna-zadacha/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-05/primerna-zadacha.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-05/README.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-05/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "cd7f442325e97d49ccb7ace2e4a63608a5aff8db66b8aa68747d50eb5feb2d39",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-05/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-05/README.html",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-05/",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-05/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-05/zadachi.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-05/zadachi.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "3b3642ce704eab907d9cca14756045f92f7b368c48e8d5ab02cc5718d16998e1",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-05/zadachi/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-05/zadachi.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-06/css-stilove.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-06/css-stilove.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "ccd245236b2655fc375c39c9c5a190e015ae7e14b8b7d530f45c3e2ae0e3d2e4",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-06/css-stilove/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-06/css-stilove.html",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-6/css-stilove"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-06/primerna-zadacha.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-06/primerna-zadacha.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "1e6449643170bd52681c0f4460eb2738e56730cf9df122ac288fcea1a0309a55",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-06/primerna-zadacha/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-06/primerna-zadacha.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-06/README.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-06/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "dd91332861aeaacb1cfe81b10ce5e49992cb189c15927c2d86b32da4e1847051",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-06/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-06/README.html",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-06/",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-06/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-06/zadachi.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-06/zadachi.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "1d4ec609c784245a7a61bc2e202db46e42f30ff9347e1b0a1c1d4203e790e17a",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-06/zadachi/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-06/zadachi.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-07/README.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-07/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "12128d787cdb32463c17e6e9cb9e5d96a93f3974f5e66a4a6be7a8275c098f0b",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-07/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-07/README.html",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-07/",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-07/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-07/Upravlenie-na-danni.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-07/Upravlenie-na-danni.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "1b2ceeaf9e5c8dfbeda6fe6d2717640c12aea3512e64333e88a3ed3e502b42f3",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-07/upravlenie-na-danni/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-07/Upravlenie-na-danni.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-08/README.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-08/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "ecd7c0ccb1fa35b50412fb749f4b7688f0591d59c5e979b6348b3928f63d619f",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-08/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-08/README.html",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-08/",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-08/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-09/README.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-09/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "8257e2deb04226c0bf6d0473f3a2e4b1f2e6a794f04b2c117a6e61a0de43b2fa",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-09/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-09/README.html",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-09/",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-09/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-10/README.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-10/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "5133f6ba6625f51bf558d53497d13c5254facdf9e0168a135d0d61cdd2b2db2e",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-10/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-10/README.html",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-10/",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-10/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-11/README.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-11/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "d4e98f038d0456afa19825b83009984496ff2504f9cbe720344168026da3b0f4",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-11/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-11/README.html",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-11/",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-11/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-12/README.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-12/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "f7a2b53bcd3232b402202af49053edb6c6436a2c625b4c98e7e226c6d5fd7379",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-12/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-12/README.html",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-12/",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-12/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratorno-uprazhnenie-13/README.md",
-    "target": "src/content/docs/en/software-systems/laboratorno-uprazhnenie-13/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "dcb5bf6ec20363cba75c1c43a1e20ce0578a63f863c8d3f22b7b9cca253a62f1",
-    "url": "/courses/en/software-systems/laboratorno-uprazhnenie-13/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-13/README.html",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-13/",
       "/docs/AEO/software-systems/laboratorno-uprazhnenie-13/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratory-exercise-01/first-javafx-application.md",
-    "target": "src/content/docs/en/software-systems/laboratory-exercise-01/first-javafx-application.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "be050b4326cb15db6a13a68e2313f82f0a23e9c159477e850b869959eafd1292",
-    "url": "/courses/en/software-systems/laboratory-exercise-01/first-javafx-application/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratory-exercise-01/first-javafx-application.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratory-exercise-01/first-javafx-project.md",
-    "target": "src/content/docs/en/software-systems/laboratory-exercise-01/first-javafx-project.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "b31fa2d36e72438a225100600439a50558cfc6ab7abada0a62115ddd3388dc24",
-    "url": "/courses/en/software-systems/laboratory-exercise-01/first-javafx-project/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratory-exercise-01/first-javafx-project.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratory-exercise-01/ide-installation/intellij.md",
-    "target": "src/content/docs/en/software-systems/laboratory-exercise-01/ide-installation/intellij.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "77ceb6b1cd38f44d9c2ffe0fa0d91223310dac3f74f01f370087b3af6d7845bf",
-    "url": "/courses/en/software-systems/laboratory-exercise-01/ide-installation/intellij/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratory-exercise-01/ide-installation/intellij.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratory-exercise-01/ide-installation/jdk.md",
-    "target": "src/content/docs/en/software-systems/laboratory-exercise-01/ide-installation/jdk.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "fa2f13f974ca312674d47a4f7dbeca7b2ddc2a355f2245e9f8237a4509f4959c",
-    "url": "/courses/en/software-systems/laboratory-exercise-01/ide-installation/jdk/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratory-exercise-01/ide-installation/jdk.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratory-exercise-01/introduction.md",
-    "target": "src/content/docs/en/software-systems/laboratory-exercise-01/introduction.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "8b5889918c5bc12ddad7dcb71a21eac560ce2012df0391f7ccbfd22fd1fe46f9",
-    "url": "/courses/en/software-systems/laboratory-exercise-01/introduction/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratory-exercise-01/introduction.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratory-exercise-01/README.md",
-    "target": "src/content/docs/en/software-systems/laboratory-exercise-01/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "e6723ca01984b0755523f59f953581c516f618c1d89830c142209af7a3174b54",
-    "url": "/courses/en/software-systems/laboratory-exercise-01/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratory-exercise-01/README.html",
       "/docs/AEO/software-systems/laboratory-exercise-01/",
       "/docs/AEO/software-systems/laboratory-exercise-01/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratory-exercise-01/xml-file.md",
-    "target": "src/content/docs/en/software-systems/laboratory-exercise-01/xml-file.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "715f0ab0fbe8928ee5abe4381bd7c9bce8cce60667bc2e29f0a011a0cbf65e2a",
-    "url": "/courses/en/software-systems/laboratory-exercise-01/xml-file/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratory-exercise-01/xml-file.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/laboratory-exercise-01/zadachi.md",
-    "target": "src/content/docs/en/software-systems/laboratory-exercise-01/zadachi.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "0debc25a073c0156de73d6362fe35e810af09d34aa91cada73db8d9a73ddb7f1",
-    "url": "/courses/en/software-systems/laboratory-exercise-01/zadachi/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/laboratory-exercise-01/zadachi.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/software-systems/README.md",
-    "target": "src/content/docs/en/software-systems/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "c35704eeaf5cf87fafb00eee9cb23719772c99f62be962a09ff56d6ba9457d24",
-    "url": "/courses/en/software-systems/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/software-systems/README.html",
       "/docs/AEO/software-systems/",
       "/docs/AEO/software-systems/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-1/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-1/laboratorno-uprazhnenie-1/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "1c5e7aeeaebd1d7e018b42b1ba6851176fadaf2d2e42a38935c07329a4cfd497",
-    "url": "/courses/en/uchebna-praktika-1/laboratorno-uprazhnenie-1/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-1/README.html",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-1/",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-1/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-10/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-1/laboratorno-uprazhnenie-10/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "a0696f62fc3f9eb9d902b933c4a27ce63872173d4973e5d30276c91400c1249b",
-    "url": "/courses/en/uchebna-praktika-1/laboratorno-uprazhnenie-10/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-10/README.html",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-10/",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-10/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-11/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-1/laboratorno-uprazhnenie-11/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "3aaa841434c2a95dcecbd7ddf9bbc04fdee3ea3ec7fea1f692986b5eda064adc",
-    "url": "/courses/en/uchebna-praktika-1/laboratorno-uprazhnenie-11/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-11/README.html",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-11/",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-11/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-12/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-1/laboratorno-uprazhnenie-12/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "ea0254e8b311b577f40e25949132b094e0f6038e5be6f74ce4c636208549d788",
-    "url": "/courses/en/uchebna-praktika-1/laboratorno-uprazhnenie-12/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-12/README.html",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-12/",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-12/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-13/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-1/laboratorno-uprazhnenie-13/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "ade009af7e6e4c043681df1a3adb85361757337494037e23819be795a1a928fe",
-    "url": "/courses/en/uchebna-praktika-1/laboratorno-uprazhnenie-13/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-13/README.html",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-13/",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-13/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-14/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-1/laboratorno-uprazhnenie-14/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "12e21710f6be11232b6dc106a2b9f8c27b4303fe5c56591dd3e30b0fd3aa1cf7",
-    "url": "/courses/en/uchebna-praktika-1/laboratorno-uprazhnenie-14/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-14/README.html",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-14/",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-14/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-15/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-1/laboratorno-uprazhnenie-15/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "293255dbdde8fb18ceadb26967be0ae58328fa41f5e179d4449b7b4b0caab3e7",
-    "url": "/courses/en/uchebna-praktika-1/laboratorno-uprazhnenie-15/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-15/README.html",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-15/",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-15/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-2/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-1/laboratorno-uprazhnenie-2/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "83f1b6e0bba8737f8ff3bf156c0ee7e52ed2361f674b8ad017b422d853296c19",
-    "url": "/courses/en/uchebna-praktika-1/laboratorno-uprazhnenie-2/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-2/README.html",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-2/",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-2/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-3/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-1/laboratorno-uprazhnenie-3/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "5655aaa07060f74cb6fe4b1bfe42ec1d9d53c99ca83d6a7e14d03d2d6fe1576c",
-    "url": "/courses/en/uchebna-praktika-1/laboratorno-uprazhnenie-3/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-3/README.html",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-3/",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-3/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-4/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-1/laboratorno-uprazhnenie-4/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "a686adfada1b67d44c7a8f94dbf4fb72fc6882eb8362a6c8a6a192903dca332a",
-    "url": "/courses/en/uchebna-praktika-1/laboratorno-uprazhnenie-4/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-4/README.html",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-4/",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-4/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-5/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-1/laboratorno-uprazhnenie-5/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "9f99e3144c7805316b444fa68997ee7807c27ef6b690167ff44c810cbd9337fd",
-    "url": "/courses/en/uchebna-praktika-1/laboratorno-uprazhnenie-5/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-5/README.html",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-5/",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-5/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-6/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-1/laboratorno-uprazhnenie-6/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "028d3843d32554728c048f8dd3ecc0bcf81d0da4cebe4c8cde0e303c3afabd9f",
-    "url": "/courses/en/uchebna-praktika-1/laboratorno-uprazhnenie-6/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-6/README.html",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-6/",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-6/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-7/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-1/laboratorno-uprazhnenie-7/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "63fa1a4ce2d28aa2fa7511ed46eed95514c2d98ae6e8dda069ce511f6bd45e59",
-    "url": "/courses/en/uchebna-praktika-1/laboratorno-uprazhnenie-7/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-7/README.html",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-7/",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-7/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-8/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-1/laboratorno-uprazhnenie-8/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "6883fb73061c510e5d2f7bad60cbc601ba9aa508948dcf13e1da2b421c410720",
-    "url": "/courses/en/uchebna-praktika-1/laboratorno-uprazhnenie-8/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-8/README.html",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-8/",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-8/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-9/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-1/laboratorno-uprazhnenie-9/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "616686f9bf1fd3856b9c8e4274cd20bce136ec68ad23a8d5466f9d57eeb96e7f",
-    "url": "/courses/en/uchebna-praktika-1/laboratorno-uprazhnenie-9/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-9/README.html",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-9/",
       "/docs/AEO/uchebna-praktika-1/laboratorno-uprazhnenie-9/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-1/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-1/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "0c193148860b9f2f78a69f7a9ae58a3d86731e8fbef68c20d221920812a05bb6",
-    "url": "/courses/en/uchebna-praktika-1/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-1/README.html",
       "/docs/AEO/uchebna-praktika-1/",
       "/docs/AEO/uchebna-praktika-1/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-1/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-2/laboratorno-uprazhnenie-1/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "b7c41712f77a359fa5dba5d4ce76e65b36ca5fd3dd79a53265a4892d86d7fe93",
-    "url": "/courses/en/uchebna-praktika-2/laboratorno-uprazhnenie-1/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-1/README.html",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-1/",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-1/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-10/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-2/laboratorno-uprazhnenie-10/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "2fc6e3030d952e2c03736e0cec5370e415cfceb08283e287da1b4d855152a057",
-    "url": "/courses/en/uchebna-praktika-2/laboratorno-uprazhnenie-10/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-10/README.html",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-10/",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-10/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-11/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-2/laboratorno-uprazhnenie-11/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "e0de84ae3e47faac4265e6c265cba504425c2b42640cea30029406b1602f0844",
-    "url": "/courses/en/uchebna-praktika-2/laboratorno-uprazhnenie-11/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-11/README.html",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-11/",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-11/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-12/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-2/laboratorno-uprazhnenie-12/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "9a756f58a558b6846e6e002c140900327f02ff43db610eb10450113153169ab6",
-    "url": "/courses/en/uchebna-praktika-2/laboratorno-uprazhnenie-12/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-12/README.html",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-12/",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-12/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-13/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-2/laboratorno-uprazhnenie-13/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "3ec647f288ddf5aa317af7cc2f4f8db5e30d20c40920f9b662d0615a785e86f2",
-    "url": "/courses/en/uchebna-praktika-2/laboratorno-uprazhnenie-13/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-13/README.html",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-13/",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-13/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-14/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-2/laboratorno-uprazhnenie-14/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "f70f76ec0b98bc2a93ba93dc8bc46e2f454bc529bd98459dfa9fb58e73c8b6bc",
-    "url": "/courses/en/uchebna-praktika-2/laboratorno-uprazhnenie-14/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-14/README.html",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-14/",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-14/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-15/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-2/laboratorno-uprazhnenie-15/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "eb635dd3ce3d1d294e1af463274ff324a40e9d9c31b71e5a0bee1a29b77a9561",
-    "url": "/courses/en/uchebna-praktika-2/laboratorno-uprazhnenie-15/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-15/README.html",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-15/",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-15/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-2/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-2/laboratorno-uprazhnenie-2/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "1bf63e13630714a6f62f4f2f27eda9d73dd6b9d86964472bee505ad050ad30dc",
-    "url": "/courses/en/uchebna-praktika-2/laboratorno-uprazhnenie-2/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-2/README.html",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-2/",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-2/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-3/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-2/laboratorno-uprazhnenie-3/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "6d8953969f58b3262a0bc8cc08fe3148b9d273b447484fb9bed0ecb2591ffd8f",
-    "url": "/courses/en/uchebna-praktika-2/laboratorno-uprazhnenie-3/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-3/README.html",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-3/",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-3/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-4/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-2/laboratorno-uprazhnenie-4/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "5aa2e594004e5576b409768bffffe29d2afb2c566baa501c22ae06fdfbbfb63f",
-    "url": "/courses/en/uchebna-praktika-2/laboratorno-uprazhnenie-4/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-4/README.html",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-4/",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-4/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-5/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-2/laboratorno-uprazhnenie-5/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "e5ad6cd079ae35ec134511087342a8266a860340316c69888e58fb787f06336e",
-    "url": "/courses/en/uchebna-praktika-2/laboratorno-uprazhnenie-5/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-5/README.html",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-5/",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-5/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-6/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-2/laboratorno-uprazhnenie-6/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "7b8e8f8e4c9d90c5516c5bdcd9b187ef4ed8ee7aedbfa348413691891d0f6c17",
-    "url": "/courses/en/uchebna-praktika-2/laboratorno-uprazhnenie-6/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-6/README.html",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-6/",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-6/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-7/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-2/laboratorno-uprazhnenie-7/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "bedccc8bf6673aed12aeaaaa5729ba886b4f7b59859e2386ab39028920a8eebc",
-    "url": "/courses/en/uchebna-praktika-2/laboratorno-uprazhnenie-7/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-7/README.html",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-7/",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-7/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-8/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-2/laboratorno-uprazhnenie-8/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "91a558d93cb49c4c7ea55fcf2c232ecca12a4625eb02fea94dce4b78616e26a3",
-    "url": "/courses/en/uchebna-praktika-2/laboratorno-uprazhnenie-8/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-8/README.html",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-8/",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-8/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-9/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-2/laboratorno-uprazhnenie-9/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "1f798583a02482e718473b77dc3fe6946a765a9f2730a9395cf0b17db05c7eff",
-    "url": "/courses/en/uchebna-praktika-2/laboratorno-uprazhnenie-9/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-9/README.html",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-9/",
       "/docs/AEO/uchebna-praktika-2/laboratorno-uprazhnenie-9/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-2/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-2/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "b8951cb0fbaa661472cafa0d29bfa141dab7bf008e0c8a3c9da54142a8e85d9b",
-    "url": "/courses/en/uchebna-praktika-2/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-2/README.html",
       "/docs/AEO/uchebna-praktika-2/",
       "/docs/AEO/uchebna-praktika-2/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-1/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-3/laboratorno-uprazhnenie-1/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "290ffdbb89b85130987c7977a4379fbf800ecfba5110cfcaadf275e63afa4f09",
-    "url": "/courses/en/uchebna-praktika-3/laboratorno-uprazhnenie-1/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-1/README.html",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-1/",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-1/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-10/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-3/laboratorno-uprazhnenie-10/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "029a7c934fbf89bbd308459e7b1cf8cf136d1df50b9eab5401f3c0bce6b740f3",
-    "url": "/courses/en/uchebna-praktika-3/laboratorno-uprazhnenie-10/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-10/README.html",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-10/",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-10/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-11/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-3/laboratorno-uprazhnenie-11/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "4f15604b14f3ce79ecd86f96dfc7cd1fe0fe0076f862d41e6d80ac31a79ff9dc",
-    "url": "/courses/en/uchebna-praktika-3/laboratorno-uprazhnenie-11/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-11/README.html",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-11/",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-11/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-12/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-3/laboratorno-uprazhnenie-12/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "b957b0953ce31ffe5048345305d62b6175a0921c2194aa9a9d72413e780bb90f",
-    "url": "/courses/en/uchebna-praktika-3/laboratorno-uprazhnenie-12/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-12/README.html",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-12/",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-12/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-13/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-3/laboratorno-uprazhnenie-13/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "d8f915585f9bb4299d5e11d93054352fbdd6b68283b34775fb3a72008b0e452a",
-    "url": "/courses/en/uchebna-praktika-3/laboratorno-uprazhnenie-13/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-13/README.html",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-13/",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-13/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-14/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-3/laboratorno-uprazhnenie-14/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "7c3759fd974fa05ec107bdbb32466013733826fdf35ffedb92a1a9840ecd75d7",
-    "url": "/courses/en/uchebna-praktika-3/laboratorno-uprazhnenie-14/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-14/README.html",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-14/",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-14/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-15/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-3/laboratorno-uprazhnenie-15/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "db41ef700934e2c2e8d8262b6b32b6212118813284385ee9d80a809f91d9e4d6",
-    "url": "/courses/en/uchebna-praktika-3/laboratorno-uprazhnenie-15/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-15/README.html",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-15/",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-15/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-2/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-3/laboratorno-uprazhnenie-2/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "99514cc6ab7460183e7088f815c9cc134fc4ea0c97ea89a4f02467b68e334b57",
-    "url": "/courses/en/uchebna-praktika-3/laboratorno-uprazhnenie-2/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-2/README.html",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-2/",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-2/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-3/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-3/laboratorno-uprazhnenie-3/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "9e55c1f04b2e465b807c423e842328aaa2473c2a112dc96e0ef4ea501d0b4780",
-    "url": "/courses/en/uchebna-praktika-3/laboratorno-uprazhnenie-3/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-3/README.html",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-3/",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-3/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-4/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-3/laboratorno-uprazhnenie-4/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "23b65e284eddd2067d6c2e721d5e16f80c06c97e000c9d769e4fd6e3eb3ebed3",
-    "url": "/courses/en/uchebna-praktika-3/laboratorno-uprazhnenie-4/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-4/README.html",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-4/",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-4/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-5/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-3/laboratorno-uprazhnenie-5/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "6637dda4d44b15ef74b566aa6d5b12c0b9a4ac624bc1edda86f52aff4bb0ed0c",
-    "url": "/courses/en/uchebna-praktika-3/laboratorno-uprazhnenie-5/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-5/README.html",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-5/",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-5/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-6/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-3/laboratorno-uprazhnenie-6/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "d9e6e23d9f78517892dc7a011c0ef4cebeaad1a9175ab16c936a85b21f809d3b",
-    "url": "/courses/en/uchebna-praktika-3/laboratorno-uprazhnenie-6/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-6/README.html",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-6/",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-6/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-7/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-3/laboratorno-uprazhnenie-7/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "9d3bbf5158382507b322ec08bc2e7abfd527f063449343cd6edbab0012f704ac",
-    "url": "/courses/en/uchebna-praktika-3/laboratorno-uprazhnenie-7/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-7/README.html",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-7/",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-7/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-8/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-3/laboratorno-uprazhnenie-8/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "b5fb725115d3808074cf53d3d1defa5db533eefc125d9250497ed3bffd3c2999",
-    "url": "/courses/en/uchebna-praktika-3/laboratorno-uprazhnenie-8/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-8/README.html",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-8/",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-8/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-9/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-3/laboratorno-uprazhnenie-9/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "46051436bfa8ed3f3b7afed98f7aa07c37730135bc04b64781a9ebc6a750bf80",
-    "url": "/courses/en/uchebna-praktika-3/laboratorno-uprazhnenie-9/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-9/README.html",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-9/",
       "/docs/AEO/uchebna-praktika-3/laboratorno-uprazhnenie-9/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/uchebna-praktika-3/README.md",
-    "target": "src/content/docs/en/uchebna-praktika-3/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "77a1da2440e1a9aa8d77525bfaba4ffcacf7ea5a0876a8f19561a1ac511ffcd2",
-    "url": "/courses/en/uchebna-praktika-3/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/uchebna-praktika-3/README.html",
       "/docs/AEO/uchebna-praktika-3/",
       "/docs/AEO/uchebna-praktika-3/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-1/README.md",
-    "target": "src/content/docs/en/ueb-sigurnost/laboratorno-uprazhnenie-1/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "e1f95ea04ec447cb130dbc2f61a562ae2b358442134f07a4f60e42b6ccb742f7",
-    "url": "/courses/en/ueb-sigurnost/laboratorno-uprazhnenie-1/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-1/README.html",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-1/",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-1/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-10/README.md",
-    "target": "src/content/docs/en/ueb-sigurnost/laboratorno-uprazhnenie-10/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "c2917a142c3a1abc170006827ad0f423d50e36e039b3f7114c65448ee5903c54",
-    "url": "/courses/en/ueb-sigurnost/laboratorno-uprazhnenie-10/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-10/README.html",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-10/",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-10/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-11/README.md",
-    "target": "src/content/docs/en/ueb-sigurnost/laboratorno-uprazhnenie-11/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "7223378141a3488120f4dd281d438b5c4e831bf05c86a7b44e342e31d5bb727b",
-    "url": "/courses/en/ueb-sigurnost/laboratorno-uprazhnenie-11/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-11/README.html",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-11/",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-11/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-12/README.md",
-    "target": "src/content/docs/en/ueb-sigurnost/laboratorno-uprazhnenie-12/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "665f961a9ab01fb0b41e5bce9728cff353c9e35bbfbf8140fc46fd05fdc09d93",
-    "url": "/courses/en/ueb-sigurnost/laboratorno-uprazhnenie-12/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-12/README.html",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-12/",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-12/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-13/README.md",
-    "target": "src/content/docs/en/ueb-sigurnost/laboratorno-uprazhnenie-13/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "d0eb572dc5f49df7acc62eef5c2b329190efa590b7565cc5dbde915e578d9e00",
-    "url": "/courses/en/ueb-sigurnost/laboratorno-uprazhnenie-13/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-13/README.html",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-13/",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-13/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-14/README.md",
-    "target": "src/content/docs/en/ueb-sigurnost/laboratorno-uprazhnenie-14/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "b064495ef1ed2be13b8cd73bda82faa0ece35df3aa407365362b1eae7c2875a3",
-    "url": "/courses/en/ueb-sigurnost/laboratorno-uprazhnenie-14/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-14/README.html",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-14/",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-14/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-15/README.md",
-    "target": "src/content/docs/en/ueb-sigurnost/laboratorno-uprazhnenie-15/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "63666da8036487c0cb3f1142126ea694b78e8a5ba2de5b21447c0323c5ab3750",
-    "url": "/courses/en/ueb-sigurnost/laboratorno-uprazhnenie-15/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-15/README.html",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-15/",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-15/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-2/README.md",
-    "target": "src/content/docs/en/ueb-sigurnost/laboratorno-uprazhnenie-2/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "9669a3f8f91a31e8f2c8a9d3070f5041edd7b3b84fb47d7d3985a3dd1488d020",
-    "url": "/courses/en/ueb-sigurnost/laboratorno-uprazhnenie-2/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-2/README.html",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-2/",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-2/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-3/README.md",
-    "target": "src/content/docs/en/ueb-sigurnost/laboratorno-uprazhnenie-3/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "f293c941cd7201d1416410873bf989b72d2f7a99e0a90bc21ba07da92f0955ed",
-    "url": "/courses/en/ueb-sigurnost/laboratorno-uprazhnenie-3/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-3/README.html",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-3/",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-3/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-4/README.md",
-    "target": "src/content/docs/en/ueb-sigurnost/laboratorno-uprazhnenie-4/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "5f8cb79049bd83ef3fd51e1c35f982fc15508682ba4a4b290a4f066c5625c372",
-    "url": "/courses/en/ueb-sigurnost/laboratorno-uprazhnenie-4/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-4/README.html",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-4/",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-4/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-5/README.md",
-    "target": "src/content/docs/en/ueb-sigurnost/laboratorno-uprazhnenie-5/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "5e66a7e1b0ba1fce9add8b42554e8576b202aaea823f947b80e5d0a6ff8d0491",
-    "url": "/courses/en/ueb-sigurnost/laboratorno-uprazhnenie-5/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-5/README.html",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-5/",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-5/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-6/README.md",
-    "target": "src/content/docs/en/ueb-sigurnost/laboratorno-uprazhnenie-6/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "0cbac1ff3118be99740713b179bc194385d3176969b77d1cb3e006cbb08b6c1d",
-    "url": "/courses/en/ueb-sigurnost/laboratorno-uprazhnenie-6/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-6/README.html",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-6/",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-6/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-7/README.md",
-    "target": "src/content/docs/en/ueb-sigurnost/laboratorno-uprazhnenie-7/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "f16a62f04e85d7cd111fe38de739f4d1c745322a881265579c341f2775ecc706",
-    "url": "/courses/en/ueb-sigurnost/laboratorno-uprazhnenie-7/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-7/README.html",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-7/",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-7/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-8/README.md",
-    "target": "src/content/docs/en/ueb-sigurnost/laboratorno-uprazhnenie-8/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "eb58be8616389014b0c2f427915494c1b9a73c00782b60784a0707d2a946ad14",
-    "url": "/courses/en/ueb-sigurnost/laboratorno-uprazhnenie-8/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-8/README.html",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-8/",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-8/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-9/README.md",
-    "target": "src/content/docs/en/ueb-sigurnost/laboratorno-uprazhnenie-9/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "b17715850cd1ed22635ebf7fd4db6a38a92b44e867c766f57938d5adcc9f53df",
-    "url": "/courses/en/ueb-sigurnost/laboratorno-uprazhnenie-9/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-9/README.html",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-9/",
       "/docs/AEO/ueb-sigurnost/laboratorno-uprazhnenie-9/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/AEO/ueb-sigurnost/README.md",
-    "target": "src/content/docs/en/ueb-sigurnost/index.md",
+    "target": "src/content/docs/en/index.md",
     "sourceSha256": "ccfcbd8131d3288f901d0ff4095079316330a4332beccd02587b0ab32ae4d076",
-    "url": "/courses/en/ueb-sigurnost/",
+    "url": "/courses/en/",
     "oldUrls": [
       "/docs/AEO/ueb-sigurnost/README.html",
       "/docs/AEO/ueb-sigurnost/",
       "/docs/AEO/ueb-sigurnost/index.html"
-    ]
+    ],
+    "retired": true
   },
   {
     "source": "docs/BEO/internet-tekhnologii-2023/laboratorno-uprazhnenie-1/http.md",

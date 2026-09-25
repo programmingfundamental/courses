@@ -4,7 +4,7 @@
 
 ## 1. Софтуерно инженерство за AI системи
 
-[Източник](software-engineering-ai/README.md)
+[Източник](course-materials/software-engineering-ai/README.md)
 
 | Упражнение | Тема |
 |---|---|
@@ -21,7 +21,7 @@
 
 ## 2. Уеб сигурност (Приложна)
 
-[Източник](applied-web-security/README.md)
+[Източник](course-materials/applied-web-security/README.md)
 
 | Упражнение | Тема |
 |---|---|
@@ -38,7 +38,7 @@
 
 ## 3. Програмиране в мрежова среда
 
-[Източник](network-programming-java/README.md)
+[Източник](course-materials/network-programming-java/README.md)
 
 | Упражнение | Тема |
 |---|---|
@@ -52,7 +52,7 @@
 
 ## 4. Android базирани технологии за мобилни устройства
 
-[Източник](android-mobile-technologies/README.md)
+[Източник](course-materials/android-mobile-technologies/README.md)
 
 | Упражнение | Тема |
 |---|---|
@@ -66,7 +66,7 @@
 
 ## 5. Интернет за мобилни устройства
 
-[Източник](mobile-internet-course/README.md)
+[Източник](course-materials/mobile-internet-course/README.md)
 
 | Упражнение | Тема |
 |---|---|

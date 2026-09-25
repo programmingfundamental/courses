@@ -4,7 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const sourceRoot = path.join(root, 'network-programming-java');
+const sourceRoot = path.join(root, 'course-materials', 'network-programming-java');
 const targetRoot = path.join(root, 'src/content/docs/bg/programirane-v-mrezhova-sreda');
 const folders = [
   'lab01-tcp-protocol',
