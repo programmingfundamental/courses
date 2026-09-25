@@ -58,13 +58,13 @@ Backpressure ограничава подаването upstream; load shedding �
 
 Всеки accepted task резервира **един completion slot** чрез global credit и byte budget за бъдещия encoded response, преди да влезе в work queue. Credit се държи и докато резултатът чака в completion queue; така нова работа не измества неприбрани резултати. `queued + running + completedNotDrained <= 68`. Byte reservation се превръща в queued output и се освобождава с действително изпратените bytes. Memory budget трябва да включва и input snapshots, decoder buffers и object overhead.
 
-## 6. Начален експеримент — 15 минути
+## 6. Начален експеримент
 
 Добавете временно 20 ms delay директно в NIO dispatcher. Пускайте WORK от client A и измерете PING latency от B: independent connection чака заради event-loop blocking. После преместете delay в 4-worker pool с **bounded** queue от 64 и подайте 400 requests/s за 10 s. Предскажете кога queue ще достигне cap и сравнете с наблюдението.
 
 Не е нужна реална unbounded queue, за да видите растежа; при cap запишете saturation и refusals. Клиентският driver също има max outstanding и отчита local rejects, вместо да складира безкрайно requests.
 
-## 7. Основна лабораторна задача — 50 минути
+## 7. Основна лабораторна задача
 
 ### Стъпка 1 — отделете application work
 
@@ -107,7 +107,7 @@ High/low thresholds създават hysteresis и намаляват често
 
 Заявка, чакала в queue над 500 ms, приключва с `ERROR/EXPIRED`, без service execution. Използвайте enqueue/start timestamps. Shutdown спира admission, изчаква работата/completions до 3 s, отчита незавършените, затваря connections и workers с bounded await. Изчистете cancellation paths и reservations; test-нете ги.
 
-## 8. Failure scenarios и edge cases — 20 минути
+## 8. Failure scenarios и edge cases
 
 | Случай | Стимул | Очакване |
 |---|---|---|
@@ -120,7 +120,7 @@ High/low thresholds създават hysteresis и намаляват често
 | Client flooding | един агресивен + няколко тихи | per-client caps, measured fairness |
 | Shutdown under load | stop при nonempty queues | няма lost permits/reservations |
 
-## 9. Наблюдение и измерване — 15 минути
+## 9. Наблюдение и измерване
 
 Изпълнете λ=50, 150, 300, 500 requests/s по 10 s с cost=20 ms, 4 workers и еднакъв брой clients. За всяка серия запишете offered, admitted, completed, BUSY, EXPIRED, client-local rejects и timeouts. Ресурсите и latencies се измерват, не се предполагат.
 

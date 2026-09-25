@@ -65,13 +65,13 @@ SEND/BROADCAST/USERS/STATS изискват login, иначе `ERROR/NOT_LOGGED_
 
 SEND OK означава, че server е приключил локалния write към recipient, не че потребителят го е прочел. BROADCAST брои такива локално успешни writes; не е атомарна доставка до всички. Глобален ред между различни изпращачи не се обещава. При промени на registry USERS е ограничен snapshot, не транзакционен read на целия свят. При твърде много имена върнете `ERROR/RESULT_TOO_LARGE`, вместо да нарушавате MAX_PAYLOAD.
 
-## 6. Начален експеримент — 15 минути
+## 6. Начален експеримент
 
 Отворете client A към baseline от Lab 1 и го оставете idle. Client B изпраща PING. Измерете connect time и response timeout отделно. После добавете thread-per-client и повторете с 10 clients. Сравнете active handler count и thread dump. Запишете защо successful connect не означава available application capacity.
 
 За теста временно задайте read timeout 10 s, за да не изчезне idle A преди наблюдението; после върнете documented настройката.
 
-## 7. Основна лабораторна задача — 50 минути
+## 7. Основна лабораторна задача
 
 ### Стъпка 1 — lifecycle и ownership
 
@@ -120,7 +120,7 @@ Blocking write няма SO_TIMEOUT. В тази версия използвай�
 
 При shutdown: спрете accept чрез close на listener; спрете admission; `shutdown()` на executor; дайте до 3 s за нормално приключване; затворете всички останали running/queued sockets от tracked set; извикайте `shutdownNow()` при нужда; обработете returned queued tasks и изчакайте bounded termination. Interrupt сам по себе си не е policy за освобождаване на blocking sockets. Затворете watchdog executor.
 
-## 8. Failure scenarios и edge cases — 20 минути
+## 8. Failure scenarios и edge cases
 
 | Случай | Провокация | Проверка |
 |---|---|---|
@@ -133,7 +133,7 @@ Blocking write няма SO_TIMEOUT. В тази версия използвай�
 | Shutdown с waiting tasks | запълнете pool и queue | bounded termination и active=0 |
 | Стар cleanup след reconnect | симулирайте replacement session | новият mapping остава |
 
-## 9. Наблюдение и измерване — 15 минути
+## 9. Наблюдение и измерване
 
 Сравнете 10, 32 и 64 connections в двата режима. За всяка конфигурация запишете connected, running, queued, rejected, threads, response latency и резултат от shutdown. За тестовете с idle clients различавайте active connections от active requests.
 
