@@ -6,13 +6,13 @@ sidebar:
   order: 100
 ---
 
-## 6. Мини експеримент / демонстрация — 10 минути
+## 6. Мини експеримент / демонстрация
 
 За 20 s в покой и 10 s бавно завъртане наблюдавайте axes и magnitude. Заявете 25, после 100 Hz и изчислете действителния rate от timestamps. Background-нете неправилната demo версия с listener без cleanup и вижте продължаващ counter. После прекратете demo subscription.
 
 Без устройство replay-нете trace: stationary `(0,0,9.81)` с seeded noise ±0.2; след това rotation със запазена приблизителна magnitude. Отбележете кои наблюдения са synthetic и не доказват реална sensor calibration.
 
-## 7. Водена практическа задача — 35 минути
+## 7. Водена практическа задача
 
 ### Стъпка 1 — source boundary и status
 
@@ -45,14 +45,14 @@ interface AccelerometerSource {
 
 Покажете observed Hz, accepted/dropped sample counts, activeListenerCount и presentationUpdates. Monotonic intervals са в текущия boot; wall clock се добавя отделно само при persisted event. На Stop counters остават видими, но acquisition трябва да спре.
 
-## 8. Checkpoint — 5 минути
+## 8. Checkpoint
 
 - Raw и filtered axes/magnitude се виждат за реален или fake source.
 - Промяна на filter parameter променя response, без нов leak.
 - UI се обновява до 10 Hz при acquisition до 100 Hz.
 - След Stop/Home/navigation activeListenerCount=0; Unsupported е нормален state.
 
-## 9. Самостоятелна задача — 35 минути, в часа
+## 9. Самостоятелна задача
 
 Добавете **Shake/Motion Detector** със configurable threshold, minimum interval между събития, визуална индикация и count. Записвайте последните 100 events в Room с id, experimentId, epoch timestamp, monotonic timestamp за текущия run, peak и algorithm parameters.
 
@@ -79,7 +79,7 @@ interface AccelerometerSource {
 
 Pure tests: constant signal, step response, noise, spike, two bursts, cooldown boundary и invalid dt. Fake clock/trace премахва sleep от тестовете. Instrumented test проверява lifecycle cleanup и Room retention/migration. Happy path е controlled shake или synthetic burst; invalid state е Start при Unsupported/без experiment; resource test повтаря 20 Start/Stop/rotation cycles и проверява listener count и bounded queue.
 
-## 12. Наблюдение и измерване — 10 минути
+## 12. Наблюдение и измерване
 
 За 25/50/100 Hz запишете requested/observed rate, drops, UI updates/s и filter delay при step trace. За detector маркирайте expected events предварително и пребройте true positives, false positives и missed events. Не настройвайте threshold само по един удобен trace. Запишете active listeners преди/след Home, както и максимален recent-window size. `results/lab04/` съдържа параметри и real/fake mode.
 

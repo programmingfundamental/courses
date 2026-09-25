@@ -78,12 +78,6 @@
     "sha256": "ff76a3c205633cced8c12455dccfa80d8f03716b5d5507a4f20ec0721673105f"
   },
   {
-    "source": "docs/BEO/software-engineering/laboratorno-uprazhnenie-6/image.png",
-    "target": "public/docs/BEO/software-engineering/laboratorno-uprazhnenie-6/image.png",
-    "bytes": 1487618,
-    "sha256": "f0dea0b6dc8694be512b74a7f200e77085e6f4bc4f2e26cbda45dd8833a9ea5d"
-  },
-  {
     "source": "docs/BEO/software-systems/laboratorno-uprazhnenie-04/image-1.png",
     "target": "public/docs/BEO/software-systems/laboratorno-uprazhnenie-04/image-1.png",
     "bytes": 24892,

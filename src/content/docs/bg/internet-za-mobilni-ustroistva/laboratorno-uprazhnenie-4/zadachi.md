@@ -9,7 +9,7 @@ sidebar:
 ## 7. Мини експеримент
 Успешен POST минава през User lookup. Спрете User container и повторете. Сравнете unknown user 404 с connection refused. Запишете кое би било невъзможно при обикновен in-process method call.
 
-## 8. Водена практическа задача — 35 минути, включително checkpoint
+## 8. Водена практическа задача
 ### Стъпка 1
 Използвайте готовия UsersResource /users/u1 и UsersClient. Инжектирайте @RestClient в Activity service layer; преди create извикайте user API. Пренесете X-Request-ID. В controller не се появява Docker hostname.
 
@@ -29,7 +29,7 @@ sidebar:
 - Unknown и unavailable user имат различни outcomes.
 - Timeout прекратява чакането и не оставя нежелан insert.
 
-## 10. Самостоятелна задача — 20 минути в часа
+## 10. Самостоятелна задача
 **Problem statement:** Реализирайте първата функционалност на Notification Service като трета самостоятелна boundary.
 
 **Functional requirements:** Изберете една capability, например notification eligibility за activity owner. Опишете собствените данни и remote dependency; реализирайте един read-only service-to-service call и малък response DTO.

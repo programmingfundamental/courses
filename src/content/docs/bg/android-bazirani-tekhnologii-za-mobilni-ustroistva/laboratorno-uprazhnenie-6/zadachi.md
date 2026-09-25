@@ -6,13 +6,13 @@ sidebar:
   order: 100
 ---
 
-## 6. Мини експеримент / демонстрация — 10 минути
+## 6. Мини експеримент / демонстрация
 
 Fake transport връща един device пет пъти, забавя service discovery с 1 s и отказва read преди discovery. Нека наивният UI опита read веднага след connect request. После локално enable-нете notifications, но пропуснете CCCD write: fake peripheral не изпраща updates.
 
 Запишете timeline с request started/callback complete и разликата между Connected transport и Ready application session. С real peripheral повторете само successful workflow след проверка на UUID/permissions.
 
-## 7. Водена практическа задача — 35 минути
+## 7. Водена практическа задача
 
 ### Стъпка 1 — capabilities и scan
 
@@ -48,7 +48,7 @@ Platform objects остават в adapter; ViewModel получава immutable
 
 Текущият measurement callback ползва overload с отделен value bytes; копирайте преди asynchronous handoff. Read и notification със същия sequence не се записват два пъти. UI показва последна value, notification count и последен error; не показва Connected като доказателство за поток от данни.
 
-## 8. Checkpoint — 5 минути
+## 8. Checkpoint
 
 - Scan завършва до 10 s и list не дублира advertisements.
 - Successful workflow е видим като ordered timeline.
@@ -56,7 +56,7 @@ Platform objects остават в adapter; ViewModel получава immutable
 - Notifications започват след CCCD acknowledgement.
 - Stop/navigation затваря GATT и scan; fake mode е функционален без hardware.
 
-## 9. Самостоятелна задача — 35 минути, в часа
+## 9. Самостоятелна задача
 
 Добавете **connection state machine**, timeout/reconnect policy и persistent history. Минимум states: Idle, Scanning, Connecting, Connected, Disconnected, Error; можете да отделите Discovering/Subscribing/Ready за по-точни transitions.
 
@@ -86,7 +86,7 @@ Platform objects остават в adapter; ViewModel получава immutable
 
 Pure tests за little-endian vectors и reducer transitions. Fake transport трябва да може да: дублира advertisement, пропусне callback, върне non-success status, скрие characteristic, спре notifications и достави late callback. Lifecycle/permission tests cancel-ват scan и retries при Home/revoke. Resource test повтаря 20 sessions и очаква activeGatt=0/activeScan=0 след cleanup. Real BLE test, когато има hardware, проверява interoperability; passing fake test не доказва RF performance.
 
-## 12. Наблюдение и измерване — 10 минути
+## 12. Наблюдение и измерване
 
 Съберете scan duration, unique devices/advertisements, connect/discovery/subscription times, requested/observed notification interval, malformed/duplicate/gap counts и retry count. Logs включват local session/generation, без публични MAC адреси. След Stop пребройте активните scan callbacks, GATT objects и retry jobs. Докладвайте real/fake mode и radio условията, когато са приложими.
 

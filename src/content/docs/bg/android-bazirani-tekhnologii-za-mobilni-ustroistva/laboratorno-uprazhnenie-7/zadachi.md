@@ -6,13 +6,13 @@ sidebar:
   order: 100
 ---
 
-## 6. Мини експеримент / демонстрация — 10 минути
+## 6. Мини експеримент / демонстрация
 
 Пуснете fake accelerometer 100 Hz за 30 s с presentation на всяка стойност и DB insert на всяка стойност. Сравнете acquired samples, committed rows, state emissions, наблюдавани UI updates и actual recompositions. Покажете memory/allocations trend при постепенно нарастваща history list.
 
 Запишете хипотеза: кой разход доминира и коя промяна би го намалила? Преди optimization фиксирайте workload seed, duration, database initial state и build mode.
 
-## 7. Водена практическа задача — 35 минути
+## 7. Водена практическа задача
 
 ### Стъпка 1 — предоставен неефективен diagnostic компонент
 
@@ -66,14 +66,14 @@ Warm-up 10 s, measurement 60 s, bounded drain 5 s. Изпълнете три п�
 
 Warm-up използва отделна кратка session. Преди measurement затворете нейния scope, изчистете warm-up records и създайте нов probe с нулеви counters; лимитът 6000 samples/60 s се отнася само за measurement window. Подготовката и cleanup между runs не участват в timing metrics.
 
-## 8. Checkpoint — 5 минути
+## 8. Checkpoint
 
 - Inefficient mode е възпроизводим и автоматично спира в budget.
 - Има baseline table от actual measurements, а не очаквани числа.
 - DB rows/transactions, state emissions/UI updates и samples/drops са разграничени.
 - Студентът посочва поне два bottleneck candidates и доказателство от trace/counters.
 
-## 9. Самостоятелна задача — 35 минути, в часа
+## 9. Самостоятелна задача
 
 Създайте optimized pipeline с **поне три различни техники**, избрани въз основа на baseline: bounded buffers, presentation sampling, batching, bounded UI window, по-рядка location acquisition, прекратяване на ненужен BLE scan, lifecycle-aware source management или намаляване на ненужни allocations.
 
@@ -100,7 +100,7 @@ Warm-up използва отделна кратка session. Преди measure
 
 Повторете lifecycle, permissions и protocol/filter tests от Lab 1–6. Fake trace има предварително labelled events и known sample count; сравнете lost/duplicated records и detector recall преди/след. Test consumer delay причинява queue saturation. Stop/drain test проверява конкретен timeout, без assertion „всичко е записано“ при process kill. За resource test изпълнете 20 Start/Stop cycles и проверете listeners/location/GATT/jobs=0; memory snapshot сам по себе си не доказва липса на leak.
 
-## 12. Наблюдение и измерване — 10 минути
+## 12. Наблюдение и измерване
 
 Попълнете таблицата с median от три runs и range; пазете отделните raw values. Rate denominator е measurement duration, а drain writes се отчитат отделно. N/A е допустимо за неподдържана метрика.
 

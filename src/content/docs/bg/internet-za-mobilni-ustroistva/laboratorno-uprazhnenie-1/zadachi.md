@@ -9,7 +9,7 @@ sidebar:
 ## 7. Мини експеримент
 Покажете Wi-Fi connected без validated Internet чрез captive portal или fake capabilities. Replay: Available(A)→Capabilities(A,unvalidated)→Capabilities(A,validated)→Available(B)→Capabilities(B,validated)→Lost(A). Наивният reducer завършва Offline. Студентите записват защо това е грешно.
 
-## 8. Водена практическа задача — 35 минути, включително checkpoint
+## 8. Водена практическа задача
 ### Стъпка 1
 В NetworkSource.kt използвайте готовия immutable NetworkSnapshot. Реализирайте Android adapter с callbackFlow; копирайте networkId, transports, INTERNET, VALIDATED, NOT_METERED и VPN. Heavy work не се изпълнява в callback thread.
 
@@ -29,7 +29,7 @@ sidebar:
 - След Home/Stop няма останала callback registration.
 - Rotation не създава два collectors.
 
-## 10. Самостоятелна задача — 20 минути в часа
+## 10. Самостоятелна задача
 **Problem statement:** Проектирайте reducer с Offline, Connecting, Online, Limited/Unvalidated и Lost плюс последните 20 transitions.
 
 **Functional requirements:** Дефинирайте кои входни събития водят до всеки state; пазете предходно/ново състояние и monotonic timestamp. Lost трябва да е наблюдаем преход, без вечен подвеждащ status.

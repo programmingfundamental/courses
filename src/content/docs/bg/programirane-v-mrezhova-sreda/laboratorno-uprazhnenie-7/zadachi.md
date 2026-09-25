@@ -6,13 +6,13 @@ sidebar:
   order: 100
 ---
 
-## 6. Начален експеримент — 15 минути
+## 6. Начален експеримент
 
 На един server изпълнете два 10 s closed-loop runs със същия payload и продължителност: първо един клиент, после 10 clients. Запишете throughput и средна/median/p95/p99 latency. Проверете дали по-висок throughput съществува с по-висока latency; не предполагайте предварително резултата.
 
 После активирайте кратък controlled 200 ms service stall в отделен диагностичен run. Сравнете closed-loop и open-loop samples, including scheduling lag. Не включвайте fault-injection run в основната performance таблица. Предскажете кой начин на подаване „скрива“ повече от периода на недостъпност.
 
-## 7. Основна лабораторна задача — 45 минути
+## 7. Основна лабораторна задача
 
 ### Стъпка 1 — хипотеза и controls
 
@@ -65,7 +65,7 @@ Recorder не трябва да блокира network reader за disk I/O. И�
 
 Добавете open-loop rates под, около и над наблюдавания устойчив капацитет за една фиксирана concurrency конфигурация. За Lab 5 WORK използвайте cost=20 ms като отделна серия; не смесвайте нейните latencies с ECHO. За TLS по избор отделете connect+handshake+AUTH от steady-state exchanges.
 
-## 8. Failure scenarios и edge cases — 15 минути
+## 8. Failure scenarios и edge cases
 
 | Случай | Провокация | Отчитане |
 |---|---|---|
@@ -80,7 +80,7 @@ Recorder не трябва да блокира network reader за disk I/O. И�
 
 Един scheduled request има точно един terminal outcome. Проверете conservation след drain: `scheduled = success + serverRejected + timeout + disconnect + protocolError + localRejected + localLate + otherFailure`. Connection setup failures са отделна статистика, когато още няма scheduled request.
 
-## 9. Наблюдение и измерване — 25 минути
+## 9. Наблюдение и измерване
 
 На 1 s събирайте actual active connections, outstanding requests, CPU и memory на **server и generator отделно**. `jcmd <pid> GC.heap_info`, JFR и OS process metrics са възможни източници; JVM heap used не е process RSS. За standard-library sampling използвайте ManagementFactory/[MemoryMXBean](https://docs.oracle.com/en/java/javase/25/docs/api/java.management/java/lang/management/MemoryMXBean.html) във всеки измерван JVM и [ProcessHandle.Info.totalCpuDuration](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/ProcessHandle.Info.html), когато е налично. Липсваща метрика се записва като N/A, не 0. CPU percent = CPU-time delta / wall-time delta ×100; при тази дефиниция многопроцесорен процес може да надвиши 100%. Ако нормализирате по cores, отбележете го.
 

@@ -6,13 +6,13 @@ sidebar:
   order: 100
 ---
 
-## 6. Начален експеримент — 15 минути
+## 6. Начален експеримент
 
 Capture-нете ECHO с отличим тестов текст през plain TCP и намерете текста във Follow TCP Stream. После изпълнете същата заявка върху TLS, без да експортирате session keys, и проверете, че wire payload не се вижда като plain LabNet bytes. Все още се наблюдават адреси, ports, packet sizes и timings — TLS не скрива целия traffic pattern.
 
 След това посочете client към trust store, който не съдържа server certificate. Наблюдавайте handshake failure и потвърдете, че application dispatcher не е получил request. Запазете error category, без private keys или secrets в логовете.
 
-## 7. Основна лабораторна задача — 50 минути
+## 7. Основна лабораторна задача
 
 ### Стъпка 1 — certificates и trust
 
@@ -58,7 +58,7 @@ AUTH се допуска само на TLS endpoint. Сравнете user и to
 
 Handshake/write watchdog може да е един periodic scan на tracked sessions, вместо unbounded timer task на всеки byte. Deadline close не взема write lock. При expiry всички buffers, permits и queued sessions се освобождават точно веднъж. Malformed input се log-ва с bounded reason code и sampling, за да не се превърне log volume в нов resource problem.
 
-## 8. Failure scenarios и edge cases — 20 минути
+## 8. Failure scenarios и edge cases
 
 | Случай | Провокация | Очакване |
 |---|---|---|
@@ -75,7 +75,7 @@ Handshake/write watchdog може да е един periodic scan на tracked se
 
 Сравнете counters преди/след 100 неуспешни опита: active sessions, handshakes и permits трябва да се върнат към baseline. Памeтта може да не спадне веднага заради GC; retained resource count е по-точен test от моментен heap размер.
 
-## 9. Наблюдение и измерване — 15 минути
+## 9. Наблюдение и измерване
 
 Съберете handshake success/failure по категории, duration, timeout counts, invalid frames, auth failures и active resources. Използвайте `-Djavax.net.debug=ssl:handshake` само при конкретен диагностичен run, после го изключете за performance. Не добавяйте секрети в report.
 

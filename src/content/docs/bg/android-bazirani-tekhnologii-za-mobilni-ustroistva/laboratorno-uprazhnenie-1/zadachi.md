@@ -6,13 +6,13 @@ sidebar:
   order: 100
 ---
 
-## 6. Мини експеримент / демонстрация — 10 минути
+## 6. Мини експеримент / демонстрация
 
 Поставете временни counters в plain local variable, remember и rememberSaveable. Предизвикайте unrelated state change, rotation и navigation away/back. Логвайте Activity instance ID, VM instance ID, composition enter/exit и active ticker count. Избягвайте log на всяка recomposition в окончателната версия.
 
 Попълнете таблица: действие → кой instance се сменя → кои стойности се пазят. `ActivityScenario.recreate()` проверява Activity recreation, а не process death. Отбележете тази разлика преди реализацията.
 
-## 7. Водена практическа задача — 35 минути
+## 7. Водена практическа задача
 
 ### Стъпка 1 — state и transitions
 
@@ -56,14 +56,14 @@ val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
 Snapshot през saved state е best-effort UI restoration, не гарантиран запис на последния tick. Проверете process recreation след background/save: `adb shell am kill <package>` и връщане от Recents. Ако OS не убие този process, използвайте emulator test setup и запишете ограничението. `force-stop` не е еквивалентен test за system restore.
 
-## 8. Checkpoint — 5 минути
+## 8. Checkpoint
 
 - Tracker и Summary показват еднакви name/counter/status.
 - 20 бързи Start натискания оставят activeTicker=1; Stop води до 0.
 - Rotation запазва elapsed и counter; Summary navigation не създава втори VM.
 - System restore не показва Running без реален owner на операцията.
 
-## 9. Самостоятелна задача — 35 минути, в часа
+## 9. Самостоятелна задача
 
 Превърнете Summary във втори функционален екран **Experiment Plan**: target count, кратка бележка и режим за сравнение на current/target. Потребителят редактира draft, избира Apply или Discard и се връща към Tracker.
 
@@ -85,11 +85,11 @@ Snapshot през saved state е best-effort UI restoration, не гаранти
 | Target=0 или празно име | validation state, без crash |
 | Смяна на system clock | elapsed не скача |
 
-## 11. Тестване — част от 15-минутния failure блок
+## 11. Тестване
 
 Unit tests с fake clock: Start→advance 1500 ms→Stop; duplicate Start; Stop без Start; invalid name; draft validation. Compose test проверява state hoisting и disabled/available actions. Instrumented lifecycle test използва ActivityScenario.recreate и navigation back; process-kill сценарият е отделен ръчен/instrumented experiment. След Stop и излизане от VM scope проверете active jobs=0 и липса на retained Activity reference.
 
-## 12. Наблюдение и измерване — 10 минути
+## 12. Наблюдение и измерване
 
 Съберете counts за VM creations, ticker starts/stops и UI updates. Запишете expected/actual state за rotation, navigation и process restore. Не приравнявайте броя recompositions на timer updates или frame rate. Наблюдавайте 30 s Running и 10 s Stopped; ticker count след Stop трябва да е 0. Резултатите са в `results/lab01/observations.md`.
 
