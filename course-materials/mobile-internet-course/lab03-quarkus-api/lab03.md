@@ -35,7 +35,7 @@ Pagination е resource contract: default size, maximum, stable tie-breaker и ne
 ## 7. Мини експеримент
 Seed-нете 200 synthetic activities. Сравнете response bytes за 200 и 20 items. Подайте blank title и unknown ID към наивен endpoint; обсъдете защо еднакво 500 пречи на client retry policy.
 
-## 8. Водена практическа задача — 35 минути, включително checkpoint
+## 8. Водена практическа задача
 ### Стъпка 1
 В ActivitiesResource реализирайте GET /activities и GET /activities/{id} върху готовия store. Създайте response DTO с UTC timestamp mapping; recent query връща максимум 50, а API не излага java.sql или storage exceptions.
 
@@ -55,7 +55,7 @@ POST /activities приема CreateActivity. Активирайте @Valid, tri
 - Invalid title е client error, unknown ID е 404.
 - Collection има finite limit и error response е predictable.
 
-## 10. Самостоятелна задача — 20 минути в часа
+## 10. Самостоятелна задача
 **Problem statement:** Проектирайте GET /activities/search с pagination и status/name filtering.
 
 **Functional requirements:** page>=0, size 1..50, status allowlist и title text до 60 chars; резултатът съдържа items и hasNext. Равни timestamps се подреждат чрез ID tie-breaker.

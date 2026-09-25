@@ -35,7 +35,7 @@ Budget включва attempts, per-attempt timeout, backoff и orchestration. F
 ## 7. Мини експеримент
 GET /unstable?mode=mixed следва deterministic цикъл: 6 successes, 2×503, 2×3 s delay. Пуснете 10 calls с изключени retries. После демонстрирайте 3 retries в client×3 в BFF като максимум 9 downstream attempts, без да генерирате масов load.
 
-## 8. Водена практическа задача — 35 минути, включително checkpoint
+## 8. Водена практическа задача
 ### Стъпка 1
 Използвайте DownstreamPolicy CDI bean между HomeResource и UnstableClient. Map-нете 503/timeout към TransientDependencyFailure, а contract/validation error към terminal category. Затваряйте Response при всяка branch.
 
@@ -55,7 +55,7 @@ GET /unstable?mode=mixed следва deterministic цикъл: 6 successes, 2×
 - Fallback е обозначен и attempts са ограничени.
 - Breaker recovery може да се наблюдава след възстановяване.
 
-## 10. Самостоятелна задача — 20 минути в часа
+## 10. Самостоятелна задача
 **Problem statement:** Изберете policy за нов случай: downstream връща постоянен 422 за невалиден вход, докато 10 паралелни валидни reads понякога timeout-ват.
 
 **Functional requirements:** Разграничете permanent input от transient capacity failure. Изберете timeout/retry/breaker/fallback и по желание bounded bulkhead; представете кратка таблица защо всеки механизъм е приложен или пропуснат.

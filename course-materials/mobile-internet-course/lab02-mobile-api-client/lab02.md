@@ -35,7 +35,7 @@ Retry има max attempts и общ deadline. GET обикновено е safe �
 ## 7. Мини експеримент
 Изпратете fixture mode=ok, client, server, slow и malformed с curl. Сравнете transport success с application failure. Стартирайте slow request, навигирайте назад и наблюдавайте дали HTTP call остава активен.
 
-## 8. Водена практическа задача — 35 минути, включително checkpoint
+## 8. Водена практическа задача
 ### Стъпка 1
 Разширете ApiResult с Success, TransportFailure(Dns/Connect/Tls), Timeout, HttpFailure(status,code), DecodeFailure; request cancellation остава control flow. UI има distinct retryable/readable error states, а не Throwable.toString.
 
@@ -55,7 +55,7 @@ Retry има max attempts и общ deadline. GET обикновено е safe �
 - Cancel/Back отменя Call; няма висящ spinner.
 - Compose не изпълнява blocking network работа.
 
-## 10. Самостоятелна задача — 20 минути в часа
+## 10. Самостоятелна задача
 **Problem statement:** Добавете bounded retry за четене, без да повторите опасна mutation.
 
 **Functional requirements:** Собствена таблица GET/POST×failure→retry/stop; максимум 3 attempts за GET и общ budget <=5 s, ограничен jitter. Retry-After, по-дълъг от оставащия budget, води до отложен/manual action.

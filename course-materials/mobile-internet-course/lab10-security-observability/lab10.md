@@ -24,7 +24,7 @@ Android + access token → [Gateway boundary]
                      OTel Collector → Jaeger
 Structured logs + requestId/traceId; aggregate metrics
 ```
-Реализирайте security върху REST create/read path. Gateway остава единственият public вход; service authorization не се заменя с routing. За основния 90-минутен вариант затворете fixture и WebSocket public routes; live stream се публикува отново само с authenticated per-user routing.
+Реализирайте security върху REST create/read path. Gateway остава единственият public вход; service authorization не се заменя с routing. За основния вариант затворете fixture и WebSocket public routes; live stream се публикува отново само с authenticated per-user routing.
 
 ## 6. Кратка теория
 OAuth2 е authorization framework; OIDC добавя identity; JWT е token format. Native mobile е public client без embedded secret: production login ползва system browser Authorization Code + PKCE. Тук token.mjs е само локален signed-credential fixture, не OIDC server. Не използвайте ID token вместо API access token.
@@ -36,7 +36,7 @@ Trace свързва spans; requestId подпомага logs; metrics дава�
 ## 7. Мини експеримент
 Извикайте protected test path без token, с expired fixture и с viewer role. После изпратете create request с member token през Gateway→BFF→Activity→User. Намерете trace и проследете общото време; премахнете token от видими screenshots/logs.
 
-## 8. Водена практическа задача — 35 минути, включително checkpoint
+## 8. Водена практическа задача
 ### Стъпка 1
 Генерирайте локални keys с token.mjs --init и използвайте member/viewer/--expired fixture. Public key се монтира в services; private key остава само в ignored local runtime. Проверете issuer=https://mobile-lab.invalid и audience=mobile-api в configuration.
 
@@ -56,12 +56,12 @@ Trace свързва spans; requestId подпомага logs; metrics дава�
 - Body userId не позволява чужд owner.
 - Един request има проследима Gateway→BFF→Activity→User chain.
 
-## 10. Самостоятелна задача — 20 минути в часа
+## 10. Самостоятелна задача
 **Problem statement:** Диагностицирайте предварително подготвен slow/failure Home scenario чрез trace, logs и metrics.
 
 **Functional requirements:** Определете dominant component и дали забавянето е service execution, queue/network wait или retry amplification. Посочете поне един trace, свързан log и metric/count наблюдение. Дайте кратка хипотеза и проверка.
 
-**Technical constraints:** Няма задача да „оправите всичко“ за 20 минути. Не променяйте произволно timeouts преди измерване. Не публикувайте credentials, tokens или лични данни в report.
+**Technical constraints:** Не се опитвайте да коригирате всички проблеми преди измерването и не променяйте произволно timeouts. Не публикувайте credentials, tokens или лични данни в report.
 
 **Acceptance criteria:** Диагнозата назовава component/call и concrete evidence; разделя symptom от cause; сравнява baseline и injected scenario; предлага bounded следваща промяна с trade-off. Липса на trace се описва като instrumentation gap, а не се измисля result.
 
