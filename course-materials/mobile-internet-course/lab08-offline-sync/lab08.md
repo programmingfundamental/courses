@@ -35,7 +35,7 @@ Idempotency key обозначава logical operation, не HTTP attempt. Serve
 ## 7. Мини експеримент
 Local create при airplane mode е видим веднага. Стартирайте lost-response proxy: той чака успешен upstream POST, после затваря mobile connection без response. Проверете server count преди retry. Това е commit-without-ack, не server rollback.
 
-## 8. Водена практическа задача — 35 минути, включително checkpoint
+## 8. Водена практическа задача
 ### Стъпка 1
 Създайте application-scoped Room instance от LocalDatabase. Repository transaction insert-ва LocalActivity и PendingOp със stable UUID operationId и canonical payload. UI показва pending status и bounded history100.
 
@@ -55,7 +55,7 @@ SyncWorker чете до 20 operations, изпраща sequentially с общ ru
 - Worker изпраща bounded batch и различава transient/permanent failure.
 - Lost response е възпроизводим, а command key остава същият.
 
-## 10. Самостоятелна задача — 20 минути в часа
+## 10. Самостоятелна задача
 **Problem statement:** Предотвратете duplicate Activity след server commit и изгубен response.
 
 **Functional requirements:** Използвайте готовия request_ledger и transaction helper; запазете key scope, canonical payload hash и replay result. Същият key/payload връща същия ID; различен payload е conflict.

@@ -35,7 +35,7 @@ Foreground-only socket се отваря при STARTED screen и user intent. H
 ## 7. Мини експеримент
 Покажете два еднакви events и след това version2 след version3. Наивният handler увеличава count два пъти и връща стар status. Прекъснете socket, променете status през HTTP и reconnect-нете: липсващото събитие не се възстановява магически.
 
-## 8. Водена практическа задача — 35 минути, включително checkpoint
+## 8. Водена практическа задача
 ### Стъпка 1
 Добавете status command endpoint към Activity Service с validated transition и version increment. Сериализирайте ActivityEvent след durable commit и извикайте готовия EventPublisher. Използвайте activityId като broker key; failure на publish се наблюдава отделно от commit.
 
@@ -55,7 +55,7 @@ Foreground-only socket се отваря при STARTED screen и user intent. H
 - Broker/Notification/BFF участват в timeline.
 - STOP затваря socket, bounded channel overflow е видим.
 
-## 10. Самостоятелна задача — 20 минути в часа
+## 10. Самостоятелна задача
 **Problem statement:** Добавете reconnect, duplicate detection и stale-event handling, без state rollback.
 
 **Functional requirements:** Определете event identity/version policy; reconnect максимум 3 attempts с backoff/jitter и snapshot reconciliation след gap. STOP отменя retries. При reconnect duplicate/stale messages не променят current Activity към по-стара версия.

@@ -37,7 +37,7 @@ Starter генерира ingress request ID, презаписва недовер
 ## 7. Мини експеримент
 Изпратете request с измислен X-Request-ID към /health; покажете генерирания ID. Непознат /api/path връща default proxy error. Променете вътрешен service адрес в config и покажете, че mobile base URL не се променя.
 
-## 8. Водена практическа задача — 35 минути, включително checkpoint
+## 8. Водена практическа задача
 ### Стъпка 1
 Добавете routes за /api/users и /api/activities със exact root плюс bounded child path matching или path_separated_prefix. Rewrite премахва само /api. Използвайте готовите clusters users/activities и HTTP route timeout=4 s.
 
@@ -57,7 +57,7 @@ Starter генерира ingress request ID, презаписва недовер
 - Internal management/relay endpoints са недостижими отвън.
 - Request ID и timing могат да се свържат с един call.
 
-## 10. Самостоятелна задача — 20 минути в часа
+## 10. Самостоятелна задача
 **Problem statement:** Проектирайте единен Gateway-level error response за неизвестен public route и недостъпен upstream.
 
 **Functional requirements:** JSON code/message/requestId или header-linked request identity; различни codes за route missing и dependency unavailable. Запазете реалния HTTP status и content type.
