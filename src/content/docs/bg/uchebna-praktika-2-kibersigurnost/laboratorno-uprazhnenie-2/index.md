@@ -9,7 +9,7 @@ sidebar:
 
 Линейното търсене проверява последователно всеки символ, докато намери търсения. За подниз стартираме от всяка възможна позиция и сравняваме следващите символи. Ако всички съвпадат, връщаме началния индекс; ако обхождането приключи без съвпадение, връщаме -1. indexOf() е готов метод за сравнение, но тук алгоритъмът се реализира самостоятелно.
 
-Условията на практическата, самостоятелната и допълнителната задача са на [страницата Задачи](/courses/bg/uchebna-praktika-2-kibersigurnost/laboratorno-uprazhnenie-2/zadachi/).
+Насоките за реализация, самостоятелната и допълнителната задача са на [страницата Задачи](/courses/bg/uchebna-praktika-2-kibersigurnost/laboratorno-uprazhnenie-2/zadachi/).
 
 ## Алгоритъм
 1. Обходи низа отляво надясно и сравнявай символа с търсения.
@@ -56,69 +56,8 @@ public static int findSubstring(String text, String pattern) {
 }
 ```
 
-## Въпроси за проверка
-1. Какво означава резултат -1?
-2. Защо поднизът изисква вътрешен цикъл?
-3. Как се определя последната възможна начална позиция?
-4. Какво връща indexOf(), ако няма съвпадение?
-5. Защо задачата изисква собствено линейно търсене?
-
 ## Очакван резултат
 За BANANA методите връщат 2 за първата N и 1 за първата ANA. При липсващ символ или подниз резултатът е -1.
 
-## Пълно примерно решение
-Работещият пълен пример е даден по-долу и се намира отделно във файла `02-text-search/src/Main.java`.
-
-
-```java
-import java.util.Scanner;
-
-public class Main {
-    public static int findCharacter(String text, char target) {
-        for (int i = 0; i < text.length(); i++) {
-            if (text.charAt(i) == target) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    public static int findSubstring(String text, String pattern) {
-        if (pattern.length() == 0) {
-            return 0;
-        }
-
-        for (int start = 0; start <= text.length() - pattern.length(); start++) {
-            int offset = 0;
-            while (offset < pattern.length()
-                    && text.charAt(start + offset) == pattern.charAt(offset)) {
-                offset++;
-            }
-            if (offset == pattern.length()) {
-                return start;
-            }
-        }
-        return -1;
-    }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Текст: ");
-        String text = scanner.nextLine();
-        System.out.print("Символ за търсене: ");
-        String symbolInput = scanner.nextLine();
-        System.out.print("Подниз за търсене: ");
-        String pattern = scanner.nextLine();
-
-        if (symbolInput.length() == 0) {
-            System.out.println("Не е въведен символ.");
-            return;
-        }
-
-        System.out.println("Позиция на символа: "
-                + findCharacter(text, symbolInput.charAt(0)));
-        System.out.println("Позиция на подниза: " + findSubstring(text, pattern));
-        System.out.println("-1 означава, че няма съвпадение.");
-    }
-}
-```
+## Практическа задача
+Напишете метод findCharacter(text, target), който връща позицията на първото срещане, и метод findSubstring(text, pattern), който реализира собствено търсене на подниз. В main прочетете трите входни стойности и покажете резултатите.
