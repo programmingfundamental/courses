@@ -6,13 +6,13 @@ sidebar:
   order: 100
 ---
 
-## 6. Мини експеримент / демонстрация — 10 минути
+## 6. Мини експеримент / демонстрация
 
 Създайте experiment в in-memory версията и рестартирайте process: историята изчезва. В малка предварително подготвена Room demo версия запишете същия record, после reopen-нете process и проверете Database Inspector. Накрая извикайте save два пъти с един operation ID; предскажете ефекта при различни conflict policies.
 
 Не измервайте „бързината на SQLite“ от един insert. Целта е да видите къде е authoritative state и как duplicate action става storage problem.
 
-## 7. Водена практическа задача — 35 минути
+## 7. Водена практическа задача
 
 ### Стъпка 1 — schema
 
@@ -57,14 +57,14 @@ Delete премахва parent и children по explicit confirmation action. Ac
 
 ViewModel преобразува repository Flow до immutable UiState с `stateIn`; UI събира lifecycle-aware. Покажете Loading, Empty, Content и StorageError. Selection пази само ID; при изтрит ID екранът преминава към „записът вече не съществува“. Не връщайте silently празен списък за всяка storage exception.
 
-## 8. Checkpoint — 5 минути
+## 8. Checkpoint
 
 - Записан experiment с 3 measurements се вижда след process restart.
 - UI се обновява от Room Flow, без ръчно добавяне във втори списък.
 - Duplicate logical insert не увеличава row count.
 - Delete оставя нула children; invalid measurement се отхвърля.
 
-## 9. Самостоятелна задача — 35 минути, в часа
+## 9. Самостоятелна задача
 
 Добавете History controls: филтър по name и status (all/open/finished), сортиране newest/oldest/name и persistent preferences. Избраният sort/status и последната search query до 60 символа се запазват в Preferences DataStore и се възстановяват при restart.
 
@@ -91,7 +91,7 @@ ViewModel преобразува repository Flow до immutable UiState с `stat
 
 Room in-memory instrumented tests: happy path, duplicate ID, foreign key, cascade и atomic finish. Pure tests проверяват value/name validation. DataStore tests използват отделен temporary file и затварят scope между instances. Rotation и navigation не повтарят insert. Reopen на file-backed test database проверява persistence; in-memory database не доказва restart behavior. Fixture от 10 000 rows се seed-ва извън main thread, с фиксиран seed.
 
-## 12. Наблюдение и измерване — 10 минути
+## 12. Наблюдение и измерване
 
 В Database Inspector проверете tables, row counts и parent-child връзки. Съберете query emissions, UI emissions, query duration и displayed count при 0/100/10 000 rows. Отбележете thread на repository calls и main-thread stalls. Използвайте bounded counters, а не лог на всеки record. Запишете before/after restart settings и screenshot на валидния filter result в `results/lab02/`.
 

@@ -25,7 +25,7 @@ Nearby measurement device се появява многократно в scan lis
 
 ## 3. Предварителни знания
 
-Lab 4–5, coroutines/Flow, state transitions, UUID и binary decoding. Peripheral firmware не се пише в тези 135 минути.
+Lab 4–5, coroutines/Flow, state transitions, UUID и binary decoding. Peripheral firmware не се пише в рамките на лабораторното упражнение.
 
 ## 4. Необходими инструменти
 

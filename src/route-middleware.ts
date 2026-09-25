@@ -78,8 +78,8 @@ export const onRequest = defineRouteMiddleware((context) => {
     route.sidebar = [
       link(locale, bg ? 'Всички дисциплини' : 'All courses'),
       group(course.data.title, [link(courseId, overview)], false),
-      ...(labEntries.length ? [group(bg ? 'Лабораторни упражнения' : 'Labs', labEntries, false)] : []),
       ...(otherEntries.length ? [group(bg ? 'Допълнителни материали' : 'Additional resources', otherEntries)] : []),
+      ...(labEntries.length ? [group(bg ? 'Лабораторни упражнения' : 'Labs', labEntries, false)] : []),
       group(bg ? 'Други дисциплини' : 'Other courses', allCourses),
     ];
     const currentLab = labs.findIndex((doc) => doc.id === route.id);

@@ -6,13 +6,13 @@ sidebar:
   order: 100
 ---
 
-## 6. Начален експеримент — 15 минути
+## 6. Начален експеримент
 
 Направете временен unreliable режим: 20 DATA съобщения със стойност +1, без ACK/retry. Fault injector drop-ва всеки пети пакет, а всеки седми дублира. Сравнете изпратени операции и total на server. После добавете „повтори, ако няма отговор“, но без deduplication, и drop-нете първия ACK. Докажете двойното изпълнение на една логическа операция.
 
 Запишете timeline `send(seq) → execute(seq) → dropped ACK → resend(seq) → execute(seq)` и посочете коя стъпка трябва да се промени.
 
-## 7. Основна лабораторна задача — 50 минути
+## 7. Основна лабораторна задача
 
 ### Стъпка 1 — отделен datagram codec
 
@@ -47,7 +47,7 @@ ACK е валиден само ако source endpoint, SESSION_ID, SEQ, TYPE и 
 
 Изпълнете по 100 последователни операции за loss=0%, 10%, 30% с фиксиран seed и documented delay. Изпълнете поне три seeds за вероятностните сценарии. Не приемайте, че всеки run с loss=30% ще завърши успешно; retry budget е краен. Потвърдете total за acknowledged prefix и отбележете ambiguity на последната timeout операция.
 
-## 8. Failure scenarios и edge cases — 20 минути
+## 8. Failure scenarios и edge cases
 
 | Случай | Как се причинява | Очакване |
 |---|---|---|
@@ -62,7 +62,7 @@ ACK е валиден само ако source endpoint, SESSION_ID, SEQ, TYPE и 
 
 Stop-and-wait не допуска две нови DATA операции едновременно, затова reordering демонстрацията използва забавено копие на стара операция. Не представяйте този test като sliding-window протокол.
 
-## 9. Наблюдение и измерване — 15 минути
+## 9. Наблюдение и измерване
 
 Съберете: unique operations, data datagrams sent, retries, ACKs, duplicates, stale packets, timeouts, injector drops/overflow, final total, duration. Goodput е acknowledged application data bytes / elapsed seconds; wire throughput включва headers, ACKs и retransmissions и е различна величина.
 

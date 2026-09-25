@@ -6,13 +6,13 @@ sidebar:
   order: 100
 ---
 
-## 6. Начален експеримент — 15 минути
+## 6. Начален експеримент
 
 Направете non-blocking connection и изпратете само първите 2 bytes от header. При readable event опитайте временния грешен подход „прочети веднъж и parse-ни целия header“. Документирайте missing bytes/underflow, после отстранете този код.
 
 Втори кратък опит: регистрирайте OP_WRITE постоянно, без output. За 5 s пребройте select returns и празни write-ready handlers. После премахнете OP_WRITE и сравнете CPU/loop counters. Този умишлен дефект се използва само в контролирания експеримент.
 
-## 7. Основна лабораторна задача — 50 минути
+## 7. Основна лабораторна задача
 
 ### Стъпка 1 — accept и ConnectionState
 
@@ -70,7 +70,7 @@ Fake writer приема най-много 3 bytes и периодично вр�
 
 Проверявайте idle deadline на всеки select cycle с максимално select wait 250 ms; задайте idle timeout=10 s за лабораторните опити. QUIT маркира closingAfterFlush; след OK drain изпълнете bounded close. При server shutdown спрете accept, забранете нови requests, drain-вайте output до 3 s, после затворете channels и selector.
 
-## 8. Failure scenarios и edge cases — 20 минути
+## 8. Failure scenarios и edge cases
 
 | Случай | Стимул | Очакване |
 |---|---|---|
@@ -85,7 +85,7 @@ Fake writer приема най-много 3 bytes и периодично вр�
 
 В тази лаборатория overflow policy е **close на slow connection** с metric; по-фина read-pause стратегия идва в Lab 5.
 
-## 9. Наблюдение и измерване — 15 минути
+## 9. Наблюдение и измерване
 
 Сравнете thread-per-client от Lab 2 и NIO при 10 и 100 connections, ако limits и средата позволяват. Запишете еднакви payloads, timeout, TCP_NODELAY и connection cap. Измерете threads, CPU при idle, completed requests, errors, latency на тих client до активен sender, maximum queuedBytes.
 

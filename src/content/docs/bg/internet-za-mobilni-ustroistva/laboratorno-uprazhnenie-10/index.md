@@ -31,7 +31,7 @@ Android + access token → [Gateway boundary]
                      OTel Collector → Jaeger
 Structured logs + requestId/traceId; aggregate metrics
 ```
-Реализирайте security върху REST create/read path. Gateway остава единственият public вход; service authorization не се заменя с routing. За основния 90-минутен вариант затворете fixture и WebSocket public routes; live stream се публикува отново само с authenticated per-user routing.
+Реализирайте security върху REST create/read path. Gateway остава единственият public вход; service authorization не се заменя с routing. За основния вариант затворете fixture и WebSocket public routes; live stream се публикува отново само с authenticated per-user routing.
 
 ## 6. Кратка теория
 OAuth2 е authorization framework; OIDC добавя identity; JWT е token format. Native mobile е public client без embedded secret: production login ползва system browser Authorization Code + PKCE. Тук token.mjs е само локален signed-credential fixture, не OIDC server. Не използвайте ID token вместо API access token.

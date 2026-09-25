@@ -9,7 +9,7 @@ sidebar:
 ## 7. Мини експеримент
 С готов Home fixture изпълнете две mobile requests последователно с еднакво добавено 150 ms network delay. После един агрегиращ request. Пребройте backend calls отделно; покажете, че те не са изчезнали.
 
-## 8. Водена практическа задача — 35 минути, включително checkpoint
+## 8. Водена практическа задача
 ### Стъпка 1
 Дефинирайте HomeResponse с profile summary и последни максимум 5 activities. Използвайте DTO projection, generatedAt и section availability. Изискването за profile като critical и activities като explicit partial се фиксира във водената версия.
 
@@ -29,7 +29,7 @@ sidebar:
 - Gateway не съдържа aggregation.
 - Един mobile request дава bounded Home DTO и explicit partial state.
 
-## 10. Самостоятелна задача — 20 минути в часа
+## 10. Самостоятелна задача
 **Problem statement:** Проектирайте BFF endpoint за различен екран: Activity Overview с owner summary и notification eligibility.
 
 **Functional requirements:** Изберете минимум две sources, собствен DTO и кои sections са critical/optional. При един failure върнете доказуемо правилна partial response или error според избрания contract.

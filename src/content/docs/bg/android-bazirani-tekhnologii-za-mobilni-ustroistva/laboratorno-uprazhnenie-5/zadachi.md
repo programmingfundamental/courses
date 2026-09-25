@@ -6,13 +6,13 @@ sidebar:
   order: 100
 ---
 
-## 6. Мини експеримент / демонстрация — 10 минути
+## 6. Мини експеримент / демонстрация
 
 Подайте синтетични точки около едно място с accuracy 80 m и jitter до 30 m. Наивно сумирайте всички съседни distances и сравнете с реално нулевото движение в сценария. После добавете стар sample с timestamp отпреди 2 min и единичен далечен jump.
 
 На emulator откажете permission, после дайте approximate. Запишете кои UI states липсват в наивната версия. Не използвайте личен реален маршрут за test report.
 
-## 7. Водена практическа задача — 35 минути
+## 7. Водена практическа задача
 
 ### Стъпка 1 — immutable fix и status
 
@@ -46,14 +46,14 @@ Callback не пише директно в Room. Bounded writer queue до 64 fi
 
 Добавете schema version=4 и RoutePoint table с id, experimentId, координати, accuracy, двата timestamps, source mode и decision metadata. Migration 3→4 запазва MotionEvent. Водената част записва basic-valid fixes и показва последна позиция, accuracy, wall timestamp и sample count. UI историята е ограничена до 200 points, durable route до 10 000 на experiment; при достигане stop recording с explicit state, вместо безкраен растеж.
 
-## 8. Checkpoint — 5 минути
+## 8. Checkpoint
 
 - Emulator/fake route води до records и актуален sample count.
 - Denied и approximate grant са различими и не crash-ват.
 - Interval се променя без дублирани subscriptions.
 - След Home/Stop няма active location listener; историята остава.
 
-## 9. Самостоятелна задача — 35 минути, в часа
+## 9. Самостоятелна задача
 
 Реализирайте **Mobility Tracker** върху logger-а: accepted route, total distance и обяснима rejection причина за всеки неприет sample.
 
@@ -80,7 +80,7 @@ Callback не пише директно в Room. Bounded writer queue до 64 fi
 
 Pure tests с synthetic latitude/longitude: straight segment, stationary jitter, zero/negative dt, stale point, missing accuracy и jump. Distance calculator се тества отделно с известни приблизителни reference distances. Permission tests на emulator проверяват deny/approximate/precise/revoke; fake capability позволява deterministic unit coverage. Lifecycle test повтаря navigation/rotation и следи registration count. Room test проверява migration, unique point и idempotent total contribution.
 
-## 12. Наблюдение и измерване — 10 минути
+## 12. Наблюдение и измерване
 
 Сравнете intervals 2/5/10 s при един и същ synthetic route: delivered fixes, accepted/rejected by reason, recorded points, total distance и active listener time. На реално устройство добавете observed accuracy distribution и provider; не извеждайте battery consumption от един кратък emulator run. Report-вайте source mode и uncertainty, а не само число за distance. Logs използват synthetic coordinates или redacted identifiers.
 
