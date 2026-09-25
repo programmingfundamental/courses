@@ -11,7 +11,7 @@ XOR сравнява битовете на две числа: резултатн
 
 **Важно за учебната криптография:** Цезаровият шифър, шифърът на Виженер, простото XOR преобразуване и използваните транспозиционни методи са само за обучение. Не ги използвайте за защита на чувствителна информация. Целта е да се упражнят алгоритми, преобразуване на текст, ключове, обратими операции, криптиране, декриптиране и елементарен криптоанализ; не се разглеждат съвременни криптографски системи.
 
-Условията на практическата, самостоятелната и допълнителната задача са на [страницата Задачи](/courses/bg/uchebna-praktika-2-kibersigurnost/laboratorno-uprazhnenie-9/zadachi/).
+Насоките за реализация, самостоятелната и допълнителната задача са на [страницата Задачи](/courses/bg/uchebna-praktika-2-kibersigurnost/laboratorno-uprazhnenie-9/zadachi/).
 
 ## Алгоритъм
 1. За всеки символ прочети числовата му стойност.
@@ -59,57 +59,8 @@ public static String xorNumbersToText(int[] values, int key) {
 }
 ```
 
-## Въпроси за проверка
-1. Какво означава XOR за два еднакви бита?
-2. Кой оператор в Java изчислява XOR?
-3. Защо второто XOR връща оригиналната стойност?
-4. Защо изходът се показва като числа?
-5. Защо тази проста операция не е подходяща за реална защита?
-
 ## Очакван резултат
 За символ A (код 65) и ключ 7 програмата показва 70. Повторното XOR дава обратно кода 65 и възстановява A.
 
-## Пълно примерно решение
-Работещият пълен пример е даден по-долу и се намира отделно във файла `09-xor/src/Main.java`.
-
-
-```java
-import java.util.Scanner;
-
-public class Main {
-    public static int[] xorToNumbers(String text, int key) {
-        int[] values = new int[text.length()];
-        for (int i = 0; i < text.length(); i++) {
-            values[i] = text.charAt(i) ^ key;
-        }
-        return values;
-    }
-
-    public static String xorNumbersToText(int[] values, int key) {
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < values.length; i++) {
-            result.append((char) (values[i] ^ key));
-        }
-        return result.toString();
-    }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Въведете текст: ");
-        String text = scanner.nextLine();
-        System.out.print("Числов ключ (например 7): ");
-        int key = scanner.nextInt();
-
-        int[] encrypted = xorToNumbers(text, key);
-        System.out.print("XOR стойности: ");
-        for (int i = 0; i < encrypted.length; i++) {
-            if (i > 0) System.out.print(" ");
-            System.out.print(encrypted[i]);
-        }
-        System.out.println();
-
-        System.out.println("Повторен XOR възстановява: "
-                + xorNumbersToText(encrypted, key));
-    }
-}
-```
+## Практическа задача
+Напишете конзолна програма, която прочита текст и цяло число, създава масив от XOR стойности, показва ги като числа и прилага XOR със същия ключ, за да възстанови текста.

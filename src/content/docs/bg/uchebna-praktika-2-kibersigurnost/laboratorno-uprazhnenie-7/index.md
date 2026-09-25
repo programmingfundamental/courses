@@ -11,7 +11,7 @@ sidebar:
 
 **Важно за учебната криптография:** Цезаровият шифър, шифърът на Виженер, простото XOR преобразуване и използваните транспозиционни методи са само за обучение. Не ги използвайте за защита на чувствителна информация. Целта е да се упражнят алгоритми, преобразуване на текст, ключове, обратими операции, криптиране, декриптиране и елементарен криптоанализ; не се разглеждат съвременни криптографски системи.
 
-Условията на практическата, самостоятелната и допълнителната задача са на [страницата Задачи](/courses/bg/uchebna-praktika-2-kibersigurnost/laboratorno-uprazhnenie-7/zadachi/).
+Насоките за реализация, самостоятелната и допълнителната задача са на [страницата Задачи](/courses/bg/uchebna-praktika-2-kibersigurnost/laboratorno-uprazhnenie-7/zadachi/).
 
 ## Алгоритъм
 1. Почисти текста до главни букви A-Z.
@@ -57,59 +57,8 @@ public static String decrypt(String text, int key) {
 }
 ```
 
-## Въпроси за проверка
-1. На коя числова стойност съответства A?
-2. Защо използваме остатък при деление на 26?
-3. Каква е разликата между encrypt и decrypt?
-4. Какво става с интервалите в дадената реализация?
-5. Защо нормализираме ключа?
-
 ## Очакван резултат
 HELLO с ключ 3 дава KHOOR, а декриптирането с ключ 3 връща HELLO. Входът се обработва като английски букви A-Z.
 
-## Пълно примерно решение
-Работещият пълен пример е даден по-долу и се намира отделно във файла `07-caesar/src/Main.java`.
-
-
-```java
-import java.util.Scanner;
-
-public class Main {
-    public static String lettersOnly(String text) {
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < text.length(); i++) {
-            char c = text.charAt(i);
-            if (c >= 'a' && c <= 'z') c = (char) (c - 'a' + 'A');
-            if (c >= 'A' && c <= 'Z') result.append(c);
-        }
-        return result.toString();
-    }
-
-    public static String encrypt(String text, int key) {
-        String clean = lettersOnly(text);
-        StringBuilder result = new StringBuilder();
-        int shift = ((key % 26) + 26) % 26;
-        for (int i = 0; i < clean.length(); i++) {
-            char c = clean.charAt(i);
-            result.append((char) ('A' + (c - 'A' + shift) % 26));
-        }
-        return result.toString();
-    }
-
-    public static String decrypt(String text, int key) {
-        return encrypt(text, -key);
-    }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Текст (английски букви): ");
-        String text = scanner.nextLine();
-        System.out.print("Ключ (цяло число): ");
-        int key = scanner.nextInt();
-
-        String encrypted = encrypt(text, key);
-        System.out.println("Криптиран текст: " + encrypted);
-        System.out.println("Декриптиран текст: " + decrypt(encrypted, key));
-    }
-}
-```
+## Практическа задача
+Реализирайте lettersOnly(text), encrypt(text, key) и decrypt(text, key). Покажете шифротекста и след това декриптирайте същия текст. Програмата приема английски букви A-Z и връща само букви.

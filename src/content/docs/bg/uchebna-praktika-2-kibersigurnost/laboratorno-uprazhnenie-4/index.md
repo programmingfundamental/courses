@@ -9,7 +9,7 @@ sidebar:
 
 Нормализирането тук означава да запазим само буквите A-Z и да ги приведем до главни. Например Java, Security! става JAVASECURITY. Обхождаме входа; малка буква се преобразува чрез разликата между 'a' и 'A', а после се добавя само ако е в диапазона 'A'–'Z'. StringBuilder е удобен за сглобяване на резултат.
 
-Условията на практическата, самостоятелната и допълнителната задача са на [страницата Задачи](/courses/bg/uchebna-praktika-2-kibersigurnost/laboratorno-uprazhnenie-4/zadachi/).
+Насоките за реализация, самостоятелната и допълнителната задача са на [страницата Задачи](/courses/bg/uchebna-praktika-2-kibersigurnost/laboratorno-uprazhnenie-4/zadachi/).
 
 ## Алгоритъм
 1. Създай празен StringBuilder.
@@ -51,46 +51,8 @@ public static String normalizeText(String text) {
 }
 ```
 
-## Въпроси за проверка
-1. Какво означава нормализиране в тази задача?
-2. Кои символи се запазват?
-3. Как се преобразува малка ASCII буква в главна?
-4. Защо използваме StringBuilder?
-5. Защо пунктуацията не се добавя към резултата?
-
 ## Очакван резултат
 Входът Java, Security! дава JAVASECURITY. Разстоянията, запетаята и удивителният знак не присъстват в резултата.
 
-## Пълно примерно решение
-Работещият пълен пример е даден по-долу и се намира отделно във файла `04-text-normalization/src/Main.java`.
-
-
-```java
-import java.util.Scanner;
-
-public class Main {
-    public static String normalizeText(String text) {
-        StringBuilder result = new StringBuilder();
-
-        for (int i = 0; i < text.length(); i++) {
-            char c = text.charAt(i);
-            if (c >= 'a' && c <= 'z') {
-                c = (char) (c - 'a' + 'A');
-            }
-            if (c >= 'A' && c <= 'Z') {
-                result.append(c);
-            }
-        }
-
-        return result.toString();
-    }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Въведете текст: ");
-        String text = scanner.nextLine();
-
-        System.out.println("Нормализиран текст: " + normalizeText(text));
-    }
-}
-```
+## Практическа задача
+Напишете normalizeText(text), която премахва интервали и препинателни знаци и връща само главни английски букви A-Z. Покажете резултата за вход от потребителя.

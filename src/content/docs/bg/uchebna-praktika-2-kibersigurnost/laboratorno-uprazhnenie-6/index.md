@@ -9,7 +9,7 @@ sidebar:
 
 Масивът frequency има 26 позиции: 0 съответства на A, 1 на B и така до 25 за Z. След нормализиране на малка буква проверяваме дали символът е A-Z и увеличаваме frequency[c - 'A']. Така една структура съхранява броя за всички букви.
 
-Условията на практическата, самостоятелната и допълнителната задача са на [страницата Задачи](/courses/bg/uchebna-praktika-2-kibersigurnost/laboratorno-uprazhnenie-6/zadachi/).
+Насоките за реализация, самостоятелната и допълнителната задача са на [страницата Задачи](/courses/bg/uchebna-praktika-2-kibersigurnost/laboratorno-uprazhnenie-6/zadachi/).
 
 ## Алгоритъм
 1. Създай int[] frequency = new int[26].
@@ -56,49 +56,8 @@ for (int i = 0; i < text.length(); i++) {
 // TODO: изведете A-Z и съответните стойности
 ```
 
-## Въпроси за проверка
-1. Защо масивът има точно 26 елемента?
-2. Какъв индекс съответства на Z?
-3. Какво означава frequency[c - 'A']?
-4. Защо трябва да проверим диапазона преди достъпа до масива?
-5. Какво се показва за буква, която липсва?
-
 ## Очакван резултат
 За BANANA таблицата съдържа A -> 3, B -> 1, N -> 2, а останалите букви имат честота 0. Резултатът е еднакъв за banana.
 
-## Пълно примерно решение
-Работещият пълен пример е даден по-долу и се намира отделно във файла `06-frequency-analysis/src/Main.java`.
-
-
-```java
-import java.util.Scanner;
-
-public class Main {
-    public static int[] frequencyAnalysis(String text) {
-        int[] frequency = new int[26];
-
-        for (int i = 0; i < text.length(); i++) {
-            char c = text.charAt(i);
-            if (c >= 'a' && c <= 'z') {
-                c = (char) (c - 'a' + 'A');
-            }
-            if (c >= 'A' && c <= 'Z') {
-                frequency[c - 'A']++;
-            }
-        }
-        return frequency;
-    }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Въведете текст: ");
-        String text = scanner.nextLine();
-        int[] frequency = frequencyAnalysis(text);
-
-        for (int i = 0; i < frequency.length; i++) {
-            char letter = (char) ('A' + i);
-            System.out.println(letter + " -> " + frequency[i]);
-        }
-    }
-}
-```
+## Практическа задача
+Напишете програма, която чете текст и показва честотна таблица за всички букви A-Z. Малките букви трябва да се броят към съответните главни, а интервали, цифри и пунктуация да се игнорират.

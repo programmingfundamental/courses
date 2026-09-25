@@ -1,0 +1,64 @@
+---
+title: "Подсказки — упражнение 9"
+draft: true
+pagefind: false
+sidebar:
+  hidden: true
+---
+
+# XOR преобразуване на текст
+
+## Практическа задача
+Напишете конзолна програма, която прочита текст и цяло число, създава масив от XOR стойности, показва ги като числа и прилага XOR със същия ключ, за да възстанови текста.
+
+## Пълно решение на практическата задача
+Работещият пълен пример е даден по-долу и се намира отделно във файла `09-xor/src/Main.java`.
+
+
+```java
+import java.util.Scanner;
+
+public class Main {
+    public static int[] xorToNumbers(String text, int key) {
+        int[] values = new int[text.length()];
+        for (int i = 0; i < text.length(); i++) {
+            values[i] = text.charAt(i) ^ key;
+        }
+        return values;
+    }
+
+    public static String xorNumbersToText(int[] values, int key) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < values.length; i++) {
+            result.append((char) (values[i] ^ key));
+        }
+        return result.toString();
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Въведете текст: ");
+        String text = scanner.nextLine();
+        System.out.print("Числов ключ (например 7): ");
+        int key = scanner.nextInt();
+
+        int[] encrypted = xorToNumbers(text, key);
+        System.out.print("XOR стойности: ");
+        for (int i = 0; i < encrypted.length; i++) {
+            if (i > 0) System.out.print(" ");
+            System.out.print(encrypted[i]);
+        }
+        System.out.println();
+
+        System.out.println("Повторен XOR възстановява: "
+                + xorNumbersToText(encrypted, key));
+    }
+}
+```
+
+## Въпроси за проверка
+1. Какво означава XOR за два еднакви бита?
+2. Кой оператор в Java изчислява XOR?
+3. Защо второто XOR връща оригиналната стойност?
+4. Защо изходът се показва като числа?
+5. Защо тази проста операция не е подходяща за реална защита?
