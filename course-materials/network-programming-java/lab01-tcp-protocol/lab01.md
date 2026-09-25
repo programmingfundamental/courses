@@ -70,7 +70,7 @@ PAYLOAD = REQUEST_ID (8 bytes) + BODY (LENGTH - 8 bytes)
 
 При стандартния blocking `OutputStream.write(byte[])` няма върнат брой записани bytes: при нормално приключване са подадени всички, а при exception може да е изпратена част. Не изпращайте отново целия frame по същата connection след такъв exception. Short writes с числов резултат ще обработваме при NIO в Lab 4. `flush()` изпразва application buffer, но не създава message boundary и не е remote acknowledgement. Вижте [OutputStream](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/OutputStream.html).
 
-## 6. Начален експеримент — 15 минути
+## 6. Начален експеримент
 
 1. Направете временен sender с две byte arrays с различим текст и два последователни `out.write(message1); out.write(message2);`. Receiver печата само `read count` и hex bytes, без да ги интерпретира като съобщения.
 2. Повторете с receiver buffer 3, 8 и 1024 bytes. При buffer 3 дълго съобщение задължително изисква множество reads.
@@ -79,7 +79,7 @@ PAYLOAD = REQUEST_ID (8 bytes) + BODY (LENGTH - 8 bytes)
 
 Запишете `write sizes`, `read sizes`, общи bytes и брой възстановени messages. Не използвайте `sleep()` като „решение“ на framing.
 
-## 7. Основна лабораторна задача — 50 минути
+## 7. Основна лабораторна задача
 
 ### Стъпка 1 — договор и модел
 
@@ -121,7 +121,7 @@ Baseline сървърът обслужва една accepted connection до н�
 
 При `QUIT` server изпраща `OK`, flush-ва и извиква `shutdownOutput()`. Client получава отговора и EOF, затваря своя output и socket. Server изчаква peer EOF най-много 2 s и затваря socket; при нарушение затваря веднага. Обяснете half-close. При I/O error не чакайте нов protocol exchange. Owner на accepted socket е handler-ът в try-with-resources.
 
-## 8. Failure scenarios и edge cases — 20 минути
+## 8. Failure scenarios и edge cases
 
 | Test | Как го предизвиквате | Очакван резултат |
 |---|---|---|
@@ -136,7 +136,7 @@ Baseline сървърът обслужва една accepted connection до н�
 
 Тествайте и точно максималния разрешен ECHO payload. Timeout tests използват интервал с толеранс, не изискват точна милисекунда.
 
-## 9. Наблюдение и измерване — 15 минути
+## 9. Наблюдение и измерване
 
 В Wireshark изберете loopback интерфейса и display filter `tcp.port == 9000`. Направете нова connection след началото на capture. Намерете SYN/SYN-ACK/ACK, application bytes и FIN/ACK обмен при `QUIT`. При рязък отказ е възможен RST, но не го очаквайте при всяко `close()`.
 
