@@ -4,7 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const sourceRoot = path.join(root, 'mobile-internet-course');
+const sourceRoot = path.join(root, 'course-materials', 'mobile-internet-course');
 const targetRoot = path.join(root, 'src/content/docs/bg/internet-za-mobilni-ustroistva');
 const folders = [
   'lab01-connectivity',

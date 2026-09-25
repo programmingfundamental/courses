@@ -1,7 +1,7 @@
 ---
-title: Introduction to programming
+title: English course materials
 template: splash
 hero:
-  title: Introduction to programming
-  tagline: Find a course for your year of study and continue to the labs.
+  title: English course materials are unavailable
+  tagline: English discipline content has been removed. Select Bulgarian from the language menu to browse the available courses.
 ---
