@@ -360,6 +360,24 @@ System.out.println("Обърнат текст: " + reverseText(text));
 System.out.println(isPalindrome(text) ? "Палиндром" : "Не е палиндром");
 ```
 
+### Задача 10
+
+Добавете избор 12 в менюто и следния клон в цикъла. `caesarEncrypt` нормализира текста, а `printFrequency` извежда честотите.
+
+```java
+System.out.println("12. Нормализирай, шифрирай и анализирай");
+```
+
+```java
+} else if (choice.equals("12")) {
+    System.out.print("Текст: ");
+    String text = scanner.nextLine();
+    int key = readInteger(scanner, "Ключ: ");
+    String cipher = caesarEncrypt(normalizeText(text), key);
+    System.out.println("Шифротекст: " + cipher);
+    printFrequency(cipher);
+```
+
 ## Въпроси за проверка
 1. Защо всеки алгоритъм е отделен метод?
 2. Какво контролира променливата running?

@@ -202,6 +202,21 @@ for (int columns : new int[] {2, 3, 4}) {
 }
 ```
 
+### Задача 10
+
+При попълване по редове символът с индекс `i` е на `row = i / columns`, `column = i % columns`. При четене по колони позицията му в шифротекста е `column * rows + row`.
+
+```java
+int rows = (text.length() + columns - 1) / columns;
+for (int i = 0; i < text.length(); i++) {
+    int row = i / columns;
+    int column = i % columns;
+    int cipherPosition = column * rows + row;
+    System.out.println(text.charAt(i) + ": (" + row + ", " + column
+            + ") -> позиция " + cipherPosition);
+}
+```
+
 ## Въпроси за проверка
 1. Какво се променя при транспозиция?
 2. Как се попълва матрицата при шифриране?

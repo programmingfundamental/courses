@@ -5,12 +5,9 @@ import { childrenOf, courseGroupsFor, isLab, urlFor } from '../utils/courses';
 const route = Astro.locals.starlightRoute;
 const bg = route.locale === 'bg';
 const home = route.id === route.locale;
-// Bulgarian course overviews contain their complete, curated laboratory list.
-const courseOverview = bg && route.id.split('/').length === 2;
-const children = courseOverview ? [] : childrenOf(route.id).filter((doc) => !route.entry.body?.includes(urlFor(doc.id)));
 ---
 <DefaultContent><slot /></DefaultContent>
-{home ? (
+{home && (
   <section aria-label={bg ? 'Дисциплини по курсове' : 'Courses by year'} class="course-catalog">
     {courseGroupsFor(route.locale!).map((year) => (
       <section class="course-year" aria-labelledby={year.id}>
@@ -23,11 +20,6 @@ const children = courseOverview ? [] : childrenOf(route.id).filter((doc) => !rou
         </CardGrid>
       </section>
     ))}
-  </section>
-) : children.length > 0 && (
-  <section class="sl-markdown-content course-index" aria-labelledby="course-content-title">
-    <h2 id="course-content-title">{bg ? 'Материали в този раздел' : 'In this section'}</h2>
-    <ul>{children.map((doc) => <li><a href={urlFor(doc.id)}>{doc.data.title}</a></li>)}</ul>
   </section>
 )}
 <script>
