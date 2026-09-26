@@ -113,6 +113,65 @@ while (running) {
 }
 ```
 
+### Задача 3
+
+```java
+System.out.println(encrypt("ATTACKATDAWN", "LEMON")); // LXFOPVEFRNHR
+```
+
+### Задача 4
+
+```java
+System.out.println(decrypt("LXFOPVEFRNHR", "LEMON")); // ATTACKATDAWN
+```
+
+### Задача 5
+
+```java
+String text = lettersOnly("HELLOWORLD");
+String key = lettersOnly("KEY");
+for (int i = 0; i < text.length(); i++) {
+    System.out.println(text.charAt(i) + " -> " + key.charAt(i % key.length()));
+}
+```
+
+### Задача 6
+
+```java
+if (lettersOnly(key).isEmpty()) {
+    System.out.println("Ключът трябва да съдържа поне една буква A-Z.");
+} else {
+    System.out.println(encrypt(text, key));
+}
+```
+
+### Задача 7
+
+Функцията `lettersOnly` преобразува малките английски букви в главни, затова резултатът е с главни букви.
+
+```java
+System.out.println(encrypt("Attack at dawn!", "lemon"));
+```
+
+### Задача 8
+
+```java
+String cipher = encrypt(text, key);
+System.out.println(decrypt(cipher, key).equals(lettersOnly(text)));
+```
+
+### Задача 9
+
+```java
+String cleanText = lettersOnly("HELLO");
+String cleanKey = lettersOnly("KEY");
+for (int i = 0; i < cleanText.length(); i++) {
+    int textValue = cleanText.charAt(i) - 'A';
+    int keyValue = cleanKey.charAt(i % cleanKey.length()) - 'A';
+    System.out.println(textValue + " + " + keyValue);
+}
+```
+
 ## Въпроси за проверка
 1. Защо ключът се повтаря?
 2. Как се избира текущата позиция в ключа?

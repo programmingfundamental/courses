@@ -89,6 +89,64 @@ int[] encrypted = xorToNumbers(text, key);
 System.out.println("Възстановен текст: " + xorNumbersToText(encrypted, key));
 ```
 
+### Задача 3
+
+```java
+int first = 'A' ^ 7;
+int second = first ^ 7;
+System.out.println("A -> " + first + " -> " + (char) second);
+int third = 'B' ^ 7;
+System.out.println("B -> " + third + " -> " + (char) (third ^ 7));
+```
+
+### Задача 4
+
+```java
+for (int value : xorToNumbers(text, key)) {
+    String bits = String.format("%8s", Integer.toBinaryString(value)).replace(' ', '0');
+    System.out.println(bits);
+}
+```
+
+### Задача 5
+
+При ключ 0 все битове остават непроменени, следователно резултатът е равен на входа.
+
+```java
+System.out.println(java.util.Arrays.toString(xorToNumbers(text, 0)));
+```
+
+### Задача 6
+
+```java
+int[] values = xorToNumbers("", key);
+System.out.println("Брой стойности: " + values.length);
+```
+
+### Задача 7
+
+```java
+int[] encrypted = xorToNumbers(text, key);
+String restored = xorNumbersToText(encrypted, key);
+System.out.println(restored.equals(text) ? "Възстановяването е успешно." : "Има грешка.");
+```
+
+### Задача 8
+
+```java
+int[] values = xorToNumbers(text, key);
+for (int value : values) System.out.println(value);
+```
+
+### Задача 9
+
+```java
+for (int key : new int[] {1, 7, 31}) {
+    System.out.println("Ключ " + key + ": "
+            + java.util.Arrays.toString(xorToNumbers(text, key)));
+}
+```
+
 ## Въпроси за проверка
 1. Какво означава XOR за два еднакви бита?
 2. Кой оператор в Java изчислява XOR?

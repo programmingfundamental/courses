@@ -80,6 +80,95 @@ public static String normalizeLatinAndCyrillic(String text) {
 
 Диапазоните `\u0410`–`\u042F` са главните кирилски букви А–Я, `\u0430`–`\u044F` са малките а–я, а `\u0401`/`\u0451` са Ё/ё.
 
+### Задача 3
+
+```java
+public static String normalizeLowercase(String text) {
+    StringBuilder result = new StringBuilder();
+    for (int i = 0; i < text.length(); i++) {
+        char c = text.charAt(i);
+        if (c >= 'A' && c <= 'Z') c = (char) (c - 'A' + 'a');
+        if (c >= 'a' && c <= 'z') result.append(c);
+    }
+    return result.toString();
+}
+```
+
+### Задача 4
+
+Добавете проверка за цифра и я добавете към резултата.
+
+```java
+if (c >= '0' && c <= '9') result.append(c);
+```
+
+### Задача 5
+
+```java
+int upper = 0, lower = 0;
+for (int i = 0; i < text.length(); i++) {
+    char c = text.charAt(i);
+    if (c >= 'A' && c <= 'Z') upper++;
+    else if (c >= 'a' && c <= 'z') lower++;
+}
+System.out.println("Главни: " + upper + ", малки: " + lower);
+```
+
+### Задача 6
+
+```java
+public static String collapseSpaces(String text) {
+    StringBuilder result = new StringBuilder();
+    boolean previousWasSpace = true;
+    for (int i = 0; i < text.length(); i++) {
+        char c = text.charAt(i);
+        if (c == ' ') {
+            if (!previousWasSpace) result.append(c);
+            previousWasSpace = true;
+        } else {
+            result.append(c);
+            previousWasSpace = false;
+        }
+    }
+    int length = result.length();
+    if (length > 0 && result.charAt(length - 1) == ' ') result.deleteCharAt(length - 1);
+    return result.toString();
+}
+```
+
+### Задача 7
+
+```java
+boolean same = normalizeText(first).equals(normalizeText(second));
+System.out.println(same ? "Еднакви след нормализиране" : "Различни");
+```
+
+### Задача 8
+
+```java
+String normalized = normalizeText(text);
+int letters = normalized.length();
+int digits = 0;
+for (int i = 0; i < text.length(); i++) {
+    char c = text.charAt(i);
+    if (c >= '0' && c <= '9') digits++;
+}
+int removed = text.length() - letters - digits;
+System.out.println("Букви=" + letters + ", цифри=" + digits + ", премахнати=" + removed);
+```
+
+### Задача 9
+
+```java
+public static String removeConsecutiveDuplicates(String text) {
+    StringBuilder result = new StringBuilder();
+    for (int i = 0; i < text.length(); i++) {
+        if (i == 0 || text.charAt(i) != text.charAt(i - 1)) result.append(text.charAt(i));
+    }
+    return result.toString();
+}
+```
+
 ## Въпроси за проверка
 1. Какво означава нормализиране в тази задача?
 2. Кои символи се запазват?

@@ -121,6 +121,94 @@ System.out.println("Главни ASCII букви: " + uppercase);
 System.out.println("Малки ASCII букви: " + lowercase);
 ```
 
+### Задача 3
+
+```java
+int spaces = 0, tabs = 0;
+for (int i = 0; i < text.length(); i++) {
+    if (text.charAt(i) == ' ') spaces++;
+    if (text.charAt(i) == '\t') tabs++;
+}
+System.out.println("Интервали=" + spaces + ", табулации=" + tabs);
+```
+
+### Задача 4
+
+Тук думите са разделени с интервали или табулации. Броят думи се увеличава при преход от разделител към символ от дума.
+
+```java
+int words = 0, lettersInWords = 0;
+boolean inWord = false;
+for (int i = 0; i < text.length(); i++) {
+    char c = text.charAt(i);
+    if (c == ' ' || c == '\t') inWord = false;
+    else {
+        lettersInWords++;
+        if (!inWord) { words++; inWord = true; }
+    }
+}
+double average = words == 0 ? 0.0 : (double) lettersInWords / words;
+System.out.printf("Средна дължина: %.2f%n", average);
+```
+
+### Задача 5
+
+```java
+int[] digits = new int[10];
+for (int i = 0; i < text.length(); i++) {
+    char c = text.charAt(i);
+    if (c >= '0' && c <= '9') digits[c - '0']++;
+}
+for (int i = 0; i < digits.length; i++) System.out.println(i + ": " + digits[i]);
+```
+
+### Задача 6
+
+```java
+int count = 0;
+for (int i = 0; i < text.length(); i++) {
+    if (Character.toLowerCase(text.charAt(i)) == Character.toLowerCase(target)) count++;
+}
+System.out.println("Срещания: " + count);
+```
+
+### Задача 7
+
+```java
+boolean valid = true;
+for (int i = 0; i < text.length(); i++) {
+    char c = text.charAt(i);
+    boolean letter = (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
+    if (!letter && c != ' ' && c != '\t') valid = false;
+}
+System.out.println(valid ? "Валиден текст" : "Има други символи");
+```
+
+### Задача 8
+
+```java
+int vowels = 0;
+String upper = text.toUpperCase();
+for (int i = 0; i < upper.length(); i++) {
+    if ("AEIOU".indexOf(upper.charAt(i)) >= 0) vowels++;
+}
+System.out.println("Гласни: " + vowels);
+```
+
+### Задача 9
+
+```java
+String longest = "", current = "";
+for (int i = 0; i <= text.length(); i++) {
+    char c = i == text.length() ? ' ' : text.charAt(i);
+    if (c == ' ' || c == '\t') {
+        if (current.length() > longest.length()) longest = current;
+        current = "";
+    } else current += c;
+}
+System.out.println("Най-дълга дума: " + longest);
+```
+
 ## Въпроси за проверка
 1. Каква е разликата между символи и букви?
 2. Защо е нужна променливата inWord?
