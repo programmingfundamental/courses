@@ -249,7 +249,7 @@
 | 14 | Темата не е попълнена. |
 | 15 | Темата не е попълнена. |
 
-## 16. Учебна практика – II част (Киберсигурност)
+## 16. Учебна практика – 2 част (Киберсигурност)
 
 [Страница на дисциплината](src/content/docs/bg/uchebna-praktika-2-kibersigurnost/index.md) · [Материали и Java примери](course-materials/uchebna-praktika-2-text-crypto/README.md)
 
