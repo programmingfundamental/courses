@@ -58,6 +58,43 @@ public class Main {
 }
 ```
 
+## Решения на задачите
+
+### Задача 1
+
+Ключът се свежда до остатък при деление на 26. Затова 0 и 26 означават отместване с нула, а 29 е еквивалентен на 3.
+
+```java
+System.out.println("Ключ 0:  " + encrypt(text, 0));
+System.out.println("Ключ 26: " + encrypt(text, 26));
+System.out.println("Ключ 29: " + encrypt(text, 29));
+// Първите два резултата са еднакви; ключ 29 съвпада с ключ 3.
+```
+
+### Задача 2
+
+Преобразувайте само буквите и копирайте останалите символи без промяна.
+
+```java
+public static String transformPreservingText(String text, int key, boolean decrypt) {
+    int shift = ((key % 26) + 26) % 26;
+    if (decrypt) shift = (26 - shift) % 26;
+    StringBuilder result = new StringBuilder();
+
+    for (int i = 0; i < text.length(); i++) {
+        char c = text.charAt(i);
+        if (c >= 'A' && c <= 'Z') {
+            result.append((char) ('A' + (c - 'A' + shift) % 26));
+        } else if (c >= 'a' && c <= 'z') {
+            result.append((char) ('a' + (c - 'a' + shift) % 26));
+        } else {
+            result.append(c);
+        }
+    }
+    return result.toString();
+}
+```
+
 ## Въпроси за проверка
 1. На коя числова стойност съответства A?
 2. Защо използваме остатък при деление на 26?

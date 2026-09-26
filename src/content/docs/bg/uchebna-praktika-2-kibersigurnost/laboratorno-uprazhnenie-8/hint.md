@@ -75,6 +75,44 @@ public class Main {
 }
 ```
 
+## Решения на задачите
+
+### Задача 1
+
+При ключа `KEY` редуването за `HELLOWORLD` е `KEYKEYKEYK`.
+
+```java
+String text = "HELLOWORLD";
+String key = "KEY";
+for (int i = 0; i < text.length(); i++) {
+    System.out.println(text.charAt(i) + " -> " + key.charAt(i % key.length()));
+}
+```
+
+### Задача 2
+
+Поставете обработката в цикъл, за да може след encrypt/decrypt менюто да се покаже отново. Методите `encrypt` и `decrypt` са от практическото решение.
+
+```java
+boolean running = true;
+while (running) {
+    System.out.println("1. Encrypt  2. Decrypt  0. Exit");
+    String choice = scanner.nextLine();
+    if (choice.equals("0")) {
+        running = false;
+    } else if (choice.equals("1") || choice.equals("2")) {
+        System.out.print("Текст: ");
+        String text = scanner.nextLine();
+        System.out.print("Ключ: ");
+        String key = scanner.nextLine();
+        if (choice.equals("1")) System.out.println(encrypt(text, key));
+        else System.out.println(decrypt(text, key));
+    } else {
+        System.out.println("Невалиден избор.");
+    }
+}
+```
+
 ## Въпроси за проверка
 1. Защо ключът се повтаря?
 2. Как се избира текущата позиция в ключа?

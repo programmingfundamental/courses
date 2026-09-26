@@ -70,6 +70,38 @@ public class Main {
 }
 ```
 
+## Решения на задачите
+
+### Задача 1
+
+Числото се чете като текст, за да се сравнят символите от двата края.
+
+```java
+public static boolean isNumericPalindrome(String value) {
+    int left = 0;
+    int right = value.length() - 1;
+    while (left < right) {
+        if (value.charAt(left) != value.charAt(right)) return false;
+        left++;
+        right--;
+    }
+    return true;
+}
+
+System.out.println(isNumericPalindrome("12321")); // true
+```
+
+### Задача 2
+
+Нормализирайте първо текста, после сравнете резултата с обърнатия му вариант.
+
+```java
+public static boolean normalizedPalindrome(String text) {
+    String normalized = normalizeText(text);
+    return normalized.equals(reverse(normalized));
+}
+```
+
 ## Въпроси за проверка
 1. Какъв индекс е последният символ?
 2. Защо StringBuilder е удобен при обръщане?

@@ -68,6 +68,39 @@ public class Main {
 }
 ```
 
+## Решения на задачите
+
+### Задача 1
+
+Преместването с една позиция след всяко съвпадение позволява да се преброят и припокриващи се срещания.
+
+```java
+public static int printCharacterPositions(String text, char target) {
+    int count = 0;
+    for (int i = 0; i < text.length(); i++) {
+        if (text.charAt(i) == target) {
+            System.out.println("Съвпадение на позиция: " + i);
+            count++;
+        }
+    }
+    return count;
+}
+```
+
+### Задача 2
+
+Сравнете първата позиция, върната от собствените методи и от `indexOf()`.
+
+```java
+int ownCharacter = findCharacter(text, target);
+int builtInCharacter = text.indexOf(target);
+int ownSubstring = findSubstring(text, pattern);
+int builtInSubstring = text.indexOf(pattern);
+
+System.out.println("Символ: " + ownCharacter + " / " + builtInCharacter);
+System.out.println("Подниз: " + ownSubstring + " / " + builtInSubstring);
+```
+
 ## Въпроси за проверка
 1. Какво означава резултат -1?
 2. Защо поднизът изисква вътрешен цикъл?

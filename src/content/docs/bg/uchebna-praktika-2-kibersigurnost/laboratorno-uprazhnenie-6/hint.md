@@ -48,6 +48,41 @@ public class Main {
 }
 ```
 
+## Решения на задачите
+
+### Задача 1
+
+При равен брой не заменяме текущия максимум. Обхождането от A към Z така избира първата буква по азбучен ред.
+
+```java
+int best = 0;
+for (int i = 1; i < frequency.length; i++) {
+    if (frequency[i] > frequency[best]) best = i;
+}
+if (frequency[best] == 0) {
+    System.out.println("Няма отчетени букви.");
+} else {
+    System.out.println("Най-честа буква: " + (char) ('A' + best)
+            + " (" + frequency[best] + ")");
+}
+```
+
+### Задача 2
+
+```java
+int total = 0;
+for (int count : frequency) total += count;
+
+if (total == 0) {
+    System.out.println("Няма отчетени букви.");
+} else {
+    for (int i = 0; i < frequency.length; i++) {
+        double percent = 100.0 * frequency[i] / total;
+        System.out.printf("%c -> %d (%.2f%%)%n", (char) ('A' + i), frequency[i], percent);
+    }
+}
+```
+
 ## Въпроси за проверка
 1. Защо масивът има точно 26 елемента?
 2. Какъв индекс съответства на Z?

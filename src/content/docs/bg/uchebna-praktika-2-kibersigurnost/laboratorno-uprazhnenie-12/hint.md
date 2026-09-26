@@ -247,6 +247,47 @@ public class Main {
 }
 ```
 
+## Решения на задачите
+
+### Задача 1
+
+Използвайте цикъла за проверка на цяло число в `readInteger`. Той изхвърля нечисловия вход, показва съобщение и връща управление към менюто след обработката на избора.
+
+```java
+public static int readInteger(Scanner scanner, String prompt) {
+    while (true) {
+        System.out.print(prompt);
+        if (scanner.hasNextInt()) {
+            int value = scanner.nextInt();
+            scanner.nextLine(); // изчиства остатъка от реда
+            return value;
+        }
+        scanner.nextLine(); // премахва невалидния вход
+        System.out.println("Моля, въведете цяло число.");
+    }
+}
+```
+
+Извикайте `readInteger(scanner, "Ключ: ")` вместо `scanner.nextInt()`.
+
+### Задача 2
+
+Добавете нов избор в менюто. Той изпълнява анализа и нормализирането последователно за един и същ входен текст.
+
+```java
+System.out.println("12. Анализ и нормализиране");
+```
+
+В обработката на избора добавете:
+
+```java
+} else if (choice.equals("12")) {
+    System.out.print("Текст: ");
+    String text = scanner.nextLine();
+    analyzeText(text);
+    System.out.println("Нормализиран текст: " + normalizeText(text));
+```
+
 ## Въпроси за проверка
 1. Защо всеки алгоритъм е отделен метод?
 2. Какво контролира променливата running?
