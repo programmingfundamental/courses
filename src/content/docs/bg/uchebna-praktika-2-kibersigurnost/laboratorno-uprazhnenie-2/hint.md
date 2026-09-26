@@ -101,6 +101,77 @@ System.out.println("Символ: " + ownCharacter + " / " + builtInCharacter);
 System.out.println("Подниз: " + ownSubstring + " / " + builtInSubstring);
 ```
 
+### Задача 3
+
+```java
+public static int lastCharacterPosition(String text, char target) {
+    for (int i = text.length() - 1; i >= 0; i--) {
+        if (text.charAt(i) == target) return i;
+    }
+    return -1;
+}
+```
+
+### Задача 4
+
+При всяка позиция проверете целия шаблон; индексът се увеличава с единица, за да се допусне припокриване.
+
+```java
+public static int countOverlapping(String text, String pattern) {
+    if (pattern.isEmpty()) return 0;
+    int count = 0;
+    for (int i = 0; i <= text.length() - pattern.length(); i++) {
+        if (text.startsWith(pattern, i)) count++;
+    }
+    return count;
+}
+```
+
+### Задача 5
+
+```java
+public static int findCharacterIgnoreCase(String text, char target) {
+    char wanted = Character.toLowerCase(target);
+    for (int i = 0; i < text.length(); i++) {
+        if (Character.toLowerCase(text.charAt(i)) == wanted) return i;
+    }
+    return -1;
+}
+```
+
+### Задача 6
+
+```java
+for (int i = 0; i <= text.length() - pattern.length(); i++) {
+    if (text.startsWith(pattern, i)) System.out.println(i);
+}
+```
+
+### Задача 7
+
+В Java `indexOf("")` връща 0, защото празният низ се намира в началото на всеки низ. В собствен метод върнете същата стойност преди цикъла.
+
+```java
+if (pattern.isEmpty()) return 0;
+```
+
+### Задача 8
+
+```java
+char target = 'a';
+int charPosition = text.indexOf(target);
+int stringPosition = text.indexOf(String.valueOf(target));
+System.out.println(charPosition + " / " + stringPosition);
+```
+
+### Задача 9
+
+```java
+int start = 3;
+int position = text.indexOf(pattern, start);
+System.out.println("Позиция след " + start + ": " + position);
+```
+
 ## Въпроси за проверка
 1. Какво означава резултат -1?
 2. Защо поднизът изисква вътрешен цикъл?

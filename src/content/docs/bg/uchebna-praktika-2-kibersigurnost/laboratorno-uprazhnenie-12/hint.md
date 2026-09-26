@@ -288,6 +288,78 @@ System.out.println("12. Анализ и нормализиране");
     System.out.println("Нормализиран текст: " + normalizeText(text));
 ```
 
+### Задача 3
+
+```java
+public static int countCharacter(String text, char target) {
+    int count = 0;
+    for (int i = 0; i < text.length(); i++) {
+        if (Character.toLowerCase(text.charAt(i)) == Character.toLowerCase(target)) count++;
+    }
+    return count;
+}
+```
+
+### Задача 4
+
+```java
+public static void printCaesarVariants(String text) {
+    for (int key = 1; key <= 25; key++) {
+        System.out.println("Key " + key + " -> " + caesarDecrypt(text, key));
+    }
+}
+```
+
+### Задача 5
+
+```java
+if (choice.equals("0")) {
+    running = false;
+} else if (choice.equals("1")) {
+    // обработка на команда 1
+} else {
+    System.out.println("Непозната команда.");
+}
+```
+
+### Задача 6
+
+Тази проверка вече се използва преди извикването на Vigenere методите.
+
+```java
+String cleanKey = normalizeText(key);
+if (cleanKey.isEmpty()) {
+    System.out.println("Ключът трябва да съдържа букви A-Z.");
+} else {
+    System.out.println(vigenereEncrypt(text, cleanKey));
+}
+```
+
+### Задача 7
+
+```java
+int[] frequency = frequencyAnalysis(text);
+for (int i = 0; i < frequency.length; i++) {
+    if (frequency[i] > 0) System.out.println((char) ('A' + i) + " -> " + frequency[i]);
+}
+```
+
+### Задача 8
+
+```java
+String normalized = normalizeText(text);
+System.out.println("Нормализиран текст: " + normalized);
+System.out.println("Премахнати символи: " + (text.length() - normalized.length()));
+```
+
+### Задача 9
+
+```java
+String text = scanner.nextLine();
+System.out.println("Обърнат текст: " + reverseText(text));
+System.out.println(isPalindrome(text) ? "Палиндром" : "Не е палиндром");
+```
+
 ## Въпроси за проверка
 1. Защо всеки алгоритъм е отделен метод?
 2. Какво контролира променливата running?

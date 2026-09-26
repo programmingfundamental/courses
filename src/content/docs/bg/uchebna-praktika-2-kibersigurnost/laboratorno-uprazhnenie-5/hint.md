@@ -102,6 +102,82 @@ public static boolean normalizedPalindrome(String text) {
 }
 ```
 
+### Задача 3
+
+```java
+public static boolean exactPalindrome(String text) {
+    int left = 0, right = text.length() - 1;
+    while (left < right) {
+        if (text.charAt(left) != text.charAt(right)) return false;
+        left++; right--;
+    }
+    return true;
+}
+```
+
+### Задача 4
+
+```java
+String[] words = text.split("\\s+");
+for (String word : words) {
+    if (!word.isEmpty()) System.out.println(word + ": " + exactPalindrome(word));
+}
+```
+
+### Задача 5
+
+```java
+String withoutSpaces = text.replace(" ", "");
+System.out.println(exactPalindrome(withoutSpaces));
+```
+
+### Задача 6
+
+Проверете префиксите от най-дългия към най-късия; първият палиндром е най-дългият.
+
+```java
+public static String longestPalindromicPrefix(String text) {
+    for (int end = text.length(); end >= 1; end--) {
+        String prefix = text.substring(0, end);
+        if (exactPalindrome(prefix)) return prefix;
+    }
+    return "";
+}
+```
+
+### Задача 7
+
+```java
+boolean mismatchFound = false;
+for (int left = 0, right = text.length() - 1; left < right; left++, right--) {
+    if (text.charAt(left) != text.charAt(right)) {
+        System.out.println("Несъвпадение: позиции " + left + " и " + right);
+        mismatchFound = true;
+        break;
+    }
+}
+if (!mismatchFound) System.out.println("Няма несъвпадащи двойки.");
+```
+### Задача 8
+
+```java
+public static boolean isNonNegativeNumberPalindrome(String value) {
+    if (value.startsWith("-") || value.isEmpty()) return false;
+    for (int i = 0; i < value.length(); i++) {
+        if (!Character.isDigit(value.charAt(i))) return false;
+    }
+    return exactPalindrome(value);
+}
+```
+
+### Задача 9
+
+```java
+boolean byIndices = exactPalindrome(text);
+boolean byReverse = text.equals(reverse(text));
+System.out.println("Индекси=" + byIndices + ", обръщане=" + byReverse);
+```
+
 ## Въпроси за проверка
 1. Какъв индекс е последният символ?
 2. Защо StringBuilder е удобен при обръщане?

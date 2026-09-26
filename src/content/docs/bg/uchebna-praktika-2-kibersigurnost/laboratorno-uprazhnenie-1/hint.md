@@ -62,6 +62,70 @@ for (int i = text.length() - 1; i >= 0; i--) {
 }
 ```
 
+### Задача 3
+
+```java
+int spaces = 0, tabs = 0;
+for (int i = 0; i < text.length(); i++) {
+    if (text.charAt(i) == ' ') spaces++;
+    else if (text.charAt(i) == '\t') tabs++;
+}
+System.out.println("Интервали: " + spaces + ", табулации: " + tabs);
+```
+
+### Задача 4
+
+```java
+if (text.isEmpty()) {
+    System.out.println("Празен текст.");
+} else {
+    System.out.println("Първи: " + text.charAt(0));
+    System.out.println("Последен: " + text.charAt(text.length() - 1));
+}
+```
+
+### Задача 5
+
+```java
+int digits = 0;
+for (int i = 0; i < text.length(); i++) {
+    if (text.charAt(i) >= '0' && text.charAt(i) <= '9') digits++;
+}
+System.out.println("Цифри: " + digits);
+```
+
+### Задача 6
+
+```java
+int count = 0;
+char wanted = Character.toLowerCase(target);
+for (int i = 0; i < text.length(); i++) {
+    if (Character.toLowerCase(text.charAt(i)) == wanted) count++;
+}
+System.out.println("Срещания: " + count);
+```
+
+### Задача 7
+
+```java
+System.out.println(text.replace(' ', '_'));
+```
+
+### Задача 8
+
+```java
+boolean containsJava = text.toLowerCase().indexOf("java".toLowerCase()) >= 0;
+System.out.println(containsJava ? "Съдържа Java" : "Не съдържа Java");
+```
+
+### Задача 9
+
+```java
+for (int i = 0; i < text.length(); i += 2) {
+    System.out.println(i + ": " + text.charAt(i));
+}
+```
+
 ## Въпроси за проверка
 1. Какво връща length()?
 2. Кой е индексът на първия символ?

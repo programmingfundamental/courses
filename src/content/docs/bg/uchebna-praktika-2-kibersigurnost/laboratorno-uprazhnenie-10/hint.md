@@ -131,6 +131,77 @@ public static void printMatrices(String text, int columns) {
     }
 }
 ```
+### Задача 3
+
+```java
+String text = "JAVA";
+String cipher = encrypt(text, 1);
+System.out.println(cipher);
+System.out.println(decrypt(cipher, 1, text.length()));
+```
+
+### Задача 4
+
+При точно запълнени редове формулата за допълване не добавя клетки.
+
+```java
+String text = "ABCDEFGH";
+int columns = 4;
+String cipher = encrypt(text, columns);
+System.out.println(cipher);
+System.out.println("Добавени символи: " + (cipher.length() - text.length())); // 0
+```
+
+### Задача 5
+
+```java
+String text = "CAT";
+int columns = 5;
+String cipher = encrypt(text, columns);
+System.out.println("Шифротекст с X: " + cipher);
+System.out.println("Възстановено: " + decrypt(cipher, columns, text.length()));
+```
+
+### Задача 6
+
+```java
+if (columns <= 0) {
+    System.out.println("Броят колони трябва да е положително число.");
+} else {
+    System.out.println(encrypt(text, columns));
+}
+```
+
+### Задача 7
+
+```java
+for (int i = 0; i < text.length(); i++) {
+    int row = i / columns;
+    int column = i % columns;
+    System.out.println(text.charAt(i) + " -> ред " + row + ", колона " + column);
+}
+```
+
+### Задача 8
+
+```java
+for (String sample : new String[] {"A", "HELLO", "JAVA COURSE"}) {
+    for (int columns = 1; columns <= 4; columns++) {
+        String cipher = encrypt(sample, columns);
+        String restored = decrypt(cipher, columns, sample.length());
+        System.out.println(sample.equals(restored));
+    }
+}
+```
+
+### Задача 9
+
+```java
+for (int columns : new int[] {2, 3, 4}) {
+    System.out.println(columns + " колони: " + encrypt("PROGRAMMING", columns));
+}
+```
+
 ## Въпроси за проверка
 1. Какво се променя при транспозиция?
 2. Как се попълва матрицата при шифриране?

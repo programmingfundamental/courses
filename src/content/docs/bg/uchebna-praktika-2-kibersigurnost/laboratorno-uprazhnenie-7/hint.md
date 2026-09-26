@@ -95,6 +95,61 @@ public static String transformPreservingText(String text, int key, boolean decry
 }
 ```
 
+### Задача 3
+
+Нормализираният ключ винаги е от 0 до 25. Например `-31` става `21`, а `29` става `3`.
+
+```java
+public static int normalizeKey(int key) {
+    return ((key % 26) + 26) % 26;
+}
+
+System.out.println(normalizeKey(-31)); // 21
+System.out.println(normalizeKey(29));  // 3
+```
+### Задача 4
+
+```java
+String clean = lettersOnly(text);
+String cipher = encrypt(text, key);
+System.out.println(decrypt(cipher, key).equals(clean));
+```
+
+### Задача 5
+
+```java
+System.out.println(encrypt("ZOO", 3)); // CRR
+```
+
+### Задача 6
+
+```java
+for (int key = 1; key <= 25; key++) {
+    System.out.println("Key " + key + " -> " + decrypt(text, key));
+}
+```
+
+### Задача 7
+
+Методът `lettersOnly` връща празен низ и цикълът за преобразуване не се изпълнява.
+
+```java
+System.out.println("Резултат: [" + encrypt("", 5) + "]");
+```
+
+### Задача 8
+
+```java
+System.out.println(encrypt(text, 29).equals(encrypt(text, 3)));
+```
+
+### Задача 9
+
+```java
+System.out.println("Изчистен текст: " + lettersOnly("Hello, Java!"));
+System.out.println("Шифротекст: " + encrypt("Hello, Java!", 3));
+```
+
 ## Въпроси за проверка
 1. На коя числова стойност съответства A?
 2. Защо използваме остатък при деление на 26?

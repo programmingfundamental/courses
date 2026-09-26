@@ -110,7 +110,78 @@ for (int key = 1; key <= 25; key++) {
     String marker = key == suggestedKey ? "  <-- предполагаем вариант" : "";
     System.out.println("Key " + key + " -> " + decrypt(cipher, key) + marker);
 }
-```## Въпроси за проверка
+```### Задача 3
+
+```java
+String cipher = "WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ";
+int[] counts = frequencyAnalysis(cipher);
+char common = mostFrequentLetter(counts);
+int key = (common - 'E' + 26) % 26;
+System.out.println("Най-честа буква=" + common + ", предполагаем ключ=" + key);
+```
+
+### Задача 3
+
+```java
+String cipher = "WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ";
+int[] counts = frequencyAnalysis(cipher);
+char common = mostFrequentLetter(counts);
+int key = (common - 'E' + 26) % 26;
+System.out.println("Най-честа буква=" + common + ", предполагаем ключ=" + key);
+```
+### Задача 4
+
+```java
+int[] counts = frequencyAnalysis(cipher);
+for (int i = 0; i < counts.length; i++) {
+    System.out.println((char) ('A' + i) + " -> " + counts[i]);
+}
+```
+
+### Задача 5
+
+Ако предложението е 0, изходът е същият текст без символи извън A–Z.
+
+```java
+if (suggestedKey == 0) {
+    System.out.println("Key 0 -> " + lettersOnly(cipher) + "  <-- предполагаем вариант");
+}
+```
+
+### Задача 6
+
+```java
+if (lettersOnly(cipher).isEmpty()) {
+    System.out.println("Няма английски букви за анализ.");
+} else {
+    System.out.println(mostFrequentLetter(frequencyAnalysis(cipher)));
+}
+```
+
+### Задача 7
+
+```java
+int distinct = 0;
+for (int count : frequencyAnalysis(cipher)) if (count > 0) distinct++;
+System.out.println("Различни букви: " + distinct);
+```
+
+### Задача 8
+
+```java
+String sample = "WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ";
+System.out.println(decrypt(sample, 3)); // THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG
+```
+
+### Задача 9
+
+Допускането е статистическо, а не правило: в кратък текст може изобщо да няма E или друга буква да се среща по-често.
+
+```java
+System.out.println(mostFrequentLetter(frequencyAnalysis("ZZZQ"))); // Z
+```
+
+## Въпроси за проверка
 1. Колко ненулеви ключа има Цезаровият шифър за A-Z?
 2. Какво означава brute-force?
 3. Как намираме най-честата буква?
