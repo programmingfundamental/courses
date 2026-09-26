@@ -95,6 +95,32 @@ public class Main {
 }
 ```
 
+## Решения на задачите
+
+### Задача 1
+
+Добавете табулацията към разделителите, преди да обработите започването на нова дума.
+
+```java
+public static boolean isWhitespace(char c) {
+    return c == ' ' || c == '\t' || c == '\n' || c == '\r';
+}
+```
+
+### Задача 2
+
+```java
+int uppercase = 0;
+int lowercase = 0;
+for (int i = 0; i < text.length(); i++) {
+    char c = text.charAt(i);
+    if (c >= 'A' && c <= 'Z') uppercase++;
+    else if (c >= 'a' && c <= 'z') lowercase++;
+}
+System.out.println("Главни ASCII букви: " + uppercase);
+System.out.println("Малки ASCII букви: " + lowercase);
+```
+
 ## Въпроси за проверка
 1. Каква е разликата между символи и букви?
 2. Защо е нужна променливата inWord?

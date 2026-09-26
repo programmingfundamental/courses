@@ -86,6 +86,51 @@ public class Main {
 }
 ```
 
+## Решения на задачите
+
+### Задача 1
+
+При `text = "HELLO"` и `columns = 3` матрицата се допълва с един `X`. Шифротекстът е `HLELXO`; декриптирането използва първоначалната дължина 5 и връща `HELLO`.
+
+```java
+String text = "HELLO";
+int columns = 3;
+String cipher = encrypt(text, columns);
+System.out.println("Шифротекст: " + cipher); // HLELXO
+System.out.println("Обратно: " + decrypt(cipher, columns, text.length())); // HELLO
+```
+
+### Задача 2
+
+Методът показва матрицата за запис и транспонираната матрица, която съответства на четенето по колони. Празните клетки се запълват с X.
+
+```java
+public static void printMatrices(String text, int columns) {
+    if (columns <= 0) return;
+    int rows = (text.length() + columns - 1) / columns;
+    if (rows == 0) return;
+
+    char[][] grid = new char[rows][columns];
+    int index = 0;
+    for (int r = 0; r < rows; r++) {
+        for (int c = 0; c < columns; c++) {
+            grid[r][c] = index < text.length() ? text.charAt(index++) : 'X';
+        }
+    }
+
+    System.out.println("Матрица за запис по редове:");
+    for (int r = 0; r < rows; r++) {
+        for (int c = 0; c < columns; c++) System.out.print(grid[r][c] + " ");
+        System.out.println();
+    }
+
+    System.out.println("Транспонирана матрица:");
+    for (int c = 0; c < columns; c++) {
+        for (int r = 0; r < rows; r++) System.out.print(grid[r][c] + " ");
+        System.out.println();
+    }
+}
+```
 ## Въпроси за проверка
 1. Какво се променя при транспозиция?
 2. Как се попълва матрицата при шифриране?

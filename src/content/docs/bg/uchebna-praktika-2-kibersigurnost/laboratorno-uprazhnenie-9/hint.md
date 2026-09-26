@@ -56,6 +56,39 @@ public class Main {
 }
 ```
 
+## Решения на задачите
+
+### Задача 1
+
+В двоичен вид `9 = 1001₂`, `5 = 0101₂`; XOR дава `1100₂`, тоест `12`.
+
+```java
+int a = 9;
+int b = 5;
+System.out.println("Десетично: " + (a ^ b));
+System.out.println("Очаквана стойност: 12");
+```
+
+### Задача 2
+
+Ограничете входа до малък неотрицателен ключ. След това повторното XOR преобразуване с този ключ възстановява входа.
+
+```java
+int key;
+do {
+    System.out.print("Ключ от 0 до 31: ");
+    while (!scanner.hasNextInt()) {
+        scanner.nextLine();
+        System.out.print("Въведете цяло число от 0 до 31: ");
+    }
+    key = scanner.nextInt();
+    scanner.nextLine();
+} while (key < 0 || key > 31);
+
+int[] encrypted = xorToNumbers(text, key);
+System.out.println("Възстановен текст: " + xorNumbersToText(encrypted, key));
+```
+
 ## Въпроси за проверка
 1. Какво означава XOR за два еднакви бита?
 2. Кой оператор в Java изчислява XOR?

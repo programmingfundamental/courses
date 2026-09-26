@@ -36,6 +36,32 @@ public class Main {
 }
 ```
 
+## Решения на задачите
+
+### Задача 1
+
+Преобразуването до главни букви позволява едно сравнение за гласни без значение от регистъра.
+
+```java
+int vowels = 0;
+String upper = text.toUpperCase();
+for (int i = 0; i < upper.length(); i++) {
+    char c = upper.charAt(i);
+    if (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U') {
+        vowels++;
+    }
+}
+System.out.println("Гласни: " + vowels);
+```
+
+### Задача 2
+
+```java
+for (int i = text.length() - 1; i >= 0; i--) {
+    System.out.println(text.charAt(i));
+}
+```
+
 ## Въпроси за проверка
 1. Какво връща length()?
 2. Кой е индексът на първия символ?

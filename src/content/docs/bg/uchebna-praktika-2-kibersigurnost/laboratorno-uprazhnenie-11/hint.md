@@ -78,7 +78,39 @@ public class Main {
 }
 ```
 
-## Въпроси за проверка
+## Решения на задачите
+
+### Задача 1
+
+Изпробвайте поне едно кратко и едно дълго съобщение. При кратък текст честотата е нестабилна, затова предполагаемият ключ може да е грешен.
+
+```java
+String shortText = "WKH FDW";
+String longText = "WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ";
+System.out.println("Кратък текст: " + mostFrequentLetter(frequencyAnalysis(shortText)));
+System.out.println("Дълъг текст: " + mostFrequentLetter(frequencyAnalysis(longText)));
+```
+
+### Задача 2
+
+Изчислете предполагаемия ключ преди цикъла и маркирайте съответния декриптиран вариант. Ако ключът е 0, той означава липса на отместване; 1–25 са ненулевите ключове.
+
+```java
+int[] frequency = frequencyAnalysis(cipher);
+int suggestedKey = 0;
+if (lettersOnly(cipher).length() > 0) {
+    char common = mostFrequentLetter(frequency);
+    suggestedKey = (common - 'E' + 26) % 26;
+}
+
+if (suggestedKey == 0) {
+    System.out.println("Key 0 -> " + lettersOnly(cipher) + "  <-- предполагаем вариант");
+}
+for (int key = 1; key <= 25; key++) {
+    String marker = key == suggestedKey ? "  <-- предполагаем вариант" : "";
+    System.out.println("Key " + key + " -> " + decrypt(cipher, key) + marker);
+}
+```## Въпроси за проверка
 1. Колко ненулеви ключа има Цезаровият шифър за A-Z?
 2. Какво означава brute-force?
 3. Как намираме най-честата буква?
