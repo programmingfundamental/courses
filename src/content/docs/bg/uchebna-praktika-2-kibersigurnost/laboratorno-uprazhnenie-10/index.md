@@ -65,5 +65,5 @@ public static String decrypt(String encrypted, int columns, int originalLength) 
 ## Очакван резултат
 MEETME с 3 колони се преобразува в MTEMEE, а декриптирането с дължина 6 връща MEETME. Непълен последен ред се обработва чрез запълване.
 
-## Практическа задача
+## Приложение
 Напишете encrypt(text, columns) и decrypt(cipher, columns, originalLength). Проверете, че при положителен брой колони възстановеният текст е равен на входа. Обработете и последен непълен ред.
