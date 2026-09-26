@@ -59,5 +59,5 @@ public static String transform(String text, String key, boolean decrypt) {
 ## Очакван резултат
 При текст HELLOWORLD и ключ KEY шифротекстът е RIJVSUYVJN. Декриптиране с KEY връща HELLOWORLD.
 
-## Практическа задача
+## Приложение
 Създайте encrypt(text, key) и decrypt(text, key), като почистите текста и ключа до A-Z. Проверете с HELLOWORLD и KEY, че декриптирането възстановява първоначалните букви.
