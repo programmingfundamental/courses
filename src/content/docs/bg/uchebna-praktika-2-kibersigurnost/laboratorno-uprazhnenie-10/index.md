@@ -13,6 +13,9 @@ sidebar:
 
 Насоките за реализация, самостоятелната и допълнителната задача са на [страницата Задачи](/courses/bg/uchebna-praktika-2-kibersigurnost/laboratorno-uprazhnenie-10/zadachi/).
 
+## Приложение
+Напишете encrypt(text, columns) и decrypt(cipher, columns, originalLength). Проверете, че при положителен брой колони възстановеният текст е равен на входа. Обработете и последен непълен ред.
+
 ## Алгоритъм
 1. Изчисли броя редове с закръгляне нагоре.
 2. Попълни матрицата по редове; липсващите клетки запълни с X.
@@ -64,6 +67,3 @@ public static String decrypt(String encrypted, int columns, int originalLength) 
 
 ## Очакван резултат
 MEETME с 3 колони се преобразува в MTEMEE, а декриптирането с дължина 6 връща MEETME. Непълен последен ред се обработва чрез запълване.
-
-## Приложение
-Напишете encrypt(text, columns) и decrypt(cipher, columns, originalLength). Проверете, че при положителен брой колони възстановеният текст е равен на входа. Обработете и последен непълен ред.
