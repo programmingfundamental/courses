@@ -126,6 +126,21 @@ for (int i = 0; i < text.length(); i += 2) {
 }
 ```
 
+### Задача 10
+
+```java
+String upper = text.toUpperCase();
+int vowels = 0, digits = 0, spaces = 0;
+for (int i = 0; i < text.length(); i++) {
+    char c = upper.charAt(i);
+    if ("AEIOU".indexOf(c) >= 0) vowels++;
+    if (c >= '0' && c <= '9') digits++;
+    if (c == ' ') spaces++;
+}
+System.out.println("Дължина=" + text.length() + ", гласни=" + vowels
+        + ", цифри=" + digits + ", интервали=" + spaces);
+```
+
 ## Въпроси за проверка
 1. Какво връща length()?
 2. Кой е индексът на първия символ?

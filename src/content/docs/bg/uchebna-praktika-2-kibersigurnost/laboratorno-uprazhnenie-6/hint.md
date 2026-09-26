@@ -155,6 +155,24 @@ for (int i = 0; i < frequency.length; i++) {
 }
 ```
 
+### Задача 10
+
+```java
+int[] counts = new int[5];
+String upper = text.toUpperCase();
+String vowels = "AEIOU";
+for (int i = 0; i < upper.length(); i++) {
+    int index = vowels.indexOf(upper.charAt(i));
+    if (index >= 0) counts[index]++;
+}
+int best = -1;
+for (int i = 0; i < counts.length; i++) {
+    if (counts[i] > 0 && (best == -1 || counts[i] > counts[best])) best = i;
+}
+if (best == -1) System.out.println("Няма гласни.");
+else System.out.println("Най-честа гласна: " + vowels.charAt(best) + " (" + counts[best] + ")");
+```
+
 ## Въпроси за проверка
 1. Защо масивът има точно 26 елемента?
 2. Какъв индекс съответства на Z?

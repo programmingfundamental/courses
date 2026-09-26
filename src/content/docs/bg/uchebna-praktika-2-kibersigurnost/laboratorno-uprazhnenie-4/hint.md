@@ -169,6 +169,14 @@ public static String removeConsecutiveDuplicates(String text) {
 }
 ```
 
+### Задача 10
+
+```java
+String once = normalizeText(text);
+String twice = normalizeText(once);
+System.out.println(once.equals(twice) ? "Идемпотентно" : "Има несъответствие");
+```
+
 ## Въпроси за проверка
 1. Какво означава нормализиране в тази задача?
 2. Кои символи се запазват?

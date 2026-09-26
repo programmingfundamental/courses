@@ -150,6 +150,16 @@ System.out.println("Изчистен текст: " + lettersOnly("Hello, Java!")
 System.out.println("Шифротекст: " + encrypt("Hello, Java!", 3));
 ```
 
+### Задача 10
+
+```java
+String cipher = transformPreservingText(text, key, false);
+String restored = transformPreservingText(cipher, key, true);
+System.out.println("Шифротекст: " + cipher);
+System.out.println("Възстановен текст: " + restored);
+System.out.println("Успешно: " + text.equals(restored));
+```
+
 ## Въпроси за проверка
 1. На коя числова стойност съответства A?
 2. Защо използваме остатък при деление на 26?

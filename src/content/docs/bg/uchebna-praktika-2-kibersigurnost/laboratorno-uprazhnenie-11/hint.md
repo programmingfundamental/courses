@@ -181,6 +181,33 @@ System.out.println(decrypt(sample, 3)); // THEQUICKBROWNFOXJUMPSOVERTHELAZYDOG
 System.out.println(mostFrequentLetter(frequencyAnalysis("ZZZQ"))); // Z
 ```
 
+### Задача 10
+
+Оценката е евристика: пребройте буквите от често срещания набор `ETAOINSHRDLU` във всеки вариант и запомнете най-високия резултат.
+
+```java
+public static int englishLetterScore(String text) {
+    int score = 0;
+    for (int i = 0; i < text.length(); i++) {
+        if ("ETAOINSHRDLU".indexOf(text.charAt(i)) >= 0) score++;
+    }
+    return score;
+}
+
+int bestKey = 1, bestScore = -1;
+String bestText = "";
+for (int key = 1; key <= 25; key++) {
+    String candidate = decrypt(cipher, key);
+    int score = englishLetterScore(candidate);
+    if (score > bestScore) {
+        bestScore = score;
+        bestKey = key;
+        bestText = candidate;
+    }
+}
+System.out.println("Предположение, ключ " + bestKey + ": " + bestText);
+```
+
 ## Въпроси за проверка
 1. Колко ненулеви ключа има Цезаровият шифър за A-Z?
 2. Какво означава brute-force?

@@ -172,6 +172,35 @@ for (int i = 0; i < cleanText.length(); i++) {
 }
 ```
 
+### Задача 10
+
+Методът увеличава индекса в ключа само когато обработва латинска буква; интервалите и пунктуацията се копират директно.
+
+```java
+public static String vigenerePreservingText(String text, String key, boolean decrypt) {
+    String cleanKey = lettersOnly(key);
+    if (cleanKey.isEmpty()) return "";
+    StringBuilder result = new StringBuilder();
+    int keyIndex = 0;
+
+    for (int i = 0; i < text.length(); i++) {
+        char c = text.charAt(i);
+        boolean upper = c >= 'A' && c <= 'Z';
+        boolean lower = c >= 'a' && c <= 'z';
+        if (!upper && !lower) {
+            result.append(c);
+            continue;
+        }
+        int base = upper ? 'A' : 'a';
+        int shift = cleanKey.charAt(keyIndex % cleanKey.length()) - 'A';
+        if (decrypt) shift = 26 - shift;
+        result.append((char) (base + (c - base + shift) % 26));
+        keyIndex++;
+    }
+    return result.toString();
+}
+```
+
 ## Въпроси за проверка
 1. Защо ключът се повтаря?
 2. Как се избира текущата позиция в ключа?

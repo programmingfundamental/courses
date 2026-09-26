@@ -209,6 +209,23 @@ for (int i = 0; i <= text.length(); i++) {
 System.out.println("Най-дълга дума: " + longest);
 ```
 
+### Задача 10
+
+```java
+int letters = 0, digits = 0;
+for (int i = 0; i < text.length(); i++) {
+    char c = text.charAt(i);
+    if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) letters++;
+    if (c >= '0' && c <= '9') digits++;
+}
+if (text.isEmpty()) {
+    System.out.println("Празен вход: 0% букви и 0% цифри.");
+} else {
+    System.out.printf("Букви: %.2f%%, цифри: %.2f%%%n",
+            100.0 * letters / text.length(), 100.0 * digits / text.length());
+}
+```
+
 ## Въпроси за проверка
 1. Каква е разликата между символи и букви?
 2. Защо е нужна променливата inWord?

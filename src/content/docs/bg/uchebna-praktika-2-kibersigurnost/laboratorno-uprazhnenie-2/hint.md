@@ -172,6 +172,23 @@ int position = text.indexOf(pattern, start);
 System.out.println("Позиция след " + start + ": " + position);
 ```
 
+### Задача 10
+
+При празен шаблон дефинираме последната позиция като края на текста, както прави `lastIndexOf("")`.
+
+```java
+public static int lastSubstringPosition(String text, String pattern) {
+    if (pattern.isEmpty()) return text.length();
+    for (int start = text.length() - pattern.length(); start >= 0; start--) {
+        int offset = 0;
+        while (offset < pattern.length()
+                && text.charAt(start + offset) == pattern.charAt(offset)) offset++;
+        if (offset == pattern.length()) return start;
+    }
+    return -1;
+}
+```
+
 ## Въпроси за проверка
 1. Какво означава резултат -1?
 2. Защо поднизът изисква вътрешен цикъл?

@@ -147,6 +147,23 @@ for (int key : new int[] {1, 7, 31}) {
 }
 ```
 
+### Задача 10
+
+```java
+System.out.print("Числови XOR стойности: ");
+String line = scanner.nextLine().trim();
+if (line.isEmpty()) {
+    System.out.println("Възстановен текст: ");
+} else {
+    String[] parts = line.split("\\s+");
+    int[] values = new int[parts.length];
+    for (int i = 0; i < parts.length; i++) values[i] = Integer.parseInt(parts[i]);
+    System.out.print("Ключ: ");
+    int key = Integer.parseInt(scanner.nextLine());
+    System.out.println("Възстановен текст: " + xorNumbersToText(values, key));
+}
+```
+
 ## Въпроси за проверка
 1. Какво означава XOR за два еднакви бита?
 2. Кой оператор в Java изчислява XOR?

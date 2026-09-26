@@ -178,6 +178,30 @@ boolean byReverse = text.equals(reverse(text));
 System.out.println("Индекси=" + byIndices + ", обръщане=" + byReverse);
 ```
 
+### Задача 10
+
+При първото несъвпадение проверете двата възможни текста след премахване на един от символите.
+
+```java
+public static boolean isPalindromeRange(String text, int left, int right) {
+    while (left < right) {
+        if (text.charAt(left++) != text.charAt(right--)) return false;
+    }
+    return true;
+}
+
+public static boolean almostPalindrome(String text) {
+    int left = 0, right = text.length() - 1;
+    while (left < right && text.charAt(left) == text.charAt(right)) {
+        left++;
+        right--;
+    }
+    return left >= right
+            || isPalindromeRange(text, left + 1, right)
+            || isPalindromeRange(text, left, right - 1);
+}
+```
+
 ## Въпроси за проверка
 1. Какъв индекс е последният символ?
 2. Защо StringBuilder е удобен при обръщане?
