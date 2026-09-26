@@ -7,7 +7,7 @@ const bg = route.locale === 'bg';
 const home = route.id === route.locale;
 ---
 <DefaultContent><slot /></DefaultContent>
-{home ? (
+{home && (
   <section aria-label={bg ? 'Дисциплини по курсове' : 'Courses by year'} class="course-catalog">
     {courseGroupsFor(route.locale!).map((year) => (
       <section class="course-year" aria-labelledby={year.id}>
