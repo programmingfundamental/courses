@@ -1,5 +1,5 @@
 ---
-title: Android базирани технологии за мобилни устройства
+title: "Android-Based Technologies for Mobile Devices"
 sidebar:
   order: 14
 ---

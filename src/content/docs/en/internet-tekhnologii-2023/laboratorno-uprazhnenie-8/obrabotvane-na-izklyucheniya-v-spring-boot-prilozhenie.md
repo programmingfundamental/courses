@@ -1,5 +1,5 @@
 ---
-title: Обработване на изключения в Spring Boot приложение
+title: "Exception Handling in a Spring Boot Application"
 sidebar:
   order: 3
 ---

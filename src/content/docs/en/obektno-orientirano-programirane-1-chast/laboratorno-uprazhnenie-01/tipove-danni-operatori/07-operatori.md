@@ -1,5 +1,5 @@
 ---
-title: Оператори
+title: "Operators"
 sidebar:
   order: 7
 ---

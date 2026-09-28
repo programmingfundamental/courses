@@ -1,5 +1,5 @@
 ---
-title: Удостоверяване със Spring Security
+title: "Authentication with Spring Security"
 sidebar:
   order: 5
 ---

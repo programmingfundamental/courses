@@ -1,5 +1,5 @@
 ---
-title: Лабораторно упражнение 10
+title: "Lab 10"
 sidebar:
   order: 10
 ---

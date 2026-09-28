@@ -1,5 +1,5 @@
 ---
-title: Учебна практика 1
+title: "Practical Training 1"
 sidebar:
   order: 1
 ---

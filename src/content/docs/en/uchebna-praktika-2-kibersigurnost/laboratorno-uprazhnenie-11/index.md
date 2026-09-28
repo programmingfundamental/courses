@@ -1,6 +1,6 @@
 ---
-title: 'Лабораторно упражнение 11 — Разбиване на Цезаров шифър с brute-force и честотен анализ'
+title: "Lab 11 — Breaking the Caesar Cipher with Brute Force and Frequency Analysis"
 sidebar:
-  label: 'Упражнение 11'
+  label: "Lab 11"
   order: 11
 ---

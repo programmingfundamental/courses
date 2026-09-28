@@ -1,6 +1,6 @@
 ---
-title: 'Лабораторно упражнение 9 — XOR преобразуване на текст'
+title: "Lab 9 — XOR Text Transformation"
 sidebar:
-  label: 'Упражнение 9'
+  label: "Lab 9"
   order: 9
 ---

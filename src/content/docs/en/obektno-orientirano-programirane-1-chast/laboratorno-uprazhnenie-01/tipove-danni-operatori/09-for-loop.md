@@ -1,5 +1,5 @@
 ---
-title: Оператори за цикъл
+title: "Loops"
 sidebar:
   order: 9
 ---

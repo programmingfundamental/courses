@@ -1,5 +1,5 @@
 ---
-title: Видове класове
+title: "Types of Classes"
 sidebar:
   order: 2
 ---

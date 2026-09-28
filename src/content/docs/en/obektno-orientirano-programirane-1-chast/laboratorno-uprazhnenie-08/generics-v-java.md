@@ -1,5 +1,5 @@
 ---
-title: Шаблонни класове и методи (Generics)
+title: "Generic Classes and Methods"
 sidebar:
   order: 1
 ---

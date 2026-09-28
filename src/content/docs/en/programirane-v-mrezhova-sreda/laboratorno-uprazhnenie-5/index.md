@@ -1,6 +1,6 @@
 ---
-title: "Лабораторно упражнение 5 — Async processing, queues и backpressure"
+title: "Lab 5 — Async Processing, Queues, and Backpressure"
 sidebar:
   order: 5
-  label: Упражнение 5
+  label: "Lab 5"
 ---

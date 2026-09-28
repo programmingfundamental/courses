@@ -1,6 +1,6 @@
 ---
-title: 'Лабораторно упражнение 12 — Мини проект „Text & Crypto Toolkit“'
+title: "Lab 12 — Mini Project: Text & Crypto Toolkit"
 sidebar:
-  label: 'Упражнение 12'
+  label: "Lab 12"
   order: 12
 ---

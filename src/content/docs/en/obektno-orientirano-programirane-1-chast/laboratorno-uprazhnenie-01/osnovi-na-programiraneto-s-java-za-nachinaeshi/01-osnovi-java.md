@@ -1,5 +1,5 @@
 ---
-title: Основни характеристики на JAVA
+title: "Key Features of Java"
 sidebar:
   order: 1
 ---

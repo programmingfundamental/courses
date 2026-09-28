@@ -1,5 +1,5 @@
 ---
-title: Конфигуриране на филтри
+title: "Configuring Filters"
 sidebar:
   order: 4
 ---

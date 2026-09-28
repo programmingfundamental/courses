@@ -1,5 +1,5 @@
 ---
-title: Задачи — Properties и събития
+title: "Tasks — Properties and Events"
 sidebar:
   order: 2
   hidden: true

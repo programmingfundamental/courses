@@ -1,5 +1,5 @@
 ---
-title: Персонализиран валидатор
+title: "Custom Validator"
 sidebar:
   order: 2
 ---

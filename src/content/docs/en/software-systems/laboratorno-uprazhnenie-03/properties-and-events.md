@@ -1,7 +1,5 @@
 ---
-title: >-
-  JavaFX Properties, Imperative и Reactive модел и механизми за наблюдение и
-  обработка на събития
+title: "JavaFX Properties, Imperative and Reactive Models, Observation Mechanisms, and Event Handling"
 sidebar:
   order: 3
 ---

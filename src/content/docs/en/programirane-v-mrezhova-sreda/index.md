@@ -1,5 +1,5 @@
 ---
-title: Програмиране в мрежова среда
+title: "Network Programming"
 sidebar:
   order: 13
 ---

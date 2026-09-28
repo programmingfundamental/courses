@@ -1,5 +1,5 @@
 ---
-title: Imperative и Reactive модел
+title: "Imperative and Reactive Models"
 sidebar:
   order: 4
 ---

@@ -1,5 +1,5 @@
 ---
-title: Създаване на Spring Boot проект с IntelliJ IDEA Ultimate
+title: "Creating a Spring Boot Project with IntelliJ IDEA Ultimate"
 sidebar:
   order: 4
 ---

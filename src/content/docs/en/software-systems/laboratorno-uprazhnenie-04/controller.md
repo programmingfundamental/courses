@@ -1,5 +1,5 @@
 ---
-title: Контролер (Controller)
+title: "Controller"
 sidebar:
   order: 1
 ---

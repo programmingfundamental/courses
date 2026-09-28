@@ -1,6 +1,6 @@
 ---
-title: "Лабораторно упражнение 6 — TLS и defensive network programming"
+title: "Lab 6 — TLS and Defensive Network Programming"
 sidebar:
   order: 6
-  label: Упражнение 6
+  label: "Lab 6"
 ---

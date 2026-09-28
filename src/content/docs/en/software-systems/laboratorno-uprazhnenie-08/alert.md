@@ -1,5 +1,5 @@
 ---
-title: Диалогови прозорци (Alert)
+title: "Alert Dialogs"
 sidebar:
   order: 4
 ---

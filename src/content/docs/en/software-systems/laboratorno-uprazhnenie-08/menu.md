@@ -1,5 +1,5 @@
 ---
-title: Меню (Menu)
+title: "Menu"
 sidebar:
   order: 1
 ---

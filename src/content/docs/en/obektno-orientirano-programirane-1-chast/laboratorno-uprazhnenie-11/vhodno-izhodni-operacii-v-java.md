@@ -1,5 +1,5 @@
 ---
-title: Входно-изходни операции в Java
+title: "Input and Output in Java"
 sidebar:
   order: 1
 ---

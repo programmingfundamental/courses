@@ -1,6 +1,6 @@
 ---
-title: 'Лабораторно упражнение 7 — Шифър на Цезар'
+title: "Lab 7 — Caesar Cipher"
 sidebar:
-  label: 'Упражнение 7'
+  label: "Lab 7"
   order: 7
 ---

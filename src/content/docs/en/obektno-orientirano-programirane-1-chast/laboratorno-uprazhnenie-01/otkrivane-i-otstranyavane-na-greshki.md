@@ -1,5 +1,5 @@
 ---
-title: Откриване и отстраняване на грешки (Debug)
+title: "Finding and Fixing Errors (Debugging)"
 sidebar:
   order: 13
 ---

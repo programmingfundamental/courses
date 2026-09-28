@@ -1,5 +1,5 @@
 ---
-title: Създаване на Maven проект в IntelliJ Ultimate Edition
+title: "Creating a Maven Project in IntelliJ Ultimate Edition"
 sidebar:
   order: 3
 ---

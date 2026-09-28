@@ -1,6 +1,6 @@
 ---
-title: "Упражнение 10 — Security, Observability и End-to-End Analysis"
+title: "Lab 10 — Security, Observability and End-to-End Analysis"
 sidebar:
   order: 10
-  label: Упражнение 10
+  label: "Lab 10"
 ---

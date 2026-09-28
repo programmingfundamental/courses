@@ -1,6 +1,6 @@
 ---
-title: 'Лабораторно упражнение 4 — Преобразуване и нормализиране на текст'
+title: "Lab 4 — Text Transformation and Normalization"
 sidebar:
-  label: 'Упражнение 4'
+  label: "Lab 4"
   order: 4
 ---

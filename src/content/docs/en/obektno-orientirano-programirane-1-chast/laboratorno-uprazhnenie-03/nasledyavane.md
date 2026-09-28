@@ -1,5 +1,5 @@
 ---
-title: Наследяване и ключова дума super
+title: "Inheritance and the super Keyword"
 sidebar:
   order: 1
 ---

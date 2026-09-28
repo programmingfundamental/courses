@@ -1,5 +1,5 @@
 ---
-title: Връзки между класовете
+title: "Relationships Between Classes"
 sidebar:
   order: 2
 ---

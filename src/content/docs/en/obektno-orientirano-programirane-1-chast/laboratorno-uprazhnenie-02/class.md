@@ -1,5 +1,5 @@
 ---
-title: 'Класове, обекти, конструктори и ключови думи'
+title: "Classes, Objects, Constructors, and Keywords"
 sidebar:
   order: 1
 ---

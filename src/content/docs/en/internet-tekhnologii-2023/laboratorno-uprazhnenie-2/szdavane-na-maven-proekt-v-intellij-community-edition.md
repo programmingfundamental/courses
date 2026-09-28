@@ -1,5 +1,5 @@
 ---
-title: Създаване на Maven проект в IntelliJ Community Edition
+title: "Creating a Maven Project in IntelliJ Community Edition"
 sidebar:
   order: 4
 ---

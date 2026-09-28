@@ -1,5 +1,5 @@
 ---
-title: Оператори за управление на изпълнението
+title: "Control Flow Statements"
 sidebar:
   order: 11
 ---

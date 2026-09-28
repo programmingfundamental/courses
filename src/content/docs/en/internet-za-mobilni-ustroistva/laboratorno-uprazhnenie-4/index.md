@@ -1,6 +1,6 @@
 ---
-title: "Упражнение 4 — Microservices Architecture и Service-to-Service Communication"
+title: "Lab 4 — Microservices Architecture and Service-to-Service Communication"
 sidebar:
   order: 4
-  label: Упражнение 4
+  label: "Lab 4"
 ---

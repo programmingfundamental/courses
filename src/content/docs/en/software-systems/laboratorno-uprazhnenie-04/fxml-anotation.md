@@ -1,5 +1,5 @@
 ---
-title: Анотиране на полета с @FXML анотация
+title: "Annotating Fields with @FXML"
 sidebar:
   order: 2
 ---

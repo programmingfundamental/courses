@@ -1,5 +1,5 @@
 ---
-title: Жизнен цикъл на сървлета
+title: "Servlet Lifecycle"
 sidebar:
   order: 7
 ---

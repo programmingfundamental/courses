@@ -1,5 +1,5 @@
 ---
-title: Масиви
+title: "Arrays"
 sidebar:
   order: 10
 ---

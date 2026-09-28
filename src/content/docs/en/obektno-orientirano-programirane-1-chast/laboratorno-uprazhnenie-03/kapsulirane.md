@@ -1,5 +1,5 @@
 ---
-title: Капсулация и модификатори за достъп
+title: "Encapsulation and Access Modifiers"
 sidebar:
   order: 3
 ---

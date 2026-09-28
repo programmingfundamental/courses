@@ -1,5 +1,5 @@
 ---
-title: Kоманди в Docker
+title: "Docker Commands"
 sidebar:
   order: 5
 ---

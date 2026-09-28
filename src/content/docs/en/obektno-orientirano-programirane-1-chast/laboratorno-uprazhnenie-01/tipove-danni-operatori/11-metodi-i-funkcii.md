@@ -1,5 +1,5 @@
 ---
-title: Методи
+title: "Methods"
 sidebar:
   order: 12
 ---

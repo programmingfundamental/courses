@@ -1,5 +1,5 @@
 ---
-title: Реализация на HTTP комуникация
+title: "Implementing HTTP Communication"
 sidebar:
   order: 3
 ---

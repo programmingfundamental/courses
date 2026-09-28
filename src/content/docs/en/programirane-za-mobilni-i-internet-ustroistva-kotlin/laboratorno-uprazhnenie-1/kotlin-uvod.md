@@ -1,5 +1,5 @@
 ---
-title: Пример за Kotlin код
+title: "Kotlin Code Example"
 sidebar:
   order: 1
 ---

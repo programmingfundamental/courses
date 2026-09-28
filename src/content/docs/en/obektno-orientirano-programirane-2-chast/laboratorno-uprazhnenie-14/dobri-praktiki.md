@@ -1,6 +1,6 @@
 ---
-title: Лабораторно упражнение 14
+title: "Lab 14"
 sidebar:
-  label: Добри практики
+  label: "Best Practices"
   order: 14
 ---

@@ -1,5 +1,5 @@
 ---
-title: Валидиране на данните от заявката
+title: "Request Data Validation"
 sidebar:
   order: 1
 ---

@@ -1,5 +1,5 @@
 ---
-title: Лабораторно упражнение 3
+title: "Laboratory Exercise 3"
 sidebar:
   order: 4
 ---

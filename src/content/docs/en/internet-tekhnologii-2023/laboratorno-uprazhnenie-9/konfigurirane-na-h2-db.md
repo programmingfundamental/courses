@@ -1,5 +1,5 @@
 ---
-title: Конфигуриране на H2 DB
+title: "Configuring the H2 Database"
 sidebar:
   order: 1
 ---

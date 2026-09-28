@@ -1,5 +1,5 @@
 ---
-title: Програмни системи
+title: "Software Systems"
 sidebar:
   order: 5
 ---

@@ -1,5 +1,5 @@
 ---
-title: 'Абстракция, абстрактни класове и интерфейси'
+title: "Abstraction, Abstract Classes, and Interfaces"
 sidebar:
   order: 1
 ---

@@ -1,5 +1,5 @@
 ---
-title: Упражнения за извънаудиторна заетост
+title: "Independent Practice"
 sidebar:
   order: 2
   hidden: true

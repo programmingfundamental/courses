@@ -1,6 +1,6 @@
 ---
-title: 'Лабораторно упражнение 2 — Търсене на символ и подниз в текст'
+title: "Lab 2 — Searching for Characters and Substrings in Text"
 sidebar:
-  label: 'Упражнение 2'
+  label: "Lab 2"
   order: 2
 ---

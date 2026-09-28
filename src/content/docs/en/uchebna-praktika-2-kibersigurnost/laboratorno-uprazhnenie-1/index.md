@@ -1,6 +1,6 @@
 ---
-title: 'Лабораторно упражнение 1 — Основни операции с текстови низове и обхождане на символи в Java'
+title: "Lab 1 — Basic String Operations and Character Iteration in Java"
 sidebar:
-  label: 'Упражнение 1'
+  label: "Lab 1"
   order: 1
 ---

@@ -1,5 +1,5 @@
 ---
-title: Защита с помощта на JWT
+title: "Security with JWT"
 sidebar:
   order: 2
 ---

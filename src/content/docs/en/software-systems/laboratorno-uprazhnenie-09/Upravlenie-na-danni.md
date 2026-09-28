@@ -1,5 +1,5 @@
 ---
-title: Управление на данни
+title: "Data Management"
 sidebar:
   order: 1
 ---

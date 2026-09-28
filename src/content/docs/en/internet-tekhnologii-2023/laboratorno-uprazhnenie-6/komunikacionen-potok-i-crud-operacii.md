@@ -1,5 +1,5 @@
 ---
-title: Комуникационен поток
+title: "Communication Flow"
 sidebar:
   order: 2
 ---
