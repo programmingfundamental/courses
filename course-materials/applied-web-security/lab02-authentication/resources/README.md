@@ -1,6 +1,6 @@
 # Работна карта — lab02
 
-Само предоставената локална учебна среда. Основен code anchor: **SecurityFilterChain → AuthenticationProvider → Accounts → SecurityContext**.
+Основен code anchor: **SecurityFilterChain → AuthenticationProvider → Accounts → SecurityContext**.
 
 ## Работен запис
 
@@ -10,7 +10,7 @@
 | Actor / entry point | |
 | Asset / trust boundary | |
 | Baseline allowed request | |
-| Контролирана reproduction | |
+| Възпроизвеждане | |
 | Expected / actual result | |
 | Root cause / code location | |
 | Likelihood × impact / аргумент | |

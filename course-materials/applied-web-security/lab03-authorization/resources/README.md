@@ -1,6 +1,6 @@
 # Работна карта — lab03
 
-Само предоставената локална учебна среда. Основен code anchor: **Controller → Documents.get → object ownership policy**.
+Основен code anchor: **Controller → Documents.get → object ownership policy**.
 
 ## Работен запис
 
@@ -10,7 +10,7 @@
 | Actor / entry point | |
 | Asset / trust boundary | |
 | Baseline allowed request | |
-| Контролирана reproduction | |
+| Възпроизвеждане | |
 | Expected / actual result | |
 | Root cause / code location | |
 | Likelihood × impact / аргумент | |

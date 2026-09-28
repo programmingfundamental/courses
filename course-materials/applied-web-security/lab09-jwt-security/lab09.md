@@ -1,33 +1,79 @@
-# 1. Упражнение 9 — JWT Security и Token Manipulation
+# Упражнение 9 — JWT Security и Token Manipulation
 
-**Продължителност:** 110 минути. **Аудитория:** IV курс, бакалавър „Киберсигурност“.
+## 1. Теория
 
-> Всички offensive действия в курса се изпълняват единствено срещу предоставената локална лабораторна среда.
+### 1.1. Устройство и проверка на токен
 
-## 2. Security сценарий
+1. **JWT** е формат с header, payload и signature; **Base64url** кодира байтовете за използване в URL; **claim** е твърдение в payload.
+   - Пример: sub=alice назовава потребителя, iss — издателя, aud — получателя, exp — срока на валидност.
+2. **Parsing** прочита структурата; **signature validation** проверява подписа с доверен ключ; **RS256** е RSA подпис със SHA-256.
+   - Пример: SignedJWT.parse не доказва кой е издателят. NimbusJwtDecoder валидира с конфигуриран публичен ключ и алгоритъм.
+3. **Scope** описва разрешен достъп; **authority mapping** го превръща в разрешение на Spring Security.
+   - Пример: documents.read става SCOPE_documents.read. Валиден токен без него получава 403; невалидният токен получава 401.
+4. **Clock skew** е допустимото отклонение между часовници; **expiry boundary** е границата на срока.
+   - Пример: при нулево отклонение проверете токена точно при exp чрез управляван Clock и очаквайте отказ при изтекъл срок.
+5. **Replay** е повторно използване на токен; **refresh token** служи за получаване на нов токен; **revocation** отнема валидност преди срока.
+   - Пример: краткият срок ограничава времето за replay, а смяната на доверения ключ обезсилва старите подписи. **TLS** защитава преноса, например при HTTPS.
+6. **alg** посочва алгоритъм, **kid** — идентификатор на ключ.
+   - Пример: сървърът избира ключ само от своя доверен набор; стойността kid не е произволен адрес за изтегляне.
 
-API endpoint приема identity от декодиран JWT payload, без да проверява подписа. Локална промяна на sub от alice към admin се приема като нова identity, въпреки че signature вече не съответства.
+### 1.2. Проверка на твърденията
 
-## 3. Учебни цели
+1. JWT съдържа Base64url header, payload и signature. Claims като sub (subject), iss (issuer), aud (audience) и exp (expiration) са недоверени преди cryptographic validation. Signing удостоверява integrity/origin при доверен key; не криптира payload. Header alg/kid също не трябва произволно да определя algorithm или key location.
 
-След упражнението студентът:
+2. Издателят на токени е локалният Tokens service; `https://issuer.lab.invalid` е exact identifier, не адрес за network calls. NimbusJwtDecoder използва локален RSA public key и RS256; проверява timestamp, issuer, audience, непразен subject и задължителен exp. Scope се map-ва към authority `SCOPE_documents.read`. Валиден token без required scope води до 403; invalid signature/claims — 401. Bearer token позволява replay до expiry; TLS, кратък живот, минимални claims и revocation strategy ограничават риска.
 
-- анализира JWT header/payload/signature;
-- възпроизвежда локална payload manipulation;
-- разграничава decoding от verification;
-- защитава decoder с доверен key и algorithm;
-- тества issuer/audience/expiration/scope;
-- аргументира replay, storage и revocation ограничения;
+### 1.3. Автоматизирани проверки: понятия и пример
 
-## 4. Предварителни знания
+1. **Security regression test** е автоматизиран тест, който проверява правило за сигурност и открива повторната поява на поправен проблем.
+   - **Negative test** проверява отказана операция; **positive control** проверява нормална разрешена операция. **Security invariant** е правило, което трябва винаги да е изпълнено.
+   - Пример: без вход GET /api/me трябва да върне 401, а след успешен вход трябва да върне името на текущия потребител.
+2. **Assertion** сравнява очаквано и получено; **red → green** означава провалена проверка преди поправка и успешна проверка след нея.
+   - Грешка при компилиране или недостъпна база е проблем на средата, а не доказателство, че проверката е открила нарушено правило.
+3. **Unit test** проверява отделна единица; **integration test** проверява взаимодействието на компоненти; **test suite** е набор от тестове.
+   - **JUnit** изпълнява Java тестовете; **MockMvc** подава HTTP заявки през Spring без браузър; **Testcontainers** стартира зависимости като PostgreSQL в Docker.
+   - Пример: MockMvc проверява HTTP отговор, но изпълнението на JavaScript и поведението на cookies се проверяват в браузър. **Fixture** е наборът входни данни или конфигурация на теста.
+4. **Test matrix** е таблица от случаи и очаквания; **edge case** е граничен случай; **test report** е отчетът от изпълнението.
+   - Пример: липсващ вход → 401, собствен ресурс → успех, чужд ресурс → отказ. Проверявайте и съдържанието и състоянието в базата.
 
-Java, Spring Boot, HTTP, SQL, client–server, Linux/Docker и мрежи на нивото, описано в [README](../README.md). Изпълнени предходните 8 упражнения и съхранени техните regression tests. Елементарните Java конструкции не се преговарят.
+В съществуващия тестов клас WebSecurityTest полето mvc е MockMvc. Следният фрагмент подава заявка без сесия и проверява отказа:
 
-## 5. Необходими инструменти
+```java
+mvc.perform(get("/api/me"))
+   .andExpect(status().isUnauthorized());
+```
+
+От vulnerable-app командата `mvn test '-Dtest=WebSecurityTest#lab01*'` изпълнява методите с префикс lab01. След промяна повторете същия тест, без да променяте очакването, и изпълнете положителния случай. Maven запазва отчета в target/surefire-reports. Профилът `mvn verify -Psecurity-tests` добавя интеграционните проверки; **profile** е именуван набор от настройки.
+
+### 1.4. Работа с материалите и резултатите
+
+- **Code diff** показва промените в кода; **evidence** е доказателство като резултат от заявка или тест.
+  - Пример: предайте разликата в метода и отчета от теста, който проверява промяната.
+- **Acceptance criteria** са проверимите условия за приемане; **constraints** са ограниченията на решението.
+  - Пример: отказана промяна не трябва да обновява запис в базата.
+- **Baseline** е началното състояние за сравнение; **LAB_MODE** избира конфигурация при стартиране.
+  - Пример: след промяна на кода повторете теста със същата конфигурация, за да сравните поведението.
+
+- **Root cause** е първопричината; **control** е защитна мярка; **policy** е правило за достъп или поведение.
+  - Пример: липсваща проверка на owner е първопричина; сравняването му с текущия потребител прилага правилото за собственост.
+- **Audit** е журнал на действията; **correlation ID** свързва заявката със записите за нея.
+  - Пример: запис с тип LOGIN_FAILURE и идентификатор на заявката позволява проследяване на отказан вход без записване на паролата.
+- **State** е състоянието на системата; **persistence** е запазването на данни; **migration** преобразува вече записани данни.
+  - Пример: след отказана промяна записът в базата остава непроменен; смяна на формата на пароли изисква и обработка на старите записи.
+
+Технически източници и version scope: [references](../architecture/references.md).
+
+## 2. Подготовка
+
+### Предварителни знания
+
+Java, Spring Boot, HTTP, SQL, client–server, Linux/Docker и мрежи на нивото, описано в [подготовка на средата](../setup.md). Изпълнени предходните 8 упражнения и съхранени техните regression tests. Елементарните Java конструкции не се преговарят.
+
+### Инструменти
 
 JDK 21, Maven 3.9+, Docker/Compose, IDE, curl.exe или PowerShell, browser DevTools, JUnit, Spring Boot Test и MockMvc. PostgreSQL работи в Compose; H2 е само бърз test backend.  За пълния security profile е нужен Testcontainers достъп до Docker. [Resources](resources/README.md) съдържа работна карта и очаквани наблюдения.
 
-## 6. Архитектурен контекст
+### Архитектурен контекст
 
 ```text
 Browser
@@ -45,15 +91,11 @@ Database (PostgreSQL)
 
 **Фокус:** Bearer token → JwtDecoder → claim validators → authorities. Съпоставете с [DFD и endpoints](../architecture/system-overview.md); отбележете кой input е недоверен и къде се взема security решението.
 
-## 7. Необходима теория
+## 3. Примерен проблем
 
-JWT съдържа Base64url header, payload и signature. Claims като sub (subject), iss (issuer), aud (audience) и exp (expiration) са недоверени преди cryptographic validation. Signing удостоверява integrity/origin при доверен key; не криптира payload. Header alg/kid също не трябва произволно да определя algorithm или key location.
+API endpoint приема identity от декодиран JWT payload, без да проверява подписа. Локална промяна на sub от alice към admin се приема като нова identity, въпреки че signature вече не съответства.
 
-Учебният issuer е локалният Tokens service; `https://issuer.lab.invalid` е exact identifier, не адрес за network calls. NimbusJwtDecoder използва локален RSA public key и RS256; проверява timestamp, issuer, audience, непразен subject и задължителен exp. Scope се map-ва към authority `SCOPE_documents.read`. Валиден token без required scope води до 403; invalid signature/claims — 401. Bearer token позволява replay до expiry; TLS, кратък живот, минимални claims и revocation strategy ограничават риска. Refresh tokens и rotation са концептуална тема, не custom implementation в този lab.
-
-Технически източници и version scope: [references](../architecture/references.md).
-
-## 8. Уязвим пример
+### Начален код
 
 ```java
 SignedJWT parsed = SignedJWT.parse(raw);
@@ -62,47 +104,41 @@ return new Jwt(raw, null, null,
 // parse не прави verify!
 ```
 
-Примерът е умишлен учебен дефект. За възпроизвеждане използвайте `LAB_MODE=lab09`; не пренасяйте този switch в production.
+### Стъпки за решаване
 
-## 9. Водена практическа задача
+Преди работа следвайте [стартиране и възстановяване](../setup.md). Командите за Maven се изпълняват от `vulnerable-app`, а Compose командите — от корена на курса.
 
-Преди работа следвайте [startup/reset](../README.md). Командите за Maven се изпълняват от `vulnerable-app`, а Compose командите — от корена на курса.
-
-### Стъпка 1
+#### Стъпка 1
 
 Стартирайте lab09. Вземете session и CSRF, POST /token, после GET /token-api/documents с Authorization: Bearer. Очаквайте subject=alice. Не качвайте token в онлайн decoder.
 
-### Стъпка 2
+#### Стъпка 2
 
 В resources има локален PowerShell decoder/manipulator. Променете само sub към admin, запазете старата signature и подайте токена само към localhost. Уязвимият decoder приема променената identity.
 
-### Стъпка 3
+#### Стъпка 3
 
 Прочетете Tokens и tokenChain. Отделете parse, signature verification, claim validation и authorization като четири решения. Изпълнете JwtSecurityTest#modifiedPayloadAndForeignSignature → red.
 
-### Стъпка 4
+#### Стъпка 4
 
 Реализирайте verification с NimbusJwtDecoder и фиксиран trusted RSA key/RS256 и в lab09 branch. Не създавайте собствен signature алгоритъм и не приемайте jku/x5u от токена.
 
-### Стъпка 5
+#### Стъпка 5
 
 За guided fix добавете modified-payload и чужд signing key tests. Самостоятелно завършете claim/scope policy и допълнете tests за липсващ exp и непразен sub; baseline validators са справка, а новите negative tests трябва да конструират реално подписани tokens.
 
-Разпределение: scenario/theory 15 мин, наблюдение 15, root cause 10, guided fix 25, tests 15, самостоятелна работа 25, защита 5. Общо 110 минути.
-
-## 10. Анализ на root cause
+### Анализ на причината
 
 Приложението третира decoding като доказателство за authenticity. Base64url е обратимо без secret; attacker контролира payload bytes. Дори валидният подпис не означава, че token е предназначен за този API, не е изтекъл или има необходимите permissions.
 
-Предайте причинна верига: **недоверен вход → нарушено assumption → липсващ/грешен control → наблюдавано въздействие**. Оценете likelihood/impact по скалата в [threat model](../architecture/threat-model.md); аргументирайте residual risk след fix.
+Причинната верига се описва като: **недоверен вход → нарушено assumption → липсващ/грешен control → наблюдавано въздействие**. Оценете likelihood/impact по скалата в [threat model](../architecture/threat-model.md); аргументирайте residual risk след fix.
 
-## 11. Реализация на защита
+### Реализация на защита
 
 Използвайте стандартния resource server и Nimbus verifier с доверен public key, фиксиран algorithm и fail-closed behavior. Разделете session chain от stateless Bearer chain. Guided целта е криптографското отхвърляне на modified bytes; application policy за issuer/audience/time/scope се защитава отделно. Не log-вайте raw Authorization header.
 
-Reference branch в общия проект служи за guided comparison. За предаване променете уязвимия code path и запазете същия lab mode. Самостоятелната задача по-долу изисква собствено разширение и няма готово решение в този файл.
-
-## 12. Security regression test
+### Проверка с регресионен тест
 
 Изпълнете:
 
@@ -123,7 +159,7 @@ mvc.perform(get("/token-api/documents")
     .andExpect(status().isOk());
 ```
 
-Задължителна матрица:
+Матрица на примерните проверки:
 
 - valid signed token → 200 и правилен subject;
 - expired token → 401;
@@ -132,21 +168,23 @@ mvc.perform(get("/token-api/documents")
 - missing required scope → 403;
 - malformed / missing token → 401;
 
-Добавете поне един нов автоматизиран test за edge case или самостоятелната задача. Повторете `mvn test` след fix и накрая `mvn verify -Psecurity-tests`. Проверявайте content/state/identity, когато са приложими, а не само HTTP status.
+Повторете `mvn test` след fix и накрая `mvn verify -Psecurity-tests`. Проверявайте content/state/identity, когато са приложими, а не само HTTP status.
 
-## 13. Самостоятелна задача
+## Самостоятелни задачи
 
-**Problem statement:** добавете пълен negative validation contract за expiration, issuer, audience и required scope, включително absent claims.
+### Задача 1
 
-**Requirements:** валидна signature, но wrong issuer/audience/expired/missing-exp/empty-sub → 401; валиден token без scope → 403. Тествайте expiry boundary с controlled Clock и разгледайте zero clock skew в baseline.
+**Условие:** добавете пълен negative validation contract за expiration, issuer, audience и required scope, включително absent claims.
 
-**Constraints:** tests подписват локално с тестовия issuer; `.with(jwt())` не доказва signature validation; не ползвайте външен token service или чужди keys.
+**Изисквания:** валидна signature, но wrong issuer/audience/expired/missing-exp/empty-sub → 401; валиден token без scope → 403. Тествайте expiry boundary с controlled Clock и разгледайте zero clock skew в baseline.
 
-**Acceptance criteria:** всяка claim mutation има собствен test с ясен failure reason; положителният token работи; session cookie без Bearer не дава достъп. Аргументирайте replay policy и какво става след restart на учебния issuer.
+**Ограничения:** tests подписват локално с тестовия issuer; `.with(jwt())` не доказва signature validation; не ползвайте външен token service или чужди keys.
+
+**Критерии за приемане:** всяка claim mutation има собствен test с ясен failure reason; положителният token работи; session cookie без Bearer не дава достъп. Аргументирайте replay policy и какво става след restart на издателя на токени.
 
 Предайте собствен code diff, test report и кратка аргументация. Не включвайте реални secrets или сурови session/token стойности в evidence.
 
-## 14. Edge cases
+### Задача 2 — Гранични случаи
 
 - Липсващ exp — не разчитайте само на timestamp validator.
 - aud е списък, а не задължително един string.
@@ -154,27 +192,3 @@ mvc.perform(get("/token-api/documents")
 - Valid signature, но missing scope; смяна на signing key при restart.
 
 Изберете поне един за нов regression test и обяснете кой security invariant защитава.
-
-## 15. Въпроси за анализ
-
-1. Защо decode не е verify?
-2. Какво гарантира signature?
-3. Защо aud се проверява?
-4. Защо @WithMockJwt не стига?
-5. Защо missing scope е 403?
-6. Може ли signed token да се replay-не?
-
-## 16. Очакван резултат
-
-Работещ guided fix за **JWT Security и Token Manipulation**, контролиран before/after evidence, root-cause анализ, test matrix и реализирана самостоятелна задача според acceptance criteria. Нормалният разрешен flow остава работещ. Отчетът разграничава доказаното с автоматизиран test, провереното ръчно и оставащите ограничения.
-
-## 17. Checklist
-
-- [ ] Vulnerability reproduced само в lab (за lab01 — unsafe config fixture анализиран).
-- [ ] Root cause и trust assumption идентифицирани.
-- [ ] Correct mitigation implemented server-side.
-- [ ] Regression test показва red → green.
-- [ ] Положителната функционалност остава работеща.
-- [ ] Edge case има автоматизирана проверка.
-- [ ] Самостоятелната задача покрива acceptance criteria.
-- [ ] Evidence не съдържа secrets; reset процедурата е проверена.

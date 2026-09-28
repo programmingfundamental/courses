@@ -9,5 +9,3 @@
 - [OWASP SQL Injection Prevention](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html) — parameter binding и allowlist за identifiers.
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/) — ориентир за threat review, не замества application-specific model.
 - [Java 21 Cipher API](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/javax/crypto/Cipher.html) — GCM/AEAD, AAD и authentication failure.
-
-Примерите в комплекта са авторски, ограничени до учебното приложение. Не прехвърляйте fixtures, ключове или vulnerable switches в production.

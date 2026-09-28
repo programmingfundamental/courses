@@ -50,4 +50,4 @@ DB runtime user има само DML върху учебните таблици; 
 
 Сървърът приема само изрично описани параметри; client-side validation не е security boundary. `anyRequest().denyAll()` забранява неизвестни routes. CSP е вторична защита и се изключва само за lab06/lab10 възпроизводимост. HTML encoding се прилага при output; DB пази оригиналния comment.
 
-Известни учебни ограничения: временни RSA keys, single-instance limiter, без TLS по подразбиране, без account recovery/refresh tokens/MFA, без production secret manager. Документирайте ги като residual risk, а не като автоматично „затворени“ findings.
+Конфигурация: временни RSA keys, single-instance limiter, без TLS по подразбиране, без account recovery/refresh tokens/MFA, без production secret manager. Документирайте ги като residual risk, а не като автоматично „затворени“ findings.

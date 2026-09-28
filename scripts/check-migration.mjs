@@ -60,7 +60,13 @@ for (const course of ['applied-web-security', 'software-engineering-ai']) {
       assert.ok(lab(`nav.sidebar a[href="${labUrl}zadachi/"]`).length, `Missing task link: ${labUrl}`);
       if (locale === 'bg') {
         assert.ok(lab('[data-pagefind-body]').text().includes('Предварителни знания'), `Missing lab material: ${labUrl}`);
-        assert.ok(readPage(`${labUrl}zadachi/`)('[data-pagefind-body]').text().includes('Водена практическа задача'), `Missing practical tasks: ${labUrl}`);
+        const tasksText = readPage(`${labUrl}zadachi/`)('[data-pagefind-body]').text();
+        assert.ok(tasksText.includes(course === 'applied-web-security' ? 'Самостоятелни задачи' : 'Водена практическа задача'), `Missing practical tasks: ${labUrl}`);
+        if (course === 'applied-web-security') {
+          assert.ok(lab('[data-pagefind-body]').text().includes('Примерен проблем'), `Missing worked example: ${labUrl}`);
+          assert.ok(!/Въпроси за анализ|Checklist|Стъпки за решаване/.test(tasksText), `Non-assignment material in tasks: ${labUrl}`);
+          assert.ok(!fs.existsSync(`dist/${locale}/${course}/laboratorno-uprazhnenie-${number}/hint`), `Published hints: ${labUrl}`);
+        }
       }
     }
   }

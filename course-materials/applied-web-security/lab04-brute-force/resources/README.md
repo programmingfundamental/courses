@@ -1,6 +1,6 @@
 # Работна карта — lab04
 
-Само предоставената локална учебна среда. Основен code anchor: **AuthenticationProvider → LoginGuard → clock/counters**.
+Основен code anchor: **AuthenticationProvider → LoginGuard → clock/counters**.
 
 ## Работен запис
 
@@ -10,7 +10,7 @@
 | Actor / entry point | |
 | Asset / trust boundary | |
 | Baseline allowed request | |
-| Контролирана reproduction | |
+| Възпроизвеждане | |
 | Expected / actual result | |
 | Root cause / code location | |
 | Likelihood × impact / аргумент | |

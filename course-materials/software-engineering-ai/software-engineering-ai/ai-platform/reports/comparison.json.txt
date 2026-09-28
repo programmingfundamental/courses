@@ -1,0 +1,74 @@
+{
+  "version": "compare-v1",
+  "metrics": {
+    "accuracy": 0.99,
+    "f1": 0.9896907216494846,
+    "precision": 1.0,
+    "recall": 0.9795918367346939
+  },
+  "cohort_metrics": {
+    "A": {
+      "n": 55,
+      "positive_n": 29,
+      "recall": 0.9655172413793104
+    },
+    "B": {
+      "n": 45,
+      "positive_n": 20,
+      "recall": 1.0
+    }
+  },
+  "dataset": {
+    "version": "requests-v1",
+    "seed": 42,
+    "rows": 400,
+    "sha256": "f8a5e8459908a46b2bb5bc80c6cfb662b65660d2e6f04fc46828caf3db799930",
+    "schema": [
+      "request_id",
+      "token_count",
+      "keyword_score",
+      "previous_requests",
+      "cohort",
+      "label"
+    ],
+    "source": "synthetic; no personal data",
+    "license": "CC0-1.0"
+  }
+}
+{
+  "version": "compare-v2",
+  "metrics": {
+    "accuracy": 0.92,
+    "f1": 0.9166666666666666,
+    "precision": 0.9361702127659575,
+    "recall": 0.8979591836734694
+  },
+  "cohort_metrics": {
+    "A": {
+      "n": 55,
+      "positive_n": 29,
+      "recall": 0.8620689655172413
+    },
+    "B": {
+      "n": 45,
+      "positive_n": 20,
+      "recall": 0.95
+    }
+  },
+  "dataset": {
+    "version": "requests-v1",
+    "seed": 42,
+    "rows": 400,
+    "sha256": "f8a5e8459908a46b2bb5bc80c6cfb662b65660d2e6f04fc46828caf3db799930",
+    "schema": [
+      "request_id",
+      "token_count",
+      "keyword_score",
+      "previous_requests",
+      "cohort",
+      "label"
+    ],
+    "source": "synthetic; no personal data",
+    "license": "CC0-1.0"
+  }
+}

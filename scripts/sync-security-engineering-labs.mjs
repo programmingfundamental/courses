@@ -80,7 +80,9 @@ for (const [index, course] of courses.entries()) {
     const body = readStudentFile(lab.file);
     const headings = parse(body).children.filter(node => node.type === 'heading');
     const title = plainText(headings[0]).replace(/^1\. /, '');
-    const boundary = headings.find(node => /^9\. Водена практическа задача/.test(plainText(node)));
+    const boundary = headings.find(node => course.id === 'applied-web-security'
+      ? plainText(node) === 'Самостоятелни задачи'
+      : /^9\. Водена практическа задача/.test(plainText(node)));
     if (!boundary) throw new Error(`Missing practical section: ${lab.file}`);
     const { theory, tasks } = splitRanges(body, [[boundary.position.start.offset, body.length]]);
     write(`bg/${lab.route}/index.md`, document(title, lab.number, theory, `Упражнение ${lab.number}`));
