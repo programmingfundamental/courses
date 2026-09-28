@@ -95,6 +95,15 @@ Its ten 90-minute labs share a buildable Android/Quarkus starter under `platform
 Run `npm run sync:mobile-internet-labs` after editing the student files; `npm run check` verifies the generated pages.
 Instructor notes and starter source projects remain outside the site content tree.
 
+The fourth-year Applied Web Security and Software Engineering for AI Systems courses
+are authored in `course-materials/applied-web-security/` and
+`course-materials/software-engineering-ai/`. Run `npm run sync:security-engineering-labs`
+after editing their README or student `labXX.md` files. This publishes ten labs per
+course, separates practical tasks, and maintains English navigation titles with
+empty lesson placeholders until translations are available. Supporting resources
+and starter code link to their repository files; instructor notes are not published
+as site pages. `npm run check` verifies that the generated pages are current.
+
 Create `<course>/laboratorno-uprazhnenie-16/index.md` or `<course>/lab16/index.md`.
 Set `title` and `sidebar.order: 16`, then write the lesson. Add extra Markdown
 pages inside the lab folder with their own titles and sidebar orders. No sidebar
