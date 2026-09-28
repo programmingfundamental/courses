@@ -2,6 +2,6 @@
 title: English course materials
 template: splash
 hero:
-  title: English course materials are unavailable
-  tagline: English discipline content has been removed. Select Bulgarian from the language menu to browse the available courses.
+  title: English course pages
+  tagline: Pages without an English translation are intentionally empty. Use the language selector to view the Bulgarian content.
 ---
