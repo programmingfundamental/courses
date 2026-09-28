@@ -124,4 +124,4 @@ sidebar:
   - [Задача 5](/courses/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-01/12-zadachi/#задача-5)
   - [Задача 6](/courses/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-01/12-zadachi/#задача-6)
   - [Задача 7](/courses/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-01/12-zadachi/#задача-7)
-  - [Задача 8](/courses/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-01/12-zadachi/#задача-8)
+  - [Задача 8](/courses/bg/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-01/12-zadachi/#task-8)
