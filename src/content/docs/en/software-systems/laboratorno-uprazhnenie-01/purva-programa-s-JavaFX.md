@@ -1,5 +1,5 @@
 ---
-title: Първа програма с JavaFx
+title: "Your First JavaFX Program"
 sidebar:
   order: 4
 ---

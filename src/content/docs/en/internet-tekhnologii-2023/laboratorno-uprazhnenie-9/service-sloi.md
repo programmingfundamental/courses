@@ -1,5 +1,5 @@
 ---
-title: Слой за бизнес логика
+title: "Business Logic Layer"
 sidebar:
   order: 4
 ---

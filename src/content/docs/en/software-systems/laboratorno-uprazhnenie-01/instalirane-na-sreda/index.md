@@ -1,5 +1,5 @@
 ---
-title: Инсталиране на среда
+title: "Development Environment Setup"
 sidebar:
   order: 1
 ---

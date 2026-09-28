@@ -11,6 +11,14 @@ export const onRequest = defineRouteMiddleware((context) => {
   const courseId = route.id.split('/').slice(0, 2).join('/');
   const course = byId.get(courseId);
   const overview = bg ? 'Преглед' : 'Overview';
+  const sectionLabels: Record<string, string> = {
+    'obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-01/osnovi-na-programiraneto-s-java-za-nachinaeshi': bg
+      ? 'Основи на програмирането с Java за начинаещи'
+      : 'Java Programming Basics for Beginners',
+    'obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-01/tipove-danni-operatori': bg
+      ? 'Типове данни и оператори'
+      : 'Data Types and Operators',
+  };
   if (route.entry.data.taskRedirect) {
     route.head.push({ tag: 'meta', attrs: { 'http-equiv': 'refresh', content: `0;url=${route.entry.data.taskRedirect}` } });
   }
@@ -43,7 +51,7 @@ export const onRequest = defineRouteMiddleware((context) => {
       const entries = clean(item.entries, id);
       if (!entries.length) return [];
       const index = byId.get(id);
-      const label = index?.data.sidebar.label || index?.data.title || item.label.replaceAll('-', ' ');
+      const label = index?.data.sidebar.label || index?.data.title || sectionLabels[id.split('/').slice(1).join('/')] || item.label.replaceAll('-', ' ');
       entries.sort((a,b) => {
         const weight = (entry: Item): number => {
           if (entry.type === 'link') return entry.href === urlFor(id) ? -1 : (byId.get(decodeURI(entry.href).replace(/^\/courses\//,'').replace(/\/$/,''))?.data.sidebar.order ?? 999);

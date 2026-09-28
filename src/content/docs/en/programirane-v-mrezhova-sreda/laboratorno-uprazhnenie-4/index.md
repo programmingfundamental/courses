@@ -1,6 +1,6 @@
 ---
-title: "Лабораторно упражнение 4 — Java NIO и event-driven networking"
+title: "Lab 4 — Java NIO and Event-Driven Networking"
 sidebar:
   order: 4
-  label: Упражнение 4
+  label: "Lab 4"
 ---

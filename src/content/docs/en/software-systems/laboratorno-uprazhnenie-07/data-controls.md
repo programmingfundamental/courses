@@ -1,5 +1,5 @@
 ---
-title: Контроли за данни
+title: "Data Controls"
 sidebar:
   order: 1
 ---

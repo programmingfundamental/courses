@@ -1,6 +1,6 @@
 ---
-title: "Упражнение 1 — Mobile Connectivity и Network State"
+title: "Lab 1 — Mobile Connectivity and Network State"
 sidebar:
   order: 1
-  label: Упражнение 1
+  label: "Lab 1"
 ---

@@ -1,5 +1,5 @@
 ---
-title: Интернет за мобилни устройства
+title: "Internet for Mobile Devices"
 sidebar:
   order: 15
 ---

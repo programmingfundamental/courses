@@ -1,6 +1,6 @@
 ---
-title: 'Лабораторно упражнение 6 — Честотен анализ на символи'
+title: "Lab 6 — Character Frequency Analysis"
 sidebar:
-  label: 'Упражнение 6'
+  label: "Lab 6"
   order: 6
 ---

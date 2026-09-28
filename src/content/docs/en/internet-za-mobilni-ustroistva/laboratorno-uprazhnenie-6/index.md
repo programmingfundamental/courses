@@ -1,6 +1,6 @@
 ---
-title: "Упражнение 6 — Backend for Frontend и mobile-specific aggregation"
+title: "Lab 6 — Backend for Frontend and mobile-specific aggregation"
 sidebar:
   order: 6
-  label: Упражнение 6
+  label: "Lab 6"
 ---

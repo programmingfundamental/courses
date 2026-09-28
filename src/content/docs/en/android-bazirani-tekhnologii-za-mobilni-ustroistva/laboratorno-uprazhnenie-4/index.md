@@ -1,6 +1,6 @@
 ---
-title: "Упражнение 4 — Sensors и обработка на физически данни"
+title: "Lab 4 — Sensors and Physical Data Processing"
 sidebar:
   order: 4
-  label: Упражнение 4
+  label: "Lab 4"
 ---

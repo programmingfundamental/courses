@@ -1,5 +1,5 @@
 ---
-title: Инсталиране на IntelliJ
+title: "Installing IntelliJ"
 sidebar:
   order: 2
 ---

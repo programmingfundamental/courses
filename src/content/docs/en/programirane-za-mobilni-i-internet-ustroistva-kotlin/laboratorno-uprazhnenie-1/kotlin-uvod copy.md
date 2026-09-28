@@ -1,5 +1,5 @@
 ---
-title: Въведение в Kotlin
+title: "Introduction to Kotlin"
 sidebar:
   order: 2
 ---

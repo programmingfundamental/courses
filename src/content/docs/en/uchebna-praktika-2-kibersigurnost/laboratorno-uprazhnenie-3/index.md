@@ -1,6 +1,6 @@
 ---
-title: 'Лабораторно упражнение 3 — Броене на символи, думи и срещания в текст'
+title: "Lab 3 — Counting Characters, Words, and Occurrences in Text"
 sidebar:
-  label: 'Упражнение 3'
+  label: "Lab 3"
   order: 3
 ---

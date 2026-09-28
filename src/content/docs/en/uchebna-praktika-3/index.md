@@ -1,5 +1,5 @@
 ---
-title: Учебна практика 3
+title: "Practical Training 3"
 sidebar:
   order: 10
 ---

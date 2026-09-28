@@ -1,6 +1,6 @@
 ---
-title: "Упражнение 5 — API Gateway и единна входна точка"
+title: "Lab 5 — API Gateway and a Single Entry Point"
 sidebar:
   order: 5
-  label: Упражнение 5
+  label: "Lab 5"
 ---

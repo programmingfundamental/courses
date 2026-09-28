@@ -1,5 +1,5 @@
 ---
-title: HTTP протокол
+title: "HTTP Protocol"
 sidebar:
   order: 1
 ---

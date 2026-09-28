@@ -1,6 +1,6 @@
 ---
-title: "Упражнение 7 — Performance, Energy и Robustness"
+title: "Lab 7 — Performance, Energy and Robustness"
 sidebar:
   order: 7
-  label: Упражнение 7
+  label: "Lab 7"
 ---

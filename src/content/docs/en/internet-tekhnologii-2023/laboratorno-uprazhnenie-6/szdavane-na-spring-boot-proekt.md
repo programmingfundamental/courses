@@ -1,5 +1,5 @@
 ---
-title: Създаване на Spring boot проект със Spring Initializr
+title: "Creating a Spring Boot Project with Spring Initializr"
 sidebar:
   order: 3
 ---

@@ -1,5 +1,5 @@
 ---
-title: Jakarta Persistence анотации
+title: "Jakarta Persistence Annotations"
 sidebar:
   order: 2
 ---

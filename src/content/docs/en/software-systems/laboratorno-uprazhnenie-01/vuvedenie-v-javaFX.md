@@ -1,5 +1,5 @@
 ---
-title: Въведение в JavaFX
+title: "Introduction to JavaFX"
 sidebar:
   order: 1
 ---

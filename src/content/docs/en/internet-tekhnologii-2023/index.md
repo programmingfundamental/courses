@@ -1,5 +1,5 @@
 ---
-title: Интернет технологии
+title: "Internet Technologies"
 sidebar:
   order: 8
 ---

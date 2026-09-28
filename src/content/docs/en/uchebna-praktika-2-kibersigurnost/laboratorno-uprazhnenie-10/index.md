@@ -1,6 +1,6 @@
 ---
-title: 'Лабораторно упражнение 10 — Просто транспозиционно шифриране'
+title: "Lab 10 — Simple Transposition Encryption"
 sidebar:
-  label: 'Упражнение 10'
+  label: "Lab 10"
   order: 10
 ---

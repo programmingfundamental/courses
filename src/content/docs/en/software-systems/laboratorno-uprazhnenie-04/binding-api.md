@@ -1,5 +1,5 @@
 ---
-title: API за свързване
+title: "Connection API"
 sidebar:
   order: 3
 ---

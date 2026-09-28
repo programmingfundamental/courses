@@ -1,5 +1,5 @@
 ---
-title: Обектно-ориентирано програмиране - 1 част - проект
+title: "Object-Oriented Programming — Part 1 — Project"
 sidebar:
   order: 3
 ---

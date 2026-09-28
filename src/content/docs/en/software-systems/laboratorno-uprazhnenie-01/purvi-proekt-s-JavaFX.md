@@ -1,5 +1,5 @@
 ---
-title: Първи проект с JavaFx
+title: "Your First JavaFX Project"
 sidebar:
   order: 3
 ---

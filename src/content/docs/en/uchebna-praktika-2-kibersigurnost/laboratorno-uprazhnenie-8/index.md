@@ -1,6 +1,6 @@
 ---
-title: 'Лабораторно упражнение 8 — Шифър на Виженер'
+title: "Lab 8 — Vigenère Cipher"
 sidebar:
-  label: 'Упражнение 8'
+  label: "Lab 8"
   order: 8
 ---

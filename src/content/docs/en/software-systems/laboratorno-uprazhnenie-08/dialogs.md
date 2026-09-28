@@ -1,5 +1,5 @@
 ---
-title: Диалогови прозорци (Dialogs)
+title: "Dialogs"
 sidebar:
   order: 3
 ---

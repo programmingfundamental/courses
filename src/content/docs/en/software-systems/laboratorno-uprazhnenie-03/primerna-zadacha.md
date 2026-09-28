@@ -1,5 +1,5 @@
 ---
-title: Примерна задача
+title: "Example Task"
 sidebar:
   order: 1
 ---
