@@ -13,8 +13,8 @@ export const onRequest = defineRouteMiddleware((context) => {
   const overview = bg ? 'Преглед' : 'Overview';
   const sectionLabels: Record<string, string> = {
     'obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-01/osnovi-na-programiraneto-s-java-za-nachinaeshi': bg
-      ? 'Основи на програмирането с Java за начинаещи'
-      : 'Java Programming Basics for Beginners',
+      ? 'Инструменти за програмирането с Java'
+      : 'Java programming tools',
     'obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-01/tipove-danni-operatori': bg
       ? 'Типове данни и оператори'
       : 'Data Types and Operators',

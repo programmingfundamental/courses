@@ -1,6 +1,6 @@
 # Работна карта — lab06
 
-Само предоставената локална учебна среда. Основен code anchor: **Stored comment / reflected query → HTML rendering → browser**.
+Основен code anchor: **Stored comment / reflected query → HTML rendering → browser**.
 
 ## Работен запис
 
@@ -10,7 +10,7 @@
 | Actor / entry point | |
 | Asset / trust boundary | |
 | Baseline allowed request | |
-| Контролирана reproduction | |
+| Възпроизвеждане | |
 | Expected / actual result | |
 | Root cause / code location | |
 | Likelihood × impact / аргумент | |

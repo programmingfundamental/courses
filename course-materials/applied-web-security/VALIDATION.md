@@ -2,6 +2,10 @@
 
 Проверка: 22.09.2026. Обхватът е само създаденият локален курс; съществуващите курсове и сайтът не са променяни.
 
+## Обновяване на материалите — 28.09.2026
+
+Структурата вече съдържа теория, примерен проблем със стъпки и самостоятелни задачи. Въпросите и checklist-ите са в отделни hint.md файлове извън съдържанието на сайта. check-structure.ps1 проверява тази структура; таблицата по-долу описва първоначалната проверка от 22.09.2026.
+
 ## Изпълнени проверки
 
 | Проверка | Резултат |
@@ -46,7 +50,7 @@
 
 MockMvc/HTTP smoke проверяват encoded HTML и CSP, но не изпълняват JavaScript. Ръчните browser XSS/CSRF демонстрации са подробно описани за занятието; тук не се отчита автоматизиран browser execution test или HTTPS browser cookie test. CookieIT доказва реалния Set-Cookie header. Не е изпълняван ZAP scan или dependency vulnerability scan; lab10 включва методика за тях, а pinned versions не са обявени за production-safe.
 
-Възпроизводимата среда има умишлени учебни ограничения: in-memory single-process limiter и JWT signing key, публични synthetic credentials, HTTP по подразбиране. Default secure означава reference controls за курса, не production certification. Независимите студентски разширения се оценяват по acceptance criteria след реализацията им; не са представени като вече изпълнен код.
+Конфигурацията включва: in-memory single-process limiter и JWT signing key, публични synthetic credentials, HTTP по подразбиране. Независимите студентски разширения се оценяват по acceptance criteria след реализацията им; не са представени като вече изпълнен код.
 
 ## Възпроизвеждане на проверките
 

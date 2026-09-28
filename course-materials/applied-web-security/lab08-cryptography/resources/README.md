@@ -1,6 +1,6 @@
 # Работна карта — lab08
 
-Само предоставената локална учебна среда. Основен code anchor: **Web.sensitive → Vault → encrypted field в PostgreSQL**.
+Основен code anchor: **Web.sensitive → Vault → encrypted field в PostgreSQL**.
 
 ## Работен запис
 
@@ -10,7 +10,7 @@
 | Actor / entry point | |
 | Asset / trust boundary | |
 | Baseline allowed request | |
-| Контролирана reproduction | |
+| Възпроизвеждане | |
 | Expected / actual result | |
 | Root cause / code location | |
 | Likelihood × impact / аргумент | |

@@ -1,6 +1,6 @@
 # Работна карта — lab05
 
-Само предоставената локална учебна среда. Основен code anchor: **Documents.search → JDBC query → DB parser**.
+Основен code anchor: **Documents.search → JDBC query → DB parser**.
 
 ## Работен запис
 
@@ -10,7 +10,7 @@
 | Actor / entry point | |
 | Asset / trust boundary | |
 | Baseline allowed request | |
-| Контролирана reproduction | |
+| Възпроизвеждане | |
 | Expected / actual result | |
 | Root cause / code location | |
 | Likelihood × impact / аргумент | |
