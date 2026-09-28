@@ -8,39 +8,13 @@ taskPage: true
 
 ## Task 1
 
-Print all odd numbers in the range 0–300.
+Print all odd numbers in the range 0–300 to the console.
 
-Create the project with **New Project → Java**. Identify which files were created by the IDE and which ones you added. Put the check in a method named `isOdd(int number)`, and explain how it is similar to a function that accepts a number and returns a boolean value.
+Create the project using **New Project → Java**. Identify which files were created by the IDE and which you added yourself. Extract the check into an `isOdd(int number)` method and explain its analogy with a function that takes a number and returns a boolean value.
 
 ## Task 2
 
-Create an array `{5, 6, 7, 9}` containing the quantities of cases of goods in a drugstore, and an array `{2.5, 3.6, 8.9, 7.5}` containing the price of one case of each item. Print the total price of all cases.
-
-## Task 3
-
-For a total vacation budget of 10,000, print the amounts allocated to each category:
-
-1. Accommodation is 50% of the total.
-2. Rental of beach equipment is 5% of the total.
-3. Restaurant expenses are 30% of the total.
-4. Additional entertainment is 10% of the total.
-5. Other expenses are 5% of the total.
-
-## Task 4
-
-Print all five-character strings whose first two characters are digits, next two are letters, and fifth character is a digit.
-
-## Task 5
-
-Write a program that prints the prime numbers in the range 1–300.
-
-## Task 6
-
-Write a program that calculates and prints what percentage of the numbers in the range 1–300 are divisible by prime numbers in the same range.
-
-## Task 7
-
-Use a debugger to trace the execution of the following program:
+Use the debugger to trace the execution of the following program:
 
 ```java
 package bg.tu_varna.sit;
@@ -70,77 +44,32 @@ public class Calculator {
 }
 ```
 
-Pause the loop for each number whose integer part is even. Find out why the calculated average is incorrect.
+Pause the loop at every number whose integer part is even. Investigate why the calculated average is incorrect.
 
-Use the [debugging guide](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-01/otkrivane-i-otstranyavane-na-greshki/): set a conditional breakpoint, watch `sum` and `i`, and enter `getAverage()` with **Step Into**. Record the expected and actual values before fixing the code. After the fix, verify the result `4.041666...` with a tolerance of `0.000001`, as well as an array containing one element.
+Use the [Debugging page](/courses/en/obektno-orientirano-programirane-1-chast/laboratorno-uprazhnenie-01/otkrivane-i-otstranyavane-na-greshki/): set a conditional breakpoint, watch `sum` and `i`, and enter `getAverage()` using **Step Into**. Record the expected and actual values before the fix. After the fix, check for a result of `4.041666...` with a tolerance of `0.000001`, and also test an array containing a single element.
 
-## Task 8
+## Task 3
 
-Analyze the task and identify the errors without rewriting all the code. The program should execute the following instructions:
+Create an array `{5, 6, 7, 9}` containing the quantities of cartridges in a drugstore and an array `{2.5, 3.6, 8.9, 7.5}` containing the price of one cartridge of each type. Print the total price of all cartridges.
 
-- `INC <operand1>` — increment operand 1;
-- `DEC <operand1>` — decrement operand 1;
-- `ADD <operand1> <operand2>` — add operand 1 and operand 2;
-- `MLA <operand1> <operand2>` — multiply operand 1 and operand 2;
-- `END` — end of input.
+## Task 4
 
-Use the following program arguments:
+Calculate and print the amounts for the following holiday expenses, given a total budget of 10000:
 
-```text
-"INC 0 END" "ADD 1323134 421315521 END" "DEC 57314183" "MLA 252621 324532 EN"
-```
+1. Accommodation accounts for 50% of the total.
+2. Beach equipment rental accounts for 5%.
+3. Restaurant expenses account for 30%.
+4. Additional entertainment accounts for 10%.
+5. Other expenses account for 5%.
 
-```java
-package bg.tu_varna.sit;
+## Task 5
 
-public class Calculator {
+Print all combinations of five-character strings in which the first two characters are digits, the next two are letters, and the fifth character is a digit.
 
-    public static long arithmeticExpression(String expression) {
-        long result = 0;
-        while (!expression.equals("END")) {
-            String[] codeArgs = expression.split(" ");
-            switch (codeArgs[0]) {
-                case "INC": {
-                    int operandOne = Integer.parseInt(codeArgs[1]);
-                    result = operandOne++;
-                    break;
-                }
-                case "DEC": {
-                    int operandOne = Integer.parseInt(codeArgs[1]);
-                    result = operandOne--;
-                    break;
-                }
-                case "ADD": {
-                    int operandOne  = Integer.parseInt(codeArgs[1]);
-                    int operandTwo = Integer.parseInt(codeArgs[2]);
-                    result = operandOne + operandTwo;
-                    break;
-                }
-                case "MLA": {
-                    int operandOne  = Integer.parseInt(codeArgs[1]);
-                    int operandTwo = Integer.parseInt(codeArgs[2]);
-                    result = (long)(operandOne * operandTwo);
-                    break;
-                }
-                default:
-                    break;
-            }
-        }
-        return result;
-    }
-}
-```
+## Task 6
 
-```java
-package bg.tu_varna.sit;
+Write a program that prints the prime numbers in the range 1–300.
 
-public class Application {
+## Task 7
 
-    public static void main(String[] args) {
-        for (int i = 0; i <= args.length; i++) {
-            long result = Calculator.arithmeticExpression(args[i]);
-            System.out.println(result);
-        }
-    }
-}
-```
+Write a program that calculates and prints what percentage of the numbers in the range 1–300 are divisible by the prime numbers in the same range.

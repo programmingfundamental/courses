@@ -34,7 +34,7 @@ Traverse the array and print all its elements. Test it with arrays of `String`, 
 
 ## Task 4
 
-Define a generic interface `Repository<T>` with `save(T item)`, `findById(int id)`, and `size()`.
+Define a generic interface `Repository<T>` with `void save(T item)`, `T findById(int id)`, and `int size()`.
 
 Define `Student` with a student ID, and `StudentRepository` implementing `Repository<Student>`. Use a fixed-capacity `Student[]` array and a record count. If the array is full, `save` should signal the condition using an appropriate exception already covered in class; if an ID is not found, `findById` should return `null`. Using `List<T>` is introduced after Lab Exercise 9. Check an empty repository, successful saving and lookup, a missing ID, and a full repository.
 
