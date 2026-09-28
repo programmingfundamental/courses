@@ -5,184 +5,300 @@ sidebar:
   label: Задачи
   order: 100
 ---
-### Начално състояние
-
-Да се използва крайната работеща версия на проекта от ЛУ 3. В проекта вече са налични:
--	ServiceRequest;
--	DTO и Bean Validation;
--	REST endpoints за създаване и извличане;
--	service и repository слой;
--	единен отговор при грешка;
--	обработка на 400, 404 и 500.
-
 ### Нов бизнес контекст
 
-Към съществуващото приложение да се добавят следните правила:
--	служител може да започне обработването само на заявка със статус SUBMITTED;
--	при започване на обработването статусът става PROCESSING;
--	заявка може да бъде отхвърлена само по време на обработването;
--	при отхвърляне трябва да бъде посочена причина;
--	при отхвърляне статусът на заявката става REJECTED;
--	недопустима операция спрямо текущия статус трябва да връща 409.
+Към съществуващото приложение се добавят следните изисквания:
 
-Фирмата трябва да предостави оферта до три работни дни след подаването на заявката. Самата оферта ще бъде реализирана на следващ етап.
+•	служител може да започне обработването само на заявка със статус SUBMITTED; 
+
+•	при започване на обработването статусът се променя на PROCESSING; 
+
+•	само заявка със статус PROCESSING може да получи оферта или да бъде отхвърлена; 
+
+•	при отхвърляне трябва да бъде посочена причина; 
+
+•	при отхвърляне статусът се променя на REJECTED; 
+
+•	отхвърлена заявка не може да бъде възстановена; 
+
+•	недопустима операция спрямо текущия статус води до HTTP 409 Conflict; 
+
+•	при създаване на оферта заявката преминава от PROCESSING в OFFERED; 
+
+•	ако заявката не бъде обработена в определения срок, тя може да премине в EXPIRED. 
+
+Част от изискванията описват бъдещи стъпки от жизнения цикъл. Не е необходимо всички идентифицирани изисквания да бъдат реализирани в една итерация.
 
 ### Анализ на жизнения цикъл
 
+Преди подаване на промпта да се определи какъв контекст от текущия проект е необходим за анализ на:
+
+•	текущото състояние на ServiceRequest; 
+
+•	статусите и lifecycle правилата; 
+
+•	service операциите; 
+
+•	REST API; 
+
+•	съществуващата обработка на грешки. 
+
+Да се предоставят само релевантните файлове. В зависимост от текущата реализация това могат да бъдат ServiceRequest, RequestStatus, съответните service и controller класове и класовете, участващи в обработката на грешки.
+
+Да не се добавя автоматично целият проект.
+
+От тази стъпка до приключване на упражнението се използва една и съща Agent сесия, така че следващите промптове да могат да използват натрупания conversational context.
+
 Да се подаде:
 
 ```
-Analyze the following business requirements together with the current codebase.
-Requirements:
-•	Employee could start request processing if its status is SUBMITTED 
-•	When processing starts, the status changes to PROCESSING 
-•	Company have to prepare offer up to 3 business days after request submission 
-•	Request could be rejected during processing with rejection reason cited 
-•	Offer is created for processed and approved requests 
-•	After offer is created, the request status changes to OFFERED 
-•	Forbidden operation depending on request status returns 409 Conflict. 
-Propose:
-•	The required changes to the ServiceRequest lifecycle 
-•	The necessary domain operations 
-•	Whether Offer should be a separate entity, value object, or part of ServiceRequest 
-•	The relationship between ServiceRequest and Offer 
-•	The responsibilities of the entity, service, and controllers 
-•	The REST operations required for the office workflow 
-•	How invalid lifecycle operations should be represented. 
-Distinguish current requirements from functionality that should remain outside the scope at this moment.
+### Task
+Analyse the following new business requirements in the context of the existing application.
+Identify:
+- the lifecycle transitions implied by the requirements;
+- the domain, service and REST operations required;
+- the appropriate distribution of responsibilities;
+- the required error handling.
+Distinguish between functionality needed for the next implementation step and functionality that can be deferred.
+
+### Context
+- only a SUBMITTED request can start processing;
+- starting processing changes the status to PROCESSING;
+- only a PROCESSING request can receive an offer or be rejected;
+- rejection requires a reason;
+- rejection changes the status to REJECTED;
+- a REJECTED request cannot be restored;
+- an operation not allowed for the current status returns HTTP 409 Conflict;
+- creating an offer changes PROCESSING to OFFERED;
+- a request that is not processed within the applicable deadline may become EXPIRED.
+
+### Constraints
 Do not generate or modify code.
-
+Do not redesign unrelated parts of the application.
+Do not assume that all identified lifecycle functionality must be implemented in the same iteration.
+If the requirements or provided project context are insufficient for a concrete decision, identify the missing information instead of making an unsupported assumption.
 ```
 
-След това да се оцени дали приложението:
--	въвежда бъдеща функционалност твърде рано;
--	поставя lifecycle проверки на подходящото място;
--	смесва входна валидация и бизнес конфликт;
--	предлага излишни CRUD операции за оферта.
+Ако Agent предложи създаване или промяна на файлове въпреки ограничението Do not generate or modify code, действията не се одобряват и поведението се отчита при оценката на резултата.
 
-*Ограничаване на scope*
+### Оценка на първоначалното предложение
 
-След анализа да се вземе решение в настоящото упражнение да не се реализира офертата. Да се подаде:
+Полученият анализ да се оцени по въведените в предходните упражнения критерии.
 
-```
-Please reevaluate the current scope without introducing Offer yet.
-The purpose of current modification is to implement the first request-processing operations and lifecycle rules:
-•	start processing only from SUBMITTED 
-•	reject only from PROCESSING 
-•	store a rejection reason 
-•	return 409 Conflict for invalid lifecycle operations 
-•	keep lifecycle checks inside ServiceRequest domain methods 
-•	let the service load, invoke domain behavior, and persist transactionally. 
-The offer itself will be introduced in a later stage.
-Propose the required domain methods, service methods, REST endpoints, exceptions, and transaction boundaries.
-Do not generate or modify the code yet.
+Допълнително да се провери:
 
-```
+•	идентифицирани ли са правилно lifecycle преходите; 
 
-*Разграничение между 400, 404 и 409*
+•	разграничена ли е недопустима lifecycle операция от невалидни входни данни и липсващ ресурс; 
 
-Да се разгледат следните състояния:
--	празна причина за отказ;
--	несъществуващ requestId;
--	опит за startProcessing()  върху заявка със статус, различен SUBMITTED;
--	опит за reject() върху заявка, която не е PROCESSING.
+•	правилно ли са разпределени отговорностите между domain object, service и controller; 
 
-Да се определи подходящият HTTP статус.
+•	предлага ли ИИ реализация на Offer или EXPIRED още в непосредствената итерация; 
 
-*Реализиране на lifecycle операциите*
+•	предлага ли други класове, endpoints или операции, които не са необходими; 
 
-Да се подаде:
+•	разпознава ли липсваща информация вместо да прави unsupported assumptions; 
 
-```
-Apply only the approved request-processing lifecycle changes:
-• Extend ServiceRequest with a nullable rejectionReason field, startProcessing() only for SUBMITTED, and reject(String reason) only from PROCESSING
-• Keep lifecycle transition checks inside ServiceRequest; do not duplicate them in controllers or service methods
-• Add service operations startProcessing(Long id) and reject(Long id, String reason)
-• Add office endpoints POST /api/office/requests/{id}/start-processing and POST /api/office/requests/{id}/reject
-• Introduce a request DTO for rejection with a required non-blank reason
-• Introduce RequestLifecycleConflictException and map it to 409 Conflict
-• Keep missing request results in 404, invalid rejection payload in 400, and invalid lifecycle transition in 409
-• Make modifying service operations transactional. Rely on JPA dirty checking where appropriate rather than adding unnecessary explicit save calls.
-Preserve all existing endpoints, DTOs, validation, package organization, and error response format.
-Do not add any other changes.
-After modifications, build and run the application and report the actual results.
+•	какво предлага да бъде реализирано сега и какво да бъде отложено. 
+
+Предложението на ИИ не определя автоматично обхвата на реализацията. Разработчикът определя кои от идентифицираните промени са необходими за текущата итерация.
+
+### Итеративно уточняване на scope
+
+За текущата итерация се взема решение да не се реализират Offer, deadline calculation и преминаване към EXPIRED.
+Ще бъдат реализирани само:
+
+•	SUBMITTED → PROCESSING; 
+
+•	PROCESSING → REJECTED; 
+
+•	задължителна причина за отхвърляне; 
+
+•	HTTP 409 Conflict при недопустима lifecycle операция. 
+
+Това представлява scope refinement – първоначално анализираният проблем се ограничава до функционалността, необходима за текущата итерация.
+
+В същата Agent сесия да се подаде следният follow-up prompt:
 
 ```
+## Task
+Refine the proposed solution for the current implementation step based on the previous analysis.
+Do not generate or modify code yet.
 
-*Преглед на капсулацията на ServiceRequest*
+## Scope
+For this iteration, implement only the following lifecycle operations:
+- start processing only from SUBMITTED;
+- reject a request only from PROCESSING;
+- require a rejection reason;
+- return 409 Conflict for invalid lifecycle operations.
 
-След добавянето на startProcessing() и reject() да се провери дали entity-то все още позволява правилата относно жизнения цикъл да бъдат заобиколени. Да се обърне внимание на:
--	анотация @Setter на ниво клас;
--	@Builder;
--	@AllArgsConstructor;
--	директна промяна на статус;
--	директна промяна на submittedAt;
--	директна промяна на rejectReason.
+Do not introduce:
+- Offer;
+- deadline calculation;
+- expiration handling.
 
-Следващ промпт:
+## Design Requirements
+- Lifecycle transition rules should be enforced by ServiceRequest domain behavior.
+- The service should load the request, invoke the corresponding domain operation, and persist the change transactionally.
 
-```
-Review the encapsulation of ServiceRequest.
-The entity currently uses class-level @Setter, @Builder, and @AllArgsConstructors, while lifecycle rules are implemented through startProcessing() and reject(...). The create method in the service also assigns status and submittedAt through the builder.
-Propose refactoring that:
-•	prevents external modification of id 
-•	prevents direct modification of status, submittedAt, and rejectionReason 
-•	guarantees that every newly created request starts as SUBMITTED and receives submittedAt from the system 
-•	preserves JPA compatibility 
-•	keeps DTO mapping and persistence orchestration in the service 
-•	avoids unnecessary setters and unrestricted constructors. 
-Do not modify the code yet.
+## Expected Output
+Revise the proposed solution for this reduced scope and describe:
+- domain operations;
+- service operations;
+- REST endpoints;
+- exceptions and their mapping to HTTP responses;
+- transaction boundaries.
 
-```
-
-*Прилагане на модификация с цел капсулиране*
-
-След одобрение:
-
-```
-Apply the approved encapsulation refactoring to ServiceRequest:
-• Remove class-level @Setter, @Builder, and @AllArgsConstructor
-• Keep @Getter
-• Use a protected JPA no-arg constructor
-• Add a controlled static factory method submit(...)
-• The factory must always initialize status to SUBMITTED, submittedAt from value supplied by the service, and rejectionReason to null
-• Do not expose public setters for id, status, submittedAt, or rejectionReason
-• Keep startProcessing() and reject(String reason) as only lifecycle mutation methods
-• Keep DTO mapping and persistence orchestration in the service
-• Inject Clock into the service and use LocalDateTime.now(clock) when calling the factory
-• Preserve everything else and do not add any other changes.
-After refactoring, build and run the application and report the actual results.
-
+Keep the proposal limited to the current implementation step.
 ```
 
-Задължително да се прегледат променените файлове и imports.
+Този промпт не повтаря целия първоначален контекст. Той използва натрупания conversational context и уточнява само променения обхват.
 
-*Финална проверка*
+### Оценка на уточненото предложение
 
-Да се проверят чрез REST заявки следните сценарии:
--	SUBMITTED → PROCESSING;
--	втори опит за стартиране на обработка – 409;
--	PROCESSING → REJECTED с валидна причина;
--	отхвърляне с празна причина – 400;
--	отхвърляне на заявка SUBMITTED – 409;
--	операция върху несъществуващ id – 404.
+Да се сравни новото предложение с първоначалния анализ и да се провери: 
 
-Да се провери дали:
--	статус не може да бъде зададен от клиент;
--	submittedAt не може да бъде зададен от клиент;
--	причината за отхвърляне не може да бъде променена директно;
--	lifecycle състояние се променя само чрез домейн методи.
+•	премахнати ли са от текущия scope Offer, deadline calculation и expiration handling; 
 
-### Резултат от упражнението
+•	запазени ли са изискванията, които остават валидни; 
 
-В края на ЛУ 4 трябва да има:
--	ServiceRequest с контролиран жизнен цикъл;
--	операции startProcessing() и reject(…);
--	причина за отхвърляне;
--	service методи и офис endpoints;
--	RequestLifecycleConflictException;
--	409 за недопустими операции;
--	transactional операции за модификация;
--	капсулиран entity обект без неоторизирани мутатори/builder;
--	контролирано създаване чрез фабричен метод;
--	запазен работещ REST API.
+•	ограничени ли са предложените промени до необходимите lifecycle операции; 
+
+•	правилно ли са разпределени отговорностите; 
+
+•	разграничени ли са HTTP 400, 404 и 409; 
+
+•	продължава ли ИИ да използва решения или assumptions, които вече не са приложими; 
+
+•	добавена ли е непоискана функционалност. 
+
+Последователността
+
+*първоначално предложение → оценка → follow-up prompt → уточнено предложение*
+
+представлява итеративно уточняване на решението.
+
+### Разграничаване на грешките
+
+Преди реализацията да се определи очакваното поведение в следните ситуации:
+
+•	празна причина за отхвърляне → HTTP 400 Bad Request; 
+
+•	заявка с несъществуващ идентификатор → HTTP 404 Not Found; 
+
+•	започване на обработване на заявка, която не е SUBMITTED → HTTP 409 Conflict; 
+
+•	отхвърляне на заявка, която не е PROCESSING → HTTP 409 Conflict. 
+
+Да се обоснове разликата между:
+
+•	невалидни входни данни; 
+
+•	липсващ ресурс; 
+
+•	валидна заявка за операция, която не е допустима спрямо текущото състояние на ресурса. 
+
+### Актуализиране на контекста
+
+След одобряване на уточненото решение да се извърши impact analysis.
+
+Да се определят:
+
+•	файловете, които трябва да бъдат променени; 
+
+•	допълнителният проектен контекст, необходим за реализацията; 
+
+•	частите на приложението, които трябва да останат непроменени. 
+
+Да се добавят само допълнителните файлове, необходими за реализацията.
+
+Натрупаният conversational context се запазва, но това не отменя необходимостта от предоставяне на релевантна информация от действителното текущо състояние на проекта.
+
+
+### Реализиране на текущата итерация
+
+В същата Agent сесия да се подаде:
+
+```
+### Task
+Implement the approved changes for the current lifecycle iteration.
+Add support for:
+- starting processing of a SUBMITTED request;
+- rejecting a PROCESSING request;
+- requiring a rejection reason;
+- returning HTTP 409 Conflict for invalid lifecycle operations.
+Use the responsibilities and REST operations approved in the previous analysis.
+
+### Constraints
+Keep lifecycle transition rules in ServiceRequest domain behavior.
+The service should load the request, invoke the corresponding domain operation, and persist the change transactionally.
+Preserve the existing behavior for HTTP 400 and HTTP 404.
+Do not introduce Offer, deadline calculation, or expiration handling.
+Do not add unrelated functionality.
+Do not refactor unrelated code.
+Modify only the files required for the approved changes.
+```
+
+Agent може да предложи необходимите действия и промени по проекта. Те се преглеждат преди одобряване.
+
+Да се провери:
+
+•	съответстват ли действително засегнатите файлове на извършения impact analysis; 
+
+•	ограничени ли са промените до одобрения scope;
+
+•	реализирани ли са точно договорените lifecycle операции; 
+
+•	запазени ли са валидните решения от предходните итерации; 
+
+•	добавена ли е непоискана функционалност; 
+
+•	съответства ли обобщението на Agent на действително предложените промени. 
+
+При проблем да не се генерира решението отначало. Да се формулира кратък follow-up prompt, който описва конкретното несъответствие и необходимата корекция.
+
+### Оценка на домейн модела след реализацията
+
+След реализиране на промените да се прегледа текущото състояние на ServiceRequest и да се оцени дали lifecycle правилата са защитени от заобикаляне.
+
+Да се провери:
+
+•	по какъв начин може да бъде променян status; 
+
+•	може ли rejectionReason да бъде зададен извън операцията за отхвърляне; 
+
+•	кой определя началния статус и submittedAt; 
+
+•	могат ли lifecycle правилата да бъдат заобиколени чрез setters, constructors, builder или други публично достъпни операции; 
+
+•	преминават ли промените в състоянието през дефинираните domain операции. 
+
+Ако бъде установен конкретен проблем, в същата Agent сесия да се формулира follow-up prompt, който описва проблема и изисква минималната необходима корекция.
+
+Ако проблем не бъде установен, не се извършва допълнителен refactoring само с цел да бъде направена още една итерация.
+
+### Проверка на поведението
+
+След приключване на промените приложението да се компилира и стартира.
+
+Чрез REST API да се проверят:
+
+•	започване на обработване на SUBMITTED заявка → PROCESSING; 
+
+•	повторно започване на обработването → HTTP 409 Conflict; 
+
+•	отхвърляне на PROCESSING заявка с валидна причина → REJECTED; 
+
+•	отхвърляне с празна причина → HTTP 400 Bad Request; 
+
+•	отхвърляне на заявка, която не е PROCESSING → HTTP 409 Conflict; 
+
+•	операция върху несъществуваща заявка → HTTP 404 Not Found. 
+
+Проверката представлява verification на действителното поведение спрямо одобрения scope на текущата итерация.
+При несъответствие се прилага използваният в предходното упражнение процес:
+
+*наблюдение → диагностична информация → хипотеза за причината → проверка на хипотезата → минимална корекция → повторна проверка*
+
+Следващият follow-up prompt към ИИ се формулира след анализ на наличната диагностична информация. Предложена от ИИ причина не се приема автоматично за действителната причина.
+
