@@ -5,163 +5,227 @@ sidebar:
   label: Задачи
   order: 100
 ---
-### Начално състояние
-
-Да се използва крайната работеща версия на проекта от ЛУ 1.
-
-Проектът съдържа: ServiceRequest; основните изброими типове; DTO; repository; service; основни REST endpoints.
-
 ### Разширен бизнес контекст
 
 Клиентът подава заявка за услуга, като посочва:
--	име;
--	електронна поща;
--	описание;
--	вид на услугата;
--	начин на изпълнение;
--	приоритет.
+
+•	име; 
+
+•	електронна поща; 
+
+•	описание; 
+
+•	вид на услугата; 
+
+•	начин на изпълнение; 
+
+•	приоритет. 
 
 При услуга на място се посочва адрес, а при спешна заявка – обосновка за спешност.
 
-Системата записва момента на подаване и задава начален статус.
+Системата записва момента на подаване и задава начален статус SUBMITTED. Клиентът не задава системно управляваните стойности.
 
-Служител на фирмата може да започне обработването на подадена заявка.
+Служител на фирмата може да започне обработването на заявка със статус SUBMITTED. При започване на обработката статусът се променя на PROCESSING.
 
-На по-късен етап от обработването фирмата може да изготви оферта, а след нейното приемане да бъде планирано изпълнение на услугата. Тези части от процеса не се реализират в настоящото упражнение.
+На по-късен етап фирмата може да изготви оферта, а след нейното приемане да бъде планирано изпълнението на услугата. 
+Тези части от процеса са извън обхвата на настоящото упражнение.
+
+Преди работа с ИИ да се определи:
+
+•	коя информация представлява функционален и домейн контекст; 
+
+•	кои части от съществуващия проект са релевантни за текущата задача; 
+
+•	коя известна информация за бъдещото развитие на системата не е необходима за текущия анализ. 
+
+### Entity, value object и enum
+
+Entity е домейн обект със собствена идентичност, която позволява той да бъде проследяван независимо от промяната на неговите свойства.
+
+Value object е обект без собствена идентичност и самостоятелен жизнен цикъл, който представя стойност или съвкупност от свързани стойности и принадлежи към друг обект от домейн модела.
+
+Enum е подходящ при затворено множество от предварително определени допустими стойности.
 
 ### Анализ на бизнес изискванията
 
-Да се подаде следния промпт:
+Преди подаване на заявката да се определи кои съществуващи файлове са необходими за анализа на текущия домейн модел.
+Да се предоставят:
+
+•	ServiceRequest; 
+
+•	съществуващите request и response DTOs за заявката; 
+
+•	ServiceType; 
+
+•	ExecutionMode; 
+
+•	Priority; 
+
+•	RequestStatus. 
+
+Ако имената на генерираните в предходното упражнение DTOs са различни, да се използват действителните файлове от проекта.
+
+Да не се предоставят останалите файлове само защото са налични в проекта.
+
+Да се подаде следният промпт:
+
 
 ```
-Analyze the following business requirements together with the existing Spring Boot project.
-Requirements:
-•	request has client name, email, description, service type, execution type, address if the execution is on site, urgency reason if the request is urgent; 
-•	request is in SUBMITTED status on creation; 
-•	the customer cannot define initial status, price, deadline to receive offer and internal data; 
-•	description should have minimal and maximal length; 
-•	when execution is remote there is no need of address; 
-•	INSTALLATION and REPAIR could be executed ON SITE; 
-•	DIAGNOSTICS and CONSULTATION could be ON SITE/REMOTE; 
-•	Priority URGENT expects text processing. 
-Request processing requirements:
-•	only request with SUBMITTED status could be processed; 
-•	when processing starts, the request status switches to PROCESSING; 
-•	the company should send offer or cancel the request up to 3 working days from the submitting moment; 
-•	working days are defined as Monday to Friday; holidays are not considered; 
-•	urgent requests could be submitted from Monday to Friday till 8PM; 
-•	urgent request processing starts immediately; 
-•	if there is no offer up to the deadline and such offer is not rejected, the status of the request switches to EXPIRED; 
-•	only request with status PROCESSING could get an offer and be rejected; 
-•	the cancellation requires a reason; 
-•	if request is rejected, its status switches to REJECTED; 
-•	rejected request could not be restored; the customer should place a new request. 
-Identify the necessary domain concepts and explain their responsibilities. Distinguish between entities, value objects, and enums. Assess whether customer information requires a separate entity.
-The later offer and service-execution stages may be identified as future domain concepts, but they are outside of the implementation scope at the moment.
+### Task
+Analyse the following business requirements in the context of the existing application.
+Identify the domain concepts relevant to the current task and explain their responsibilities.
+Distinguish between entities, value objects and enums.
+Assess whether customer information should remain directly in ServiceRequest or should be represented by a separate domain concept.
+Do not modify the project.
+
+### Context
+A service request contains:
+- customer name and email;
+- description;
+- service type;
+- execution mode;
+- priority;
+- address when execution is ON_SITE;
+- urgency reason when priority is URGENT.
+A new request has status SUBMITTED. System-managed values are not provided by the customer.
+A request in SUBMITTED status can start processing. When processing starts, its status becomes PROCESSING.
+Offer creation and service execution are future stages and are outside the scope of the current task.
+
+### Constraints
+Do not redesign unrelated parts of the application.
+Do not analyse or implement the internal structure of future Offer or ServiceExecution concepts.
 Do not generate or modify code.
+First provide only the domain analysis.
 
+### Expected output
+For the concepts relevant to the current task:
+- identify their responsibilities;
+- classify them as entities, value objects or enums where appropriate;
+- explain whether customer information requires a separate domain concept;
+- justify the proposed domain model.
 ```
 
-*Оценка на предложения домейн модел*
+### Оценка на предложения домейн модел
 
-Да се разгледат предложените понятия. За всяко от тях да се определи:
--	има ли собствена идентичност;
--	има ли самостоятелен жизнен цикъл;
--	представлява ли стойност, принадлежаща на друг обект;
--	представлява ли затворено множество от допустими стойности;
--	необходимо ли е да бъде отделен клас в настоящия размер на проекта.
-  
-Особено внимание да се обърне на:
--	ServiceRequest;
--	клиентската информация;
--	адреса;
--	описанието;
--	причината за спешност;
--	ServiceType, ExecutionMode, Priority, RequestStatus.
+Полученият резултат да се оцени по критериите за анализ на ИИ резултат, въведени в предходното упражнение.
 
-*Анализ на клиентската информация*
+За предложените домейн понятия допълнително да се прецени:
 
-Да се прецени дали клиентът трябва да бъде отделно entity. Да се разгледат следните съображения:
--	има ли клиентът собствен идентификатор;
--	има ли самостоятелен жизнен цикъл;
--	управлява ли се клиентът независимо от заявката;
--	необходимо ли е няколко заявки да сочат към един и същи клиентски обект;
--	възможно ли е заявката да пази snapshot на името и имейла при подаването.
+•	има ли обектът собствена идентичност и самостоятелен жизнен цикъл; 
 
-*Одобряване на промените*
+•	представлява ли стойност, принадлежаща към друг домейн обект; 
 
-След анализа да се определят само промените, които са оправдани в настоящия етап на проекта.
-Ако се приеме решение клиентската информация да бъде value object, може да се използва следния промпт:
+•	представлява ли затворено множество от допустими стойности; 
+
+•	необходимо ли е отделянето му в самостоятелен клас в текущия обхват; 
+
+•	произтича ли предложението от бизнес изискванията или е допълнително решение на ИИ. 
+
+Особено внимание да се обърне на клиентската информация. Да се прецени дали клиентът се управлява независимо от заявката и има собствена идентичност и жизнен цикъл, или името и електронната поща представляват информация, принадлежаща към конкретната заявка.
+
+Да не се приема автоматично класификацията, предложена от ИИ. Решението трябва да бъде аргументирано спрямо бизнес изискванията, съществуващия проект и определения scope.
+
+### Одобряване на промените
+
+След анализа да се определи кои предложения са оправдани в текущия обхват.
+
+За целите на следващата част от упражнението да се приеме следното проектно решение:
+
+•	клиентската информация се представя чрез immutable value object CustomerInfo, съдържащ customerName и customerEmail; 
+
+•	CustomerInfo принадлежи към ServiceRequest и не представлява самостоятелно entity; 
+
+•	address, description и urgencyReason остават полета от тип String; 
+
+•	външният REST API запазва полетата customerName и customerEmail; 
+
+•	бъдещите Offer и ServiceExecution не се реализират. 
+
+Да се сравни това решение с предложението на ИИ и да се установи кои негови предложения се приемат и кои се отхвърлят.
+
+### Impact analysis и актуализиране на контекста
+
+Преди промяна на кода да се извърши impact analysis.
+
+Да се определи:
+
+•	кои съществуващи класове ще бъдат засегнати от въвеждането на CustomerInfo; 
+
+•	как промяната влияе върху persistence слоя; 
+
+•	кои DTO mappings трябва да бъдат адаптирани; 
+
+•	кои от вече предоставените файлове остават релевантни; 
+
+•	кои допълнителни файлове са необходими за безопасната реализация на промяната. 
+
+Да се добавят само установените като релевантни файлове.
+
+Контекстът, необходим за анализ на домейн модела, не е задължително да бъде достатъчен за неговата реализация. Той се актуализира според конкретната задача и очакваното въздействие на промяната.
+
+
+### Реализиране на одобрената промяна
+
+След актуализиране на контекста да се подаде:
 
 ```
-Based on the analysis, apply only the following approved changes to the current project:
-• Introduce an immutable CustomerInfo value object containing customerName and customerEmail. Persist it as part of ServiceRequest using JPA @Embeddable and @Embedded. CustomerInfo is not a separate entity and must not have its own repository.
-• Keep address, description, and urgencyReason as String fields. Do not introduce separate value-object classes for them.
-• Update the request and response DTO mappings to work with CustomerInfo while preserving the existing external API field names customerName and customerEmail.
-• Preserve the existing REST endpoints and application behavior.
-Do not add Offer, ServiceExecution, pricing, deadline calculation, new status transitions, domain-policy services, or any other future functionality.
-Update all affected mappings, imports, constructors, and persistence annotations. Then build and run the application and report the actual result.
+### Task
+Implement the approved change in the existing project.
 
+### Approved change
+Introduce an immutable CustomerInfo value object containing customerName and customerEmail.
+Persist CustomerInfo as part of ServiceRequest using JPA @Embeddable and @Embedded.
+CustomerInfo is not a separate entity and must not have its own repository.
+Update the affected DTO mappings while preserving the existing external API fields customerName and customerEmail.
+Keep address, description and urgencyReason as String fields.
+
+### Constraints
+Preserve the existing REST endpoints and current application behavior.
+Do not add Offer, ServiceExecution or other future functionality.
+Do not redesign unrelated parts of the application.
+Modify only the files affected by the approved change.
+Keep affected mappings, imports and persistence annotations consistent.
 ```
 
-*Проверка на организацията на домейн типовете*
+Agent може да предложи действия и промени върху предоставените части от проекта. Те не се приемат автоматично.
 
-След промяната да се провери:
--	в кой пакет е поставен CustomerInfo;
--	съответства ли името на пакета на ролята на класа;
--	смесени ли са entities, value objects и enums без ясна причина;
--	създадени ли са твърде много технически пакети;
--	има ли празни пакети, останали след преместванията.
+### Преглед на предложените промени
 
-Ако организацията на пакетите не изглежда семантично последователна, да се поиска от ИИ асистента да аргументира направения избор, без да променя кода.
+Преди одобряване на предложените от Agent промени да се провери:
 
-*Уточняване на пакетната организация*
+•	кои файлове ще бъдат създадени или променени; 
 
-Ако е необходимо, да се поиска препоръка за проста и семантично последователна структура, без създаване на пакет за всеки технически детайл.
+•	съответстват ли те на извършения impact analysis; 
 
-Може да се използва следния промпт:
+•	ограничени ли са промените до определения scope; 
 
-```
-The goal is not to introduce a dedicated package for every technical concept but the structure to remain simple and semantically consistent. Which package organization would you recommend for this project if I want to distinguish between entities from other domain types without unnecessary technical packages?
-Do not modify the code.
+•	реализирано ли е точно одобреното проектно решение; 
 
-```
+•	добавени ли са непоискани класове, зависимости или функционалност; 
 
-Да се оцени полученото предложение и да се избере структура, която:
--	ясно различава entity от останалите домейн типове;
--	не създава ненужна дълбочина;
--	остава подходяща за текущия размер на проекта.
+•	запазен ли е външният REST API; 
 
+•	има ли промени в несвързани части от приложението. 
 
-*Финална проверка*
+При несъответствие предложението не се приема само защото Agent го е генерирал. Да се установи причината и да се формулира конкретно уточнение или корекция.
 
-След реализиране на одобрените промени:
--	да се прегледат всички променени файлове;
--	да се проверят imports и package declarations;
--	да се провери дали няма останали празни пакети;
--	да се компилира проектът;
--	да се стартира приложението.
+След проверката да се одобрят само необходимите промени.
 
-Работата на REST API да се провери чрез Postman.
+### Финална проверка
 
-Да се изпълнят заявки към реализираните endpoints за:
--	създаване на нова заявка;
--	извличане на заявка по идентификатор;
--	извличане на заявки по електронна поща на клиент;
--	извличане на заявките от служител на офиса.
+След прилагане на одобрените промени:
 
-При създаване на заявка да се провери:
--	кои полета се изпращат от клиента;
--	кои стойности се задават от системата;
--	как изглежда полученият JSON response;
--	запазени ли са имената customerName и customerEmail във външния API след въвеждането на CustomerInfo.
+•	да се прегледат действително променените файлове, imports и package declarations; 
 
-### Резултат от упражнението
+•	да се провери дали CustomerInfo е поставен на подходящо място в структурата на проекта; 
 
-В края на упражнението трябва да бъде получен:
--	аргументиран концептуален модел на текущата предметна област;
--	разграничение между entity, value object и enum;
--	решение кои понятия трябва да бъдат реализирани сега и кои да останат за бъдещ етап;
--	работещ ServiceRequest модел с клиентска информация, организирана според избраното домейн решение;
--	запазен външен REST API;
--	семантично последователна пакетна структура.
+•	да се компилира и стартира приложението; 
+
+•	чрез Postman да се създаде нова заявка и да се извлече създадената заявка; 
+
+•	да се провери дали външният JSON продължава да съдържа customerName и customerEmail; 
+
+•	да се провери дали стойностите се записват и извличат коректно след въвеждането на CustomerInfo. 
+
+Полученият резултат се приема само след проверка на действителното поведение на приложението.
+
