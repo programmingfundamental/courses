@@ -8,6 +8,8 @@ taskPage: true
 
 ## Independent Study Exercise
 
+## Task
+
 Create a bookstore program that reads data from a file, processes it as objects, and writes results to a new file.
 
 ## Data model

@@ -305,6 +305,12 @@ Double price = Double.valueOf("12.50");
 
 If the text is not a valid number, a `NumberFormatException` is thrown. This exception is covered in the lesson on exception handling.
 
+For example, the following conversion fails because `"abc"` is not a number:
+
+```java
+int number = Integer.parseInt("abc");
+```
+
 | Method | Purpose |
 | --- | --- |
 | `valueOf()` | Creates an object from a primitive value or string |
