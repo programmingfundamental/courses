@@ -1,5 +1,5 @@
 ---
-title: Strings: Immutable and Mutable. Wrapper Classes
+title: "Strings: Immutable and Mutable. Wrapper Classes"
 sidebar:
   order: 1
 ---
