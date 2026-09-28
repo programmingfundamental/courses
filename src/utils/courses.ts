@@ -28,6 +28,8 @@ const academicYears = [
   [
     'programirane-za-mobilni-i-internet-ustroistva-kotlin',
     'uchebna-praktika-3',
+    'applied-web-security',
+    'software-engineering-ai',
   ],
 ];
 

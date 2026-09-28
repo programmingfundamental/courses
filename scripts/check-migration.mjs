@@ -46,6 +46,25 @@ for (const locale of ['bg','en']) {
   assert.equal(search.languages[locale].page_count,count,`Search coverage for ${locale}`);
 }
 const ids = new Set(docs.map(doc=>doc.id));
+// These source-only courses must remain published in both catalogs.
+for (const course of ['applied-web-security', 'software-engineering-ai']) {
+  for (const locale of ['bg', 'en']) {
+    const url = `/courses/${locale}/${course}/`;
+    const home = readPage(`/courses/${locale}/`);
+    assert.ok(home(`.course-year:has(#year-4) a[href="${url}"]`).length, `Missing fourth-year course: ${url}`);
+    const overview = readPage(url);
+    for (let number = 1; number <= 10; number++) {
+      const labUrl = `${url}laboratorno-uprazhnenie-${number}/`;
+      assert.ok(overview(`a[href="${labUrl}"]`).length, `Missing lab link: ${labUrl}`);
+      const lab = readPage(labUrl);
+      assert.ok(lab(`nav.sidebar a[href="${labUrl}zadachi/"]`).length, `Missing task link: ${labUrl}`);
+      if (locale === 'bg') {
+        assert.ok(lab('[data-pagefind-body]').text().includes('Предварителни знания'), `Missing lab material: ${labUrl}`);
+        assert.ok(readPage(`${labUrl}zadachi/`)('[data-pagefind-body]').text().includes('Водена практическа задача'), `Missing practical tasks: ${labUrl}`);
+      }
+    }
+  }
+}
 for (const doc of docs.filter(doc=>doc.id.startsWith('bg/'))) {
   const englishId=doc.id.replace(/^bg\//,'en/');
   if (ids.has(englishId)) continue;
