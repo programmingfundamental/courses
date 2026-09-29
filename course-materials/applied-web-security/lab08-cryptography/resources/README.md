@@ -1,48 +1,19 @@
-# Работна карта — lab08
+# Работна карта — Task Manager, упражнение 8
 
-Основен code anchor: **Web.sensitive → Vault → encrypted field в PostgreSQL**.
+След упражнение 7. Добавят се PUT/GET /tasks/{id}/private-note. Бележката не се включва в TaskResponseDto или HTML списъка.
 
-## Работен запис
-
-| Поле | Попълнете |
+| Поле | Резултат |
 |---|---|
-| Mode / commit | |
-| Actor / entry point | |
-| Asset / trust boundary | |
-| Baseline allowed request | |
-| Възпроизвеждане | |
-| Expected / actual result | |
-| Root cause / code location | |
-| Likelihood × impact / аргумент | |
-| Fix / residual risk | |
-| Regression test / report path | |
-| Positive functionality check | |
+| Версия/commit | |
+| HTTP метод и маршрут | |
+| Потребител и роля | |
+| Начални данни/owner | |
+| Очакван/получен статус | |
+| DB преди/след | |
+| Проверявано правило | |
+| Test class и report | |
+| Оставащ риск | |
 
-## Test matrix
+Файлове: нов TaskSecretService/FieldCipher, Task.privateNoteCiphertext, TaskController, TaskPolicy.
 
-| Case | Expected | Actual / evidence |
-|---|---|---|
-| 1 | encrypt/decrypt → original value | |
-| 2 | еднакъв input два пъти → различни envelopes | |
-| 3 | wrong key/owner → generic error | |
-| 4 | corrupted ciphertext/tag → rejected | |
-| 5 | null/empty/malformed envelope → rejected | |
-| 6 | logs не съдържат synthetic field или credentials | |
-
-## Команди
-
-От `vulnerable-app`:
-
-```powershell
-mvn test '-Dlab.mode=lab08' '-Dtest=WebSecurityTest#lab08*'
-```
-
-От корена на курса:
-
-```powershell
-$env:LAB_MODE='lab08'
-docker compose up -d --build
-curl.exe -i http://localhost:8080/health
-```
-
-За authenticated requests: `. ./scripts/lab-client.ps1`; използвайте `$LabSession` и `$LabHeaders`. Паролите, cookies и tokens не се включват в evidence. При lab02 е нужен пълен DB reset; при lab08 не смесвайте legacy plaintext и encrypted records. Подробните стъпки и independent acceptance criteria са в [lab08.md](../lab08.md).
+Команди от task-manager: mvn test; след стартиране на compose.test.yml — mvn -Ppostgres-tests test. Подробности: [подготовка](../../setup.md), [условие](../lab08.md).

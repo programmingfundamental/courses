@@ -5,67 +5,65 @@ sidebar:
   label: "Упражнение 10"
 ---
 
-# 1. Упражнение 10 — Сигурност, етика, технически дълг и поддръжка
+# Упражнение 10 — Сигурност, етика, технически дълг и поддръжка
 
-**Аудитория:** IV курс, бакалавър „Изкуствен интелект“. **Време:** 110 минути.
-Работи се само с предоставения CPU проект и synthetic dataset, без платени услуги.
+## Теория
 
-## 2. Инженерен сценарий
+### 1. Сигурност на входове и артефакти
 
-Review открива secret в source, стар model artifact без version, недокументиран dataset, sensitive logs и deprecated dependency. Високият F1 не отговаря дали системата е безопасна, поддържаема или подходяща за употреба.
+1. **Валидация, контрол на достъпа и trust boundary.** Валидацията проверява входа; контролът на достъпа определя разрешените действия. Trust boundary е граница между части с различно доверие.
+   - **Пример:** API проверява схема и ключ, преди да предаде вход към модела.
 
-## 3. Учебни цели
+2. **Secret, API key, PII и fail-closed.** Secret е поверителна стойност; API key е ключ за достъп; PII е информация, свързана с разпознаваем човек. Fail-closed означава отказ на достъп при непълни условия.
+   - **Пример:** При липсващ ключ защитената операция отказва, а входните лични данни не се записват в log.
 
-След упражнението студентът:
+3. **Сериализация, pickle/joblib и цялост.** Сериализацията записва обекти във файл. Зареждане чрез pickle/joblib може да изпълни код. Проверка за цялост сравнява отпечатъка, но не доказва доверен автор.
+   - **Пример:** Приемаме модел от контролирания процес на проекта; файл и подменен заедно с него hash не са основание за доверие.
 
-- анализира trust boundaries и privacy risks;
-- проектира risk/technical-debt register;
-- реализира проверими security/ethics constraints;
-- тества access control и log redaction;
-- аргументира fairness/explainability ограничения;
-- планира maintenance, deprecation и retirement;
+### 2. Отговорна употреба
 
-## 4. Предварителни знания
+1. **Model card, data card и provenance.** Model card описва предназначение, оценка и ограничения на модел; data card описва данни; provenance е произходът им.
+   - **Пример:** Картата указва синтетичен произход и забрана резултатът да се представя като оценка на реални хора.
 
-Python, основи на ML/Jupyter, Git, REST API, Docker, scikit-learn/pandas/numpy, Linux и бази данни. Използвайте резултатите от предходните 9 упражнения като engineering input. Не преговаряме елементарни Python конструкции.
+2. **Справедливост, обяснимост и човешки преглед.** Справедливостта изисква критерии за засегнатите групи; обяснимостта дава разбираеми основания; човешкият преглед оценява решения извън автоматичните проверки.
+   - **Пример:** Recall върху малка синтетична група не заменя прегледа на пригодността за реална употреба.
 
-## 5. Инструменти
+3. **Retention, deletion и audit evidence.** Retention определя срок за съхранение; deletion е изтриване по правило; audit evidence е запазено доказателство за действие или решение.
+   - **Пример:** Политика определя кои данни се изтриват и кои записи за одобрение се пазят за проследимост.
 
-Python 3.12, virtual environment, Jupyter Notebook по избор за notebook UI, pytest/coverage, Git, Docker, FastAPI/Pydantic и стандартните Python logging/JSON инструменти. Използвайте pinned environment от [README](/courses/bg/software-engineering-ai/). Training е върху 400 synthetic rows на CPU. Tracking/data versioning са local journal + Git/SHA manifest; не е необходим cloud account.
+### 3. Поддръжка и извеждане от употреба
 
-## 6. Архитектурен контекст
+1. **Технически дълг, риск, въздействие и мярка.** Дългът е бъдеща цена на решение; рискът е възможен проблем; въздействието е последицата; мярката намалява риска. Остатъчният риск остава след мярката.
+   - **Пример:** Липсващ произход на модел се адресира с проверка на метаданните и отговорник за липсващите записи.
 
-```text
-Dataset + manifest
-       |
-Validation / Features
-       |
-Offline Training Pipeline
-       |
-Experiment metadata + immutable Model Registry
-       |
-Inference Service -> FastAPI -> Client
-       |
-Logs / Metrics -> CI/CD and maintenance feedback
-```
+2. **Deprecation, migration и retirement.** Deprecation обявява предстоящо спиране; migration описва преминаване към заместител; retirement прекратява използването.
+   - **Пример:** Версия v1 получава краен срок, потребителите преминават към v2 и проверка блокира ново внедряване на v1.
 
-**Фокус в това упражнение:** API/model/data trust boundaries → risk/debt register → maintenance/retirement. Вижте [общата архитектура](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/architecture/system-overview.md). Отбележете данните, зависимостите и owner на всяка граница.
+3. **Rollback boundary и регистър на проблеми.** Границата за rollback определя към кои версии връщането е допустимо. Регистърът описва проблем, риск, въздействие, дълг, мярка, приоритет, отговорник и срок.
+   - **Пример:** Забранена версия не се връща дори да е била предишната работеща версия.
 
-## 7. Теоретична подготовка
+## Примерен проблем
 
-Secure coding включва input validation, server-side access control, bounded requests, trusted artifacts и secret handling. Pickle/joblib loading може да изпълни код; checksum не прави непознат artifact безопасен. API key е учебен access mechanism, не пълна identity/authorization система. Sensitive inputs не се логват; retention и deletion трябва да имат policy и owner.
+Преглед открива ключ в кода, модел без версия и входни данни в записите на събития. Трябва да превърнем констатациите в проверими промени.
 
-Responsible AI изисква intended use, limitations, data provenance, fairness/explainability reasoning и human oversight според риска. Synthetic cohort A/B показва mechanics на slice analysis, не сертифицира fairness. Technical debt включва code/dependency debt, model debt (неясен lifecycle/validation) и data debt (липсващ provenance/quality ownership). Deprecation има срок, migration path и измерване на usage; retirement включва отказ на стар model, запазване/изтриване на artifacts според policy и комуникация с users.
+### Стъпка 1. Класифициране на констатациите
 
-Следвайте [източниците и version scope](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/architecture/references.md). Теорията трябва да обяснява engineering избора, не да замества evidence.
+Използваме учебния review.json. Ключът е проблем на достъпа, записаните входове — на поверителността, а моделът без версия — на проследимостта.
 
-## 8. Лош / проблемен пример
+### Стъпка 2. Определяне на мерки
 
-```text
-API_KEY = "SYNTHETIC-NOT-A-REAL-SECRET"
-model-final-final.joblib; version = null
-log: {"email": "student@example.invalid", "input": "..."}
-# non-executable review fixture; няма реални credentials
-```
+За ключа задаваме подаване извън кода; за събитията — ограничени полета; за модела — задължителни метаданни. Всяка мярка получава отговорник и срок.
 
-Работещият starter и неговият TODO contract са в [starter/README.md](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/lab10-security-ethics-maintenance/starter/README.md). Примерът е за анализ: първо запишете observable behavior и failure risks, после refactor-вайте. Не броим просто преименуване на файлове за архитектурна промяна.
+### Стъпка 3. Добавяне на проверки
+
+Тест без ключ очаква отказ. Тест на записите проверява липса на чувствителен вход. Отделна проверка отхвърля непълни метаданни.
+
+### Стъпка 4. Описание на употребата
+
+Model/data card записва предназначение, произход, оценъчен протокол и ограничения. Отделяме проверимите условия от решенията за човешки преглед.
+
+### Стъпка 5. Планиране на спирането
+
+Определяме заместител, срок и правила за съхранение. Проверка отказва внедряване на изведена версия, но допуска одобрения заместител.
+
+Материали за примера: [начален проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/lab10-security-ethics-maintenance/starter/README.md). [Подготовка и команди за общия проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/setup.md).

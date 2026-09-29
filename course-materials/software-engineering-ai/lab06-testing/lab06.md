@@ -1,152 +1,81 @@
-# 1. Упражнение 6 — Тестване на софтуер и AI компоненти
+# Упражнение 6 — Тестване на софтуер и AI компоненти
 
-**Аудитория:** IV курс, бакалавър „Изкуствен интелект“. **Време:** 110 минути.
-Работи се само с предоставения CPU проект и synthetic dataset, без платени услуги.
+## Теория
 
-## 2. Инженерен сценарий
+### 1. Нива и организация на тестовете
 
-API тестът проверява само дали отговорът е 200. Повреден artifact, missing feature и променен feature order остават незабелязани. В друг test качеството варира, защото dataset split се сменя при всяко изпълнение.
+1. **Unit, integration, end-to-end (E2E) и contract test.** Unit изолира отговорност; integration проверява сътрудничещи компоненти; E2E преминава целия работещ път; contract проверява интерфейса.
+   - **Пример:** Проверка на чиста функция е unit; заявка към стартирано приложение със запазен модел е E2E.
 
-## 3. Учебни цели
+2. **Тестова пирамида и тестова матрица.** Пирамидата предпочита много бързи проверки и по-малко скъпи проверки на цялата система. Матрицата свързва рискове, компоненти и тестове.
+   - **Пример:** Ред „липсващ модел“ посочва repository тест и API тест за 503.
 
-След упражнението студентът:
+3. **Fixture, fake и mock.** Fixture подготвя вход и среда; fake е опростена работеща реализация; mock замества взаимодействие с контролирано поведение.
+   - **Пример:** Повреден файл е fixture; mock предизвиква отказ при зареждане, но не доказва съвместимост на реален файл.
 
-- проектира test pyramid за AI pipeline;
-- реализира unit/integration/contract tests;
-- тества data/schema/artifact failure paths;
-- измерва model quality с фиксиран protocol;
-- анализира deterministic и statistical guarantees;
-- аргументира ограниченията на drift smoke test;
+### 2. Качество на данни и модели
 
-## 4. Предварителни знания
+1. **Детерминистична проверка и статистическа оценка.** Детерминистичната проверка очаква точен договор; статистическата оценява качество върху определена извадка.
+   - **Пример:** Липсващ признак винаги дава 422, но F1 ≥ 0.85 се отнася само за посочените оценъчни данни.
 
-Python, основи на ML/Jupyter, Git, REST API, Docker, scikit-learn/pandas/numpy, Linux и бази данни. Използвайте резултатите от предходните 5 упражнения като engineering input. Не преговаряме елементарни Python конструкции.
+2. **Изтичане на информация и preprocessing.** Изтичане има, когато обучението използва информация от оценъчните данни. Preprocessing подготвя признаците и също трябва да се настройва само по обучаващата част.
+   - **Пример:** Средната стойност за стандартизиране не се пресмята върху целия набор преди разделяне.
 
-## 5. Инструменти
+3. **Data drift, concept drift и спад на качеството.** Data drift е промяна на входното разпределение; concept drift е промяна на връзката между вход и цел. Спадът на качеството се установява чрез оценка с известни етикети.
+   - **Пример:** По-дълги заявки показват промяна на входа, но сами по себе си не доказват по-нисък F1.
 
-Python 3.12, virtual environment, Jupyter Notebook по избор за notebook UI, pytest/coverage, Git, Docker, FastAPI/Pydantic и стандартните Python logging/JSON инструменти. Използвайте pinned environment от [README](../README.md). Training е върху 400 synthetic rows на CPU. Tracking/data versioning са local journal + Git/SHA manifest; не е необходим cloud account.
+4. **NaN и гранична стойност.** NaN означава нечислова стойност при числово изчисление; граничният случай проверява краищата на допустимите входове.
+   - **Пример:** HTTP 200 с probability NaN нарушава договора за крайна вероятност между 0 и 1.
 
-## 6. Архитектурен контекст
+### 3. Доказване на полезността на тест
 
-```text
-Dataset + manifest
-       |
-Validation / Features
-       |
-Offline Training Pipeline
-       |
-Experiment metadata + immutable Model Registry
-       |
-Inference Service -> FastAPI -> Client
-       |
-Logs / Metrics -> CI/CD and maintenance feedback
-```
+1. **Failure injection и mutation.** Failure injection предизвиква контролиран отказ; mutation е умишлена малка дефектна промяна за оценка на теста.
+   - **Пример:** Разменяме реда на признаците и очакваме тестът за схемата да се провали.
 
-**Фокус в това упражнение:** Data contract → preprocessing → artifact → service → HTTP. Вижте [общата архитектура](../architecture/system-overview.md). Отбележете данните, зависимостите и owner на всяка граница.
+2. **Red → green и regression.** Red → green показва провал при дефект и успех след поправката. Regression е повреда на по-рано работещо поведение.
+   - **Пример:** Запазваме резултатите преди и след възстановяване на правилния ред на признаците.
 
-## 7. Теоретична подготовка
+3. **Бюджет за време, triage и измервателен протокол.** Бюджетът ограничава продължителността; triage класифицира причината за провал; протоколът фиксира условията на измерване.
+   - **Пример:** Разделяме липсваща библиотека от нарушен договор и измерваме производителност при еднакъв компютър и натоварване.
 
-Unit test изолира малка отговорност, integration test проверява collaborators/IO, end-to-end test преминава реалните deployment boundaries. Contract test фиксира observable interface. Mocking е полезен за failure injection, но не доказва истинска serialization/serving compatibility.
+## Примерен проблем
 
-Детерминистичният contract може да има exact assertions: missing feature →422, missing model→503. Statistical quality test има versioned held-out dataset, threshold и support; фиксираният seed не прави качеството универсална гаранция. Test pyramid държи много бързи проверки и малко скъпи end-to-end runs. Data drift е промяна на входното разпределение; model/concept drift засяга връзката между входове и цел. Mean-shift smoke сигнал е евтин индикатор, не доказателство за спад на F1; нужни са labels и наблюдение във времето.
+Единственият тест проверява HTTP 200 за валидна заявка. Той не открива невалидна вероятност или липсващ модел.
 
-Следвайте [източниците и version scope](../architecture/references.md). Теорията трябва да обяснява engineering избора, не да замества evidence.
+### Стъпка 1. Описване на непокритите рискове
 
-## 8. Лош / проблемен пример
+Матрицата съдържа данни, признаци, зареждане на модел и API. За всяка граница записваме нормален случай и отказ.
 
-```python
-def test_api():
-    assert response.status_code == 200  # няма schema, version, range, failure checks
-```
+### Стъпка 2. Проверка на входа
 
-Работещият starter и неговият TODO contract са в [starter/README.md](starter/README.md). Примерът е за анализ: първо запишете observable behavior и failure risks, после refactor-вайте. Не броим просто преименуване на файлове за архитектурна промяна.
+Добавяме случаи за липсващ признак, разменен ред и стойност извън допустимото. Проверяваме, че етикетът не попада сред признаците.
 
-## 9. Водена практическа задача
+### Стъпка 3. Проверка на артефакта
 
-Командите за Python/pytest са от `ai-platform` при активирана среда. Процесът е **проблем → теория → анализ на лошо решение → практическа задача → самостоятелна задача → тестове → инженерна дискусия**.
+Integration test използва реален модел, а отделен fixture съдържа повреден файл. Повредата трябва да доведе до договорен отказ.
 
-### Стъпка 1
+### Стъпка 4. Разделяне на договора от качеството
 
-Изпълнете starter happy-path test и обяснете какво остава непроверено. Създайте test matrix по boundaries: data, features, repository, Predictor, HTTP.
+API тестът проверява крайна probability между 0 и 1 и model_version. Отделна оценка проверява F1 и recall върху фиксирана извадка.
 
-### Стъпка 2
+### Стъпка 5. Проверка на самия тест
 
-Добавете preprocessing test: label/cohort не влизат във features и scaler statistics са от training rows. Проверете missing/duplicate/out-of-range data.
+Въвеждаме mutation с разменени признаци. Очакваме red, възстановяваме кода и очакваме green; записваме действителните резултати.
 
-### Стъпка 3
+Материали за примера: [начален проект](starter/README.md). [Подготовка и команди за общия проект](../setup.md).
 
-Тествайте model loading с реален local artifact, повредени bytes, wrong runtime version и missing file. Използвайте fake repository за отделен service unit test.
+## Самостоятелни задачи
 
-### Стъпка 4
+### Задача 1. Основна разработка
 
-Проверете prediction schema, probability range, model_version, empty batch, missing feature и invalid types. Quality gate използва held-out F1/recall≥0.85; не сравнявайте всеки prediction с една фиксирана label за всички модели.
+Създайте стратегия за целия pipeline с поне 12 тестови случая. Включете unit, integration, E2E, договори, данни, модел и производителност. Посочете fixture, отговорник, времеви бюджет и начин за класифициране на провал.
 
-### Стъпка 5
+### Задача 2. Автоматична проверка
 
-Добавете drift smoke с controlled shifted copy, performance protocol без fragile wall-clock unit threshold и една deliberate mutation, която нов test открива. Класифицирайте тестовете по цена и confidence.
+Реализирайте три липсващи теста, включително нормално поведение и контролиран отказ. За една mutation представете red → green. Не заменяйте реалната оценка на модела с подставена метрика.
 
-Време: сценарий/теория15, анализ10, guided работа30, checkpoint5, самостоятелна работа25, tests15, дискусия10 минути — общо110. При 90 минути преподавателят подготвя environment и baseline evidence предварително.
+### Задача 3. Граничен случай
 
-## 10. Checkpoint
+Изберете NaN при успешен HTTP отговор, липсващ клас в оценъчната извадка или измерване на натоварен общ компютър. Опишете ограничението и добавете подходяща проверка или измервателен протокол.
 
-Suite покрива preprocessing, model loading, HTTP/invalid input, quality/range/schema и drift smoke с ясни ограничения.
-
-Покажете working increment и кратък before/after diff. Ако има failure, класифицирайте го като environment, contract, quality или implementation проблем. Не преминавайте нататък само заради един green happy-path test.
-
-## 11. Самостоятелна задача
-
-**Problem statement:** разработете test strategy за целия AI pipeline и добавете три липсващи проверки.
-
-**Requirements:** unit/integration/E2E/data/model/performance/contract матрица, fixture ownership, test runtime budget и failure triage; новите tests трябва да включват failure injection и normal functionality.
-
-**Constraints:** без истински лични данни, sleep-based retries в unit tests или training-on-request; не заменяйте quality gate с mocked metric.
-
-**Acceptance criteria:** минимум 12 test cases в стратегията, 3 нови runnable tests, red→green evidence от една mutation и обяснение кои guarantees остават извън suite.
-
-Предайте собствена реализация/спецификация, rationale и evidence. Пълно решение не е включено тук; готовият общ проект е reference baseline за сравнение на contracts, а starter TODO задачите изискват ваш diff и допълнителни проверки.
-
-## 12. Automated tests
-
-Начални runnable проверки:
-
-```bash
-pytest -q --cov=ai_platform --cov-fail-under=85
-pytest ../lab06-testing/starter/test_happy_path.py -q
-```
-
-Новите tests трябва да проверяват observable contract, negative/edge behavior и разрешения нормален flow. За документните задачи автоматизирайте структурните invariants, а смисъла проверете с peer review. За statistical/performance проверки запишете dataset/workload/seed/version/sample count; не твърдете универсална гаранция от малка synthetic извадка.
-
-Добавете test/evidence traceability: **requirement ID → test name → command → actual result → limitation**. Поне една собствена проверка трябва да открива deliberate bad fixture или regression. След restore повторете suite; не променяйте assertions, за да прикриете failure.
-
-## 13. Edge cases
-
-- Prediction е NaN, но JSON status е 200.
-- Feature order е разменен без промяна на броя features.
-- В test split липсва една class/cohort.
-- Performance test е изпълнен на shared noisy runner.
-
-Изберете поне един за нов автоматизиран test; за останалите опишете expected behavior и owner.
-
-## 14. Въпроси за анализ
-
-1. Защо mocking не доказва artifact compatibility?
-2. Как се прави reproducible quality test?
-3. Какво доказва drift smoke?
-4. Защо coverage не е достатъчно?
-5. Къде е E2E boundary?
-6. Кога exact prediction assertion е риск?
-
-## 15. Очакван резултат
-
-Завършен engineering increment по **Тестване на софтуер и AI компоненти**, checkpoint evidence, самостоятелната задача според acceptance criteria и нови automated checks. Предайте decision/trade-off analysis, а не само screenshot или model score. Данните, моделът и test environment трябва да са идентифицируеми.
-
-## 16. Checklist
-
-- [ ] Анализирах проблемния starter и записах failure scenario.
-- [ ] Избрах архитектурно/процесно решение с trade-offs.
-- [ ] Реализирах guided increment и checkpoint.
-- [ ] Самостоятелната задача е различна и покрива acceptance criteria.
-- [ ] Tests покриват negative/edge и positive behavior.
-- [ ] Evidence включва data/model/code/environment identity.
-- [ ] Не включих реални secrets/PII или платени external dependencies.
-- [ ] Описах limitations, technical debt и следваща стъпка.
+Към решението предайте собствените файлове, обосновка, използвани версии, команди и действителни резултати от проверките. Посочете ограниченията на получените резултати.

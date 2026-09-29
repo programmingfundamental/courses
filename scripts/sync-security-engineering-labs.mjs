@@ -54,6 +54,9 @@ for (const [index, course] of courses.entries()) {
       if (['link', 'image', 'definition'].includes(node.type) && !/^(?:[a-z][a-z\d+.-]*:|\/|#)/i.test(node.url)) {
         const [relative, fragment] = node.url.split('#');
         const target = path.resolve(path.dirname(file), decodeURI(relative));
+        if (['hint.md', 'instructor-notes.md'].includes(path.basename(target))) {
+          throw new Error(`Instructor-only resource linked from student page: ${file}: ${node.url}`);
+        }
         if (!fs.existsSync(target)) throw new Error(`Missing resource ${node.url} in ${file}`);
         const repoPath = path.relative(root, target).replaceAll('\\', '/');
         if (repoPath.startsWith('../')) throw new Error(`Resource outside repository: ${node.url}`);
@@ -80,9 +83,7 @@ for (const [index, course] of courses.entries()) {
     const body = readStudentFile(lab.file);
     const headings = parse(body).children.filter(node => node.type === 'heading');
     const title = plainText(headings[0]).replace(/^1\. /, '');
-    const boundary = headings.find(node => course.id === 'applied-web-security'
-      ? plainText(node) === 'Самостоятелни задачи'
-      : /^9\. Водена практическа задача/.test(plainText(node)));
+    const boundary = headings.find(node => node.depth === 2 && plainText(node) === 'Самостоятелни задачи');
     if (!boundary) throw new Error(`Missing practical section: ${lab.file}`);
     const { theory, tasks } = splitRanges(body, [[boundary.position.start.offset, body.length]]);
     write(`bg/${lab.route}/index.md`, document(title, lab.number, theory, `Упражнение ${lab.number}`));

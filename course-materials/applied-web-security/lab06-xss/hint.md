@@ -1,92 +1,47 @@
-# Упражнение 6 — Cross-Site Scripting (XSS) — насоки
+# Упражнение 6 — HTML изглед на задачите и XSS защита — решения и насоки
+
 
 ## Решение на примерния проблем
 
-Web.render винаги връща `HtmlUtils.htmlEscape(text)`. В SecurityConfig премахваме условието за lab06 при задаване на CSP, така че политиката да важи във всеки режим.
-
-В DB пазим първоначалния текст и го кодираме при извеждане в HTML. Коментар със script се връща с &lt;script&gt; и се показва като текст. `WebSecurityTest#lab06*` проверява кодирането, CSP и нормална кирилица; браузърната проверка отделно потвърждава липса на изпълнен marker.
-
-## Решение на самостоятелна задача 1 — Homepage link
-
-1. Добавяме nullable `homepage VARCHAR(2048)` към app_users в schema.sql и infra/init.sql. За съществуваща PostgreSQL база owner изпълнява еднократно `ALTER TABLE app_users ADD COLUMN homepage VARCHAR(2048)`.
-2. POST /api/profile приема и `@RequestParam(defaultValue="") String homepage`. Празно поле премахва връзката; относителен URL се отказва.
-3. В Web добавяме валидатор:
+TaskPageController е @RestController с инжектиран TaskService. Методът:
 
 ```java
-private String validatedHomepage(String value) {
-    if (value == null || value.isBlank()) return null;
-    if (value.length() > 2048 || value.chars().anyMatch(c -> c < 32 || c == 127)) {
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+@GetMapping(value="/ui/tasks", produces="text/html;charset=UTF-8")
+public String tasks() {
+    StringBuilder html = new StringBuilder("<!doctype html><html lang=\"bg\"><meta charset=\"UTF-8\"><title>Задачи</title><body><h1>Задачи</h1>");
+    for (var t : service.getAll()) {
+        html.append("<article><h2>").append(org.springframework.web.util.HtmlUtils.htmlEscape(t.getSummary()))
+            .append("</h2><p>").append(org.springframework.web.util.HtmlUtils.htmlEscape(t.getDescription()))
+            .append("</p></article>");
     }
-    try {
-        java.net.URI uri = new java.net.URI(value);
-        String scheme = uri.getScheme();
-        if (!("http".equalsIgnoreCase(scheme) || "https".equalsIgnoreCase(scheme))
-                || uri.getHost() == null || uri.getUserInfo() != null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
-        return uri.toASCIIString();
-    } catch (java.net.URISyntaxException ex) {
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-    }
+    return html.append("</body></html>").toString();
 }
 ```
 
-След check(displayName,200) записваме двете полета едновременно:
+CSP се добавя към security chain; header съдържа `default-src 'none'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'`. Test POST създава task със summary минимум 10 символа и future deadline; GET като същия user съдържа &lt;b&gt;, не raw <b>. GET като bob не съдържа нито summary, нито description на alice.
 
-```java
-String link = validatedHomepage(homepage);
-db.update("UPDATE app_users SET display_name=?, homepage=? WHERE username=?",
-    displayName, link, user.getName());
-```
+## Решение на самостоятелна задача 1
 
-GET /profile извлича двете стойности за user.getName(). След прочитането им генерира:
+Добавяме nullable колона reference_url length=2048 и DTO поле. Преди save/update валидираме чрез URI: стойността е null/blank → null; дължина>2048/control characters → 400; scheme не е http/https, getHost()==null или getUserInfo()!=null → 400; URISyntaxException → 400. Приемаме uri.toASCIIString(). Връзката се генерира като `<a href="` + HtmlUtils.htmlEscape(url) + `">Референция</a>`. Проверяваме URL преди промяна на managed entity; при отказ транзакцията не записва промени. При blank поле изрично setReferenceUrl(null), защото CustomMapper skipNullEnabled иначе би запазил старата връзка.
 
-```java
-String html = "<h1>" + render(displayName) + "</h1>";
-if (homepage != null) {
-    String href = validatedHomepage(homepage);
-    if (href != null) html += "<a href=\"" + HtmlUtils.htmlEscape(href) + "\">Homepage</a>";
-}
-return html;
-```
+Тестове: https://example.com/a?x=1&y=2 → anchor с &amp;; javascript:/data:/relative и сурова кавичка → 400 без DB промяна; empty → липсва anchor; bob не може да смени URL на alice.
 
-displayName и homepage тук са стойностите от DB. Не правим HTTP заявка към homepage.
+## Решение на самостоятелна задача 2
 
-| Вход | Резултат |
-|---|---|
-| https://example.com/profile?a=1&b=2 | Успех; href съдържа &amp;, браузърът възстановява оригиналния URL |
-| javascript:alert(1) или data:text/html,... | 400, DB не се променя |
-| URL със сурова кавичка и onmouseover | 400 при URI parsing |
-| /relative/path | 400 |
-| Празна стойност | Успех, няма anchor |
-| displayName с HTML | Показва се като текст |
+Вход &lt; остава същият в DB, изходът е &amp;lt; и браузърът показва буквалното &lt;. Кавичките в URL се отказват от URI parser; encoding остава отделен контрол. javascript: се отказва независимо от escaping. Тестът проверява самия HTML, защото CSP може да скрие липсващото encoding. Браузърната проверка включва отваряне на owner страницата и наблюдение на marker без следване на външния URL.
 
-В MockMvc тестовете изпращаме POST с user(alice) и csrf(), проверяваме статуса, DB и последващия GET. Отговорът няма injected attribute. В браузъра проверяваме липса на marker execution, без да следваме външния URL.
-
-## Решение на самостоятелна задача 2 — Гранични случаи
-
-- **Double encoding:** пазим първоначалния текст. Вход &lt; се кодира като &amp;lt; в изхода и се вижда буквално като &lt;; не декодираме повторно преди render.
-- **Затваряща кавичка:** URI parsing отказва сурова кавичка, а HtmlUtils.htmlEscape защитава quoted атрибута. Проверяваме, че няма втори атрибут.
-- **Опасна scheme:** javascript: се отказва независимо дали кавичките са HTML encoded.
-- **CSP прикрива пропуск:** тестът проверява самия HTML за raw script/инжектирани атрибути. Само липса на изпълнение при активна CSP не доказва правилно encoding.
 
 ## Въпроси за анализ
 
-1. Защо HTML encoding не е универсално?
-2. Какво не доказва MockMvc?
-3. Защо пазим original comment в DB?
-4. Кога е нужен sanitizer?
-5. Достатъчно ли е HttpOnly?
-6. Може ли CSP да скрие bug?
+1. Защо JSON отговорът не доказва XSS?
+2. Къде трябва да се извърши HTML encoding?
+3. Защо URL validation е отделна от HTML escaping?
 
 ## Checklist
 
-- [ ] Vulnerability reproduced само в lab (за lab01 — unsafe config fixture анализиран).
-- [ ] Root cause и trust assumption идентифицирани.
-- [ ] Correct mitigation implemented server-side.
-- [ ] Regression test показва red → green.
-- [ ] Положителната функционалност остава работеща.
-- [ ] Edge case има автоматизирана проверка.
-- [ ] Самостоятелната задача покрива acceptance criteria.
-- [ ] Evidence не съдържа secrets; reset процедурата е проверена.
+- [ ] Примерният проблем има работеща реализация в Task Manager.
+- [ ] Самостоятелните задачи имат код/анализ и проверими резултати.
+- [ ] Тестовете включват разрешен и отказан сценарий.
+- [ ] Отказаната операция не променя DB.
+- [ ] Изпълнените H2/PostgreSQL и браузърни проверки са разграничени.
+- [ ] Отчетът не съдържа пароли, raw tokens или поверителни бележки.

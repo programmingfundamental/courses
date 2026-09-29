@@ -1,0 +1,31 @@
+name: web-security-task-manager
+services:
+  app:
+    build: .
+    ports: ["127.0.0.1:${TASK_MANAGER_PORT:-9000}:9000"]
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/tasksdb
+      DB_USER: task_user
+      DB_PASSWORD: ${DB_PASSWORD:?Run init-environment.ps1 first}
+      JWT_SECRET: ${JWT_SECRET:?Run init-environment.ps1 first}
+    depends_on:
+      db: {condition: service_healthy}
+    networks: [backend, frontend]
+  db:
+    image: postgres:17.6-alpine
+    environment:
+      POSTGRES_DB: tasksdb
+      POSTGRES_USER: task_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Run init-environment.ps1 first}
+    volumes: [task-db:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U task_user -d tasksdb"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    networks: [backend]
+networks:
+  frontend: {}
+  backend: {internal: true}
+volumes:
+  task-db:

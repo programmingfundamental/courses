@@ -1,153 +1,81 @@
-# 1. Упражнение 7 — Version Control, CI/CD и автоматизация
+# Упражнение 7 — Version Control, CI/CD и автоматизация
 
-**Аудитория:** IV курс, бакалавър „Изкуствен интелект“. **Време:** 110 минути.
-Работи се само с предоставения CPU проект и synthetic dataset, без платени услуги.
+## Теория
 
-## 2. Инженерен сценарий
+### 1. Интегриране и доставка
 
-На лаптопа build-ът минава, но CI инсталира различни dependencies и моделът не се зарежда. Deployment използва tag latest и няма начин да се докаже кой artifact е бил serving преди регресията.
+1. **CI, continuous delivery и continuous deployment.** CI автоматично проверява интегрирани промени. Continuous delivery подготвя версия с контролирано внедряване; continuous deployment я внедрява автоматично след проверките.
+   - **Пример:** Последователност проверява код и тестове, създава пакет и изчаква решение за внедряване.
 
-## 3. Учебни цели
+2. **Branch, commit, pull request (PR) и workflow.** Branch отделя работа; commit записва промяна; PR предлага обединяване с преглед; workflow задава автоматичните стъпки и зависимостите им.
+   - **Пример:** PR съдържа промяна, тест и обяснение; изграждането започва след успешни проверки.
 
-След упражнението студентът:
+3. **Lint, format, coverage и exit code.** Lint търси проблеми в кода; format проверява оформлението; coverage измерва изпълнената от тестовете част на кода; exit code съобщава успех или отказ на команда.
+   - **Пример:** Ruff проверява кода, а неуспешен pytest трябва да запази ненулев код за изход и да спре следващите стъпки.
 
-- проектира Git/review workflow;
-- автоматизира lint/tests/build quality gates;
-- реализира reproducible dependency installation;
-- тества immutable release и deployment readiness;
-- аргументира CI спрямо CD и manual gates;
-- измерва regression impact преди promotion;
+### 2. Версии и пакети
 
-## 4. Предварителни знания
+1. **Семантично версиониране и версия на модел.** Семантичното версиониране използва major.minor.patch за съвместимост на интерфейса. Версията на модел идентифицира конкретен обучен артефакт.
+   - **Пример:** Променен модел demo-v2 не налага непременно нова major версия на API.
 
-Python, основи на ML/Jupyter, Git, REST API, Docker, scikit-learn/pandas/numpy, Linux и бази данни. Използвайте резултатите от предходните 6 упражнения като engineering input. Не преговаряме елементарни Python конструкции.
+2. **Lock файл и проверка на зависимости.** Lock файл фиксира избраните версии на библиотеките. Проверка за съвместимост на зависимости установява конфликт между изискванията им.
+   - **Пример:** pip check може да открие конфликт на версии, но не е проверка за известни уязвимости.
 
-## 5. Инструменти
+3. **Docker image, container, tag и image ID.** Image е пакет за изпълнение; container е негов работещ екземпляр; tag е име, което може да сочи друг пакет; image ID идентифицира конкретния пакет.
+   - **Пример:** Внедряваме записан image ID, вместо да разчитаме, че latest остава непроменен.
 
-Python 3.12, virtual environment, Jupyter Notebook по избор за notebook UI, pytest/coverage, Git, Docker, FastAPI/Pydantic и стандартните Python logging/JSON инструменти. Използвайте pinned environment от [README](../README.md). Training е върху 400 synthetic rows на CPU. Tracking/data versioning са local journal + Git/SHA manifest; не е необходим cloud account.
+4. **Неизменяем release и lineage.** Неизменяемият release съчетава точно определени код, модел и среда. Lineage описва произхода им.
+   - **Пример:** Пакетът съдържа demo-v1 и метаданни с версии на данните, кода и lock файла.
 
-## 6. Архитектурен контекст
+### 3. Блокиращи проверки и възстановяване
 
-```text
-Dataset + manifest
-       |
-Validation / Features
-       |
-Offline Training Pipeline
-       |
-Experiment metadata + immutable Model Registry
-       |
-Inference Service -> FastAPI -> Client
-       |
-Logs / Metrics -> CI/CD and maintenance feedback
-```
+1. **Quality gate и readiness gate.** Quality gate блокира неприемливо качество; readiness gate проверява готовност за обслужване след стартиране.
+   - **Пример:** Липсващ произход спира release, а readiness 503 спира приемането на новия container.
 
-**Фокус в това упражнение:** Commit → lint → tests → model gate → immutable image → local deployment. Вижте [общата архитектура](../architecture/system-overview.md). Отбележете данните, зависимостите и owner на всяка граница.
+2. **Promotion, deployment и rollback.** Promotion избира одобрена версия; deployment стартира пакета; rollback възстановява предишно допустимо изпълнение.
+   - **Пример:** Смяна на избора на модел не сменя автоматично модела в вече стартиран процес.
 
-## 7. Теоретична подготовка
+3. **Secret, credential и CVE.** Secret е поверителна стойност; credential удостоверява достъп; CVE е идентификатор на публично описана уязвимост.
+   - **Пример:** API ключът се подава при изпълнение и не се записва в image. При проверка за уязвимости се посочват база и дата.
 
-CI интегрира малки промени с автоматични проверки; continuous delivery подготвя release с контролирана promotion/deployment стъпка, а continuous deployment публикува автоматично след gates. Pull request review оценява design, tests и риск; branch е изолирана линия работа, не заместител на review.
+## Примерен проблем
 
-Semantic versioning следва compatibility на публичния API, докато model version идентифицира конкретен trained artifact; те не са едно и също. Lock file pin-ва resolved dependencies; reproducibility допълнително зависи от Python/OS и base image. Immutable release съдържа конкретен model bundle и image ID/digest. Tag latest е подвижен pointer. Coverage е quality signal, не доказателство за correctness. Deployment readiness gate проверява, че service може да обслужва request, не само че process съществува.
+Последователността изгражда пакет, въпреки че тест е неуспешен. Пакетът може да съдържа непроверен модел.
 
-Следвайте [източниците и version scope](../architecture/references.md). Теорията трябва да обяснява engineering избора, не да замества evidence.
+### Стъпка 1. Определяне на зависимостите
 
-## 8. Лош / проблемен пример
+Подреждаме инсталиране → проверки на код и зависимости → тестове → оценка на модел → изграждане. Всеки отказ спира зависимите стъпки.
 
-```yaml
-- run: pip install scikit-learn fastapi
-- run: echo 'tests passed'
-# unpinned dependencies, без tests, image/version или failure gate
-```
+### Стъпка 2. Проверка на средата
 
-Работещият starter и неговият TODO contract са в [starter/README.md](starter/README.md). Примерът е за анализ: първо запишете observable behavior и failure risks, после refactor-вайте. Не броим просто преименуване на файлове за архитектурна промяна.
+Използваме lock файла и pip check. Записваме версии на Python и средата, тъй като само lock файлът не описва целия runtime.
 
-## 9. Водена практическа задача
+### Стъпка 3. Свързване на кода за изход
 
-Командите за Python/pytest са от `ai-platform` при активирана среда. Процесът е **проблем → теория → анализ на лошо решение → практическа задача → самостоятелна задача → тестове → инженерна дискусия**.
+При неуспешен тест командата завършва с ненулев exit code. Не допускаме настройка, която игнорира тази грешка.
 
-### Стъпка 1
+### Стъпка 4. Подготовка на release
 
-Разгледайте ci-incomplete.yml като fixture; не го активирайте. Сравнете с реалния workflow в корена `.github/workflows/software-engineering-ai.yml` и начертайте dependencies между steps.
+Пакетираме конкретен одобрен модел и записваме image ID. Ключът за API се подава при стартиране.
 
-### Стъпка 2
+### Стъпка 5. Проверка на възстановяването
 
-Изпълнете locally pinned install, pip check, ruff check/format-check, unit tests и integration tests. Изолирайте failure от lint спрямо model metric failure.
+При readiness 503 локалното внедряване възстановява предишния container. Проверяваме model_version от реален отговор, а не само успешна команда.
 
-### Стъпка 3
+Материали за примера: [начален проект](starter/README.md). [Подготовка и команди за общия проект](../setup.md).
 
-Build-нете конкретен model version, проверете quality gate и embed-нете bundle в Docker image. API не трябва да има достъп до dataset за training. Не bake-вайте API key в image.
+## Самостоятелни задачи
 
-### Стъпка 4
+### Задача 1. Основна разработка
 
-Проучете local deploy script: image tag се resolve-ва до image ID, readiness се проверява, при failure се възстановява старият labelled container. Дискутирайте краткия downtime на този учебен single-host подход.
+Добавете quality gate за липсващ произход на модела или забранена зависимост. Опишете отделно условията за отказ при покритие, качество на модела и зависимости. Запишете кои проверки откриват конфликти и кои проверяват уязвимости.
 
-### Стъпка 5
+### Задача 2. Автоматична проверка
 
-Създайте PR checklist за tests/schema/model metadata/dependencies. Покажете failed build при deliberate schema regression и green след restore. Не push-вайте или deploy-вайте към публична услуга за упражнението.
+Покажете отказ върху дефектен fixture и успех върху валиден release. Докажете, че ненулевият exit code спира изграждането или внедряването.
 
-Време: сценарий/теория15, анализ10, guided работа30, checkpoint5, самостоятелна работа25, tests15, дискусия10 минути — общо110. При 90 минути преподавателят подготвя environment и baseline evidence предварително.
+### Задача 3. Граничен случай
 
-## 10. Checkpoint
+Подгответе описание на PR с ред за promotion, deployment и rollback. Проверете случай, в който върнатият избор на модел и моделът в работещия пакет се различават.
 
-Една документирана команда/CI sequence валидира кода, dataset, model и Docker release; version е traceable и failure спира pipeline.
-
-Покажете working increment и кратък before/after diff. Ако има failure, класифицирайте го като environment, contract, quality или implementation проблем. Не преминавайте нататък само заради един green happy-path test.
-
-## 11. Самостоятелна задача
-
-**Problem statement:** добавете нов quality gate за model/dependency regression.
-
-**Requirements:** coverage threshold, model validation и dependency check да имат конкретни failure условия; добавете gate за missing lineage metadata или forbidden dependency в учебен fixture.
-
-**Constraints:** без paid scanning/cloud credentials; pip check е consistency проверка, не CVE scanner; ако използвате audit tool, запишете database timestamp и scope.
-
-**Acceptance criteria:** gate fail-ва върху supplied bad fixture, минава върху valid release и пази exit code; PR описва artifact promotion/rollback procedure и отчита текущите ограничения.
-
-Предайте собствена реализация/спецификация, rationale и evidence. Пълно решение не е включено тук; готовият общ проект е reference baseline за сравнение на contracts, а starter TODO задачите изискват ваш diff и допълнителни проверки.
-
-## 12. Automated tests
-
-Начални runnable проверки:
-
-```bash
-ruff check src tests scripts
-pytest --cov=ai_platform --cov-fail-under=85 -q
-```
-
-Новите tests трябва да проверяват observable contract, negative/edge behavior и разрешения нормален flow. За документните задачи автоматизирайте структурните invariants, а смисъла проверете с peer review. За statistical/performance проверки запишете dataset/workload/seed/version/sample count; не твърдете универсална гаранция от малка synthetic извадка.
-
-Добавете test/evidence traceability: **requirement ID → test name → command → actual result → limitation**. Поне една собствена проверка трябва да открива deliberate bad fixture или regression. След restore повторете suite; не променяйте assertions, за да прикриете failure.
-
-## 13. Edge cases
-
-- Steps използват continue-on-error за quality failure.
-- Docker build включва secrets от .env.
-- PR untrusted code получава deployment credentials.
-- Rollback alias е сменен, но image съдържа друг модел.
-
-Изберете поне един за нов автоматизиран test; за останалите опишете expected behavior и owner.
-
-## 14. Въпроси за анализ
-
-1. Как CI се различава от CD?
-2. Защо latest не е release identity?
-3. Какво не доказва pip check?
-4. Защо model version и API SemVer са различни?
-5. Защо secret не се bake-ва в image?
-6. Каква е rollback acceptance проверката?
-
-## 15. Очакван резултат
-
-Завършен engineering increment по **Version Control, CI/CD и автоматизация**, checkpoint evidence, самостоятелната задача според acceptance criteria и нови automated checks. Предайте decision/trade-off analysis, а не само screenshot или model score. Данните, моделът и test environment трябва да са идентифицируеми.
-
-## 16. Checklist
-
-- [ ] Анализирах проблемния starter и записах failure scenario.
-- [ ] Избрах архитектурно/процесно решение с trade-offs.
-- [ ] Реализирах guided increment и checkpoint.
-- [ ] Самостоятелната задача е различна и покрива acceptance criteria.
-- [ ] Tests покриват negative/edge и positive behavior.
-- [ ] Evidence включва data/model/code/environment identity.
-- [ ] Не включих реални secrets/PII или платени external dependencies.
-- [ ] Описах limitations, technical debt и следваща стъпка.
+Към решението предайте собствените файлове, обосновка, използвани версии, команди и действителни резултати от проверките. Посочете ограниченията на получените резултати.

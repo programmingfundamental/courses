@@ -59,13 +59,16 @@ for (const course of ['applied-web-security', 'software-engineering-ai']) {
       const lab = readPage(labUrl);
       assert.ok(lab(`nav.sidebar a[href="${labUrl}zadachi/"]`).length, `Missing task link: ${labUrl}`);
       if (locale === 'bg') {
-        assert.ok(lab('[data-pagefind-body]').text().includes('Предварителни знания'), `Missing lab material: ${labUrl}`);
+        const labText = lab('[data-pagefind-body]').text();
+        assert.ok(labText.includes(course === 'software-engineering-ai' ? 'Теория' : 'Предварителни знания'), `Missing lab material: ${labUrl}`);
         const tasksText = readPage(`${labUrl}zadachi/`)('[data-pagefind-body]').text();
-        assert.ok(tasksText.includes(course === 'applied-web-security' ? 'Самостоятелни задачи' : 'Водена практическа задача'), `Missing practical tasks: ${labUrl}`);
-        if (course === 'applied-web-security') {
-          assert.ok(lab('[data-pagefind-body]').text().includes('Примерен проблем'), `Missing worked example: ${labUrl}`);
-          assert.ok(!/Въпроси за анализ|Checklist|Стъпки за решаване/.test(tasksText), `Non-assignment material in tasks: ${labUrl}`);
-          assert.ok(!fs.existsSync(`dist/${locale}/${course}/laboratorno-uprazhnenie-${number}/hint`), `Published hints: ${labUrl}`);
+        assert.ok(tasksText.includes('Самостоятелни задачи'), `Missing practical tasks: ${labUrl}`);
+        assert.ok(labText.includes('Примерен проблем'), `Missing worked example: ${labUrl}`);
+        assert.ok(!/Въпроси за анализ|Checklist|Стъпки за решаване|Примерен проблем/.test(tasksText), `Non-assignment material in tasks: ${labUrl}`);
+        assert.ok(!fs.existsSync(`dist/${locale}/${course}/laboratorno-uprazhnenie-${number}/hint`), `Published hints: ${labUrl}`);
+        if (course === 'software-engineering-ai') {
+          assert.ok(!/Учебни цели|Предварителни знания|Инструменти|Архитектурен контекст|Checkpoint|Въпроси за анализ|Checklist|Аудитория:|110 минути/.test(labText), `Instructor material in overview: ${labUrl}`);
+          assert.ok(!lab('a[href*="hint.md"]').length, `Linked instructor hints: ${labUrl}`);
         }
       }
     }

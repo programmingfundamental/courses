@@ -23,6 +23,8 @@
 
 [Източник](course-materials/applied-web-security/README.md)
 
+Всички упражнения надграждат Task Manager от lab11; [начален проект](course-materials/applied-web-security/task-manager/README.md).
+
 | Упражнение | Тема |
 |---|---|
 | 1 | Лабораторна среда и Threat Modeling. |

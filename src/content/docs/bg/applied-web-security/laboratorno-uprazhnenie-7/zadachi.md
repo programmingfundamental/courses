@@ -8,23 +8,11 @@ sidebar:
 
 ## Самостоятелни задачи
 
-### Задача 1
 
-**Условие:** защитете втория mutation flow — създаване на comment през собствена HTML форма.
+### Задача 1 — HTML форма за нова задача
 
-**Изисквания:** формата да използва server-provided CSRF token; след login да работи с актуалната session; server отказът да оставя comments count непроменен.
+Добавете GET /ui/tasks/new с полета summary, description, deadline и hidden CSRF. POST /ui/tasks приема form data и делегира към същия TaskService.create. Добавете setters към TaskRequestDto за @ModelAttribute binding или отделен form DTO със същата валидация. Не копирайте repository логика. Успех=201; липсващ/чужд token=403 без INSERT. Owner е текущият потребител.
 
-**Ограничения:** без глобално изключване на CSRF/CORS wildcard; token не се поставя в URL; не използвайте cookies като Bearer fallback.
+### Задача 2 — Token и cookie граници
 
-**Критерии за приемане:** legitimate comment → 201; missing, forged и token от друга session → 403; поне един test извлича реален `/csrf` response вместо само `.with(csrf())`; проверка за липса на DB insert при отказ.
-
-Предайте собствен code diff, test report и кратка аргументация. Не включвайте реални secrets или сурови session/token стойности в evidence.
-
-### Задача 2 — Гранични случаи
-
-- Token от предишна session след login/logout.
-- Same-site cross-origin request от различен localhost port.
-- Secure cookie върху plain HTTP и browser-specific localhost exceptions.
-- POST без CSRF връща 403 преди authentication, затова anonymous тестовете за identity използват GET.
-
-Изберете поне един за нов regression test и обяснете кой security invariant защитава.
+Проверете стар token след login, стар session cookie след logout, same-site/cross-origin form и Secure cookie през HTTPS. Добавете автоматизирана проверка за token/session, а действителното изпращане на cookie проверете с браузър. Опишете защо 403 за POST без token не доказва правилна authentication policy.

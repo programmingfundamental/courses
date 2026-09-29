@@ -1,48 +1,19 @@
-# Работна карта — lab09
+# Работна карта — Task Manager, упражнение 9
 
-Основен code anchor: **Bearer token → JwtDecoder → claim validators → authorities**.
+След упражнение 8. Запазваме JJWT и HS256 от lab11; добавяме валидирани claims, Clock и отделна stateless верига /token-api/**. Refresh tokens се завъртат еднократно.
 
-## Работен запис
-
-| Поле | Попълнете |
+| Поле | Резултат |
 |---|---|
-| Mode / commit | |
-| Actor / entry point | |
-| Asset / trust boundary | |
-| Baseline allowed request | |
-| Възпроизвеждане | |
-| Expected / actual result | |
-| Root cause / code location | |
-| Likelihood × impact / аргумент | |
-| Fix / residual risk | |
-| Regression test / report path | |
-| Positive functionality check | |
+| Версия/commit | |
+| HTTP метод и маршрут | |
+| Потребител и роля | |
+| Начални данни/owner | |
+| Очакван/получен статус | |
+| DB преди/след | |
+| Проверявано правило | |
+| Test class и report | |
+| Оставащ риск | |
 
-## Test matrix
+Файлове: JwtService, JwtAuthFilter, RefreshTokenService/Repository, SecurityConfig, нов TokenTaskController.
 
-| Case | Expected | Actual / evidence |
-|---|---|---|
-| 1 | valid signed token → 200 и правилен subject | |
-| 2 | expired token → 401 | |
-| 3 | modified payload / чужда signature → 401 | |
-| 4 | wrong issuer / audience → 401 | |
-| 5 | missing required scope → 403 | |
-| 6 | malformed / missing token → 401 | |
-
-## Команди
-
-От `vulnerable-app`:
-
-```powershell
-mvn test '-Dlab.mode=lab09' '-Dtest=JwtSecurityTest'
-```
-
-От корена на курса:
-
-```powershell
-$env:LAB_MODE='lab09'
-docker compose up -d --build
-curl.exe -i http://localhost:8080/health
-```
-
-За authenticated requests: `. ./scripts/lab-client.ps1`; използвайте `$LabSession` и `$LabHeaders`. Паролите, cookies и tokens не се включват в evidence. При lab02 е нужен пълен DB reset; при lab08 не смесвайте legacy plaintext и encrypted records. Подробните стъпки и independent acceptance criteria са в [lab09.md](../lab09.md).
+Команди от task-manager: mvn test; след стартиране на compose.test.yml — mvn -Ppostgres-tests test. Подробности: [подготовка](../../setup.md), [условие](../lab09.md).

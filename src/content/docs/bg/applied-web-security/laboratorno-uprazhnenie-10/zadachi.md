@@ -8,23 +8,11 @@ sidebar:
 
 ## Самостоятелни задачи
 
-### Задача 1
 
-**Условие:** направете mini security assessment на registration + profile модула и разширете audit events за него.
+### Задача 1 — Оценка на регистрация и промяна на задача
 
-**Изисквания:** предайте Finding, Risk, Evidence, Root Cause, Mitigation, Regression Test за минимум 3 обосновани observations; разграничете потвърден finding от limitation/hypothesis. Добавете безопасен event type и автоматизиран no-secret-in-logs test.
+Предайте минимум три наблюдения за /auth/register и PATCH /tasks/{id}/update с Finding/Status, Risk, Evidence, Root Cause, Mitigation и Regression Test. Разграничете потвърден дефект, защитен случай и непроверена хипотеза. Добавете REGISTRATION_RESULT и TASK_UPDATE_RESULT audit events и нов тест, че credentials/tokens/private note не влизат в логовете. Поне един regression test трябва да е извън началния TaskManagerBaselineTest.
 
-**Ограничения:** само локални synthetic данни; без general request/body logging; без изтриване на existing tests или смяна на vulnerable mode като fix.
+### Задача 2 — Проверка на обхвата
 
-**Критерии за приемане:** поне един нов regression test извън готовата suite; positive functionality test; correlation между event и request без raw session/token; остатъчен риск и приоритет за всяко observation.
-
-Предайте собствен code diff, test report и кратка аргументация. Не включвайте реални secrets или сурови session/token стойности в evidence.
-
-### Задача 2 — Гранични случаи
-
-- Green тест срещу грешния profile/base URL.
-- Случайно skip-нат Docker integration test.
-- Debug logging разкрива request parameters.
-- Control работи директно към app, но proxy configuration го променя.
-
-Изберете поне един за нов regression test и обяснете кой security invariant защитава.
+Разгледайте грешен profile/base URL, пропуснат PostgreSQL тест, debug logging и промяна на cookie behavior зад HTTPS proxy. Автоматизирайте поне две проверки и запишете коя част изисква реален браузър. Отчетът трябва да позволява друг човек да повтори същите команди.

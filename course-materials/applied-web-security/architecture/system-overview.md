@@ -1,53 +1,42 @@
-# Архитектура и security contract
+# Task Manager — архитектура и последователност
 
-Само контролирана локална учебна среда. Trust boundary е граница, при която се променят нивото на доверие и правилата за проверка на входа.
+## Начално приложение
 
-```mermaid
-flowchart LR
-  U[Browser / curl] -->|TB1: HTTP loopback 8080| N[Nginx]
-  A[CSRF page :8081] -->|same-site, cross-origin POST| N
-  N -->|TB2: internal HTTP| F[Spring Security filters]
-  F --> C[Controller]
-  C --> S[Service / ownership / crypto]
-  S -->|TB3: SQL parameters, runtime user| D[(PostgreSQL)]
-  K[Docker secret file] -->|TB4: key material| S
-```
+Клиент → Spring Security/JwtAuthFilter → AuthController, TaskController, ReportController → AuthService, TaskServiceImp, ReportServiceImp → Spring Data JPA → PostgreSQL. Compose няма reverse proxy. Port: 127.0.0.1:9000; db е достъпна само по internal backend; app участва и във frontend за публикувания HTTP порт. Java 17, Spring Boot 3.4.4 и JJWT 0.12.5 са от lab11.
 
-## Данни и потоци
+| Начален маршрут | Договор |
+|---|---|
+| POST /auth/register | JSON username/password; 200; role=USER |
+| POST /auth/login | JSON credentials; 200 с tokens и сесия |
+| POST /auth/refresh | JSON refreshToken; 200 с access token |
+| POST /auth/logout | Сесийният контекст се изчиства |
+| GET/POST /tasks | USER/ADMIN; списък/създаване |
+| GET /tasks/{id} | USER/ADMIN; прочит |
+| PATCH /tasks/{id}/update | USER/ADMIN; промяна |
+| DELETE /tasks/{id}/delete | USER/ADMIN; изтриване |
+| /reports/** | ADMIN; включва /task/{id}, /{id}, /task/{id}/summary |
 
-Login: form → CSRF filter → UsernamePasswordAuthenticationFilter → AuthenticationProvider → UserDetailsService → PasswordEncoder → SecurityContext → session. Spring управлява persistence и session fixation protection. Не пишем собствен session login controller.
+Началният Task няма owner. Не приемайте роли за доказателство за ownership. Login поддържа сесия и връща JWT; CSRF е изключен в началната конфигурация и се добавя в упражнение 7.
 
-Document read: session principal → endpoint authentication → service-level authentication → ownership/admin policy → JSON. Непозволен и несъществуващ документ връщат 404; anonymous получава 401, user към admin endpoint — 403.
+## Надграждания по упражнения
 
-JWT: session + CSRF → POST /token → RS256 token → Authorization: Bearer → отделна stateless filter chain → signature/claims → scope. Cookie session не е fallback за `/token-api/**`. Подписването не криптира claims.
+| № | Резултат, който следващото упражнение използва |
+|---|---|
+| 1 | Карта на потоците и тест на публикуваните портове |
+| 2 | Валидирани credentials, смяна на session ID, GET /auth/me, регистрационни ограничения |
+| 3 | Task.owner, TaskPolicy, owner-scoped списък/CRUD; ADMIN-only reports остава |
+| 4 | LoginAttemptService, Clock, configurable lockout |
+| 5 | GET /tasks/search?q= и /tasks/lookup?summary=, binding и sort allowlist |
+| 6 | GET /ui/tasks, HTML encoding, CSP, Task.referenceUrl |
+| 7 | GET /auth/csrf, session CSRF rotation, GET /ui/tasks/new и POST /ui/tasks form |
+| 8 | PUT/GET /tasks/{id}/private-note, FieldCipher, key ring/migration |
+| 9 | Отделен /token-api/tasks и /token-api/admin/status, строг JWT договор и refresh rotation |
+| 10 | AuditFilter, обща матрица и отчет за реалния обхват |
 
-Sensitive field: form + CSRF → AES-256-GCM, random 96-bit nonce, owner като AAD → `v1:Base64(nonce || ciphertext || tag)` → DB. AAD е допълнително удостоверен контекст, който не се криптира. Текущият envelope има version, но няма key ID/rotation implementation.
+Новите endpoints не са готови в началния starter. Студентът ги реализира последователно. Няма нова база за всяко упражнение; schema промени се прилагат чрез документирана миграция или върху ясно избрана празна база.
 
-## Endpoint inventory
+## Данни и изходни DTO
 
-| Метод / path | Достъп | State change / CSRF | Данни |
-|---|---|---|---|
-| GET /, /health, /login, /csrf | public | не | banner, readiness, login, CSRF |
-| POST /register | public | да / да | само USER, 201 или 400 |
-| POST /login | public | да / да | success 204, failure 401 |
-| POST /logout | session | да / да | invalidates session |
-| GET /api/me | session | не | principal |
-| GET /api/documents/{id} | owner или ADMIN | не | документ |
-| GET /api/search?q= | session | не | само собствени документи, включително за admin |
-| GET /search?q= | session | не | reflected HTML output |
-| GET /comments | session | не | всички учебни comments |
-| POST /api/comments | session | да / да | body до 1000 chars |
-| GET /profile | session | не | собствен display name |
-| POST /api/profile | session | да / да | displayName до 200 chars |
-| GET, POST /api/sensitive | session owner | POST / да | synthetic field |
-| GET /admin/status | ADMIN | не | admin marker |
-| POST /token | session | да / да | token с 5 минути живот |
-| GET /token-api/documents | Bearer + documents.read | не | учебен protected marker |
+Task: id, summary, description, deadline; по-късно owner, referenceUrl, privateNoteCiphertext. Report: content, workedTime, task. User: username, BCrypt password, role, enabled. RefreshToken: първоначално raw token; в упражнение 9 — digest и еднократна употреба.
 
-## Security decisions и граници
-
-DB runtime user има само DML върху учебните таблици; credential от Compose е публичен fixture. AES secret се генерира отделно, не влиза в Git. Nginx access log е изключен, Java audit записва само генериран correlation ID, method и status. Този минимален audit не е пълен incident-response log: разширяването със стабилен event type и безопасен actor ID е задача в lab10.
-
-Сървърът приема само изрично описани параметри; client-side validation не е security boundary. `anyRequest().denyAll()` забранява неизвестни routes. CSP е вторична защита и се изключва само за lab06/lab10 възпроизводимост. HTML encoding се прилага при output; DB пази оригиналния comment.
-
-Конфигурация: временни RSA keys, single-instance limiter, без TLS по подразбиране, без account recovery/refresh tokens/MFA, без production secret manager. Документирайте ги като residual risk, а не като автоматично „затворени“ findings.
+TaskResponseDto няма рекурсивен списък от отчети; ReportResponseDto съдържа taskId и workTime. Summary totalWorkedTime е Duration като ISO-8601 текст, например PT31H. Парола, raw refresh token и privateNoteCiphertext не се добавят в общите task/report DTO.

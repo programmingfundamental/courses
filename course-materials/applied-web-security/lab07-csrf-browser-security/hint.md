@@ -1,76 +1,51 @@
-# Упражнение 7 — CSRF, Cookies и Browser Security — насоки
+# Упражнение 7 — CSRF защита на сесиите и формите в Task Manager — решения и насоки
+
 
 ## Решение на примерния проблем
 
-В session SecurityFilterChain премахваме `if(mode.vulnerable(7)) http.csrf(c->c.disable())`. Стандартната CSRF защита остава включена. Отделният stateless Bearer chain не приема session cookie и запазва своята конфигурация.
+Добавяме beans HttpSessionCsrfTokenRepository и SessionAuthenticationStrategy. SecurityConfig ползва същия repository чрез http.csrf(c -> c.csrfTokenRepository(repository)). Стратегията е CompositeSessionAuthenticationStrategy с ChangeSessionIdAuthenticationStrategy и CsrfAuthenticationStrategy(repository). AuthController.login приема и HttpServletResponse; предава го на AuthService.login. След успешно authenticate извикваме strategy.onAuthentication(authentication,httpRequest,httpResponse), след това запазваме context в сесията. Премахваме ръчното changeSessionId от упражнение 2, защото вече е в стратегията.
 
-1. Влизаме като alice и вземаме актуален token от /csrf.
-2. POST /api/profile без token или с подправен token → 403 и непроменено display_name.
-3. Със същата сесия и валиден token → 200 и нова стойност в DB.
-4. Портове 8080 и 8081 са cross-origin, но same-site: отказът се дължи на CSRF проверката, а не на SameSite=Lax.
-5. Изпълняваме `WebSecurityTest#lab07*` при lab07 и CookieIT. Поведението на Secure cookie се проверява и в браузър през HTTPS.
-
-## Решение на самостоятелна задача 1 — Форма за коментар
-
-В Web добавяме форма под /api/**, където вече се изисква вход. Тя се отваря след login и получава token от текущата сесия:
+AuthController добавя:
 
 ```java
-@GetMapping(value="/api/comment-form", produces="text/html")
-String commentForm(CsrfToken token) {
-    return "<form method=\"post\" action=\"/api/comments\">"
-        + "<textarea name=\"body\"></textarea>"
-        + "<input type=\"hidden\" name=\"" + HtmlUtils.htmlEscape(token.getParameterName())
-        + "\" value=\"" + HtmlUtils.htmlEscape(token.getToken()) + "\">"
-        + "<button type=\"submit\">Изпрати</button></form>";
+@GetMapping("/csrf")
+public java.util.Map<String,String> csrf(org.springframework.security.web.csrf.CsrfToken token) {
+    return java.util.Map.of("token",token.getToken(),"headerName",token.getHeaderName(),"parameterName",token.getParameterName());
 }
 ```
 
-POST /api/comments използва съществуващия метод и връща 201. Token се изпраща в body, без промяна на CORS или добавяне в URL.
+Маршрутът е permitAll, докато /auth/me остава authenticated. Сценарий: GET csrf → POST login с token → GET csrf в новия контекст → PATCH task с headerName/token. Запазваме summary преди всеки отказ и четем от DB след него. При wrong/missing/other-session token статусът е 403 и summary е същото. Bearer в същата верига не отменя CSRF изискването; отделяне има в упражнение 9.
 
-В WebSecurityTest инжектираме `@Autowired com.fasterxml.jackson.databind.ObjectMapper mapper;`. Следният тестов фрагмент извлича реален /csrf response:
+## Решение на самостоятелна задача 1
+
+GET /ui/tasks/new получава CsrfToken и връща form method=post action=/ui/tasks с textarea description, input summary, datetime-local deadline и hidden поле с token.getParameterName()/getToken(), кодирани за quoted attributes. TaskRequestDto получава @Setter. POST адаптерът е:
 
 ```java
-var login = mvc.perform(post("/login").with(csrf()).param("username", "alice")
-    .param("password", "Lab-alice-2026!"))
-    .andExpect(status().isNoContent()).andReturn();
-var session = (MockHttpSession) login.getRequest().getSession(false);
-var response = mvc.perform(get("/csrf").session(session))
-    .andExpect(status().isOk()).andReturn();
-var token = mapper.readTree(response.getResponse().getContentAsString());
-int before = db.queryForObject("SELECT COUNT(*) FROM comments", Integer.class);
-mvc.perform(post("/api/comments").session(session)
-    .header(token.get("headerName").asText(), token.get("token").asText())
-    .param("body", "Нов коментар"))
-    .andExpect(status().isCreated());
-assertThat(db.queryForObject("SELECT COUNT(*) FROM comments", Integer.class))
-    .isEqualTo(before + 1);
+@PostMapping(value="/ui/tasks", consumes="application/x-www-form-urlencoded")
+public org.springframework.http.ResponseEntity<TaskResponseDto> createForm(
+        @jakarta.validation.Valid @ModelAttribute TaskRequestDto dto) {
+    return org.springframework.http.ResponseEntity.status(201).body(service.create(dto));
+}
 ```
 
-За всеки отрицателен случай запомняме броя непосредствено преди POST: липсващ token, произволен token и token, прочетен от /csrf в отделна сесия. Изпращаме ги с alice session: всеки получава 403, без нов коментар. За другата сесия правим отделен GET /csrf без alice session и вземаме response token. Тестваме и самата форма: скритото поле има правилното parameterName и подадената от него стойност позволява 201.
+TaskService задава owner, не формата. Тестовете изпращат валиден future deadline, summary/description минимум 10 символа; липсващ и чужд token=403 без нов ред, правилен=201 с текущ owner. Form route е под authenticated /ui/**, CSP form-action self го допуска.
 
-## Решение на самостоятелна задача 2 — Гранични случаи
+## Решение на самостоятелна задача 2
 
-- **Стар token:** вземаме token преди login, след вход изпращаме него с новата сесия → 403. Нов GET /csrf дава работещ token. След logout старият session identifier вече не удостоверява.
-- **Same-site/cross-origin:** формата от 8081 без token не променя данните; положителен POST през 8080 с актуален token работи.
-- **Secure през HTTP:** CookieIT проверява Set-Cookie; реален браузър през HTTPS проверява изпращането. Изключенията за localhost не доказват поведение за други хостове.
-- **Ред на филтрите:** POST без CSRF може да получи 403 преди authentication. За изолирана проверка на identity използваме GET /api/me → 401 или POST с валиден CSRF.
+Token преди login със сесията след login се отказва, защото CsrfAuthenticationStrategy го изчиства. Нов GET /auth/csrf дава актуалния token. Logout инвалидира сесията. За cross-origin използваме форма от друг localhost порт без token и следим DB, не само видимия отговор. Secure се включва в HTTPS конфигурация и се проверява в браузър; MockMvc проверява header, не browser enforcement. За identity използваме GET /tasks или POST с валиден CSRF; иначе CSRF filter може да върне 403 преди authentication.
+
 
 ## Въпроси за анализ
 
-1. Защо SOP не спира формата?
-2. Защо SameSite=Lax не спря локалния пример?
-3. Защо CORS не е CSRF control?
-4. Защо token се взема след login?
-5. Кога може да се изключи CSRF за API?
-6. Какво доказва CookieIT?
+1. Защо JWT не отменя CSRF при приемана сесия?
+2. Кой сменя CSRF token при custom login?
+3. Как се доказва, че отказът няма DB ефект?
 
 ## Checklist
 
-- [ ] Vulnerability reproduced само в lab (за lab01 — unsafe config fixture анализиран).
-- [ ] Root cause и trust assumption идентифицирани.
-- [ ] Correct mitigation implemented server-side.
-- [ ] Regression test показва red → green.
-- [ ] Положителната функционалност остава работеща.
-- [ ] Edge case има автоматизирана проверка.
-- [ ] Самостоятелната задача покрива acceptance criteria.
-- [ ] Evidence не съдържа secrets; reset процедурата е проверена.
+- [ ] Примерният проблем има работеща реализация в Task Manager.
+- [ ] Самостоятелните задачи имат код/анализ и проверими резултати.
+- [ ] Тестовете включват разрешен и отказан сценарий.
+- [ ] Отказаната операция не променя DB.
+- [ ] Изпълнените H2/PostgreSQL и браузърни проверки са разграничени.
+- [ ] Отчетът не съдържа пароли, raw tokens или поверителни бележки.

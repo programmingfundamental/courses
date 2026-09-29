@@ -1,97 +1,54 @@
-# Упражнение 5 — SQL Injection — насоки
+# Упражнение 5 — Безопасно търсене на задачи със Spring Data JPA — решения и насоки
+
 
 ## Решение на примерния проблем
 
-В Documents.search премахваме клона с конкатенация. Запазваме проверката за null, над 100 символа и NUL. Единствената заявка е:
+TaskRepository добавя:
 
 ```java
-return db.query(
-    "SELECT id,owner,title FROM documents WHERE owner=? AND title LIKE ? ORDER BY id",
-    (r,n) -> new Document(r.getLong(1), r.getString(2), r.getString(3)),
-    owner, "%" + q + "%");
+@org.springframework.data.jpa.repository.Query("""
+    select t from Task t where (:admin = true or t.owner.username = :username)
+    and t.summary like concat('%', :q, '%') order by t.id
+    """)
+java.util.List<Task> search(@org.springframework.data.repository.query.Param("q") String q,
+    @org.springframework.data.repository.query.Param("username") String username,
+    @org.springframework.data.repository.query.Param("admin") boolean admin);
 ```
 
-owner идва от user.getName() в Web. O'Reilly остава текст; `' OR '1'='1' -- ` не променя SQL структурата. Празно q връща само собствените документи. % и _ запазват LIKE семантиката, без да премахват owner условието. Изпълняваме `WebSecurityTest#lab05*` при lab05 и PostgresIT чрез security-tests.
+Service валидира q, извиква repository.search(q,policy.currentUser(),policy.isAdmin()) и преобразува към TaskResponseDto. Controller добавя @GetMapping("/search") и @RequestParam(defaultValue="") String q. Не приема username/admin като параметри. При q="' OR '1'='1' --" получаваме само действителни текстови съвпадения, обичайно празен списък; апострофът не променя структурата.
 
-## Решение на самостоятелна задача 1 — Точно заглавие
+## Решение на самостоятелна задача 1
 
-В Documents добавяме:
+Втора JPQL заявка заменя LIKE с `t.summary = :summary` и запазва owner/admin предиката. Service отказва null, >255 и NUL с 400. Empty summary дава List.of(). Controller е @GetMapping("/lookup") с @RequestParam String summary. Два различни users с еднакво summary получават всеки своя ID; ADMIN получава и двата. %/_ са буквални при =. POST fixture създава данните през API, след което GET доказва isolation. HTTP 200 без проверка на owners/IDs не е достатъчен.
+
+## Решение на самостоятелна задача 2
+
+Премахваме фиксираното ORDER BY от search @Query и добавяме параметър org.springframework.data.domain.Sort sort към repository метода. В service избираме:
 
 ```java
-public List<Document> lookup(String title, String owner) {
-    if (title == null || title.length() > 200 || title.indexOf('\0') >= 0) {
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-    }
-    return db.query(
-        "SELECT id,owner,title FROM documents WHERE owner=? AND title=? ORDER BY id",
-        (r,n) -> new Document(r.getLong(1), r.getString(2), r.getString(3)), owner, title);
-}
+String field = switch (sort) {
+    case "summary" -> "summary";
+    case "deadline" -> "deadline";
+    default -> throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST);
+};
+var ordering = org.springframework.data.domain.Sort.by(field).ascending().and(
+    org.springframework.data.domain.Sort.by("id"));
 ```
 
-В Web добавяме:
+Подаваме ordering като последния repository параметър. sort="summary desc;..." се отказва с 400; разрешените две полета дават предвидима подредба с id при равенство и не променят owner филтъра. Използваме фиксирани бъдещи дати при fixtures и проверяваме последователността на върнатите ID с двата DB профила.
 
-```java
-@GetMapping("/api/lookup")
-List<Documents.Document> lookup(@RequestParam String title, Authentication user) {
-    return documents.lookup(title, user.getName());
-}
-```
-
-Празно заглавие е допустим вход с празен резултат при началните данни; липсващ параметър → 400. Използваме равенство вместо LIKE.
-
-| Вход като alice | Очакване |
-|---|---|
-| Alice notes | Един резултат, owner=alice |
-| O'Reilly guide | Един резултат, без SQL грешка |
-| notes или празен текст | Нула резултати |
-| 201 символа или NUL | 400 |
-| ' OR '1'='1' -- | Нула резултати |
-| % или _ | Буквално съвпадение, без wildcard поведение |
-| Еднакво заглавие за alice и bob | Всяка сесия получава само собствения ред |
-
-Фрагмент за нов тест в WebSecurityTest:
-
-```java
-db.update("INSERT INTO documents VALUES (?,?,?)", 101L, "alice", "Shared title");
-db.update("INSERT INTO documents VALUES (?,?,?)", 102L, "bob", "Shared title");
-try {
-    mvc.perform(get("/api/lookup").with(user("alice")).param("title", "Shared title"))
-        .andExpect(jsonPath("$.length()").value(1))
-        .andExpect(jsonPath("$[0].id").value(101))
-        .andExpect(jsonPath("$[0].owner").value("alice"));
-    mvc.perform(get("/api/lookup").with(user("bob")).param("title", "Shared title"))
-        .andExpect(jsonPath("$.length()").value(1))
-        .andExpect(jsonPath("$[0].id").value(102));
-} finally {
-    db.update("DELETE FROM documents WHERE id IN (101,102)");
-}
-```
-
-Първо интегрираме заявката от UnsafeLookup.java.txt и показваме провален отрицателен тест; заменяме я с binding и повтаряме същия тест. Проверяваме и anonymous → 401, както и липса на SQL/stack trace в error response.
-
-## Решение на самостоятелна задача 2 — Гранични случаи
-
-- **%/_:** search позволява шаблони, но всеки върнат owner е текущият потребител; lookup третира символите буквално заради =.
-- **Апостроф и кирилица:** записваме „Бележки O'Reilly“; lookup връща точно този запис без грешка.
-- **Динамично сортиране:** `Map.of("title", "title", "id", "id")` избира фиксиран SQL идентификатор; неизвестна стойност → 400. Binding остава за данните. Основният lookup използва фиксирано ORDER BY id.
-- **H2/PostgreSQL:** повтаряме матрицата чрез PostgresIT с реален PostgreSQL и сравняваме съдържание/owners, а не само status.
 
 ## Въпроси за анализ
 
-1. Защо validation не заменя binding?
-2. Какво е wrong при concatenated JPA native query?
-3. Защо injection може да е опасен без DELETE?
-4. Как се поддържа dynamic ORDER BY?
-5. Защо O'Reilly е важен тест?
-6. Защо PostgreSQL test е отделен?
+1. Защо @Query с параметри пази структурата?
+2. Защо LIKE wildcard не означава SQL injection?
+3. Защо sort не се предава като произволен SQL текст?
 
 ## Checklist
 
-- [ ] Vulnerability reproduced само в lab (за lab01 — unsafe config fixture анализиран).
-- [ ] Root cause и trust assumption идентифицирани.
-- [ ] Correct mitigation implemented server-side.
-- [ ] Regression test показва red → green.
-- [ ] Положителната функционалност остава работеща.
-- [ ] Edge case има автоматизирана проверка.
-- [ ] Самостоятелната задача покрива acceptance criteria.
-- [ ] Evidence не съдържа secrets; reset процедурата е проверена.
+- [ ] Примерният проблем има работеща реализация в Task Manager.
+- [ ] Самостоятелните задачи имат код/анализ и проверими резултати.
+- [ ] Тестовете включват разрешен и отказан сценарий.
+- [ ] Отказаната операция не променя DB.
+- [ ] Изпълнените H2/PostgreSQL и браузърни проверки са разграничени.
+- [ ] Отчетът не съдържа пароли, raw tokens или поверителни бележки.

@@ -1,11 +1,10 @@
 # Технически източници
 
-Проверени при подготовката на 22.09.2026. Следвайте API на фиксираната версия в pom.xml; online документацията може да показва по-нов patch.
+- Началният код и версиите: [Task Manager](../task-manager/README.md), [pom.xml](../task-manager/pom.xml), [произход](../task-manager/SOURCE.md).
+- Spring Security: https://docs.spring.io/spring-security/reference/ — authentication, authorization, sessions, CSRF и тестове.
+- Spring Data JPA: https://docs.spring.io/spring-data/jpa/reference/ — @Query, binding, transactions и locking.
+- JJWT: https://github.com/jwtk/jjwt — API за подпис и проверка; проектът използва 0.12.5.
+- Java Cipher: https://docs.oracle.com/en/java/javase/17/docs/api/java.base/javax/crypto/Cipher.html — AES-GCM и AAD.
+- OWASP Cheat Sheet Series: https://cheatsheetseries.owasp.org/ — XSS, CSRF, password storage, logging и threat modeling.
 
-- [Spring Security 6.5: CSRF](https://docs.spring.io/spring-security/reference/6.5/servlet/exploits/csrf.html) — default protection на unsafe methods, session token, refresh след authentication.
-- [Spring Security 6.5: JWT Resource Server](https://docs.spring.io/spring-security/reference/6.5/servlet/oauth2/resource-server/jwt.html) — decoding, validation и mapping на authorities.
-- [Spring Boot 3.5 system requirements](https://docs.spring.io/spring-boot/3.5/system-requirements.html) — съвместимост на runtime/build.
-- [OWASP XSS Prevention](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html) — различните output contexts изискват различни controls; CSP е допълнение.
-- [OWASP SQL Injection Prevention](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html) — parameter binding и allowlist за identifiers.
-- [OWASP Top 10](https://owasp.org/www-project-top-ten/) — ориентир за threat review, не замества application-specific model.
-- [Java 21 Cipher API](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/javax/crypto/Cipher.html) — GCM/AEAD, AAD и authentication failure.
+При използване на документация съпоставете API с фиксираните версии в pom.xml; версията на библиотеката сама по себе си не доказва наличие или липса на уязвимост.

@@ -5,67 +5,68 @@ sidebar:
   label: "Упражнение 4"
 ---
 
-# 1. Упражнение 4 — Модулност, слоеве и разделяне на отговорностите
+# Упражнение 4 — Модулност, слоеве и разделяне на отговорностите
 
-**Аудитория:** IV курс, бакалавър „Изкуствен интелект“. **Време:** 110 минути.
-Работи се само с предоставения CPU проект и synthetic dataset, без платени услуги.
+## Теория
 
-## 2. Инженерен сценарий
+### 1. Отговорности на модулите
 
-Една функция чете CSV, избира модел, обучава го и връща business result. За да тествате един prediction branch, трябва да имате filesystem, dataset и training runtime. Промяната на storage се разпространява до API.
+1. **Модулност, предметна логика и инфраструктура.** Модулността групира код по отговорност. Предметната логика задава правилата; инфраструктурата осигурява файлове, мрежа и техническо изпълнение.
+   - **Пример:** Изборът на признаци е отделен от четенето на файл.
 
-## 3. Учебни цели
+2. **Чиста функция и входно-изходна операция (I/O).** Чистата функция зависи само от аргументите си и не променя външно състояние; I/O чете или записва извън функцията.
+   - **Пример:** Избор на три колони от подадена таблица може да се тества без отваряне на файл.
 
-След упражнението студентът:
+3. **Рефакториране и характеризиращ тест.** Рефакторирането променя структурата при запазено поведение. Характеризиращият тест записва важно съществуващо поведение преди промяната.
+   - **Пример:** Проверяваме резултата за фиксиран вход преди и след разделяне на голяма функция.
 
-- анализира separation of concerns;
-- refactor-ва tightly coupled компонент;
-- проектира dependency direction и Protocol;
-- реализира configuration извън domain logic;
-- тества модули с малки fakes;
-- аргументира границата domain/infrastructure;
+### 2. Договор и подаване на зависимости
 
-## 4. Предварителни знания
+1. **Интерфейс и Python Protocol.** Интерфейсът описва нужните операции. Protocol позволява структурно типизиране: обект с подходящите операции удовлетворява договора без задължителен общ родител.
+   - **Пример:** ModelRepository има load(version), който връща модел и метаданни или договорена грешка.
 
-Python, основи на ML/Jupyter, Git, REST API, Docker, scikit-learn/pandas/numpy, Linux и бази данни. Използвайте резултатите от предходните 3 упражнения като engineering input. Не преговаряме елементарни Python конструкции.
+2. **Инверсия и инжектиране на зависимости.** Инверсията насочва основната логика към интерфейс. Инжектирането подава конкретната зависимост отвън.
+   - **Пример:** Predictor получава repository като аргумент, вместо сам да избира файлово хранилище.
 
-## 5. Инструменти
+3. **Adapter, Repository и fake.** Adapter приспособява конкретна реализация към интерфейс; Repository отделя достъпа до запазени обекти; fake е опростена работеща реализация за тест.
+   - **Пример:** FileRepository чете модел от диск, а fake repository връща модел от паметта със същия договор.
 
-Python 3.12, virtual environment, Jupyter Notebook по избор за notebook UI, pytest/coverage, Git, Docker, FastAPI/Pydantic и стандартните Python logging/JSON инструменти. Използвайте pinned environment от [README](/courses/bg/software-engineering-ai/). Training е върху 400 synthetic rows на CPU. Tracking/data versioning са local journal + Git/SHA manifest; не е необходим cloud account.
+### 3. Настройки, запис и проверки
 
-## 6. Архитектурен контекст
+1. **Конфигурация и жизнен цикъл на обект.** Конфигурацията е проверен вход за настройка на приложението. Жизненият цикъл определя кога обектът се създава, използва и освобождава.
+   - **Пример:** Settings съдържа версия на модела; промяна на текста след зареждане не заменя вече заредения модел.
 
-```text
-Dataset + manifest
-       |
-Validation / Features
-       |
-Offline Training Pipeline
-       |
-Experiment metadata + immutable Model Registry
-       |
-Inference Service -> FastAPI -> Client
-       |
-Logs / Metrics -> CI/CD and maintenance feedback
-```
+2. **ExperimentTracker, метаданни и lineage.** ExperimentTracker е договор за запис на опит. Метаданните описват параметри и измервания; lineage свързва резултата с данни, код и среда.
+   - **Пример:** При обучение записваме параметри, F1 и версия на данните чрез подаден tracker.
 
-**Фокус в това упражнение:** api → inference port → repository adapter; data/features отделно. Вижте [общата архитектура](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/architecture/system-overview.md). Отбележете данните, зависимостите и owner на всяка граница.
+3. **Unit test, integration test и persistence.** Unit test изолира една отговорност; integration test проверява съвместна работа. Persistence е запазване на данни след приключване на процеса.
+   - **Пример:** Unit test проверява запис в паметта; integration test записва файл и го прочита отново.
 
-## 7. Теоретична подготовка
+4. **Договор за грешки и циклична зависимост.** Договорът задава еднакво поведение при отказ. Цикличната зависимост възниква, когато модули зависят един от друг по затворена верига.
+   - **Пример:** Fake и файловият repository трябва да съобщават липсваща версия по еднакъв начин.
 
-Модулността намалява броя причини за промяна на компонент и позволява независими tests. Domain logic описва бизнес правила; infrastructure се занимава с filesystem, network, serialization и framework lifecycle. Dependency inversion означава високото ниво да зависи от contract, а adapter да реализира този contract.
+## Примерен проблем
 
-Python Protocol описва structural typing: подходящ object удовлетворява интерфейса без общ base class. Dependency injection подава collaborator отвън; не изисква DI framework. Configuration е validated input на приложението, не глобален набор от hardcoded paths. Добрата граница следва отговорност и change rate, а не произволно разпределяне на функции в много файлове. Модулите data/features/training/inference/api/config имат различни allowed dependencies.
+Функцията за предсказване сама намира файл, зарежда модел и обработва входа. За всеки тест е необходим реален файл.
 
-Следвайте [източниците и version scope](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/architecture/references.md). Теорията трябва да обяснява engineering избора, не да замества evidence.
+### Стъпка 1. Запазване на поведението
 
-## 8. Лош / проблемен пример
+Добавяме характеризиращ тест за валиден вход и текущия резултат. Това е опората при разделяне на функцията.
 
-```python
-def predict_one():
-    data = pd.read_csv(HARDCODED_PATH)
-    model = DummyClassifier().fit(data[FEATURES], data.label)
-    return model.predict(data[FEATURES].head(1))
-```
+### Стъпка 2. Извличане на договор
 
-Работещият starter и неговият TODO contract са в [starter/README.md](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/lab04-modularity/starter/README.md). Примерът е за анализ: първо запишете observable behavior и failure risks, после refactor-вайте. Не броим просто преименуване на файлове за архитектурна промяна.
+Определяме ModelRepository.load(version) с резултат модел и метаданни и ясна грешка при липсваща версия.
+
+### Стъпка 3. Подаване на зависимостта
+
+Predictor приема repository отвън. Изборът на файловата реализация остава в началната настройка на приложението.
+
+### Стъпка 4. Изолирана проверка
+
+Fake repository връща предварително зададен модел. Unit test проверява предсказването без четене на файлове и без обучение.
+
+### Стъпка 5. Проверка на реалния запис
+
+Integration test зарежда от FileRepository и проверява същия договор. Двете реализации връщат еднакъв вид грешка за липсваща версия.
+
+Материали за примера: [начален проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/lab04-modularity/starter/README.md). [Подготовка и команди за общия проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/setup.md).

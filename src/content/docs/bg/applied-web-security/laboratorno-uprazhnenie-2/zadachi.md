@@ -8,23 +8,11 @@ sidebar:
 
 ## Самостоятелни задачи
 
-### Задача 1
 
-**Условие:** добавете `GET /api/account-summary`, който връща username и брой собствени документи.
+### Задача 1 — Текущ потребител и регистрационни ограничения
 
-**Изисквания:** anonymous се отказва; user identity идва само от SecurityContext; count е за текущия user.
+Добавете GET /auth/me, който връща само username и role от удостоверения контекст; anonymous → 401. Подредете SecurityConfig така, че /auth/me да не попада в публичното /auth/** правило. Регистрацията да приема username 3–32 символа и парола 12–64 символа и до 72 UTF-8 байта. Подадена role не променя Role.USER. Докажете отказите и че хеш/refresh token не се връщат от /auth/me.
 
-**Ограничения:** не приемайте username от query parameter; не връщайте password/hash/roles от DB entity; не използвайте Basic auth вместо зададения session flow.
+### Задача 2 — Гранични сесии и Unicode
 
-**Критерии за приемане:** автоматизирани anonymous, invalid-login, valid-login и cross-user isolation tests, включително Alice count=2 и Bob count=1; обяснение защо login и policy са различни отговорности.
-
-Предайте собствен code diff, test report и кратка аргументация. Не включвайте реални secrets или сурови session/token стойности в evidence.
-
-### Задача 2 — Гранични случаи
-
-- Парола с Unicode, която надхвърля BCrypt byte limit при допустим брой chars.
-- Unknown user срещу known user: еднакъв текст, но възможни timing различия.
-- Session/CSRF token преди login се сменят; клиентът трябва да вземе нов CSRF token.
-- Смяна на mode без DB reset оставя legacy {noop} записи.
-
-Изберете поне един за нов regression test и обяснете кой security invariant защитава.
+Добавете поне два теста: 40 кирилски символа в паролата; login с различно име в съществуваща сесия; повторно използване на session след logout; два еднакви plaintext входа дават различни BCrypt хешове. Всеки тест проверява identity или DB state освен статуса.
