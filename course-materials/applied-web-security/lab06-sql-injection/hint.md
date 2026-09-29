@@ -19,7 +19,7 @@ Service валидира q, извиква repository.search(q,policy.currentUse
 
 ## Решение на самостоятелна задача 1
 
-Втора JPQL заявка заменя LIKE с `t.summary = :summary` и запазва owner/admin предиката. Service отказва null, >255 и NUL с 400. Empty summary дава List.of(). Controller е @GetMapping("/lookup") с @RequestParam String summary. Два различни users с еднакво summary получават всеки своя ID; ADMIN получава и двата. %/_ са буквални при =. POST fixture създава данните през API, след което GET доказва isolation. HTTP 200 без проверка на owners/IDs не е достатъчен.
+Втора JPQL заявка заменя LIKE с `t.summary = :summary` и запазва owner/admin предиката. Service отказва null, >255 и NUL с 400. Empty summary дава List.of(). Controller е @GetMapping("/lookup") с @RequestParam String summary. Два различни users с еднакво summary получават всеки своя ID; ADMIN получава и двата. %/_ са буквални при =. Ръчна POST заявка в Postman създава данните през API, след което GET доказва isolation. HTTP 200 без проверка на owners/IDs не е достатъчен.
 
 ## Решение на самостоятелна задача 2
 
@@ -35,7 +35,7 @@ var ordering = org.springframework.data.domain.Sort.by(field).ascending().and(
     org.springframework.data.domain.Sort.by("id"));
 ```
 
-Подаваме ordering като последния repository параметър. sort="summary desc;..." се отказва с 400; разрешените две полета дават предвидима подредба с id при равенство и не променят owner филтъра. Използваме фиксирани бъдещи дати при fixtures и проверяваме последователността на върнатите ID с двата DB профила.
+Подаваме ordering като последния repository параметър. sort="summary desc;..." се отказва с 400; разрешените две полета дават предвидима подредба с id при равенство и не променят owner филтъра. Използваме фиксирани бъдещи дати за примерните данни и сравняваме ръчно последователността на ID от Postman с работната PostgreSQL база.
 
 
 ## Въпроси за анализ
@@ -48,7 +48,7 @@ var ordering = org.springframework.data.domain.Sort.by(field).ascending().and(
 
 - [ ] Примерният проблем има работеща реализация в Task Manager.
 - [ ] Самостоятелните задачи имат код/анализ и проверими резултати.
-- [ ] Тестовете включват разрешен и отказан сценарий.
+- [ ] Ръчните проверки включват разрешен и отказан сценарий.
 - [ ] Отказаната операция не променя DB.
-- [ ] Изпълнените H2/PostgreSQL и браузърни проверки са разграничени.
+- [ ] Ръчните API проверки с Postman, DB наблюденията и браузърните проверки са разграничени.
 - [ ] Отчетът не съдържа пароли, raw tokens или поверителни бележки.

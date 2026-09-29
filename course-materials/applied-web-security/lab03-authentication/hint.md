@@ -22,7 +22,7 @@ httpRequest.getSession(true).setAttribute(
     HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, context);
 ```
 
-Следва съществуващото издаване на AuthResponse за authentication.getName(). Добавяме @Transactional към RefreshTokenService.revokeAllUserTokens. Login=200; грешен login=401 без нови tokens; logout=200 и session.isInvalid()=true. Тестовете използват JSON и реален login, а не само with(user()).
+Следва съществуващото издаване на AuthResponse за authentication.getName(). Добавяме @Transactional към RefreshTokenService.revokeAllUserTokens. Login=200; грешен login=401 без нови tokens; logout=200, а повторна GET /tasks със старото cookie връща 401. Заявките в Postman използват JSON и реален login.
 
 ## Решение на самостоятелна задача 1
 
@@ -58,7 +58,7 @@ public java.util.Map<String,Object> me(org.springframework.security.core.Authent
 
 - [ ] Примерният проблем има работеща реализация в Task Manager.
 - [ ] Самостоятелните задачи имат код/анализ и проверими резултати.
-- [ ] Тестовете включват разрешен и отказан сценарий.
+- [ ] Ръчните проверки включват разрешен и отказан сценарий.
 - [ ] Отказаната операция не променя DB.
-- [ ] Изпълнените H2/PostgreSQL и браузърни проверки са разграничени.
+- [ ] Ръчните API проверки с Postman, DB наблюденията и браузърните проверки са разграничени.
 - [ ] Отчетът не съдържа пароли, raw tokens или поверителни бележки.

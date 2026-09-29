@@ -28,11 +28,11 @@ public org.springframework.http.ResponseEntity<TaskResponseDto> createForm(
 }
 ```
 
-TaskService задава owner, не формата. Тестовете изпращат валиден future deadline, summary/description минимум 10 символа; липсващ и чужд token=403 без нов ред, правилен=201 с текущ owner. Form route е под authenticated /ui/**, CSP form-action self го допуска.
+TaskService задава owner, не формата. Ръчните проверки изпращат валиден future deadline, summary/description минимум 10 символа; липсващ и чужд token=403 без нов ред, правилен=201 с текущ owner. Form route е под authenticated /ui/**, CSP form-action self го допуска.
 
 ## Решение на самостоятелна задача 2
 
-Token преди login със сесията след login се отказва, защото CsrfAuthenticationStrategy го изчиства. Нов GET /auth/csrf дава актуалния token. Logout инвалидира сесията. За cross-origin използваме форма от друг localhost порт без token и следим DB, не само видимия отговор. Secure се включва в HTTPS конфигурация и се проверява в браузър; MockMvc проверява header, не browser enforcement. За identity използваме GET /tasks или POST с валиден CSRF; иначе CSRF filter може да върне 403 преди authentication.
+Token преди login със сесията след login се отказва, защото CsrfAuthenticationStrategy го изчиства. Нов GET /auth/csrf дава актуалния token. Logout инвалидира сесията. За cross-origin използваме форма от друг localhost порт без token и следим DB, не само видимия отговор. Secure се включва в HTTPS конфигурация и се проверява в браузър; Postman показва header, но не доказва browser enforcement. За identity използваме GET /tasks или POST с валиден CSRF; иначе CSRF filter може да върне 403 преди authentication.
 
 
 ## Въпроси за анализ
@@ -45,7 +45,7 @@ Token преди login със сесията след login се отказва,
 
 - [ ] Примерният проблем има работеща реализация в Task Manager.
 - [ ] Самостоятелните задачи имат код/анализ и проверими резултати.
-- [ ] Тестовете включват разрешен и отказан сценарий.
+- [ ] Ръчните проверки включват разрешен и отказан сценарий.
 - [ ] Отказаната операция не променя DB.
-- [ ] Изпълнените H2/PostgreSQL и браузърни проверки са разграничени.
+- [ ] Ръчните API проверки с Postman, DB наблюденията и браузърните проверки са разграничени.
 - [ ] Отчетът не съдържа пароли, raw tokens или поверителни бележки.

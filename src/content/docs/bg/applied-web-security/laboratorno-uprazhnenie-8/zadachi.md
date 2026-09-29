@@ -15,4 +15,4 @@ sidebar:
 
 ### Задача 2 — Token и cookie граници
 
-Проверете стар token след login, стар session cookie след logout, same-site/cross-origin form и Secure cookie през HTTPS. Добавете автоматизирана проверка за token/session, а действителното изпращане на cookie проверете с браузър. Опишете защо 403 за POST без token не доказва правилна authentication policy.
+Проверете стар token след login, стар session cookie след logout, same-site/cross-origin form и Secure cookie през HTTPS. Изпълнете ръчни Postman заявки за token/session, а действителното изпращане на cookie проверете с браузър. Опишете защо 403 за POST без token не доказва правилна authentication policy.

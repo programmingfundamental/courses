@@ -16,13 +16,13 @@ org.springframework.boot.web.servlet.FilterRegistrationBean<JwtAuthFilter> jwtRe
 }
 ```
 
-В @Order(1) chain поставяме securityMatcher("/token-api/**"), STATELESS, NullSecurityContextRepository, csrf.disable(), httpBasic.disable(), formLogin.disable(), requestMatchers("/token-api/admin/**").hasRole("ADMIN") и anyRequest.authenticated(); добавяме JWT filter пред UsernamePasswordAuthenticationFilter. Session chain е @Order(2), пази CSRF и няма JWT filter. TokenTaskController използва същия TaskService и TaskPolicy. За 403 тест може да добавим GET /token-api/admin/status, връщащ фиксиран status само за ADMIN.
+В @Order(1) chain поставяме securityMatcher("/token-api/**"), STATELESS, NullSecurityContextRepository, csrf.disable(), httpBasic.disable(), formLogin.disable(), requestMatchers("/token-api/admin/**").hasRole("ADMIN") и anyRequest.authenticated(); добавяме JWT filter пред UsernamePasswordAuthenticationFilter. Session chain е @Order(2), пази CSRF и няма JWT filter. TokenTaskController използва същия TaskService и TaskPolicy. За ръчна проверка на 403 може да добавим GET /token-api/admin/status, връщащ фиксиран status само за ADMIN.
 
 ## Решение на самостоятелна задача 1
 
-Тестовият fixture подписва claims чрез Jwts.builder().signWith(същияTestKey,Jwts.SIG.HS256), отделно от production issue метода; не променяме само payload за missing-exp, защото това би тествало подписа. Матрица: correct=200; чужд ключ/payload mutation/wrong issuer/wrong audience/missing exp/empty or missing sub=401; aud=[other,task-manager-api]=200; disabled user=401; валиден USER към admin status=403. Реален login session без Bearer към /token-api/tasks=401.
+Преподавателят подготвя локално примерни tokens с учебния signing key, отделно от production issue метода. Не променяме само payload за missing-exp, защото това проверява подписа. Студентите копират token в Postman Bearer Token: correct=200; чужд ключ/payload mutation/wrong issuer/wrong audience/missing exp/empty or missing sub=401; aud=[other,task-manager-api]=200; disabled user=401; валиден USER към admin status=403. Реална login сесия без Bearer към /token-api/tasks=401. Неподготвените claim случаи се отбелязват като неизпълнени.
 
-Издаваме един token с exp=t+60s и движим Clock: t+59=200, t+60=401, t+61=401. При смяна на конфигурирания signing key старият token е 401. Рестарт със същия .env ключ не го обезсилва автоматично — за разлика от временен генериран ключ. Изчистваме security context между unit cases; HTTP тестът се изпълнява през реалната chain.
+Използваме token с кратък срок и изпращаме Postman заявка преди и след изтичането: 200, после 401. Точната граница изисква контролиран Clock в упражнение 11. При смяна на signing key старият token е 401; рестарт със същия ключ не го обезсилва. Възстановяваме конфигурацията след проверката.
 
 ## Решение на самостоятелна задача 2
 
@@ -30,7 +30,7 @@ org.springframework.boot.web.servlet.FilterRegistrationBean<JwtAuthFilter> jwtRe
 
 Repository метод findByTokenDigest има @Lock(PESSIMISTIC_WRITE); RefreshTokenService.rotate е @Transactional: digest вход → заключен ред → !revoked и now<expiryDate → активен user → revoked=true → издаване/запис на нов digest → връщане на raw нов token и access token. AuthService.refresh делегира цялата операция на тази транзакция. Повторна употреба е 401. Revoke-all маркира редовете revoked в транзакция; редът на заключванията е постоянен. Logout също инвалидира сесията. На PostgreSQL две едновременни refresh заявки в отделни транзакции имат един успех и един 401, с точно един активен наследник.
 
-Tests: wrong/expired/used digest=401; disabled user=401 без нов token; на expiry точно отказ; valid refresh=200 с различна raw стойност; DB не съдържа нито старата, нито новата raw стойност. След logout refresh е отказан, но access token остава валиден до exp при активен user. За незабавно access revocation е нужен отделен token version/denylist, който не е част от този договор.
+Ръчни проверки: wrong/expired/used digest=401; disabled user=401 без нов token; след expiry отказ; valid refresh=200 с различна raw стойност; DB не съдържа нито старата, нито новата raw стойност. След logout refresh е отказан, но access token остава валиден до exp при активен user. За незабавно access revocation е нужен отделен token version/denylist, който не е част от този договор.
 
 
 ## Въпроси за анализ
@@ -43,7 +43,7 @@ Tests: wrong/expired/used digest=401; disabled user=401 без нов token; н�
 
 - [ ] Примерният проблем има работеща реализация в Task Manager.
 - [ ] Самостоятелните задачи имат код/анализ и проверими резултати.
-- [ ] Тестовете включват разрешен и отказан сценарий.
+- [ ] Ръчните проверки включват разрешен и отказан сценарий.
 - [ ] Отказаната операция не променя DB.
-- [ ] Изпълнените H2/PostgreSQL и браузърни проверки са разграничени.
+- [ ] Ръчните API проверки с Postman, DB наблюденията и браузърните проверки са разграничени.
 - [ ] Отчетът не съдържа пароли, raw tokens или поверителни бележки.

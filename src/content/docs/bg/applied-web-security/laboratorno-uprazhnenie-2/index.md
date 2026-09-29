@@ -25,18 +25,14 @@ sidebar:
 
 
 
-### 1.2. Проверки и доказателства
+### 1.2. Ръчни проверки с Postman
 
-1. **Security regression test** е автоматизиран тест на правило за сигурност, който открива повторна поява на проблем. **Assertion** сравнява очаквано и получено; **negative test** проверява отказ, **positive test** — разрешена операция.
-   - Пример: GET /tasks без удостоверяване → 401, със съществуваща сесия → 200. Тестът за отказ не заменя теста за нормална работа.
-2. **JUnit** изпълнява тестовете; **MockMvc** подава HTTP заявки през Spring; **H2** е базата в памет за бързи проверки. **Integration test** проверява взаимодействието на компоненти; същите тестове се изпълняват и с PostgreSQL.
-   - В TaskManagerBaselineTest полето mvc е MockMvc: `mvc.perform(get("/tasks")).andExpect(status().isUnauthorized());`. Статичните imports са в готовия клас.
-3. **Fixture** са началните данни на теста; **test matrix** е списък от входове и очаквания; **edge case** е граничен случай. **Regression** означава връщане на вече отстранен проблем.
-   - Пример: собствена задача, чужда задача и липсващо ID се проверяват отделно; след отказана промяна записът в DB остава същият.
-4. **Root cause** е първопричината, **mitigation** — защитата, **evidence** — доказателството. **Code diff** показва промяната, **test report** — резултата. **Baseline** е началната версия за сравнение.
-   - Запазете заявката, очакването и отчета. Провалена компилация не е доказателство, че тестът е открил нарушение. Не представяйте непроверена хипотеза като установен дефект.
+1. **Postman** изпраща HTTP заявки към работещото приложение. Изберете метод, URL, headers и JSON body, натиснете Send и сравнете статуса и съдържанието с очакваното.
+2. **Положителна проверка** доказва разрешена операция, а **отрицателна проверка** — отказ. След отказ проверете с нова GET заявка или в DB, че данните са непроменени.
+3. **Матрица на проверките** описва потребител, начални данни, заявка, очакван и действителен резултат. Използвайте реални login сесии и ID от отговорите. При смяна на потребителя изчистете cookies и влезте отново.
+4. **Доказателство** е записан резултат от изпълнена проверка: статус, обезличен отговор и състояние преди/след. Запазете заявките в Postman колекция без пароли, cookies и tokens. За HTML, JavaScript и cookie поведение използвайте и браузър.
 
-`mvn test` изпълнява тестовете с H2 и записва target/surefire-reports. `mvn -Ppostgres-tests test` използва отделната PostgreSQL тестова база, стартирана по инструкциите по-долу. **Maven profile** е именуван набор от настройки. Новите класове с тестове завършват на Test. За браузърно поведение се използва и реален браузър; MockMvc не изпълнява JavaScript.
+До упражнение 10 изпълнявайте заявките поотделно с Send и попълвайте резултатите ръчно. Автоматизираните тестове се въвеждат в упражнение 11.
 
 ### 1.3. Средства за стартиране
 
@@ -44,10 +40,8 @@ sidebar:
    - `docker compose up -d --build --wait` изгражда образа, стартира услугите във фонов режим и изчаква проверките за готовност. **Healthcheck** проверява състоянието на услуга; тук PostgreSQL има такава проверка, а готовността на приложението проверяваме с HTTP заявка.
 2. **Environment variable** е стойност от средата на процеса; файлът **.env** предоставя такива стойности на Compose. **Volume** съхранява данните отделно от контейнера.
    - init-environment.ps1 генерира DB_PASSWORD и JWT_SECRET в .env. `docker compose down` спира услугите, но запазва данните в тома task-db.
-3. **Maven Wrapper** е включен в проекта скрипт, който изтегля и стартира необходимия Maven. **JDK** предоставя Java компилатора и средата за локалните тестове.
-   - В PowerShell `./mvnw.cmd test` изпълнява тестовете без отделна инсталация на Maven; все пак е нужен JDK.
-4. **HTTP session** свързва поредица заявки с влезлия потребител чрез cookie. **JSON** е текстовият формат на изпратените и получените данни.
-   - `ConvertTo-Json` превръща PowerShell обект в JSON; `Invoke-RestMethod` изпраща заявката. `-SessionVariable taskSession` запазва получените cookies, а `-WebSession $taskSession` ги подава в следващата заявка.
+3. **Maven Wrapper** изтегля Maven за локална компилация; при Docker build инструментите са в образа. За работа с кода в IDE използвайте JDK 17+.
+4. **HTTP session** свързва заявките с потребителя чрез cookie. Postman запазва полученото JSESSIONID в cookie jar и го изпраща при следващите заявки към същия хост. **JSON** е форматът на данните в Body → raw → JSON.
 
 
 ## 2. Подготовка
@@ -62,15 +56,15 @@ Java, Spring Boot, HTTP, JPA и Task Manager от lab11. Започнете от
 
 [**Изтеглете началния работещ проект Task Manager (ZIP)**](/courses/downloads/task-manager-starter.zip)
 
-Архивът съдържа папка task-manager с кода от lab11, конфигурацията за стартиране, Maven Wrapper и началните тестове. Включени са също setup.md и архитектурната карта. Не е необходимо да създавате проект от нулата или да изтегляте цялото хранилище на курса. Използвайте това копие за упражнение 2 и продължавайте със своите промени във всички следващи упражнения.
+Архивът съдържа папка task-manager с кода от lab11, конфигурацията за стартиране, Maven Wrapper и настройките за работа с Postman. Включени са също setup.md и архитектурната карта. Не е необходимо да създавате проект от нулата или да изтегляте цялото хранилище на курса. Използвайте това копие за упражнение 2 и продължавайте със своите промени във всички следващи упражнения.
 
-Всички Maven/Compose команди по-долу се изпълняват от task-manager. Работните Java класове са в src/main/java/bg/tu_varna/sit/task_manager; тестовете — в съответния src/test/java package.
+Всички Maven/Compose команди по-долу се изпълняват от task-manager. Работните Java класове са в src/main/java/bg/tu_varna/sit/task_manager.
 
 **Файлове за работа:** compose.yml, SecurityConfig, AuthController, AuthService, RegisterRequest, UserRepository. Архитектурната карта показва кои маршрути съществуват в началото и кои се добавят последователно.
 
 ### Изтегляне и разархивиране
 
-1. Инсталирайте и стартирайте Docker Desktop с Linux containers и Docker Compose. За локалните тестове инсталирайте JDK 17+; проверете с `java -version`. Maven 3.9+ е по избор — проектът включва Wrapper.
+1. Инсталирайте и стартирайте Docker Desktop с Linux containers и Docker Compose. За работа с Java кода в IDE инсталирайте JDK 17+; проверете с `java -version`. Maven 3.9+ е по избор — проектът включва Wrapper.
 2. Свалете ZIP файла чрез връзката по-горе. В PowerShell отворете папката, в която сте го запазили, и изпълнете:
 
    ```powershell
@@ -89,60 +83,49 @@ Java, Spring Boot, HTTP, JPA и Task Manager от lab11. Започнете от
 docker compose config --quiet
 docker compose up -d --build --wait
 docker compose logs --tail 30 app
-curl.exe -i http://localhost:9000/tasks
 ```
 
 Първото изграждане изтегля Docker образи и Maven зависимости и изисква интернет. Скриптът създава .env с генерирани стойности за DB_PASSWORD и JWT_SECRET; при следващо изпълнение запазва съществуващия файл. Запазете .env и за следващите упражнения.
 
-След стартиране на Spring заявката GET /tasks без вход трябва да върне **HTTP 401** — приложението работи и изисква удостоверяване. `--wait` изчаква готовността на базата, но приложението може да се нуждае от още няколко секунди; повторете заявката. При проблем прочетете `docker compose logs --tail 100 app db`.
+В Postman създайте environment с `baseUrl=http://localhost:9000`. Изпратете `GET {{baseUrl}}/tasks` с No Auth и празен cookie jar. След стартиране на Spring заявката GET /tasks без вход трябва да върне **HTTP 401** — приложението работи и изисква удостоверяване. `--wait` изчаква готовността на базата, но приложението може да се нуждае от още няколко секунди; повторете заявката. При проблем прочетете `docker compose logs --tail 100 app db`.
 
-Ако порт 9000 е зает, задайте `$env:TASK_MANAGER_PORT='19000'` преди командата за стартиране и използвайте http://localhost:19000 във всички заявки. За Bash използвайте `sh ./init-environment.sh`, същите Compose команди и `curl -i http://localhost:9000/tasks`.
+Ако порт 9000 е зает, задайте `$env:TASK_MANAGER_PORT='19000'` преди командата за стартиране и използвайте http://localhost:19000 във всички заявки. За Bash използвайте `sh ./init-environment.sh`, същите Compose команди.
 
-### Начални потребители и първа задача
+### Начални потребители и първа задача в Postman
 
-Празната база няма потребители. Изпълнете следните PowerShell команди веднъж, за да създадете alice, bob и admin. Регистрацията задава USER; следващата SQL команда дава ADMIN на профила admin:
+1. Създайте колекция Task Manager и environment с `baseUrl=http://localhost:9000`. За заявките изберете No Auth; входът използва cookie сесия.
+2. Изпратете `POST {{baseUrl}}/auth/register` с Body → raw → JSON:
 
-```powershell
-$base = 'http://localhost:9000'
-foreach ($name in @('alice', 'bob', 'admin')) {
-    $body = @{username=$name;password="$name-password-2026!"} | ConvertTo-Json
-    Invoke-RestMethod "$base/auth/register" -Method Post -ContentType 'application/json' -Body $body
-}
-docker compose exec -T db psql -U task_user -d tasksdb -c "UPDATE users SET role='ADMIN' WHERE username='admin';"
-```
+   ```json
+   {"username":"alice","password":"alice-password-2026!"}
+   ```
 
-Влезте като alice, запазете сесията и създайте задача:
+   Повторете ръчно за bob и admin с отделни пароли. При съществуващи профили преминете към вход. Регистрацията винаги задава USER. Само за началната подготовка на admin изпълнете от task-manager:
 
-```powershell
-$body = @{username='alice';password='alice-password-2026!'} | ConvertTo-Json
-$auth = Invoke-RestMethod "$base/auth/login" -Method Post -ContentType 'application/json' -Body $body -SessionVariable taskSession
-Invoke-RestMethod "$base/tasks" -WebSession $taskSession
-$task = @{summary='First task for Alice';description='Description for the first task';deadline='2099-12-31T12:00:00'} | ConvertTo-Json
-$created = Invoke-RestMethod "$base/tasks" -Method Post -ContentType 'application/json' -Body $task -WebSession $taskSession
-Invoke-RestMethod "$base/tasks/$($created.id)" -WebSession $taskSession
-```
+   ```powershell
+   docker compose exec -T db psql -U task_user -d tasksdb -c "UPDATE users SET role='ADMIN' WHERE username='admin';"
+   ```
 
-Очаквайте успешен вход, списък от задачи и създадената задача с ID от отговора. При повторно стартиране влизайте със съществуващите профили, вместо да ги регистрирате отново. Началният Task още няма собственик; тази връзка се добавя в упражнение 4.
+3. Изпратете `POST {{baseUrl}}/auth/login` със същия JSON за alice. Очаквайте 200 и JSESSIONID в cookies. Следващата `GET {{baseUrl}}/tasks` трябва да върне 200. Не добавяйте Authorization header за сесийните проверки.
+4. Изпратете `POST {{baseUrl}}/tasks` с JSON:
 
-### Изпълнение на началните тестове
+   ```json
+   {"summary":"First task for Alice","description":"Description for the first task","deadline":"2099-12-31T12:00:00"}
+   ```
 
-Преди промяна изпълнете петте готови теста с H2 — те не изискват стартиран Docker:
+5. Очаквайте 201. Копирайте ръчно id от отговора в environment променлива `taskId`. Изпратете `GET {{baseUrl}}/tasks/{{taskId}}` и сравнете полетата с изпратените. Началният Task няма owner; той се добавя в упражнение 4.
+6. За проверка като bob изчистете cookies за localhost и влезте като bob. За анонимна проверка изчистете cookies и оставете No Auth. Отделни environments сами по себе си не изолират cookie jar.
 
-```powershell
-./mvnw.cmd test
-```
+### Протокол от ръчните проверки
 
-След това изпълнете същите тестове с отделна PostgreSQL база:
+| Потребител и начално състояние | Заявка | Очакван резултат | Действителен резултат | Данни преди/след |
+| --- | --- | --- | --- | --- |
+| Без сесия | GET /tasks | 401 | Попълнете | Без промяна |
+| Alice след вход | GET /tasks | 200, списък | Попълнете | Без промяна |
+| Alice след вход | POST /tasks с валиден JSON | 201, нов ID | Попълнете | Нов запис |
+| Alice след създаване | GET /tasks/{id} | 200, същите полета | Попълнете | Без промяна |
 
-```powershell
-docker compose -f compose.test.yml up -d --wait
-./mvnw.cmd -Ppostgres-tests test
-docker compose -f compose.test.yml down
-```
-
-Очаквайте `BUILD SUCCESS` и 5 успешни теста. Отчетите са в target/surefire-reports. Тестовата PostgreSQL база е tasks_test на 127.0.0.1:55432; данните ѝ се пресъздават за тестовете. Тя е отделна от работната база на приложението.
-
-При инсталиран Maven можете да замените `./mvnw.cmd` с `mvn`; за Bash използвайте `sh ./mvnw`. След промени повторете тестовете и обновете работещото приложение с `docker compose up -d --build --wait`.
+Изпращайте всяка заявка с Send. Не добавяйте Postman scripts или Collection Runner. Запазвайте обезличени резултати и описания на заявките; премахвайте credentials, cookies и tokens от споделяните файлове. След промени обновете приложението с `docker compose up -d --build --wait` и повторете проверките.
 
 ### Спиране и продължаване
 
@@ -160,6 +143,6 @@ docker compose -f compose.test.yml down
 2. Начертайте DFD и означете три граници: клиент/HTTP API, security context/приложна логика, приложение/DB. Посочете кои стойности идват от клиента.
 3. Изпълнете GET http://localhost:9000/tasks без вход → 401. Регистрирайте alice с JSON, влезте и повторете със сесията → 200 и списък от задачи.
 4. Прочетете `docker compose config --format json`: db няма ports, app има един публикуван порт с host_ip=127.0.0.1, backend е internal. Връзката app → db:5432 продължава да работи.
-5. Изпълнете готовия `TaskManagerBaselineTest`. Добавете `NetworkPolicyTest` или PowerShell проверка за конфигурацията и отрицателно копие на JSON с публикуван DB порт. Няма нужда от промяна на реалната мрежа за този отрицателен тест.
+5. Прегледайте ръчно JSON конфигурацията. В отделен текстов пример добавете публикуван DB порт и обяснете защо той нарушава правилото; не прилагайте примера към работещата среда.
 
 Очакваният резултат е схема, сравнение на достъпа и проверка, която приема текущата конфигурация и отхвърля публикуван DB порт.

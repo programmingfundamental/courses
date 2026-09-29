@@ -15,4 +15,4 @@ sidebar:
 
 ### Задача 2 — Решения за secrets
 
-Направете таблица за password, access signing key, refresh token, private note и DB credential: нужно ли е възстановяване, механизъм, съхранение, rotation/revocation и тест. Реализирайте поне два теста. Включете restart със същия/различен ключ, променен owner/AAD и кирилица.
+Направете таблица за password, access signing key, refresh token, private note и DB credential: нужно ли е възстановяване, механизъм, съхранение, rotation/revocation и ръчна проверка. Изпълнете поне две ръчни проверки с Postman и запишете наблюдаваните резултати. Включете restart със същия/различен ключ, променен owner/AAD и кирилица.
