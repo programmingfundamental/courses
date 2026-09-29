@@ -4,7 +4,7 @@ sidebar:
   order: 17
 ---
 
-The course spans 13 weeks: 9 teaching sessions and assessments in weeks 5, 9, 12, and 13. Week 1 has already been taught. Subsequent sessions build on Task Manager. All 14 UML diagram types are introduced in week 2 and used in later sessions. The teaching materials are currently available in Bulgarian. Use the language selector to open them.
+This course covers the design, development, testing, and maintenance of software with AI components. In the labs, you will extend Task Manager using UML models, automated tests, and model versioning. The teaching materials are available in Bulgarian via the language selector.
 
 ## Labs
 

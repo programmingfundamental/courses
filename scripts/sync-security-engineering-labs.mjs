@@ -93,8 +93,8 @@ for (const [index, course] of courses.entries()) {
 
   write(`bg/${course.id}/index.md`, document(course.title, 16 + index, readStudentFile(path.join(sourceRoot, 'README.md'))));
   const englishLinks = labs.map(lab => `- [Lab ${lab.number} — ${course.topics[lab.number - 1]}](/courses/en/${lab.route}/)`).join('\n');
-  const overview = schedule ? 'The course spans 13 weeks: 9 teaching sessions and assessments in weeks 5, 9, 12, and 13. Week 1 has already been taught. Subsequent sessions build on Task Manager. All 14 UML diagram types are introduced in week 2 and used in later sessions.' : `The course contains ${labs.length} labs.`;
-  write(`en/${course.id}/index.md`, document(course.english, 16 + index, `${overview} The teaching materials are currently available in Bulgarian. Use the language selector to open them.\n\n## Labs\n\n${englishLinks}`));
+  const overview = schedule ? 'This course covers the design, development, testing, and maintenance of software with AI components. In the labs, you will extend Task Manager using UML models, automated tests, and model versioning.' : `The course contains ${labs.length} labs on applied web security.`;
+  write(`en/${course.id}/index.md`, document(course.english, 16 + index, `${overview} The teaching materials are available in Bulgarian via the language selector.\n\n## Labs\n\n${englishLinks}`));
   for (const lab of labs) {
     const body = readStudentFile(lab.file);
     const headings = parse(body).children.filter(node => node.type === 'heading');

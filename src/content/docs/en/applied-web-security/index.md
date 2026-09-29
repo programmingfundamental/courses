@@ -4,7 +4,7 @@ sidebar:
   order: 16
 ---
 
-The course contains 11 labs. The teaching materials are currently available in Bulgarian. Use the language selector to open them.
+The course contains 11 labs on applied web security. The teaching materials are available in Bulgarian via the language selector.
 
 ## Labs
 
