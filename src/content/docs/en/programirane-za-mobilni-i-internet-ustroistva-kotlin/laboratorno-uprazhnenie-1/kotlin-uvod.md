@@ -1,14 +1,14 @@
 ---
-title: Пример за Kotlin код
+title: Kotlin code example
 sidebar:
   order: 1
 ---
 
-# Пример за Kotlin код
+# Kotlin code example
 
-Свойствата в Kotlin намаляват необходимостта от ръчно писане на getter и setter. При клас за данни (`data class`) компилаторът генерира и функции като `toString()`, `equals()` и `hashCode()` въз основа на свойствата в първичния конструктор. Двата примера показват съхраняване на температура, но не са напълно равностойни по генерирано поведение.
+Kotlin properties reduce the need to write getters and setters manually. For a `data class`, the compiler also generates functions such as `toString()`, `equals()`, and `hashCode()` based on the properties in the primary constructor. Both examples store a temperature, but they are not fully equivalent in their generated behavior.
 
-## Клас за аквариум в Java
+## Aquarium class in Java
 
 ```java
 public class Aquarium {
@@ -34,7 +34,7 @@ public class Aquarium {
 }
 ```
 
-## Клас за аквариум в Kotlin
+## Aquarium class in Kotlin
 
 ```kotlin
 data class Aquarium (var temperature: Int = 0)

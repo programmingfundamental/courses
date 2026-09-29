@@ -1,67 +1,67 @@
 ---
-title: Лабораторно упражнение 10
+title: Lab 10
 sidebar:
   order: 10
 ---
 
-# Лабораторно упражнение 10
+# Lab 10
 
-## Корутини в Kotlin
+## Coroutines in Kotlin
 
-Корутина (`coroutine`) е изчисление, което може да бъде преустановено и по-късно възобновено. Корутините улесняват асинхронната работа, като кодът може да остане последователен и четим.
+A coroutine is a computation that can be suspended and resumed later. Coroutines make asynchronous work easier while allowing the code to remain sequential and readable.
 
-Kotlin предоставя езикова поддръжка чрез модификатора `suspend`. Използваните на практика високонивови API като `launch`, `async`, `CoroutineScope` и `Dispatchers` се предоставят от библиотеката `kotlinx.coroutines`, а не от стандартната библиотека. При използването им проектът трябва да има съответните зависимости; версиите се съгласуват с конфигурацията на проекта.
+Kotlin provides language support through the `suspend` modifier. Practical high-level APIs such as `launch`, `async`, `CoroutineScope`, and `Dispatchers` come from the `kotlinx.coroutines` library, rather than the standard library. To use them, the project must include the appropriate dependencies, with versions aligned with the project configuration.
 
-## Корутина и нишка
+## Coroutines and threads
 
-Корутината не е нишка. Тя се изпълнява върху нишка, определена от контекста и dispatcher-а, а много корутини могат да споделят набор от нишки. При преустановяване чрез неблокираща операция нишката може да изпълнява друга работа. Възобновяването не е задължително на същата нишка — това зависи от контекста.
+A coroutine is not a thread. It runs on a thread determined by its context and dispatcher, and many coroutines can share a pool of threads. When a coroutine suspends through a nonblocking operation, the thread can perform other work. Resumption does not necessarily occur on the same thread: this depends on the context.
 
-Корутините не премахват автоматично необходимостта от синхронизация при споделени изменяеми данни.
+Coroutines do not automatically eliminate the need for synchronization when mutable data is shared.
 
-## Модификаторът `suspend`
+## The `suspend` modifier
 
-Функция с `suspend` може да използва операции, които преустановяват изпълнението и го възобновяват по-късно. Тя се извиква от друга `suspend` функция или от тялото на корутина.
+A function marked `suspend` can use operations that suspend execution and resume it later. It is called from another `suspend` function or from the body of a coroutine.
 
-Самият модификатор не премества работата на фонова нишка и не прави блокиращ код неблокиращ. Ако функцията извика блокираща операция, тя може да блокира текущата нишка.
+The modifier itself does not move work to a background thread or make blocking code nonblocking. If the function calls a blocking operation, it may block the current thread.
 
 ```kotlin
 import kotlinx.coroutines.delay
 
 suspend fun fetchData(): String {
-    delay(1000L) // Симулира изчакване без мрежова операция.
-    return "Данни"
+    delay(1000L) // Simulates waiting without a network operation.
+    return "Data"
 }
 ```
 
-## `delay()` и блокиращо изчакване
+## `delay()` and blocking waits
 
-`delay(1000L)` преустановява корутината за поне зададеното време в милисекунди, без да блокира нишката, и поддържа отмяна. `Thread.sleep(1000L)` блокира текущата нишка. В UI цикъла на задачата се използва `delay()`, за да остане интерфейсът отзивчив.
+`delay(1000L)` suspends the coroutine for at least the specified time in milliseconds without blocking the thread, and supports cancellation. `Thread.sleep(1000L)` blocks the current thread. The task's UI loop uses `delay()` to keep the interface responsive.
 
 ## `Dispatchers`
 
-| Dispatcher | Предназначение |
+| Dispatcher | Purpose |
 | --- | --- |
-| `Dispatchers.Main` | Работа на главната UI нишка; при Android поддръжката се осигурява от `kotlinx-coroutines-android`. |
-| `Dispatchers.IO` | Блокиращи входно-изходни операции, например четене от файл. |
-| `Dispatchers.Default` | Изчислително натоварваща работа. |
+| `Dispatchers.Main` | Work on the main UI thread; on Android, support is provided by `kotlinx-coroutines-android`. |
+| `Dispatchers.IO` | Blocking input/output operations, such as reading from a file. |
+| `Dispatchers.Default` | CPU-intensive work. |
 
-`Dispatchers.Unconfined` има специално поведение при възобновяване и обичайно не е необходим за стандартните Android задачи в това упражнение.
+`Dispatchers.Unconfined` has special resumption behavior and is usually unnecessary for the standard Android tasks in this lab.
 
-## Жизнен обхват и структуриран конкурентен модел
+## Coroutine scope and structured concurrency
 
-`CoroutineScope` определя жизнения обхват на стартираните в него корутини чрез своя контекст (`CoroutineContext`) и `Job`. Контекстът съдържа dispatcher, `Job` и други елементи. Обхватът сам по себе си не задава график за стартиране.
+`CoroutineScope` defines the lifetime of coroutines launched within it through its context (`CoroutineContext`) and `Job`. The context contains a dispatcher, a `Job`, and other elements. The scope itself does not define an execution schedule.
 
-При структурирана конкурентност (structured concurrency) корутините са свързани с родителска задача. Отмяната на родителския `Job` се предава към дъщерните корутини, така че ненужната работа да може да бъде прекратена. Отмяната е кооперативна: кодът трябва да достига операции, които я проверяват, например `delay()`, или да проверява `isActive`.
+With structured concurrency, coroutines are associated with a parent job. Cancelling the parent `Job` propagates cancellation to child coroutines so that unnecessary work can stop. Cancellation is cooperative: the code must reach operations that check for it, such as `delay()`, or check `isActive`.
 
-`GlobalScope` не обвързва работата с жизнения цикъл на конкретния екран и е неподходящ като стандартен избор за тези Android задачи. В задачата със зар се използва `LaunchedEffect`, който свързва работата с композицията.
+`GlobalScope` does not tie work to the lifecycle of a particular screen and is unsuitable as the default choice for these Android tasks. The dice task uses `LaunchedEffect`, which ties the work to the composition.
 
-## Стартиране и резултати
+## Launching coroutines and obtaining results
 
-- `launch` стартира корутина и връща `Job`, чрез който работата може да се изчака или отмени. Той не връща изчислен резултат.
-- `async` стартира корутина и връща `Deferred<T>`. Резултатът се получава чрез `await()`.
-- `suspend` функциите позволяват последователен запис на операции с преустановяване, без всяка стъпка да се описва чрез отделна callback функция.
+- `launch` starts a coroutine and returns a `Job`, which can be used to wait for or cancel the work. It does not return a computed result.
+- `async` starts a coroutine and returns `Deferred<T>`. Obtain the result through `await()`.
+- `suspend` functions allow suspending operations to be written sequentially, without expressing each step through a separate callback function.
 
-Примерът използва `fetchData()` от предходния раздел и структуриран обхват:
+The example uses `fetchData()` from the previous section and a structured scope:
 
 ```kotlin
 import kotlinx.coroutines.async
@@ -73,8 +73,8 @@ suspend fun loadMessage(): String = coroutineScope {
 }
 ```
 
-За единствена операция е достатъчно директно извикване на `fetchData()`; тук `async` показва начина за получаване на резултат.
+For a single operation, a direct call to `fetchData()` is sufficient; here, `async` demonstrates how to obtain a result.
 
-## Предимства и ограничения
+## Benefits and limitations
 
-Корутините позволяват четим асинхронен код и ефективно изчакване, когато операциите са неблокиращи. За правилна работа са необходими подходящ dispatcher, управляван жизнен обхват и коректна отмяна. Грешките могат да се обработват с `try`/`catch` на подходящото място, но сигналът за отмяна не трябва да се поглъща като обикновена грешка.
+Coroutines enable readable asynchronous code and efficient waiting when operations are nonblocking. Correct behavior requires an appropriate dispatcher, a managed lifetime, and proper cancellation. Errors can be handled with `try`/`catch` at the appropriate point, but the cancellation signal must not be swallowed as an ordinary error.

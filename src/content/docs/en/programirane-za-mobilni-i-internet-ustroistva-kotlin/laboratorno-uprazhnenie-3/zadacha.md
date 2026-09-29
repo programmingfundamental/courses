@@ -1,32 +1,32 @@
 ---
-title: Задачи
+title: Tasks
 sidebar:
   order: 100
-  label: Задачи
+  label: Tasks
 taskPage: true
 ---
-## Задачи за самостоятелна работа
+## Independent tasks
 
-Следните задачи са за подготовка и самопроверка към контролното върху упражнения 1–2. Реализирайте конзолно приложение „Справка за студенти“.
+The following tasks are for preparation and self-assessment for the test on Labs 1–2. Implement a "Student Report" console application.
 
-### Задача 1. Модел и входни данни
+### Task 1. Model and input data
 
-Създайте `data class Student` с име, факултетен номер като `String` и списък от цели оценки. Валидни са оценките от 2 до 6 включително.
+Create a `data class Student` with a name, a student ID as a `String`, and a list of integer grades. Valid grades range from 2 to 6 inclusive.
 
-Подгответе студентите „Анна“ с оценки `[6, 5, 6]`, „Борис“ с `[2, 3]` и „Вера“ с празен списък. Използвайте различни фиктивни факултетни номера.
+Prepare the students "Anna" with grades `[6, 5, 6]`, "Boris" with `[2, 3]`, and "Vera" with an empty list. Use different fictional student IDs.
 
-### Задача 2. Изчисления и справка
+### Task 2. Calculations and reporting
 
-Напишете функция за средна оценка, която връща `null` при липса на оценки. Отделете проверката за невалидни оценки в друга функция. При наличие на невалидна оценка съобщете грешката и не изчислявайте средна стойност за този студент.
+Write a function that calculates the average grade and returns `null` when there are no grades. Put the check for invalid grades in a separate function. If an invalid grade is present, report the error and do not calculate an average for that student.
 
-Изведете име, факултетен номер и среден успех с два знака след десетичния разделител или „Няма оценки“. Очакваните средни стойности са 5.67 за Анна и 2.50 за Борис.
+Print the name, student ID, and average grade to two decimal places, or "No grades". The expected averages are 5.67 for Anna and 2.50 for Boris.
 
-### Задача 3. Филтриране и търсене
+### Task 3. Filtering and searching
 
-Изведете студентите със среден успех поне 5.00, подредени по име. Добавете търсене по факултетен номер, което връща `Student?`. За несъществуващ номер покажете „Студентът не е намерен“.
+Print the students with an average grade of at least 5.00, sorted by name. Add a search by student ID that returns `Student?`. For an ID that does not exist, display "Student not found".
 
-При началните данни в списъка с отличници трябва да присъства само Анна. Студентите без оценки и с невалидни оценки не участват във филтрирането.
+With the initial data, only Anna should appear in the high-achievers list. Students with no grades or invalid grades are excluded from filtering.
 
-### Проверка и предаване
+### Verification and submission
 
-Предайте кода и примерния изход. Проверете празен списък от студенти, липсващ номер и оценки `[1, 7]`. Обяснете защо факултетният номер е текст и как обработвате липсващата средна стойност.
+Submit the code and sample output. Test an empty student list, a missing ID, and grades `[1, 7]`. Explain why the student ID is text and how you handle a missing average.

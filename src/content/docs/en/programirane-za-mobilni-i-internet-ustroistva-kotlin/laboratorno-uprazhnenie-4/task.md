@@ -1,19 +1,19 @@
 ---
-title: Задачи
+title: Tasks
 sidebar:
   order: 100
-  label: Задачи
+  label: Tasks
 taskPage: true
 ---
-Да се създаде Android приложение с Kotlin и Jetpack Compose, което визуализира заглавие и изображение, заредено от интернет.
+Create an Android application with Kotlin and Jetpack Compose that displays a title and an image loaded from the internet.
 
-## 1. Compose проект
+## 1. Compose project
 
-Да се създаде или отвори проект с Compose и Material 3. Да се запази генерираната Gradle конфигурация, описана в [основната страница](/courses/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-4/).
+Create or open a project with Compose and Material 3. Keep the generated Gradle configuration described on the [main page](/courses/en/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-4/).
 
-## 2. Зависимости за изображението
+## 2. Image dependencies
 
-В `app/build.gradle.kts`, в блока `dependencies`, да се добавят зависимостите за Coil Compose и за зареждане от мрежата. Хранилището не задава версия на Coil. Примерът използва `3.6.2`, посочена в [официалните указания на Coil](https://coil-kt.github.io/coil/getting_started/) при проверката на 17.09.2026 г. Двата артефакта трябва да са с една и съща версия; при използване на version catalog тя се задава там.
+In the `dependencies` block of `app/build.gradle.kts`, add the dependencies for Coil Compose and network loading. The repository does not specify a Coil version. The example uses `3.6.2`, listed in the [official Coil setup guide](https://coil-kt.github.io/coil/getting_started/) when checked on 17 September 2026. Both artifacts must use the same version; if using a version catalog, specify it there.
 
 ```kotlin
 dependencies {
@@ -24,35 +24,35 @@ dependencies {
 
 ## 3. Gradle sync
 
-Да се изпълни **Sync Project with Gradle Files**. Преди следващата стъпка да се провери дали зависимостите са заредени успешно.
+Run **Sync Project with Gradle Files**. Before proceeding, check that the dependencies have loaded successfully.
 
-## 4. Разрешение за интернет
+## 4. Internet permission
 
-В `app/src/main/AndroidManifest.xml` да се добави следният елемент непосредствено в `<manifest>`, извън и преди `<application>`:
+In `app/src/main/AndroidManifest.xml`, add the following element directly inside `<manifest>`, outside and before `<application>`:
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
-## 5. URL стойност
+## 5. URL value
 
-Адресът да се запише като `String` в композируемата функция:
+Store the URL as a `String` in the composable function:
 
 ```kotlin
 val imageUrl = "https://i.imgur.com/DvpvklR.png"
 ```
 
-## 6. Композируема функция
+## 6. Composable function
 
-Да се създаде функция `InternetImageScreen()` с `@Composable` и `Column`. Тя да бъде извикана в `setContent` на `MainActivity`.
+Create an `InternetImageScreen()` function with `@Composable` and `Column`. Call it inside `setContent` in `MainActivity`.
 
-## 7. Заглавие
+## 7. Title
 
-В `Column` да се добави `Text` със заглавие „Изображение от интернет“.
+Add a `Text` element to the `Column` with the title "Image from the internet".
 
-## 8. Изображение
+## 8. Image
 
-След заглавието да се добави `AsyncImage` с URL стойността, описание, подходящ размер и `ContentScale.Crop`. Пълният пример за `MainActivity.kt` е даден по-долу. Редът `package` се съобразява с пакета на проекта.
+After the title, add an `AsyncImage` with the URL value, a description, an appropriate size, and `ContentScale.Crop`. The complete `MainActivity.kt` example is shown below. Adjust the `package` line to match your project's package.
 
 ```kotlin
 package com.example.mycomposeapp
@@ -94,12 +94,12 @@ fun InternetImageScreen(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Text(
-            text = "Изображение от интернет",
+            text = "Image from the internet",
             style = MaterialTheme.typography.headlineSmall
         )
         AsyncImage(
             model = imageUrl,
-            contentDescription = "Изображение, заредено от интернет",
+            contentDescription = "Image loaded from the internet",
             modifier = Modifier.fillMaxWidth().height(300.dp),
             contentScale = ContentScale.Crop
         )
@@ -107,38 +107,38 @@ fun InternetImageScreen(modifier: Modifier = Modifier) {
 }
 ```
 
-## 9. Стартиране
+## 9. Running the application
 
-Приложението да се стартира на емулатор или физическо устройство с достъп до интернет.
+Run the application on an emulator or physical device with internet access.
 
-## 10. Проверка
+## 10. Verification
 
-Да се провери дали заглавието и изображението се визуализират и дали изображението заема зададената област. При неуспех да се проверят адресът, интернет връзката, разрешението и съобщенията в Logcat.
+Check that the title and image are displayed and that the image occupies the specified area. If loading fails, check the URL, internet connection, permission, and Logcat messages.
 
-Зареждането на мрежов ресурс не е надежден тест в Compose Preview, където мрежовият достъп е ограничен. Реалното зареждане се проверява на емулатор или устройство. [Документация на Coil за Preview](https://coil-kt.github.io/coil/compose/#previews).
+Loading a network resource is not a reliable test in Compose Preview, where network access is restricted. Test actual loading on an emulator or device. [Coil Preview documentation](https://coil-kt.github.io/coil/compose/#previews).
 
-## Задачи за самостоятелна работа
+## Independent tasks
 
-Работете в собствен Android проект с Kotlin и Jetpack Compose. Използвайте генерираната конфигурация на проекта.
+Work in your own Android project with Kotlin and Jetpack Compose. Use the generated project configuration.
 
-### Задача 1. Първо приложение
+### Task 1. Your first application
 
-Създайте приложение „Моята студентска карта“. Изнесете интерфейса в композируема функция `StudentCardScreen()` и я извикайте от `setContent`. Покажете име, специалност и курс с примерни данни.
+Create a "My Student Card" application. Move the interface into a `StudentCardScreen()` composable function and call it from `setContent`. Display a name, degree program, and year of study using sample data.
 
-Стартирайте приложението на емулатор или физическо устройство и проверете дали се виждат всички надписи.
+Run the application on an emulator or physical device and check that all labels are visible.
 
-### Задача 2. Ресурси и Preview
+### Task 2. Resources and Preview
 
-Запишете името на приложението и етикетите на картата в `strings.xml`. Добавете собствено локално изображение в `res/drawable` и го покажете с описание. Изображението може да бъде създадена от вас PNG икона.
+Store the application name and card labels in `strings.xml`. Add your own local image to `res/drawable` and display it with a description. The image can be a PNG icon you created.
 
-Създайте Preview на картата. Променете един текстов ресурс и проверете резултата както в Preview, така и в стартираното приложение.
+Create a Preview of the card. Change one text resource and check the result both in Preview and in the running application.
 
-### Задача 3. Ориентиране в проекта
+### Task 3. Navigating the project
 
-Съставете таблица с пътищата до манифеста, Kotlin файла с интерфейса, текстовите ресурси и Gradle файла на модула `app`. За всеки файл посочете предназначението му.
+Create a table containing the paths to the manifest, the Kotlin file with the interface, the text resources, and the `app` module's Gradle file. State the purpose of each file.
 
-В собствен текстов ресурс временно премахнете затварящия XML таг. Стартирайте изграждането, запишете как съобщението насочва към грешката, възстановете тага и изградете успешно проекта.
+Temporarily remove a closing XML tag from one of your own text resources. Start the build, record how the message identifies the error, restore the tag, and build the project successfully.
 
-### Проверка и предаване
+### Verification and submission
 
-Предайте проекта, таблицата и снимка на работещото приложение. Приложете съобщението за XML грешката и резултата след поправката. Картата трябва да се показва и без интернет връзка.
+Submit the project, the table, and a screenshot of the running application. Include the XML error message and the result after the fix. The card must also be displayed without an internet connection.

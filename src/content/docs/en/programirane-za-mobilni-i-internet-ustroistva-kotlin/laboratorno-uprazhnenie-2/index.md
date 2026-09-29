@@ -1,14 +1,14 @@
 ---
-title: Лабораторно упражнение 2
+title: Lab 2
 sidebar:
   order: 2
 ---
 
-# Лабораторно упражнение 2
+# Lab 2
 
-## Класове и обекти
+## Classes and objects
 
-Клас се декларира с `class`, име и при необходимост параметри на конструктора и тяло във фигурни скоби. Когато няма тяло, скобите могат да се пропуснат. Всеки кодов блок е самостоятелен пример; повтарящите се имена не се добавят едновременно в един файл.
+A class is declared with `class`, a name, and, if needed, constructor parameters and a body in braces. When there is no body, the braces can be omitted. Each code block is a standalone example; do not place repeated names in the same file at the same time.
 
 ```kotlin
 class Customer                                  // 1
@@ -26,14 +26,14 @@ fun main() {
 }
 ```
 
-1. Декларира се `Customer` с конструктор без параметри.
-2. `Contact` има първичен конструктор с два параметъра. `val id` и `var email` едновременно декларират свойства.
-3. Обект се създава чрез извикване на конструктора, без ключова дума `new`.
-4. На конструктора на `Contact` се подават два аргумента.
-5. Прочита се `id`.
-6. Променя се `email`.
+1. `Customer` is declared with a constructor without parameters.
+2. `Contact` has a primary constructor with two parameters. `val id` and `var email` also declare properties.
+3. An object is created by calling the constructor, without the `new` keyword.
+4. Two arguments are passed to the `Contact` constructor.
+5. `id` is read.
+6. `email` is changed.
 
-## Свойства
+## Properties
 
 ```kotlin
 class Customer(initialEmail: String) {
@@ -45,11 +45,11 @@ class Customer(initialEmail: String) {
 }
 ```
 
-`field` е полето за съхранение (backing field) на свойството. Getter прочита стойността, а setter я променя. Обръщение към самото свойство в неговия getter или setter може да предизвика рекурсивно извикване. Инициализацията използва `initialEmail` директно; `trim()` се изпълнява при последващо присвояване.
+`field` is the property's backing field. The getter reads its value, while the setter changes it. Referring to the property itself inside its getter or setter may cause a recursive call. Initialization uses `initialEmail` directly; `trim()` runs on subsequent assignments.
 
-## Конструктори
+## Constructors
 
-Първичният конструктор (`primary constructor`) се задава след името на класа. Параметър с `val` или `var` става свойство, а параметър без тях служи за инициализация. Блокът `init` съдържа код, изпълняван при създаване на обекта. Вторичният конструктор (`secondary constructor`) се декларира с `constructor(...)`. Ако има първичен конструктор, вторичният трябва да делегира към него пряко или чрез друг вторичен конструктор с `this(...)`.
+The primary constructor is specified after the class name. A parameter with `val` or `var` becomes a property, while a parameter without them is used for initialization. An `init` block contains code executed when the object is created. A secondary constructor is declared with `constructor(...)`. If there is a primary constructor, a secondary constructor must delegate to it directly or through another secondary constructor using `this(...)`.
 
 ```kotlin
 class Contact(val id: Int, var email: String) {
@@ -66,16 +66,16 @@ fun main() {
 }
 ```
 
-## Модификатори на видимост
+## Visibility modifiers
 
-- `public` е модификаторът по подразбиране. Декларацията е достъпна навсякъде, където е достъпен съдържащият я тип.
-- `private` ограничава достъпа до съдържащия клас; за декларация на най-горно ниво (top-level) — до същия файл.
-- `protected` позволява достъп от класа и неговите подкласове. Не се използва за top-level декларации.
-- `internal` позволява достъп в същия модул — група файлове, компилирани заедно.
+- `public` is the default modifier. The declaration is accessible wherever its containing type is accessible.
+- `private` restricts access to the containing class; for a top-level declaration, access is restricted to the same file.
+- `protected` allows access from the class and its subclasses. It is not used for top-level declarations.
+- `internal` allows access within the same module: a group of files compiled together.
 
-## Наследяване
+## Inheritance
 
-Kotlin напълно поддържа традиционния обектно-ориентиран механизъм за наследяване.
+Kotlin fully supports traditional object-oriented inheritance.
 
 ```kotlin
 open class Dog {                // 1
@@ -96,12 +96,12 @@ fun main() {
 }
 ```
 
-1. Класовете са окончателни по подразбиране. Модификаторът `open` разрешава наследяване.
-2. Метод с `open` може да бъде предефиниран в подклас.
-3. `Yorkshire` наследява `Dog`, като `Dog()` извиква конструктора на базовия клас.
-4. За предефиниране на метод или свойство се използва `override`.
+1. Classes are final by default. The `open` modifier allows inheritance.
+2. A method marked `open` can be overridden in a subclass.
+3. `Yorkshire` inherits from `Dog`, with `Dog()` calling the base class constructor.
+4. Use `override` to override a method or property.
 
-## Наследяване с параметризиран конструктор
+## Inheritance with a parameterized constructor
 
 ```kotlin
 open class Tiger(val origin: String) {
@@ -118,9 +118,9 @@ fun main() {
 }
 ```
 
-Аргументите за параметризирания конструктор на базовия клас се подават в декларацията на подкласа.
+Arguments for the base class's parameterized constructor are passed in the subclass declaration.
 
-## Предаване на аргументи на конструктора към суперклас
+## Passing constructor arguments to a superclass
 
 ```kotlin
 open class Lion(val name: String, val origin: String) {
@@ -137,9 +137,9 @@ fun main() {
 }
 ```
 
-## Абстрактни класове
+## Abstract classes
 
-Абстрактен клас се декларира с `abstract` и не може да има непосредствени екземпляри. Той може да бъде наследяван. Членовете му са абстрактни само ако изрично са означени с `abstract`; останалите могат да имат реализация.
+An abstract class is declared with `abstract` and cannot be instantiated directly. It can be subclassed. Its members are abstract only if explicitly marked `abstract`; other members can have implementations.
 
 ```kotlin
 abstract class Person(name: String) {
@@ -169,9 +169,9 @@ fun main(args: Array<String>) {
 }
 ```
 
-## Интерфейси
+## Interfaces
 
-Интерфейсите могат да съдържат абстрактни методи и методи с реализация. Свойствата им нямат backing field: те са абстрактни или предоставят реализация на достъпа, която не съхранява собствена стойност.
+Interfaces can contain abstract methods and methods with implementations. Their properties have no backing fields: they are either abstract or provide accessor implementations that do not store their own values.
 
 ```kotlin
 interface Animal {
@@ -205,9 +205,9 @@ fun main(args: Array<String>) {
 }
 ```
 
-## Класове за данни (`data class`)
+## Data classes (`data class`)
 
-Класът за данни (`data class`) съхранява стойности. Компилаторът генерира `equals()`, `hashCode()`, `toString()`, `componentN()` и `copy()` въз основа на свойствата от първичния конструктор. Следващият пример използва автоматично генерираното поведение.
+A data class stores values. The compiler generates `equals()`, `hashCode()`, `toString()`, `componentN()`, and `copy()` based on the properties in the primary constructor. The following example uses this automatically generated behavior.
 
 ```kotlin
 data class User(val name: String, val id: Int)             // 1
@@ -237,20 +237,20 @@ fun main() {
 }
 ```
 
-1. `data class User` има свойствата `name` и `id`.
-2. `equals()` и `hashCode()` се генерират съгласувано от двете свойства.
-3. `println(user)` използва генерираната `toString()`.
-4. Два обекта са равни чрез `==`, ако съвпадат и `name`, и `id`.
-5. Равните обекти имат еднакъв `hashCode()`.
-6. `copy()` създава нов екземпляр.
-7. Операторът `===` сравнява референциите; копието е друг обект.
-8. Позиционен аргумент в `copy()` променя съответното свойство в копието.
-9. Именуван аргумент като `id = 3` посочва кое свойство се променя.
-10. `component1()` и `component2()` връщат свойствата в реда на първичния конструктор.
+1. `data class User` has the properties `name` and `id`.
+2. `equals()` and `hashCode()` are generated consistently from both properties.
+3. `println(user)` uses the generated `toString()`.
+4. Two objects are equal according to `==` if both `name` and `id` match.
+5. Equal objects have the same `hashCode()`.
+6. `copy()` creates a new instance.
+7. The `===` operator compares references; the copy is a different object.
+8. A positional argument in `copy()` changes the corresponding property in the copy.
+9. A named argument such as `id = 3` specifies which property changes.
+10. `component1()` and `component2()` return the properties in primary constructor order.
 
-## Изброими класове (`enum class`)
+## Enum classes (`enum class`)
 
-Изброим клас (`enum class`) представя краен набор от именувани стойности, например посоки, състояния или режими.
+An enum class represents a finite set of named values, such as directions, states, or modes.
 
 ```kotlin
 enum class State {
@@ -268,13 +268,13 @@ fun main() {
 }
 ```
 
-1. `State` съдържа три различни константи.
-2. Константа се достъпва чрез името на класа.
-3. Изразът `when` е изчерпателен, защото обхваща всички константи, и не изисква `else`.
+1. `State` contains three distinct constants.
+2. A constant is accessed through the class name.
+3. The `when` expression is exhaustive because it covers all constants, so it does not require `else`.
 
-### Свойства и методи в `enum class`
+### Properties and methods in an `enum class`
 
-Списъкът от константи се отделя от останалите членове с точка и запетая.
+The list of constants is separated from the remaining members by a semicolon.
 
 ```kotlin
 enum class Color(val rgb: Int) {                      // 1
@@ -295,17 +295,17 @@ fun main() {
 }
 ```
 
-1. `Color` има свойство `rgb` и метод `containsRed()`.
-2. Всяка константа подава стойност за `rgb` на конструктора.
-3. Побитовата операция `and` проверява дали червеният компонент е ненулев.
-4. `println(red)` извежда името `RED`.
-5. Методът се извиква върху константата `red`.
-6. `Color.BLUE.containsRed()` връща `false`.
-7. Червеният компонент е ненулев при `RED` и `YELLOW`, затова проверката връща `true`.
+1. `Color` has an `rgb` property and a `containsRed()` method.
+2. Each constant passes a value for `rgb` to the constructor.
+3. The bitwise `and` operation checks whether the red component is nonzero.
+4. `println(red)` prints the name `RED`.
+5. The method is called on the `red` constant.
+6. `Color.BLUE.containsRed()` returns `false`.
+7. The red component is nonzero for `RED` and `YELLOW`, so the check returns `true`.
 
-## Запечатани класове (`sealed class`)
+## Sealed classes (`sealed class`)
 
-Запечатаният клас (`sealed class`) ограничава преките си наследници до същия пакет и модул. Те трябва да имат име и не могат да бъдат локални или анонимни класове. Това позволява на компилатора да провери дали `when` обхваща всички възможни случаи.
+A sealed class restricts its direct subclasses to the same package and module. They must have names and cannot be local or anonymous classes. This allows the compiler to check whether `when` covers all possible cases.
 
 ```kotlin
 
@@ -326,11 +326,11 @@ fun main() {
 
 ```
 
-`Mammal` е запечатан клас, а `Cat` и `Human` са неговите преки наследници. След проверка с `is` компилаторът разпознава конкретния тип (smart cast), например `Human`, и разрешава достъп до `job`. Изразът `when` е изчерпателен и не изисква `else`.
+`Mammal` is a sealed class, and `Cat` and `Human` are its direct subclasses. After an `is` check, the compiler recognizes the specific type (a smart cast), such as `Human`, and allows access to `job`. The `when` expression is exhaustive and does not require `else`.
 
-## Клас и обект
+## Class and object
 
-Класът описва структура и поведение, а обектът е негов екземпляр. От един клас могат да се създадат няколко обекта:
+A class describes structure and behavior, while an object is an instance of that class. Multiple objects can be created from one class:
 
 ```kotlin
 
@@ -353,16 +353,16 @@ fun main() {
 
 ```
 
-1. Декларира се клас `LuckDispatcher`.
-2. Методът извежда случайно цяло число от 0 до 89.
-3. Създават се два различни обекта.
-4. Методът се извиква върху всеки обект.
+1. The `LuckDispatcher` class is declared.
+2. The method prints a random integer from 0 to 89.
+3. Two distinct objects are created.
+4. The method is called on each object.
 
-Декларацията `object` създава един споделен екземпляр (singleton). Той се инициализира при първи достъп, като инициализацията е безопасна при работа с няколко нишки.
+An `object` declaration creates a single shared instance (a singleton). It is initialized on first access, and initialization is thread-safe.
 
-## Израз `object`
+## Object expressions
 
-Изразът `object` създава анонимен обект с посочените членове. В примера той съхранява междинните стойности за изчисляване на наем:
+An `object` expression creates an anonymous object with the specified members. In this example, it stores intermediate values for calculating rent:
 
 ```kotlin
 
@@ -386,15 +386,15 @@ fun main() {
 
 ```
 
-1. Декларира се функция с три параметъра.
-2. При извикване се създава анонимен обект със стойностите за отделните дни.
-3. Сумата се изчислява чрез свойствата на обекта.
-4. Резултатът се извежда.
-5. Функцията се извиква с конкретен брой дни.
+1. A function with three parameters is declared.
+2. Calling it creates an anonymous object with the values for the different days.
+3. The total is calculated using the object's properties.
+4. The result is printed.
+5. The function is called with specific numbers of days.
 
-## Декларация `object`
+## Object declarations
 
-Именуваната декларация `object` предоставя един споделен обект. До членовете му се достига чрез името му, без извикване на конструктор. Примерът използва демонстрационни стойности.
+A named `object` declaration provides a single shared object. Its members are accessed through its name, without calling a constructor. The example uses demonstration values.
 
 ```kotlin
 
@@ -410,13 +410,13 @@ fun main(){
 
 ```
 
-1. Създава декларация на обект.
-2. Определя метода на обекта.
-3. Извиква метода. Това е моментът, в който обектът действително е създаден.
+1. Creates an object declaration.
+2. Defines the object's method.
+3. Calls the method. This is when the object is actually created.
 
-## Придружаващ обект (`companion object`)
+## Companion objects (`companion object`)
 
-Придружаващият обект (`companion object`) се декларира в клас. Членовете му могат да се извикват чрез името на съдържащия клас. Те принадлежат на придружаващия обект, а не на отделните екземпляри на класа.
+A companion object is declared inside a class. Its members can be called through the containing class's name. They belong to the companion object, rather than individual instances of the class.
 
 ```kotlin
 
@@ -436,7 +436,7 @@ fun main() {
 
 ```
 
-1. Дефинира клас.
-2. Декларира придружаващ обект. Името `Bonger` може да се пропусне.
-3. Дефинира метод на придружаващ обект.
-4. Извиква метода на придружаващия обект чрез името на класа.
+1. Defines a class.
+2. Declares a companion object. The name `Bonger` can be omitted.
+3. Defines a companion object method.
+4. Calls the companion object's method through the class name.

@@ -1,28 +1,28 @@
 ---
-title: Задачи
+title: Tasks
 sidebar:
   order: 100
-  label: Задачи
+  label: Tasks
 taskPage: true
 ---
-Да се създаде приложение, което през зададен от потребителя интервал избира произволен зар и визуализира съответното изображение.
+Create an application that selects a random die face at a user-defined interval and displays the corresponding image.
 
-## Ресурси и модел
+## Resources and model
 
-1. Да се използват изображенията на зарове от следния ресурс: [изображения за задачата](https://tuvarnabg.sharepoint.com/:u:/s/msteams_230e9b/EXtfPyFQ_3tAnBwEYE7-4XgB3w6hd6boqpZEw_RJEj-sgg?e=HW2dfN).
-2. Изображенията да се добавят в `app/src/main/res/drawable`.
-3. В `app/src/main/res/values/strings.xml` да се добави текстов ресурс за стойността на всеки зар.
-4. Да се създаде клас за данни `Dice` с `@StringRes val stringResourceId: Int` и `@DrawableRes val drawableResourceId: Int`. Да се подготви непразен списък `List<Dice>`, който свързва действителните ресурси. Имената на файловете не се предполагат от адреса на ресурса.
+1. Use the dice images from the following resource: [images for the task](https://tuvarnabg.sharepoint.com/:u:/s/msteams_230e9b/EXtfPyFQ_3tAnBwEYE7-4XgB3w6hd6boqpZEw_RJEj-sgg?e=HW2dfN).
+2. Add the images to `app/src/main/res/drawable`.
+3. In `app/src/main/res/values/strings.xml`, add a text resource for the value of each die face.
+4. Create a `Dice` data class with `@StringRes val stringResourceId: Int` and `@DrawableRes val drawableResourceId: Int`. Prepare a nonempty `List<Dice>` linking the actual resources. Do not infer file names from the resource URL.
 
-## Интервал и управление
+## Interval and controls
 
-5. Да се добави поле за интервал в **цели положителни секунди**. Да се проверяват празна стойност, нечислова стойност и стойност, по-малка или равна на нула. Да се отхвърлят и стойности, които не могат безопасно да се преобразуват в милисекунди.
-6. Да се добавят бутони „Старт“ и „Стоп“. „Старт“ да включва повтарящия се процес само след успешна проверка. При работещ процес полето и „Старт“ да са неактивни. „Стоп“ да отменя работата.
-7. Да се използва един `LaunchedEffect`, управляван от състоянието `running`. След всяко `delay()` да се избира случаен обект от списъка и да се показват неговите изображение и текст. Повторно натискане на „Старт“ да не създава допълнителни цикли.
+5. Add a field for the interval in **positive whole seconds**. Check for an empty value, a nonnumeric value, and a value less than or equal to zero. Also reject values that cannot be safely converted to milliseconds.
+6. Add "Start" and "Stop" buttons. "Start" should enable the repeating process only after successful validation. Disable the field and "Start" while the process is running. "Stop" should cancel the work.
+7. Use a single `LaunchedEffect` controlled by the `running` state. After each `delay()`, select a random object from the list and display its image and text. Pressing "Start" again must not create additional loops.
 
-## Пример за управлението
+## Control example
 
-Примерът се добавя в Kotlin файл на Compose проекта. `DiceScreen(dice)` се извиква в `setContent` в темата на приложението с подготвения списък от ресурси. Използва се Material 3. Кодът не предполага конкретни имена на изображенията.
+Add this example to a Kotlin file in the Compose project. Call `DiceScreen(dice)` inside `setContent`, within the application theme, using the prepared resource list. It uses Material 3. The code does not assume specific image names.
 
 ```kotlin
 import androidx.annotation.DrawableRes
@@ -84,7 +84,7 @@ fun DiceScreen(dice: List<Dice>, modifier: Modifier = Modifier) {
         OutlinedTextField(
             value = intervalText,
             onValueChange = { intervalText = it; error = null },
-            label = { Text("Интервал в секунди") },
+            label = { Text("Interval in seconds") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             singleLine = true,
             enabled = !running,
@@ -97,16 +97,16 @@ fun DiceScreen(dice: List<Dice>, modifier: Modifier = Modifier) {
                 onClick = {
                     val parsed = intervalMillisOrNull(intervalText)
                     if (parsed == null) {
-                        error = "Необходим е валиден положителен брой секунди."
+                        error = "A valid positive number of seconds is required."
                     } else {
                         error = null
                         intervalMillis = parsed
                         running = true
                     }
                 }
-            ) { Text("Старт") }
+            ) { Text("Start") }
             Button(enabled = running, onClick = { running = false }) {
-                Text("Стоп")
+                Text("Stop")
             }
         }
         currentDice?.let { selected ->
@@ -120,42 +120,42 @@ fun DiceScreen(dice: List<Dice>, modifier: Modifier = Modifier) {
             Text(description)
         }
         if (dice.isEmpty()) {
-            Text("Липсват ресурси за заровете.")
+            Text("Dice resources are missing.")
         }
     }
 }
 ```
 
-При промяна на ключа `running` предишната корутина на `LaunchedEffect` се отменя. При `false` не се стартира нов цикъл. Напускането на композицията също отменя работата. Самото изпращане на `Activity` във фонов режим не означава непременно напускане на композицията.
+When the `running` key changes, the previous `LaunchedEffect` coroutine is cancelled. When it is `false`, no new loop starts. Leaving the composition also cancels the work. Moving the `Activity` to the background does not necessarily mean leaving the composition.
 
-Първоначално се показва първият зар от списъка, а след „Старт“ случайният избор се извършва след всеки зададен интервал. Интервалът е приблизителен и зависи от планирането на изпълнението; `delay()` не е точен часовник.
+Initially, the first die face in the list is displayed. After "Start", a random selection occurs after each specified interval. The interval is approximate and depends on execution scheduling; `delay()` is not a precise clock.
 
-## Проверка
+## Verification
 
-Да се проверят празен вход, текст вместо число, нула, отрицателна стойност и прекалено голямо число. При грешка цикълът не трябва да започва. След валиден старт да се провери промяната на изображението, неактивният бутон „Старт“, спирането чрез „Стоп“ и последващо стартиране с друг интервал. Случайният избор може да повтори предишния зар.
+Test empty input, text instead of a number, zero, a negative value, and an excessively large number. The loop must not start when there is an error. After a valid start, check that the image changes, the "Start" button is disabled, "Stop" stops the process, and it can subsequently restart with a different interval. Random selection may repeat the previous die face.
 
-## Задачи за самостоятелна работа
+## Independent tasks
 
-Реализирайте Compose таймер за обратно броене с корутина. Не са необходими изображения или мрежова връзка.
+Implement a Compose countdown timer with a coroutine. No images or network connection are required.
 
-### Задача 1. Вход и представяне
+### Task 1. Input and display
 
-Добавете поле за начална продължителност в цели секунди от 1 до 300, текст с оставащото време и бутони „Старт“, „Стоп“ и „Нулиране“.
+Add a field for an initial duration in whole seconds from 1 to 300, text showing the remaining time, and "Start", "Stop", and "Reset" buttons.
 
-При невалидна стойност показвайте грешка и не стартирайте таймера. В началото оставащото време да е 0, докато не бъде приета валидна продължителност.
+For an invalid value, show an error and do not start the timer. Initially, the remaining time should be 0 until a valid duration is accepted.
 
-### Задача 2. Един работещ цикъл
+### Task 2. A single running loop
 
-Управлявайте отброяването с `LaunchedEffect` и `delay()`. След всяко изчакване от 1000 ms намалявайте стойността с 1, докато достигне 0. При 0 спрете цикъла и покажете „Готово“.
+Manage the countdown with `LaunchedEffect` and `delay()`. After each 1000 ms wait, decrease the value by 1 until it reaches 0. At 0, stop the loop and display "Done".
 
-Докато таймерът работи, полето и „Старт“ да са неактивни. Повторно действие не трябва да създава втори цикъл. Това е учебно отброяване; не се изисква точност на часовник.
+Disable the field and "Start" while the timer is running. A repeated action must not create a second loop. This is an educational countdown; clock-level accuracy is not required.
 
-### Задача 3. Отмяна и повторно стартиране
+### Task 3. Cancellation and restarting
 
-„Стоп“ да отменя отброяването и да оставя текущата стойност видима. Следващото „Старт“ да започва от въведената продължителност. „Нулиране“ да отменя работата, да връща оставащото време на 0 и да скрива „Готово“.
+"Stop" should cancel the countdown and leave the current value visible. The next "Start" should begin from the entered duration. "Reset" should cancel the work, set the remaining time to 0, and hide "Done".
 
-Добавете бутон извън таймера, който премахва неговата композируема функция от композицията. При повторно показване таймерът да е спрян. Състоянието за текущото изпълнение да е локално за тази функция и да не се възстановява като работещо след пресъздаване на `Activity`.
+Add a button outside the timer that removes its composable function from the composition. When shown again, the timer should be stopped. The current execution state should be local to that function and should not be restored as running after `Activity` recreation.
 
-### Проверка и предаване
+### Verification and submission
 
-Предайте кода и наблюдения за завършване от 3 секунди, спиране по средата, повторен старт, нулиране и премахване от композицията. Проверете вход `0`, `301`, празен и нечислов текст. Обяснете защо `Thread.sleep()` не е подходящ за този UI цикъл.
+Submit the code and observations for completing a 3-second countdown, stopping midway, restarting, resetting, and removing the timer from the composition. Test `0`, `301`, empty input, and nonnumeric text. Explain why `Thread.sleep()` is unsuitable for this UI loop.

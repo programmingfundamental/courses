@@ -1,36 +1,36 @@
 ---
-title: Задачи
+title: Tasks
 sidebar:
   order: 100
-  label: Задачи
+  label: Tasks
 taskPage: true
 ---
-## Задачи за самостоятелна работа
+## Independent tasks
 
-Използвайте конзолен Kotlin проект и материала „Въведение в Kotlin“. Всяка задача да има отделна функция и извиквания от `main()`.
+Use a Kotlin console project and the "Introduction to Kotlin" material. Give each task a separate function and call it from `main()`.
 
-### Задача 1. Състояние на батерията
+### Task 1. Battery status
 
-Реализирайте `batteryLabel(percent: Int?): String`, която връща:
+Implement `batteryLabel(percent: Int?): String`, which returns:
 
-- „Няма данни“ при `null`;
-- „Невалидна стойност“ извън диапазона 0–100;
-- „Нисък заряд“ при 0–15, „Нормален заряд“ при 16–79 и „Пълен заряд“ при 80–100.
+- "No data" for `null`;
+- "Invalid value" for values outside the 0–100 range;
+- "Low charge" for 0–15, "Normal charge" for 16–79, and "Full charge" for 80–100.
 
-Използвайте условни изрази и обработете `null` без оператора `!!`.
+Use conditional expressions and handle `null` without the `!!` operator.
 
-### Задача 2. Обработка на измервания
+### Task 2. Processing measurements
 
-За `List<Int?>` отделете ненулевите измервания в диапазона от −50 до 50 включително. Изведете броя, минималната, максималната и средната им стойност. Ако няма валидни измервания, изведете „Няма валидни измервания“, без да изчислявате средна стойност.
+From a `List<Int?>`, select non-null measurements in the range −50 to 50 inclusive. Print their count, minimum, maximum, and average. If there are no valid measurements, print "No valid measurements" without calculating an average.
 
-За вход `[18, 21, -100, null, 25, 60, 19]` очаквайте 4 валидни измервания, минимум 18, максимум 25 и средна стойност 20.75.
+For input `[18, 21, -100, null, 25, 60, 19]`, expect 4 valid measurements, a minimum of 18, a maximum of 25, and an average of 20.75.
 
-### Задача 3. Списък с устройства
+### Task 3. Device list
 
-Обработете списък с имена: премахнете водещите и крайните празни знаци, изключете празните имена, премахнете повторенията без значение на регистъра и сортирайте резултата. За еднозначен изход представете имената с малки букви. Използвайте операции върху колекции и ламбда изрази.
+Process a list of names: trim leading and trailing whitespace, exclude empty names, remove case-insensitive duplicates, and sort the result. Convert names to lowercase for unambiguous output. Use collection operations and lambda expressions.
 
-За `[" Phone ", "", "TABLET", "phone", " Watch "]` очаквайте `["phone", "tablet", "watch"]`.
+For `[" Phone ", "", "TABLET", "phone", " Watch "]`, expect `["phone", "tablet", "watch"]`.
 
-### Проверка и предаване
+### Verification and submission
 
-Предайте Kotlin файловете и изхода от проверките. За батерията проверете `null`, −1, 0, 15, 16, 79, 80, 100 и 101; за двата списъка добавете празен вход и вход само с невалидни или празни стойности.
+Submit the Kotlin files and the verification output. For the battery, test `null`, −1, 0, 15, 16, 79, 80, 100, and 101; for both lists, add an empty input and an input containing only invalid or empty values.

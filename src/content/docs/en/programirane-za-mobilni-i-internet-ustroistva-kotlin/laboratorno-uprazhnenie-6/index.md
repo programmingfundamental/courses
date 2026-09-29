@@ -1,56 +1,56 @@
 ---
-title: Лабораторно упражнение 6
+title: Lab 6
 sidebar:
   order: 6
 ---
 
-# Лабораторно упражнение 6
+# Lab 6
 
-## Жизнен цикъл на `Activity`
+## The `Activity` lifecycle
 
-`Activity` е Android компонент, който предоставя прозорец за потребителския интерфейс. Например приложение може да използва `LoginActivity`, `SettingsActivity` или `MainActivity`. Една `Activity` може да представя и повече от един екран чрез Compose.
+An `Activity` is an Android component that provides a window for the user interface. For example, an application may use `LoginActivity`, `SettingsActivity`, or `MainActivity`. A single `Activity` can also present more than one screen through Compose.
 
-Системата управлява жизнения цикъл на всеки екземпляр и извиква callback методи при създаване, показване, спиране и унищожаване.
+The system manages each instance's lifecycle and calls callback methods when it is created, shown, stopped, and destroyed.
 
-### Основни callback методи
+### Main callback methods
 
-| Метод | Кога се извиква | Типична роля |
+| Method | When it is called | Typical role |
 | --- | --- | --- |
-| `onCreate()` | При създаване на екземпляра, включително след пресъздаване | Инициализация и задаване на съдържанието чрез `setContent`. |
-| `onStart()` | При преминаване към видимо състояние | Подготовка на работа, необходима докато `Activity` е видима. |
-| `onResume()` | При преминаване към активно състояние за взаимодействие | Възобновяване на работа, свързана с активния интерфейс. |
-| `onPause()` | При напускане на активното състояние; `Activity` може още да е видима | Кратки операции за пауза на работа, която изисква активен интерфейс. |
-| `onStop()` | Когато `Activity` вече не е видима | Прекратяване на работа, необходима само при видим интерфейс. |
-| `onRestart()` | След спиране, когато същият екземпляр се показва отново | След него следва `onStart()`. |
-| `onDestroy()` | При унищожаване на екземпляра, например след `finish()` или при определени промени на конфигурацията | Завършване на работа, свързана с този екземпляр, когато callback методът бъде извикан. |
+| `onCreate()` | When the instance is created, including after recreation | Initialization and setting content through `setContent`. |
+| `onStart()` | When entering the visible state | Preparing work required while the `Activity` is visible. |
+| `onResume()` | When entering the active state for interaction | Resuming work related to the active interface. |
+| `onPause()` | When leaving the active state; the `Activity` may still be visible | Brief operations to pause work that requires an active interface. |
+| `onStop()` | When the `Activity` is no longer visible | Stopping work required only while the interface is visible. |
+| `onRestart()` | After stopping, when the same instance is shown again | Followed by `onStart()`. |
+| `onDestroy()` | When the instance is destroyed, for example after `finish()` or certain configuration changes | Cleaning up work associated with this instance when the callback is invoked. |
 
-`onDestroy()` не е гарантиран при прекратяване на процеса и не е надеждна точка за запазване на критични данни. [Жизнен цикъл на Activity](https://developer.android.com/guide/components/activities/activity-lifecycle).
+`onDestroy()` is not guaranteed when the process is terminated and is not a reliable point for saving critical data. [Activity lifecycle](https://developer.android.com/guide/components/activities/activity-lifecycle).
 
-### Типични последователности
+### Typical sequences
 
 ```text
-Създаване:                  onCreate() → onStart() → onResume()
-Временно прекъсване:         onPause() → onResume()
-Изпращане във фонов режим:   onPause() → onStop()
-Връщане на същия екземпляр:  onRestart() → onStart() → onResume()
-Приключване чрез finish():  onPause() → onStop() → onDestroy()
+Creation:                       onCreate() → onStart() → onResume()
+Temporary interruption:         onPause() → onResume()
+Moving to the background:       onPause() → onStop()
+Returning to the same instance: onRestart() → onStart() → onResume()
+Finishing with finish():        onPause() → onStop() → onDestroy()
 ```
 
-При пресъздаване старият екземпляр се унищожава, а новият преминава през `onCreate()`, `onStart()` и `onResume()`. Последователностите са за обичайните сценарии; прекратяване на процеса може да прекъсне извикванията.
+During recreation, the old instance is destroyed, and the new one goes through `onCreate()`, `onStart()`, and `onResume()`. These sequences describe common scenarios; process termination may interrupt the calls.
 
-### Жизнен цикъл на композицията
+### Composition lifecycle
 
-Жизненият цикъл на `Activity` и този на композицията са различни. Композируема функция влиза в композицията, може да участва в рекомпозиции и по-късно да напусне композицията. Рекомпозицията не означава ново извикване на `Activity.onCreate()`.
+The `Activity` lifecycle and the composition lifecycle are different. A composable function enters the composition, may participate in recompositions, and later leaves the composition. Recomposition does not mean that `Activity.onCreate()` is called again.
 
-`remember` запазва стойност на съответното място в композицията. `LaunchedEffect` е API за странични ефекти (side effects), свързано с композицията: стартира корутина при влизане, рестартира я при промяна на ключовете и я отменя при напускане. То не е общ lifecycle callback на `Activity` и не се отменя автоматично само защото тя е във фонов режим.
+`remember` retains a value at its corresponding position in the composition. `LaunchedEffect` is a composition-related side-effect API: it starts a coroutine on entry, restarts it when its keys change, and cancels it on exit. It is not a general `Activity` lifecycle callback and is not automatically cancelled just because the activity moves to the background.
 
-## Реактивен подход в Jetpack Compose
+## A reactive approach in Jetpack Compose
 
-При декларативния подход интерфейсът се описва според текущите данни. Compose проследява прочетеното наблюдавано състояние и при промяна планира рекомпозиция на засегнатите части. Рекомпозицията е изпълнение на функции за актуализиране на композицията; тя не е синоним на всяка операция по рисуване на екрана.
+In the declarative approach, the interface is described based on the current data. Compose tracks reads of observable state and schedules recomposition of affected parts when it changes. Recomposition runs functions to update the composition; it is not synonymous with every operation that draws on the screen.
 
-### Императивен пример
+### Imperative example
 
-При View компонент свойствата се променят изрично:
+With a View component, properties are changed explicitly:
 
 ```kotlin
 import android.view.View
@@ -62,7 +62,7 @@ fun showGreeting(textView: TextView) {
 }
 ```
 
-### Декларативен пример
+### Declarative example
 
 ```kotlin
 import androidx.compose.material3.Text
@@ -74,23 +74,23 @@ import androidx.compose.runtime.setValue
 
 @Composable
 fun NameGreeting() {
-    var name by remember { mutableStateOf("Иван") }
-    Text(text = "Здравей, $name!")
+    var name by remember { mutableStateOf("Ivan") }
+    Text(text = "Hello, $name!")
 }
 ```
 
-Ако `name` бъде променена от обработваща функция, Compose планира рекомпозиция на кода, който прочита тази стойност. Не се извиква ръчно метод за смяна на текста на View.
+If `name` is changed by a handler function, Compose schedules recomposition of the code that reads that value. There is no manual call to a method that changes a View's text.
 
-### Състояние, `mutableStateOf()` и `remember`
+### State, `mutableStateOf()`, and `remember`
 
-Състоянието (`state`) представя данни, които могат да се променят, например брояч или въведен текст. Обикновена локална променлива не е автоматично Compose състояние.
+State represents data that can change, such as a counter or entered text. An ordinary local variable is not automatically Compose state.
 
-- `mutableStateOf()` създава наблюдавано състояние. Промяна на неговата `value` може да предизвика рекомпозиция.
-- `remember` запазва създадената стойност между рекомпозиции, докато мястото ѝ е в композицията.
-- `remember` не осигурява запазване при пресъздаване на `Activity`. За подходящи UI стойности, например `String` и `Int`, може да се използва `rememberSaveable`, което участва в механизма за запазване и възстановяване на UI състоянието.
-- Синтаксисът `by` изисква импорти на `getValue` и `setValue` от `androidx.compose.runtime`.
+- `mutableStateOf()` creates observable state. Changing its `value` can trigger recomposition.
+- `remember` retains the created value across recompositions while its position remains in the composition.
+- `remember` does not preserve values when the `Activity` is recreated. For suitable UI values, such as `String` and `Int`, you can use `rememberSaveable`, which participates in the UI state saving and restoration mechanism.
+- The `by` syntax requires imports of `getValue` and `setValue` from `androidx.compose.runtime`.
 
-### Реактивен брояч
+### A reactive counter
 
 ```kotlin
 import androidx.compose.foundation.layout.Arrangement
@@ -118,40 +118,40 @@ fun CounterScreen() {
         verticalArrangement = Arrangement.Center,
         modifier = Modifier.fillMaxSize()
     ) {
-        Text(text = "Брояч: $count", fontSize = 24.sp)
+        Text(text = "Counter: $count", fontSize = 24.sp)
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = { count++ }) {
-            Text("Увеличаване")
+            Text("Increment")
         }
     }
 }
 ```
 
-Броячът започва от 0. Натискането на бутона увеличава `count`, а прочетената стойност се използва при следващата рекомпозиция. Не се предполага, че всяка промяна веднага рисува отделен кадър.
+The counter starts at 0. Pressing the button increments `count`, and the value read is used during the next recomposition. This does not imply that every change immediately draws a separate frame.
 
-### Сравнение на подходите
+### Comparing the approaches
 
-| Характеристика | Императивен подход с Views | Декларативен подход с Compose |
+| Characteristic | Imperative approach with Views | Declarative approach with Compose |
 | --- | --- | --- |
-| Промяна на UI | Изрична промяна на свойствата на View. | Промяна на наблюдавано състояние и актуализиране на композицията. |
-| Описание | Последователност от действия върху съществуващи обекти. | Описание на интерфейса за дадени входни данни. |
-| Актуализиране | Зависи от използваните View компоненти и извиканите методи. | Compose планира необходимата рекомпозиция и последващите фази. |
+| UI changes | Explicitly changing View properties. | Changing observable state and updating the composition. |
+| Description | A sequence of actions on existing objects. | A description of the interface for given input data. |
+| Updates | Depend on the View components used and the methods called. | Compose schedules the required recomposition and subsequent phases. |
 
-Спирането на `Activity` не означава автоматично премахване на композицията или спиране на всяка операция, която използва състоянието. Работата, зависеща от lifecycle, се управлява изрично според съответния API.
+Stopping an `Activity` does not automatically remove the composition or stop every operation that uses its state. Lifecycle-dependent work is managed explicitly according to the relevant API.
 
-### Състояние като свойство на `Activity`
+### State as an `Activity` property
 
-Състоянието може да се пази и като свойство на екземпляра. Следният фрагмент се поставя в класа `Activity`, с импорти на `mutableStateOf`, `getValue` и `setValue`:
+State can also be stored as an instance property. Place the following snippet inside the `Activity` class, with imports of `mutableStateOf`, `getValue`, and `setValue`:
 
 ```kotlin
 private var lifecycleState by mutableStateOf("")
 ```
 
-Тук `remember` не е необходим, защото свойството принадлежи на `Activity`, а не е локално в композируема функция. Когато callback метод промени `lifecycleState`, интерфейсът, който я прочита, може да се актуализира. Стойността не се запазва автоматично в нов екземпляр на `Activity`.
+Here, `remember` is unnecessary because the property belongs to the `Activity` rather than being local to a composable function. When a callback changes `lifecycleState`, the interface that reads it can update. The value is not automatically preserved in a new `Activity` instance.
 
 ## `Toast`
 
-`Toast` е кратко съобщение, което изчезва автоматично и не изисква действие от потребителя.
+A `Toast` is a brief message that disappears automatically and requires no user action.
 
 ```kotlin
 import android.content.Context
@@ -162,49 +162,49 @@ fun showGreetingToast(context: Context) {
 }
 ```
 
-Първият аргумент е контекстът, вторият — текстът, а `Toast.LENGTH_SHORT` или `Toast.LENGTH_LONG` определя продължителността. `show()` показва съобщението.
+The first argument is the context, the second is the text, and `Toast.LENGTH_SHORT` or `Toast.LENGTH_LONG` determines the duration. `show()` displays the message.
 
-В callback на `Activity` може да се използва `this`. При наличен `import android.widget.Toast` примерният фрагмент е:
+You can use `this` in an `Activity` callback. With `import android.widget.Toast`, an example snippet is:
 
 ```kotlin
-Toast.makeText(this, "Състояние: onStart", Toast.LENGTH_SHORT).show()
+Toast.makeText(this, "State: onStart", Toast.LENGTH_SHORT).show()
 ```
 
-Бързо следващи събития и ограниченията за работа във фонов режим могат да попречат всички съобщения да се видят. Точната последователност се проследява чрез Logcat.
+Events that occur in quick succession and background execution restrictions may prevent all messages from being visible. Use Logcat to track the exact sequence.
 
 ## Logcat
 
-Logcat показва диагностични съобщения от Android и приложенията: системни събития, съобщения от разработчика, предупреждения и изключения. В Android Studio приложението се стартира чрез **Run**, отваря се **Logcat** и се избира съответното устройство и процес.
+Logcat displays diagnostic messages from Android and applications: system events, developer messages, warnings, and exceptions. In Android Studio, start the application through **Run**, open **Logcat**, and select the relevant device and process.
 
-### Нива на съобщенията
+### Message levels
 
-| Метод | Ниво | Предназначение |
+| Method | Level | Purpose |
 | --- | --- | --- |
-| `Log.v()` | VERBOSE | Подробна диагностична информация. |
-| `Log.d()` | DEBUG | Съобщения за отстраняване на грешки. |
-| `Log.i()` | INFO | Информация за нормалното изпълнение. |
-| `Log.w()` | WARN | Предупреждение за възможен проблем. |
-| `Log.e()` | ERROR | Информация за грешка. |
-| `Log.wtf()` | ASSERT | Сериозно нарушение на очаквано условие; поведението зависи от системната конфигурация. |
+| `Log.v()` | VERBOSE | Detailed diagnostic information. |
+| `Log.d()` | DEBUG | Debugging messages. |
+| `Log.i()` | INFO | Information about normal execution. |
+| `Log.w()` | WARN | A warning about a possible problem. |
+| `Log.e()` | ERROR | Error information. |
+| `Log.wtf()` | ASSERT | A serious violation of an expected condition; behavior depends on system configuration. |
 
-Примерните извиквания се поставят в метод на приложението; необходим е `import android.util.Log`:
+Place the example calls inside an application method; `import android.util.Log` is required:
 
 ```kotlin
 val tag = "LifecycleDemo"
-Log.v(tag, "Подробна информация")
-Log.d(tag, "Debug съобщение")
-Log.i(tag, "Нормално изпълнение")
-Log.w(tag, "Предупреждение")
-Log.e(tag, "Грешка")
-Log.wtf(tag, "Нарушено критично условие")
+Log.v(tag, "Detailed information")
+Log.d(tag, "Debug message")
+Log.i(tag, "Normal execution")
+Log.w(tag, "Warning")
+Log.e(tag, "Error")
+Log.wtf(tag, "Critical condition violated")
 ```
 
-### Филтриране
+### Filtering
 
-Съобщенията се филтрират по пакет, ниво и таг. Например `tag:LifecycleDemo` ограничава резултатите до съобщения с този таг. Така събитията от упражнението се разграничават от останалите системни съобщения.
+Messages are filtered by package, level, and tag. For example, `tag:LifecycleDemo` restricts results to messages with that tag. This distinguishes the lab's events from other system messages.
 
-## Наблюдение на жизнения цикъл
+## Observing the lifecycle
 
-`LifecycleOwner` предоставя обект `Lifecycle`; `ComponentActivity` реализира този интерфейс. `LifecycleOwner` не е заместител на базов клас. `LifecycleObserver` е интерфейс за наблюдатели, а `DefaultLifecycleObserver` предоставя callback методи като `onStart(owner)` и `onStop(owner)`. Наблюдател се регистрира чрез `lifecycle.addObserver(...)`.
+`LifecycleOwner` provides a `Lifecycle` object; `ComponentActivity` implements this interface. `LifecycleOwner` is not a replacement for a base class. `LifecycleObserver` is an observer interface, while `DefaultLifecycleObserver` provides callbacks such as `onStart(owner)` and `onStop(owner)`. Register an observer through `lifecycle.addObserver(...)`.
 
-`DefaultLifecycleObserver` няма `onRestart()`. Ако това конкретно извикване трябва да бъде записано, то остава callback метод в `Activity`.
+`DefaultLifecycleObserver` has no `onRestart()`. If this particular call must be logged, keep it as a callback in the `Activity`.

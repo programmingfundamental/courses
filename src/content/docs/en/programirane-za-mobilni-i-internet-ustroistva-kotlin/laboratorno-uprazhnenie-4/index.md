@@ -1,76 +1,76 @@
 ---
-title: Лабораторно упражнение 4
+title: Lab 4
 sidebar:
   order: 4
 ---
 
-# Лабораторно упражнение 4
+# Lab 4
 
-## Среда за разработване Android Studio
+## The Android Studio development environment
 
-Android Studio е интегрирана среда за разработване на Android приложения, базирана на IntelliJ IDEA. Тя предоставя редактор на код, инструменти за изграждане на интерфейс, компилация, тестване и отстраняване на грешки.
+Android Studio is an integrated development environment for Android applications, based on IntelliJ IDEA. It provides a code editor and tools for building interfaces, compilation, testing, and debugging.
 
-Android интерфейс може да бъде изграден чрез XML базирани View компоненти или чрез Jetpack Compose. В настоящите упражнения се използва Jetpack Compose.
+An Android interface can be built using XML-based View components or Jetpack Compose. These labs use Jetpack Compose.
 
-### Основни инструменти
+### Main tools
 
-| Инструмент | Предназначение |
+| Tool | Purpose |
 | --- | --- |
-| Code Editor | Редактиране на Kotlin, Java и C++ код, автоматично допълване, рефакториране и анализ с Lint. |
-| Project | Преглед на модулите, изходния код, ресурсите и конфигурационните файлове. Android изгледът групира файловете логически, а Project показва директориите. |
-| Layout Editor | Визуален редактор за XML оформления с View компоненти, включително `ConstraintLayout`. Това е отделен подход от Compose. |
-| Compose Preview | Предварителен преглед на композируеми функции чрез `@Preview`, без стартиране на цялото приложение. |
-| Resource Manager | Преглед и добавяне на ресурси, например изображения. |
-| Gradle | Автоматизира компилацията, обработката на ресурсите и управлението на зависимостите. Поддържа варианти за изграждане, например debug и release. |
-| Device Manager | Създаване и управление на виртуални устройства (AVD) и преглед на свързаните устройства. |
-| Android Emulator | Изпълнение на Android на виртуално устройство. |
-| Logcat | Преглед и филтриране на системни съобщения и съобщения от приложението, включително изключения. |
+| Code Editor | Editing Kotlin, Java, and C++ code, code completion, refactoring, and Lint analysis. |
+| Project | Viewing modules, source code, resources, and configuration files. The Android view groups files logically, while Project shows directories. |
+| Layout Editor | A visual editor for XML layouts with View components, including `ConstraintLayout`. This is a separate approach from Compose. |
+| Compose Preview | Previewing composable functions with `@Preview` without running the entire application. |
+| Resource Manager | Viewing and adding resources, such as images. |
+| Gradle | Automates compilation, resource processing, and dependency management. Supports build variants such as debug and release. |
+| Device Manager | Creating and managing virtual devices (AVDs) and viewing connected devices. |
+| Android Emulator | Running Android on a virtual device. |
+| Logcat | Viewing and filtering system and application messages, including exceptions. |
 
-Android Studio има интеграция с Git за проследяване на промени, клониране на хранилища и работа с отдалечени хранилища. Зависимостите на Android проект обикновено се получават чрез Google Maven и Maven Central.
+Android Studio integrates with Git for tracking changes, cloning repositories, and working with remote repositories. Android project dependencies are usually obtained from Google Maven and Maven Central.
 
 ## Android SDK
 
-Android SDK (Software Development Kit) включва библиотеки и инструменти за компилиране и тестване на приложения. Пакетите се управляват чрез **SDK Manager**.
+The Android SDK (Software Development Kit) includes libraries and tools for compiling and testing applications. Packages are managed through **SDK Manager**.
 
-| Компонент | Предназначение |
+| Component | Purpose |
 | --- | --- |
-| Command-line Tools | `sdkmanager` управлява SDK пакети, а `avdmanager` — виртуални устройства. |
-| Platform Tools | Включват `adb` и `fastboot`. `adb` осигурява връзка с устройство, инсталиране на приложения и достъп до Logcat. Тези инструменти не са ограничени до една Android версия. |
-| Build Tools | Инструменти за изграждане на приложението: например AAPT2 обработва ресурси, `aidl` генерира код за комуникация между процеси, а `zipalign` подравнява данните в APK. |
-| SDK Platform | Android API библиотеката за конкретно API ниво, използвана при компилация. |
-| System Images | Системни образи за виртуалните устройства, съобразени с Android версията и архитектурата на машината. |
+| Command-line Tools | `sdkmanager` manages SDK packages, while `avdmanager` manages virtual devices. |
+| Platform Tools | Include `adb` and `fastboot`. `adb` provides device connectivity, application installation, and access to Logcat. These tools are not limited to a single Android version. |
+| Build Tools | Tools for building an application: for example, AAPT2 processes resources, `aidl` generates code for interprocess communication, and `zipalign` aligns data in an APK. |
+| SDK Platform | The Android API library for a specific API level, used during compilation. |
+| System Images | System images for virtual devices, matched to the Android version and the host machine's architecture. |
 
-## Android Emulator и Device Manager
+## Android Emulator and Device Manager
 
-Емулаторът позволява проверка на приложения при различни размери на екрана, версии на Android и конфигурации на устройството. Поддържа симулиране на местоположение, сензори, камера, повиквания и SMS според избрания образ. Хардуерното ускорение зависи от операционната система и наличната виртуализация. Проверката на емулатор не замества всички проверки на физическо устройство.
+The emulator allows applications to be tested with different screen sizes, Android versions, and device configurations. It supports simulated location, sensors, cameras, calls, and SMS depending on the selected image. Hardware acceleration depends on the operating system and available virtualization. Testing on an emulator does not replace all testing on a physical device.
 
-В **Device Manager** се създава Android Virtual Device (AVD), като се избират:
+In **Device Manager**, create an Android Virtual Device (AVD) by selecting:
 
-- тип устройство — телефон, таблет, телевизор или часовник;
-- системен образ и API ниво;
-- съвместима архитектура;
-- хардуерни настройки, например памет и графично ускорение.
+- a device type: phone, tablet, television, or watch;
+- a system image and API level;
+- a compatible architecture;
+- hardware settings, such as memory and graphics acceleration.
 
-В по-стари версии този инструмент се среща като **AVD Manager**. След стартиране на емулатора приложението може да се инсталира от Android Studio или чрез `adb`. Поддържат се също инсталиране на APK чрез плъзгане във прозореца, снимки на екрана и видеозапис.
+In older versions, this tool is called **AVD Manager**. After starting the emulator, you can install the application from Android Studio or using `adb`. It also supports installing APKs by dragging them into the window, screenshots, and video recording.
 
-## Връзка между Android Studio, SDK и Emulator
+## How Android Studio, the SDK, and the Emulator work together
 
-| Компонент | Роля |
+| Component | Role |
 | --- | --- |
-| Android Studio | Организира работата по проекта и стартира инструментите за изграждане и проверка. |
-| Android SDK | Предоставя Android API и инструментите за изграждане и комуникация с устройства. |
-| Android Emulator | Изпълнява приложението във виртуална Android среда. |
+| Android Studio | Organizes project work and launches build and verification tools. |
+| Android SDK | Provides Android APIs and tools for building applications and communicating with devices. |
+| Android Emulator | Runs the application in a virtual Android environment. |
 
-Примерен работен поток:
+Example workflow:
 
-1. В Android Studio се създава проект.
-2. Gradle използва Android SDK, за да изгради приложението.
-3. APK се инсталира на избрания емулатор или физическо устройство.
-4. Приложението се стартира и резултатът се проверява, включително чрез Logcat.
+1. Create a project in Android Studio.
+2. Gradle uses the Android SDK to build the application.
+3. Install the APK on the selected emulator or physical device.
+4. Run the application and check the result, including through Logcat.
 
-## Структура на Android проект с Kotlin и Jetpack Compose
+## Structure of an Android project with Kotlin and Jetpack Compose
 
-Проектът разделя изходния код, ресурсите и конфигурацията. При създаване на проект се избира шаблон за Compose, например **Empty Activity**. Имената на шаблоните може да се различават между версиите на Android Studio.
+The project separates source code, resources, and configuration. When creating a project, select a Compose template, such as **Empty Activity**. Template names may vary between Android Studio versions.
 
 ```text
 MyComposeApp/
@@ -84,8 +84,8 @@ MyComposeApp/
 │   │   │   │   ├── values/
 │   │   │   │   └── mipmap/
 │   │   │   └── AndroidManifest.xml
-│   │   ├── test/                 # Локални тестове
-│   │   └── androidTest/          # Тестове на Android устройство
+│   │   ├── test/                 # Local tests
+│   │   └── androidTest/          # Tests on an Android device
 │   ├── build.gradle.kts
 │   └── proguard-rules.pro
 ├── build.gradle.kts
@@ -93,17 +93,17 @@ MyComposeApp/
 ├── gradle.properties
 ├── local.properties
 └── gradle/
-    ├── libs.versions.toml        # Ако се използва version catalog
+    ├── libs.versions.toml        # If a version catalog is used
     └── wrapper/
         ├── gradle-wrapper.jar
         └── gradle-wrapper.properties
 ```
 
-Kotlin файловете могат да са в директория `java` или `kotlin` според проекта. Папката `res/layout` е нужна за XML оформления; Compose не изисква XML файл за всеки екран, но двата подхода могат да съществуват в едно приложение.
+Kotlin files can be in a `java` or `kotlin` directory, depending on the project. The `res/layout` folder is needed for XML layouts; Compose does not require an XML file for each screen, but both approaches can coexist in one application.
 
 ## `AndroidManifest.xml`
 
-Манифестът описва компонентите на приложението, разрешенията и входната `Activity`. Следният пример предполага пакет `com.example.mycomposeapp` и генерирани ресурси `app_name`, `ic_launcher` и `Theme.MyComposeApp`. Имената се съобразяват с конкретния проект.
+The manifest describes the application's components, permissions, and entry `Activity`. The following example assumes the package `com.example.mycomposeapp` and the generated resources `app_name`, `ic_launcher`, and `Theme.MyComposeApp`. Adjust the names to match your project.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -128,34 +128,34 @@ Kotlin файловете могат да са в директория `java` и
 </manifest>
 ```
 
-| Елемент | Описание |
+| Element | Description |
 | --- | --- |
-| `<manifest>` | Коренов елемент на манифеста. В съвременния Gradle проект `namespace` и `applicationId` се задават в конфигурацията на модула. |
-| `<uses-permission>` | Декларира разрешение, необходимо за използваната функционалност. |
-| `<application>` | Общи настройки: икона, име, тема и други ресурси. |
-| `<activity>` | Декларира клас `Activity`. |
-| `<intent-filter>` | Описва какви намерения (`Intent`) може да обработва компонентът; тук определя входната `Activity`. |
+| `<manifest>` | The manifest's root element. In a modern Gradle project, `namespace` and `applicationId` are specified in the module configuration. |
+| `<uses-permission>` | Declares a permission required by the functionality being used. |
+| `<application>` | General settings: icon, name, theme, and other resources. |
+| `<activity>` | Declares an `Activity` class. |
+| `<intent-filter>` | Describes the intents (`Intent`) the component can handle; here, it defines the entry `Activity`. |
 
-При приложения, насочени към Android 12 или по-нова версия, компонентите с `intent-filter` трябва изрично да задават `android:exported`. За входната `Activity` стойността е `true`, за да може системният launcher да я стартира. Останалите компоненти не трябва автоматично да получават `true`.
+For applications targeting Android 12 or later, components with an `intent-filter` must explicitly set `android:exported`. For the entry `Activity`, the value is `true` so that the system launcher can start it. Other components should not automatically receive `true`.
 
-## Gradle конфигурация (Kotlin DSL)
+## Gradle configuration (Kotlin DSL)
 
-В това хранилище няма примерен Android проект или version catalog, от който да се вземе съгласуван набор версии. Затова се запазва конфигурацията, генерирана от Compose шаблона на Android Studio, вместо да се копира отделен списък с фиксирани версии.
+This repository does not contain a sample Android project or a version catalog from which to obtain a compatible set of versions. Therefore, keep the configuration generated by Android Studio's Compose template instead of copying a separate list of fixed versions.
 
-`settings.gradle.kts` определя името и модулите. Следният фрагмент се намира след генерираните настройки за плъгини и хранилища:
+`settings.gradle.kts` defines the name and modules. The following fragment goes after the generated plugin and repository settings:
 
 ```kotlin
 rootProject.name = "MyComposeApp"
 include(":app")
 ```
 
-Проектният `build.gradle.kts` декларира общите плъгини, а `app/build.gradle.kts` прилага нужните за приложението. При Kotlin 2.0 и по-нова версия се използва Compose compiler plugin `org.jetbrains.kotlin.plugin.compose` със същата версия като Kotlin. Ако проектът използва version catalog, версията се взема от неговия запис за Kotlin. Не се добавя старият `composeOptions.kotlinCompilerExtensionVersion = "1.5.1"` към такава конфигурация. [Официални указания за Compose compiler plugin](https://developer.android.com/develop/ui/compose/setup-compose-dependencies-and-compiler).
+The project-level `build.gradle.kts` declares shared plugins, while `app/build.gradle.kts` applies those required by the application. With Kotlin 2.0 and later, use the Compose compiler plugin `org.jetbrains.kotlin.plugin.compose` with the same version as Kotlin. If the project uses a version catalog, take the version from its Kotlin entry. Do not add the old `composeOptions.kotlinCompilerExtensionVersion = "1.5.1"` to such a configuration. [Official Compose compiler plugin setup guide](https://developer.android.com/develop/ui/compose/setup-compose-dependencies-and-compiler).
 
-Кратък фрагмент от `app/build.gradle.kts`, когато версията на плъгина вече е определена на проектно ниво:
+A short fragment from `app/build.gradle.kts`, when the plugin version has already been defined at project level:
 
 ```kotlin
 plugins {
-    // Останалите генерирани плъгини се запазват.
+    // Keep the remaining generated plugins.
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
@@ -166,11 +166,11 @@ android {
 }
 ```
 
-Ако същият плъгин вече е приложен чрез `alias(...)`, не се добавя втори път. Запазват се генерираните зависимости за `activity-compose`, Compose BOM, Material 3, `ui-tooling-preview` и `ui-tooling`. Compose BOM съгласува версиите на Compose библиотеките; той не определя версията на Kotlin или на Compose compiler plugin. След промяна се изпълнява **Sync Project with Gradle Files**.
+If the same plugin is already applied through `alias(...)`, do not add it a second time. Keep the generated dependencies for `activity-compose`, the Compose BOM, Material 3, `ui-tooling-preview`, and `ui-tooling`. The Compose BOM aligns Compose library versions; it does not determine the Kotlin or Compose compiler plugin version. After making changes, run **Sync Project with Gradle Files**.
 
-## Първи Compose интерфейс — `MainActivity.kt`
+## Your first Compose interface — `MainActivity.kt`
 
-Класът `MainActivity` наследява `ComponentActivity`. В `onCreate()` се извиква `setContent`, който задава Compose съдържанието. Примерът използва Material 3 и пакет `com.example.mycomposeapp`; името на пакета се съобразява с проекта.
+The `MainActivity` class extends `ComponentActivity`. Its `onCreate()` calls `setContent`, which sets the Compose content. The example uses Material 3 and the package `com.example.mycomposeapp`; adjust the package name to match your project.
 
 ```kotlin
 package com.example.mycomposeapp
@@ -213,10 +213,10 @@ fun GreetingScreen() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Добре дошли в MyComposeApp!", style = MaterialTheme.typography.headlineMedium)
+        Text("Welcome to MyComposeApp!", style = MaterialTheme.typography.headlineMedium)
         Spacer(modifier = Modifier.height(20.dp))
-        Button(onClick = { /* Демонстрационният бутон няма действие. */ }) {
-            Text("Бутон")
+        Button(onClick = { /* The demonstration button has no action. */ }) {
+            Text("Button")
         }
     }
 }
@@ -230,16 +230,16 @@ fun GreetingScreenPreview() {
 }
 ```
 
-`@Composable` означава композируема функция. `Text` визуализира текст, а `Modifier` задава например размер и отстояния. `MaterialTheme` предоставя цветове, типография и форми. В реалния проект може да се използва генерираната функция за тема, която конфигурира `MaterialTheme`. `@Preview` показва интерфейса в Android Studio.
+`@Composable` marks a composable function. `Text` displays text, while `Modifier` specifies properties such as size and spacing. `MaterialTheme` provides colors, typography, and shapes. In a real project, you can use the generated theme function that configures `MaterialTheme`. `@Preview` displays the interface in Android Studio.
 
-## Ресурсни файлове
+## Resource files
 
-| Директория или файл | Съдържание |
+| Directory or file | Contents |
 | --- | --- |
-| `res/drawable/` | Растерни изображения и XML графични ресурси, включително vector drawable. SVG може да се импортира чрез Vector Asset, когато е поддържан. |
-| `res/mipmap/` | Икони за стартиране на приложението. |
-| `res/values/strings.xml` | Текстови ресурси. |
-| `res/values/colors.xml` | Цветови ресурси, когато са необходими. |
-| `res/values/themes.xml` | Android темата на приложението; Compose темата обикновено се конфигурира и чрез Kotlin код. |
+| `res/drawable/` | Raster images and XML graphics resources, including vector drawables. SVG can be imported through Vector Asset when supported. |
+| `res/mipmap/` | Application launcher icons. |
+| `res/values/strings.xml` | Text resources. |
+| `res/values/colors.xml` | Color resources, when needed. |
+| `res/values/themes.xml` | The application's Android theme; the Compose theme is usually also configured through Kotlin code. |
 
-Манифестът описва компонентите, Gradle управлява изграждането и зависимостите, `MainActivity.kt` задава интерфейса, а `res` съдържа ресурсите. Android Studio обединява работата с тези файлове и стартира изграждането на APK или Android App Bundle (AAB).
+The manifest describes components, Gradle manages the build and dependencies, `MainActivity.kt` defines the interface, and `res` contains resources. Android Studio brings together work on these files and starts the APK or Android App Bundle (AAB) build.

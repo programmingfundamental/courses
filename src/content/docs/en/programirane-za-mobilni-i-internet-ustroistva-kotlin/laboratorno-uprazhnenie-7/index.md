@@ -1,41 +1,41 @@
 ---
-title: Лабораторно упражнение 7
+title: Lab 7
 sidebar:
   order: 7
 ---
 
-# Лабораторно упражнение 7
+# Lab 7
 
-## Форми, въвеждане на данни и обработване на потребителски събития
+## Forms, data entry, and handling user events
 
-Формите събират въведени стойности чрез Compose компоненти. Състоянието определя показаните данни, а обработващите функции описват действията при взаимодействие.
+Forms collect input values through Compose components. State determines the displayed data, while handler functions describe the actions performed during interaction.
 
-### Входни компоненти
+### Input components
 
-| Компонент | Предназначение |
+| Component | Purpose |
 | --- | --- |
-| `TextField` | Поле за текст; `singleLine = true` го ограничава до един ред. |
-| `OutlinedTextField` | Текстово поле с контур. |
-| `Checkbox` | Избор между отметнато и неотметнато състояние. |
-| `RadioButton` | Избор на една възможност от група, управлявана чрез общо състояние. |
-| `Switch` | Превключване на настройка. |
-| `Button` | Изпълнение на действие чрез `onClick`. |
+| `TextField` | A text input field; `singleLine = true` restricts it to one line. |
+| `OutlinedTextField` | A text field with an outline. |
+| `Checkbox` | A choice between checked and unchecked states. |
+| `RadioButton` | Selecting one option from a group managed through shared state. |
+| `Switch` | Toggling a setting. |
+| `Button` | Performing an action through `onClick`. |
 
-`PasswordField` не е стандартен самостоятелен Material Compose компонент. Поле за парола може да се реализира чрез `TextField` или `OutlinedTextField` с `PasswordVisualTransformation()`.
+`PasswordField` is not a standard standalone Material Compose component. A password field can be implemented using `TextField` or `OutlinedTextField` with `PasswordVisualTransformation()`.
 
-### Управление на състоянието
+### State management
 
-`mutableStateOf()` създава наблюдавано състояние, а `remember` запазва стойността между рекомпозиции. За подходящи UI стойности като име, имейл и отметка се използва `rememberSaveable`, за да могат да бъдат възстановени при пресъздаване. В примерите паролите се пазят с `remember` и при пресъздаване се въвеждат отново.
+`mutableStateOf()` creates observable state, while `remember` retains the value across recompositions. Use `rememberSaveable` for suitable UI values such as a name, email, and checkbox state so that they can be restored after recreation. In these examples, passwords are stored with `remember` and must be entered again after recreation.
 
-Следният фрагмент е част от тялото на композируема функция и използва импортите, дадени по-долу:
+The following snippet belongs inside a composable function and uses the imports listed below:
 
 ```kotlin
 var username by rememberSaveable { mutableStateOf("") }
 ```
 
-### Callback функции
+### Callback functions
 
-В Compose взаимодействията обикновено се обработват чрез callback параметри: `onClick`, `onValueChange` и `onCheckedChange`. Обработващата функция може да промени състоянието или да изпълни действие, например запис в Logcat.
+In Compose, interactions are usually handled through callback parameters: `onClick`, `onValueChange`, and `onCheckedChange`. The handler function can change state or perform an action, such as logging to Logcat.
 
 ```kotlin
 @Composable
@@ -45,27 +45,27 @@ fun EventsExample() {
     Column {
         TextField(value = text, onValueChange = { newValue -> text = newValue })
         Checkbox(checked = checked, onCheckedChange = { checked = it })
-        Button(onClick = { Log.d("BTN", "Натиснат бутон") }) {
-            Text("Изпращане")
+        Button(onClick = { Log.d("BTN", "Button pressed") }) {
+            Text("Submit")
         }
     }
 }
 ```
 
-### Валидация на данните
+### Data validation
 
-Преди обработване на формата се проверяват различни условия:
+Check various conditions before processing the form:
 
-- `isBlank()` установява празна стойност или стойност само от празни знаци.
-- Имейлът се проверява отделно за подходящ формат; клавиатурата за имейл улеснява въвеждането, но не валидира стойността.
-- Паролата и нейното потвърждение трябва да съвпадат.
-- Грешката се показва чрез `isError` и поясняващ текст (`supportingText`) или чрез `Toast`.
+- `isBlank()` detects an empty value or one consisting only of whitespace.
+- The email address is checked separately for a suitable format; an email keyboard makes entry easier but does not validate the value.
+- The password and its confirmation must match.
+- Display an error through `isError` and explanatory text (`supportingText`), or through a `Toast`.
 
-Съобщение за успех се показва само след успешното преминаване на всички приложими проверки. `Toast` се създава в обработващата функция, а не като действие при всяка рекомпозиция.
+Display a success message only after all applicable checks pass. Create the `Toast` in the handler function, rather than as an action performed on every recomposition.
 
-## Примери за използване на компонентите
+## Component usage examples
 
-Примерите използват Compose Material 3. Следните импорти се поставят в началото на Kotlin файла. Всяка показана функция може да се извика от `setContent` или от друга композируема функция.
+The examples use Compose Material 3. Place the following imports at the beginning of the Kotlin file. Each function shown can be called from `setContent` or another composable function.
 
 ```kotlin
 import android.util.Log
@@ -96,13 +96,13 @@ fun SimpleTextFieldExample() {
     var name by rememberSaveable { mutableStateOf("") }
 
     Column(modifier = Modifier.padding(16.dp)) {
-        Text("Име:")
+        Text("Name:")
         TextField(
             value = name,
             onValueChange = { name = it },
-            label = { Text("Име") }
+            label = { Text("Name") }
         )
-        Text("Здравей, $name")
+        Text("Hello, $name")
     }
 }
 ```
@@ -115,11 +115,11 @@ fun OutlinedTextFieldExample() {
     var email by rememberSaveable { mutableStateOf("") }
 
     Column(modifier = Modifier.padding(16.dp)) {
-        Text("Имейл:")
+        Text("Email:")
         OutlinedTextField(
             value = email,
             onValueChange = { email = it },
-            label = { Text("Имейл адрес") },
+            label = { Text("Email address") },
             placeholder = { Text("example@mail.com") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
             singleLine = true
@@ -128,7 +128,7 @@ fun OutlinedTextFieldExample() {
 }
 ```
 
-### Поле за парола
+### Password field
 
 ```kotlin
 @Composable
@@ -136,11 +136,11 @@ fun PasswordFieldExample() {
     var password by remember { mutableStateOf("") }
 
     Column(modifier = Modifier.padding(16.dp)) {
-        Text("Парола:")
+        Text("Password:")
         OutlinedTextField(
             value = password,
             onValueChange = { password = it },
-            label = { Text("Парола") },
+            label = { Text("Password") },
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             singleLine = true
@@ -164,7 +164,7 @@ fun CheckboxExample() {
             checked = isChecked,
             onCheckedChange = { isChecked = it }
         )
-        Text(if (isChecked) "Съгласен съм" else "Не съм съгласен")
+        Text(if (isChecked) "I agree" else "I do not agree")
     }
 }
 ```
@@ -174,25 +174,25 @@ fun CheckboxExample() {
 ```kotlin
 @Composable
 fun RadioButtonExample() {
-    var selectedOption by rememberSaveable { mutableStateOf("Мъж") }
+    var selectedOption by rememberSaveable { mutableStateOf("Male") }
 
     Column(modifier = Modifier.padding(16.dp)) {
-        Text("Пол:")
+        Text("Gender:")
         Row(verticalAlignment = Alignment.CenterVertically) {
             RadioButton(
-                selected = selectedOption == "Мъж",
-                onClick = { selectedOption = "Мъж" }
+                selected = selectedOption == "Male",
+                onClick = { selectedOption = "Male" }
             )
-            Text("Мъж")
+            Text("Male")
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
             RadioButton(
-                selected = selectedOption == "Жена",
-                onClick = { selectedOption = "Жена" }
+                selected = selectedOption == "Female",
+                onClick = { selectedOption = "Female" }
             )
-            Text("Жена")
+            Text("Female")
         }
-        Text("Избран: $selectedOption")
+        Text("Selected: $selectedOption")
     }
 }
 ```
@@ -208,7 +208,7 @@ fun SwitchExample() {
         modifier = Modifier.padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text("Известия:")
+        Text("Notifications:")
         Spacer(modifier = Modifier.width(8.dp))
         Switch(
             checked = notificationsEnabled,
@@ -227,18 +227,18 @@ fun ButtonExample() {
 
     Button(
         onClick = {
-            Toast.makeText(context, "Бутонът е натиснат!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "The button was pressed!", Toast.LENGTH_SHORT).show()
         },
         modifier = Modifier.padding(16.dp)
     ) {
-        Text("Показване на съобщение")
+        Text("Show message")
     }
 }
 ```
 
-### Примерна форма за вход
+### Example login form
 
-Да се създаде екран с потребителско име, парола и бутон „Вход“. При празно поле да се покаже `Toast` за грешка, а при попълнени полета — съобщение с потребителското име. Примерът демонстрира локална проверка на формата; паролата не се показва в съобщението.
+Create a screen with a username, password, and "Log in" button. If a field is empty, display an error `Toast`; if both fields are filled in, display a message with the username. The example demonstrates local form validation; the password is not shown in the message.
 
 ```kotlin
 @Composable
@@ -254,14 +254,14 @@ fun LoginScreen() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Форма за вход", fontSize = 24.sp)
+        Text("Login form", fontSize = 24.sp)
 
         Spacer(modifier = Modifier.height(16.dp))
 
         OutlinedTextField(
             value = username,
             onValueChange = { username = it },
-            label = { Text("Потребителско име") }
+            label = { Text("Username") }
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -269,7 +269,7 @@ fun LoginScreen() {
         OutlinedTextField(
             value = password,
             onValueChange = { password = it },
-            label = { Text("Парола") },
+            label = { Text("Password") },
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             singleLine = true
@@ -279,12 +279,12 @@ fun LoginScreen() {
 
         Button(onClick = {
             if (username.isBlank() || password.isBlank()) {
-                Toast.makeText(context, "Всички полета са задължителни.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "All fields are required.", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(context, "Попълнени данни за: $username", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Details entered for: $username", Toast.LENGTH_SHORT).show()
             }
         }) {
-            Text("Вход")
+            Text("Log in")
         }
     }
 }
