@@ -8,23 +8,11 @@ sidebar:
 
 ## Самостоятелни задачи
 
-### Задача 1
 
-**Условие:** добавете пълен negative validation contract за expiration, issuer, audience и required scope, включително absent claims.
+### Задача 1 — Проверка на claims и ключове
 
-**Изисквания:** валидна signature, но wrong issuer/audience/expired/missing-exp/empty-sub → 401; валиден token без scope → 403. Тествайте expiry boundary с controlled Clock и разгледайте zero clock skew в baseline.
+Добавете отделни тестове за грешен подпис, изменен payload, друг iss/aud, липсващи exp/sub, празен sub, точно изтекъл token, изключен user и валидна сесия без Bearer. За claim случаите token е подписан с правилния ключ. Валидният token работи; USER token към admin-only ресурс получава 403. Проверете aud като списък.
 
-**Ограничения:** tests подписват локално с тестовия issuer; `.with(jwt())` не доказва signature validation; не ползвайте външен token service или чужди keys.
+### Задача 2 — Еднократен refresh token
 
-**Критерии за приемане:** всяка claim mutation има собствен test с ясен failure reason; положителният token работи; session cookie без Bearer не дава достъп. Аргументирайте replay policy и какво става след restart на издателя на токени.
-
-Предайте собствен code diff, test report и кратка аргументация. Не включвайте реални secrets или сурови session/token стойности в evidence.
-
-### Задача 2 — Гранични случаи
-
-- Липсващ exp — не разчитайте само на timestamp validator.
-- aud е списък, а не задължително един string.
-- Token точно на expiry и различен clock skew.
-- Valid signature, но missing scope; смяна на signing key при restart.
-
-Изберете поне един за нов regression test и обяснете кой security invariant защитава.
+Променете refresh така, че старият token да се използва веднъж и да се замени с нов. Пазете SHA-256 digest в DB; raw token се връща само при издаване. Refresh и revoke са транзакционни, с конкурентен тест за един успех и един отказ. Проверете expiry boundary, disabled user, повторна употреба и logout. Опишете валидността на вече издадения access token след logout.

@@ -1,155 +1,81 @@
-# 1. Упражнение 3 — Софтуерна архитектура и архитектурни стилове
+# Упражнение 3 — Софтуерна архитектура и архитектурни стилове
 
-**Аудитория:** IV курс, бакалавър „Изкуствен интелект“. **Време:** 110 минути.
-Работи се само с предоставения CPU проект и synthetic dataset, без платени услуги.
+## Теория
 
-## 2. Инженерен сценарий
+### 1. Архитектурни граници
 
-Монолитният Python script обучава модел при import и после стартира API. Един restart на serving води до ново обучение; промяна в dataset променя production поведението без release.
+1. **Компонент, зависимост и архитектура.** Компонентът има отговорност; зависимостта показва какво използва. Архитектурата определя компонентите, връзките и условията за работа.
+   - **Пример:** Компонентът за предсказване използва запазен модел, без да извиква обучение.
 
-## 3. Учебни цели
+2. **Слоеста архитектура и pipeline.** Слоевете разделят интерфейс, управление на действията, предметни правила и технически достъп. Pipeline е последователност от обработки.
+   - **Пример:** Проверка на данни → избор на признаци → обучение → оценка е обучаващ pipeline.
 
-След упражнението студентът:
+3. **Свързаност (coupling) и вътрешна съгласуваност (cohesion).** Свързаността описва зависимостите между компоненти; съгласуваността показва дали компонентът обединява една отговорност.
+   - **Пример:** Преместването на обучение извън API намалява зависимостта на обслужването от обучаващи данни.
 
-- анализира runtime coupling;
-- проектира layered и pipeline архитектура;
-- разделя batch training и online inference чрез архитектурен contract;
-- аргументира embedded/service trade-offs;
-- тества import и artifact boundaries;
-- измерва operational последствия от design решение;
+### 2. Начини за изпълнение
 
-## 4. Предварителни знания
+1. **Вграден модел и отделна услуга за предсказване.** Вграденият модел работи в процеса на приложението; отделната услуга приема мрежови заявки. Клиент–сървър е разделението между подател на заявка и обслужваща програма.
+   - **Пример:** За малък екип вграденият модел спестява мрежова комуникация; отделна услуга позволява независимо обновяване.
 
-Python, основи на ML/Jupyter, Git, REST API, Docker, scikit-learn/pandas/numpy, Linux и бази данни. Използвайте резултатите от предходните 2 упражнения като engineering input. Не преговаряме елементарни Python конструкции.
+2. **Микроуслуга, мащабиране и единица за внедряване.** Микроуслугата се внедрява самостоятелно; мащабирането добавя ресурси или копия. Единицата за внедряване е пакетът, който се пуска като цяло.
+   - **Пример:** Две копия на услугата могат да обслужват повече заявки, но изискват общ начин за избор на версия.
 
-## 5. Инструменти
+3. **Пакетно и интерактивно предсказване.** Пакетното предсказване обработва група наблюдения; интерактивното обслужва текуща заявка с очаквано време за отговор.
+   - **Пример:** Нощна обработка на файл и отговор при натискане на бутон имат различни времеви ограничения.
 
-Python 3.12, virtual environment, Jupyter Notebook по избор за notebook UI, pytest/coverage, Git, Docker, FastAPI/Pydantic и стандартните Python logging/JSON инструменти. Използвайте pinned environment от [README](../README.md). Training е върху 400 synthetic rows на CPU. Tracking/data versioning са local journal + Git/SHA manifest; не е необходим cloud account.
+4. **Страничен ефект и жизнен цикъл на приложението.** Страничният ефект променя външно състояние, например записва файл. Жизненият цикъл включва стартиране, обслужване и спиране.
+   - **Пример:** Импортиране на API модула не трябва да обучава модел; при стартиране може да зареди избран артефакт.
 
-## 6. Архитектурен контекст
+### 3. Договори и документиране на решения
 
-```text
-Dataset + manifest
-       |
-Validation / Features
-       |
-Offline Training Pipeline
-       |
-Experiment metadata + immutable Model Registry
-       |
-Inference Service -> FastAPI -> Client
-       |
-Logs / Metrics -> CI/CD and maintenance feedback
-```
+1. **Артефакт, метаданни, hash и съвместимост.** Артефактът е запазеният модел; метаданните описват версията и произхода му. Hash е отпечатък на съдържанието. Съвместимостта включва ред на признаците и версии на библиотеките.
+   - **Пример:** Модел с различен ред на признаците се отказва дори файлът да се отваря успешно.
 
-**Фокус в това упражнение:** Data → offline training → immutable bundle → serving boundary. Вижте [общата архитектура](../architecture/system-overview.md). Отбележете данните, зависимостите и owner на всяка граница.
+2. **Liveness и readiness.** Liveness показва дали процесът работи; readiness показва дали може да обслужва заявки. HTTP 200 означава успех, а 503 — недостъпна услуга.
+   - **Пример:** При липсващ модел процесът е жив, но readiness връща 503.
 
-## 7. Теоретична подготовка
+3. **ADR и архитектурни диаграми.** ADR е запис на архитектурно решение с контекст, алтернативи и последствия. Компонентната диаграма показва логически връзки; диаграмата на внедряването показва процеси и машини.
+   - **Пример:** ADR избира вграден модел и задава кога независимо мащабиране би наложило отделна услуга.
 
-Architecture описва отговорности, dependencies, deployment units и качествени компромиси. Layered architecture разделя API/application/domain/infrastructure; pipeline architecture описва последователни transformation stages. Client–server отделя потребител от услуга, а service-oriented design поставя network boundaries между capabilities. Microservices са operational избор, не синоним на модулност.
+## Примерен проблем
 
-Coupling е зависимост между компоненти; cohesion — доколко една отговорност е събрана на едно място. Batch inference обработва набори извън интерактивен request, online inference има latency/availability contract. Embedded model има по-малка network сложност; separate inference service позволява независимо scaling/version lifecycle, но добавя timeout, serialization, auth и observability нужди. Model artifact е versioned boundary между training и serving.
+Програмата обучава модел при импортиране на API. Всеки рестарт повтаря обучението и зависи от наличните данни.
 
-Следвайте [източниците и version scope](../architecture/references.md). Теорията трябва да обяснява engineering избора, не да замества evidence.
+### Стъпка 1. Откриване на зависимостта
 
-## 8. Лош / проблемен пример
+Отделяме действията при import от тези при заявка. Обучението при import е страничният ефект, който пречи на независимо стартиране.
 
-```python
-# module import:
-data = load_data()
-model = train(data)
-app = FastAPI()
-# всеки serving restart зависи от training data и training cost
-```
+### Стъпка 2. Разделяне на отговорностите
 
-Работещият starter и неговият TODO contract са в [starter/README.md](starter/README.md). Примерът е за анализ: първо запишете observable behavior и failure risks, после refactor-вайте. Не броим просто преименуване на файлове за архитектурна промяна.
+Определяме два пътя: данни → обучение → артефакт и артефакт → предсказване → API. Между тях преминава версия на модел.
 
-## 9. Водена практическа задача
+### Стъпка 3. Описание на артефакта
 
-Командите за Python/pytest са от `ai-platform` при активирана среда. Процесът е **проблем → теория → анализ на лошо решение → практическа задача → самостоятелна задача → тестове → инженерна дискусия**.
+Договорът съдържа версия, ред на признаците, hash и съвместими библиотеки. Липсващ или несъвместим модел прави услугата неготова.
 
-### Стъпка 1
+### Стъпка 4. Проверка на границата
 
-Изпълнете monolith.py --smoke. Прочетете top-level code и опишете какви side effects се случват преди първия request. Не добавяйте още sklearn tuning.
+Тест импортира API без достъп до обучаващите данни и проверява, че обучение не е извикано. Отделен тест очаква readiness 503 при липсващ модел.
 
-### Стъпка 2
+### Стъпка 5. Запис на решението
 
-Начертайте component и deployment diagrams отделно. Отбележете data ownership, training-only dependencies и model handoff. Използвайте SRS latency/availability constraints като аргумент.
+ADR избира вграден модел за текущия малък проект, описва цената на отделна услуга и условие за преразглеждане: необходимост от независимо мащабиране.
 
-### Стъпка 3
+Материали за примера: [начален проект](starter/README.md). [Подготовка и команди за общия проект](../setup.md).
 
-Дефинирайте artifact contract: version, feature schema/order, model hash, runtime compatibility, dataset/code/config lineage. Опишете поведение при missing/corrupted model.
+## Самостоятелни задачи
 
-### Стъпка 4
+### Задача 1. Основна разработка
 
-Планирайте миграция в два increments, така че service да продължи да има working demo. Сравнете предложението с ai-platform modules; проследете create_app/lifespan и offline cli train.
+Екип от двама разработчици обслужва 20 заявки в секунда на един компютър и сменя модела седмично. Сравнете вграден модел и отделна услуга по време за отговор, мащабиране, надеждност, внедряване, сигурност и сложност. Предайте ADR с допускания, отхвърлена алтернатива и условие за промяна на решението.
 
-### Стъпка 5
+### Задача 2. Автоматична проверка
 
-Добавете architecture test, който import-ва API без dataset достъп и потвърждава, че train не е извикан. Проверете missing model: live200, ready503. Напишете ADR за избрания serving boundary.
+Добавете автоматичен тест за избрана архитектурна граница или договор. Той трябва да открива забранено обучение при обслужване или несъвместим артефакт.
 
-Време: сценарий/теория15, анализ10, guided работа30, checkpoint5, самостоятелна работа25, tests15, дискусия10 минути — общо110. При 90 минути преподавателят подготвя environment и baseline evidence предварително.
+### Задача 3. Граничен случай
 
-## 10. Checkpoint
+Опишете и проверете поведението при рестарт без обучаващи данни или при артефакт с разменен ред на признаците. Посочете как резултатът подкрепя ADR.
 
-Training и serving могат да се стартират отделно; architecture decision има quality-attribute аргумент и artifact/error contract.
-
-Покажете working increment и кратък before/after diff. Ако има failure, класифицирайте го като environment, contract, quality или implementation проблем. Не преминавайте нататък само заради един green happy-path test.
-
-## 11. Самостоятелна задача
-
-**Problem statement:** екип от двама разработчици обслужва 20 requests/sec на един CPU host, сменя модела веднъж седмично и няма дежурен infrastructure екип.
-
-**Requirements:** сравнете embedded model и separate inference service по latency, scaling, reliability, deployment, security и complexity; изберете вариант с ADR.
-
-**Constraints:** няма GPU или cloud managed serving; не обявявайте microservices за задължителни.
-
-**Acceptance criteria:** поне 6 сравними измерения, workload assumptions, rejected alternative, failure behavior и migration trigger; един автоматизиран boundary/contract test подкрепя решението.
-
-Предайте собствена реализация/спецификация, rationale и evidence. Пълно решение не е включено тук; готовият общ проект е reference baseline за сравнение на contracts, а starter TODO задачите изискват ваш diff и допълнителни проверки.
-
-## 12. Automated tests
-
-Начални runnable проверки:
-
-```bash
-pytest tests/test_api.py -q
-python ../lab03-architecture/starter/monolith.py --smoke
-```
-
-Новите tests трябва да проверяват observable contract, negative/edge behavior и разрешения нормален flow. За документните задачи автоматизирайте структурните invariants, а смисъла проверете с peer review. За statistical/performance проверки запишете dataset/workload/seed/version/sample count; не твърдете универсална гаранция от малка synthetic извадка.
-
-Добавете test/evidence traceability: **requirement ID → test name → command → actual result → limitation**. Поне една собствена проверка трябва да открива deliberate bad fixture или regression. След restore повторете suite; не променяйте assertions, за да прикриете failure.
-
-## 13. Edge cases
-
-- Serving restart няма достъп до training dataset.
-- Artifact е нов, но feature order е стар.
-- Service division увеличава latency повече от model compute.
-- Нова model version е promoted, но вече стартираният API е pinned към старата.
-
-Изберете поне един за нов автоматизиран test; за останалите опишете expected behavior и owner.
-
-## 14. Въпроси за анализ
-
-1. Каква е разликата module/service?
-2. Защо serving не обучава при request?
-3. Защо artifact contract включва schema?
-4. Кога separate inference е оправдан?
-5. Какво съдържа ADR?
-6. Защо promotion не е deployment?
-
-## 15. Очакван резултат
-
-Завършен engineering increment по **Софтуерна архитектура и архитектурни стилове**, checkpoint evidence, самостоятелната задача според acceptance criteria и нови automated checks. Предайте decision/trade-off analysis, а не само screenshot или model score. Данните, моделът и test environment трябва да са идентифицируеми.
-
-## 16. Checklist
-
-- [ ] Анализирах проблемния starter и записах failure scenario.
-- [ ] Избрах архитектурно/процесно решение с trade-offs.
-- [ ] Реализирах guided increment и checkpoint.
-- [ ] Самостоятелната задача е различна и покрива acceptance criteria.
-- [ ] Tests покриват negative/edge и positive behavior.
-- [ ] Evidence включва data/model/code/environment identity.
-- [ ] Не включих реални secrets/PII или платени external dependencies.
-- [ ] Описах limitations, technical debt и следваща стъпка.
+Към решението предайте собствените файлове, обосновка, използвани версии, команди и действителни резултати от проверките. Посочете ограниченията на получените резултати.

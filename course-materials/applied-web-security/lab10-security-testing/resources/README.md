@@ -1,50 +1,19 @@
-# Работна карта — lab10
+# Работна карта — Task Manager, упражнение 10
 
-Основен code anchor: **Цялата архитектура → evidence → fixes → regression suite**.
+Използвайте резултата от упражнения 1–9. Началното копие от lab11 не съдържа тези завършени надграждания; тук се проверява натрупаната студентска реализация.
 
-## Работен запис
-
-| Поле | Попълнете |
+| Поле | Резултат |
 |---|---|
-| Mode / commit | |
-| Actor / entry point | |
-| Asset / trust boundary | |
-| Baseline allowed request | |
-| Възпроизвеждане | |
-| Expected / actual result | |
-| Root cause / code location | |
-| Likelihood × impact / аргумент | |
-| Fix / residual risk | |
-| Regression test / report path | |
-| Positive functionality check | |
+| Версия/commit | |
+| HTTP метод и маршрут | |
+| Потребител и роля | |
+| Начални данни/owner | |
+| Очакван/получен статус | |
+| DB преди/след | |
+| Проверявано правило | |
+| Test class и report | |
+| Оставащ риск | |
 
-## Test matrix
+Файлове: Всички надграждания; нов AuditFilter и AuditTest; H2/PostgreSQL тестови профили.
 
-| Case | Expected | Actual / evidence |
-|---|---|---|
-| 1 | authentication и session lifecycle | |
-| 2 | owner/admin/non-owner policy | |
-| 3 | brute-force threshold/expiration | |
-| 4 | SQL input остава data; XSS input остава text | |
-| 5 | CSRF mutation отказ без state change | |
-| 6 | crypto roundtrip/tamper/logging | |
-| 7 | JWT signature/claims/scope | |
-| 8 | config, headers, real PostgreSQL и cookie flags | |
-
-## Команди
-
-От `vulnerable-app`:
-
-```powershell
-mvn test '-Dlab.mode=lab10' '-Dtest=WebSecurityTest,JwtSecurityTest,LoginGuardTest,VaultTest,AuditTest'
-```
-
-От корена на курса:
-
-```powershell
-$env:LAB_MODE='lab10'
-docker compose up -d --build
-curl.exe -i http://localhost:8080/health
-```
-
-За authenticated requests: `. ./scripts/lab-client.ps1`; използвайте `$LabSession` и `$LabHeaders`. Паролите, cookies и tokens не се включват в evidence. При lab02 е нужен пълен DB reset; при lab08 не смесвайте legacy plaintext и encrypted records. Подробните стъпки и independent acceptance criteria са в [lab10.md](../lab10.md).
+Команди от task-manager: mvn test; след стартиране на compose.test.yml — mvn -Ppostgres-tests test. Подробности: [подготовка](../../setup.md), [условие](../lab10.md).

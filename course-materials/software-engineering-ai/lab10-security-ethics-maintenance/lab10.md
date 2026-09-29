@@ -1,154 +1,78 @@
-# 1. Упражнение 10 — Сигурност, етика, технически дълг и поддръжка
+# Упражнение 10 — Сигурност, етика, технически дълг и поддръжка
 
-**Аудитория:** IV курс, бакалавър „Изкуствен интелект“. **Време:** 110 минути.
-Работи се само с предоставения CPU проект и synthetic dataset, без платени услуги.
+## Теория
 
-## 2. Инженерен сценарий
+### 1. Сигурност на входове и артефакти
 
-Review открива secret в source, стар model artifact без version, недокументиран dataset, sensitive logs и deprecated dependency. Високият F1 не отговаря дали системата е безопасна, поддържаема или подходяща за употреба.
+1. **Валидация, контрол на достъпа и trust boundary.** Валидацията проверява входа; контролът на достъпа определя разрешените действия. Trust boundary е граница между части с различно доверие.
+   - **Пример:** API проверява схема и ключ, преди да предаде вход към модела.
 
-## 3. Учебни цели
+2. **Secret, API key, PII и fail-closed.** Secret е поверителна стойност; API key е ключ за достъп; PII е информация, свързана с разпознаваем човек. Fail-closed означава отказ на достъп при непълни условия.
+   - **Пример:** При липсващ ключ защитената операция отказва, а входните лични данни не се записват в log.
 
-След упражнението студентът:
+3. **Сериализация, pickle/joblib и цялост.** Сериализацията записва обекти във файл. Зареждане чрез pickle/joblib може да изпълни код. Проверка за цялост сравнява отпечатъка, но не доказва доверен автор.
+   - **Пример:** Приемаме модел от контролирания процес на проекта; файл и подменен заедно с него hash не са основание за доверие.
 
-- анализира trust boundaries и privacy risks;
-- проектира risk/technical-debt register;
-- реализира проверими security/ethics constraints;
-- тества access control и log redaction;
-- аргументира fairness/explainability ограничения;
-- планира maintenance, deprecation и retirement;
+### 2. Отговорна употреба
 
-## 4. Предварителни знания
+1. **Model card, data card и provenance.** Model card описва предназначение, оценка и ограничения на модел; data card описва данни; provenance е произходът им.
+   - **Пример:** Картата указва синтетичен произход и забрана резултатът да се представя като оценка на реални хора.
 
-Python, основи на ML/Jupyter, Git, REST API, Docker, scikit-learn/pandas/numpy, Linux и бази данни. Използвайте резултатите от предходните 9 упражнения като engineering input. Не преговаряме елементарни Python конструкции.
+2. **Справедливост, обяснимост и човешки преглед.** Справедливостта изисква критерии за засегнатите групи; обяснимостта дава разбираеми основания; човешкият преглед оценява решения извън автоматичните проверки.
+   - **Пример:** Recall върху малка синтетична група не заменя прегледа на пригодността за реална употреба.
 
-## 5. Инструменти
+3. **Retention, deletion и audit evidence.** Retention определя срок за съхранение; deletion е изтриване по правило; audit evidence е запазено доказателство за действие или решение.
+   - **Пример:** Политика определя кои данни се изтриват и кои записи за одобрение се пазят за проследимост.
 
-Python 3.12, virtual environment, Jupyter Notebook по избор за notebook UI, pytest/coverage, Git, Docker, FastAPI/Pydantic и стандартните Python logging/JSON инструменти. Използвайте pinned environment от [README](../README.md). Training е върху 400 synthetic rows на CPU. Tracking/data versioning са local journal + Git/SHA manifest; не е необходим cloud account.
+### 3. Поддръжка и извеждане от употреба
 
-## 6. Архитектурен контекст
+1. **Технически дълг, риск, въздействие и мярка.** Дългът е бъдеща цена на решение; рискът е възможен проблем; въздействието е последицата; мярката намалява риска. Остатъчният риск остава след мярката.
+   - **Пример:** Липсващ произход на модел се адресира с проверка на метаданните и отговорник за липсващите записи.
 
-```text
-Dataset + manifest
-       |
-Validation / Features
-       |
-Offline Training Pipeline
-       |
-Experiment metadata + immutable Model Registry
-       |
-Inference Service -> FastAPI -> Client
-       |
-Logs / Metrics -> CI/CD and maintenance feedback
-```
+2. **Deprecation, migration и retirement.** Deprecation обявява предстоящо спиране; migration описва преминаване към заместител; retirement прекратява използването.
+   - **Пример:** Версия v1 получава краен срок, потребителите преминават към v2 и проверка блокира ново внедряване на v1.
 
-**Фокус в това упражнение:** API/model/data trust boundaries → risk/debt register → maintenance/retirement. Вижте [общата архитектура](../architecture/system-overview.md). Отбележете данните, зависимостите и owner на всяка граница.
+3. **Rollback boundary и регистър на проблеми.** Границата за rollback определя към кои версии връщането е допустимо. Регистърът описва проблем, риск, въздействие, дълг, мярка, приоритет, отговорник и срок.
+   - **Пример:** Забранена версия не се връща дори да е била предишната работеща версия.
 
-## 7. Теоретична подготовка
+## Примерен проблем
 
-Secure coding включва input validation, server-side access control, bounded requests, trusted artifacts и secret handling. Pickle/joblib loading може да изпълни код; checksum не прави непознат artifact безопасен. API key е учебен access mechanism, не пълна identity/authorization система. Sensitive inputs не се логват; retention и deletion трябва да имат policy и owner.
+Преглед открива ключ в кода, модел без версия и входни данни в записите на събития. Трябва да превърнем констатациите в проверими промени.
 
-Responsible AI изисква intended use, limitations, data provenance, fairness/explainability reasoning и human oversight според риска. Synthetic cohort A/B показва mechanics на slice analysis, не сертифицира fairness. Technical debt включва code/dependency debt, model debt (неясен lifecycle/validation) и data debt (липсващ provenance/quality ownership). Deprecation има срок, migration path и измерване на usage; retirement включва отказ на стар model, запазване/изтриване на artifacts според policy и комуникация с users.
+### Стъпка 1. Класифициране на констатациите
 
-Следвайте [източниците и version scope](../architecture/references.md). Теорията трябва да обяснява engineering избора, не да замества evidence.
+Използваме учебния review.json. Ключът е проблем на достъпа, записаните входове — на поверителността, а моделът без версия — на проследимостта.
 
-## 8. Лош / проблемен пример
+### Стъпка 2. Определяне на мерки
 
-```text
-API_KEY = "SYNTHETIC-NOT-A-REAL-SECRET"
-model-final-final.joblib; version = null
-log: {"email": "student@example.invalid", "input": "..."}
-# non-executable review fixture; няма реални credentials
-```
+За ключа задаваме подаване извън кода; за събитията — ограничени полета; за модела — задължителни метаданни. Всяка мярка получава отговорник и срок.
 
-Работещият starter и неговият TODO contract са в [starter/README.md](starter/README.md). Примерът е за анализ: първо запишете observable behavior и failure risks, после refactor-вайте. Не броим просто преименуване на файлове за архитектурна промяна.
+### Стъпка 3. Добавяне на проверки
 
-## 9. Водена практическа задача
+Тест без ключ очаква отказ. Тест на записите проверява липса на чувствителен вход. Отделна проверка отхвърля непълни метаданни.
 
-Командите за Python/pytest са от `ai-platform` при активирана среда. Процесът е **проблем → теория → анализ на лошо решение → практическа задача → самостоятелна задача → тестове → инженерна дискусия**.
+### Стъпка 4. Описание на употребата
 
-### Стъпка 1
+Model/data card записва предназначение, произход, оценъчен протокол и ограничения. Отделяме проверимите условия от решенията за човешки преглед.
 
-Прочетете starter/review.json; това е inert fixture, не реален compromised service. Класифицирайте поне6 problems като security/privacy/dependency/model/data debt.
+### Стъпка 5. Планиране на спирането
 
-### Стъпка 2
+Определяме заместител, срок и правила за съхранение. Проверка отказва внедряване на изведена версия, но допуска одобрения заместител.
 
-Проследете app trust boundaries: API key, schema, model repository, filesystem permissions, CI secrets. Обяснете защо joblib не трябва да приема uploads от users и защо SHA проверката е само integrity срещу случайна промяна при trusted metadata.
+Материали за примера: [начален проект](starter/README.md). [Подготовка и команди за общия проект](../setup.md).
 
-### Стъпка 3
+## Самостоятелни задачи
 
-Създайте findings с Risk, Impact, Technical Debt, Mitigation, Priority и Owner. За всеки добавете acceptance evidence, due date и residual risk. Не измисляйте CVE за фиктивния deprecated adapter.
+### Задача 1. Основна разработка
 
-### Стъпка 4
+Планирайте поддръжката и извеждането от употреба на версия, която не покрива изискванията. Опишете поне пет проблема с риск, въздействие, технически дълг, мярка, приоритет, отговорник, срок и измерим завършек. Добавете заместител, срок за миграция, правила за съхранение и граница за rollback.
 
-Реализирайте поне два controls/tests: например fail-closed missing key, sensitive input не се echo-ва/log-ва, stale model metadata gate. Сравнете с baseline и покажете red→green за собствената поправка.
+### Задача 2. Автоматична проверка
 
-### Стъпка 5
+Реализирайте поне две автоматични проверки. Една трябва да отказва внедряване на изведена версия и да допуска одобрената. Документирайте решенията, които изискват човешки преглед.
 
-Напишете кратък model/data card: intended use, prohibited use, dataset origin, evaluation protocol, slice support, limitations, retention и retirement owner. Превърнете поне едно ethical constraint в автоматична проверка и обяснете какво остава за human review.
+### Задача 3. Граничен случай
 
-Време: сценарий/теория15, анализ10, guided работа30, checkpoint5, самостоятелна работа25, tests15, дискусия10 минути — общо110. При 90 минути преподавателят подготвя environment и baseline evidence предварително.
+Разгледайте ключ, останал в историята на Git, малка оценъчна група или rollback към забранена версия. Използвайте измислени данни, посочете остатъчния риск и проверете избрана мярка.
 
-## 10. Checkpoint
-
-Има приоритизиран risk/debt register и доказани controls; model/data limitations и maintenance ownership са explicit.
-
-Покажете working increment и кратък before/after diff. Ако има failure, класифицирайте го като environment, contract, quality или implementation проблем. Не преминавайте нататък само заради един green happy-path test.
-
-## 11. Самостоятелна задача
-
-**Problem statement:** планирайте поддръжката и retirement на версия, която вече не покрива product requirements.
-
-**Requirements:** минимум 5 проблема с Risk/Impact/Technical Debt/Mitigation/Priority/Owner; добавете deprecation deadline, migration path, artifact/data retention и rollback boundary.
-
-**Constraints:** не използвайте реални PII/secrets; не твърдете fairness само от synthetic accuracy; не изтривайте незаменими audit/reproducibility evidence без policy.
-
-**Acceptance criteria:** поне2 automated acceptance checks, всеки проблем има owner и измерим completion criterion; retirement test показва, че retired version не се deploy-ва, докато approved version работи. Документирайте human-review decisions.
-
-Предайте собствена реализация/спецификация, rationale и evidence. Пълно решение не е включено тук; готовият общ проект е reference baseline за сравнение на contracts, а starter TODO задачите изискват ваш diff и допълнителни проверки.
-
-## 12. Automated tests
-
-Начални runnable проверки:
-
-```bash
-pytest tests/test_api.py tests/test_repository.py -q
-python -m pip check
-```
-
-Новите tests трябва да проверяват observable contract, negative/edge behavior и разрешения нормален flow. За документните задачи автоматизирайте структурните invariants, а смисъла проверете с peer review. За statistical/performance проверки запишете dataset/workload/seed/version/sample count; не твърдете универсална гаранция от малка synthetic извадка.
-
-Добавете test/evidence traceability: **requirement ID → test name → command → actual result → limitation**. Поне една собствена проверка трябва да открива deliberate bad fixture или regression. След restore повторете suite; не променяйте assertions, за да прикриете failure.
-
-## 13. Edge cases
-
-- Secret е махнат от последния commit, но остава в Git history.
-- Artifact е стар, но дата сама по себе си не доказва непригодност.
-- Slice има твърде малко positive labels за надежден recall.
-- Rollback връща версия, която вече е забранена по policy.
-
-Изберете поне един за нов автоматизиран test; за останалите опишете expected behavior и owner.
-
-## 14. Въпроси за анализ
-
-1. Защо checksum не обезопасява pickle?
-2. Какво следва след изтекъл real secret?
-3. Как ethical requirement става проверим?
-4. Защо възрастта не е единствен retirement критерий?
-5. Как измерваме debt?
-6. Кога rollback е забранен?
-
-## 15. Очакван резултат
-
-Завършен engineering increment по **Сигурност, етика, технически дълг и поддръжка**, checkpoint evidence, самостоятелната задача според acceptance criteria и нови automated checks. Предайте decision/trade-off analysis, а не само screenshot или model score. Данните, моделът и test environment трябва да са идентифицируеми.
-
-## 16. Checklist
-
-- [ ] Анализирах проблемния starter и записах failure scenario.
-- [ ] Избрах архитектурно/процесно решение с trade-offs.
-- [ ] Реализирах guided increment и checkpoint.
-- [ ] Самостоятелната задача е различна и покрива acceptance criteria.
-- [ ] Tests покриват negative/edge и positive behavior.
-- [ ] Evidence включва data/model/code/environment identity.
-- [ ] Не включих реални secrets/PII или платени external dependencies.
-- [ ] Описах limitations, technical debt и следваща стъпка.
+Към решението предайте собствените файлове, обосновка, използвани версии, команди и действителни резултати от проверките. Посочете ограниченията на получените резултати.

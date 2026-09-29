@@ -5,66 +5,68 @@ sidebar:
   label: "Упражнение 9"
 ---
 
-# 1. Упражнение 9 — Наблюдаемост, надеждност и управление на грешки
+# Упражнение 9 — Наблюдаемост, надеждност и управление на грешки
 
-**Аудитория:** IV курс, бакалавър „Изкуствен интелект“. **Време:** 110 минути.
-Работи се само с предоставения CPU проект и synthetic dataset, без платени услуги.
+## Теория
 
-## 2. Инженерен сценарий
+### 1. Сигнали за състоянието
 
-След deployment p95 latency е пет пъти по-висока. Екипът вижда само „server started“ в console. Не е ясно дали причината е model compute, batch size, опашка, dependency или промяна в входните данни.
+1. **Наблюдаемост, log, metric и trace.** Наблюдаемостта извежда състоянието чрез сигнали. Log е запис на събитие, metric е обобщено измерване, trace свързва части от една операция.
+   - **Пример:** Записваме операция, статус, продължителност и версия, а брояч обобщава неуспешните заявки.
 
-## 3. Учебни цели
+2. **Span, correlation ID и middleware.** Span е измерена част от операция; correlation ID свързва събития за една заявка; middleware обработва заявки преди или след основната операция.
+   - **Пример:** Middleware добавя общ идентификатор към началото и края на една заявка.
 
-След упражнението студентът:
+3. **Prometheus, OpenTelemetry и cardinality.** Prometheus работи с времеви редове от метрики; OpenTelemetry предоставя средства за телеметрия. Cardinality е броят различни комбинации от стойности на етикетите.
+   - **Пример:** Етикет по операция е ограничен; етикет по уникален потребител расте без граница. JSON отговор с метрики не е автоматично Prometheus exporter.
 
-- проектира observability plan;
-- реализира structured logging и bounded metrics;
-- измерва latency с explicit workload;
-- тества readiness/liveness и error handling;
-- аргументира timeout/retry/degradation policy;
-- анализира data/model drift без прибързани изводи;
+### 2. Измерване и откази
 
-## 4. Предварителни знания
+1. **Latency, p95, batch, concurrency и warmup.** Latency е време за отговор; p95 обобщава горната част на измерванията; batch е група входове; concurrency е едновременност; warmup подготвя изпълнението преди измерване.
+   - **Пример:** Сравняваме пакет 1 с пакет 1, при еднаква едновременност, 10 загряващи и 100 измервани заявки.
 
-Python, основи на ML/Jupyter, Git, REST API, Docker, scikit-learn/pandas/numpy, Linux и бази данни. Използвайте резултатите от предходните 8 упражнения като engineering input. Не преговаряме елементарни Python конструкции.
+2. **Liveness, readiness и error count.** Liveness показва жив процес; readiness — готовност за обслужване; error count брои отказите по зададена дефиниция.
+   - **Пример:** При липсващ модел live връща 200, ready и predict — 503; проверяваме и брояча на грешките.
 
-## 5. Инструменти
+3. **Timeout, cancellation и retry.** Timeout ограничава чакането; cancellation прекратява работа, когато е поддържано; retry повтаря операция след временен отказ.
+   - **Пример:** Ограничаваме повторенията; не повтаряме безкрайно заявка с невалиден признак. Изтеклото чакане не гарантира спряло изчисление.
 
-Python 3.12, virtual environment, Jupyter Notebook по избор за notebook UI, pytest/coverage, Git, Docker, FastAPI/Pydantic и стандартните Python logging/JSON инструменти. Използвайте pinned environment от [README](/courses/bg/software-engineering-ai/). Training е върху 400 synthetic rows на CPU. Tracking/data versioning са local journal + Git/SHA manifest; не е необходим cloud account.
+4. **Graceful degradation и претоварване.** Degradation е предварително определено ограничено поведение при проблем; претоварване има, когато търсенето надвишава капацитета.
+   - **Пример:** Връщаме явен 503, вместо измислен клас; масови повторения могат да увеличат претоварването.
 
-## 6. Архитектурен контекст
+### 3. Диагностика и възстановяване
 
-```text
-Dataset + manifest
-       |
-Validation / Features
-       |
-Offline Training Pipeline
-       |
-Experiment metadata + immutable Model Registry
-       |
-Inference Service -> FastAPI -> Client
-       |
-Logs / Metrics -> CI/CD and maintenance feedback
-```
+1. **Хипотеза, контролиран експеримент и failure injection.** Хипотезата е проверимо обяснение; контролираният експеримент изменя един фактор; failure injection предизвиква известен отказ.
+   - **Пример:** Променяме само размера на пакета или временно премахваме достъпа до тестов артефакт.
 
-**Фокус в това упражнение:** Request → structured event + metrics → readiness → diagnostic decision. Вижте [общата архитектура](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/architecture/system-overview.md). Отбележете данните, зависимостите и owner на всяка граница.
+2. **Runbook, mitigation и rollback.** Runbook описва действия при инцидент; mitigation ограничава последствията; rollback връща допустима предходна версия.
+   - **Пример:** При устойчиво нарушение на времето сравняваме версии, ограничаваме натоварването и проверяваме възстановяването.
 
-## 7. Теоретична подготовка
+3. **Data drift и оценка на качество.** Data drift е промяна на входните данни. За доказан спад на качеството са нужни известни етикети и сравнима оценка.
+   - **Пример:** Повишена средна дължина на заявките е сигнал за проверка, а не доказана причина за нисък F1.
 
-Observability извежда вътрешното състояние от logs, metrics и traces. Logs са събития с контекст; metrics са агрегирани измервания; distributed tracing свързва spans на една операция през services. Prometheus/OpenTelemetry са стандартни ecosystems; този малък app предоставя JSON metrics, не се представя като Prometheus exporter.
+## Примерен проблем
 
-Liveness показва, че process работи; readiness — че може да обслужва смислено. Request count/error count/latency и model version са базовите сигнали. Избягвайте unbounded labels като user ID/token. Retry е подходящ само за transient failure и ограничен budget; може да увеличи overload. Timeout без cancellation не спира непременно CPU работа. Graceful degradation трябва да е explicit, например 503 вместо fabricated prediction. Data drift не означава автоматично model drift; quality monitoring изисква delayed labels и evaluation protocol.
+След внедряване p95 е пет пъти по-висока. В incident.json размерът на пакета е променен от 1 на 16.
 
-Следвайте [източниците и version scope](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/architecture/references.md). Теорията трябва да обяснява engineering избора, не да замества evidence.
+### Стъпка 1. Отделяне на факт от предположение
 
-## 8. Лош / проблемен пример
+Фактите са промяната в p95 и размера на пакета. „Новият модел е по-бавен“ остава хипотеза.
 
-```python
-print("request:", body)  # privacy risk, без version/correlation
-except Exception:
-    return {"label": 0}   # скрива failure като нормална prediction
-```
+### Стъпка 2. Изравняване на условията
 
-Работещият starter и неговият TODO contract са в [starter/README.md](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/lab09-observability/starter/README.md). Примерът е за анализ: първо запишете observable behavior и failure risks, после refactor-вайте. Не броим просто преименуване на файлове за архитектурна промяна.
+Сравняваме стара и нова версия с пакет 1, едновременност 1, 10 загряващи и 100 измервани заявки на един компютър.
+
+### Стъпка 3. Съпоставка на сигналите
+
+Събираме клиентско време и duration_ms от сървъра, свързани с correlation ID и model_version. Различните точки на измерване могат да дадат различни стойности.
+
+### Стъпка 4. Проверка на отказ
+
+Симулираме липсващ тестов артефакт. Очакваме явен 503 и съответно увеличение на брояча, без измислено предсказване.
+
+### Стъпка 5. Документиране на възстановяване
+
+Runbook описва хипотеза, измерване, действие, отговорник и критерий за успех. Решението за rollback използва сравними резултати и допустима предишна версия.
+
+Материали за примера: [начален проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/lab09-observability/starter/README.md). [Подготовка и команди за общия проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/setup.md).

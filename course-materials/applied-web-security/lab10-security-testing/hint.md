@@ -1,121 +1,56 @@
-# Упражнение 10 — Security Testing и интегрирана защита — насоки
+# Упражнение 10 — Интегрирана оценка и регресионни тестове на Task Manager — решения и насоки
+
 
 ## Решение на примерния проблем
 
-LabMode активира в lab10 проблемите от упражнения 3, 5 и 6. Прилагаме трите решения едновременно:
+Матрица на завършеното приложение:
 
-1. Documents.get винаги проверява owner или ROLE_ADMIN; чужд/липсващ документ → 404.
-2. Documents.search използва само параметризирана SQL заявка с owner и q.
-3. Web.render винаги прилага HtmlUtils.htmlEscape; SecurityConfig задава CSP без условието за режим.
-4. Изпълняваме `mvn test -Dlab.mode=lab10` и `mvn verify -Psecurity-tests -Dlab.mode=lab10`. Повтаряме нормален login → собствен документ → comment → logout през Nginx.
-5. В отделно работно копие временно премахваме owner проверката: тестът за чужд документ трябва да се провали. Възстановяваме я и тестът преминава.
-
-| Проблем | Доказателство преди поправката | Очакване след нея |
+| Област | Отрицателна проверка | Положителна |
 |---|---|---|
-| IDOR | alice вижда Bob invoice чрез id=2 | 404 без съдържание на bob |
-| SQL Injection | q променя SQL логиката и връща чужд owner | Няма чужди данни; O'Reilly работи |
-| XSS | HTML съдържа необработен вход | Encoded HTML и липса на marker execution в браузъра |
+| Identity | Грешен login дори при съществуваща сесия=401 | Правилен login=200, нов session ID |
+| Ownership | Чужда задача=404, без промяна | Owner/admin работи |
+| Search | SQL-подобен вход не връща чужди IDs | Апостроф/кирилица работят |
+| HTML | Няма raw tag/опасна URL scheme | Текстът е четим |
+| CSRF | Missing/other-session token=403 | Актуален token работи |
+| Private note | Wrong owner/AAD/tag отказва | Owner/admin roundtrip |
+| JWT/refresh | Invalid Bearer=401; used refresh=401 | Валиден token/нов refresh работят |
+| Logs | Няма password/raw tokens/note | Event и correlation са налични |
 
-Преглеждаме и dependency tree, мрежови публикации, runtime DB role и secret файла. Без конкретен advisory, версия и достижимост не обозначаваме зависимост като потвърдена уязвимост.
+Изпълняваме mvn test, отделната тестова PostgreSQL среда и mvn -Ppostgres-tests test. При mutation проверката променяме само owner условието и не променяме fixtures/status очаквания. Build failure не е валиден резултат от тази проверка.
 
-## Решение на самостоятелна задача 1 — Registration/profile assessment
+## Решение на самостоятелна задача 1
 
-### Три обосновани наблюдения
+Примерен отчет за началното lab11 и последващата реализация:
 
-| Finding/наблюдение | Risk и Evidence | Root Cause | Mitigation | Regression Test и остатъчен риск |
-|---|---|---|---|---|
-| Потвърден дефект: raw HTML в profile при lab10 | POST на markup като displayName и GET връща необработен таг; възможно действие през сесията | Условно изключено output encoding | Безусловно HtmlUtils.htmlEscape и CSP | Encoded отговор, без raw tag, нормално име работи; другите контексти се проверяват отделно |
-| Потвърдена липса на регистрационен лимит | /register не използва guard; няколко различни валидни имена се приемат. Това не е измерен DoS | Login лимитът не обхваща регистрацията | Отделен лимит по доверен адрес и общ капацитет; над праг → 429 | С управляван Clock: до праг 201, над праг 429 без INSERT, след срок 201; остава разпределен abuse |
-| Пропуск в password validation | 40 кирилски букви преминават length≤64, но са 80 UTF-8 байта | Character count вместо BCrypt byte limit | Проверка ≤72 UTF-8 байта преди encoder; отказ 400 | 40 кирилски букви → 400 без INSERT; допустима парола → 201; качеството на паролата е отделна политика |
+1. Регистрационният DTO има само @NotBlank: потвърдена липса на размерни ограничения в starter; root cause е липса на byte/length validation; защита от упражнение 2; тест с 40 кирилски символа → 400 без INSERT. След поправката отбелязваме „отстранено“, не „текущ дефект“.
+2. Role.USER в AuthService е защитен случай: JSON role=ADMIN не създава admin; evidence е редът в DB и regression тест. Рискът от mass assignment остава предмет на бъдещи DTO промени.
+3. Task в starter няма owner: липсва изолация между потребителите. След упражнение 3 bob PATCH чужд ID → 404 и всички полета остават непроменени; root cause е липсваща object policy, поправката е в service.
 
-Приоритети: profile XSS — висок; регистрационен лимит — среден според достъпност и капацитет; byte validation — среден за надежден отказ на невалидния вход. Изтичане през error response е хипотеза, докато не се провери точният отговор. За password решението използваме Accounts.encode от упражнение 2; за profile — render от упражнение 6. За регистрационния лимит отделяме брояча от LoginGuard, така че регистрации да не заключват чужди профили.
+AuditFilter е OncePerRequestFilter с @Order пред security chain. Генерира UUID, задава X-Correlation-ID и във finally записва status и event type. Типът се избира по точен метод и фиксиран шаблон, например POST /auth/register → REGISTRATION_RESULT, PATCH /tasks/{число}/update → TASK_UPDATE_RESULT, останалото → HTTP_RESULT. Не логваме произволен URI, query, principal input, headers или body. Подаден от клиента X-Correlation-ID не заменя генерирания.
 
-### Audit event и корелация
+AuditTest използва OutputCaptureExtension и реални requests със sentinel PASSWORD-MARKER, TOKEN-MARKER и NOTE-MARKER. assertThat(output.getAll()).doesNotContain трите стойности; contains event type и върнатия server correlation. При 403/404 няма DB update и event отразява отказа. Output capture се прави без включено MockMvc print на request body.
 
-Във finally на AuditFilter.doFilterInternal заменяме съществуващото log извикване. Избираме event само от фиксирани стойности по точен method/path, без raw URI, body, параметри или headers:
+Нов TaskUpdateIsolationTest: създаваме users/tasks, bob PATCH чужд task с валиден csrf → 404, после през repository сравняваме summary/description/deadline/owner с предишните стойности. Alice PATCH същия task → 200 с нови стойности. Така тестът доказва едновременно отказа и нормалната функционалност.
 
-```java
-String event = "HTTP_REQUEST";
-if ("POST".equals(request.getMethod())) {
-    if ("/register".equals(request.getServletPath())) event = "REGISTRATION_RESULT";
-    else if ("/api/profile".equals(request.getServletPath())) event = "PROFILE_UPDATE_RESULT";
-}
-log.info("security_event type={} correlation={} status={}", event, id, response.getStatus());
-```
+## Решение на самостоятелна задача 2
 
-id остава генерираният от сървъра UUID в X-Correlation-ID. Event описва HTTP резултат; не твърди, че има успешна транзакция само защото е постъпила заявка.
+- Преди изпълнение записваме commit, spring.profiles.active, DB URL без credentials и API base URL. Проверка отхвърля production/различна тестова база за create-drop профила.
+- PostgreSQL тестовете се изпълняват с профила postgres-tests срещу compose.test.yml; проверяваме reports за Tests>0, Failures=0, Errors=0, Skipped=0 и JDBC URL за PostgreSQL. H2 успех не замества този резултат.
+- Sentinel log тест се изпълнява с действителните logging настройки; raw request logging остава изключено.
+- HTTPS proxy е допълнителна среда: повторете CSRF/session потока и проверете cookie flags и реално изпращане в браузъра. Ако не е изпълнено, отбележете го като непроверено, не като успешно.
 
-Тест в AuditTest с неговия OutputCaptureExtension:
-
-```java
-@Test void profileAuditContainsCorrelationWithoutInput(CapturedOutput output) throws Exception {
-    String marker = "NEVER-LOG-PROFILE-INPUT";
-    var result = mvc.perform(post("/api/profile").servletPath("/api/profile")
-        .with(user("alice")).with(csrf())
-        .header("X-Correlation-ID", "CLIENT-SUPPLIED-ID")
-        .param("displayName", marker))
-        .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.status().isOk())
-        .andReturn();
-    String id = result.getResponse().getHeader("X-Correlation-ID");
-    assertThat(id).isNotBlank().isNotEqualTo("CLIENT-SUPPLIED-ID");
-    java.util.UUID.fromString(id);
-    assertThat(output.getAll()).contains("type=PROFILE_UPDATE_RESULT", "correlation=" + id)
-        .doesNotContain(marker, "CLIENT-SUPPLIED-ID");
-}
-```
-
-Аналогичен тест за /register проверява REGISTRATION_RESULT и липса на паролата. Отказан POST без CSRF дава status=403 в event и не променя DB. Съществуващите тестове за credentials, token и sensitive field остават. Използваме отделни данни или възстановяваме състоянието след всеки тест.
-
-### Нов regression test извън готовата suite
-
-В WebSecurityTest добавяме:
-
-```java
-@Test void profileMarkupStaysText() throws Exception {
-    String before = db.queryForObject(
-        "SELECT display_name FROM app_users WHERE username='alice'", String.class);
-    try {
-        mvc.perform(post("/api/profile").with(user("alice")).with(csrf())
-            .param("displayName", "<b>PROFILE-MARKER</b>"))
-            .andExpect(status().isOk());
-        mvc.perform(get("/profile").with(user("alice")))
-            .andExpect(content().string(containsString("&lt;b&gt;PROFILE-MARKER&lt;/b&gt;")))
-            .andExpect(content().string(not(containsString("<b>PROFILE-MARKER</b>"))));
-        mvc.perform(post("/api/profile").with(user("alice")).with(csrf())
-            .param("displayName", "Алиса")).andExpect(status().isOk());
-        mvc.perform(get("/profile").with(user("alice")))
-            .andExpect(content().string(containsString("Алиса")));
-    } finally {
-        db.update("UPDATE app_users SET display_name=? WHERE username='alice'", before);
-    }
-}
-```
-
-Тестът се проваля с предишния render при lab10 и преминава след поправката. За registration положителният тест проверява role=USER и BCrypt запис, а не само 201.
-
-## Решение на самостоятелна задача 2 — Гранични случаи
-
-- **Грешен profile/base URL:** отчетът съдържа LAB_MODE, commit, адрес и конфигурация; тестът проверява очакваните данни и настройките на стартираната среда. Успех срещу друга инстанция не доказва поправката.
-- **Пропуснат Docker test:** във failsafe-reports проверяваме изпълнени PostgresIT/CookieIT и skipped=0. Липсващ report/Docker означава непроверен обхват.
-- **Debug logging:** marker тестът се изпълнява с използваната logging конфигурация; не включваме body/header/query logging. Нови настройки се проверяват повторно.
-- **Proxy промяна:** повтаряме разрешени и отказани HTTP операции през Nginx и проверяваме status, cookies, headers и DB state. MockMvc сам не доказва proxy поведението.
 
 ## Въпроси за анализ
 
-1. Какво е доказателство за поправка?
-2. Защо severity не е равна на risk?
-3. Какво прави finding actionable?
-4. Защо correlation ID е server-generated?
-5. Кога scanner pass е недостатъчен?
-6. Кога review е приключил?
+1. Кое доказателство различава finding от hypothesis?
+2. Защо тест само за status не доказва липса на DB промяна?
+3. Как се разбира, че тестовете са минали срещу правилната база?
 
 ## Checklist
 
-- [ ] Vulnerability reproduced само в lab (за lab01 — unsafe config fixture анализиран).
-- [ ] Root cause и trust assumption идентифицирани.
-- [ ] Correct mitigation implemented server-side.
-- [ ] Regression test показва red → green.
-- [ ] Положителната функционалност остава работеща.
-- [ ] Edge case има автоматизирана проверка.
-- [ ] Самостоятелната задача покрива acceptance criteria.
-- [ ] Evidence не съдържа secrets; reset процедурата е проверена.
+- [ ] Примерният проблем има работеща реализация в Task Manager.
+- [ ] Самостоятелните задачи имат код/анализ и проверими резултати.
+- [ ] Тестовете включват разрешен и отказан сценарий.
+- [ ] Отказаната операция не променя DB.
+- [ ] Изпълнените H2/PostgreSQL и браузърни проверки са разграничени.
+- [ ] Отчетът не съдържа пароли, raw tokens или поверителни бележки.

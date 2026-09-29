@@ -8,23 +8,11 @@ sidebar:
 
 ## Самостоятелни задачи
 
-### Задача 1
 
-**Условие:** разширете profile с optional homepage link; unsafe starter в resources поставя стойността директно в href.
+### Задача 1 — Външна референция към задача
 
-**Изисквания:** plain display name да остава безопасен, homepage да допуска само http/https URL и да се рендерира в quoted attribute.
+Добавете незадължително referenceUrl към Task, TaskRequestDto и TaskResponseDto, до 2048 символа. Празно поле премахва връзката; приемат се само абсолютни http/https URL без userinfo; относителни, javascript: и data: се отказват с 400. В /ui/tasks изведете quoted href с encoding. Запазете owner policy при промяна. Сървърът не изтегля URL.
 
-**Ограничения:** не приемайте javascript/data schemes; не използвайте HTML text escaping като единствен URL control; без външни заявки по време на тестовете.
+### Задача 2 — Контексти и повторно кодиране
 
-**Критерии за приемане:** автоматизирани tests за quoted attribute breakout, опасна scheme, relative/empty value според описана policy и нормален https URL; browser проверка без marker execution. Не е достатъчно да поправите само comments.
-
-Предайте собствен code diff, test report и кратка аргументация. Не включвайте реални secrets или сурови session/token стойности в evidence.
-
-### Задача 2 — Гранични случаи
-
-- Double encoding при вече съдържащ `&lt;` input.
-- Attribute value със затваряща кавичка.
-- Опасна URL scheme при правилно escaped attribute.
-- CSP блокира exploit, но raw vulnerable sink остава.
-
-Изберете поне един за нов regression test и обяснете кой security invariant защитава.
+Проверете текст &lt;, кавички в URL, опасна scheme при правилно escaped attribute и CSP, която блокира script при липсващо encoding. Добавете поне два автоматизирани теста и една браузърна проверка. Невалиден URL не трябва да променя останалите полета на задачата.

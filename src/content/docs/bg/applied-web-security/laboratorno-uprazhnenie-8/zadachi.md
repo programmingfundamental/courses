@@ -8,23 +8,11 @@ sidebar:
 
 ## Самостоятелни задачи
 
-### Задача 1
 
-**Условие:** подгответе crypto decision record за password, API secret, personal identifier, session identifier и database credential.
+### Задача 1 — Rotation на ключове
 
-**Изисквания:** за всеки посочете нужда от възстановяване, избран механизъм, entropy/key source, storage boundary и rotation/revocation. Добавете test specification за всеки, а за два механизма — изпълними автоматизирани tests.
+Разширете envelope до v1:keyId:Base64(nonce+ciphertext+tag) и поддържайте key ring от конфигурирани файлове. Новите записи използват currentKeyId; старите се четат с техния ID. Реализирайте service операция за миграция на една бележка, без публичен административен endpoint. Докажете old-read/new-write, повторно изпълнение и отказ при непознат key ID.
 
-**Ограничения:** стандартни Java/Spring APIs; без custom algorithms, hardcoded production secrets или истински лични данни. API secret трябва да разгледа два случая: само verify и outbound use.
+### Задача 2 — Решения за secrets
 
-**Критерии за приемане:** решенията следват употребата на данните; посочени са backup/key loss и log risks. Не е достатъчна таблица, в която всичко се encrypt-ва.
-
-Предайте собствен code diff, test report и кратка аргументация. Не включвайте реални secrets или сурови session/token стойности в evidence.
-
-### Задача 2 — Гранични случаи
-
-- Повторен nonce със същия key.
-- Коректен envelope се копира към друг owner — AAD трябва да откаже.
-- Restart със сменен key и запазена DB.
-- Unknown envelope version, truncated tag, Unicode input.
-
-Изберете поне един за нов regression test и обяснете кой security invariant защитава.
+Направете таблица за password, access signing key, refresh token, private note и DB credential: нужно ли е възстановяване, механизъм, съхранение, rotation/revocation и тест. Реализирайте поне два теста. Включете restart със същия/различен ключ, променен owner/AAD и кирилица.

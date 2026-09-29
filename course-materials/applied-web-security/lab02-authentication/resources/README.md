@@ -1,47 +1,19 @@
-# Работна карта — lab02
+# Работна карта — Task Manager, упражнение 2
 
-Основен code anchor: **SecurityFilterChain → AuthenticationProvider → Accounts → SecurityContext**.
+Продължете резултата от упражнение 1. Добавят се проверки на входа, последователен отказ при грешен login и GET /auth/me.
 
-## Работен запис
-
-| Поле | Попълнете |
+| Поле | Резултат |
 |---|---|
-| Mode / commit | |
-| Actor / entry point | |
-| Asset / trust boundary | |
-| Baseline allowed request | |
-| Възпроизвеждане | |
-| Expected / actual result | |
-| Root cause / code location | |
-| Likelihood × impact / аргумент | |
-| Fix / residual risk | |
-| Regression test / report path | |
-| Positive functionality check | |
+| Версия/commit | |
+| HTTP метод и маршрут | |
+| Потребител и роля | |
+| Начални данни/owner | |
+| Очакван/получен статус | |
+| DB преди/след | |
+| Проверявано правило | |
+| Test class и report | |
+| Оставащ риск | |
 
-## Test matrix
+Файлове: AuthService.login/register/logout, SecurityConfig, AppUserDetailsService, RegisterRequest.
 
-| Case | Expected | Actual / evidence |
-|---|---|---|
-| 1 | valid credentials → 204 и /api/me със същата session → Alice | |
-| 2 | wrong password и unknown user → 401 generic | |
-| 3 | anonymous protected endpoint → 401 | |
-| 4 | logout → 204 и session invalidation | |
-| 5 | stored password → BCrypt prefix и успешен matches | |
-
-## Команди
-
-От `vulnerable-app`:
-
-```powershell
-mvn test '-Dlab.mode=lab02' '-Dtest=WebSecurityTest#lab02*'
-```
-
-От корена на курса:
-
-```powershell
-$env:LAB_MODE='lab02'
-docker compose up -d --build
-curl.exe -i http://localhost:8080/health
-```
-
-За authenticated requests: `. ./scripts/lab-client.ps1`; използвайте `$LabSession` и `$LabHeaders`. Паролите, cookies и tokens не се включват в evidence. При lab02 е нужен пълен DB reset; при lab08 не смесвайте legacy plaintext и encrypted records. Подробните стъпки и independent acceptance criteria са в [lab02.md](../lab02.md).
+Команди от task-manager: mvn test; след стартиране на compose.test.yml — mvn -Ppostgres-tests test. Подробности: [подготовка](../../setup.md), [условие](../lab02.md).

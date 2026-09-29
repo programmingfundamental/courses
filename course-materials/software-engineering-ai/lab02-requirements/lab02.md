@@ -1,151 +1,84 @@
-# 1. Упражнение 2 — Изисквания и спецификация на AI-базирани системи
+# Упражнение 2 — Изисквания и спецификация на AI-базирани системи
 
-**Аудитория:** IV курс, бакалавър „Изкуствен интелект“. **Време:** 110 минути.
-Работи се само с предоставения CPU проект и synthetic dataset, без платени услуги.
+## Теория
 
-## 2. Инженерен сценарий
+### 1. Изисквания и проследимост
 
-Възложителят казва: „Системата трябва да разпознава заявки добре и бързо.“ Разработчиците могат да докажат висок F1 на различен dataset или ниска latency при един request, но нито едно не определя приемането.
+1. **Функционално (FR) и нефункционално изискване (NFR).** FR описва действие или резултат, а NFR задава качество или ограничение.
+   - **Пример:** FR: връщане на клас за заявка. NFR: отговор под зададено време при описано натоварване.
 
-## 3. Учебни цели
+2. **Спецификация (SRS), критерий за приемане и проследимост.** SRS е подредено описание на изискванията. Критерият задава проверим успех, а проследимостта свързва изискване с тест и резултат.
+   - **Пример:** FR-01 → test_predict → команда за изпълнение → действителен резултат.
 
-След упражнението студентът:
+3. **API, HTTP, endpoint и схема.** API е интерфейс между програми; HTTP е протокол за заявки и отговори; endpoint е адрес на операция. Схемата задава полета, типове и допустими стойности.
+   - **Пример:** POST /predict приема instances с числови признаци и връща label, probability и model_version.
 
-- анализира двусмислени requirements;
-- проектира functional и non-functional спецификация;
-- измерва quality и latency с явен protocol;
-- аргументира precision/recall trade-off;
-- реализира traceability към acceptance tests;
-- тества schema и data quality constraints;
+4. **Пакет (batch) и договор за грешки.** Пакетът групира няколко входа в една операция. Договорът за грешки задава резултата при невалиден вход.
+   - **Пример:** При три входа връщаме три резултата в същия ред; липсващ признак дава HTTP 422.
 
-## 4. Предварителни знания
+### 2. Измерване на качеството на модела
 
-Python, основи на ML/Jupyter, Git, REST API, Docker, scikit-learn/pandas/numpy, Linux и бази данни. Използвайте резултатите от предходните 1 упражнения като engineering input. Не преговаряме елементарни Python конструкции.
+1. **Обучаваща и отделена оценъчна извадка (holdout).** Моделът се настройва по обучаващата част, а качеството се измерва по отделени наблюдения. Seed управлява случайното разделяне; test_fraction задава дела за оценяване.
+   - **Пример:** test_fraction 0.25 отделя една четвърт от наблюденията за оценка.
 
-## 5. Инструменти
+2. **Accuracy, precision, recall и F1.** Accuracy е делът верни предсказвания. Precision е делът действителни положителни сред предсказаните положителни; recall е делът намерени сред всички действителни положителни. F1 е 2 × precision × recall / (precision + recall), с предварително правило при нулев знаменател.
+   - **Пример:** При 8 верни от 10 положителни предсказвания и 16 действителни положителни: precision = 0.8, recall = 0.5, F1 ≈ 0.615.
 
-Python 3.12, virtual environment, Jupyter Notebook по избор за notebook UI, pytest/coverage, Git, Docker, FastAPI/Pydantic и стандартните Python logging/JSON инструменти. Използвайте pinned environment от [README](../README.md). Training е върху 400 synthetic rows на CPU. Tracking/data versioning са local journal + Git/SHA manifest; не е необходим cloud account.
+3. **Група (cohort), срез (slice) и размер на извадката (support).** Срезът оценява подмножество на данните; support показва колко наблюдения подкрепят резултата.
+   - **Пример:** Recall за група с два положителни случая е твърде нестабилна основа за общ извод.
 
-## 6. Архитектурен контекст
+### 3. Измерване на услугата
 
-```text
-Dataset + manifest
-       |
-Validation / Features
-       |
-Offline Training Pipeline
-       |
-Experiment metadata + immutable Model Registry
-       |
-Inference Service -> FastAPI -> Client
-       |
-Logs / Metrics -> CI/CD and maintenance feedback
-```
+1. **Latency, p95 и throughput.** Latency е времето за отговор; p95 е стойност, под която са приблизително 95% от измерванията; throughput е броят обработени заявки за единица време.
+   - **Пример:** Записваме p95 в милисекунди и throughput в заявки за секунда.
 
-**Фокус в това упражнение:** Stakeholder intent → SRS → measurable acceptance contracts. Вижте [общата архитектура](../architecture/system-overview.md). Отбележете данните, зависимостите и owner на всяка граница.
+2. **Натоварване, concurrency и warmup.** Натоварването задава вида и броя заявки; concurrency е броят едновременни заявки; warmup са начални изпълнения преди измерването.
+   - **Пример:** Протокол: пакет 1, едновременност 1, 10 загряващи и 100 измервани заявки на описан компютър.
 
-## 7. Теоретична подготовка
+3. **Достъпност, SLO и SLA.** Достъпността е делът успешно обслужени допустими заявки за определен период. SLO е цел за измерим показател; SLA е договор с последствия при неизпълнение.
+   - **Пример:** SLO 99.5% за 30 дни изисква данни за целия период; кратка проверка не го доказва.
 
-Functional requirement описва действие/резултат; non-functional requirement задава качество или ограничение. AI-specific requirements включват model metrics върху versioned evaluation data, slice support и допустимо поведение при uncertainty. Accuracy е дял верни predictions; precision измерва надеждността на positive results, recall — намерените positives. F1 съчетава precision/recall, но не отчита самостоятелно различна бизнес цена на грешките.
+4. **Обяснимост и справедливост.** Обяснимостта свързва резултата с разбираеми основания; справедливостта изисква изрични критерии за засегнатите групи и контекст.
+   - **Пример:** Проверка върху синтетични групи демонстрира метод, но не доказва справедливост за реални хора.
 
-SLO е цел за service indicator за определен прозорец; SLA е договор с последствия. p95 latency без hardware, workload, concurrency, batch size, warmup и sample count е непълно requirement. Availability трябва да определя denominator, maintenance windows и откази. Explainability/fairness се превръщат в проверими constraints само в ясно описан контекст; synthetic cohort metrics не доказват fairness за реални хора.
+## Примерен проблем
 
-Следвайте [източниците и version scope](../architecture/references.md). Теорията трябва да обяснява engineering избора, не да замества evidence.
+Възложителят иска „точен и бърз модел“. Формулировката не позволява еднозначно приемане.
 
-## 8. Лош / проблемен пример
+### Стъпка 1. Разделяне на изискванията
 
-```json
-{"requirement": "Моделът е точен и API е бърз", "test": "работи"}
-```
+Записваме FR-01 за отговора на POST /predict, NFR-01 за времето и ML-01 за качеството. Така един успешен тест не замества останалите.
 
-Работещият starter и неговият TODO contract са в [starter/README.md](starter/README.md). Примерът е за анализ: първо запишете observable behavior и failure risks, после refactor-вайте. Не броим просто преименуване на файлове за архитектурна промяна.
+### Стъпка 2. Описание на договора
 
-## 9. Водена практическа задача
+FR-01 изисква label, probability и model_version за всеки вход в същия ред. Липсващ признак води до 422.
 
-Командите за Python/pytest са от `ai-platform` при активирана среда. Процесът е **проблем → теория → анализ на лошо решение → практическа задача → самостоятелна задача → тестове → инженерна дискусия**.
+### Стъпка 3. Фиксиране на оценката
 
-### Стъпка 1
+ML-01 задава F1 ≥ 0.85 и recall ≥ 0.85 върху requests-v1 със seed 42 и оценъчен дял 0.25. Записваме отделно ограниченията на тази извадка.
 
-Изпълнете starter/check.py и разгледайте requirements.json. Structural pass не означава качествена спецификация. Маркирайте undefined terms, липсваща мярка и неопределен workload.
+### Стъпка 4. Описание на измерването
 
-### Стъпка 2
+NFR-01 задава учебна цел p95 < 100 ms при пакет 1 и едновременност 1, след 10 загряващи и 100 измервани заявки. Добавяме характеристиките на компютъра.
 
-Дефинирайте FR за POST /predict: required features, bounds, label/probability/version response и invalid-input response. Задайте отделно batch limit и access requirement.
+### Стъпка 5. Свързване с доказателства
 
-### Стъпка 3
+За всяко ID посочваме тест, команда, отговорник и действителен резултат. Спецификация без попълнен резултат описва цел, а не доказан успех.
 
-Задайте учебни acceptance цели: held-out F1≥0.85 и recall≥0.85 при requests-v1, seed42, test_fraction0.25; candidate model не се оценява по training score. Документирайте кой dataset служи за acceptance и кога трябва независим final holdout.
+Материали за примера: [начален проект](starter/README.md). [Подготовка и команди за общия проект](../setup.md).
 
-### Стъпка 4
+## Самостоятелни задачи
 
-Опишете performance protocol: например p95<100 ms за batch 1/concurrency1 след 10 warmup,100 measured requests на записан hardware. Това е начална учебна цел, не гарантирана universal стойност. Availability SLO99.5%/30 дни се проектира, но не се „доказва“ с минутен smoke test.
+### Задача 1. Основна разработка
 
-### Стъпка 5
+Съставете SRS за пакетно предсказване с поне 8 уникално номерирани изисквания. Включете поведение, качество на данните и модела, максимален пакет, пропускателна способност, грешки и запазване на реда. За всяко посочете измерим критерий, протокол и отговорник.
 
-Свържете requirement IDs с test names и evidence. Допълнете checker така, че да отхвърля липсващи measurement/window/threshold полета за performance requirements. Напишете counterexample requirement, което структурно минава, но е недоказуемо.
+### Задача 2. Автоматична проверка
 
-Време: сценарий/теория15, анализ10, guided работа30, checkpoint5, самостоятелна работа25, tests15, дискусия10 минути — общо110. При 90 минути преподавателят подготвя environment и baseline evidence предварително.
+Добавете поне два автоматични теста за договора и данните. Свържете ги с ID на изискванията и покажете валиден и невалиден вход.
 
-## 10. Checkpoint
+### Задача 3. Граничен случай
 
-Има измерими FR/NFR/model/data requirements, traceability matrix и explicit measurement protocol.
+Анализирайте висока accuracy при рядък положителен клас или p95 от пет измервания. Формулирайте какво допълнително изискване е нужно и как ще го проверите.
 
-Покажете working increment и кратък before/after diff. Ако има failure, класифицирайте го като environment, contract, quality или implementation проблем. Не преминавайте нататък само заради един green happy-path test.
-
-## 11. Самостоятелна задача
-
-**Problem statement:** съставете SRS за batch prediction module.
-
-**Requirements:** functional behavior, NFR, model quality, data quality, error semantics и acceptance criteria; задайте throughput и maximum batch с unit и measurement protocol.
-
-**Constraints:** няма streaming/cloud queue; output запазва input order; contract не зависи от sklearn class.
-
-**Acceptance criteria:** поне 8 requirements с уникални IDs, без „бързо/достатъчно/надеждно“ без мярка; всяко има test/evidence owner; поне 2 автоматични contract/data checks.
-
-Предайте собствена реализация/спецификация, rationale и evidence. Пълно решение не е включено тук; готовият общ проект е reference baseline за сравнение на contracts, а starter TODO задачите изискват ваш diff и допълнителни проверки.
-
-## 12. Automated tests
-
-Начални runnable проверки:
-
-```bash
-pytest tests/test_api.py tests/test_training.py -q
-python ../lab02-requirements/starter/check.py
-```
-
-Новите tests трябва да проверяват observable contract, negative/edge behavior и разрешения нормален flow. За документните задачи автоматизирайте структурните invariants, а смисъла проверете с peer review. За statistical/performance проверки запишете dataset/workload/seed/version/sample count; не твърдете универсална гаранция от малка synthetic извадка.
-
-Добавете test/evidence traceability: **requirement ID → test name → command → actual result → limitation**. Поне една собствена проверка трябва да открива deliberate bad fixture или regression. След restore повторете suite; не променяйте assertions, за да прикриете failure.
-
-## 13. Edge cases
-
-- Висока accuracy при силно небалансирани labels.
-- p95 от само 5 measurements.
-- Metric threshold без минимална cohort sample size.
-- Timeout request се брои като successful response в availability.
-
-Изберете поне един за нов автоматизиран test; за останалите опишете expected behavior и owner.
-
-## 14. Въпроси за анализ
-
-1. Защо F1 не е достатъчно requirement?
-2. Каква е разликата SLA/SLO?
-3. Кога latency числа са сравними?
-4. Как се тества explainability constraint?
-5. Какво е traceability?
-6. Защо synthetic fairness е ограничено?
-
-## 15. Очакван резултат
-
-Завършен engineering increment по **Изисквания и спецификация на AI-базирани системи**, checkpoint evidence, самостоятелната задача според acceptance criteria и нови automated checks. Предайте decision/trade-off analysis, а не само screenshot или model score. Данните, моделът и test environment трябва да са идентифицируеми.
-
-## 16. Checklist
-
-- [ ] Анализирах проблемния starter и записах failure scenario.
-- [ ] Избрах архитектурно/процесно решение с trade-offs.
-- [ ] Реализирах guided increment и checkpoint.
-- [ ] Самостоятелната задача е различна и покрива acceptance criteria.
-- [ ] Tests покриват negative/edge и positive behavior.
-- [ ] Evidence включва data/model/code/environment identity.
-- [ ] Не включих реални secrets/PII или платени external dependencies.
-- [ ] Описах limitations, technical debt и следваща стъпка.
+Към решението предайте собствените файлове, обосновка, използвани версии, команди и действителни резултати от проверките. Посочете ограниченията на получените резултати.

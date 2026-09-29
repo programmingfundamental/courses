@@ -5,66 +5,68 @@ sidebar:
   label: "Упражнение 8"
 ---
 
-# 1. Упражнение 8 — MLOps и управление на модели и данни
+# Упражнение 8 — MLOps и управление на модели и данни
 
-**Аудитория:** IV курс, бакалавър „Изкуствен интелект“. **Време:** 110 минути.
-Работи се само с предоставения CPU проект и synthetic dataset, без платени услуги.
+## Теория
 
-## 2. Инженерен сценарий
+### 1. Управление на опити и модели
 
-В директория има model-final.joblib и model-final2.joblib. Вторият има по-висока accuracy, но е обучен върху различен split; dataset origin липсва. Екипът не може да избере release или да възстанови предишното поведение.
+1. **MLOps и experiment tracking.** MLOps свързва жизнения цикъл на машинното обучение с автоматизация и експлоатация. Tracking пази параметри, измервания, артефакти и контекст на всеки опит.
+   - **Пример:** Два опита с linear и tree имат отделни папки с модел и метаданни.
 
-## 3. Учебни цели
+2. **Model registry, champion и challenger.** Registry управлява идентичността и състоянието на версии. Champion е избраната версия; challenger е кандидат за замяната ѝ.
+   - **Пример:** compare-v1 остава champion, докато compare-v2 не премине всички критерии.
 
-След упражнението студентът:
+3. **MLflow и DVC.** MLflow е инструмент за проследяване на опити и управление на модели; DVC свързва версии на големи данни с историята на проекта.
+   - **Пример:** Малкият проект използва локални папки и описание на данните; при екипно управление могат да се сравнят с тези инструменти.
 
-- анализира model/data lineage;
-- реализира experiment tracking с пълни metadata;
-- автоматизира data/model version checks;
-- сравнява release кандидати по инженерни критерии;
-- тества immutable versions и rollback;
-- аргументира champion/challenger promotion;
+### 2. Произход и неизменяемост
 
-## 4. Предварителни знания
+1. **Lineage, manifest и hash.** Lineage свързва модел с данни, код, настройки и библиотеки. Manifest описва набора от данни; hash е отпечатък за проверка на съдържанието.
+   - **Пример:** Метаданните пазят dataset hash, commit на кода и hash на lock файла.
 
-Python, основи на ML/Jupyter, Git, REST API, Docker, scikit-learn/pandas/numpy, Linux и бази данни. Използвайте резултатите от предходните 7 упражнения като engineering input. Не преговаряме елементарни Python конструкции.
+2. **Неизменяема версия и съвместим runtime.** Неизменяемата версия не се презаписва. Runtime е средата за изпълнение, която трябва да може да зареди и използва запазения модел.
+   - **Пример:** Повторно записване на compare-v1 се отказва; връщането към нея изисква съвместими библиотеки.
 
-## 5. Инструменти
+3. **Цялост и автентичност.** Цялостта проверява дали съдържанието е променено; автентичността проверява доверения произход.
+   - **Пример:** Hash от доверени метаданни открива повреда; подменени заедно модел и hash не доказват доверен автор.
 
-Python 3.12, virtual environment, Jupyter Notebook по избор за notebook UI, pytest/coverage, Git, Docker, FastAPI/Pydantic и стандартните Python logging/JSON инструменти. Използвайте pinned environment от [README](/courses/bg/software-engineering-ai/). Training е върху 400 synthetic rows на CPU. Tracking/data versioning са local journal + Git/SHA manifest; не е необходим cloud account.
+4. **Clean и dirty commit.** Clean означава, че работните файлове съответстват на записаното състояние в Git; dirty означава допълнителни незаписани промени.
+   - **Пример:** Commit ID с незаписани промени не идентифицира напълно кода, използван за обучение.
 
-## 6. Архитектурен контекст
+### 3. Избор и възстановяване на версия
 
-```text
-Dataset + manifest
-       |
-Validation / Features
-       |
-Offline Training Pipeline
-       |
-Experiment metadata + immutable Model Registry
-       |
-Inference Service -> FastAPI -> Client
-       |
-Logs / Metrics -> CI/CD and maintenance feedback
-```
+1. **Оценъчен протокол и slice support.** Протоколът фиксира данни, разделяне и измерване; slice support е броят наблюдения в оценяваната подгрупа.
+   - **Пример:** Сравняваме F1, recall и време при едни и същи оценъчни записи и отчитаме малките групи.
 
-**Фокус в това упражнение:** Dataset manifest → experiment journal → immutable registry → promotion/rollback. Вижте [общата архитектура](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/architecture/system-overview.md). Отбележете данните, зависимостите и owner на всяка граница.
+2. **Promotion, pointer, deployment и rollback.** Promotion обновява избора на одобрена версия; pointer е този запис за избор. Deployment стартира версията, а rollback възстановява предходна допустима версия.
+   - **Пример:** След връщане на pointer проверяваме и model_version на работещото API.
 
-## 7. Теоретична подготовка
+3. **Един записващ процес и конкурентен запис.** Един записващ процес прави промените последователно. При конкурентен запис няколко процеса могат да загубят взаимно актуализациите си.
+   - **Пример:** Две едновременни promotion операции изискват координация, която прост файл сам по себе си не осигурява.
 
-MLOps свързва ML lifecycle с автоматизация и operations. Experiment tracking пази parameters, metrics, artifacts и контекста на run; model registry управлява version identities и promotion state. Lineage проследява model → dataset → source/config/dependencies → evaluation. Име на файл и timestamp не са достатъчни за възпроизводимост.
+## Примерен проблем
 
-В курса local immutable experiment journal е еквивалент на основните tracking функции: всеки version folder съдържа model и metadata с params/metrics/data hash/git commit/source hash/lock hash. Git+CSV manifest е малък data-versioning workflow, еквивалентен за този dataset на DVC pointer/content workflow. Не е разпределен MLflow/DVC service. Champion е избраната версия; challenger е кандидатът. Promotion сменя registry pointer, deployment сменя running immutable bundle. Rollback трябва да запази стария artifact и runtime compatibility; само alias update не променя вече работещия процес.
+Две версии имат различни резултати. Трябва да изберем кандидат и да запазим възможност за връщане.
 
-Следвайте [източниците и version scope](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/architecture/references.md). Теорията трябва да обяснява engineering избора, не да замества evidence.
+### Стъпка 1. Фиксиране на условията
 
-## 8. Лош / проблемен пример
+Използваме едни данни, seed и оценъчно разделяне. Обучаваме compare-v1 с linear и compare-v2 с tree.
 
-```text
-models/model-final.joblib
-models/model-final-new.joblib
-# няма dataset identity, split, params, metrics или source version
-```
+### Стъпка 2. Проверка на произхода
 
-Работещият starter и неговият TODO contract са в [starter/README.md](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/lab08-mlops/starter/README.md). Примерът е за анализ: първо запишете observable behavior и failure risks, после refactor-вайте. Не броим просто преименуване на файлове за архитектурна промяна.
+Сравняваме данни, код, lock файл и оценъчни записи в метаданните. Непълен произход блокира решението за release.
+
+### Стъпка 3. Съпоставка на критериите
+
+Кандидатът трябва да покрива минималните F1 и recall, съвместимост и договорено време за отговор. По-висока accuracy сама не решава избора.
+
+### Стъпка 4. Одобряване без презаписване
+
+Избираме само преминала проверките версия. Старият артефакт се запазва; опит за запис със същото име трябва да бъде отказан.
+
+### Стъпка 5. Доказване на rollback
+
+Връщаме предходния избор и внедряваме съответния пакет. Проверяваме model_version в API отговор и записваме действителното поведение.
+
+Материали за примера: [начален проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/lab08-mlops/starter/README.md). [Подготовка и команди за общия проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/setup.md).

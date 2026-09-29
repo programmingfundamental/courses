@@ -1,47 +1,19 @@
-# Работна карта — lab06
+# Работна карта — Task Manager, упражнение 6
 
-Основен code anchor: **Stored comment / reflected query → HTML rendering → browser**.
+След упражнение 5. Добавя се HTML изглед /ui/tasks към същото приложение. JSON REST отговор сам по себе си не изпълнява HTML; XSS се анализира при новия изходен контекст.
 
-## Работен запис
-
-| Поле | Попълнете |
+| Поле | Резултат |
 |---|---|
-| Mode / commit | |
-| Actor / entry point | |
-| Asset / trust boundary | |
-| Baseline allowed request | |
-| Възпроизвеждане | |
-| Expected / actual result | |
-| Root cause / code location | |
-| Likelihood × impact / аргумент | |
-| Fix / residual risk | |
-| Regression test / report path | |
-| Positive functionality check | |
+| Версия/commit | |
+| HTTP метод и маршрут | |
+| Потребител и роля | |
+| Начални данни/owner | |
+| Очакван/получен статус | |
+| DB преди/след | |
+| Проверявано правило | |
+| Test class и report | |
+| Оставащ риск | |
 
-## Test matrix
+Файлове: нов TaskPageController, TaskServiceImp, SecurityConfig; по избор Task.referenceUrl.
 
-| Case | Expected | Actual / evidence |
-|---|---|---|
-| 1 | ordinary HTML characters → encoded response | |
-| 2 | script-like stored input → literal text, без raw script tag | |
-| 3 | normal Bulgarian text → правилно показан | |
-| 4 | CSP присъства след fix | |
-| 5 | browser marker не се изпълнява; отделно от MockMvc assertions | |
-
-## Команди
-
-От `vulnerable-app`:
-
-```powershell
-mvn test '-Dlab.mode=lab06' '-Dtest=WebSecurityTest#lab06*'
-```
-
-От корена на курса:
-
-```powershell
-$env:LAB_MODE='lab06'
-docker compose up -d --build
-curl.exe -i http://localhost:8080/health
-```
-
-За authenticated requests: `. ./scripts/lab-client.ps1`; използвайте `$LabSession` и `$LabHeaders`. Паролите, cookies и tokens не се включват в evidence. При lab02 е нужен пълен DB reset; при lab08 не смесвайте legacy plaintext и encrypted records. Подробните стъпки и independent acceptance criteria са в [lab06.md](../lab06.md).
+Команди от task-manager: mvn test; след стартиране на compose.test.yml — mvn -Ppostgres-tests test. Подробности: [подготовка](../../setup.md), [условие](../lab06.md).

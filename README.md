@@ -104,6 +104,16 @@ empty lesson placeholders until translations are available. Supporting resources
 and starter code link to their repository files; instructor notes are not published
 as site pages. `npm run check` verifies that the generated pages are current.
 
+Applied Web Security uses the familiar Task Manager from lab11, copied under
+`course-materials/applied-web-security/task-manager/`. Labs build on each other;
+`hint.md` files contain instructor solutions and remain outside the site.
+The previous standalone application is retained under `legacy/`.
+Lab 1 provides the starter download and complete startup instructions. After changing
+the starter or its bundled setup/architecture documents, run
+`./scripts/package-task-manager.ps1` in PowerShell to rebuild
+`public/downloads/task-manager-starter.zip`. The archive includes only explicitly
+selected source files and documents, excluding local `.env`, build output, and hints.
+
 Create `<course>/laboratorno-uprazhnenie-16/index.md` or `<course>/lab16/index.md`.
 Set `title` and `sidebar.order: 16`, then write the lesson. Add extra Markdown
 pages inside the lab folder with their own titles and sidebar orders. No sidebar

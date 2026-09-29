@@ -16,7 +16,14 @@ foreach($lab in $labs){
     $hintText=Get-Content -LiteralPath $hint -Raw
     if($hintText -notmatch '## Въпроси за анализ' -or $hintText -notmatch '## Checklist'){throw "${id}: missing instructor hints"}
     if($studentText -match '## (?:Въпроси за анализ|Checklist)|Продължителност:|Аудитория:|умишлен учебен дефект'){throw "${id}: unexpected student annotation"}
-    if(([regex]::Matches($notesText,'(?m)^## \d+\. ')).Count -ne 16){throw "${id}: expected 16 instructor sections"}
+    foreach($heading in @('## Решение на примерния проблем','## Решение на самостоятелна задача 1','## Решение на самостоятелна задача 2')) {
+        if(-not $hintText.Contains($heading)){throw "${id}: missing $heading"}
+    }
+    if($studentText -notmatch 'Task Manager' -or $notesText -notmatch 'hint.md'){throw "${id}: missing Task Manager context"}
+    if(($studentText + $hintText) -match 'vulnerable-app|WebSecurityTest|LAB_MODE|/api/documents|/api/profile|bg/tuvarna/lab'){throw "${id}: stale application reference"}
     if(-not (Test-Path (Join-Path $lab.FullName 'resources/README.md'))){throw "Missing resources: $id"}
 }
-Write-Output 'PASS: 10 labs with theory, worked examples, independent tasks, separate hints, instructor notes and resources.'
+foreach($file in @('task-manager/pom.xml','task-manager/compose.yml','task-manager/README.md','setup.md')) {
+    if(-not (Test-Path (Join-Path $courseRoot $file))){throw "Missing starter file: $file"}
+}
+Write-Output 'PASS: 10 Task Manager labs with theory, examples, independent tasks and separate solutions; starter present.'

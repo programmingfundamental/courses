@@ -11,11 +11,37 @@ for lab in labs:
     number = lab.name[3:5]
     student = (lab / f"lab{number}.md").read_text(encoding="utf-8")
     notes = (lab / "instructor-notes.md").read_text(encoding="utf-8")
-    assert len(re.findall(r"^#{1,2} \d+\. ", student, re.M)) == 16, lab
+    assert re.match(r"# Упражнение \d+ — [^\n]+\n\n## Теория\n", student), lab
+    assert re.findall(r"^## (.+)$", student, re.M) == [
+        "Теория",
+        "Примерен проблем",
+        "Самостоятелни задачи",
+    ], lab
+    theory, practice = student.split("## Примерен проблем\n", 1)
+    example, tasks = practice.split("## Самостоятелни задачи\n", 1)
+    assert len(re.findall(r"^### \d+\.", theory, re.M)) >= 3, lab
+    assert "   - **Пример:**" in theory, lab
+    assert len(re.findall(r"^### Стъпка \d+\.", example, re.M)) == 5, lab
+    assert len(re.findall(r"^### Задача \d+\.", tasks, re.M)) == 3, lab
+    hints = (lab / "hint.md").read_text(encoding="utf-8")
+    for heading in [
+        "Учебни цели",
+        "Предварителни знания",
+        "Инструменти",
+        "Архитектурен контекст",
+        "Checkpoint",
+        "Въпроси за анализ",
+        "Checklist",
+    ]:
+        assert f"## {heading}\n" in hints, (lab, heading)
+        assert f"## {heading}\n" not in student, (lab, heading)
+    assert "**Аудитория:**" not in student and "110 минути" not in student, lab
     assert len(re.findall(r"^## \d+\. ", notes, re.M)) == 15, lab
     assert (lab / "starter" / "README.md").exists(), lab
 for path in [
     root / "README.md",
+    root / "setup.md",
+    root / "hint.md",
     *root.glob("architecture/*.md"),
     *root.glob("lab*/*.md"),
     *root.glob("lab*/starter/*.md"),

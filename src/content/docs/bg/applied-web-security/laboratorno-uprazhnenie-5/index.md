@@ -1,176 +1,72 @@
 ---
-title: "Упражнение 5 — SQL Injection"
+title: "Упражнение 5 — Безопасно търсене на задачи със Spring Data JPA"
 sidebar:
   order: 5
   label: "Упражнение 5"
 ---
 
-# Упражнение 5 — SQL Injection
+# Упражнение 5 — Безопасно търсене на задачи със Spring Data JPA
 
 ## 1. Теория
 
-### 1.1. SQL структура и стойности
 
-1. **Prepared statement** пази SQL структурата отделно от входните стойности; **binding** свързва стойност с параметър (placeholder).
-   - Пример: `WHERE owner=? AND title=?` с параметри alice и O'Reilly търси текст, без апострофът да затваря SQL литерал.
-2. **Literal** е стойност, записана в самия SQL; **boolean condition** е логическо условие, например 1=1; `--` започва SQL коментар.
-   - Пример: конкатенация на вход с апостроф може да промени логическите условия на заявката.
-3. **JPA** е интерфейс за работа с обекти и база; **JPQL** е езикът му за заявки; **native query** изпълнява SQL.
-   - Пример: setParameter задава стойност отделно от JPQL текста. Конкатенацията е проблем и при JPA.
-4. **Identifier** е име на колона или таблица. **Allowlist** съпоставя позволени входни имена с известни SQL имена.
-   - Пример: sort=title избира фиксираната колона title. Параметърът ? не замества име на колона в ORDER BY.
-5. **Wildcard** е шаблонен символ: % съвпада с поредица, _ с един символ. **Exact match** използва равенство вместо LIKE.
-   - Пример: LIKE '%notes%' намира заглавия, съдържащи notes; title='notes' изисква точно съвпадение.
-6. **NUL** е нулевият символ; **stack trace** показва веригата от извиквания при грешка; **SQL dialect** са особеностите на дадена база.
-   - Пример: отказвайте недопустим вход с 400 без SQL текст; проверявайте поведението и с PostgreSQL, защото H2 може да се различава.
+### 1.1. SQL/JPQL структура и входни стойности
 
-### 1.2. Защита на заявките
+1. **SQL Injection** възниква, когато вход става изпълним синтаксис. **Binding** подава стойност отделно от структурата; **placeholder** е място за параметър.
+   - `WHERE t.summary = :summary` с @Param обработва O'Reilly като текст. Конкатенация `"...='"+input+"'"` смесва данни и синтаксис.
+2. **JPA** работи с entities; **JPQL** използва имена на Java полета; **native query** изпълнява SQL към таблици.
+   - В JPQL owner е `t.owner.username`, а в SQL е join към users чрез owner_id. @Query сам по себе си не оправдава конкатенация.
+3. **LIKE wildcard** % съвпада с поредица, _ с един символ; **exact match** използва =.
+   - Search допуска wildcard семантика, но никога чужд owner; lookup намира точно summary, без шаблони.
+4. **Identifier** е име на колона/поле, **allowlist** допуска само избрани identifiers.
+   - sort=summary може да се съпостави с фиксирано поле. Bind параметър не замества SQL ORDER BY идентификатор.
+5. **Validation** ограничава размер и допустими стойности, **NUL** е нулев символ, **SQL dialect** са особености на DB.
+   - q над 100 символа или с NUL получава 400. Проверяваме и PostgreSQL; H2 не доказва всички особености на реалната база.
 
-1. SQL Injection възниква когато недоверен input става част от изпълнимата структура на SQL. Prepared statement отделя структурата от bind values. Input validation ограничава допустим domain/размер, но не заменя parameterized SQL. Escaping на apostrophe не е обща защита за всички dialects/contexts.
 
-2. JPA не прави concatenated JPQL/native SQL безопасен; setParameter/позиционни placeholders са нужни и там. Bind parameters са за стойности, не за column/table/ORDER BY identifiers; dynamic identifiers изискват server-side allowlist. LIKE wildcard `%` е search semantics, не SQL injection; parameter binding запазва wildcard поведението. Runtime DB role трябва да има минимални права, но дори read-only injection може да наруши confidentiality. Generic error handling не трябва да връща SQL/schema/stack trace.
 
-### 1.3. Автоматизирани проверки: понятия и пример
+### 1.2. Проверки и доказателства
 
-1. **Security regression test** е автоматизиран тест, който проверява правило за сигурност и открива повторната поява на поправен проблем.
-   - **Negative test** проверява отказана операция; **positive control** проверява нормална разрешена операция. **Security invariant** е правило, което трябва винаги да е изпълнено.
-   - Пример: без вход GET /api/me трябва да върне 401, а след успешен вход трябва да върне името на текущия потребител.
-2. **Assertion** сравнява очаквано и получено; **red → green** означава провалена проверка преди поправка и успешна проверка след нея.
-   - Грешка при компилиране или недостъпна база е проблем на средата, а не доказателство, че проверката е открила нарушено правило.
-3. **Unit test** проверява отделна единица; **integration test** проверява взаимодействието на компоненти; **test suite** е набор от тестове.
-   - **JUnit** изпълнява Java тестовете; **MockMvc** подава HTTP заявки през Spring без браузър; **Testcontainers** стартира зависимости като PostgreSQL в Docker.
-   - Пример: MockMvc проверява HTTP отговор, но изпълнението на JavaScript и поведението на cookies се проверяват в браузър. **Fixture** е наборът входни данни или конфигурация на теста.
-4. **Test matrix** е таблица от случаи и очаквания; **edge case** е граничен случай; **test report** е отчетът от изпълнението.
-   - Пример: липсващ вход → 401, собствен ресурс → успех, чужд ресурс → отказ. Проверявайте и съдържанието и състоянието в базата.
+1. **Security regression test** е автоматизиран тест на правило за сигурност, който открива повторна поява на проблем. **Assertion** сравнява очаквано и получено; **negative test** проверява отказ, **positive test** — разрешена операция.
+   - Пример: GET /tasks без удостоверяване → 401, със съществуваща сесия → 200. Тестът за отказ не заменя теста за нормална работа.
+2. **JUnit** изпълнява тестовете; **MockMvc** подава HTTP заявки през Spring; **H2** е базата в памет за бързи проверки. **Integration test** проверява взаимодействието на компоненти; същите тестове се изпълняват и с PostgreSQL.
+   - В TaskManagerBaselineTest полето mvc е MockMvc: `mvc.perform(get("/tasks")).andExpect(status().isUnauthorized());`. Статичните imports са в готовия клас.
+3. **Fixture** са началните данни на теста; **test matrix** е списък от входове и очаквания; **edge case** е граничен случай. **Regression** означава връщане на вече отстранен проблем.
+   - Пример: собствена задача, чужда задача и липсващо ID се проверяват отделно; след отказана промяна записът в DB остава същият.
+4. **Root cause** е първопричината, **mitigation** — защитата, **evidence** — доказателството. **Code diff** показва промяната, **test report** — резултата. **Baseline** е началната версия за сравнение.
+   - Запазете заявката, очакването и отчета. Провалена компилация не е доказателство, че тестът е открил нарушение. Не представяйте непроверена хипотеза като установен дефект.
 
-В съществуващия тестов клас WebSecurityTest полето mvc е MockMvc. Следният фрагмент подава заявка без сесия и проверява отказа:
+`mvn test` изпълнява тестовете с H2 и записва target/surefire-reports. `mvn -Ppostgres-tests test` използва отделната PostgreSQL тестова база, стартирана по setup.md. **Maven profile** е именуван набор от настройки. Новите класове с тестове завършват на Test. За браузърно поведение се използва и реален браузър; MockMvc не изпълнява JavaScript.
 
-```java
-mvc.perform(get("/api/me"))
-   .andExpect(status().isUnauthorized());
-```
-
-От vulnerable-app командата `mvn test '-Dtest=WebSecurityTest#lab01*'` изпълнява методите с префикс lab01. След промяна повторете същия тест, без да променяте очакването, и изпълнете положителния случай. Maven запазва отчета в target/surefire-reports. Профилът `mvn verify -Psecurity-tests` добавя интеграционните проверки; **profile** е именуван набор от настройки.
-
-### 1.4. Работа с материалите и резултатите
-
-- **Code diff** показва промените в кода; **evidence** е доказателство като резултат от заявка или тест.
-  - Пример: предайте разликата в метода и отчета от теста, който проверява промяната.
-- **Acceptance criteria** са проверимите условия за приемане; **constraints** са ограниченията на решението.
-  - Пример: отказана промяна не трябва да обновява запис в базата.
-- **Baseline** е началното състояние за сравнение; **LAB_MODE** избира конфигурация при стартиране.
-  - Пример: след промяна на кода повторете теста със същата конфигурация, за да сравните поведението.
-
-- **Root cause** е първопричината; **control** е защитна мярка; **policy** е правило за достъп или поведение.
-  - Пример: липсваща проверка на owner е първопричина; сравняването му с текущия потребител прилага правилото за собственост.
-- **Audit** е журнал на действията; **correlation ID** свързва заявката със записите за нея.
-  - Пример: запис с тип LOGIN_FAILURE и идентификатор на заявката позволява проследяване на отказан вход без записване на паролата.
-- **State** е състоянието на системата; **persistence** е запазването на данни; **migration** преобразува вече записани данни.
-  - Пример: след отказана промяна записът в базата остава непроменен; смяна на формата на пароли изисква и обработка на старите записи.
-
-Технически източници и version scope: [references](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/references.md).
 
 ## 2. Подготовка
 
 ### Предварителни знания
 
-Java, Spring Boot, HTTP, SQL, client–server, Linux/Docker и мрежи на нивото, описано в [подготовка на средата](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/setup.md). Изпълнени предходните 4 упражнения и съхранени техните regression tests. Елементарните Java конструкции не се преговарят.
+Java, Spring Boot, HTTP, JPA и Task Manager от lab11. Продължете собственото решение от упражнение 4; запазете тестовете и данните с определени собственици.
 
-### Инструменти
+### Начален проект и надграждане
 
-JDK 21, Maven 3.9+, Docker/Compose, IDE, curl.exe или PowerShell, browser DevTools, JUnit, Spring Boot Test и MockMvc. PostgreSQL работи в Compose; H2 е само бърз test backend.  За пълния security profile е нужен Testcontainers достъп до Docker. [Resources](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/lab05-sql-injection/resources/README.md) съдържа работна карта и очаквани наблюдения.
+След упражнение 4. Добавя се търсене по summary; запазва се owner политиката от упражнение 3. Съществуващите JPA заявки не се заменят с конкатенация.
 
-### Архитектурен контекст
+Използвайте [Task Manager](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/task-manager/README.md) и [подготовката](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/setup.md). Всички Maven/Compose команди се изпълняват от task-manager. Работните Java класове са в src/main/java/bg/tu_varna/sit/task_manager; тестовете — в съответния src/test/java package.
 
-```text
-Browser
-   |
-Reverse Proxy (Nginx)
-   |
-Spring Security
-   |
-Controller
-   |
-Service
-   |
-Database (PostgreSQL)
-```
+**Файлове за работа:** TaskRepository, TaskService/TaskServiceImp, TaskController; нови /tasks/search и /tasks/lookup. [Архитектурната карта](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md) показва кои маршрути съществуват в началото и кои се добавят последователно.
 
-**Фокус:** Documents.search → JDBC query → DB parser. Съпоставете с [DFD и endpoints](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md); отбележете кой input е недоверен и къде се взема security решението.
+JDK 17+, Maven 3.9+ или Maven Wrapper, Docker Compose и браузър са достатъчни. Преди промяна изпълнете mvn test; след промяната повторете съответните тестове и PostgreSQL профила. Новите класове/маршрути, описани като надграждане, се реализират в това упражнение.
+
 
 ## 3. Примерен проблем
 
-Search трябва да показва само документите на текущия user. Един search string променя структурата на SQL условието и резултатите вече съдържат Bob документи при Alice session.
-
-### Начален код
-
-```java
-String sql = "SELECT id,owner,title FROM documents WHERE owner='"
-    + owner + "' AND title LIKE '%" + q + "%' ORDER BY id";
-return db.query(sql, rowMapper);
-```
+Добавете GET /tasks/search?q= с параметризирана заявка, която връща само разрешените задачи.
 
 ### Стъпки за решаване
 
-Преди работа следвайте [стартиране и възстановяване](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/setup.md). Командите за Maven се изпълняват от `vulnerable-app`, а Compose командите — от корена на курса.
 
-#### Стъпка 1
+1. Добавете search към TaskService и TaskController. q има defaultValue=""; дължина<=100 и без NUL. Новият literal маршрут /tasks/search се различава от /tasks/{id}.
+2. В TaskRepository използвайте JPQL с :q, :username и server-side :admin. Политиката е ADMIN всички, USER само t.owner.username=username.
+3. В service подайте principal и isAdmin от TaskPolicy, а не от query parameters. Mapping към TaskResponseDto остава в транзакция.
+4. Създайте задачи със summary „Бележки O'Reilly“ за alice и bob. Търсенето като alice трябва да върне само нейния запис.
+5. Добавете TaskSearchTest за нормален текст, апостроф, празно q, SQL-подобен текст, %, _, голям вход и NUL. Изпълнете H2 и PostgreSQL тестовете.
 
-Стартирайте lab05 и влезте като Alice. GET /api/search?q=notes → само нейния документ. За сравнение empty q връща нейните два документа.
-
-#### Стъпка 2
-
-Използвайте локалната команда от resources с q=`' OR '1'='1' -- `, без destructive statements. В уязвимия режим резултатът включва Bob. Запишете request parameter и owner списъка като evidence.
-
-#### Стъпка 3
-
-Възстановете получения SQL на хартия. Посочете затворения literal, OR condition и коментара. Проверете O'Reilly: валиден текст не трябва да причинява query error.
-
-#### Стъпка 4
-
-Заменете конкатенацията със `owner=? AND title LIKE ?`; bind-нете principal и `%`+q+`%` като values. Ограничете размера и NUL input; не правете blacklist на SQL keywords.
-
-#### Стъпка 5
-
-Изпълнете lab05 regression и PostgresIT. Добавете test за `%` и `_`, като ясно документирате, че wildcard search е позволен, но owner isolation остава. Проверете, че error response няма SQL.
-
-### Анализ на причината
-
-q преминава от данни към синтаксис преди заявката да достигне DB parser. Authenticated identity не прави произволния search input доверен. Ownership условие в конкатениран query може да бъде заобиколено от променената boolean структура.
-
-Причинната верига се описва като: **недоверен вход → нарушено assumption → липсващ/грешен control → наблюдавано въздействие**. Оценете likelihood/impact по скалата в [threat model](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/threat-model.md); аргументирайте residual risk след fix.
-
-### Реализация на защита
-
-Guided pattern: `db.query("SELECT ... WHERE owner=? AND title LIKE ?", mapper, principal, "%" + q + "%")`. SQL структурата остава константна. За sorting използвайте map от публично enum към фиксирани SQL identifiers; не поставяйте untrusted column name в placeholder. DB runtime user няма CREATE/DDL; обработвайте malformed inputs с 400 без SQL текст.
-
-### Проверка с регресионен тест
-
-Изпълнете:
-
-```powershell
-mvn test '-Dlab.mode=lab05' '-Dtest=WebSecurityTest#lab05*'
-```
-
-Преди поправка очаквайте assertion failure, който показва дефекта. След поправката същата команда трябва да премине. Infrastructure error не е валиден red security test.
-
-Примерен test fragment (пълният runnable class и imports са в `vulnerable-app/src/test/java/bg/tuvarna/lab`):
-
-```java
-mvc.perform(get("/api/search").with(user("alice"))
-    .param("q", "' OR '1'='1' -- "))
-    .andExpect(status().isOk()).andExpect(jsonPath("$.length()").value(0));
-mvc.perform(get("/api/search").with(user("alice")).param("q", "O'Reilly"))
-    .andExpect(jsonPath("$.length()").value(1));
-```
-
-Матрица на примерните проверки:
-
-- normal notes → един result;
-- O'Reilly → валиден result;
-- structured malicious input → нула results;
-- empty input → само собствени docs;
-- oversized/NUL input → 400;
-- wildcards → allowed semantics, без чужди owners;
-
-Повторете `mvn test` след fix и накрая `mvn verify -Psecurity-tests`. Проверявайте content/state/identity, когато са приложими, а не само HTTP status.
+Не очаквайте съществуващата findById заявка да е SQL injection. Оценяваме конструкцията на новата заявка и сравняваме параметризирания вариант с конкатениран SQL фрагмент в анализа.

@@ -5,64 +5,71 @@ sidebar:
   label: "Упражнение 2"
 ---
 
-# 1. Упражнение 2 — Изисквания и спецификация на AI-базирани системи
+# Упражнение 2 — Изисквания и спецификация на AI-базирани системи
 
-**Аудитория:** IV курс, бакалавър „Изкуствен интелект“. **Време:** 110 минути.
-Работи се само с предоставения CPU проект и synthetic dataset, без платени услуги.
+## Теория
 
-## 2. Инженерен сценарий
+### 1. Изисквания и проследимост
 
-Възложителят казва: „Системата трябва да разпознава заявки добре и бързо.“ Разработчиците могат да докажат висок F1 на различен dataset или ниска latency при един request, но нито едно не определя приемането.
+1. **Функционално (FR) и нефункционално изискване (NFR).** FR описва действие или резултат, а NFR задава качество или ограничение.
+   - **Пример:** FR: връщане на клас за заявка. NFR: отговор под зададено време при описано натоварване.
 
-## 3. Учебни цели
+2. **Спецификация (SRS), критерий за приемане и проследимост.** SRS е подредено описание на изискванията. Критерият задава проверим успех, а проследимостта свързва изискване с тест и резултат.
+   - **Пример:** FR-01 → test_predict → команда за изпълнение → действителен резултат.
 
-След упражнението студентът:
+3. **API, HTTP, endpoint и схема.** API е интерфейс между програми; HTTP е протокол за заявки и отговори; endpoint е адрес на операция. Схемата задава полета, типове и допустими стойности.
+   - **Пример:** POST /predict приема instances с числови признаци и връща label, probability и model_version.
 
-- анализира двусмислени requirements;
-- проектира functional и non-functional спецификация;
-- измерва quality и latency с явен protocol;
-- аргументира precision/recall trade-off;
-- реализира traceability към acceptance tests;
-- тества schema и data quality constraints;
+4. **Пакет (batch) и договор за грешки.** Пакетът групира няколко входа в една операция. Договорът за грешки задава резултата при невалиден вход.
+   - **Пример:** При три входа връщаме три резултата в същия ред; липсващ признак дава HTTP 422.
 
-## 4. Предварителни знания
+### 2. Измерване на качеството на модела
 
-Python, основи на ML/Jupyter, Git, REST API, Docker, scikit-learn/pandas/numpy, Linux и бази данни. Използвайте резултатите от предходните 1 упражнения като engineering input. Не преговаряме елементарни Python конструкции.
+1. **Обучаваща и отделена оценъчна извадка (holdout).** Моделът се настройва по обучаващата част, а качеството се измерва по отделени наблюдения. Seed управлява случайното разделяне; test_fraction задава дела за оценяване.
+   - **Пример:** test_fraction 0.25 отделя една четвърт от наблюденията за оценка.
 
-## 5. Инструменти
+2. **Accuracy, precision, recall и F1.** Accuracy е делът верни предсказвания. Precision е делът действителни положителни сред предсказаните положителни; recall е делът намерени сред всички действителни положителни. F1 е 2 × precision × recall / (precision + recall), с предварително правило при нулев знаменател.
+   - **Пример:** При 8 верни от 10 положителни предсказвания и 16 действителни положителни: precision = 0.8, recall = 0.5, F1 ≈ 0.615.
 
-Python 3.12, virtual environment, Jupyter Notebook по избор за notebook UI, pytest/coverage, Git, Docker, FastAPI/Pydantic и стандартните Python logging/JSON инструменти. Използвайте pinned environment от [README](/courses/bg/software-engineering-ai/). Training е върху 400 synthetic rows на CPU. Tracking/data versioning са local journal + Git/SHA manifest; не е необходим cloud account.
+3. **Група (cohort), срез (slice) и размер на извадката (support).** Срезът оценява подмножество на данните; support показва колко наблюдения подкрепят резултата.
+   - **Пример:** Recall за група с два положителни случая е твърде нестабилна основа за общ извод.
 
-## 6. Архитектурен контекст
+### 3. Измерване на услугата
 
-```text
-Dataset + manifest
-       |
-Validation / Features
-       |
-Offline Training Pipeline
-       |
-Experiment metadata + immutable Model Registry
-       |
-Inference Service -> FastAPI -> Client
-       |
-Logs / Metrics -> CI/CD and maintenance feedback
-```
+1. **Latency, p95 и throughput.** Latency е времето за отговор; p95 е стойност, под която са приблизително 95% от измерванията; throughput е броят обработени заявки за единица време.
+   - **Пример:** Записваме p95 в милисекунди и throughput в заявки за секунда.
 
-**Фокус в това упражнение:** Stakeholder intent → SRS → measurable acceptance contracts. Вижте [общата архитектура](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/architecture/system-overview.md). Отбележете данните, зависимостите и owner на всяка граница.
+2. **Натоварване, concurrency и warmup.** Натоварването задава вида и броя заявки; concurrency е броят едновременни заявки; warmup са начални изпълнения преди измерването.
+   - **Пример:** Протокол: пакет 1, едновременност 1, 10 загряващи и 100 измервани заявки на описан компютър.
 
-## 7. Теоретична подготовка
+3. **Достъпност, SLO и SLA.** Достъпността е делът успешно обслужени допустими заявки за определен период. SLO е цел за измерим показател; SLA е договор с последствия при неизпълнение.
+   - **Пример:** SLO 99.5% за 30 дни изисква данни за целия период; кратка проверка не го доказва.
 
-Functional requirement описва действие/резултат; non-functional requirement задава качество или ограничение. AI-specific requirements включват model metrics върху versioned evaluation data, slice support и допустимо поведение при uncertainty. Accuracy е дял верни predictions; precision измерва надеждността на positive results, recall — намерените positives. F1 съчетава precision/recall, но не отчита самостоятелно различна бизнес цена на грешките.
+4. **Обяснимост и справедливост.** Обяснимостта свързва резултата с разбираеми основания; справедливостта изисква изрични критерии за засегнатите групи и контекст.
+   - **Пример:** Проверка върху синтетични групи демонстрира метод, но не доказва справедливост за реални хора.
 
-SLO е цел за service indicator за определен прозорец; SLA е договор с последствия. p95 latency без hardware, workload, concurrency, batch size, warmup и sample count е непълно requirement. Availability трябва да определя denominator, maintenance windows и откази. Explainability/fairness се превръщат в проверими constraints само в ясно описан контекст; synthetic cohort metrics не доказват fairness за реални хора.
+## Примерен проблем
 
-Следвайте [източниците и version scope](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/architecture/references.md). Теорията трябва да обяснява engineering избора, не да замества evidence.
+Възложителят иска „точен и бърз модел“. Формулировката не позволява еднозначно приемане.
 
-## 8. Лош / проблемен пример
+### Стъпка 1. Разделяне на изискванията
 
-```json
-{"requirement": "Моделът е точен и API е бърз", "test": "работи"}
-```
+Записваме FR-01 за отговора на POST /predict, NFR-01 за времето и ML-01 за качеството. Така един успешен тест не замества останалите.
 
-Работещият starter и неговият TODO contract са в [starter/README.md](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/lab02-requirements/starter/README.md). Примерът е за анализ: първо запишете observable behavior и failure risks, после refactor-вайте. Не броим просто преименуване на файлове за архитектурна промяна.
+### Стъпка 2. Описание на договора
+
+FR-01 изисква label, probability и model_version за всеки вход в същия ред. Липсващ признак води до 422.
+
+### Стъпка 3. Фиксиране на оценката
+
+ML-01 задава F1 ≥ 0.85 и recall ≥ 0.85 върху requests-v1 със seed 42 и оценъчен дял 0.25. Записваме отделно ограниченията на тази извадка.
+
+### Стъпка 4. Описание на измерването
+
+NFR-01 задава учебна цел p95 < 100 ms при пакет 1 и едновременност 1, след 10 загряващи и 100 измервани заявки. Добавяме характеристиките на компютъра.
+
+### Стъпка 5. Свързване с доказателства
+
+За всяко ID посочваме тест, команда, отговорник и действителен резултат. Спецификация без попълнен резултат описва цел, а не доказан успех.
+
+Материали за примера: [начален проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/lab02-requirements/starter/README.md). [Подготовка и команди за общия проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/setup.md).

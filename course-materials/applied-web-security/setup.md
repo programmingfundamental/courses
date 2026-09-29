@@ -1,95 +1,87 @@
-# Подготовка и работа със средата
+# Подготовка на Task Manager
 
-## Архитектура и версии
+## Получаване на проекта
 
-```text
-Browser/curl → localhost:8080 → Nginx → Spring Security → Controller
-                                                    → Service → PostgreSQL
-Browser → localhost:8081 → локална CSRF демонстрационна страница
-```
+Използвайте папката [task-manager](task-manager/README.md) от този курс. Тя е фиксирано работно копие на познатия lab11 с описани технически корекции и готови начални тестове. За всяко следващо упражнение продължете своите промени; запазвайте отделен commit за завършените стъпки. Не е нужен втори портал или превключване на режим.
 
-Java 21, Maven 3.9+, Spring Boot 3.5.7 / Spring Security 6.5.6, PostgreSQL 17.6, Nginx 1.28.0.  Преди нов семестър преподавателят проверява advisories и тества актуализацията. Няма нужда от Node, Postman или външен identity provider. H2 е само бърз локален/test backend; PostgreSQL е реалният Compose backend.
+## Изисквания и първо стартиране
 
-Вижте [архитектурата](architecture/system-overview.md), [threat model](architecture/threat-model.md), [източниците](architecture/references.md) и [проверка на комплекта](VALIDATION.md).
-
-## Стартиране с Docker
-
-Командите по-долу са PowerShell, от `applied-web-security`. За curl използвайте `curl.exe` в Windows, за да избегнете alias на PowerShell. Нужни са работещ Docker Desktop с Linux containers и свободни портове 8080/8081.
+Docker Desktop с Linux containers и Docker Compose; свободен порт 9000. За локални Java тестове: JDK 17+ и Maven 3.9+ или включеният Maven Wrapper. PowerShell команди от course-materials/applied-web-security/task-manager:
 
 ```powershell
-./scripts/init-secrets.ps1
-$env:LAB_MODE='secure'
+./init-environment.ps1
 docker compose config --quiet
-docker compose up -d --build
-docker compose ps
-curl.exe -i http://localhost:8080/health
+docker compose up -d --build --wait
+docker compose logs --tail 30 app
+curl.exe -i http://localhost:9000/tasks
 ```
 
-Изчакайте `/health` да върне 200 и `{"status":"UP"}`; кратък 502 по време на стартиране означава, че app още не е готово. Отворете `http://localhost:8080/login` за генерираната login форма. Успешният login връща 204; след това отворете `/api/me` или `/profile`.
+Изчакайте Spring да стартира; GET /tasks без вход трябва да върне 401. На първото изграждане се изтеглят Maven зависимости и Docker образи. Ако порт 9000 е зает, задайте $env:TASK_MANAGER_PORT='19000' преди Compose командата и променете base URL в клиентските команди; вътрешният app порт остава 9000.
 
-Публикувани са само `127.0.0.1:8080` и `127.0.0.1:8081`. App и DB нямат host ports. Backend network е `internal: true`; само Nginx участва и във frontend bridge за host port publication. Не променяйте bind адреса, не създавайте tunnel и не публикувайте образа като публична услуга. Nginx презаписва forwarding headers. Runtime DB потребителят няма DDL/CREATE права; init се изпълнява от отделен owner.
+За Bash: `sh ./init-environment.sh`, после същите Compose команди. .env съдържа генерирани DB_PASSWORD и JWT_SECRET и е игнориран от Git. Init script не го презаписва. Промяна само на POSTGRES_PASSWORD не сменя паролата в вече създаден DB volume; съгласувайте промяната в DB и app.
 
-При заети ports задайте `LAB_HTTP_PORT` и `LAB_CSRF_PORT` с други локални стойности преди Compose startup. Адаптирайте URLs в client scripts и action в lab07 HTML fixture към същите ports; не прекратявайте чужди services. За стандартните упражнения се използват 8080/8081.
+## Начални потребители и JSON заявки
 
-За Bash: `mkdir -p .secrets; umask 077; openssl rand -base64 32 > .secrets/field-key.txt` **само при първоначално създаване**; после `LAB_MODE=secure docker compose up -d --build`. Не генерирайте нов ключ върху съществуваща БД с encrypted данни.
-
-### Учебни credentials
-
-| User | Password | Role | Собствени документи |
-|---|---|---|---|
-| alice | Lab-alice-2026! | USER | 1, 3 |
-| bob | Lab-bob-2026! | USER | 2 |
-| admin | Lab-admin-2026! | ADMIN | вижда всички по ID |
-
-Тези пароли и DB credentials са публични учебни fixtures, никога не ги използвайте другаде. `/register` приема form parameters `username,password` и CSRF token; role винаги се задава от сървъра като USER. Паролите по подразбиране са BCrypt с генерирана salt. В `lab02` новите записи са `{noop}`.
-
-### Работа с authenticated requests
+В празната база няма alice/bob/admin. Регистрацията винаги задава USER. Изпълнете веднъж за всеки потребител; при повторение използвайте съществуващия профил:
 
 ```powershell
-. ./scripts/lab-client.ps1
-Invoke-RestMethod http://localhost:8080/api/me -WebSession $LabSession
-Invoke-RestMethod http://localhost:8080/api/profile -Method Post `
-  -WebSession $LabSession -Headers $LabHeaders -Body @{displayName='Alice Lab'}
+$base = 'http://localhost:9000'
+foreach ($name in @('alice','bob','admin')) {
+    $body = @{username=$name;password="$name-password-2026!"} | ConvertTo-Json
+    Invoke-RestMethod "$base/auth/register" -Method Post -ContentType 'application/json' -Body $body
+}
+# Само начална подготовка на административния профил:
+docker compose exec -T db psql -U task_user -d tasksdb -c "UPDATE users SET role='ADMIN' WHERE username='admin';"
+$body = @{username='alice';password='alice-password-2026!'} | ConvertTo-Json
+$auth = Invoke-RestMethod "$base/auth/login" -Method Post -ContentType 'application/json' -Body $body -SessionVariable taskSession
+Invoke-RestMethod "$base/tasks" -WebSession $taskSession
+$task = @{summary='First task for Alice';description='Description for the first task';deadline='2099-12-31T12:00:00'} | ConvertTo-Json
+$created = Invoke-RestMethod "$base/tasks" -Method Post -ContentType 'application/json' -Body $task -WebSession $taskSession
+Invoke-RestMethod "$base/tasks/$($created.id)" -WebSession $taskSession
 ```
 
-Script-ът взема CSRF token преди login и нов token след login, когато Spring сменя session/CSRF контекста. При `lab07` CSRF е изключен и headers са празни. За Bob: `. ./scripts/lab-client.ps1 -UserName bob -Password 'Lab-bob-2026!'`. Не записвайте cookie jar, пароли и токени в Git или отчети.
+Вземайте ID от отговора, вместо да предполагате, че alice притежава конкретно число. Началният Task няма owner; той се добавя в упражнение 3. GET /reports/** изисква ADMIN. При лабораторните тестове потребителите се създават във fixtures и не се използва тази работна база.
 
-### Режими и прогресия
+## След упражнение 7 — CSRF клиент
 
-`LAB_MODE=labXX` включва само съответния дефект; останалите controls са reference baseline. `lab01` няма exploit switch: студентът сравнява реалната конфигурация с unsafe пример в условието. `lab10` комбинира IDOR, SQL Injection и XSS. Режимът се чете при стартиране. След промяна на code изпълнете `docker compose up -d --build`; след промяна на env — `docker compose up -d --force-recreate app`.
+След добавяне на GET /auth/csrf и token rotation заменете входа с:
 
-## Автоматизирани тестове
+```powershell
+$csrf = Invoke-RestMethod "$base/auth/csrf" -SessionVariable taskSession
+$headers = @{}; $headers[$csrf.headerName] = $csrf.token
+$body = @{username='alice';password='alice-password-2026!'} | ConvertTo-Json
+$auth = Invoke-RestMethod "$base/auth/login" -Method Post -ContentType 'application/json' -Body $body -WebSession $taskSession -Headers $headers
+$csrf = Invoke-RestMethod "$base/auth/csrf" -WebSession $taskSession
+$headers = @{}; $headers[$csrf.headerName] = $csrf.token
+# Всички session POST/PATCH/PUT/DELETE използват -WebSession $taskSession -Headers $headers.
+```
 
-От `vulnerable-app`:
+За нова регистрация след упражнение 7 първо вземете /auth/csrf и подайте същата сесия/headers с POST /auth/register. След logout изхвърлете session и tokens.
+
+## След упражнение 9 — Bearer API
+
+```powershell
+$bearerHeaders = @{Authorization="Bearer $($auth.accessToken)"}
+Invoke-RestMethod "$base/token-api/tasks" -Headers $bearerHeaders
+```
+
+/token-api/** съществува след упражнение 9 и използва отделна stateless chain. /tasks и /ui/** остават сесийни и CSRF-защитени. Refresh rotation връща нов accessToken и refreshToken; заменете старите стойности в клиента. Началният lab11 използва обща верига; не прилагайте договора на упражнение 9 към непроменения starter.
+
+## Тестове и отчети
 
 ```powershell
 mvn test
-mvn verify -Psecurity-tests
-# Очакван RED преди поправката:
-mvn test '-Dlab.mode=lab03' '-Dtest=WebSecurityTest#lab03*'
-# Същата команда след fix трябва да стане GREEN; режимът остава lab03.
+docker compose -f compose.test.yml up -d --wait
+mvn -Ppostgres-tests test
+docker compose -f compose.test.yml down
 ```
 
-`mvn test` изпълнява JUnit/MockMvc тестове и unit tests без Docker. `mvn verify -Psecurity-tests` добавя истински PostgreSQL с Testcontainers и CookieIT с embedded Tomcat. Docker е задължителен за PostgresIT; тестът не се пропуска мълчаливо при липса на engine. Failsafe задава Docker API 1.44 за съвместимост с Docker 29; настройката може да се промени с `-Ddocker.api.version=...` при друг engine. Reports: `target/surefire-reports` и `target/failsafe-reports`. MockMvc не изпълнява JavaScript и не доказва browser cookie enforcement. Browser проверките са описани отделно; тестовете за XSS проверяват encoded response и CSP, не симулират browser engine.
+Без инсталиран Maven използвайте ./mvnw.cmd (PowerShell) или sh ./mvnw (Bash). H2 тестовете не изискват Docker. PostgreSQL профилът ползва tasks_test на 127.0.0.1:55432 с create-drop; не го насочвайте към базата с работни данни. TEST_DB_URL/USER/PASSWORD могат да изберат друга отделна тестова база. Report: target/surefire-reports. Профилът не пропуска тихо недостъпна база.
 
-Всеки fix трябва да има тест, който се проваля на уязвимия code path и преминава на поправения, и положителен тест за нормална функционалност. HTTP 200 сам по себе си не е достатъчен: проверявайте identity, owner, съдържание и persistence. Не използвайте реални secrets, wordlists или destructive payloads.
+Новите тестове от упражненията се добавят в src/test/java/bg/tu_varna/sit/task_manager с имена *Test. След промяна на кода: docker compose up -d --build. Test code с with(user(...)) не доказва password login или JWT signature; за тях използвайте истински HTTP login/Bearer token.
 
-От корена на курса: `./scripts/check-structure.ps1` проверява комплектността; `./scripts/check-network.ps1` проверява Compose network invariants; `./scripts/smoke.ps1` изпълнява реални HTTP flows през proxy в secure mode. Smoke test добавя synthetic comment и sensitive field. Преподавателският `./scripts/check-vulnerable-modes.ps1` доказва, че оригиналните уязвими режими причиняват assertion failures; след студентски поправки този diagnostic runner закономерно вече не минава.
+## Спиране и данни
 
-За configurable limiter задайте например `$env:MAX_ATTEMPTS='3'`, `$env:LOCK_DURATION='PT30S'`, `$env:RESET_AFTER_SUCCESS='false'` преди `docker compose up -d --force-recreate app`. Премахнете тези env overrides преди следващото упражнение, за да възстановите documented defaults.
+`docker compose down` спира проекта и запазва named volume. `docker compose down -v` изтрива единствено данните на този Compose проект; използвайте го само когато искате празна работна база. Преди това проверете project name web-security-task-manager и запазете нужните данни. Кодът, .env и файловете с ключове не се възстановяват чрез Docker reset.
 
-## Reset
-
-За lockouts, sessions и JWT signing keys: `docker compose restart app`. Това не чисти DB и не сменя persistent AES ключа. JWT токените се обезсилват при restart, защото учебният RSA key е в паметта. Изчистете browser cookies, отново влезте и вземете нов CSRF token.
-
-За пълен reset на **само този учебен project** от тази папка:
-
-```powershell
-docker compose down -v
-$env:LAB_MODE='lab02'  # или следващото упражнение
-docker compose up -d --build
-```
-
-`down -v` изтрива учебните записи и seed-ва наново трите users/документи. Проверете `docker compose config` и project name `applied-web-security` преди командата. Не използвайте `docker system prune`. При смяна от lab02 към secure е нужен пълен reset, защото съществуващите `{noop}` hashes не се пренаписват автоматично. При lab08 reset изчиства plaintext данните преди encrypted режим; студентът отделно проектира migration. `.secrets/field-key.txt` остава: загубата му прави старите encrypted стойности нечетими.
-
-Без Docker за бърза работа: `mvn spring-boot:run` стартира loopback-only app с временна H2 база и временен AES key; restart губи данните. Това не заменя проверката с PostgreSQL/Nginx.
+Ключът за private note се добавя в упражнение 8 и трябва да се пази между рестартиранията. Загубата му прави старите бележки нечетими. JWT_SECRET в .env също се запазва; рестарт със същия ключ не отменя сам по себе си access tokens.
