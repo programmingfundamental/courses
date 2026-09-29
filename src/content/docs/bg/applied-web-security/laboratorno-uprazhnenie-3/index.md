@@ -1,27 +1,27 @@
 ---
-title: "Упражнение 3 — Собственост на задачи и контрол на достъпа"
+title: "Упражнение 3 — Удостоверяване и сесии в Task Manager"
 sidebar:
   order: 3
   label: "Упражнение 3"
 ---
 
-# Упражнение 3 — Собственост на задачи и контрол на достъпа
+# Упражнение 3 — Удостоверяване и сесии в Task Manager
 
 ## 1. Теория
 
 
-### 1.1. Роли и права върху отделен обект
+### 1.1. Пароли, SecurityContext и жизнен цикъл
 
-1. **RBAC** управлява достъп по роли; **ownership** е връзка между потребител и ресурс; **IDOR** е достъп чрез ID без нужната обектна проверка.
-   - /tasks/** допуска USER и ADMIN, но в lab11 Task няма owner. Самата роля USER не изолира задачите на alice и bob.
-2. **Horizontal escalation** пресича потребители на едно ниво; **vertical escalation** дава по-високи права.
-   - Bob вижда задача на alice чрез ID: първото. USER извиква административен отчет: второто.
-3. **Service policy** е правило в слоя на бизнес операциите. **Principal** трябва да идва от Authentication, не от body.
-   - TaskPolicy.currentUser() чете SecurityContext; POST /tasks игнорира owner от JSON и записва създателя.
-4. **TOCTOU** е промяна между проверка и употреба; **transaction/lock** свързва четенето с промяната.
-   - При неизменяем owner няма публичен transfer; при бъдещ transfer използвайте заключване или проверка в самия UPDATE.
-5. **404** за чужд и липсващ ID ограничава разкриването на съществуване. **DTO** пази API независимо от JPA връзките.
-   - TaskResponseDto не връща User/password; само позволените полета на задачата. /reports/** остава ADMIN-only в този курс.
+1. **Password hashing** е еднопосочно преобразуване; **salt** е случайна стойност в хеша; **BCrypt** използва изчислителна трудност и ограничение 72 UTF-8 байта.
+   - В lab11 вече има BCryptPasswordEncoder. Проверяваме `encoder.matches(password, stored)`; записът е $2a$/$2b$, без {bcrypt} префикса на DelegatingPasswordEncoder.
+2. **Principal** е установеният потребител; **SecurityContext** пази Authentication; **session** свързва следващи заявки с него чрез cookie.
+   - AuthService.login записва SPRING_SECURITY_CONTEXT в HttpSession и връща JSON с accessToken и refreshToken. Успехът е 200, не 204.
+3. **Session fixation** е запазване на предварително наложен session ID при вход. **Credential validation** трябва да проверява всяко искане за вход.
+   - Нов login с грешна парола не трябва да издава нов token само защото заявката вече има сесия.
+4. **401** означава липсващо/невалидно удостоверяване; **403** — отказ на право. **Account enumeration** разкрива дали име съществува чрез отговор или време.
+   - Неизвестно име и грешна парола получават еднакъв контролиран 401, без съдържание на изключение.
+5. **DTO validation** проверява форма/дължина; **migration** променя съществуващи данни; **transaction** групира DB операции.
+   - @NotBlank не ограничава размера. Добавяме @Size и байтова проверка преди encode; logout изтрива refresh записи в транзакция.
 
 
 
@@ -47,24 +47,24 @@ Java, Spring Boot, HTTP, JPA и Task Manager от lab11. Продължете с
 
 ### Начален проект и надграждане
 
-След упражнение 2. Добавят се owner към Task и TaskPolicy. Старите задачи се присвояват чрез явна миграция; новите получават текущия потребител на сървъра.
+Продължете резултата от упражнение 2. Добавят се проверки на входа, последователен отказ при грешен login и GET /auth/me.
 
 Използвайте [Task Manager](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/task-manager/README.md) и [подготовката](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/setup.md). Всички Maven/Compose команди се изпълняват от task-manager. Работните Java класове са в src/main/java/bg/tu_varna/sit/task_manager; тестовете — в съответния src/test/java package.
 
-**Файлове за работа:** Task, TaskRepository, TaskServiceImp, TaskController, SecurityConfig. [Архитектурната карта](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md) показва кои маршрути съществуват в началото и кои се добавят последователно.
+**Файлове за работа:** AuthService.login/register/logout, SecurityConfig, AppUserDetailsService, RegisterRequest. [Архитектурната карта](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md) показва кои маршрути съществуват в началото и кои се добавят последователно.
 
 JDK 17+, Maven 3.9+ или Maven Wrapper, Docker Compose и браузър са достатъчни. Преди промяна изпълнете mvn test; след промяната повторете съответните тестове и PostgreSQL профила. Новите класове/маршрути, описани като надграждане, се реализират в това упражнение.
 
 
 ## 3. Примерен проблем
 
-Добавете собственост на Task и ограничете GET /tasks и GET /tasks/{id} до собствени задачи за USER; ADMIN вижда всички.
+Подобрете login така, че всяка заявка да проверява подадените credentials, да сменя session ID при успех и да връща 401 при неуспех.
 
 ### Стъпки за решаване
 
 
-1. Добавете @ManyToOne(fetch=LAZY) User owner и @JoinColumn(name="owner_id") в Task, със setter само за server-side създаване. Не добавяйте owner в TaskRequestDto.
-2. За празна база Hibernate създава полето. За база със задачи първо добавете nullable owner_id, задайте собственици по проверен списък, после NOT NULL и foreign key. Не приписвайте всички стари задачи на първия влязъл user.
-3. Добавете findByOwnerUsername в TaskRepository и TaskPolicy с currentUser, isAdmin и requireReadable(Task). Използвайте UserRepository за owner при create.
-4. getAll избира всички за ADMIN или собствени за USER. findById проверява policy преди mapping към TaskResponseDto; чужд и липсващ ID → 404.
-5. Създайте alice/bob в users, по една задача за всеки и TaskOwnershipTest: owner=200, other=404, admin=200, anonymous=401, list няма чужди задачи. Не разчитайте на фиксирани ID; вземете ги от POST response.
+1. Прочетете ранното връщане в AuthService.login при currentAuth.isAuthenticated(). Създайте сесия за alice и изпратете втори login с грешна парола; запишете поведението.
+2. Премахнете този shortcut. Всяка заявка преминава през authenticationManager.authenticate. Уловете AuthenticationException и върнете контролиран 401; не връщайте e.getMessage().
+3. След успешна проверка сменете ID на съществуваща сесия чрез request.changeSessionId(), създайте нов SecurityContext и го запазете в сесията. Не сменяйте ID преди доказване на самоличността.
+4. Проверете, че logout обезсилва сесията и премахва refresh записите; revokeAllUserTokens работи в транзакция. Вече издаденият access token има собствен срок — това се разглежда в упражнение 10.
+5. Добавете AuthenticationTest за правилна/грешна парола, неизвестно име, повторен login с грешна парола в съществуваща сесия и logout. Запазете положителния GET /tasks.

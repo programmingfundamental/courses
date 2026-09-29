@@ -1,27 +1,27 @@
 ---
-title: "Упражнение 4 — Ограничаване на опитите за вход"
+title: "Упражнение 4 — Собственост на задачи и контрол на достъпа"
 sidebar:
   order: 4
   label: "Упражнение 4"
 ---
 
-# Упражнение 4 — Ограничаване на опитите за вход
+# Упражнение 4 — Собственост на задачи и контрол на достъпа
 
 ## 1. Теория
 
 
-### 1.1. Опити, срокове и конкурентност
+### 1.1. Роли и права върху отделен обект
 
-1. **Brute force** изпробва кандидати; **credential stuffing** използва изтекли двойки име/парола; **account enumeration** различава съществуващи имена.
-   - Единен 401 не разкрива дали отказът е грешна парола или активна блокировка.
-2. **Rate limiting** ограничава честота; **lockout** временно отказва след праг; **throttling** забавя/ограничава приемането.
-   - При max=5 петият неуспех достига прага; следващият опит е отказан за 60 секунди от достигането му.
-3. **Clock injection** подава часовник като зависимост; **deterministic test** има повторим резултат без sleep.
-   - MutableClock се премества от t до t+60s и проверява изтичането точно на границата.
-4. **Atomic update** предотвратява загуба на конкурентни промени; **bounded storage** ограничава броя ключове.
-   - Два failures за alice трябва да увеличат броя с две. Измислени имена не трябва да растат безкрайно в map.
-5. **NAT** споделя IP; **cluster** има няколко app инстанции; **lockout DoS** блокира чужд профил чрез грешни опити.
-   - Account лимит се комбинира с общ праг; при cluster е нужно общо атомарно хранилище. X-Forwarded-For е доверен само от управляван proxy.
+1. **RBAC** управлява достъп по роли; **ownership** е връзка между потребител и ресурс; **IDOR** е достъп чрез ID без нужната обектна проверка.
+   - /tasks/** допуска USER и ADMIN, но в lab11 Task няма owner. Самата роля USER не изолира задачите на alice и bob.
+2. **Horizontal escalation** пресича потребители на едно ниво; **vertical escalation** дава по-високи права.
+   - Bob вижда задача на alice чрез ID: първото. USER извиква административен отчет: второто.
+3. **Service policy** е правило в слоя на бизнес операциите. **Principal** трябва да идва от Authentication, не от body.
+   - TaskPolicy.currentUser() чете SecurityContext; POST /tasks игнорира owner от JSON и записва създателя.
+4. **TOCTOU** е промяна между проверка и употреба; **transaction/lock** свързва четенето с промяната.
+   - При неизменяем owner няма публичен transfer; при бъдещ transfer използвайте заключване или проверка в самия UPDATE.
+5. **404** за чужд и липсващ ID ограничава разкриването на съществуване. **DTO** пази API независимо от JPA връзките.
+   - TaskResponseDto не връща User/password; само позволените полета на задачата. /reports/** остава ADMIN-only в този курс.
 
 
 
@@ -47,24 +47,24 @@ Java, Spring Boot, HTTP, JPA и Task Manager от lab11. Продължете с
 
 ### Начален проект и надграждане
 
-След упражнение 3. Добавя се LoginAttemptService с configurable праг, срок и Clock. В AuthService остава задължителната проверка на credentials от упражнение 2.
+След упражнение 3. Добавят се owner към Task и TaskPolicy. Старите задачи се присвояват чрез явна миграция; новите получават текущия потребител на сървъра.
 
 Използвайте [Task Manager](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/task-manager/README.md) и [подготовката](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/setup.md). Всички Maven/Compose команди се изпълняват от task-manager. Работните Java класове са в src/main/java/bg/tu_varna/sit/task_manager; тестовете — в съответния src/test/java package.
 
-**Файлове за работа:** AuthService.login, нов LoginAttemptService, Clock bean, application.properties. [Архитектурната карта](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md) показва кои маршрути съществуват в началото и кои се добавят последователно.
+**Файлове за работа:** Task, TaskRepository, TaskServiceImp, TaskController, SecurityConfig. [Архитектурната карта](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md) показва кои маршрути съществуват в началото и кои се добавят последователно.
 
 JDK 17+, Maven 3.9+ или Maven Wrapper, Docker Compose и браузър са достатъчни. Преди промяна изпълнете mvn test; след промяната повторете съответните тестове и PostgreSQL профила. Новите класове/маршрути, описани като надграждане, се реализират в това упражнение.
 
 
 ## 3. Примерен проблем
 
-Добавете пет неуспешни опита и блокировка за 60 секунди към POST /auth/login, без блокираният опит да удължава срока.
+Добавете собственост на Task и ограничете GET /tasks и GET /tasks/{id} до собствени задачи за USER; ADMIN вижда всички.
 
 ### Стъпки за решаване
 
 
-1. Добавете Clock.systemUTC() bean. LoginAttemptService пази failures и until за username и приема max=5, duration=PT60S, resetAfterSuccess=true.
-2. AuthService.login първо проверява blocked(name); при блокировка връща 401 без нов failure. Само AuthenticationException от authenticationManager увеличава брояча; DB/build грешки не са грешна парола.
-3. При успех изчистете брояча, после създайте сесия и tokens по упражнение 2. Ранният shortcut за authenticated user остава премахнат.
-4. Добавете LoginRateLimitTest през MockMvc: 5 грешни JSON login, после правилен → 401; след преместване на Clock с 60 секунди → 200.
-5. Проверете bob независимо от alice и еднакъв отказ за непознато име. Описвайте избраната политика за срок от първи/последен failure; тук срокът след блокировка е фиксиран.
+1. Добавете @ManyToOne(fetch=LAZY) User owner и @JoinColumn(name="owner_id") в Task, със setter само за server-side създаване. Не добавяйте owner в TaskRequestDto.
+2. За празна база Hibernate създава полето. За база със задачи първо добавете nullable owner_id, задайте собственици по проверен списък, после NOT NULL и foreign key. Не приписвайте всички стари задачи на първия влязъл user.
+3. Добавете findByOwnerUsername в TaskRepository и TaskPolicy с currentUser, isAdmin и requireReadable(Task). Използвайте UserRepository за owner при create.
+4. getAll избира всички за ADMIN или собствени за USER. findById проверява policy преди mapping към TaskResponseDto; чужд и липсващ ID → 404.
+5. Създайте alice/bob в users, по една задача за всеки и TaskOwnershipTest: owner=200, other=404, admin=200, anonymous=401, list няма чужди задачи. Не разчитайте на фиксирани ID; вземете ги от POST response.

@@ -1,27 +1,27 @@
 ---
-title: "Упражнение 10 — Интегрирана оценка и регресионни тестове на Task Manager"
+title: "Упражнение 10 — JWT, отделен Bearer API и refresh rotation"
 sidebar:
   order: 10
   label: "Упражнение 10"
 ---
 
-# Упражнение 10 — Интегрирана оценка и регресионни тестове на Task Manager
+# Упражнение 10 — JWT, отделен Bearer API и refresh rotation
 
 ## 1. Теория
 
 
-### 1.1. Оценка, обхват и проследимост
+### 1.1. Подпис, claims и отмяна
 
-1. **Security assessment** е систематична оценка; **finding** е потвърден проблем; **hypothesis** е предположение; **limitation** е граница на проверката.
-   - Липсващ route в непроменения starter е липсваща реализация, не доказателство за заобиколена policy.
-2. **Defense in depth** комбинира независими controls; **test coverage** описва обхват; **mutation check** временно променя код, за да докаже, че тестът реагира.
-   - Тест за owner трябва да се провали при премахната owner проверка и да премине след връщането ѝ.
-3. **Audit event** записва действие/резултат; **correlation ID** свързва HTTP заявка и лог; **log injection** вмъква заблуждаващи редове.
-   - Event type се избира от фиксиран набор; парола, JWT, refresh token и private note не се логват.
-4. **Dependency tree** показва версии; **advisory** описва известен проблем; **affected range** са засегнатите версии; **reachability** е достижимостта на кода.
-   - mvn dependency:tree е вход за оценката, но версия без приложим advisory не е потвърден finding.
-5. **Acceptance criteria** са проверими условия; **reproducible build** повтаря резултата от определена версия; **residual risk** остава след защитата.
-   - Отчетът посочва commit, профил, DB и реално изпълнени тестове, отделно от браузърните проверки.
+1. **JWT** има header, payload и signature; **Base64url** е кодиране; **claim** е твърдение. **HS256** подписва с общ таен ключ, **issuer/audience/subject/expiration** определят издател/получател/потребител/срок.
+   - JwtService вече проверява подпис чрез verifyWith и издава exp. Добавяме задължителни iss, aud, sub, exp и точен алгоритъм; не заменяме проверката с parsing.
+2. **Clock skew** допуска разлика между часовници; **replay** използва token повторно.
+   - Приетият договор е now<exp с нулев skew; кратък срок ограничава, но не забранява replay.
+3. **Stateless chain** не използва HttpSession; **Bearer** се подава изрично от клиента. **SecurityContextRepository** определя къде се пази context.
+   - /token-api/tasks приема само Bearer и няма session fallback; /tasks и /ui остават session API с CSRF.
+4. **Refresh rotation** обезсилва стар refresh token при издаване на нов; **revocation** го отменя; **digest** пази стойност за сравнение вместо raw token.
+   - RefreshTokenService в lab11 връща същия token. При rotation две едновременни употреби трябва да дадат точно един успех.
+5. **Key rotation** сменя signing key; **roles** в JWT са различни от актуални права в DB.
+   - Тук JwtAuthFilter зарежда UserDetails от DB, проверява enabled и използва текущите authorities. Logout отменя refresh/session; вече издаден access остава валиден до exp, освен ако добавим server-side revocation.
 
 
 
@@ -47,24 +47,24 @@ Java, Spring Boot, HTTP, JPA и Task Manager от lab11. Продължете с
 
 ### Начален проект и надграждане
 
-Използвайте резултата от упражнения 1–9. Началното копие от lab11 не съдържа тези завършени надграждания; тук се проверява натрупаната студентска реализация.
+След упражнение 9. Запазваме JJWT и HS256 от lab11; добавяме валидирани claims, Clock и отделна stateless верига /token-api/**. Refresh tokens се завъртат еднократно.
 
 Използвайте [Task Manager](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/task-manager/README.md) и [подготовката](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/setup.md). Всички Maven/Compose команди се изпълняват от task-manager. Работните Java класове са в src/main/java/bg/tu_varna/sit/task_manager; тестовете — в съответния src/test/java package.
 
-**Файлове за работа:** Всички надграждания; нов AuditFilter и AuditTest; H2/PostgreSQL тестови профили. [Архитектурната карта](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md) показва кои маршрути съществуват в началото и кои се добавят последователно.
+**Файлове за работа:** JwtService, JwtAuthFilter, RefreshTokenService/Repository, SecurityConfig, нов TokenTaskController. [Архитектурната карта](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md) показва кои маршрути съществуват в началото и кои се добавят последователно.
 
 JDK 17+, Maven 3.9+ или Maven Wrapper, Docker Compose и браузър са достатъчни. Преди промяна изпълнете mvn test; след промяната повторете съответните тестове и PostgreSQL профила. Новите класове/маршрути, описани като надграждане, се реализират в това упражнение.
 
 
 ## 3. Примерен проблем
 
-Докажете съвместната работа на собствеността, търсенето, HTML, CSRF, криптографията и Bearer/refresh потока.
+Затегнете JwtService и отделете Bearer достъпа до задачите от сесийната верига.
 
 ### Стъпки за решаване
 
 
-1. Направете инвентар на реалните endpoints от архитектурната карта. За всеки запишете authentication механизъм, роли, owner policy и промяна на състояние.
-2. Изпълнете mvn test и PostgreSQL профила. Отчетът трябва да съдържа началните и новите тестове, без пропуснати случаи заради грешен адрес/профил.
-3. През Docker приложението повторете register → csrf/login → create own task → search → HTML → private note → token-api → refresh → logout. Няма смяна на режим за поправяне на тестове.
-4. Добавете AuditFilter с генериран UUID correlation ID и фиксирани event types, без raw body/headers. Проверете allowed и denied операции.
-5. В отделно работно копие премахнете една owner проверка, покажете проваления тест и възстановете промяната. Положителните сценарии трябва да останат успешни.
+1. Добавете Clock bean към JwtService. Издавайте issuer=task-manager, audience=task-manager-api, sub=username, exp=now+TTL и HS256. Секретът идва от конфигурацията, не от request.
+2. След cryptographic verification проверете algorithm=HS256, задължителни exp/sub/iss/aud и now<exp. Parse-вайте token веднъж за заявка. Invalid Bearer връща 401, включително ако клиентът има валидна сесия.
+3. JwtAuthFilter зарежда user, отказва disabled/unknown user, създава context с актуалните authorities. Изключете автоматичната servlet регистрация на filter bean, така че да работи само в избраната security chain.
+4. Добавете @Order(1) SecurityFilterChain за /token-api/**: STATELESS, NullSecurityContextRepository, CSRF disabled, без Basic/formLogin. @Order(2) запазва session/CSRF за останалото и не добавя JWT filter.
+5. TokenTaskController GET /token-api/tasks делегира на TaskService.getAll. USER вижда собствени задачи; ADMIN всички. JwtContractTest използва истински подписан token, не само mocked jwt()/user().

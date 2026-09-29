@@ -10,13 +10,15 @@ sidebar:
 
 ## Упражнения
 
-- [Упражнение 1 — Среда и моделиране на заплахи в Task Manager](/courses/bg/applied-web-security/laboratorno-uprazhnenie-1/)
-- [Упражнение 2 — Удостоверяване и сесии в Task Manager](/courses/bg/applied-web-security/laboratorno-uprazhnenie-2/)
-- [Упражнение 3 — Собственост на задачи и контрол на достъпа](/courses/bg/applied-web-security/laboratorno-uprazhnenie-3/)
-- [Упражнение 4 — Ограничаване на опитите за вход](/courses/bg/applied-web-security/laboratorno-uprazhnenie-4/)
-- [Упражнение 5 — Безопасно търсене на задачи със Spring Data JPA](/courses/bg/applied-web-security/laboratorno-uprazhnenie-5/)
-- [Упражнение 6 — HTML изглед на задачите и XSS защита](/courses/bg/applied-web-security/laboratorno-uprazhnenie-6/)
-- [Упражнение 7 — CSRF защита на сесиите и формите в Task Manager](/courses/bg/applied-web-security/laboratorno-uprazhnenie-7/)
-- [Упражнение 8 — Криптиране на поверителна бележка към задача](/courses/bg/applied-web-security/laboratorno-uprazhnenie-8/)
-- [Упражнение 9 — JWT, отделен Bearer API и refresh rotation](/courses/bg/applied-web-security/laboratorno-uprazhnenie-9/)
-- [Упражнение 10 — Интегрирана оценка и регресионни тестове на Task Manager](/courses/bg/applied-web-security/laboratorno-uprazhnenie-10/)
+- [Упражнение 1 — Въведение в Уеб сигурността](/courses/bg/applied-web-security/laboratorno-uprazhnenie-1/)
+
+- [Упражнение 2 — Среда и моделиране на заплахи в Task Manager](/courses/bg/applied-web-security/laboratorno-uprazhnenie-2/)
+- [Упражнение 3 — Удостоверяване и сесии в Task Manager](/courses/bg/applied-web-security/laboratorno-uprazhnenie-3/)
+- [Упражнение 4 — Собственост на задачи и контрол на достъпа](/courses/bg/applied-web-security/laboratorno-uprazhnenie-4/)
+- [Упражнение 5 — Ограничаване на опитите за вход](/courses/bg/applied-web-security/laboratorno-uprazhnenie-5/)
+- [Упражнение 6 — Безопасно търсене на задачи със Spring Data JPA](/courses/bg/applied-web-security/laboratorno-uprazhnenie-6/)
+- [Упражнение 7 — HTML изглед на задачите и XSS защита](/courses/bg/applied-web-security/laboratorno-uprazhnenie-7/)
+- [Упражнение 8 — CSRF защита на сесиите и формите в Task Manager](/courses/bg/applied-web-security/laboratorno-uprazhnenie-8/)
+- [Упражнение 9 — Криптиране на поверителна бележка към задача](/courses/bg/applied-web-security/laboratorno-uprazhnenie-9/)
+- [Упражнение 10 — JWT, отделен Bearer API и refresh rotation](/courses/bg/applied-web-security/laboratorno-uprazhnenie-10/)
+- [Упражнение 11 — Интегрирана оценка и регресионни тестове на Task Manager](/courses/bg/applied-web-security/laboratorno-uprazhnenie-11/)

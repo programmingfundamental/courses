@@ -9,10 +9,10 @@ sidebar:
 ## Самостоятелни задачи
 
 
-### Задача 1 — Rotation на ключове
+### Задача 1 — HTML форма за нова задача
 
-Разширете envelope до v1:keyId:Base64(nonce+ciphertext+tag) и поддържайте key ring от конфигурирани файлове. Новите записи използват currentKeyId; старите се четат с техния ID. Реализирайте service операция за миграция на една бележка, без публичен административен endpoint. Докажете old-read/new-write, повторно изпълнение и отказ при непознат key ID.
+Добавете GET /ui/tasks/new с полета summary, description, deadline и hidden CSRF. POST /ui/tasks приема form data и делегира към същия TaskService.create. Добавете setters към TaskRequestDto за @ModelAttribute binding или отделен form DTO със същата валидация. Не копирайте repository логика. Успех=201; липсващ/чужд token=403 без INSERT. Owner е текущият потребител.
 
-### Задача 2 — Решения за secrets
+### Задача 2 — Token и cookie граници
 
-Направете таблица за password, access signing key, refresh token, private note и DB credential: нужно ли е възстановяване, механизъм, съхранение, rotation/revocation и тест. Реализирайте поне два теста. Включете restart със същия/различен ключ, променен owner/AAD и кирилица.
+Проверете стар token след login, стар session cookie след logout, same-site/cross-origin form и Secure cookie през HTTPS. Добавете автоматизирана проверка за token/session, а действителното изпращане на cookie проверете с браузър. Опишете защо 403 за POST без token не доказва правилна authentication policy.

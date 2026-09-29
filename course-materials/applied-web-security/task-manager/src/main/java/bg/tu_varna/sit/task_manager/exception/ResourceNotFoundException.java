@@ -1,7 +1,7 @@
 package bg.tu_varna.sit.task_manager.exception;
 
 /***
- * Добавено в лабораторно упражнение 8
+ * Добавено в лабораторно упражнение 9
  */
 public class ResourceNotFoundException extends Exception {
     public ResourceNotFoundException(long id, Class item) {

@@ -98,7 +98,7 @@ Instructor notes and starter source projects remain outside the site content tre
 The fourth-year Applied Web Security and Software Engineering for AI Systems courses
 are authored in `course-materials/applied-web-security/` and
 `course-materials/software-engineering-ai/`. Run `npm run sync:security-engineering-labs`
-after editing their README or student `labXX.md` files. This publishes ten labs per
+after editing their README or student `labXX.md` files. This publishes eleven labs per
 course, separates practical tasks, and maintains English navigation titles with
 empty lesson placeholders until translations are available. Supporting resources
 and starter code link to their repository files; instructor notes are not published

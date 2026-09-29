@@ -14,12 +14,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.time.LocalDateTime;
 
 /***
- * Добавено в лабораторно упражнение 8
+ * Добавено в лабораторно упражнение 9
  */
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     /**
-     * Добавено в лабораторно упражнение 9
+     * Добавено в лабораторно упражнение 10
      */
     @ExceptionHandler(RelatedEntityException.class)
     public ResponseEntity<Object> handleResourceNotFoundException(RelatedEntityException exception) {

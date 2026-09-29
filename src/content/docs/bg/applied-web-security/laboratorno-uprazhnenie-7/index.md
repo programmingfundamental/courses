@@ -1,27 +1,27 @@
 ---
-title: "Упражнение 7 — CSRF защита на сесиите и формите в Task Manager"
+title: "Упражнение 7 — HTML изглед на задачите и XSS защита"
 sidebar:
   order: 7
   label: "Упражнение 7"
 ---
 
-# Упражнение 7 — CSRF защита на сесиите и формите в Task Manager
+# Упражнение 7 — HTML изглед на задачите и XSS защита
 
 ## 1. Теория
 
 
-### 1.1. Браузърни credentials и намерение на потребителя
+### 1.1. Данни в браузъра
 
-1. **CSRF** използва автоматично изпратени credentials за нежелана операция. Session cookie се изпраща от браузъра; наличието на JWT в приложението не премахва сесийния достъп.
-   - AuthService.login създава HttpSession, а SecurityConfig е IF_REQUIRED и csrf.disable(). Следователно анализираме реално съществуващ сесиен път.
-2. **CSRF token** е непредсказуема стойност, свързана със сесията; сървърът я сравнява преди промяна.
-   - GET /auth/csrf връща token/headerName/parameterName. JSON клиентът изпраща заглавката; HTML формата — hidden parameter.
-3. **Origin** включва схема, хост и порт; **site** не се различава само по порт. **SOP** ограничава четенето, **CORS** разрешава избрани script origins.
-   - HTML form може да изпрати cross-origin POST, дори да няма право да прочете отговора. CORS не доказва намерението на user.
-4. **HttpOnly** ограничава JavaScript достъп до cookie; **Secure** изисква защитен транспорт; **SameSite** ограничава cross-site изпращане.
-   - Различни localhost портове са cross-origin, но same-site. Cookie flags са отделни проверки от token.
-5. **Session fixation protection** сменя session ID; **token rotation** сменя CSRF token след удостоверяване.
-   - При custom AuthService.login изрично извикваме SessionAuthenticationStrategy, вместо да предполагаме, че стандартният login filter го прави.
+1. **XSS** е изпълнение на недоверено съдържание в origin на приложението. **Stored XSS** използва записан вход; **reflected XSS** отразява заявка; **DOM XSS** възниква при обработка от JavaScript.
+   - summary/description се пазят в Task и се показват в /ui/tasks. Рискът е при HTML render, а не при JPA записването.
+2. **Origin** е протокол, хост и порт; **sink** е място, което интерпретира вход; **DOM** е дървото на страницата.
+   - innerHTML интерпретира тагове; textContent показва текст. Сървърното конкатениране на raw summary в <h2> също е HTML sink.
+3. **Output encoding** зависи от контекста. **Sanitization** допуска ограничен HTML; тук полетата са обикновен текст.
+   - HtmlUtils.htmlEscape превръща < в &lt; за HTML текст/quoted attribute. Пазим оригинала в DB, кодираме при извеждане.
+4. **URL scheme** е частта преди :, **attribute breakout** затваря кавичката, **double encoding** кодира повторно вече кодиран текст.
+   - href изисква и allowlist http/https, и кодиране на атрибут. HTML escaping не прави javascript: безопасен.
+5. **CSP** задава разрешени източници/действия; **defense in depth** съчетава независими защити.
+   - CSP без inline scripts ограничава изпълнението, но тестът пак проверява, че summary е encoded. **Marker** е видим индикатор за изпълнение, например заглавието на страницата.
 
 
 
@@ -47,24 +47,24 @@ Java, Spring Boot, HTTP, JPA и Task Manager от lab11. Продължете с
 
 ### Начален проект и надграждане
 
-След упражнение 6. Включва се CSRF за съществуващата сесийна верига и се добавя HTML форма. До упражнение 9 POST/PATCH/DELETE с Bearer също изискват CSRF в тази обща верига.
+След упражнение 6. Добавя се HTML изглед /ui/tasks към същото приложение. JSON REST отговор сам по себе си не изпълнява HTML; XSS се анализира при новия изходен контекст.
 
 Използвайте [Task Manager](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/task-manager/README.md) и [подготовката](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/setup.md). Всички Maven/Compose команди се изпълняват от task-manager. Работните Java класове са в src/main/java/bg/tu_varna/sit/task_manager; тестовете — в съответния src/test/java package.
 
-**Файлове за работа:** SecurityConfig, AuthController/AuthService, нов GET /auth/csrf, TaskPageController. [Архитектурната карта](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md) показва кои маршрути съществуват в началото и кои се добавят последователно.
+**Файлове за работа:** нов TaskPageController, TaskServiceImp, SecurityConfig; по избор Task.referenceUrl. [Архитектурната карта](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md) показва кои маршрути съществуват в началото и кои се добавят последователно.
 
 JDK 17+, Maven 3.9+ или Maven Wrapper, Docker Compose и браузър са достатъчни. Преди промяна изпълнете mvn test; след промяната повторете съответните тестове и PostgreSQL профила. Новите класове/маршрути, описани като надграждане, се реализират в това упражнение.
 
 
 ## 3. Примерен проблем
 
-Включете CSRF при съществуващия session login и докажете, че отказана промяна на Task не записва данни.
+Добавете HTML страница /ui/tasks, която показва разрешените summary и description като текст.
 
 ### Стъпки за решаване
 
 
-1. Премахнете csrf.disable() от текущата SecurityConfig и използвайте HttpSessionCsrfTokenRepository. Добавете публичен GET /auth/csrf преди общите правила.
-2. Преди POST /auth/login клиентът взема token с анонимна сесия. След authenticate извикайте стратегия за смяна на session ID и изчистване на CSRF token, после запазете SecurityContext.
-3. Клиентът взема нов token след login и използва неговата headerName за JSON POST/PATCH/DELETE. Актуализирайте setup клиентските стъпки; всички тестови mutations вече използват with(csrf()).
-4. Като owner изпратете PATCH /tasks/{id}/update без token, с грешен token и с token от друга сесия: 403 и без DB промяна. Валидният token със същата сесия дава 200.
-5. Добавете CsrfSessionTest с поне един реален GET /auth/csrf response, не само csrf() helper. Проверете GET /tasks без сесия=401 и logout с token=200.
+1. Създайте TaskPageController с GET /ui/tasks, produces=text/html, който използва TaskService.getAll от упражнение 4. Не правете repository.findAll в контролера.
+2. Поставете summary/description в <h2>/<p> след HtmlUtils.htmlEscape. Не кодирайте стойностите при запис в DB.
+3. SecurityConfig изисква удостоверяване за /ui/**. Добавете CSP default-src none; form-action self; frame-ancestors none; base-uri none.
+4. Създайте Task със summary/description, съдържащи <b> и script marker; отворете /ui/tasks като owner и като друг user. Другият user не вижда задачата.
+5. TaskHtmlTest проверява encoded HTML, липса на raw script и нормална кирилица. В браузър marker не се изпълнява. Не правете извод за JavaScript само от MockMvc.

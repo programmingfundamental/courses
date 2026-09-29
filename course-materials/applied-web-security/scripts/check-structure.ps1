@@ -1,12 +1,19 @@
 $ErrorActionPreference='Stop'
 $courseRoot=Split-Path -Parent $PSScriptRoot
 $labs=@(Get-ChildItem -LiteralPath $courseRoot -Directory | Where-Object Name -Match '^lab\d{2}-')
-if($labs.Count -ne 10){throw "Expected exactly 10 labs, got $($labs.Count)"}
+if($labs.Count -ne 11){throw "Expected exactly 11 labs, got $($labs.Count)"}
+$expectedNumber=1
+foreach($lab in ($labs | Sort-Object Name)){
+    if([int]$lab.Name.Substring(3,2) -ne $expectedNumber){throw "Unexpected lab sequence: $($lab.Name)"}
+    $expectedNumber++
+}
 foreach($lab in $labs){
     $id=$lab.Name.Substring(0,5)
     $student=Join-Path $lab.FullName "$id.md"
     $notes=Join-Path $lab.FullName 'instructor-notes.md'
     $studentText=Get-Content -LiteralPath $student -Raw
+    $number=[int]$lab.Name.Substring(3,2)
+    if(-not $studentText.StartsWith("# Упражнение $number — ")){throw "${id}: wrong title number"}
     $notesText=Get-Content -LiteralPath $notes -Raw
     if($studentText -notmatch '(?s)^# [^\r\n]+\r?\n\s*## 1\. Теория'){throw "${id}: theory must follow the title"}
     foreach($heading in @('## 2. Подготовка','## 3. Примерен проблем','### Стъпки за решаване','## Самостоятелни задачи')){
@@ -26,4 +33,4 @@ foreach($lab in $labs){
 foreach($file in @('task-manager/pom.xml','task-manager/compose.yml','task-manager/README.md','setup.md')) {
     if(-not (Test-Path (Join-Path $courseRoot $file))){throw "Missing starter file: $file"}
 }
-Write-Output 'PASS: 10 Task Manager labs with theory, examples, independent tasks and separate solutions; starter present.'
+Write-Output 'PASS: 11 Task Manager labs with theory, examples, independent tasks and separate solutions; starter present.'

@@ -7,7 +7,7 @@ import json
 import os
 from pathlib import Path
 
-path = Path(__file__).parents[2] / "lab01-lifecycle-processes" / "starter" / "experiment.ipynb"
+path = Path(__file__).parents[2] / "lab02-lifecycle-processes" / "starter" / "experiment.ipynb"
 notebook = json.loads(path.read_text(encoding="utf-8"))
 namespace = {"__name__": "__main__"}
 os.chdir(path.parent)

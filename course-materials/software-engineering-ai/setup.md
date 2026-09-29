@@ -26,7 +26,7 @@ Structured logs / bounded metrics → CI/CD / operational feedback
 
 Python 3.12, scikit-learn1.7.2, pandas2.3.3, numpy2.3.4, FastAPI0.119.1, Pydantic2.12.3, pytest, Ruff, GitHub Actions и Docker. Точните преки и транзитивни версии са в [requirements.lock](ai-platform/requirements.lock); requirements.in е входният списък, не reproducible install command. Версиите са фиксиран учебен baseline, не твърдение за липса на известни vulnerabilities.
 
-За малкия local проект използваме **еквивалентен experiment tracking/model registry**: immutable version directories с parameters, metrics, dataset hash, git commit, source hash, dependency lock hash, split IDs и model artifact. Git+CSV+SHA manifest осигурява data versioning. Тези решения реализират нужните учебни функции без MLflow/DVC service. Сравнението с MLflow/DVC и критерият за миграция са в lab08. JSON metrics демонстрират observability; не са Prometheus/OpenTelemetry exporter.
+За малкия local проект използваме **еквивалентен experiment tracking/model registry**: immutable version directories с parameters, metrics, dataset hash, git commit, source hash, dependency lock hash, split IDs и model artifact. Git+CSV+SHA manifest осигурява data versioning. Тези решения реализират нужните учебни функции без MLflow/DVC service. Сравнението с MLflow/DVC и критерият за миграция са в lab09. JSON metrics демонстрират observability; не са Prometheus/OpenTelemetry exporter.
 
 ## Setup
 
@@ -45,7 +45,7 @@ pytest -q
 
 В Bash активирайте с `source .venv/bin/activate`, после същите commands. Ако PowerShell policy не позволява activation, използвайте пълния path до `.venv/Scripts/python.exe`; от ai-platform той е `../.venv/Scripts/python.exe`. Не е нужно да променяте глобалната policy.
 
-Committed dataset е готов. `python -m ai_platform.cli generate` възпроизвежда synthetic fixture с seed42, но за нови данни създавайте нов version/path вместо overwrite на v1. Notebook се проверява с `python scripts/check_notebook.py`. За UI по желание инсталирайте JupyterLab в отделна notebook среда/същата среда с осъзнат dependency update и отворете `../lab01-lifecycle-processes/starter/experiment.ipynb`. Kernel cwd трябва да е starter папката; hardcoded path е умишленият lab01 smell.
+Committed dataset е готов. `python -m ai_platform.cli generate` възпроизвежда synthetic fixture с seed42, но за нови данни създавайте нов version/path вместо overwrite на v1. Notebook се проверява с `python scripts/check_notebook.py`. За UI по желание инсталирайте JupyterLab в отделна notebook среда/същата среда с осъзнат dependency update и отворете `../lab02-lifecycle-processes/starter/experiment.ipynb`. Kernel cwd трябва да е starter папката; hardcoded path е умишленият lab02 smell.
 
 ### Обучение, metadata и promotion
 
@@ -55,14 +55,14 @@ python -m ai_platform.cli inspect --version demo-v1
 python -m ai_platform.cli promote --version demo-v1
 ```
 
-Artifacts са в `ai-platform/artifacts/demo-v1/`: model.joblib и metadata.json. Версията **не може да се презапише**; при повторна работа използвайте demo-v2 или нов root с `--root`. Preprocessing се fit-ва само върху training split. Учебните quality gates са held-out F1≥0.85 и recall≥0.85 в tests; promotion baseline проверява F1≥0.85, а допълнителните gates се добавят в labs07/08. Не използвайте същия holdout за неограничено model selection в реален проект.
+Artifacts са в `ai-platform/artifacts/demo-v1/`: model.joblib и metadata.json. Версията **не може да се презапише**; при повторна работа използвайте demo-v2 или нов root с `--root`. Preprocessing се fit-ва само върху training split. Учебните quality gates са held-out F1≥0.85 и recall≥0.85 в tests; promotion baseline проверява F1≥0.85, а допълнителните gates се добавят в labs08/09. Не използвайте същия holdout за неограничено model selection в реален проект.
 
 За champion/challenger сравнение:
 
 ```powershell
 python -m ai_platform.cli train --version compare-v1 --strategy linear
 python -m ai_platform.cli train --version compare-v2 --strategy tree
-python ../lab08-mlops/starter/compare.py compare-v1 compare-v2
+python ../lab09-mlops/starter/compare.py compare-v1 compare-v2
 python -m ai_platform.cli promote --version compare-v1
 # Само след review и преминали gates:
 python -m ai_platform.cli promote --version compare-v2
@@ -112,7 +112,7 @@ Key трябва да е зададен в environment. Docker image съдър�
 
 ## Git workflow
 
-Работете в feature branch, например `codex/ai-lab04-repository`. Един commit добавя characterization/negative test, следващият — refactoring/fix. PR описва problem, behavior, alternatives, validation и debt. Не commit-вайте `.venv`, artifacts, logs, API keys или PII. Dataset/manifest и source/lock са versioned; large artifacts се пазят отделно с immutable identity.
+Работете в feature branch, например `codex/ai-lab05-repository`. Един commit добавя characterization/negative test, следващият — refactoring/fix. PR описва problem, behavior, alternatives, validation и debt. Не commit-вайте `.venv`, artifacts, logs, API keys или PII. Dataset/manifest и source/lock са versioned; large artifacts се пазят отделно с immutable identity.
 
 Преди release запишете clean source commit. При dirty tree metadata е обозначена с `-dirty`; при недостъпен Git е `unavailable`. Source SHA е допълнителна identity, не оправдание да се твърди clean release. При този repository учебните файлове първоначално са uncommitted; преподавателят прави review/commit преди раздаване на pinned release.
 

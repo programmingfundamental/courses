@@ -5,7 +5,7 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 /**
- *  Добавено в лабораторно упражнение 8
+ *  Добавено в лабораторно упражнение 9
  */
 public class DateRangeValidator implements ConstraintValidator<ValidDateRange, FilterReportDto> {
 

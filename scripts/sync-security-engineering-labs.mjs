@@ -10,13 +10,13 @@ const courses = [
     id: 'applied-web-security',
     title: 'Уеб сигурност (Приложна)',
     english: 'Applied Web Security',
-    topics: ['Lab Environment and Threat Modeling', 'Authentication with Spring Security', 'Authorization, Broken Access Control, and IDOR', 'Brute-Force Attacks and Authentication Protection', 'SQL Injection', 'Cross-Site Scripting (XSS)', 'CSRF, Cookies, and Browser Security', 'Cryptography and Sensitive Data Protection', 'JWT Security and Token Manipulation', 'Security Testing and Integrated Protection'],
+    topics: ['Introduction to Web Security', 'Lab Environment and Threat Modeling', 'Authentication with Spring Security', 'Authorization, Broken Access Control, and IDOR', 'Brute-Force Attacks and Authentication Protection', 'SQL Injection', 'Cross-Site Scripting (XSS)', 'CSRF, Cookies, and Browser Security', 'Cryptography and Sensitive Data Protection', 'JWT Security and Token Manipulation', 'Security Testing and Integrated Protection'],
   },
   {
     id: 'software-engineering-ai',
     title: 'Софтуерно инженерство за AI системи',
     english: 'Software Engineering for AI Systems',
-    topics: ['Software Lifecycle and Engineering Processes', 'Requirements and Specifications for AI-Based Systems', 'Software Architecture and Architectural Styles', 'Modularity, Layers, and Separation of Responsibilities', 'Design Patterns and Code Quality Principles', 'Testing Software and AI Components', 'Version Control, CI/CD, and Automation', 'MLOps and Model and Data Management', 'Observability, Reliability, and Error Handling', 'Security, Ethics, Technical Debt, and Maintenance'],
+    topics: ['Introduction to Software Engineering', 'Software Lifecycle and Engineering Processes', 'Requirements and Specifications for AI-Based Systems', 'Software Architecture and Architectural Styles', 'Modularity, Layers, and Separation of Responsibilities', 'Design Patterns and Code Quality Principles', 'Testing Software and AI Components', 'Version Control, CI/CD, and Automation', 'MLOps and Model and Data Management', 'Observability, Reliability, and Error Handling', 'Security, Ethics, Technical Debt, and Maintenance'],
   },
 ];
 let stale = 0;
@@ -36,14 +36,14 @@ const document = (title, order, body = '', label) => `---\ntitle: ${JSON.stringi
 
 for (const [index, course] of courses.entries()) {
   const sourceRoot = path.join(root, 'course-materials', course.id);
-  // Only the ten top-level student labs are published; nested working copies,
+  // Only the top-level student labs are published; nested working copies,
   // application code, and instructor notes are not content sources.
   const labs = fs.readdirSync(sourceRoot).filter(name => /^lab\d{2}-/.test(name)).sort().map((folder, index) => {
     const number = index + 1;
     if (!folder.startsWith(`lab${String(number).padStart(2, '0')}-`)) throw new Error(`Unexpected lab sequence: ${folder}`);
     return { number, file: path.join(sourceRoot, folder, `lab${String(number).padStart(2, '0')}.md`), route: `${course.id}/laboratorno-uprazhnenie-${number}` };
   });
-  if (labs.length !== course.topics.length) throw new Error(`Expected ten labs in ${course.id}`);
+  if (labs.length !== course.topics.length) throw new Error(`Expected ${course.topics.length} labs in ${course.id}`);
   const routes = new Map(labs.map(lab => [lab.file, `/courses/bg/${lab.route}/`]));
   routes.set(path.join(sourceRoot, 'README.md'), `/courses/bg/${course.id}/`);
 
@@ -78,7 +78,7 @@ for (const [index, course] of courses.entries()) {
 
   write(`bg/${course.id}/index.md`, document(course.title, 16 + index, readStudentFile(path.join(sourceRoot, 'README.md'))));
   const englishLinks = labs.map(lab => `- [Lab ${lab.number} — ${course.topics[lab.number - 1]}](/courses/en/${lab.route}/)`).join('\n');
-  write(`en/${course.id}/index.md`, document(course.english, 16 + index, `The course contains ten labs. The teaching materials are currently available in Bulgarian. Use the language selector to open them.\n\n## Labs\n\n${englishLinks}`));
+  write(`en/${course.id}/index.md`, document(course.english, 16 + index, `The course contains ${labs.length} labs. The teaching materials are currently available in Bulgarian. Use the language selector to open them.\n\n## Labs\n\n${englishLinks}`));
   for (const lab of labs) {
     const body = readStudentFile(lab.file);
     const headings = parse(body).children.filter(node => node.type === 'heading');
@@ -93,4 +93,4 @@ for (const [index, course] of courses.entries()) {
   }
 }
 if (stale) process.exitCode = 1;
-else console.log(`${check ? 'Verified' : 'Synchronized'} 20 security and software engineering labs in both language catalogs.`);
+else console.log(`${check ? 'Verified' : 'Synchronized'} ${courses.reduce((sum, course) => sum + course.topics.length, 0)} security and software engineering labs in both language catalogs.`);

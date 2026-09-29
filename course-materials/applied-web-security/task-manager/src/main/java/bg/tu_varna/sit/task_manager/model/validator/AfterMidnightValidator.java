@@ -6,7 +6,7 @@ import jakarta.validation.ConstraintValidatorContext;
 import java.time.LocalTime;
 
 /**
- *  Добавено в лабораторно упражнение 8
+ *  Добавено в лабораторно упражнение 9
  */
 public class AfterMidnightValidator implements ConstraintValidator<AfterMidnight, LocalTime> {
 

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalTime;
 
 /***
- * Добавено в лабораторно упражнение 7
+ * Добавено в лабораторно упражнение 8
  */
 @NoArgsConstructor
 @AllArgsConstructor

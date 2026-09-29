@@ -1,27 +1,27 @@
 ---
-title: "Упражнение 6 — HTML изглед на задачите и XSS защита"
+title: "Упражнение 6 — Безопасно търсене на задачи със Spring Data JPA"
 sidebar:
   order: 6
   label: "Упражнение 6"
 ---
 
-# Упражнение 6 — HTML изглед на задачите и XSS защита
+# Упражнение 6 — Безопасно търсене на задачи със Spring Data JPA
 
 ## 1. Теория
 
 
-### 1.1. Данни в браузъра
+### 1.1. SQL/JPQL структура и входни стойности
 
-1. **XSS** е изпълнение на недоверено съдържание в origin на приложението. **Stored XSS** използва записан вход; **reflected XSS** отразява заявка; **DOM XSS** възниква при обработка от JavaScript.
-   - summary/description се пазят в Task и се показват в /ui/tasks. Рискът е при HTML render, а не при JPA записването.
-2. **Origin** е протокол, хост и порт; **sink** е място, което интерпретира вход; **DOM** е дървото на страницата.
-   - innerHTML интерпретира тагове; textContent показва текст. Сървърното конкатениране на raw summary в <h2> също е HTML sink.
-3. **Output encoding** зависи от контекста. **Sanitization** допуска ограничен HTML; тук полетата са обикновен текст.
-   - HtmlUtils.htmlEscape превръща < в &lt; за HTML текст/quoted attribute. Пазим оригинала в DB, кодираме при извеждане.
-4. **URL scheme** е частта преди :, **attribute breakout** затваря кавичката, **double encoding** кодира повторно вече кодиран текст.
-   - href изисква и allowlist http/https, и кодиране на атрибут. HTML escaping не прави javascript: безопасен.
-5. **CSP** задава разрешени източници/действия; **defense in depth** съчетава независими защити.
-   - CSP без inline scripts ограничава изпълнението, но тестът пак проверява, че summary е encoded. **Marker** е видим индикатор за изпълнение, например заглавието на страницата.
+1. **SQL Injection** възниква, когато вход става изпълним синтаксис. **Binding** подава стойност отделно от структурата; **placeholder** е място за параметър.
+   - `WHERE t.summary = :summary` с @Param обработва O'Reilly като текст. Конкатенация `"...='"+input+"'"` смесва данни и синтаксис.
+2. **JPA** работи с entities; **JPQL** използва имена на Java полета; **native query** изпълнява SQL към таблици.
+   - В JPQL owner е `t.owner.username`, а в SQL е join към users чрез owner_id. @Query сам по себе си не оправдава конкатенация.
+3. **LIKE wildcard** % съвпада с поредица, _ с един символ; **exact match** използва =.
+   - Search допуска wildcard семантика, но никога чужд owner; lookup намира точно summary, без шаблони.
+4. **Identifier** е име на колона/поле, **allowlist** допуска само избрани identifiers.
+   - sort=summary може да се съпостави с фиксирано поле. Bind параметър не замества SQL ORDER BY идентификатор.
+5. **Validation** ограничава размер и допустими стойности, **NUL** е нулев символ, **SQL dialect** са особености на DB.
+   - q над 100 символа или с NUL получава 400. Проверяваме и PostgreSQL; H2 не доказва всички особености на реалната база.
 
 
 
@@ -47,24 +47,26 @@ Java, Spring Boot, HTTP, JPA и Task Manager от lab11. Продължете с
 
 ### Начален проект и надграждане
 
-След упражнение 5. Добавя се HTML изглед /ui/tasks към същото приложение. JSON REST отговор сам по себе си не изпълнява HTML; XSS се анализира при новия изходен контекст.
+След упражнение 5. Добавя се търсене по summary; запазва се owner политиката от упражнение 4. Съществуващите JPA заявки не се заменят с конкатенация.
 
 Използвайте [Task Manager](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/task-manager/README.md) и [подготовката](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/setup.md). Всички Maven/Compose команди се изпълняват от task-manager. Работните Java класове са в src/main/java/bg/tu_varna/sit/task_manager; тестовете — в съответния src/test/java package.
 
-**Файлове за работа:** нов TaskPageController, TaskServiceImp, SecurityConfig; по избор Task.referenceUrl. [Архитектурната карта](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md) показва кои маршрути съществуват в началото и кои се добавят последователно.
+**Файлове за работа:** TaskRepository, TaskService/TaskServiceImp, TaskController; нови /tasks/search и /tasks/lookup. [Архитектурната карта](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md) показва кои маршрути съществуват в началото и кои се добавят последователно.
 
 JDK 17+, Maven 3.9+ или Maven Wrapper, Docker Compose и браузър са достатъчни. Преди промяна изпълнете mvn test; след промяната повторете съответните тестове и PostgreSQL профила. Новите класове/маршрути, описани като надграждане, се реализират в това упражнение.
 
 
 ## 3. Примерен проблем
 
-Добавете HTML страница /ui/tasks, която показва разрешените summary и description като текст.
+Добавете GET /tasks/search?q= с параметризирана заявка, която връща само разрешените задачи.
 
 ### Стъпки за решаване
 
 
-1. Създайте TaskPageController с GET /ui/tasks, produces=text/html, който използва TaskService.getAll от упражнение 3. Не правете repository.findAll в контролера.
-2. Поставете summary/description в <h2>/<p> след HtmlUtils.htmlEscape. Не кодирайте стойностите при запис в DB.
-3. SecurityConfig изисква удостоверяване за /ui/**. Добавете CSP default-src none; form-action self; frame-ancestors none; base-uri none.
-4. Създайте Task със summary/description, съдържащи <b> и script marker; отворете /ui/tasks като owner и като друг user. Другият user не вижда задачата.
-5. TaskHtmlTest проверява encoded HTML, липса на raw script и нормална кирилица. В браузър marker не се изпълнява. Не правете извод за JavaScript само от MockMvc.
+1. Добавете search към TaskService и TaskController. q има defaultValue=""; дължина<=100 и без NUL. Новият literal маршрут /tasks/search се различава от /tasks/{id}.
+2. В TaskRepository използвайте JPQL с :q, :username и server-side :admin. Политиката е ADMIN всички, USER само t.owner.username=username.
+3. В service подайте principal и isAdmin от TaskPolicy, а не от query parameters. Mapping към TaskResponseDto остава в транзакция.
+4. Създайте задачи със summary „Бележки O'Reilly“ за alice и bob. Търсенето като alice трябва да върне само нейния запис.
+5. Добавете TaskSearchTest за нормален текст, апостроф, празно q, SQL-подобен текст, %, _, голям вход и NUL. Изпълнете H2 и PostgreSQL тестовете.
+
+Не очаквайте съществуващата findById заявка да е SQL injection. Оценяваме конструкцията на новата заявка и сравняваме параметризирания вариант с конкатениран SQL фрагмент в анализа.

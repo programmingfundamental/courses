@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /***
- * Добавено в лабораторно упражнение 9
+ * Добавено в лабораторно упражнение 10
  */
 @Getter
 @Entity

@@ -1,27 +1,27 @@
 ---
-title: "Упражнение 8 — Криптиране на поверителна бележка към задача"
+title: "Упражнение 8 — CSRF защита на сесиите и формите в Task Manager"
 sidebar:
   order: 8
   label: "Упражнение 8"
 ---
 
-# Упражнение 8 — Криптиране на поверителна бележка към задача
+# Упражнение 8 — CSRF защита на сесиите и формите в Task Manager
 
 ## 1. Теория
 
 
-### 1.1. Защита при съхранение и управление на ключове
+### 1.1. Браузърни credentials и намерение на потребителя
 
-1. **Hashing** е еднопосочен; **encryption** позволява възстановяване с ключ; **encoding** сменя представянето.
-   - Паролата остава BCrypt; поверителната бележка трябва да се чете от owner и използва криптиране. Base64 не осигурява поверителност.
-2. **AES-GCM** е authenticated encryption: пази поверителност и цялост. **Nonce/IV** е уникална за ключа стойност; **tag** доказва целостта.
-   - Използваме Java Cipher AES/GCM/NoPadding, 32-байтов ключ, случаен 12-байтов nonce и 128-битов tag.
-3. **AAD** са допълнителни удостоверени данни; **envelope** е форматът на записа.
-   - AAD=taskId:ownerId свързва бележката със задача и собственик. Envelope има версия, key ID, nonce и ciphertext с tag.
-4. **Key rotation** сменя ключ, **versioning** различава поколения, **migration** преобразува записи.
-   - Новите записи ползват текущ key ID, старите се четат с предишния до завършване на миграцията. Ключовете не се пазят заедно с DB backup.
-5. **Roundtrip** е encrypt→decrypt; **tampering** е промяна на ciphertext; **entropy** означава непредсказуемост.
-   - SecureRandom генерира ключ/nonce; при променен tag няма частичен plaintext. Компрометирано приложение с ключа остава извън тази гаранция.
+1. **CSRF** използва автоматично изпратени credentials за нежелана операция. Session cookie се изпраща от браузъра; наличието на JWT в приложението не премахва сесийния достъп.
+   - AuthService.login създава HttpSession, а SecurityConfig е IF_REQUIRED и csrf.disable(). Следователно анализираме реално съществуващ сесиен път.
+2. **CSRF token** е непредсказуема стойност, свързана със сесията; сървърът я сравнява преди промяна.
+   - GET /auth/csrf връща token/headerName/parameterName. JSON клиентът изпраща заглавката; HTML формата — hidden parameter.
+3. **Origin** включва схема, хост и порт; **site** не се различава само по порт. **SOP** ограничава четенето, **CORS** разрешава избрани script origins.
+   - HTML form може да изпрати cross-origin POST, дори да няма право да прочете отговора. CORS не доказва намерението на user.
+4. **HttpOnly** ограничава JavaScript достъп до cookie; **Secure** изисква защитен транспорт; **SameSite** ограничава cross-site изпращане.
+   - Различни localhost портове са cross-origin, но same-site. Cookie flags са отделни проверки от token.
+5. **Session fixation protection** сменя session ID; **token rotation** сменя CSRF token след удостоверяване.
+   - При custom AuthService.login изрично извикваме SessionAuthenticationStrategy, вместо да предполагаме, че стандартният login filter го прави.
 
 
 
@@ -47,24 +47,24 @@ Java, Spring Boot, HTTP, JPA и Task Manager от lab11. Продължете с
 
 ### Начален проект и надграждане
 
-След упражнение 7. Добавят се PUT/GET /tasks/{id}/private-note. Бележката не се включва в TaskResponseDto или HTML списъка.
+След упражнение 7. Включва се CSRF за съществуващата сесийна верига и се добавя HTML форма. До упражнение 10 POST/PATCH/DELETE с Bearer също изискват CSRF в тази обща верига.
 
 Използвайте [Task Manager](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/task-manager/README.md) и [подготовката](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/setup.md). Всички Maven/Compose команди се изпълняват от task-manager. Работните Java класове са в src/main/java/bg/tu_varna/sit/task_manager; тестовете — в съответния src/test/java package.
 
-**Файлове за работа:** нов TaskSecretService/FieldCipher, Task.privateNoteCiphertext, TaskController, TaskPolicy. [Архитектурната карта](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md) показва кои маршрути съществуват в началото и кои се добавят последователно.
+**Файлове за работа:** SecurityConfig, AuthController/AuthService, нов GET /auth/csrf, TaskPageController. [Архитектурната карта](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md) показва кои маршрути съществуват в началото и кои се добавят последователно.
 
 JDK 17+, Maven 3.9+ или Maven Wrapper, Docker Compose и браузър са достатъчни. Преди промяна изпълнете mvn test; след промяната повторете съответните тестове и PostgreSQL профила. Новите класове/маршрути, описани като надграждане, се реализират в това упражнение.
 
 
 ## 3. Примерен проблем
 
-Добавете поверителна бележка, която се възстановява само след TaskPolicy проверка и не се съхранява като plaintext.
+Включете CSRF при съществуващия session login и докажете, че отказана промяна на Task не записва данни.
 
 ### Стъпки за решаване
 
 
-1. Добавете nullable privateNoteCiphertext с достатъчен размер (например 4096) в Task. Не го добавяйте към общите DTO и HTML.
-2. Създайте FieldCipher с inject-нат 32-байтов ключ от Base64 файл. За всяко encrypt генерирайте nonce; AAD включва task ID и owner ID, не ID на четящия admin.
-3. TaskSecretService в транзакция зарежда Task, проверява TaskPolicy и извършва операцията. PUT body е JSON {"value":"..."}, 1–500 символа; успех=204. GET връща {"value":"..."}; без бележка=404. Чужда задача=404.
-4. Проверете DB: няма plaintext; два записа на един текст имат различен ciphertext. GET owner/admin възстановява стойността; bob не получава чуждата бележка.
-5. FieldCipherTest проверява roundtrip, wrong key/AAD, повреден и отрязан envelope. TaskSecretTest проверява policy и липса на бележката в GET /tasks и /ui/tasks.
+1. Премахнете csrf.disable() от текущата SecurityConfig и използвайте HttpSessionCsrfTokenRepository. Добавете публичен GET /auth/csrf преди общите правила.
+2. Преди POST /auth/login клиентът взема token с анонимна сесия. След authenticate извикайте стратегия за смяна на session ID и изчистване на CSRF token, после запазете SecurityContext.
+3. Клиентът взема нов token след login и използва неговата headerName за JSON POST/PATCH/DELETE. Актуализирайте setup клиентските стъпки; всички тестови mutations вече използват with(csrf()).
+4. Като owner изпратете PATCH /tasks/{id}/update без token, с грешен token и с token от друга сесия: 403 и без DB промяна. Валидният token със същата сесия дава 200.
+5. Добавете CsrfSessionTest с поне един реален GET /auth/csrf response, не само csrf() helper. Проверете GET /tasks без сесия=401 и logout с token=200.

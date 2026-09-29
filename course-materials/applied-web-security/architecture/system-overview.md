@@ -16,7 +16,7 @@
 | DELETE /tasks/{id}/delete | USER/ADMIN; изтриване |
 | /reports/** | ADMIN; включва /task/{id}, /{id}, /task/{id}/summary |
 
-Началният Task няма owner. Не приемайте роли за доказателство за ownership. Login поддържа сесия и връща JWT; CSRF е изключен в началната конфигурация и се добавя в упражнение 7.
+Началният Task няма owner. Не приемайте роли за доказателство за ownership. Login поддържа сесия и връща JWT; CSRF е изключен в началната конфигурация и се добавя в упражнение 8.
 
 ## Надграждания по упражнения
 
@@ -37,6 +37,6 @@
 
 ## Данни и изходни DTO
 
-Task: id, summary, description, deadline; по-късно owner, referenceUrl, privateNoteCiphertext. Report: content, workedTime, task. User: username, BCrypt password, role, enabled. RefreshToken: първоначално raw token; в упражнение 9 — digest и еднократна употреба.
+Task: id, summary, description, deadline; по-късно owner, referenceUrl, privateNoteCiphertext. Report: content, workedTime, task. User: username, BCrypt password, role, enabled. RefreshToken: първоначално raw token; в упражнение 10 — digest и еднократна употреба.
 
 TaskResponseDto няма рекурсивен списък от отчети; ReportResponseDto съдържа taskId и workTime. Summary totalWorkedTime е Duration като ISO-8601 текст, например PT31H. Парола, raw refresh token и privateNoteCiphertext не се добавят в общите task/report DTO.
