@@ -4,6 +4,8 @@ import matter from 'gray-matter';
 import { assignmentHeading, parse, plainText } from './lib/lab-tasks.mjs';
 
 const root = 'src/content/docs';
+// PMIU is intentionally copied into the English catalog without translation.
+const untranslatedEnglishCourses = new Set(['programirane-za-mobilni-i-internet-ustroistva-kotlin']);
 const docs = fs.readdirSync(root, { recursive: true }).filter((file) => file.endsWith('.md')).map((file) => ({
   id: file.replaceAll('\\', '/').replace(/(?:\/index)?\.md$/, '').toLowerCase().replaceAll(' ', '-'),
   ...matter(fs.readFileSync(`${root}/${file}`, 'utf8')),
@@ -14,7 +16,8 @@ for (const lab of labs) {
   const tasks = children.filter((doc) => doc.data.taskPage);
   assert.equal(tasks.length, 1, `Expected one task page: ${lab.id}`);
   const task = tasks[0];
-  const title = lab.id.startsWith('bg/') ? 'Задачи' : 'Tasks';
+  const [locale, course] = lab.id.split('/');
+  const title = locale === 'bg' || untranslatedEnglishCourses.has(course) ? 'Задачи' : 'Tasks';
   assert.equal(task.id.split('/').length, 4, `Task page must be a direct lab child: ${task.id}`);
   assert.equal(task.data.title, title, task.id);
   assert.equal(task.data.sidebar?.label, title, task.id);
