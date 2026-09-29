@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+<title id="title">Object — моментна снимка — Task Manager</title><desc id="desc">Учебен UML пример на планираната система; обяснение и нотация в тема 2.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#17324d" stroke-width="1.5"/></marker><marker id="solid" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M1 1 L10 6 L1 11 Z" fill="#17324d"/></marker></defs>
+<style>text{font-family:Arial,sans-serif;font-size:16px;fill:#17324d;stroke:none}rect,ellipse,circle,polygon{fill:#fff;stroke:#17324d;stroke-width:1.6}line,polyline,path{stroke:#17324d;stroke-width:1.6} .note{font-size:14px;fill:#425b73}</style>
+<rect width="900" height="420" fill="#f5f8fc" stroke="none"/>
+<text x="30" y="35" font-size="22" font-weight="700">Object — моментна снимка</text>
+<rect x="60" y="95" width="320" height="190" /><text x="220" y="122" text-anchor="middle" font-weight="600"></text><line x1="60" y1="135" x2="380" y2="135" /><text x="74" y="161" >id = 42</text><text x="74" y="184" >summary = &quot;Fix login validation&quot;</text><text x="74" y="207" >status = IN_PROGRESS</text><text x="74" y="230" >confirmedCategory = BUG</text><text x="220" y="122" text-anchor="middle" text-decoration="underline">task42:Task</text><rect x="575" y="120" width="250" height="115" /><text x="700" y="147" text-anchor="middle" font-weight="600"></text><line x1="575" y1="160" x2="825" y2="160" /><text x="589" y="186" >id = 7</text><text x="700" y="147" text-anchor="middle" text-decoration="underline">report7:Report</text><line x1="380" y1="185" x2="575" y2="185" /><text x="435" y="172" >reports</text>
+<text x="30" y="402" class="note">Task Manager · UML · учебен проект</text>
+</svg>

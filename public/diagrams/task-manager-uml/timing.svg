@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+<title id="title">Timing — договорен бюджет при отказ — Task Manager</title><desc id="desc">Учебен UML пример на планираната система; обяснение и нотация в тема 2.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#17324d" stroke-width="1.5"/></marker><marker id="solid" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M1 1 L10 6 L1 11 Z" fill="#17324d"/></marker></defs>
+<style>text{font-family:Arial,sans-serif;font-size:16px;fill:#17324d;stroke:none}rect,ellipse,circle,polygon{fill:#fff;stroke:#17324d;stroke-width:1.6}line,polyline,path{stroke:#17324d;stroke-width:1.6} .note{font-size:14px;fill:#425b73}</style>
+<rect width="900" height="420" fill="#f5f8fc" stroke="none"/>
+<text x="30" y="35" font-size="22" font-weight="700">Timing — договорен бюджет при отказ</text>
+<text x="35" y="100" font-weight="600">request:CategoryRequest</text><text x="55" y="150" >Fallback</text><text x="55" y="215" >Waiting</text><text x="55" y="280" >Idle</text><line x1="190" y1="322" x2="840" y2="322" marker-end="url(#arrow)"/><text x="800" y="349" >t (ms)</text><polyline points="190,275 270,275 270,210 730,210 730,145 830,145" fill="none" stroke-width="3"/><line x1="270" y1="120" x2="270" y2="322" stroke-dasharray="4 5"/><line x1="730" y1="120" x2="730" y2="322" stroke-dasharray="4 5"/><text x="264" y="346" >0</text><text x="712" y="346" >1500</text><line x1="270" y1="118" x2="730" y2="118" /><text x="500" y="105" text-anchor="middle">{waiting duration ≤ 1500 ms}</text><text x="190" y="377" class="note">Учебна цел; проверява се с реално измерване.</text>
+<text x="30" y="402" class="note">Task Manager · UML · учебен проект</text>
+</svg>

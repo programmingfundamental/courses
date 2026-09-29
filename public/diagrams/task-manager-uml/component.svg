@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+<title id="title">Component — части и договори — Task Manager</title><desc id="desc">Учебен UML пример на планираната система; обяснение и нотация в тема 2.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#17324d" stroke-width="1.5"/></marker><marker id="solid" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M1 1 L10 6 L1 11 Z" fill="#17324d"/></marker></defs>
+<style>text{font-family:Arial,sans-serif;font-size:16px;fill:#17324d;stroke:none}rect,ellipse,circle,polygon{fill:#fff;stroke:#17324d;stroke-width:1.6}line,polyline,path{stroke:#17324d;stroke-width:1.6} .note{font-size:14px;fill:#425b73}</style>
+<rect width="900" height="420" fill="#f5f8fc" stroke="none"/>
+<text x="30" y="35" font-size="22" font-weight="700">Component — части и договори</text>
+<rect x="55" y="130" width="235" height="110" /><text x="172.5" y="156" text-anchor="middle" font-size="14">«component»</text><text x="172.5" y="183" text-anchor="middle" font-weight="600">Task API</text><rect x="590" y="130" width="260" height="110" /><text x="720" y="156" text-anchor="middle" font-size="14">«component»</text><text x="720" y="183" text-anchor="middle" font-weight="600">Category Service</text><line x1="290" y1="185" x2="590" y2="185" marker-end="url(#arrow)" stroke-dasharray="7 5"/><text x="440" y="161" text-anchor="middle">CategorySuggester</text><text x="55" y="320" class="note">Зависимостта сочи предоставящия договора компонент.</text>
+<text x="30" y="402" class="note">Task Manager · UML · учебен проект</text>
+</svg>

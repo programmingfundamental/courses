@@ -16,7 +16,7 @@ const courses = [
     id: 'software-engineering-ai',
     title: 'Софтуерно инженерство за AI системи',
     english: 'Software Engineering for AI Systems',
-    topics: ['Introduction to Software Engineering', 'Software Lifecycle and Engineering Processes', 'Requirements and Specifications for AI-Based Systems', 'Software Architecture and Architectural Styles', 'Modularity, Layers, and Separation of Responsibilities', 'Design Patterns and Code Quality Principles', 'Testing Software and AI Components', 'Version Control, CI/CD, and Automation', 'MLOps and Model and Data Management', 'Observability, Reliability, and Error Handling', 'Security, Ethics, Technical Debt, and Maintenance'],
+    schedule: 'semester/schedule.json',
   },
 ];
 let stale = 0;
@@ -38,13 +38,21 @@ for (const [index, course] of courses.entries()) {
   const sourceRoot = path.join(root, 'course-materials', course.id);
   // Only the top-level student labs are published; nested working copies,
   // application code, and instructor notes are not content sources.
-  const labs = fs.readdirSync(sourceRoot).filter(name => /^lab\d{2}-/.test(name)).sort().map((folder, index) => {
+  const schedule = course.schedule ? JSON.parse(fs.readFileSync(path.join(sourceRoot, course.schedule), 'utf8')) : null;
+  if (schedule) course.topics = schedule.map(week => week.english);
+  const labs = schedule ? schedule.map((week, index) => {
+    if (week.number !== index + 1) throw new Error(`Unexpected week sequence in ${course.id}`);
+    return { number: week.number, file: path.join(sourceRoot, week.file), route: `${course.id}/laboratorno-uprazhnenie-${week.number}`, aliases: week.aliases || [] };
+  }) : fs.readdirSync(sourceRoot).filter(name => /^lab\d{2}-/.test(name)).sort().map((folder, index) => {
     const number = index + 1;
     if (!folder.startsWith(`lab${String(number).padStart(2, '0')}-`)) throw new Error(`Unexpected lab sequence: ${folder}`);
     return { number, file: path.join(sourceRoot, folder, `lab${String(number).padStart(2, '0')}.md`), route: `${course.id}/laboratorno-uprazhnenie-${number}` };
   });
   if (labs.length !== course.topics.length) throw new Error(`Expected ${course.topics.length} labs in ${course.id}`);
   const routes = new Map(labs.map(lab => [lab.file, `/courses/bg/${lab.route}/`]));
+  for (const lab of labs) {
+    for (const alias of lab.aliases || []) routes.set(path.join(sourceRoot, alias), `/courses/bg/${lab.route}/`);
+  }
   routes.set(path.join(sourceRoot, 'README.md'), `/courses/bg/${course.id}/`);
 
   function readStudentFile(file) {
@@ -85,7 +93,8 @@ for (const [index, course] of courses.entries()) {
 
   write(`bg/${course.id}/index.md`, document(course.title, 16 + index, readStudentFile(path.join(sourceRoot, 'README.md'))));
   const englishLinks = labs.map(lab => `- [Lab ${lab.number} — ${course.topics[lab.number - 1]}](/courses/en/${lab.route}/)`).join('\n');
-  write(`en/${course.id}/index.md`, document(course.english, 16 + index, `The course contains ${labs.length} labs. The teaching materials are currently available in Bulgarian. Use the language selector to open them.\n\n## Labs\n\n${englishLinks}`));
+  const overview = schedule ? 'The course spans 13 weeks: 9 teaching sessions and assessments in weeks 5, 9, 12, and 13. Week 1 has already been taught. Subsequent sessions build on Task Manager. All 14 UML diagram types are introduced in week 2 and used in later sessions.' : `The course contains ${labs.length} labs.`;
+  write(`en/${course.id}/index.md`, document(course.english, 16 + index, `${overview} The teaching materials are currently available in Bulgarian. Use the language selector to open them.\n\n## Labs\n\n${englishLinks}`));
   for (const lab of labs) {
     const body = readStudentFile(lab.file);
     const headings = parse(body).children.filter(node => node.type === 'heading');

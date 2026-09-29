@@ -98,11 +98,20 @@ Instructor notes and starter source projects remain outside the site content tre
 The fourth-year Applied Web Security and Software Engineering for AI Systems courses
 are authored in `course-materials/applied-web-security/` and
 `course-materials/software-engineering-ai/`. Run `npm run sync:security-engineering-labs`
-after editing their README or student `labXX.md` files. This publishes eleven labs per
-course, separates practical tasks, and maintains English navigation titles with
-empty lesson placeholders until translations are available. Supporting resources
-and starter code link to their repository files; instructor notes are not published
-as site pages. `npm run check` verifies that the generated pages are current.
+after editing their README or student `labXX.md` files. This publishes eleven Applied
+Web Security labs and thirteen Software Engineering weeks, separates practical tasks,
+and maintains English navigation titles with empty lesson placeholders until
+translations are available. Public downloads and diagram images remain linked;
+references to unpublished supporting resources become text. Instructor notes are not
+published as site pages. `npm run check` verifies that generated pages are current.
+
+Software Engineering uses `course-materials/software-engineering-ai/semester/schedule.json`
+as its active source map: week 1 is preserved, weeks 2–13 are authored under `semester/`,
+and assessments take place in weeks 5, 9, 12, and 13. Subsequent lessons build on a
+separate student copy of Task Manager. All 14 UML diagram types are introduced in
+week 2; editable SVG examples are generated with `node scripts/generate-task-manager-uml.mjs`.
+Older AI-platform materials remain available for reference but are not active lesson
+sources; see `course-materials/software-engineering-ai/semester/README.md`.
 
 Applied Web Security uses the familiar Task Manager from lab11, copied under
 `course-materials/applied-web-security/task-manager/`. Labs build on each other;
