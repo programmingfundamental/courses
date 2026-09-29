@@ -11,9 +11,9 @@
 | Очакван/получен статус | |
 | DB преди/след | |
 | Проверявано правило | |
-| Test class и report | |
+| Postman заявка и действителен резултат | |
 | Оставащ риск | |
 
 Файлове: JwtService, JwtAuthFilter, RefreshTokenService/Repository, SecurityConfig, нов TokenTaskController.
 
-Команди от task-manager: mvn test; след стартиране на compose.test.yml — mvn -Ppostgres-tests test. Подробности: [подготовка](../../setup.md), [условие](../lab10.md).
+Изпълнете API заявките ръчно с Postman и запишете статуса, отговора и състоянието преди/след. Подробности: [подготовка](../../setup.md), [условие](../lab10.md).

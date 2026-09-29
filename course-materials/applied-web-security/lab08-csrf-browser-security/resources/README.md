@@ -11,9 +11,9 @@
 | Очакван/получен статус | |
 | DB преди/след | |
 | Проверявано правило | |
-| Test class и report | |
+| Postman заявка и действителен резултат | |
 | Оставащ риск | |
 
 Файлове: SecurityConfig, AuthController/AuthService, нов GET /auth/csrf, TaskPageController.
 
-Команди от task-manager: mvn test; след стартиране на compose.test.yml — mvn -Ppostgres-tests test. Подробности: [подготовка](../../setup.md), [условие](../lab08.md).
+Изпълнете API заявките ръчно с Postman и запишете статуса, отговора и състоянието преди/след. Подробности: [подготовка](../../setup.md), [условие](../lab08.md).

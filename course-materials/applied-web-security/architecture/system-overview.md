@@ -22,7 +22,7 @@
 
 | № | Резултат, който следващото упражнение използва |
 |---|---|
-| 1 | Карта на потоците и тест на публикуваните портове |
+| 1 | Карта на потоците и ръчна проверка на публикуваните портове |
 | 2 | Валидирани credentials, смяна на session ID, GET /auth/me, регистрационни ограничения |
 | 3 | Task.owner, TaskPolicy, owner-scoped списък/CRUD; ADMIN-only reports остава |
 | 4 | LoginAttemptService, Clock, configurable lockout |
