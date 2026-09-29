@@ -1,23 +1,23 @@
 ---
-title: Лабораторно упражнение 1
+title: Lab 1
 sidebar:
   order: 1
 ---
 
-# Лабораторно упражнение 1
+# Lab 1
 
-## Накратко за Kotlin
+## Kotlin at a glance
 
-Kotlin е статично типизиран език за програмиране с акцент върху яснотата, краткия запис и безопасността на кода.
+Kotlin is a statically typed programming language that emphasizes clarity, conciseness, and code safety.
 
-## Стабилен код
+## Robust code
 
-Kotlin различава типове, допускащи `null`, и типове, които не допускат `null`. Така част от грешките, свързани с `NullPointerException`, се откриват при компилация. Езикът поддържа ламбда изрази, корутини и свойства, които улесняват изразяването на програмната логика с по-малко шаблонен код.
+Kotlin distinguishes between nullable and non-nullable types. This allows some errors related to `NullPointerException` to be detected at compile time. The language supports lambda expressions, coroutines, and properties, making it easier to express program logic with less boilerplate code.
 
-## Зряла платформа
+## A mature platform
 
-Kotlin е представен през 2011 г., а през 2012 г. е публикуван като проект с отворен код. Версия 1.0 излиза през 2016 г. От 2017 г. Kotlin е официално поддържан език за разработване на Android приложения. Поддръжка за него има в IntelliJ IDEA и Android Studio.
+Kotlin was introduced in 2011 and released as an open-source project in 2012. Version 1.0 was released in 2016. Kotlin has been an officially supported language for Android application development since 2017. It is supported in IntelliJ IDEA and Android Studio.
 
-## Съвместимост с Java
+## Java interoperability
 
-При работа с JVM Kotlin се компилира до байткод и може да използва Java библиотеки. Java и Kotlin код могат да съществуват в един проект. IntelliJ IDEA и Android Studio предоставят инструменти за преобразуване на Java код в Kotlin, като полученият код подлежи на преглед.
+When targeting the JVM, Kotlin compiles to bytecode and can use Java libraries. Java and Kotlin code can coexist in a single project. IntelliJ IDEA and Android Studio provide tools for converting Java code to Kotlin; the resulting code should be reviewed.

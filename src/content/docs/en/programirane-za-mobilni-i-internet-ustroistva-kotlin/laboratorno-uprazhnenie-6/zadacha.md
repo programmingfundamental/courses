@@ -1,87 +1,87 @@
 ---
-title: Задачи
+title: Tasks
 sidebar:
   order: 100
-  label: Задачи
+  label: Tasks
 taskPage: true
 ---
-Да се създаде приложение, което показва името на последния извикан callback метод на `Activity`, записва lifecycle събитията в Logcat и актуализира текста при промяна на състоянието.
+Create an application that displays the name of the last `Activity` callback invoked, logs lifecycle events to Logcat, and updates the text when the state changes.
 
-## Задача 1
+## Task 1
 
-Описанието на интерфейса да се изнесе от `onCreate()` в отделна композируема функция. `setContent` да се извика веднъж в `onCreate()`. Да се създаде метод `update(state: String)`, който променя наблюдаваното състояние; чрез него да се актуализира текстът, без повторно извикване на `setContent`.
+Move the interface description from `onCreate()` into a separate composable function. Call `setContent` once in `onCreate()`. Create an `update(state: String)` method that changes the observable state; use it to update the text without calling `setContent` again.
 
-## Задача 2
+## Task 2
 
-Да се създаде функция с `@Composable` и параметър `state: String`, която съдържа:
+Create a function with `@Composable` and a `state: String` parameter that contains:
 
-- `Text` с надпис „Последен callback на Activity:“;
-- `Text`, който показва стойността на `state`.
+- a `Text` element with the label "Last Activity callback:";
+- a `Text` element that displays the value of `state`.
 
-Името на callback метод описва последното събитие, а не стойност от изброимия тип `Lifecycle.State`.
+The callback name describes the last event, rather than a value of the `Lifecycle.State` enum.
 
-## Задача 3
+## Task 3
 
-В класа на `Activity` да се дефинират следните свойства. Демонстрационната стойност на `TAG` да се замени с факултетния номер. Необходими са импорти на `mutableStateOf`, `getValue` и `setValue` от `androidx.compose.runtime`.
+Define the following properties in the `Activity` class. Replace the demonstration value of `TAG` with your student ID. Imports of `mutableStateOf`, `getValue`, and `setValue` from `androidx.compose.runtime` are required.
 
 ```kotlin
 private val TAG = "123456"
 private var lifecycleState by mutableStateOf("")
 ```
 
-Свойството `lifecycleState` да се подаде към композируемата функция в `setContent`.
+Pass the `lifecycleState` property to the composable function inside `setContent`.
 
-## Задача 4
+## Task 4
 
-Да се реализират callback методите `onCreate()`, `onStart()`, `onResume()`, `onPause()`, `onStop()`, `onRestart()` и `onDestroy()`, като се запазят необходимите извиквания към `super`. За всяко събитие:
+Implement the `onCreate()`, `onStart()`, `onResume()`, `onPause()`, `onStop()`, `onRestart()`, and `onDestroy()` callbacks, retaining the required calls to `super`. For each event:
 
-- чрез `update()` да се промени `lifecycleState` с името на метода;
-- да се запише debug съобщение в Logcat чрез `Log.d(TAG, ...)`;
-- да се покаже кратко `Toast` съобщение.
+- use `update()` to set `lifecycleState` to the method name;
+- log a debug message to Logcat using `Log.d(TAG, ...)`;
+- display a short `Toast` message.
 
-Общите операции за промяна на състоянието и съобщенията могат да се обединят в `update()`. Историята на събитията да се проверява в Logcat, защото UI и `Toast` може да не покажат всяка междинна стойност.
+The shared state-update and messaging operations can be combined in `update()`. Verify event history in Logcat because the UI and `Toast` may not display every intermediate value.
 
-## Задача 5
+## Task 5
 
-Общата реализация на callback методите и `update()` да се изнесе в базов клас, наследяващ `ComponentActivity`. `MainActivity` да го наследява и да задава Compose интерфейса. Да се провери дали събитията продължават да се записват по веднъж.
+Move the shared implementation of the callbacks and `update()` into a base class extending `ComponentActivity`. Have `MainActivity` extend it and set the Compose interface. Check that events are still logged exactly once.
 
-## Задача 6
+## Task 6
 
-Като алтернативен вариант общата обработка на lifecycle събитията да се изнесе в клас, реализиращ `DefaultLifecycleObserver`, и да се регистрира чрез `lifecycle.addObserver(...)` в `Activity`. От наблюдателя да се извиква подадена обработваща функция за обновяване и запис на състоянието. `Activity` е `LifecycleOwner` и предоставя наблюдавания жизнен цикъл.
+As an alternative, move shared lifecycle event handling into a class implementing `DefaultLifecycleObserver` and register it through `lifecycle.addObserver(...)` in the `Activity`. Have the observer invoke a supplied handler function to update and log the state. The `Activity` is a `LifecycleOwner` and provides the observed lifecycle.
 
-Да се избегне едновременно дублиране на съобщенията от базовия клас и от наблюдателя. `onRestart()` да остане в `Activity`, защото няма съответен метод в `DefaultLifecycleObserver`.
+Avoid duplicate messages from the base class and the observer running simultaneously. Keep `onRestart()` in the `Activity` because `DefaultLifecycleObserver` has no corresponding method.
 
-## Тестване
+## Testing
 
-1. Приложението да се стартира. В Logcat да се проследят `onCreate()`, `onStart()` и `onResume()`. На екрана обикновено ще се вижда последното събитие.
-2. Приложението да се изпрати във фонов режим чрез Home. Да се проверят `onPause()` и `onStop()`.
-3. Приложението да се изведе отново на преден план. Ако същият екземпляр е запазен, да се проследят `onRestart()`, `onStart()` и `onResume()`.
-4. Текущата `Activity` да се приключи чрез явно извикване на `finish()`, например от временен бутон. Да се проследят `onPause()`, `onStop()` и `onDestroy()`.
+1. Start the application. Track `onCreate()`, `onStart()`, and `onResume()` in Logcat. The screen will usually show the last event.
+2. Move the application to the background using Home. Check `onPause()` and `onStop()`.
+3. Bring the application back to the foreground. If the same instance has been retained, track `onRestart()`, `onStart()`, and `onResume()`.
+4. Finish the current `Activity` with an explicit call to `finish()`, for example from a temporary button. Track `onPause()`, `onStop()`, and `onDestroy()`.
 
-При прекратяване на процеса `onDestroy()` не е гарантирано да бъде извикан. Back при входната `Activity` може да изпрати задачата във фонов режим според Android версията; за проверката на унищожаването се използва `finish()`.
+When the process is terminated, `onDestroy()` is not guaranteed to be called. Depending on the Android version, pressing Back in the entry `Activity` may move the task to the background; use `finish()` to test destruction.
 
-## Задачи за самостоятелна работа
+## Independent tasks
 
-Надградете приложението за наблюдение на жизнения цикъл с малък експеримент за UI състояние.
+Extend the lifecycle monitoring application with a small UI state experiment.
 
-### Задача 1. Два брояча
+### Task 1. Two counters
 
-Добавете два брояча със собствени бутони за увеличаване: единият да използва `remember`, а другият — `rememberSaveable`. Покажете имената на използваните механизми до стойностите.
+Add two counters with their own increment buttons: one should use `remember`, and the other `rememberSaveable`. Display the names of the mechanisms used next to their values.
 
-Увеличете двата брояча до 3 и предизвикайте друга промяна на UI, например показване и скриване на помощен текст, без да премахвате броячите от композицията. Проверете дали стойностите се запазват.
+Increment both counters to 3 and trigger another UI change, such as showing and hiding help text, without removing the counters from the composition. Check whether the values are retained.
 
-### Задача 2. Пресъздаване на Activity
+### Task 2. Recreating the Activity
 
-Записвайте callback методите и идентификатор на екземпляра на `Activity` в Logcat. Сравнете изпращане във фонов режим и връщане с пресъздаване при завъртане на устройството.
+Log the callbacks and an identifier for the `Activity` instance to Logcat. Compare moving to the background and returning with recreation when the device is rotated.
 
-За опита със завъртане проверете в Logcat, че действително е създаден нов екземпляр. Запишете стойностите на двата брояча преди и след всеки сценарий. При пресъздаване очаквайте броячът с `remember` да започне от 0, а този с `rememberSaveable` да възстанови стойността си.
+For the rotation experiment, confirm in Logcat that a new instance was actually created. Record the values of both counters before and after each scenario. On recreation, expect the `remember` counter to start at 0 and the `rememberSaveable` counter to restore its value.
 
-### Задача 3. Отделяне на състоянието от изгледа
+### Task 3. Separating state from the view
 
-Реализирайте `CounterPanel(value: Int, onIncrement: () -> Unit, onReset: () -> Unit)`. Функцията да показва стойността и да изпраща действията чрез callback параметрите. Състоянието да се управлява от извикващата функция.
+Implement `CounterPanel(value: Int, onIncrement: () -> Unit, onReset: () -> Unit)`. The function should display the value and send actions through its callback parameters. The calling function should manage the state.
 
-Използвайте панела за двата брояча. Добавете Preview с фиксирана стойност и празни callback функции.
+Use the panel for both counters. Add a Preview with a fixed value and empty callback functions.
 
-### Проверка и предаване
+### Verification and submission
 
-Предайте кода, кратък Logcat откъс и таблица „сценарий / стар или нов екземпляр / стойности преди и след“. Обяснете разликата между рекомпозиция и пресъздаване на `Activity`. Не използвайте `Toast` като единствено доказателство за реда на събитията.
+Submit the code, a short Logcat excerpt, and a table with "scenario / old or new instance / values before and after". Explain the difference between recomposition and `Activity` recreation. Do not use `Toast` as the sole evidence of event order.

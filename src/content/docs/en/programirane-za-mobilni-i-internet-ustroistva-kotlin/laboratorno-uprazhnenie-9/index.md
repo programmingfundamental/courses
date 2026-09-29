@@ -1,16 +1,16 @@
 ---
-title: Лабораторно упражнение 9
+title: Lab 9
 sidebar:
   order: 9
 ---
 
-# Лабораторно упражнение 9
+# Lab 9
 
-## Списъци и решетки в Jetpack Compose
+## Lists and grids in Jetpack Compose
 
-Колекция от елементи може да се представи чрез `Column` или `Row`, когато броят е малък и не е необходимо отложено създаване. `Column` създава подаденото съдържание, включително елементите извън видимата област.
+A collection of elements can be displayed using `Column` or `Row` when the number of elements is small and lazy creation is unnecessary. `Column` creates the supplied content, including elements outside the visible area.
 
-Следните примери за съобщения използват общ модел и композируема функция:
+The following message examples use a shared model and composable function:
 
 ```kotlin
 import androidx.compose.foundation.layout.Column
@@ -34,17 +34,17 @@ fun MessageList(messages: List<Message>) {
 }
 ```
 
-За вертикално превъртане към `Column` може да се добави `Modifier.verticalScroll(rememberScrollState())`, с импорти на `verticalScroll` и `rememberScrollState` от `androidx.compose.foundation` и `Modifier` от `androidx.compose.ui`. Това не превръща `Column` в Lazy компонент — съдържанието пак се създава изцяло.
+To enable vertical scrolling, add `Modifier.verticalScroll(rememberScrollState())` to a `Column`, with imports of `verticalScroll` and `rememberScrollState` from `androidx.compose.foundation` and `Modifier` from `androidx.compose.ui`. This does not turn `Column` into a lazy component: all content is still created.
 
-## Списъци с отложено създаване на елементите (`LazyColumn` и `LazyRow`)
+## Lists with lazy item creation (`LazyColumn` and `LazyRow`)
 
-`LazyColumn` и `LazyRow` композират и подреждат необходимите елементи според видимата област и позицията на превъртане. Те са подходящи за голям или динамичен брой елементи. Възможно е предварително подготвяне на близки елементи, затова не се предполага, че се създават единствено видимите пиксели.
+`LazyColumn` and `LazyRow` compose and lay out the required items based on the visible area and scroll position. They are suitable for large or dynamic numbers of items. Nearby items may be prepared in advance, so do not assume that only visible pixels are created.
 
-`LazyColumn` подрежда и превърта вертикално, а `LazyRow` — хоризонтално. Решетките използват съответно `LazyVerticalGrid` и `LazyHorizontalGrid`.
+`LazyColumn` arranges and scrolls items vertically, while `LazyRow` does so horizontally. Grids use `LazyVerticalGrid` and `LazyHorizontalGrid`, respectively.
 
 ### `LazyListScope`
 
-Блокът на Lazy списъка предоставя DSL — набор от функции за описание на съдържанието. В `LazyListScope` функцията `item` добавя един елемент, `items` — няколко елемента, а `itemsIndexed` предоставя и индекса.
+The lazy list block provides a DSL: a set of functions for describing content. In `LazyListScope`, `item` adds one item, `items` adds multiple items, and `itemsIndexed` also provides the index.
 
 ```kotlin
 import androidx.compose.foundation.lazy.LazyColumn
@@ -61,7 +61,7 @@ fun NumberedList() {
 }
 ```
 
-За обхождане на колекция се използва разширението `items`. Примерът използва `Message` и `MessageRow` от началото на страницата:
+Use the `items` extension to iterate over a collection. This example uses `Message` and `MessageRow` from the beginning of the page:
 
 ```kotlin
 import androidx.compose.foundation.lazy.LazyColumn
@@ -78,13 +78,13 @@ fun LazyMessageList(messages: List<Message>) {
 }
 ```
 
-`itemsIndexed` се импортира от `androidx.compose.foundation.lazy.itemsIndexed` и подава два аргумента на ламбда израза — индекс и елемент.
+`itemsIndexed` is imported from `androidx.compose.foundation.lazy.itemsIndexed` and passes two arguments to the lambda expression: the index and the item.
 
-### Стабилни ключове
+### Stable keys
 
-Параметърът `key` помага на Compose да проследява идентичността на елемент при добавяне, премахване или пренареждане. Ключът трябва да е уникален в списъка и стабилен за същия елемент. За запазване на състояние в Android се използва поддържан от `Bundle` тип, например `Long` или `String`.
+The `key` parameter helps Compose track an item's identity when items are added, removed, or reordered. The key must be unique within the list and stable for the same item. To save state on Android, use a type supported by `Bundle`, such as `Long` or `String`.
 
-Следният фрагмент заменя блока `items` в `LazyMessageList`. Приема се, че всяко съобщение има уникално `id`:
+The following snippet replaces the `items` block in `LazyMessageList`. It assumes that each message has a unique `id`:
 
 ```kotlin
 items(messages, key = { it.id }) { message ->
@@ -92,16 +92,16 @@ items(messages, key = { it.id }) { message ->
 }
 ```
 
-## Решетки с отложено създаване на елементите
+## Grids with lazy item creation
 
-`LazyVerticalGrid` разполага елементи в колони и превърта вертикално. `LazyHorizontalGrid` разполага елементи в редове и превърта хоризонтално. Блокът `LazyGridScope` предоставя функции `item` и `items`, подобни на тези за списъците.
+`LazyVerticalGrid` arranges items in columns and scrolls vertically. `LazyHorizontalGrid` arranges items in rows and scrolls horizontally. The `LazyGridScope` block provides `item` and `items` functions similar to those for lists.
 
-Броят и размерът на клетките се задават чрез `columns` при `LazyVerticalGrid` и `rows` при `LazyHorizontalGrid`:
+The number and size of cells are set through `columns` in `LazyVerticalGrid` and `rows` in `LazyHorizontalGrid`:
 
-- `GridCells.Adaptive(minSize = 128.dp)` определя броя колони или редове според наличното място и желания минимален размер на клетката. При твърде малка област остава една клетка в наличния размер.
-- `GridCells.Fixed(2)` задава точно две колони или два реда.
+- `GridCells.Adaptive(minSize = 128.dp)` determines the number of columns or rows based on the available space and desired minimum cell size. If the area is too small, one cell uses the available size.
+- `GridCells.Fixed(2)` specifies exactly two columns or two rows.
 
-Примерът с изображения използва ресурсни идентификатори, подадени чрез `photos`:
+The image example uses resource identifiers passed through `photos`:
 
 ```kotlin
 import androidx.annotation.DrawableRes
@@ -123,7 +123,7 @@ data class Photo(@DrawableRes val drawableResourceId: Int)
 fun PhotoItem(photo: Photo) {
     Image(
         painter = painterResource(photo.drawableResourceId),
-        contentDescription = "Снимка",
+        contentDescription = "Photo",
         modifier = Modifier.fillMaxWidth().height(128.dp),
         contentScale = ContentScale.Crop
     )
@@ -137,11 +137,11 @@ fun PhotoGrid(photos: List<Photo>) {
 }
 ```
 
-При адаптивно оразмеряване оставащото място се разпределя между колоните. За фиксиран брой колони `GridCells.Adaptive(...)` може да се замени с `GridCells.Fixed(2)`.
+With adaptive sizing, the remaining space is distributed among the columns. For a fixed number of columns, replace `GridCells.Adaptive(...)` with `GridCells.Fixed(2)`.
 
-### Елемент, който заема цял ред
+### An item spanning a full row
 
-Параметърът `span` определя колко клетки заема елементът. `GridItemSpan(maxLineSpan)` е подходящ за заглавие, което обхваща всички колони, дори когато броят им е адаптивен.
+The `span` parameter determines how many cells an item occupies. `GridItemSpan(maxLineSpan)` is suitable for a heading spanning all columns, even when their number is adaptive.
 
 ```kotlin
 import androidx.compose.foundation.lazy.grid.GridCells

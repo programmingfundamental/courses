@@ -69,4 +69,4 @@ sidebar:
 
 Връщаме предходния избор и внедряваме съответния пакет. Проверяваме model_version в API отговор и записваме действителното поведение.
 
-Материали за примера: [начален проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/lab09-mlops/starter/README.md). [Подготовка и команди за общия проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/setup.md).
+Материали за примера: начален проект. Подготовка и команди за общия проект.

@@ -1,18 +1,18 @@
 ---
-title: Въведение в Kotlin
+title: Introduction to Kotlin
 sidebar:
   order: 2
 ---
 
-# Въведение в Kotlin
+# Introduction to Kotlin
 
-Кратките блокове с изрази се изпълняват поотделно в Kotlin скрипт (`.kts`) или в тялото на `main()`. Блоковете с декларация на `main()` са самостоятелни програми. Алтернативните реализации не се добавят едновременно в един файл.
+Run the short expression blocks separately in a Kotlin script (`.kts`) or inside `main()`. Blocks that declare `main()` are standalone programs. Do not place alternative implementations in the same file at the same time.
 
-## Оператори и типове данни
+## Operators and data types
 
-Аритметичните оператори са `+`, `-`, `*`, `/` и `%` (остатък от деление). Целочислените типове включват `Byte`, `Short`, `Int` и `Long`, а типовете с плаваща запетая — `Float` и `Double`. Например `1L` е литерал от тип `Long`, `1.5f` — от тип `Float`, а `1.5` — от тип `Double`.
+The arithmetic operators are `+`, `-`, `*`, `/`, and `%` (remainder). Integer types include `Byte`, `Short`, `Int`, and `Long`; floating-point types are `Float` and `Double`. For example, `1L` is a `Long` literal, `1.5f` is a `Float` literal, and `1.5` is a `Double` literal.
 
-При присвояване на стойност от един числов тип на друг Kotlin изисква явно преобразуване. Целочислен литерал като `1` може да се присвои на `Byte`, ако се побира в диапазона му.
+Kotlin requires explicit conversion when assigning a value of one numeric type to another. An integer literal such as `1` can be assigned to a `Byte` if it fits within its range.
 
 ```kotlin
 val i: Int = 6
@@ -23,7 +23,7 @@ val b2: Byte = 1
 println(b2)
 ```
 
-Следният код не се компилира: стойността от тип `Byte` не се преобразува автоматично в `Int`, `String` или `Double`.
+The following code does not compile: a `Byte` value is not automatically converted to `Int`, `String`, or `Double`.
 
 ```kotlin
 val b2: Byte = 1
@@ -34,7 +34,7 @@ val i2: String = b2
 val i3: Double = b2
 ```
 
-Правилен вариант с явно преобразуване:
+A correct version with explicit conversion:
 
 ```kotlin
 val b2: Byte = 1
@@ -48,11 +48,11 @@ val i6: Double = b2.toDouble()
 println(i6)
 ```
 
-Преобразуването към по-тесен числов тип, например с `toByte()`, може да загуби информация, ако стойността е извън неговия диапазон.
+Converting to a narrower numeric type, for example with `toByte()`, may lose information if the value is outside its range.
 
-При декларация с `val` стойността не може да бъде присвоена повторно. Това не означава, че самият обект е неизменяем. При декларация с `var` е разрешено повторно присвояване.
+A value declared with `val` cannot be reassigned. This does not mean that the object itself is immutable. A declaration with `var` allows reassignment.
 
-Следният код не се компилира, защото `aquarium` е декларирана с `val`:
+The following code does not compile because `aquarium` is declared with `val`:
 
 ```kotlin
 var fish = 1
@@ -61,14 +61,14 @@ val aquarium = 1
 aquarium = 2
 ```
 
-Ако стойността трябва да се променя, правилният вариант е:
+If the value needs to change, the correct version is:
 
 ```kotlin
 var aquarium = 1
 aquarium = 2
 ```
 
-Низовете (`String`) се ограждат с двойни кавички, а единичните символи (`Char`) — с единични кавички. Операторът `+` обединява низове. В шаблон на низ `$name` включва стойност на променлива, а `${expression}` — резултат от израз.
+Strings (`String`) use double quotes, while individual characters (`Char`) use single quotes. The `+` operator concatenates strings. In a string template, `$name` inserts the value of a variable, while `${expression}` inserts the result of an expression.
 
 ```kotlin
 val numberOfFish = 5
@@ -78,11 +78,11 @@ val numberOfPlants = 12
 "I have ${numberOfFish + numberOfPlants} fish and plants"
 ```
 
-## Сравняване
+## Comparisons
 
-Резултатът от сравнение е от тип `Boolean`. Операторите за сравнение включват `<`, `<=`, `>`, `>=`, `==` и `!=`.
+A comparison produces a `Boolean` result. Comparison operators include `<`, `<=`, `>`, `>=`, `==`, and `!=`.
 
-Пример:
+Example:
 
 ```kotlin
 val numberOfFish = 50
@@ -94,7 +94,7 @@ if (numberOfFish > numberOfPlants) {
 }
 ```
 
-### Проверка за принадлежност към диапазон
+### Checking whether a value belongs to a range
 
 ```kotlin
 val fish = 50
@@ -103,7 +103,7 @@ if (fish in 1..100) {
 }
 ```
 
-### Допълнителни условия
+### Additional conditions
 
 ```kotlin
 val numberOfFish = 50
@@ -115,7 +115,7 @@ if (numberOfFish == 0) {
     println("That's a lot of fish!")
 }
 ```
-### Условен израз `when`
+### The `when` conditional expression
 
 ```kotlin
 val numberOfFish = 50
@@ -126,27 +126,27 @@ when (numberOfFish) {
 }
 ```
 
-## Типове, допускащи `null`
+## Nullable types
 
-### Тип, който не допуска `null`
+### A non-nullable type
 
-Типът `Int` не допуска `null`. Следният код не се компилира:
+The `Int` type does not allow `null`. The following code does not compile:
 
 ```kotlin
 var rocks: Int = null
 ```
 
-Валидна декларация е `var rocks: Int = 0`.
+A valid declaration is `var rocks: Int = 0`.
 
-### Тип, който допуска `null` чрез `?`
+### A nullable type using `?`
 
-Знакът `?` след името на типа разрешава стойност `null`, която означава липса на стойност, а не числото нула.
+A `?` after the type name allows `null`, which represents the absence of a value, rather than the number zero.
 
 ```kotlin
 var marbles: Int? = null
 ```
 
-### Проверка за `null`
+### Checking for `null`
 
 ```kotlin
 var fishFoodTreats: Int? = 6
@@ -155,18 +155,18 @@ if (fishFoodTreats != null) {
 }
 ```
 
-### Safe-call оператор `?.`
+### The safe-call operator `?.`
 
-Операторът извиква метода само ако стойността е различна от `null`; в противен случай резултатът е `null`.
+The operator calls the method only if the value is not `null`; otherwise, the result is `null`.
 
 ```kotlin
 var fishFoodTreats: Int? = null
 fishFoodTreats = fishFoodTreats?.dec()
 ```
 
-### Elvis оператор `?:`
+### The Elvis operator `?:`
 
-При резултат `null` отляво се използва стойността отдясно:
+If the result on the left is `null`, the value on the right is used:
 
 ```kotlin
 val fishFoodTreats: Int? = null
@@ -174,9 +174,9 @@ val remainingTreats: Int = fishFoodTreats?.dec() ?: 0
 println(remainingTreats)
 ```
 
-### Оператор `!!`
+### The `!!` operator
 
-Операторът принудително третира стойността като различна от `null`. Ако тя е `null`, възниква `NullPointerException`. Следната функция се компилира, но извикването `textLength(null)` би предизвикало това изключение:
+This operator forces a value to be treated as non-null. If it is `null`, a `NullPointerException` is thrown. The following function compiles, but calling `textLength(null)` would throw this exception:
 
 ```kotlin
 fun textLength(s: String?): Int {
@@ -184,25 +184,25 @@ fun textLength(s: String?): Int {
 }
 ```
 
-## Колекции
+## Collections
 
-`List<T>` предоставя достъп за четене до списък. `MutableList<T>` позволява добавяне, премахване и замяна на елементи. `Array<T>` има фиксиран размер, но елементите му могат да се променят. Специализираните масиви като `IntArray` съхраняват стойности от конкретен числов тип. `Sequence<T>` позволява отложена обработка на елементи и е разгледана след операциите върху списъци.
+`List<T>` provides read-only access to a list. `MutableList<T>` allows elements to be added, removed, and replaced. `Array<T>` has a fixed size, but its elements can be changed. Specialized arrays such as `IntArray` store values of a specific numeric type. `Sequence<T>` allows lazy processing of elements and is covered after list operations.
 
-Дефиниране на списък с `listOf()`:
+Defining a list with `listOf()`:
 
 ```kotlin
 val school = listOf("mackerel", "trout", "halibut")
 println(school)
 ```
 
-Дефиниране на изменяем списък с `mutableListOf()`:
+Defining a mutable list with `mutableListOf()`:
 
 ```kotlin
 val myList = mutableListOf("tuna", "salmon", "shark")
 myList.remove("shark")
 ```
 
-Дефиниране на масив с `arrayOf()` и `intArrayOf()`:
+Defining an array with `arrayOf()` and `intArrayOf()`:
 
 ```kotlin
 val school = arrayOf("shark", "salmon", "minnow")
@@ -214,7 +214,7 @@ val numbers = intArrayOf(1,2,3)
 
 ```
 
-Операторът `+` създава нов масив с елементите на двата масива:
+The `+` operator creates a new array containing the elements of both arrays:
 
 ```kotlin
 val numbers = intArrayOf(1,2,3)
@@ -223,7 +223,7 @@ val foo2 = numbers3 + numbers
 println(foo2[5])
 ```
 
-Масивите и списъците могат да бъдат вложени. Вложеният масив остава отделен елемент; съдържанието му не се обединява автоматично с външния масив. Елементите на масив могат да бъдат списъци и обратно.
+Arrays and lists can be nested. A nested array remains a separate element; its contents are not automatically merged into the outer array. Array elements can be lists, and vice versa.
 
 ```kotlin
 val numbers = intArrayOf(1, 2, 3)
@@ -232,14 +232,14 @@ val oddList = listOf(numbers, oceans, "salmon")
 println(oddList)
 ```
 
-Инициализиране на масив 
+Initializing an array
 
 ```kotlin
 val array = Array (5) { it * 2 }
 println(java.util.Arrays.toString(array))
 ```
 
-## Обхождане на масив
+## Iterating over an array
 
 ```kotlin
 val school = arrayOf("shark", "salmon", "minnow")
@@ -276,7 +276,7 @@ repeat(2) {
 }
 ```
 
-## Функции
+## Functions
 
 ```kotlin
 fun main(args: Array<String>) {
@@ -290,9 +290,9 @@ fun printHello() {
 
 ```
 
-## Предаване на аргументи в `main()`
+## Passing arguments to `main()`
 
-Първият аргумент се използва само ако е подаден, за да се избегне достъп извън границите на масива.
+The first argument is used only if it has been supplied, to avoid accessing an element outside the array bounds.
 
 ```kotlin
 fun main(args: Array<String>) {
@@ -301,7 +301,7 @@ fun main(args: Array<String>) {
 }
 ```
 
-### Примерни функции
+### Example functions
 
 ```kotlin
 fun feedTheFish() {
@@ -321,7 +321,7 @@ fun randomDay() : String {
 }
 ```
 
-Функцията за избор на храна може да присвоява стойност според деня:
+The function that selects food can assign a value based on the day:
 
 ```kotlin
 fun fishFood (day : String) : String {
@@ -339,7 +339,7 @@ fun fishFood (day : String) : String {
 }
 ```
 
-Следващият вариант заменя предишната `feedTheFish()` и използва вече дефинираните `randomDay()` и `fishFood()`:
+The following version replaces the previous `feedTheFish()` and uses the previously defined `randomDay()` and `fishFood()`:
 
 ```kotlin
 fun feedTheFish() {
@@ -350,7 +350,7 @@ fun feedTheFish() {
 }
 ```
 
-Алтернативна реализация на `fishFood()` с `val` и клон `else`:
+An alternative implementation of `fishFood()` with `val` and an `else` branch:
 
 ```kotlin
 fun fishFood (day : String) : String {
@@ -367,7 +367,7 @@ fun fishFood (day : String) : String {
 }
 ```
 
-Същата алтернатива може да върне директно резултата от `when`:
+The same alternative can return the result of `when` directly:
 
 ```kotlin
 fun fishFood (day : String) : String {
@@ -382,7 +382,7 @@ fun fishFood (day : String) : String {
 }
 ```
 
-## Стойност по подразбиране
+## Default values
 
 ```kotlin
 fun swim(speed: String = "fast") {
@@ -390,9 +390,9 @@ fun swim(speed: String = "fast") {
 }
 ```
 
-## Задължителни параметри
+## Required parameters
 
-Параметърът `day` е задължителен, а останалите имат стойности по подразбиране. Вариантът на `feedTheFish()` заменя предишния и използва `randomDay()` и `fishFood()` от горните примери.
+The `day` parameter is required, while the other parameters have default values. This version of `feedTheFish()` replaces the previous one and uses `randomDay()` and `fishFood()` from the examples above.
 
 ```kotlin
 fun shouldChangeWater (day: String, temperature: Int = 22, dirty: Int = 20): Boolean {
@@ -412,9 +412,9 @@ fun feedTheFish() {
 }
 ```
 
-## Компактни функции
+## Compact functions
 
-Функция с един израз може да се запише чрез `=`. Следващият вариант заменя предишната `shouldChangeWater()`:
+A single-expression function can be written using `=`. The following version replaces the previous `shouldChangeWater()`:
 
 ```kotlin
 fun isTooHot(temperature: Int) = temperature > 30
@@ -433,21 +433,21 @@ fun shouldChangeWater (day: String, temperature: Int = 22, dirty: Int = 20): Boo
 }
 ```
 
-## Филтри
+## Filters
 
-Функцията `filter` избира елементите на колекция, които удовлетворяват условие.
+The `filter` function selects collection elements that satisfy a condition.
 
-Примерна колекция:
+Example collection:
 
 ```kotlin
 val decorations = listOf ("rock", "pagoda", "plastic plant", "alligator", "flowerpot")
 ```
 
-Да се изведат само стойностите, които започват с `'p'`.
+Print only the values that start with `'p'`.
 
-## Незабавна и отложена обработка на колекции
+## Eager and lazy collection processing
 
-Операции като `filter` и `map` върху обикновени колекции се изпълняват незабавно и създават нови колекции. При верига от такива операции обикновено се получават междинни резултати.
+Operations such as `filter` and `map` on ordinary collections run eagerly and create new collections. Chaining these operations usually produces intermediate results.
 
 ```kotlin
 fun main() {
@@ -459,7 +459,7 @@ fun main() {
 }
 ```
 
-Чрез `asSequence()` обработката се отлага. `filter` и `map` описват операциите, а изпълнението започва при крайна (terminal) операция като `toList()` или `first()`.
+With `asSequence()`, processing is deferred. `filter` and `map` describe the operations, and execution begins with a terminal operation such as `toList()` or `first()`.
 
 ```kotlin
 val decorations = listOf("rock", "pagoda", "plastic plant", "alligator", "flowerpot")
@@ -470,9 +470,9 @@ val newList = filtered.toList()
 println("new list: $newList")
 ```
 
-## Трансформиране на елементи
+## Transforming elements
 
-`map` преобразува всеки елемент. В примера стойността се връща непроменена, а съобщението показва кога се изпълнява обработката. Използва се колекцията `decorations` от предходния пример. `first()` обработва необходимите елементи до първия резултат, а `toList()` обхожда последователността отначало и събира всички резултати.
+`map` transforms each element. In this example, the value is returned unchanged, while the message shows when processing occurs. It uses the `decorations` collection from the previous example. `first()` processes the elements needed to obtain the first result, while `toList()` traverses the sequence again from the beginning and collects all results.
 
 ```kotlin
 val lazyMap = decorations.asSequence().map {
@@ -487,7 +487,7 @@ println("-----")
 println("all: ${lazyMap.toList()}")
 ```
 
-Пример 2:
+Example 2:
 
 ```kotlin
 val lazyMap2 = decorations.asSequence().filter {it[0] == 'p'}.map {
@@ -498,11 +498,11 @@ println("-----")
 println("filtered: ${lazyMap2.toList()}")
 ```
 
-## Ламбди
+## Lambdas
 
-Ламбда изразът представлява анонимна функция, която може да бъде съхранявана в променлива, подавана като аргумент или връщана като резултат.
+A lambda expression is an anonymous function that can be stored in a variable, passed as an argument, or returned as a result.
 
-Пример
+Example
 
 ```kotlin
 var dirtyLevel = 20
@@ -510,17 +510,17 @@ val waterFilter = { dirty : Int -> dirty / 2}
 println(waterFilter(dirtyLevel))
 ```
 
-Дефиниране на ламбда израз с явно зададен тип:
+Defining a lambda expression with an explicit type:
 
 ```kotlin
 val waterFilter: (Int) -> Int = { dirty -> dirty / 2 }
 ```
 
-Променливата `waterFilter` съхранява функция от тип `(Int) -> Int`: тя приема `Int` и връща `Int`. Присвоеният ламбда израз връща резултата от целочисленото деление на аргумента `dirty` на две.
+The `waterFilter` variable stores a function of type `(Int) -> Int`: it takes an `Int` and returns an `Int`. The assigned lambda expression returns the result of integer division of the `dirty` argument by two.
 
-## Функции, приемащи ламбда израз като аргумент
+## Functions that take a lambda expression as an argument
 
-Функция от по-висок ред приема друга функция като аргумент или връща функция. В примера `updateDirty()` извиква подадената `operation`.
+A higher-order function takes another function as an argument or returns a function. In this example, `updateDirty()` calls the supplied `operation`.
 
 ```kotlin
 fun updateDirty(dirty: Int, operation: (Int) -> Int): Int {
@@ -531,7 +531,7 @@ val waterFilter: (Int) -> Int = { dirty -> dirty / 2 }
 println(updateDirty(30, waterFilter))
 ```
 
-Предаване на именувана функция към вече дефинираната `updateDirty()` чрез референция с `::`:
+Passing a named function to the previously defined `updateDirty()` using a `::` reference:
 
 ```kotlin
 fun increaseDirty( start: Int ) = start + 1
@@ -539,7 +539,7 @@ fun increaseDirty( start: Int ) = start + 1
 println(updateDirty(15, ::increaseDirty))
 ```
 
-Ламбда изразът може да се постави след скобите, когато е последният аргумент на `updateDirty()`:
+A lambda expression can be placed after the parentheses when it is the last argument of `updateDirty()`:
 
 ```kotlin
 var dirtyLevel = 19;

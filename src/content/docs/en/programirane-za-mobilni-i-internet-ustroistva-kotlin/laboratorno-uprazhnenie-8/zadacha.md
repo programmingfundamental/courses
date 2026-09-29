@@ -1,32 +1,32 @@
 ---
-title: Задачи
+title: Tasks
 sidebar:
   order: 100
-  label: Задачи
+  label: Tasks
 taskPage: true
 ---
-## Задачи за самостоятелна работа
+## Independent tasks
 
-Задачите са за подготовка и самопроверка към контролното върху упражнения 4–7. Създайте Compose приложение „Разпределяне на сметка“, като използвате условни парични единици.
+These tasks are for preparation and self-assessment for the test on Labs 4–7. Create a "Split the Bill" Compose application using arbitrary currency units.
 
-### Задача 1. Входна форма
+### Task 1. Input form
 
-Добавете полета за обща сума и брой участници, както и `Switch` „Добави 10% обслужване“. Запазвайте въведените текстове и избора с `rememberSaveable`.
+Add fields for the total amount and number of participants, along with an "Add 10% service charge" `Switch`. Save the entered text and selection with `rememberSaveable`.
 
-Уточнете в етикета, че десетичният разделител за сумата е точка. Формата трябва да е използваема при показана клавиатура.
+Specify in the label that the amount uses a period as the decimal separator. The form must remain usable while the keyboard is visible.
 
-### Задача 2. Изчисляване
+### Task 2. Calculation
 
-Изнесете изчислението в обикновена Kotlin функция. Приемайте само крайна положителна сума и положителен цял брой участници. Проверете за невалиден вход преди деление.
+Move the calculation into an ordinary Kotlin function. Accept only a finite positive amount and a positive integer number of participants. Check for invalid input before division.
 
-При натискане на „Изчисли“ покажете общата сума с обслужването и сумата на човек с два знака след десетичния разделител. За сума 120 и четирима участници очаквайте 30.00 без обслужване и 33.00 с обслужване.
+When "Calculate" is pressed, display the total including the service charge and the amount per person to two decimal places. For an amount of 120 and four participants, expect 30.00 without the service charge and 33.00 with it.
 
-### Задача 3. Състояние и потребителски събития
+### Task 3. State and user events
 
-Добавете бутон „Нулиране“. При промяна на входните стойности скрийте стария резултат, докато не се натисне отново „Изчисли“. При грешка покажете съобщение до съответното поле.
+Add a "Reset" button. When input values change, hide the old result until "Calculate" is pressed again. If there is an error, display a message next to the corresponding field.
 
-Отделете формата и представянето на резултата в различни композируеми функции. Предавайте данни и callback функции чрез параметри.
+Separate the form and result display into different composable functions. Pass data and callback functions through parameters.
 
-### Проверка и предаване
+### Verification and submission
 
-Предайте проекта, изчислителната функция и резултатите от самопроверката. Проверете празен вход, букви, нулева и отрицателна сума, нулев и дробен брой участници, както и вход `NaN` за сумата. Завъртете устройството и проверете възстановяването на входните данни.
+Submit the project, calculation function, and self-assessment results. Test empty input, letters, zero and negative amounts, zero and fractional participant counts, and `NaN` as the amount. Rotate the device and check that input data is restored.

@@ -1,9 +1,9 @@
 ---
-title: Лабораторно упражнение 11
+title: Lab 11
 sidebar:
   order: 11
 ---
 
-# Лабораторно упражнение 11
+# Lab 11
 
-## Обобщаващо упражнение: асинхронно зареждане на каталог
+## Review exercise: asynchronous catalog loading

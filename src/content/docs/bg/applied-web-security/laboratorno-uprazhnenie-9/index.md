@@ -49,9 +49,9 @@ Java, Spring Boot, HTTP, JPA и Task Manager от lab11. Продължете с
 
 След упражнение 8. Добавят се PUT/GET /tasks/{id}/private-note. Бележката не се включва в TaskResponseDto или HTML списъка.
 
-Използвайте [Task Manager](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/task-manager/README.md) и [подготовката](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/setup.md). Всички Maven/Compose команди се изпълняват от task-manager. Работните Java класове са в src/main/java/bg/tu_varna/sit/task_manager; тестовете — в съответния src/test/java package.
+Използвайте Task Manager и подготовката. Всички Maven/Compose команди се изпълняват от task-manager. Работните Java класове са в src/main/java/bg/tu_varna/sit/task_manager; тестовете — в съответния src/test/java package.
 
-**Файлове за работа:** нов TaskSecretService/FieldCipher, Task.privateNoteCiphertext, TaskController, TaskPolicy. [Архитектурната карта](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md) показва кои маршрути съществуват в началото и кои се добавят последователно.
+**Файлове за работа:** нов TaskSecretService/FieldCipher, Task.privateNoteCiphertext, TaskController, TaskPolicy. Архитектурната карта показва кои маршрути съществуват в началото и кои се добавят последователно.
 
 JDK 17+, Maven 3.9+ или Maven Wrapper, Docker Compose и браузър са достатъчни. Преди промяна изпълнете mvn test; след промяната повторете съответните тестове и PostgreSQL профила. Новите класове/маршрути, описани като надграждане, се реализират в това упражнение.
 

@@ -1,9 +1,9 @@
 ---
-title: Лабораторно упражнение 12
+title: Lab 12
 sidebar:
   order: 12
 ---
 
-# Лабораторно упражнение 12
+# Lab 12
 
-## Обобщаващо упражнение: личен учебен планер
+## Review exercise: personal study planner

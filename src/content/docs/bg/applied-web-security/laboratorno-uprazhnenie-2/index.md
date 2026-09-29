@@ -66,7 +66,7 @@ Java, Spring Boot, HTTP, JPA и Task Manager от lab11. Започнете от
 
 Всички Maven/Compose команди по-долу се изпълняват от task-manager. Работните Java класове са в src/main/java/bg/tu_varna/sit/task_manager; тестовете — в съответния src/test/java package.
 
-**Файлове за работа:** compose.yml, SecurityConfig, AuthController, AuthService, RegisterRequest, UserRepository. [Архитектурната карта](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md) показва кои маршрути съществуват в началото и кои се добавят последователно.
+**Файлове за работа:** compose.yml, SecurityConfig, AuthController, AuthService, RegisterRequest, UserRepository. Архитектурната карта показва кои маршрути съществуват в началото и кои се добавят последователно.
 
 ### Изтегляне и разархивиране
 

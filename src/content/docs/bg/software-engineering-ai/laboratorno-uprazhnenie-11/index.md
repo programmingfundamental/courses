@@ -66,4 +66,4 @@ Model/data card записва предназначение, произход, �
 
 Определяме заместител, срок и правила за съхранение. Проверка отказва внедряване на изведена версия, но допуска одобрения заместител.
 
-Материали за примера: [начален проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/lab11-security-ethics-maintenance/starter/README.md). [Подготовка и команди за общия проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/setup.md).
+Материали за примера: начален проект. Подготовка и команди за общия проект.

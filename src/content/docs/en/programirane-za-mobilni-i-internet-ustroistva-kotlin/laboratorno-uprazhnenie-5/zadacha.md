@@ -1,60 +1,60 @@
 ---
-title: Задачи
+title: Tasks
 sidebar:
   order: 100
-  label: Задачи
+  label: Tasks
 taskPage: true
 ---
-## Задача 1
+## Task 1
 
-Да се създаде композируема функция `GreetingText` с анотация `@Composable` и параметри `message: String` и `modifier: Modifier = Modifier`. Функцията да се визуализира чрез Compose Preview със съобщение "Happy Birthday Android!".
+Create a `GreetingText` composable function with the `@Composable` annotation and the parameters `message: String` and `modifier: Modifier = Modifier`. Display it in Compose Preview with the message "Happy Birthday Android!".
 
-## Задача 2
+## Task 2
 
-За параметъра `fontSize` на `Text` да се зададе стойност `100.sp`. Да се провери полученият резултат.
+Set the `fontSize` parameter of `Text` to `100.sp`. Check the result.
 
-## Задача 3
+## Task 3
 
-За параметъра `lineHeight` на `Text` да се зададе стойност `116.sp`. Да се провери полученият резултат.
+Set the `lineHeight` parameter of `Text` to `116.sp`. Check the result.
 
-## Задача 4
+## Task 4
 
-Да се добави нов текстов елемент, който показва от кого е поздравът. За неговия параметър `fontSize` да се зададе `36.sp`.
+Add a new text element showing who the greeting is from. Set its `fontSize` parameter to `36.sp`.
 
-## Задача 5
+## Task 5
 
-Текстовите елементи да се подредят последователно чрез `Row` и чрез `Column`. Да се сравнят резултатите и да се избере оформлението, което съответства на желания изглед.
+Arrange the text elements using `Row`, then `Column`. Compare the results and choose the layout that matches the desired appearance.
 
-## Задача 6
+## Task 6
 
-Да се зададат отстояния чрез `Modifier.padding()`. При `Column` да се използват `verticalArrangement` и `horizontalAlignment`, а при `Row` — `horizontalArrangement` и `verticalAlignment`. Подравняването на текста в областта на `Text` да се зададе чрез `textAlign`. Да се провери разликата между подравняване на елемент и подравняване на текста в него.
+Set spacing using `Modifier.padding()`. For `Column`, use `verticalArrangement` and `horizontalAlignment`; for `Row`, use `horizontalArrangement` and `verticalAlignment`. Set text alignment within the `Text` area using `textAlign`. Check the difference between aligning an element and aligning the text inside it.
 
-## Задача 7
+## Task 7
 
-Допълнителни ресурси за задачата: [връзка към SharePoint](https://tuvarnabg.sharepoint.com/:u:/s/msteams_230e9b/EXtfPyFQ_3tAnBwEYE7-4XgB3w6hd6boqpZEw_RJEj-sgg?e=HW2dfN).
+Additional resources for the task: [SharePoint link](https://tuvarnabg.sharepoint.com/:u:/s/msteams_230e9b/EXtfPyFQ_3tAnBwEYE7-4XgB3w6hd6boqpZEw_RJEj-sgg?e=HW2dfN).
 
-## Задачи за самостоятелна работа
+## Independent tasks
 
-Създайте екран „Покана за събитие“ с Compose и Material 3. Използвайте собствени текстове и локален графичен ресурс.
+Create an "Event Invitation" screen with Compose and Material 3. Use your own text and a local graphics resource.
 
-### Задача 1. Преизползваема покана
+### Task 1. A reusable invitation
 
-Реализирайте `EventCard(title: String, description: String, modifier: Modifier = Modifier)`. Покажете заглавие, описание и изображение. Разделете съдържанието в поне две по-малки композируеми функции.
+Implement `EventCard(title: String, description: String, modifier: Modifier = Modifier)`. Display a title, a description, and an image. Split the content into at least two smaller composable functions.
 
-Приложете параметъра `modifier` към кореновия елемент на картата. Постоянните етикети да се четат от текстови ресурси.
+Apply the `modifier` parameter to the card's root element. Read fixed labels from text resources.
 
-### Задача 2. Подредба и четимост
+### Task 2. Layout and readability
 
-Създайте два Preview варианта с кратко и с дълго заглавие. Използвайте `Column`, `Row`, отстояния и подходящо подравняване, така че елементите да не се застъпват. Проверете изгледа при ширина 320 и 480 dp.
+Create two Preview variants with a short and a long title. Use `Column`, `Row`, spacing, and suitable alignment so that elements do not overlap. Check the appearance at widths of 320 and 480 dp.
 
-Променете последователността на `padding` и `background` в отделен пример и опишете наблюдаваната разлика.
+Change the order of `padding` and `background` in a separate example and describe the difference you observe.
 
-### Задача 3. Брояч на харесвания
+### Task 3. Like counter
 
-Добавете бутон „Харесвам“ и текст с броя харесвания, започващ от 0. Всяко натискане да увеличава броя с 1 чрез `remember` и наблюдавано състояние. Добавете бутон „Нулиране“.
+Add a "Like" button and text showing the number of likes, starting at 0. Each press should increment the count by 1 using `remember` and observable state. Add a "Reset" button.
 
-Поставете две покани на екрана със самостоятелни броячи. Натискането на бутон в едната не трябва да променя другата.
+Place two invitations on the screen with independent counters. Pressing a button in one must not change the other.
 
-### Проверка и предаване
+### Verification and submission
 
-Предайте композируемите функции и снимки на двата Preview варианта. Демонстрирайте три харесвания, нулиране и независимостта на двете карти. Опишете къде се съхранява състоянието на всяка карта.
+Submit the composable functions and screenshots of both Preview variants. Demonstrate three likes, a reset, and the independence of the two cards. Describe where each card's state is stored.

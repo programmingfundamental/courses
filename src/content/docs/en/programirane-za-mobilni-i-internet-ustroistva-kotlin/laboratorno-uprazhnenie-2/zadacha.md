@@ -1,44 +1,44 @@
 ---
-title: Задачи
+title: Tasks
 sidebar:
   order: 100
-  label: Задачи
+  label: Tasks
 taskPage: true
 ---
-## Задача 1
+## Task 1
 
-![Диаграма на Animal и наследниците Duck, Fish и Zebra](/courses/docs/BEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-2/image-1.png)
+![Diagram of Animal and its subclasses Duck, Fish, and Zebra](/courses/docs/BEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-2/image-1.png)
 
-## Задача 2
+## Task 2
 
-![Диаграма на BankAccount и наследниците CheckingAccount и SavingsAccount](/courses/docs/BEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-2/image-2.png)
+![Diagram of BankAccount and its subclasses CheckingAccount and SavingsAccount](/courses/docs/BEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-2/image-2.png)
 
-## Задача 3
+## Task 3
 
-![Диаграма на интерфейса Person и реализациите Professor и Student](/courses/docs/BEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-2/image.png)
+![Diagram of the Person interface and its implementations Professor and Student](/courses/docs/BEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-2/image.png)
 
-## Задачи за самостоятелна работа
+## Independent tasks
 
-Създайте конзолен модел на устройства. Използвайте фиктивни данни; не е необходим достъп до хардуер или мрежа.
+Create a console-based device model. Use mock data; no hardware or network access is required.
 
-### Задача 1. Капсулиране на състояние
+### Task 1. Encapsulating state
 
-Създайте клас `Device` с неизменяем идентификатор, име и булево състояние `isOn`, което се чете отвън, но се променя само чрез `turnOn()` и `turnOff()`. При създаване устройството да е изключено. Повторно включване или изключване да запазва същото състояние.
+Create a `Device` class with an immutable identifier, a name, and a Boolean `isOn` state that can be read externally but changed only through `turnOn()` and `turnOff()`. The device should be off when created. Repeatedly turning it on or off should preserve the same state.
 
-Създайте два обекта и покажете, че промяната на единия не променя другия.
+Create two objects and show that changing one does not change the other.
 
-### Задача 2. Наследяване и интерфейс
+### Task 2. Inheritance and an interface
 
-Разширете модела с `SmartLamp` и `TemperatureSensor`. Дефинирайте интерфейс `StatusProvider` с `status(): String` и го реализирайте в двата класа. Лампата да съобщава дали свети, а сензорът — зададена примерна температура, когато е включен, и „Изключен“, когато е изключен.
+Extend the model with `SmartLamp` and `TemperatureSensor`. Define a `StatusProvider` interface with `status(): String` and implement it in both classes. The lamp should report whether it is lit, while the sensor should report a preset sample temperature when on and "Off" when off.
 
-Обходете общ списък `List<StatusProvider>` и извикайте `status()` за всеки елемент, без проверки за конкретния клас.
+Iterate over a shared `List<StatusProvider>` and call `status()` for each element without checking its specific class.
 
-### Задача 3. Снимка на данните
+### Task 3. A data snapshot
 
-Създайте `data class DeviceSnapshot` със свойства `id`, `name` и `isOn`. Създайте снимка на устройство, променете устройството и покажете, че вече създадената снимка пази старите стойности.
+Create a `data class DeviceSnapshot` with `id`, `name`, and `isOn` properties. Create a snapshot of a device, change the device, and show that the existing snapshot retains the old values.
 
-Чрез `copy()` създайте снимка с променено име. Сравнете с `==` и `===` оригинала, копие без промени и копие с променено име. Обяснете резултатите.
+Use `copy()` to create a snapshot with a different name. Use `==` and `===` to compare the original, an unchanged copy, and a copy with a different name. Explain the results.
 
-### Проверка и предаване
+### Verification and submission
 
-Предайте класовете и демонстрация в `main()`. Проверете началното състояние, повторните операции, независимостта на обектите и резултатите от трите сравнения. Опишете кое поведение се осигурява от наследяването и кое — от интерфейса.
+Submit the classes and a demonstration in `main()`. Check the initial state, repeated operations, object independence, and the results of the three comparisons. Describe which behavior is provided by inheritance and which by the interface.

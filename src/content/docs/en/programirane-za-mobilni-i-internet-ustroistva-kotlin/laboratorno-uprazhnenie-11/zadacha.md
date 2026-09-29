@@ -1,34 +1,34 @@
 ---
-title: Задачи
+title: Tasks
 sidebar:
   order: 100
-  label: Задачи
+  label: Tasks
 taskPage: true
 ---
-## Обобщаващо упражнение: асинхронно зареждане на каталог
+## Review exercise: asynchronous catalog loading
 
-Приложете наученото за форми, състояние, списъци и корутини от упражнения 7, 9 и 10. Работете с локална симулация на зареждане, за да можете да възпроизвеждате еднакви резултати.
+Apply what you learned about forms, state, lists, and coroutines in Labs 7, 9, and 10. Use a local loading simulation so that you can reproduce the same results.
 
-## Задачи за самостоятелна работа
+## Independent tasks
 
-### Задача 1. Източник на данни
+### Task 1. Data source
 
-Създайте `data class CourseItem` с идентификатор, заглавие и кратко описание. Подгответе шест фиктивни учебни курса.
+Create a `data class CourseItem` with an identifier, a title, and a short description. Prepare six fictional courses.
 
-Реализирайте `suspend` функция, която изчаква 1500 ms чрез `delay()` и връща списъка. Добавете параметър за сценарий: успешно зареждане, празен списък или симулирана грешка. Избирайте сценария чрез UI преди зареждане.
+Implement a `suspend` function that waits 1500 ms using `delay()` and returns the list. Add a scenario parameter: successful loading, an empty list, or a simulated error. Select the scenario through the UI before loading.
 
-### Задача 2. Състояния на екрана
+### Task 2. Screen states
 
-Представете изрично състоянията „Начало“, „Зареждане“, „Данни“, „Празен резултат“ и „Грешка“, например чрез `sealed class`. При „Зареди“ стартирайте работата в обхват, свързан с композицията.
+Explicitly represent the "Initial", "Loading", "Data", "Empty result", and "Error" states, for example using a `sealed class`. When "Load" is pressed, start the work in a scope tied to the composition.
 
-Показвайте индикатор при изчакване, `LazyColumn` при успех, обяснение при празен резултат и съобщение с „Опитай отново“ при грешка. По време на зареждане блокирайте повторното стартиране и смяната на сценария.
+Show a loading indicator while waiting, a `LazyColumn` on success, an explanation for an empty result, and a message with "Try again" on error. Prevent restarting and changing the scenario while loading.
 
-### Задача 3. Отмяна и възстановяване
+### Task 3. Cancellation and recovery
 
-Добавете „Отказ“, който отменя текущото зареждане и връща началното състояние. След отказ не трябва да се показва закъснял резултат. Отмяната не трябва да се представя като грешка.
+Add "Cancel" to cancel the current loading operation and return to the initial state. No late result should appear after cancellation. Cancellation must not be presented as an error.
 
-Добавете възможност да скриете целия екран на каталога от родителската композиция. Проверете, че работата се отменя и при напускане на композицията. Ако обработвате общо изключенията, предайте `CancellationException` нататък.
+Add a way to hide the entire catalog screen from the parent composition. Check that work is also cancelled when leaving the composition. If you handle exceptions broadly, rethrow `CancellationException`.
 
-### Проверка и предаване
+### Verification and submission
 
-Предайте проекта и таблица с пет сценария: успех, празен резултат, грешка и успешен повторен опит, отказ преди 1500 ms и скриване по време на зареждане. При повторния опит сменете сценария на успешен. Посочете кой обект или Compose механизъм управлява жизнения обхват на корутината.
+Submit the project and a table covering five scenarios: success, an empty result, an error followed by a successful retry, cancellation before 1500 ms, and hiding the screen during loading. Switch to the successful scenario for the retry. State which object or Compose mechanism manages the coroutine's lifetime.

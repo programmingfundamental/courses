@@ -69,4 +69,4 @@ sidebar:
 
 При readiness 503 локалното внедряване възстановява предишния container. Проверяваме model_version от реален отговор, а не само успешна команда.
 
-Материали за примера: [начален проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/lab08-cicd/starter/README.md). [Подготовка и команди за общия проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/setup.md).
+Материали за примера: начален проект. Подготовка и команди за общия проект.

@@ -1,50 +1,50 @@
 ---
-title: Лабораторно упражнение 5
+title: Lab 5
 sidebar:
   order: 5
 ---
 
-# Лабораторно упражнение 5
+# Lab 5
 
-## Построяване на потребителски интерфейс
+## Building a user interface
 
-Потребителският интерфейс (UI) включва текстове, изображения, бутони, полета за въвеждане и тяхното разположение на екрана. Чрез него приложението представя информация и приема действия от потребителя.
+The user interface (UI) includes text, images, buttons, input fields, and their arrangement on the screen. It allows the application to present information and receive user actions.
 
-![Варианти на активни бутони](/courses/docs/BEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/image.png)
+![Enabled button variants](/courses/docs/BEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/image.png)
 
-![Подсказка с описание и действие](/courses/docs/BEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/image-1.png)
+![Tooltip with a description and an action](/courses/docs/BEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/image-1.png)
 
-![Полета за въвеждане с плътен фон и с контур](/courses/docs/BEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/image-2.png)
+![Filled and outlined input fields](/courses/docs/BEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/image-2.png)
 
-Елементите могат да бъдат интерактивни, например бутон и поле за въвеждане, или да представят информация, например текст и изображение.
+Elements can be interactive, such as buttons and input fields, or present information, such as text and images.
 
 ## Jetpack Compose
 
-Jetpack Compose е инструментариум за декларативно изграждане на Android интерфейси с Kotlin. Интерфейсът се описва чрез композируеми функции (`@Composable`), които използват входните данни и текущото състояние.
+Jetpack Compose is a toolkit for declaratively building Android interfaces with Kotlin. The interface is described through composable functions (`@Composable`) that use input data and the current state.
 
-## Композируеми функции
+## Composable functions
 
-Анотацията `@Composable` позволява на функцията да участва в композицията. Функциите, които описват UI, обикновено връщат `Unit` и извикват други композируеми функции, например `Text`, `Image` и `Button`. Не всяка функция с `@Composable` непременно създава видим елемент.
+The `@Composable` annotation allows a function to participate in composition. Functions that describe UI usually return `Unit` and call other composable functions, such as `Text`, `Image`, and `Button`. Not every function marked `@Composable` necessarily creates a visible element.
 
-Композицията е описанието на интерфейса, което Compose изгражда при изпълнение на тези функции. Рекомпозицията е повторно изпълнение на засегнати части, когато входните данни или наблюдаваното състояние се променят.
+The composition is the description of the interface that Compose builds when these functions run. Recomposition reruns affected parts when input data or observed state changes.
 
-## Мерни единици
+## Units of measurement
 
-Независимите от плътността пиксели (`dp`) се използват за размери и отстояния. Мащабируемите пиксели (`sp`) се използват за размер на текста и отчитат настройката на потребителя за шрифта. В Kotlin стойностите се записват например като `16.dp` и `20.sp` чрез съответните импорти от `androidx.compose.ui.unit`.
+Density-independent pixels (`dp`) are used for sizes and spacing. Scalable pixels (`sp`) are used for text size and account for the user's font setting. In Kotlin, values are written as, for example, `16.dp` and `20.sp`, using the corresponding imports from `androidx.compose.ui.unit`.
 
-AndroidX е набор от библиотеки за Android. Compose API се използва чрез пакети като `androidx.compose.foundation`, `androidx.compose.material3` и `androidx.compose.ui`.
+AndroidX is a set of Android libraries. Compose APIs are used through packages such as `androidx.compose.foundation`, `androidx.compose.material3`, and `androidx.compose.ui`.
 
-## Йерархия на потребителския интерфейс
+## User interface hierarchy
 
-Оформлението се изгражда чрез вложени извиквания. Родителското оформление съдържа дъщерни елементи, които също могат да съдържат други елементи.
+A layout is built through nested calls. A parent layout contains child elements, which can also contain other elements.
 
-- `Column` подрежда елементите вертикално.
-- `Row` ги подрежда хоризонтално.
-- `Box` позволява наслагване и позициониране на елементи в обща област.
+- `Column` arranges elements vertically.
+- `Row` arranges them horizontally.
+- `Box` allows elements to overlap and be positioned within a shared area.
 
-![Вертикално подреждане с Column и хоризонтално подреждане с Row](/courses/docs/BEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/image-3.png)
+![Vertical arrangement with Column and horizontal arrangement with Row](/courses/docs/BEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/image-3.png)
 
-Следните три фрагмента се поставят поотделно в тялото на композируема функция. За тях са необходими `import androidx.compose.foundation.layout.Row` и `import androidx.compose.material3.Text`.
+Place each of the following three snippets separately inside a composable function. They require `import androidx.compose.foundation.layout.Row` and `import androidx.compose.material3.Text`.
 
 ```kotlin
 Row {
@@ -53,11 +53,11 @@ Row {
 }
 ```
 
-![Два текстови елемента, подредени хоризонтално в Row](/courses/docs/BEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/image-4.png)
+![Two text elements arranged horizontally in a Row](/courses/docs/BEO/programirane-za-mobilni-i-internet-ustroistva-kotlin/laboratorno-uprazhnenie-5/image-4.png)
 
-Функции като `Row`, `Column` и `Box` приемат съдържание като ламбда израз. Когато последният аргумент е ламбда израз, той може да се запише след кръглите скоби във фигурни скоби `{ ... }` (trailing lambda). При липса на други аргументи кръглите скоби могат да се пропуснат.
+Functions such as `Row`, `Column`, and `Box` accept content as a lambda expression. When the last argument is a lambda expression, it can be written after the parentheses in braces `{ ... }` (a trailing lambda). If there are no other arguments, the parentheses can be omitted.
 
-Запис с именуван параметър `content`:
+Using the named `content` parameter:
 
 ```kotlin
 Row(
@@ -69,7 +69,7 @@ Row(
 )
 ```
 
-Равностоен запис с ламбда израз след скобите:
+Equivalent syntax with a trailing lambda:
 
 ```kotlin
 Row {
@@ -79,29 +79,29 @@ Row {
 }
 ```
 
-## Оформление и `Modifier`
+## Layout and `Modifier`
 
-`Modifier` задава характеристики като размер, вътрешни отстояния (`padding`), фон, позициониране и взаимодействие. Модификаторите се свързват във верига, чийто ред може да промени резултата. Някои са достъпни само в определен контекст, например `Modifier.align` в `Box`.
+`Modifier` specifies characteristics such as size, padding, background, positioning, and interaction. Modifiers are chained, and their order can change the result. Some are available only in a particular scope, such as `Modifier.align` inside a `Box`.
 
-Не всички свойства се задават чрез `Modifier`. `fontSize`, `lineHeight` и `textAlign` са параметри на `Text`. При `Column` подреждането се управлява чрез `verticalArrangement` и `horizontalAlignment`, а при `Row` — чрез `horizontalArrangement` и `verticalAlignment`.
+Not all properties are set through `Modifier`. `fontSize`, `lineHeight`, and `textAlign` are parameters of `Text`. In a `Column`, arrangement is controlled through `verticalArrangement` and `horizontalAlignment`; in a `Row`, through `horizontalArrangement` and `verticalAlignment`.
 
-## Обработка на потребителски взаимодействия
+## Handling user interactions
 
-Compose компонентите могат да показват визуална обратна връзка при взаимодействие. `Button` предоставя параметър `onClick`, в който се задава обработващата функция. Не е необходимо към бутона допълнително да се добавя `Modifier.clickable`.
+Compose components can provide visual feedback during interaction. `Button` provides an `onClick` parameter for specifying a handler function. There is no need to add `Modifier.clickable` to the button as well.
 
-`Modifier.clickable` се използва, когато друг подходящ елемент трябва да реагира на щракване. Така действието се описва чрез callback функция, без ръчно обработване на всяко докосване или натискане на клавиш.
+Use `Modifier.clickable` when another suitable element should respond to a click. This describes the action through a callback function without manually handling every touch or key press.
 
-## Ресурси на приложението
+## Application resources
 
-Ресурсите се съхраняват в `app/src/main/res`. **Resource Manager** служи за преглед и добавяне на ресурси и се отваря чрез **View > Tool Windows > Resource Manager**. При изграждане на проекта се генерират идентификатори в класа `R`, например `R.string.app_name`.
+Resources are stored in `app/src/main/res`. **Resource Manager** is used to view and add resources and is opened through **View > Tool Windows > Resource Manager**. Building the project generates identifiers in the `R` class, such as `R.string.app_name`.
 
-В Compose текстов ресурс се извлича чрез `stringResource()`, а подходящ графичен ресурс — чрез `painterResource()`. Съответните функции са в `androidx.compose.ui.res`. Графичният ресурс може да се подаде на `Image`.
+In Compose, use `stringResource()` to retrieve a text resource and `painterResource()` to retrieve a suitable graphics resource. These functions are in `androidx.compose.ui.res`. The graphics resource can be passed to `Image`.
 
-## Динамичен потребителски интерфейс
+## Dynamic user interfaces
 
-Обикновена локална променлива не става автоматично наблюдавано Compose състояние (`state`). `mutableStateOf()` създава наблюдавано състояние. Промяна на стойността му може да предизвика рекомпозиция на частите, които я прочитат.
+An ordinary local variable does not automatically become observable Compose state. `mutableStateOf()` creates observable state. Changing its value can trigger recomposition of the parts that read it.
 
-`remember` запазва стойността между рекомпозиции, докато съответната част е в композицията. Ламбда изразът, подаден на `remember`, създава първоначалната стойност; той не е обработчик, извикван при всяка промяна. Примерът показва брояч:
+`remember` retains a value across recompositions while the corresponding part remains in the composition. The lambda passed to `remember` creates the initial value; it is not a handler called on every change. This example shows a counter:
 
 ```kotlin
 import androidx.compose.material3.Button
@@ -116,9 +116,9 @@ import androidx.compose.runtime.setValue
 fun CounterButton() {
     var count by remember { mutableStateOf(0) }
     Button(onClick = { count++ }) {
-        Text("Брой натискания: $count")
+        Text("Click count: $count")
     }
 }
 ```
 
-`remember` сам по себе си не запазва стойността при пресъздаване на `Activity`.
+`remember` on its own does not retain the value when the `Activity` is recreated.

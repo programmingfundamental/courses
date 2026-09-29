@@ -1,66 +1,66 @@
 ---
-title: Задачи
+title: Tasks
 sidebar:
   order: 100
-  label: Задачи
+  label: Tasks
 taskPage: true
 ---
-Да се създаде регистрационна форма със следните полета:
+Create a registration form with the following fields:
 
-- име;
-- имейл;
-- парола;
-- потвърждение на паролата;
-- `Checkbox` за съгласие с условията за ползване.
+- name;
+- email;
+- password;
+- password confirmation;
+- a `Checkbox` for accepting the terms of use.
 
-## Изграждане на формата
+## Building the form
 
-1. За текстовите полета да се използва `OutlinedTextField` с етикети и `singleLine = true`.
-2. За имейла да се зададе `KeyboardOptions(keyboardType = KeyboardType.Email)`.
-3. За двете полета за парола да се използват `PasswordVisualTransformation()` и `KeyboardOptions(keyboardType = KeyboardType.Password)`.
-4. За името, имейла и отметката да се използва `rememberSaveable { mutableStateOf(...) }`. Тези стойности са подходящи за запазване на UI състояние при пресъздаване. Паролите да се пазят с `remember` и при пресъздаване да се въвеждат отново.
-5. Формата да се подреди чрез `Column`, `Spacer` и `Modifier.padding()`.
-6. Да се добави бутон „Регистрация“, чийто `onClick` проверява данните.
+1. Use `OutlinedTextField` for text fields, with labels and `singleLine = true`.
+2. Set `KeyboardOptions(keyboardType = KeyboardType.Email)` for the email field.
+3. Use `PasswordVisualTransformation()` and `KeyboardOptions(keyboardType = KeyboardType.Password)` for both password fields.
+4. Use `rememberSaveable { mutableStateOf(...) }` for the name, email, and checkbox. These values are suitable for saving UI state during recreation. Store passwords with `remember` and require them to be entered again after recreation.
+5. Arrange the form using `Column`, `Spacer`, and `Modifier.padding()`.
+6. Add a "Register" button whose `onClick` validates the data.
 
-## Проверки при регистрация
+## Registration checks
 
-Преди съобщение за успех да се провери дали:
+Before displaying a success message, check that:
 
-1. Всички текстови полета съдържат стойност, различна от празен низ или само празни знаци.
-2. Имейлът има подходящ формат. За локалната проверка може да се използва `android.util.Patterns.EMAIL_ADDRESS.matcher(email.trim()).matches()`. Тази проверка не доказва, че адресът съществува.
-3. Паролата и потвърждението съвпадат. Паролите да се сравняват така, както са въведени, без премахване на знаци от тях.
-4. Отметката за съгласие е поставена.
+1. All text fields contain a value other than an empty string or whitespace only.
+2. The email has a suitable format. For local validation, you can use `android.util.Patterns.EMAIL_ADDRESS.matcher(email.trim()).matches()`. This check does not prove that the address exists.
+3. The password and confirmation match. Compare passwords exactly as entered, without removing any characters.
+4. The acceptance checkbox is checked.
 
-При невалидни данни да се покаже `Toast` с конкретно съобщение за грешка. Съответното текстово поле може допълнително да се означи чрез `isError` и `supportingText`.
+For invalid data, show a `Toast` with a specific error message. The corresponding text field can also be marked using `isError` and `supportingText`.
 
-Само когато всички проверки са успешни, да се покаже съобщение „Регистрация успешна!“. При грешка да не се изпълнява клонът за успех. Задачата демонстрира проверка на данни във формата.
+Only when all checks pass should you display "Registration successful!". Do not execute the success branch if an error occurs. This task demonstrates form data validation.
 
-## Проверка на резултата
+## Verifying the result
 
-Да се изпробват празна форма, невалиден имейл, различни пароли, непоставена отметка и напълно валидни данни. Да се провери дали всеки невалиден случай показва грешка и единствено валидният случай показва успех.
+Try an empty form, an invalid email, mismatched passwords, an unchecked checkbox, and fully valid data. Check that every invalid case displays an error and that only the valid case displays success.
 
-## Задачи за самостоятелна работа
+## Independent tasks
 
-Създайте форма „Записване за работилница“. Данните се обработват локално в приложението.
+Create a "Workshop Registration" form. Process the data locally in the application.
 
-### Задача 1. Полета и състояние
+### Task 1. Fields and state
 
-Добавете име, имейл, брой места, избор „Присъствено“ или „Онлайн“ чрез `RadioButton` и `Checkbox` за съгласие с условията.
+Add a name, email, number of places, a choice between "In person" and "Online" using `RadioButton`, and a `Checkbox` for accepting the terms.
 
-Използвайте етикети, подходяща клавиатура и `rememberSaveable` за въведените текстове и избори. Състоянието на полето за брой места да е текст, за да може да представя и временно празен вход.
+Use labels, an appropriate keyboard, and `rememberSaveable` for the entered text and selections. Store the number-of-places field as text so that it can also represent temporarily empty input.
 
-### Задача 2. Валидация при изпращане
+### Task 2. Validation on submission
 
-При „Записване“ проверете за непразно име, подходящ формат на имейла, цяло число места от 1 до 5 и поставена отметка. Използвайте безопасно преобразуване на числото. Поле с грешка да има `isError` и конкретен `supportingText`.
+When "Register" is pressed, check for a nonblank name, a suitable email format, an integer number of places from 1 to 5, and a checked checkbox. Use safe numeric conversion. A field with an error should have `isError` and specific `supportingText`.
 
-Покажете всички установени грешки при опита за изпращане. Само при валидни данни покажете обобщение с името, формата на участие и броя места.
+Display all detected errors on the submission attempt. Only with valid data should you show a summary containing the name, attendance format, and number of places.
 
-### Задача 3. Редактиране и изчистване
+### Task 3. Editing and clearing
 
-Добавете бутон „Изчистване“, който връща полетата и съобщенията в начално състояние. При редакция след успешна проверка скрийте предишното обобщение, докато данните не бъдат проверени отново.
+Add a "Clear" button that restores fields and messages to their initial state. When editing after successful validation, hide the previous summary until the data is validated again.
 
-Изнесете проверката на броя места в обикновена Kotlin функция, която може да се извика независимо от Compose.
+Move validation of the number of places into an ordinary Kotlin function that can be called independently of Compose.
 
-### Проверка и предаване
+### Verification and submission
 
-Предайте кода и таблица с резултати за празна форма, име само с интервали, невалиден имейл и брой места `""`, `"abc"`, `"0"`, `"1"`, `"5"`, `"6"`. Проверете липсващо съгласие, успешен запис, редакция и изчистване. При пресъздаване въведените стойности и избори трябва да се възстановят.
+Submit the code and a results table for an empty form, a name containing only spaces, an invalid email, and the following numbers of places: `""`, `"abc"`, `"0"`, `"1"`, `"5"`, `"6"`. Test missing acceptance, successful registration, editing, and clearing. Entered values and selections should be restored after recreation.

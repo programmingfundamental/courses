@@ -1,20 +1,20 @@
 ---
-title: Задачи
+title: Tasks
 sidebar:
   order: 100
-  label: Задачи
+  label: Tasks
 taskPage: true
 ---
-Да се създаде приложение, което показва изображения и текст чрез различни списъци и решетки в Jetpack Compose.
+Create an application that displays images and text using different lists and grids in Jetpack Compose.
 
-1. Да се добавят текстовите ресурси от предоставения файл `lab9_strings` в `app/src/main/res/values/strings.xml`.
-2. Изображенията от предоставения архив `lab9_images.zip` да се разархивират и добавят в `app/src/main/res/drawable`.
+1. Add the text resources from the supplied `lab9_strings` file to `app/src/main/res/values/strings.xml`.
+2. Extract the images from the supplied `lab9_images.zip` archive and add them to `app/src/main/res/drawable`.
 
-В хранилището не са налични `lab9_strings` и `lab9_images.zip` и няма предоставена връзка за изтегляне. За изпълнение с конкретните учебни ресурси е необходимо те да бъдат предоставени от преподавателя. Имената и съдържанието им не се предполагат.
+The repository does not contain `lab9_strings` or `lab9_images.zip`, and no download link is provided. To complete the exercise with these specific teaching resources, obtain them from the instructor. Do not assume their names or contents.
 
-## Модел и данни
+## Model and data
 
-3. Да се създаде клас за данни `Place` със следните свойства:
+3. Create a `Place` data class with the following properties:
 
 ```kotlin
 import androidx.annotation.DrawableRes
@@ -26,41 +26,41 @@ data class Place(
 )
 ```
 
-4. Да се създаде клас с метод `loadPlaces(): List<Place>`, който връща списък от обекти `Place`, свързващи текстовите ресурси с изображенията. Да се използват действителните идентификатори от генерирания клас `R`.
+4. Create a class with a `loadPlaces(): List<Place>` method that returns a list of `Place` objects linking text resources to images. Use the actual identifiers from the generated `R` class.
 
-## Композируеми функции
+## Composable functions
 
-5. Да се създаде функция `PlaceApp()` с `@Composable`, която получава списъка и показва избраното оформление. Функцията да се извика от `setContent`.
-6. Да се създаде функция `PlaceCard(place: Place, modifier: Modifier = Modifier)` с `@Composable`. В `Card` да се разположат `Image` и `Text`, като ресурсите се извлекат чрез `painterResource()` и `stringResource()`.
-7. Да се реализира `PlaceColumn(places: List<Place>, modifier: Modifier = Modifier)` с `@Composable`, която извиква `PlaceCard()` за всеки елемент в `LazyColumn` на **зелен фон**.
-8. Да се реализира `PlaceRow(places: List<Place>, modifier: Modifier = Modifier)` с `@Composable`, която извиква `PlaceCard()` за всеки елемент в `LazyRow` на **син фон**.
-9. Да се реализира `PlaceVerticalGrid(places: List<Place>, modifier: Modifier = Modifier)` с `@Composable`, която използва `LazyVerticalGrid` на **лилав фон**. Да се зададе `columns` чрез `GridCells.Fixed` или `GridCells.Adaptive`.
-10. Да се реализира `PlaceHorizontalGrid(places: List<Place>, modifier: Modifier = Modifier)` с `@Composable`, която използва `LazyHorizontalGrid` на **лилав фон**. Да се зададе `rows` и ограничена височина за хоризонталната решетка.
+5. Create a `PlaceApp()` function with `@Composable` that obtains the list and displays the selected layout. Call the function from `setContent`.
+6. Create `PlaceCard(place: Place, modifier: Modifier = Modifier)` with `@Composable`. Place an `Image` and a `Text` inside a `Card`, retrieving resources through `painterResource()` and `stringResource()`.
+7. Implement `PlaceColumn(places: List<Place>, modifier: Modifier = Modifier)` with `@Composable`, calling `PlaceCard()` for each item in a `LazyColumn` on a **green background**.
+8. Implement `PlaceRow(places: List<Place>, modifier: Modifier = Modifier)` with `@Composable`, calling `PlaceCard()` for each item in a `LazyRow` on a **blue background**.
+9. Implement `PlaceVerticalGrid(places: List<Place>, modifier: Modifier = Modifier)` with `@Composable`, using a `LazyVerticalGrid` on a **purple background**. Set `columns` through `GridCells.Fixed` or `GridCells.Adaptive`.
+10. Implement `PlaceHorizontalGrid(places: List<Place>, modifier: Modifier = Modifier)` with `@Composable`, using a `LazyHorizontalGrid` on a **purple background**. Set `rows` and a bounded height for the horizontal grid.
 
-Параметърът `modifier` да се приложи към кореновия елемент на съответната функция. Да се проверят четирите оформления поотделно. При използване на ресурсен идентификатор като `key` да се гарантира, че той е уникален за всяко място в списъка.
+Apply the `modifier` parameter to the root element of the corresponding function. Test the four layouts separately. When using a resource identifier as a `key`, ensure that it is unique for each place in the list.
 
-## Задачи за самостоятелна работа
+## Independent tasks
 
-Създайте каталог на места с поне 12 записа. Използвайте собствени текстове и локални изображения; един и същ графичен ресурс може да се използва за няколко записа.
+Create a catalog of places with at least 12 entries. Use your own text and local images; the same graphics resource can be used for multiple entries.
 
-### Задача 1. Данни и списък
+### Task 1. Data and a list
 
-Създайте модел с уникален `id`, име, категория и идентификатор на графичен ресурс. Подгответе записи в поне три категории, например „Парк“, „Музей“ и „Плаж“.
+Create a model with a unique `id`, name, category, and graphics resource identifier. Prepare entries in at least three categories, such as "Park", "Museum", and "Beach".
 
-Покажете ги чрез `LazyColumn` и отделна композируема функция за карта. Използвайте `id` като стабилен ключ; графичният ресурс не е идентификатор на записа.
+Display them using `LazyColumn` and a separate card composable. Use `id` as a stable key; the graphics resource is not the entry's identifier.
 
-### Задача 2. Търсене и филтриране
+### Task 2. Searching and filtering
 
-Добавете търсене по част от името без значение на регистъра и избор на категория, включително „Всички“. Двата филтъра да действат едновременно.
+Add a case-insensitive search by part of the name and category selection, including "All". Both filters should apply simultaneously.
 
-Покажете броя намерени места и съобщение при празен резултат. Изчистването на търсенето и изборът „Всички“ да възстановяват пълния списък.
+Display the number of places found and a message when the result is empty. Clearing the search and selecting "All" should restore the full list.
 
-### Задача 3. Решетка и любими места
+### Task 3. Grid and favorite places
 
-Добавете превключване между `LazyColumn` и `LazyVerticalGrid` и действие „Любимо“ за всеки запис. Пазете избраните идентификатори в общо за екрана наблюдавано състояние.
+Add switching between `LazyColumn` and `LazyVerticalGrid`, along with a "Favorite" action for each entry. Store the selected identifiers in observable state shared across the screen.
 
-Сортирайте местата по име и проверете дали отбелязаните любими остават свързани с правилните записи при сортиране, филтриране и смяна на оформлението.
+Sort places by name and check that favorites remain associated with the correct entries when sorting, filtering, and switching layouts.
 
-### Проверка и предаване
+### Verification and submission
 
-Предайте модела, примерните данни и UI кода. Проверете празно търсене, липсващо съвпадение и комбинация от двата филтъра. Отбележете място, скрийте го с филтър и го покажете отново — отметката трябва да се запази в текущия екран.
+Submit the model, sample data, and UI code. Test an empty search, no matching results, and a combination of both filters. Mark a place as a favorite, hide it with a filter, and show it again: the selection must be retained on the current screen.
