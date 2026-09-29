@@ -1,0 +1,15 @@
+[
+  {"number":1,"english":"Introduction to Software Engineering","file":"lab01-introduction/lab01.md"},
+  {"number":2,"english":"Software Lifecycle, Requirements, Specification, and UML Modeling","file":"semester/week02-specification/lab02.md","aliases":["lab02-lifecycle-processes/lab02.md","lab03-requirements/lab03.md"]},
+  {"number":3,"english":"Software Architecture and Architectural Styles","file":"semester/week03-architecture/lab03.md","aliases":["lab04-architecture/lab04.md"]},
+  {"number":4,"english":"Modularity, Code Quality Principles, and Design Patterns","file":"semester/week04-design/lab04.md","aliases":["lab05-modularity/lab05.md","lab06-design-patterns/lab06.md"]},
+  {"number":5,"english":"Assessment 1 — Requirements and Design","file":"semester/week05-assessment/lab05.md"},
+  {"number":6,"english":"Testing Software and AI Components","file":"semester/week06-testing/lab06.md","aliases":["lab07-testing/lab07.md"]},
+  {"number":7,"english":"Version Control, CI/CD, and Automation","file":"semester/week07-cicd/lab07.md","aliases":["lab08-cicd/lab08.md"]},
+  {"number":8,"english":"MLOps and Model and Data Management","file":"semester/week08-mlops/lab08.md","aliases":["lab09-mlops/lab09.md"]},
+  {"number":9,"english":"Assessment 2 — Testing, CI/CD, and MLOps","file":"semester/week09-assessment/lab09.md"},
+  {"number":10,"english":"Observability, Reliability, and Error Handling","file":"semester/week10-reliability/lab10.md","aliases":["lab10-observability/lab10.md"]},
+  {"number":11,"english":"Security, Ethics, Technical Debt, and Maintenance","file":"semester/week11-maintenance/lab11.md","aliases":["lab11-security-ethics-maintenance/lab11.md"]},
+  {"number":12,"english":"Assessment 3 — Reliability, Security, and Maintenance","file":"semester/week12-assessment/lab12.md"},
+  {"number":13,"english":"Comprehensive Assessment — Task Manager","file":"semester/week13-assessment/lab13.md"}
+]

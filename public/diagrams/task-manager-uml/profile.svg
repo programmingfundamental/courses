@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+<title id="title">Profile — разширение на UML метаклас — Task Manager</title><desc id="desc">Учебен UML пример на планираната система; обяснение и нотация в тема 2.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#17324d" stroke-width="1.5"/></marker><marker id="solid" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M1 1 L10 6 L1 11 Z" fill="#17324d"/></marker></defs>
+<style>text{font-family:Arial,sans-serif;font-size:16px;fill:#17324d;stroke:none}rect,ellipse,circle,polygon{fill:#fff;stroke:#17324d;stroke-width:1.6}line,polyline,path{stroke:#17324d;stroke-width:1.6} .note{font-size:14px;fill:#425b73}</style>
+<rect width="900" height="420" fill="#f5f8fc" stroke="none"/>
+<text x="30" y="35" font-size="22" font-weight="700">Profile — разширение на UML метаклас</text>
+<rect x="35" y="75" width="830" height="270" /><text x="58" y="105" >«profile» TaskManagerProfile</text><rect x="70" y="145" width="310" height="150" /><text x="225" y="172" text-anchor="middle" font-weight="600">«stereotype» ModelService</text><line x1="70" y1="185" x2="380" y2="185" /><text x="84" y="211" >modelVersion: String</text><text x="84" y="234" >{modelVersion not empty}</text><rect x="585" y="165" width="230" height="100" /><text x="700" y="191" text-anchor="middle" font-size="14">«metaclass»</text><text x="700" y="218" text-anchor="middle" font-weight="600">Component</text><line x1="380" y1="214" x2="585" y2="214" marker-end="url(#solid)"/><text x="451" y="195" >extension</text>
+<text x="30" y="402" class="note">Task Manager · UML · учебен проект</text>
+</svg>

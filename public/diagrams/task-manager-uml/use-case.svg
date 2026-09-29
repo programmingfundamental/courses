@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+<title id="title">Use Case — цели на потребителя — Task Manager</title><desc id="desc">Учебен UML пример на планираната система; обяснение и нотация в тема 2.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#17324d" stroke-width="1.5"/></marker><marker id="solid" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M1 1 L10 6 L1 11 Z" fill="#17324d"/></marker></defs>
+<style>text{font-family:Arial,sans-serif;font-size:16px;fill:#17324d;stroke:none}rect,ellipse,circle,polygon{fill:#fff;stroke:#17324d;stroke-width:1.6}line,polyline,path{stroke:#17324d;stroke-width:1.6} .note{font-size:14px;fill:#425b73}</style>
+<rect width="900" height="420" fill="#f5f8fc" stroke="none"/>
+<text x="30" y="35" font-size="22" font-weight="700">Use Case — цели на потребителя</text>
+<rect x="310" y="65" width="500" height="300" /><text x="335" y="95" >Task Manager</text><circle cx="135" cy="145" r="15" /><line x1="135" y1="160" x2="135" y2="210" /><line x1="105" y1="180" x2="165" y2="180" /><line x1="135" y1="210" x2="110" y2="245" /><line x1="135" y1="210" x2="160" y2="245" /><text x="135" y="275" text-anchor="middle">Потребител</text><line x1="165" y1="180" x2="385" y2="140" /><line x1="165" y1="180" x2="385" y2="230" /><line x1="165" y1="180" x2="385" y2="320" /><ellipse cx="540" cy="140" rx="155" ry="35"/><text x="540" y="146" text-anchor="middle">Създаване на задача</text><ellipse cx="540" cy="230" rx="155" ry="35"/><text x="540" y="236" text-anchor="middle">Получаване на предложение</text><ellipse cx="540" cy="320" rx="155" ry="35"/><text x="540" y="326" text-anchor="middle">Потвърждаване на категория</text>
+<text x="30" y="402" class="note">Task Manager · UML · учебен проект</text>
+</svg>

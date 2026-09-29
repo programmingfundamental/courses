@@ -53,16 +53,23 @@ for (const course of ['applied-web-security', 'software-engineering-ai']) {
     const home = readPage(`/courses/${locale}/`);
     assert.ok(home(`.course-year:has(#year-4) a[href="${url}"]`).length, `Missing fourth-year course: ${url}`);
     const overview = readPage(url);
-    for (let number = 1; number <= 11; number++) {
+    const softwareEngineering = course === 'software-engineering-ai';
+    const weekCount = softwareEngineering ? 13 : 11;
+    const assessmentWeeks = softwareEngineering ? new Set([5, 9, 12, 13]) : new Set();
+    for (let number = 1; number <= weekCount; number++) {
       const labUrl = `${url}laboratorno-uprazhnenie-${number}/`;
       assert.ok(overview(`a[href="${labUrl}"]`).length, `Missing lab link: ${labUrl}`);
       const lab = readPage(labUrl);
       assert.ok(lab(`nav.sidebar a[href="${labUrl}zadachi/"]`).length, `Missing task link: ${labUrl}`);
       if (locale === 'bg') {
         const labText = lab('[data-pagefind-body]').text();
-        assert.ok(labText.includes('Теория'), `Missing lab material: ${labUrl}`);
+        const materialHeading = assessmentWeeks.has(number) ? 'Обхват и организация' : 'Теория';
+        assert.ok(labText.includes(materialHeading), `Missing lab material: ${labUrl}`);
         const tasksText = readPage(`${labUrl}zadachi/`)('[data-pagefind-body]').text();
         assert.ok(tasksText.includes('Самостоятелни задачи'), `Missing practical tasks: ${labUrl}`);
+        if (assessmentWeeks.has(number)) {
+          assert.ok(tasksText.includes('100 точки'), `Missing assessment criteria: ${labUrl}`);
+        }
         assert.ok(labText.includes('Примерен проблем'), `Missing worked example: ${labUrl}`);
         assert.ok(!/Въпроси за анализ|Checklist|Стъпки за решаване|Примерен проблем/.test(tasksText), `Non-assignment material in tasks: ${labUrl}`);
         assert.ok(!fs.existsSync(`dist/${locale}/${course}/laboratorno-uprazhnenie-${number}/hint`), `Published hints: ${labUrl}`);

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+<title id="title">Composite Structure — вътрешни части — Task Manager</title><desc id="desc">Учебен UML пример на планираната система; обяснение и нотация в тема 2.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#17324d" stroke-width="1.5"/></marker><marker id="solid" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M1 1 L10 6 L1 11 Z" fill="#17324d"/></marker></defs>
+<style>text{font-family:Arial,sans-serif;font-size:16px;fill:#17324d;stroke:none}rect,ellipse,circle,polygon{fill:#fff;stroke:#17324d;stroke-width:1.6}line,polyline,path{stroke:#17324d;stroke-width:1.6} .note{font-size:14px;fill:#425b73}</style>
+<rect width="900" height="420" fill="#f5f8fc" stroke="none"/>
+<text x="30" y="35" font-size="22" font-weight="700">Composite Structure — вътрешни части</text>
+<rect x="70" y="80" width="760" height="260" /><text x="95" y="110" >CategoryFacade</text><rect x="62" y="172" width="16" height="16" /><text x="38" y="158" >input</text><rect x="160" y="145" width="240" height="85" /><text x="280" y="172" text-anchor="middle" font-weight="600">validator:Validator</text><rect x="530" y="145" width="235" height="85" /><text x="647.5" y="172" text-anchor="middle" font-weight="600">predictor:Predictor</text><line x1="78" y1="180" x2="160" y2="180" /><line x1="400" y1="180" x2="530" y2="180" /><text x="430" y="166" >text</text>
+<text x="30" y="402" class="note">Task Manager · UML · учебен проект</text>
+</svg>

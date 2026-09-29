@@ -6,19 +6,35 @@ sidebar:
 
 # Софтуерно инженерство за AI системи
 
-Курсът включва единадесет упражнения за проектиране, разработване, тестване и поддръжка на системи с изкуствен интелект. Всяко упражнение съдържа теория с примери, примерен проблем със стъпки за решаване и отделна страница със самостоятелни задачи.
+Курсът е разпределен в **13 седмици: 9 занятия за учебен материал и 4 контролни**. Тема 1 вече е проведена и е запазена. От седмица 2 упражненията надграждат последователно **Task Manager** с компонент за предлагане на категория по заглавието и описанието на задача. Потребителят потвърждава категорията; основните операции остават достъпни при отказ на AI компонента.
+
+Всяка учебна тема следва структурата **теория с примери → примерен проблем със стъпки → самостоятелни задачи**. Контролните съдържат обхват, пример за подготовка, задания и критерии за оценяване; не въвеждат нов материал.
 
 ## Упражнения
 
-- [Упражнение 1 — Въведение в Софтуерното инженерство](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-1/)
+- [Седмица 1 — Въведение в софтуерното инженерство — проведена](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-1/)
 
-- [Упражнение 2 — Софтуерен жизнен цикъл и инженерни процеси](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-2/)
-- [Упражнение 3 — Изисквания и спецификация на AI-базирани системи](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-3/)
-- [Упражнение 4 — Софтуерна архитектура и архитектурни стилове](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-4/)
-- [Упражнение 5 — Модулност, слоеве и разделяне на отговорностите](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-5/)
-- [Упражнение 6 — Design Patterns и принципи за качествен код](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-6/)
-- [Упражнение 7 — Тестване на софтуер и AI компоненти](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-7/)
-- [Упражнение 8 — Version Control, CI/CD и автоматизация](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-8/)
-- [Упражнение 9 — MLOps и управление на модели и данни](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-9/)
-- [Упражнение 10 — Наблюдаемост, надеждност и управление на грешки](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-10/)
-- [Упражнение 11 — Сигурност, етика, технически дълг и поддръжка](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-11/)
+- [Седмица 2 — Софтуерен жизнен цикъл, изисквания и спецификация. UML моделиране](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-2/)
+- [Седмица 3 — Софтуерна архитектура и архитектурни стилове](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-3/)
+- [Седмица 4 — Модулност, принципи за качествен код и Design Patterns](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-4/)
+- [Седмица 5 — Контролно 1 — Изисквания и проектиране](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-5/)
+- [Седмица 6 — Тестване на софтуер и AI компоненти](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-6/)
+- [Седмица 7 — Version Control, CI/CD и автоматизация](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-7/)
+- [Седмица 8 — MLOps и управление на модели и данни](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-8/)
+- [Седмица 9 — Контролно 2 — Тестване, CI/CD и MLOps](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-9/)
+- [Седмица 10 — Наблюдаемост, надеждност и управление на грешки](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-10/)
+- [Седмица 11 — Сигурност, етика, технически дълг и поддръжка](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-11/)
+- [Седмица 12 — Контролно 3 — Надеждност, сигурност и поддръжка](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-12/)
+- [Седмица 13 — Обобщаващо контролно — Task Manager](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-13/)
+
+## Общ проект и последователност
+
+Използвайте [началния Task Manager](/courses/downloads/task-manager-starter.zip) в отделно работно копие за тази дисциплина. Началните команди и разграничението между налични и планирани функции са в тема 2. Не е нужно да сте завършили курса по Уеб сигурност. Не пренасяйте неговата номерация или ограничения върху автоматизираните тестове.
+
+В седмица 2 се изготвят спецификация и UML модели; в седмица 3 — архитектурното решение; в седмица 4 се реализират статуси, потвърдена категория и заменяем категоризатор с учебна реализация по правила. Седмица 6 въвежда тестове и първи обучен текстов модел; седмици 7–8 добавят CI/CD и управление на версиите. Седмици 10–11 надграждат надеждността и защитата. Контролните използват достигнатата версия.
+
+## UML и предаване
+
+**Всички 14 UML диаграми се въвеждат само в тема 2:** Class, Object, Package, Component, Composite Structure, Deployment, Profile, Use Case, Activity, State Machine, Sequence, Communication, Interaction Overview и Timing. Диаграмите на взаимодействие са подгрупа на поведенческите. След това моделите се използват и актуализират, без повторно преподаване на нотацията.
+
+Предавайте код, редактируеми диаграми, спецификация, версии и действителни резултати от проверките. След всяка тема запазвайте commit и протокол: промяна → изискване → проверка → резултат → ограничение.
