@@ -20,8 +20,6 @@ export default defineConfig({
     logo: { src: './src/assets/java-tu-varna.svg', alt: 'Java × TU Varna' },
     defaultLocale: 'bg',
     locales: { bg: { label: 'Български', lang: 'bg' }, en: { label: 'English', lang: 'en' } },
-    editLink: { baseUrl: 'https://github.com/programmingfundamental/courses/edit/main/' },
-    social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/programmingfundamental/courses' }],
     customCss: ['./src/styles/custom.css'],
     routeMiddleware: './src/route-middleware.ts',
     components: { LanguageSelect: './src/components/LanguageSelect.astro', MarkdownContent: './src/components/MarkdownContent.astro', PageTitle: './src/components/PageTitle.astro' },

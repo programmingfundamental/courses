@@ -69,4 +69,4 @@ API тестът проверява крайна probability между 0 и 1 �
 
 Въвеждаме mutation с разменени признаци. Очакваме red, възстановяваме кода и очакваме green; записваме действителните резултати.
 
-Материали за примера: [начален проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/lab07-testing/starter/README.md). [Подготовка и команди за общия проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/setup.md).
+Материали за примера: начален проект. Подготовка и команди за общия проект.

@@ -69,4 +69,4 @@ sidebar:
 
 Runbook описва хипотеза, измерване, действие, отговорник и критерий за успех. Решението за rollback използва сравними резултати и допустима предишна версия.
 
-Материали за примера: [начален проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/lab10-observability/starter/README.md). [Подготовка и команди за общия проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/setup.md).
+Материали за примера: начален проект. Подготовка и команди за общия проект.

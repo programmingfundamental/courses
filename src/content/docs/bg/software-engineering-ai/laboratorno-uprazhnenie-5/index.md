@@ -69,4 +69,4 @@ Fake repository връща предварително зададен модел.
 
 Integration test зарежда от FileRepository и проверява същия договор. Двете реализации връщат еднакъв вид грешка за липсваща версия.
 
-Материали за примера: [начален проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/lab05-modularity/starter/README.md). [Подготовка и команди за общия проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/setup.md).
+Материали за примера: начален проект. Подготовка и команди за общия проект.

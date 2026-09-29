@@ -66,4 +66,4 @@ Pipeline съдържа преобразуването и модела. fit из
 
 Добавяме реализация чрез нов запис в регистъра и изпълняваме общите договорни тестове. Управлението на обучението остава същото.
 
-Материали за примера: [начален проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/lab06-design-patterns/starter/README.md). [Подготовка и команди за общия проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/setup.md).
+Материали за примера: начален проект. Подготовка и команди за общия проект.

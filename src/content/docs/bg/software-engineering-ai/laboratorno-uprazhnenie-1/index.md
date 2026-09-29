@@ -62,4 +62,4 @@ sidebar:
 
 Към версията прилагаме инструкции, примерните входове и резултатите от проверките. Друг човек повтаря изпълнението; пропуск в инструкциите става конкретна промяна за следваща версия.
 
-Използвайте [работния лист](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/lab01-introduction/starter/README.md). Следващото [упражнение 2](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-2/) развива жизнения цикъл и планирането на проекта.
+Използвайте работния лист. Следващото [упражнение 2](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-2/) развива жизнения цикъл и планирането на проекта.

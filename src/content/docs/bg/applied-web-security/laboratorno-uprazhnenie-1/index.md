@@ -38,7 +38,7 @@ sidebar:
 
 ## 2. Подготовка
 
-Използваме Task Manager като пример за приложение с потребители и задачи. За това въведение е достатъчен [работният лист](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/lab01-introduction/resources/README.md); не е необходимо стартиране на проекта. Подробната подготовка на средата е в [упражнение 2](/courses/bg/applied-web-security/laboratorno-uprazhnenie-2/).
+Използваме Task Manager като пример за приложение с потребители и задачи. За това въведение е достатъчен работният лист; не е необходимо стартиране на проекта. Подробната подготовка на средата е в [упражнение 2](/courses/bg/applied-web-security/laboratorno-uprazhnenie-2/).
 
 ## 3. Примерен проблем
 

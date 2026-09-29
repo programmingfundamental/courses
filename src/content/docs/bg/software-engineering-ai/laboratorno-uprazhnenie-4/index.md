@@ -69,4 +69,4 @@ sidebar:
 
 ADR избира вграден модел за текущия малък проект, описва цената на отделна услуга и условие за преразглеждане: необходимост от независимо мащабиране.
 
-Материали за примера: [начален проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/lab04-architecture/starter/README.md). [Подготовка и команди за общия проект](https://github.com/programmingfundamental/courses/blob/main/course-materials/software-engineering-ai/setup.md).
+Материали за примера: начален проект. Подготовка и команди за общия проект.

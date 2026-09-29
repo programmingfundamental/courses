@@ -49,9 +49,9 @@ Java, Spring Boot, HTTP, JPA и Task Manager от lab11. Продължете с
 
 След упражнение 7. Включва се CSRF за съществуващата сесийна верига и се добавя HTML форма. До упражнение 10 POST/PATCH/DELETE с Bearer също изискват CSRF в тази обща верига.
 
-Използвайте [Task Manager](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/task-manager/README.md) и [подготовката](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/setup.md). Всички Maven/Compose команди се изпълняват от task-manager. Работните Java класове са в src/main/java/bg/tu_varna/sit/task_manager; тестовете — в съответния src/test/java package.
+Използвайте Task Manager и подготовката. Всички Maven/Compose команди се изпълняват от task-manager. Работните Java класове са в src/main/java/bg/tu_varna/sit/task_manager; тестовете — в съответния src/test/java package.
 
-**Файлове за работа:** SecurityConfig, AuthController/AuthService, нов GET /auth/csrf, TaskPageController. [Архитектурната карта](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md) показва кои маршрути съществуват в началото и кои се добавят последователно.
+**Файлове за работа:** SecurityConfig, AuthController/AuthService, нов GET /auth/csrf, TaskPageController. Архитектурната карта показва кои маршрути съществуват в началото и кои се добавят последователно.
 
 JDK 17+, Maven 3.9+ или Maven Wrapper, Docker Compose и браузър са достатъчни. Преди промяна изпълнете mvn test; след промяната повторете съответните тестове и PostgreSQL профила. Новите класове/маршрути, описани като надграждане, се реализират в това упражнение.
 

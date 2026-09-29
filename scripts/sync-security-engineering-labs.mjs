@@ -60,9 +60,16 @@ for (const [index, course] of courses.entries()) {
         if (!fs.existsSync(target)) throw new Error(`Missing resource ${node.url} in ${file}`);
         const repoPath = path.relative(root, target).replaceAll('\\', '/');
         if (repoPath.startsWith('../')) throw new Error(`Resource outside repository: ${node.url}`);
-        const url = (routes.get(target) || `https://github.com/programmingfundamental/courses/blob/main/${repoPath.split('/').map(encodeURIComponent).join('/')}`) + (fragment ? `#${fragment}` : '');
         const start = node.position.start.offset;
         const end = node.position.end.offset;
+        const route = routes.get(target);
+        // Keep references to unpublished materials as text, without repository links.
+        if (!route) {
+          if (node.type !== 'link') throw new Error(`Unpublished resource must be an inline link: ${file}: ${node.url}`);
+          edits.push([start, end, plainText(node)]);
+          return;
+        }
+        const url = route + (fragment ? `#${fragment}` : '');
         const text = body.slice(start, end);
         const offset = node.type === 'definition' ? text.indexOf(node.url, text.indexOf(']:') + 2) : text.lastIndexOf(node.url);
         if (offset < 0) throw new Error(`Cannot rewrite link ${node.url}`);
