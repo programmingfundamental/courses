@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 /***
- * Добавено в лабораторно упражнение 9
+ * Добавено в лабораторно упражнение 10
  */
 @Getter
 @Entity

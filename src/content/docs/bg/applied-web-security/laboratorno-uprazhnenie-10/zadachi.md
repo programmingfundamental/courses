@@ -9,10 +9,10 @@ sidebar:
 ## Самостоятелни задачи
 
 
-### Задача 1 — Оценка на регистрация и промяна на задача
+### Задача 1 — Проверка на claims и ключове
 
-Предайте минимум три наблюдения за /auth/register и PATCH /tasks/{id}/update с Finding/Status, Risk, Evidence, Root Cause, Mitigation и Regression Test. Разграничете потвърден дефект, защитен случай и непроверена хипотеза. Добавете REGISTRATION_RESULT и TASK_UPDATE_RESULT audit events и нов тест, че credentials/tokens/private note не влизат в логовете. Поне един regression test трябва да е извън началния TaskManagerBaselineTest.
+Добавете отделни тестове за грешен подпис, изменен payload, друг iss/aud, липсващи exp/sub, празен sub, точно изтекъл token, изключен user и валидна сесия без Bearer. За claim случаите token е подписан с правилния ключ. Валидният token работи; USER token към admin-only ресурс получава 403. Проверете aud като списък.
 
-### Задача 2 — Проверка на обхвата
+### Задача 2 — Еднократен refresh token
 
-Разгледайте грешен profile/base URL, пропуснат PostgreSQL тест, debug logging и промяна на cookie behavior зад HTTPS proxy. Автоматизирайте поне две проверки и запишете коя част изисква реален браузър. Отчетът трябва да позволява друг човек да повтори същите команди.
+Променете refresh така, че старият token да се използва веднъж и да се замени с нов. Пазете SHA-256 digest в DB; raw token се връща само при издаване. Refresh и revoke са транзакционни, с конкурентен тест за един успех и един отказ. Проверете expiry boundary, disabled user, повторна употреба и logout. Опишете валидността на вече издадения access token след logout.

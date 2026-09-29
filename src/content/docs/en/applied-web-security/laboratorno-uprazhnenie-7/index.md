@@ -1,5 +1,5 @@
 ---
-title: "Lab 7 — CSRF, Cookies, and Browser Security"
+title: "Lab 7 — Cross-Site Scripting (XSS)"
 sidebar:
   order: 7
   label: "Lab 7"

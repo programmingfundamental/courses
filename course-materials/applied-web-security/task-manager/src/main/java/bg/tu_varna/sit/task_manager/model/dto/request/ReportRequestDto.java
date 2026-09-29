@@ -12,16 +12,16 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /***
- * Добавено в лабораторно упражнение 7
+ * Добавено в лабораторно упражнение 8
  */
 @NoArgsConstructor
 @Getter
 public class ReportRequestDto {
-    @NotBlank(message = "Content is required") //Добавено в лабораторно упражнение 8
-    @Size(min = 10, max = 2500, message = "Content must be at least 10 characters and no more than 2500") //Добавено в лабораторно упражнение 8
+    @NotBlank(message = "Content is required") //Добавено в лабораторно упражнение 9
+    @Size(min = 10, max = 2500, message = "Content must be at least 10 characters and no more than 2500") //Добавено в лабораторно упражнение 9
     private String content;
 
-    @NotNull(message = "WorkTime is required") //Добавено в лабораторно упражнение 8
-    @AfterMidnight //Добавено в лабораторно упражнение 8
+    @NotNull(message = "WorkTime is required") //Добавено в лабораторно упражнение 9
+    @AfterMidnight //Добавено в лабораторно упражнение 9
     private LocalTime workTime;
 }

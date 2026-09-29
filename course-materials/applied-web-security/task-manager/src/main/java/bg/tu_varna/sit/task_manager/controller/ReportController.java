@@ -21,9 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /***
- * Добавено в лабораторно упражнение 7
+ * Добавено в лабораторно упражнение 8
  */
-@Validated //Добавено в лабораторно упражнение 8
+@Validated //Добавено в лабораторно упражнение 9
 @RestController
 @RequestMapping("/reports")
 public class ReportController {
@@ -35,27 +35,27 @@ public class ReportController {
 
     @PostMapping("/task/{id}")
     public ResponseEntity<ReportResponseDto> create(@PathVariable(name = "id") long taskId, @Valid @RequestBody ReportRequestDto dto) throws ResourceNotFoundException {
-        ReportResponseDto result = service.create(taskId, dto);//Добавено в лабораторно упражнение 10
+        ReportResponseDto result = service.create(taskId, dto);//Добавено в лабораторно упражнение 11
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
     @GetMapping("/task/{id}")
     public ResponseEntity<List<ReportResponseDto>> getAllByTask(@PathVariable(name = "id") long taskId) throws ResourceNotFoundException {
-        return ResponseEntity.ok(service.getAll(taskId));//Добавено в лабораторно упражнение 10
+        return ResponseEntity.ok(service.getAll(taskId));//Добавено в лабораторно упражнение 11
     }
     @GetMapping("/{id}")
     public ResponseEntity<ReportResponseDto> get(@PathVariable Long id) throws ResourceNotFoundException {
-        return ResponseEntity.ok(service.getById(id));//Добавено в лабораторно упражнение 10
+        return ResponseEntity.ok(service.getById(id));//Добавено в лабораторно упражнение 11
     }
     @GetMapping()
     public ResponseEntity<List<ReportResponseDto>> getByWorkTimeInDateInterval(
-            @Valid @ModelAttribute FilterReportDto filter //Добавено в лабораторно упражнение 8
+            @Valid @ModelAttribute FilterReportDto filter //Добавено в лабораторно упражнение 9
     ) throws ResourceNotFoundException {
-        return ResponseEntity.ok(service.getReportsByWorkedTimeAndDateRange(filter));//Добавено в лабораторно упражнение 10
+        return ResponseEntity.ok(service.getReportsByWorkedTimeAndDateRange(filter));//Добавено в лабораторно упражнение 11
     }
 
     @GetMapping("/task/{id}/max-hours-worked")
     public ResponseEntity<ReportResponseDto> getByTaskWithMaxHoursWorked(@PathVariable(name = "id") long taskId) throws ResourceNotFoundException {
-        return ResponseEntity.ok(service.getReportWithMostWorkedTime(taskId));//Добавено в лабораторно упражнение 10
+        return ResponseEntity.ok(service.getReportWithMostWorkedTime(taskId));//Добавено в лабораторно упражнение 11
     }
 
     @GetMapping("/task/{taskId}/summary")
@@ -66,12 +66,12 @@ public class ReportController {
 
     @PutMapping("/{id}/update")
     public ResponseEntity<ReportResponseDto> update(@PathVariable Long id, @Valid @RequestBody ReportRequestDto dto) throws ResourceNotFoundException {
-        ReportResponseDto result = service.update(id, dto); // Добавено в лабораторно упражнение 9
-        return ResponseEntity.ok(result);  //Добавено в лабораторно упражнение 9
+        ReportResponseDto result = service.update(id, dto); // Добавено в лабораторно упражнение 10
+        return ResponseEntity.ok(result);  //Добавено в лабораторно упражнение 10
     }
     @DeleteMapping("/{id}/delete")
     public ResponseEntity<ReportResponseDto> delete(@PathVariable Long id) throws ResourceNotFoundException, RelatedEntityException {
-        ReportResponseDto result = service.delete(id); // Добавено в лабораторно упражнение 10
-        return ResponseEntity.ok(result);  //Добавено в лабораторно упражнение 10
+        ReportResponseDto result = service.delete(id); // Добавено в лабораторно упражнение 11
+        return ResponseEntity.ok(result);  //Добавено в лабораторно упражнение 11
     }
 }

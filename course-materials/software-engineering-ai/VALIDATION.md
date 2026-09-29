@@ -30,9 +30,9 @@
 
 ## Съдържателен review
 
-- Точно 10 теми следват progression от notebook/lifecycle до security/maintenance.
-- Всеки student файл има 16 раздела, 6 цели, guided checkpoint, отделна independent задача, tests, минимум 3 edge cases и 6 въпроса.
-- Всеки instructor файл има 15 раздела,100-точкова rubric, минимум 5 чести грешки и отговори за устна защита.
+- Курсът има 11 теми: въведение, последвано от жизнен цикъл, разработване и поддръжка на системата.
+- Всеки студентски файл започва с теория, съдържа примерен проблем с пет стъпки и три самостоятелни задачи. Генераторът отделя задачите в собствена страница.
+- Всеки lab има непубликуван hint.md. Въвеждащото упражнение има кратки преподавателски бележки; останалите запазват подробните си 15 раздела за оценяване и обсъждане.
 - Starter code използва малкия общ dataset и има TODO; JSON/YAML review fixtures са изрично означени като non-executable, а не представени за production code.
 - Същият AI Prediction Platform contract се развива през курса. Задачите са engineering задачи, а не hyperparameter/model competition.
 - Tracking е ограничен local functional equivalent на experiment tracking/registry; data versioning е Git+manifest. Не се твърди, че са инсталирани MLflow/DVC services.

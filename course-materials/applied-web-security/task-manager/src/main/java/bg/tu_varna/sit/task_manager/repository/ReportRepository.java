@@ -10,7 +10,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 /***
- * Добавено в лабораторно упражнение 9
+ * Добавено в лабораторно упражнение 10
  */
 public interface ReportRepository extends JpaRepository<Report, Long> {
     List<Report> findByTaskId(Long taskId);

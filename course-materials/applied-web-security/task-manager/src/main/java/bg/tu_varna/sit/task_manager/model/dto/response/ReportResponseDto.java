@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 /***
- * Добавено в лабораторно упражнение 7
+ * Добавено в лабораторно упражнение 8
  */
 @NoArgsConstructor
 @AllArgsConstructor

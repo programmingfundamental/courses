@@ -1,27 +1,27 @@
 ---
-title: "Упражнение 9 — JWT, отделен Bearer API и refresh rotation"
+title: "Упражнение 9 — Криптиране на поверителна бележка към задача"
 sidebar:
   order: 9
   label: "Упражнение 9"
 ---
 
-# Упражнение 9 — JWT, отделен Bearer API и refresh rotation
+# Упражнение 9 — Криптиране на поверителна бележка към задача
 
 ## 1. Теория
 
 
-### 1.1. Подпис, claims и отмяна
+### 1.1. Защита при съхранение и управление на ключове
 
-1. **JWT** има header, payload и signature; **Base64url** е кодиране; **claim** е твърдение. **HS256** подписва с общ таен ключ, **issuer/audience/subject/expiration** определят издател/получател/потребител/срок.
-   - JwtService вече проверява подпис чрез verifyWith и издава exp. Добавяме задължителни iss, aud, sub, exp и точен алгоритъм; не заменяме проверката с parsing.
-2. **Clock skew** допуска разлика между часовници; **replay** използва token повторно.
-   - Приетият договор е now<exp с нулев skew; кратък срок ограничава, но не забранява replay.
-3. **Stateless chain** не използва HttpSession; **Bearer** се подава изрично от клиента. **SecurityContextRepository** определя къде се пази context.
-   - /token-api/tasks приема само Bearer и няма session fallback; /tasks и /ui остават session API с CSRF.
-4. **Refresh rotation** обезсилва стар refresh token при издаване на нов; **revocation** го отменя; **digest** пази стойност за сравнение вместо raw token.
-   - RefreshTokenService в lab11 връща същия token. При rotation две едновременни употреби трябва да дадат точно един успех.
-5. **Key rotation** сменя signing key; **roles** в JWT са различни от актуални права в DB.
-   - Тук JwtAuthFilter зарежда UserDetails от DB, проверява enabled и използва текущите authorities. Logout отменя refresh/session; вече издаден access остава валиден до exp, освен ако добавим server-side revocation.
+1. **Hashing** е еднопосочен; **encryption** позволява възстановяване с ключ; **encoding** сменя представянето.
+   - Паролата остава BCrypt; поверителната бележка трябва да се чете от owner и използва криптиране. Base64 не осигурява поверителност.
+2. **AES-GCM** е authenticated encryption: пази поверителност и цялост. **Nonce/IV** е уникална за ключа стойност; **tag** доказва целостта.
+   - Използваме Java Cipher AES/GCM/NoPadding, 32-байтов ключ, случаен 12-байтов nonce и 128-битов tag.
+3. **AAD** са допълнителни удостоверени данни; **envelope** е форматът на записа.
+   - AAD=taskId:ownerId свързва бележката със задача и собственик. Envelope има версия, key ID, nonce и ciphertext с tag.
+4. **Key rotation** сменя ключ, **versioning** различава поколения, **migration** преобразува записи.
+   - Новите записи ползват текущ key ID, старите се четат с предишния до завършване на миграцията. Ключовете не се пазят заедно с DB backup.
+5. **Roundtrip** е encrypt→decrypt; **tampering** е промяна на ciphertext; **entropy** означава непредсказуемост.
+   - SecureRandom генерира ключ/nonce; при променен tag няма частичен plaintext. Компрометирано приложение с ключа остава извън тази гаранция.
 
 
 
@@ -47,24 +47,24 @@ Java, Spring Boot, HTTP, JPA и Task Manager от lab11. Продължете с
 
 ### Начален проект и надграждане
 
-След упражнение 8. Запазваме JJWT и HS256 от lab11; добавяме валидирани claims, Clock и отделна stateless верига /token-api/**. Refresh tokens се завъртат еднократно.
+След упражнение 8. Добавят се PUT/GET /tasks/{id}/private-note. Бележката не се включва в TaskResponseDto или HTML списъка.
 
 Използвайте [Task Manager](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/task-manager/README.md) и [подготовката](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/setup.md). Всички Maven/Compose команди се изпълняват от task-manager. Работните Java класове са в src/main/java/bg/tu_varna/sit/task_manager; тестовете — в съответния src/test/java package.
 
-**Файлове за работа:** JwtService, JwtAuthFilter, RefreshTokenService/Repository, SecurityConfig, нов TokenTaskController. [Архитектурната карта](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md) показва кои маршрути съществуват в началото и кои се добавят последователно.
+**Файлове за работа:** нов TaskSecretService/FieldCipher, Task.privateNoteCiphertext, TaskController, TaskPolicy. [Архитектурната карта](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md) показва кои маршрути съществуват в началото и кои се добавят последователно.
 
 JDK 17+, Maven 3.9+ или Maven Wrapper, Docker Compose и браузър са достатъчни. Преди промяна изпълнете mvn test; след промяната повторете съответните тестове и PostgreSQL профила. Новите класове/маршрути, описани като надграждане, се реализират в това упражнение.
 
 
 ## 3. Примерен проблем
 
-Затегнете JwtService и отделете Bearer достъпа до задачите от сесийната верига.
+Добавете поверителна бележка, която се възстановява само след TaskPolicy проверка и не се съхранява като plaintext.
 
 ### Стъпки за решаване
 
 
-1. Добавете Clock bean към JwtService. Издавайте issuer=task-manager, audience=task-manager-api, sub=username, exp=now+TTL и HS256. Секретът идва от конфигурацията, не от request.
-2. След cryptographic verification проверете algorithm=HS256, задължителни exp/sub/iss/aud и now<exp. Parse-вайте token веднъж за заявка. Invalid Bearer връща 401, включително ако клиентът има валидна сесия.
-3. JwtAuthFilter зарежда user, отказва disabled/unknown user, създава context с актуалните authorities. Изключете автоматичната servlet регистрация на filter bean, така че да работи само в избраната security chain.
-4. Добавете @Order(1) SecurityFilterChain за /token-api/**: STATELESS, NullSecurityContextRepository, CSRF disabled, без Basic/formLogin. @Order(2) запазва session/CSRF за останалото и не добавя JWT filter.
-5. TokenTaskController GET /token-api/tasks делегира на TaskService.getAll. USER вижда собствени задачи; ADMIN всички. JwtContractTest използва истински подписан token, не само mocked jwt()/user().
+1. Добавете nullable privateNoteCiphertext с достатъчен размер (например 4096) в Task. Не го добавяйте към общите DTO и HTML.
+2. Създайте FieldCipher с inject-нат 32-байтов ключ от Base64 файл. За всяко encrypt генерирайте nonce; AAD включва task ID и owner ID, не ID на четящия admin.
+3. TaskSecretService в транзакция зарежда Task, проверява TaskPolicy и извършва операцията. PUT body е JSON {"value":"..."}, 1–500 символа; успех=204. GET връща {"value":"..."}; без бележка=404. Чужда задача=404.
+4. Проверете DB: няма plaintext; два записа на един текст имат различен ciphertext. GET owner/admin възстановява стойността; bob не получава чуждата бележка.
+5. FieldCipherTest проверява roundtrip, wrong key/AAD, повреден и отрязан envelope. TaskSecretTest проверява policy и липса на бележката в GET /tasks и /ui/tasks.

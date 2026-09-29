@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 /***
- * Добавено в лабораторно упражнение 8
+ * Добавено в лабораторно упражнение 9
  */
 @Builder
 @Getter

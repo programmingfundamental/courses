@@ -40,9 +40,9 @@ $created = Invoke-RestMethod "$base/tasks" -Method Post -ContentType 'applicatio
 Invoke-RestMethod "$base/tasks/$($created.id)" -WebSession $taskSession
 ```
 
-Вземайте ID от отговора, вместо да предполагате, че alice притежава конкретно число. Началният Task няма owner; той се добавя в упражнение 3. GET /reports/** изисква ADMIN. При лабораторните тестове потребителите се създават във fixtures и не се използва тази работна база.
+Вземайте ID от отговора, вместо да предполагате, че alice притежава конкретно число. Началният Task няма owner; той се добавя в упражнение 4. GET /reports/** изисква ADMIN. При лабораторните тестове потребителите се създават във fixtures и не се използва тази работна база.
 
-## След упражнение 7 — CSRF клиент
+## След упражнение 8 — CSRF клиент
 
 След добавяне на GET /auth/csrf и token rotation заменете входа с:
 
@@ -56,16 +56,16 @@ $headers = @{}; $headers[$csrf.headerName] = $csrf.token
 # Всички session POST/PATCH/PUT/DELETE използват -WebSession $taskSession -Headers $headers.
 ```
 
-За нова регистрация след упражнение 7 първо вземете /auth/csrf и подайте същата сесия/headers с POST /auth/register. След logout изхвърлете session и tokens.
+За нова регистрация след упражнение 8 първо вземете /auth/csrf и подайте същата сесия/headers с POST /auth/register. След logout изхвърлете session и tokens.
 
-## След упражнение 9 — Bearer API
+## След упражнение 10 — Bearer API
 
 ```powershell
 $bearerHeaders = @{Authorization="Bearer $($auth.accessToken)"}
 Invoke-RestMethod "$base/token-api/tasks" -Headers $bearerHeaders
 ```
 
-/token-api/** съществува след упражнение 9 и използва отделна stateless chain. /tasks и /ui/** остават сесийни и CSRF-защитени. Refresh rotation връща нов accessToken и refreshToken; заменете старите стойности в клиента. Началният lab11 използва обща верига; не прилагайте договора на упражнение 9 към непроменения starter.
+/token-api/** съществува след упражнение 10 и използва отделна stateless chain. /tasks и /ui/** остават сесийни и CSRF-защитени. Refresh rotation връща нов accessToken и refreshToken; заменете старите стойности в клиента. Началният lab11 използва обща верига; не прилагайте договора на упражнение 10 към непроменения starter.
 
 ## Тестове и отчети
 
@@ -84,4 +84,4 @@ docker compose -f compose.test.yml down
 
 `docker compose down` спира проекта и запазва named volume. `docker compose down -v` изтрива единствено данните на този Compose проект; използвайте го само когато искате празна работна база. Преди това проверете project name web-security-task-manager и запазете нужните данни. Кодът, .env и файловете с ключове не се възстановяват чрез Docker reset.
 
-Ключът за private note се добавя в упражнение 8 и трябва да се пази между рестартиранията. Загубата му прави старите бележки нечетими. JWT_SECRET в .env също се запазва; рестарт със същия ключ не отменя сам по себе си access tokens.
+Ключът за private note се добавя в упражнение 9 и трябва да се пази между рестартиранията. Загубата му прави старите бележки нечетими. JWT_SECRET в .env също се запазва; рестарт със същия ключ не отменя сам по себе си access tokens.

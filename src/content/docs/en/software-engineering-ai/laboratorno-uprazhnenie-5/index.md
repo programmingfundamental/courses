@@ -1,5 +1,5 @@
 ---
-title: "Lab 5 — Design Patterns and Code Quality Principles"
+title: "Lab 5 — Modularity, Layers, and Separation of Responsibilities"
 sidebar:
   order: 5
   label: "Lab 5"

@@ -53,14 +53,14 @@ for (const course of ['applied-web-security', 'software-engineering-ai']) {
     const home = readPage(`/courses/${locale}/`);
     assert.ok(home(`.course-year:has(#year-4) a[href="${url}"]`).length, `Missing fourth-year course: ${url}`);
     const overview = readPage(url);
-    for (let number = 1; number <= 10; number++) {
+    for (let number = 1; number <= 11; number++) {
       const labUrl = `${url}laboratorno-uprazhnenie-${number}/`;
       assert.ok(overview(`a[href="${labUrl}"]`).length, `Missing lab link: ${labUrl}`);
       const lab = readPage(labUrl);
       assert.ok(lab(`nav.sidebar a[href="${labUrl}zadachi/"]`).length, `Missing task link: ${labUrl}`);
       if (locale === 'bg') {
         const labText = lab('[data-pagefind-body]').text();
-        assert.ok(labText.includes(course === 'software-engineering-ai' ? 'Теория' : 'Предварителни знания'), `Missing lab material: ${labUrl}`);
+        assert.ok(labText.includes('Теория'), `Missing lab material: ${labUrl}`);
         const tasksText = readPage(`${labUrl}zadachi/`)('[data-pagefind-body]').text();
         assert.ok(tasksText.includes('Самостоятелни задачи'), `Missing practical tasks: ${labUrl}`);
         assert.ok(labText.includes('Примерен проблем'), `Missing worked example: ${labUrl}`);

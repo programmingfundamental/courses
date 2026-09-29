@@ -9,10 +9,10 @@ sidebar:
 ## Самостоятелни задачи
 
 
-### Задача 1 — HTML форма за нова задача
+### Задача 1 — Външна референция към задача
 
-Добавете GET /ui/tasks/new с полета summary, description, deadline и hidden CSRF. POST /ui/tasks приема form data и делегира към същия TaskService.create. Добавете setters към TaskRequestDto за @ModelAttribute binding или отделен form DTO със същата валидация. Не копирайте repository логика. Успех=201; липсващ/чужд token=403 без INSERT. Owner е текущият потребител.
+Добавете незадължително referenceUrl към Task, TaskRequestDto и TaskResponseDto, до 2048 символа. Празно поле премахва връзката; приемат се само абсолютни http/https URL без userinfo; относителни, javascript: и data: се отказват с 400. В /ui/tasks изведете quoted href с encoding. Запазете owner policy при промяна. Сървърът не изтегля URL.
 
-### Задача 2 — Token и cookie граници
+### Задача 2 — Контексти и повторно кодиране
 
-Проверете стар token след login, стар session cookie след logout, same-site/cross-origin form и Secure cookie през HTTPS. Добавете автоматизирана проверка за token/session, а действителното изпращане на cookie проверете с браузър. Опишете защо 403 за POST без token не доказва правилна authentication policy.
+Проверете текст &lt;, кавички в URL, опасна scheme при правилно escaped attribute и CSP, която блокира script при липсващо encoding. Добавете поне два автоматизирани теста и една браузърна проверка. Невалиден URL не трябва да променя останалите полета на задачата.

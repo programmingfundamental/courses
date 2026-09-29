@@ -7,7 +7,7 @@ import bg.tu_varna.sit.task_manager.model.dto.response.TaskResponseDto;
 import java.util.List;
 
 /***
- * Добавено в лабораторно упражнение 9
+ * Добавено в лабораторно упражнение 10
  */
 public interface TaskService {
     TaskResponseDto create(TaskRequestDto dto);

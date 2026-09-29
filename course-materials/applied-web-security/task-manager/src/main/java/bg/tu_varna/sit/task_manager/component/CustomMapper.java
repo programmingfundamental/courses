@@ -11,7 +11,7 @@ import org.modelmapper.TypeToken;
 import java.util.List;
 
 /**
- * Добавено в лабораторно упражнение 9
+ * Добавено в лабораторно упражнение 10
  */
 @Component
 public class CustomMapper extends ModelMapper {

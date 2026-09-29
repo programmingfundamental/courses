@@ -1,27 +1,27 @@
 ---
-title: "Упражнение 5 — Безопасно търсене на задачи със Spring Data JPA"
+title: "Упражнение 5 — Ограничаване на опитите за вход"
 sidebar:
   order: 5
   label: "Упражнение 5"
 ---
 
-# Упражнение 5 — Безопасно търсене на задачи със Spring Data JPA
+# Упражнение 5 — Ограничаване на опитите за вход
 
 ## 1. Теория
 
 
-### 1.1. SQL/JPQL структура и входни стойности
+### 1.1. Опити, срокове и конкурентност
 
-1. **SQL Injection** възниква, когато вход става изпълним синтаксис. **Binding** подава стойност отделно от структурата; **placeholder** е място за параметър.
-   - `WHERE t.summary = :summary` с @Param обработва O'Reilly като текст. Конкатенация `"...='"+input+"'"` смесва данни и синтаксис.
-2. **JPA** работи с entities; **JPQL** използва имена на Java полета; **native query** изпълнява SQL към таблици.
-   - В JPQL owner е `t.owner.username`, а в SQL е join към users чрез owner_id. @Query сам по себе си не оправдава конкатенация.
-3. **LIKE wildcard** % съвпада с поредица, _ с един символ; **exact match** използва =.
-   - Search допуска wildcard семантика, но никога чужд owner; lookup намира точно summary, без шаблони.
-4. **Identifier** е име на колона/поле, **allowlist** допуска само избрани identifiers.
-   - sort=summary може да се съпостави с фиксирано поле. Bind параметър не замества SQL ORDER BY идентификатор.
-5. **Validation** ограничава размер и допустими стойности, **NUL** е нулев символ, **SQL dialect** са особености на DB.
-   - q над 100 символа или с NUL получава 400. Проверяваме и PostgreSQL; H2 не доказва всички особености на реалната база.
+1. **Brute force** изпробва кандидати; **credential stuffing** използва изтекли двойки име/парола; **account enumeration** различава съществуващи имена.
+   - Единен 401 не разкрива дали отказът е грешна парола или активна блокировка.
+2. **Rate limiting** ограничава честота; **lockout** временно отказва след праг; **throttling** забавя/ограничава приемането.
+   - При max=5 петият неуспех достига прага; следващият опит е отказан за 60 секунди от достигането му.
+3. **Clock injection** подава часовник като зависимост; **deterministic test** има повторим резултат без sleep.
+   - MutableClock се премества от t до t+60s и проверява изтичането точно на границата.
+4. **Atomic update** предотвратява загуба на конкурентни промени; **bounded storage** ограничава броя ключове.
+   - Два failures за alice трябва да увеличат броя с две. Измислени имена не трябва да растат безкрайно в map.
+5. **NAT** споделя IP; **cluster** има няколко app инстанции; **lockout DoS** блокира чужд профил чрез грешни опити.
+   - Account лимит се комбинира с общ праг; при cluster е нужно общо атомарно хранилище. X-Forwarded-For е доверен само от управляван proxy.
 
 
 
@@ -47,26 +47,24 @@ Java, Spring Boot, HTTP, JPA и Task Manager от lab11. Продължете с
 
 ### Начален проект и надграждане
 
-След упражнение 4. Добавя се търсене по summary; запазва се owner политиката от упражнение 3. Съществуващите JPA заявки не се заменят с конкатенация.
+След упражнение 4. Добавя се LoginAttemptService с configurable праг, срок и Clock. В AuthService остава задължителната проверка на credentials от упражнение 3.
 
 Използвайте [Task Manager](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/task-manager/README.md) и [подготовката](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/setup.md). Всички Maven/Compose команди се изпълняват от task-manager. Работните Java класове са в src/main/java/bg/tu_varna/sit/task_manager; тестовете — в съответния src/test/java package.
 
-**Файлове за работа:** TaskRepository, TaskService/TaskServiceImp, TaskController; нови /tasks/search и /tasks/lookup. [Архитектурната карта](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md) показва кои маршрути съществуват в началото и кои се добавят последователно.
+**Файлове за работа:** AuthService.login, нов LoginAttemptService, Clock bean, application.properties. [Архитектурната карта](https://github.com/programmingfundamental/courses/blob/main/course-materials/applied-web-security/architecture/system-overview.md) показва кои маршрути съществуват в началото и кои се добавят последователно.
 
 JDK 17+, Maven 3.9+ или Maven Wrapper, Docker Compose и браузър са достатъчни. Преди промяна изпълнете mvn test; след промяната повторете съответните тестове и PostgreSQL профила. Новите класове/маршрути, описани като надграждане, се реализират в това упражнение.
 
 
 ## 3. Примерен проблем
 
-Добавете GET /tasks/search?q= с параметризирана заявка, която връща само разрешените задачи.
+Добавете пет неуспешни опита и блокировка за 60 секунди към POST /auth/login, без блокираният опит да удължава срока.
 
 ### Стъпки за решаване
 
 
-1. Добавете search към TaskService и TaskController. q има defaultValue=""; дължина<=100 и без NUL. Новият literal маршрут /tasks/search се различава от /tasks/{id}.
-2. В TaskRepository използвайте JPQL с :q, :username и server-side :admin. Политиката е ADMIN всички, USER само t.owner.username=username.
-3. В service подайте principal и isAdmin от TaskPolicy, а не от query parameters. Mapping към TaskResponseDto остава в транзакция.
-4. Създайте задачи със summary „Бележки O'Reilly“ за alice и bob. Търсенето като alice трябва да върне само нейния запис.
-5. Добавете TaskSearchTest за нормален текст, апостроф, празно q, SQL-подобен текст, %, _, голям вход и NUL. Изпълнете H2 и PostgreSQL тестовете.
-
-Не очаквайте съществуващата findById заявка да е SQL injection. Оценяваме конструкцията на новата заявка и сравняваме параметризирания вариант с конкатениран SQL фрагмент в анализа.
+1. Добавете Clock.systemUTC() bean. LoginAttemptService пази failures и until за username и приема max=5, duration=PT60S, resetAfterSuccess=true.
+2. AuthService.login първо проверява blocked(name); при блокировка връща 401 без нов failure. Само AuthenticationException от authenticationManager увеличава брояча; DB/build грешки не са грешна парола.
+3. При успех изчистете брояча, после създайте сесия и tokens по упражнение 3. Ранният shortcut за authenticated user остава премахнат.
+4. Добавете LoginRateLimitTest през MockMvc: 5 грешни JSON login, после правилен → 401; след преместване на Clock с 60 секунди → 200.
+5. Проверете bob независимо от alice и еднакъв отказ за непознато име. Описвайте избраната политика за срок от първи/последен failure; тук срокът след блокировка е фиксиран.
