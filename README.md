@@ -65,6 +65,12 @@ Six legacy drafts are retained with `draft: true`; they are excluded from produc
 
 ## Adding a course
 
+Follow the repository-wide [course authoring rules](AGENTS.md) when creating or
+editing any course. Public pages contain student theory, implemented examples,
+and assignments. Course overviews contain two or three introductory sentences and
+the exercise list. Keep instructor metadata in an unpublished `hint.md` beside
+the course or lesson source.
+
 Create `src/content/docs/bg/<course>/index.md` (or `en` for English):
 
 ```yaml
@@ -106,12 +112,10 @@ references to unpublished supporting resources become text. Instructor notes are
 published as site pages. `npm run check` verifies that generated pages are current.
 
 Software Engineering uses `course-materials/software-engineering-ai/semester/schedule.json`
-as its active source map: week 1 is preserved, weeks 2–13 are authored under `semester/`,
-and assessments take place in weeks 5, 9, 12, and 13. Subsequent lessons build on a
-separate student copy of Task Manager. All 14 UML diagram types are introduced in
-week 2; editable SVG examples are generated with `node scripts/generate-task-manager-uml.mjs`.
-Older AI-platform materials remain available for reference but are not active lesson
-sources; see `course-materials/software-engineering-ai/semester/README.md`.
+as its active source map. Editable SVG examples are generated with
+`node scripts/generate-task-manager-uml.mjs`. Instructor guidance and the source
+organization are documented in `course-materials/software-engineering-ai/hint.md`
+and `course-materials/software-engineering-ai/semester/hint.md`.
 
 Applied Web Security uses the familiar Task Manager from lab11, copied under
 `course-materials/applied-web-security/task-manager/`. Labs build on each other;
