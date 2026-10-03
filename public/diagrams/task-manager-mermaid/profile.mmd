@@ -1,0 +1,9 @@
+flowchart LR
+    %% file: profile.mmd
+    subgraph PROFILE["profile: TaskManagerProfile"]
+        S["stereotype: ModelService<br/>modelVersion: String"]
+        C["metaclass: Component"]
+        S -->|extension| C
+        RULE["Ограничение: modelVersion не е празно"]
+        RULE -.- S
+    end

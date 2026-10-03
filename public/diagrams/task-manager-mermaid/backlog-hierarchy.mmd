@@ -1,0 +1,13 @@
+flowchart TD
+    %% file: backlog-hierarchy.mmd
+    E["Epic E-AI-01<br/>Подпомогнато категоризиране"]
+    S1["Story AI-01<br/>Предложение по правила<br/>и потвърждение"]
+    S2["Story AI-02<br/>Предложение от<br/>оценен модел"]
+    T1["Task AI-01b<br/>Договор и fixtures"]
+    T2["Task AI-01c<br/>Baseline по правила"]
+    T3["Task AI-01e<br/>Интегрирана проверка"]
+    E --> S1
+    E --> S2
+    S1 --> T1
+    S1 --> T2
+    S1 --> T3

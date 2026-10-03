@@ -1,0 +1,9 @@
+flowchart TD
+    %% file: interaction-overview.mmd
+    START(("Начало")) --> CREATE["ref: CreateTask"]
+    CREATE --> MODE{"Избор"}
+    MODE -->|предложение| SUGGEST["ref: SuggestCategory"]
+    MODE -->|ръчно| MERGE{"Сливане на алтернативите"}
+    SUGGEST --> MERGE
+    MERGE --> CONFIRM["ref: ConfirmCategory"]
+    CONFIRM --> FINISH(("Край"))

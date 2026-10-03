@@ -1,0 +1,10 @@
+flowchart TD
+    %% file: task-lifecycle.mmd
+    Todo["To Do<br/>Предстои"] -->|"Избрана работа<br/>с готови входове"| Active["In Progress<br/>В изпълнение"]
+    Active -->|"Пречка"| Blocked["Blocked<br/>Блокирана"]
+    Blocked -->|"Решена"| Active
+    Active -->|"Резултатът<br/>е проверен"| Review["Review<br/>Преглед"]
+    Review -->|"Изпълнени<br/>условия"| Done["Done<br/>Завършена"]
+    Review -->|"Нужна<br/>поправка"| Active
+    Done -->|"Открит<br/>пропуск"| Active
+    Todo -->|"Отпаднала<br/>работа"| Cancelled["Cancelled<br/>Отменена"]

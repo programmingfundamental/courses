@@ -1,0 +1,13 @@
+flowchart LR
+    %% file: deployment.mmd
+    subgraph JVM["Среда: JVM / Spring"]
+        APP["artifact: task-manager.jar"]
+    end
+    subgraph PY["Среда: Python / WSGI"]
+        MODEL["artifact: model-v1.joblib"]
+    end
+    subgraph PG["Среда: PostgreSQL"]
+        DB[("tasks schema")]
+    end
+    APP ---|HTTP| MODEL
+    APP ---|JDBC| DB

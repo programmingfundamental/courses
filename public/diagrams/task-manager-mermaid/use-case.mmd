@@ -1,0 +1,11 @@
+flowchart LR
+    %% file: use-case.mmd
+    USER["actor: Потребител"]
+    subgraph SYSTEM["Task Manager"]
+        CREATE(["Създаване на задача"])
+        SUGGEST(["Получаване на предложение"])
+        CONFIRM(["Потвърждаване на категория"])
+    end
+    USER --- CREATE
+    USER --- SUGGEST
+    USER --- CONFIRM

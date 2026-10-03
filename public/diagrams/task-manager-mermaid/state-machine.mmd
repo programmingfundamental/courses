@@ -1,0 +1,6 @@
+stateDiagram-v2
+    %% file: state-machine.mmd
+    [*] --> OPEN
+    OPEN --> IN_PROGRESS: start
+    IN_PROGRESS --> DONE: complete
+    DONE --> OPEN: reopen

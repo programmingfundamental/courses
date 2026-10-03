@@ -1,0 +1,4 @@
+flowchart LR
+    %% file: communication.mmd
+    UI[":UI"] -->|"1: suggest(taskId)"| API[":TaskAPI"]
+    API -->|"1.1: suggest(text)"| AI[":CategoryService"]

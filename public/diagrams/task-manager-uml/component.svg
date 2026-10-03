@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
-<title id="title">Component — части и договори — Task Manager</title><desc id="desc">Учебен UML пример на планираната система; обяснение и нотация в тема 2.</desc>
+<title id="title">Component — части и договори — Task Manager</title><desc id="desc">Учебен UML пример на планираната система; обяснение и нотация в упражнение 3.</desc>
 <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#17324d" stroke-width="1.5"/></marker><marker id="solid" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M1 1 L10 6 L1 11 Z" fill="#17324d"/></marker></defs>
 <style>text{font-family:Arial,sans-serif;font-size:16px;fill:#17324d;stroke:none}rect,ellipse,circle,polygon{fill:#fff;stroke:#17324d;stroke-width:1.6}line,polyline,path{stroke:#17324d;stroke-width:1.6} .note{font-size:14px;fill:#425b73}</style>
 <rect width="900" height="420" fill="#f5f8fc" stroke="none"/>

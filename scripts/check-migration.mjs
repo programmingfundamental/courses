@@ -54,8 +54,12 @@ for (const course of ['applied-web-security', 'software-engineering-ai']) {
     assert.ok(home(`.course-year:has(#year-4) a[href="${url}"]`).length, `Missing fourth-year course: ${url}`);
     const overview = readPage(url);
     const softwareEngineering = course === 'software-engineering-ai';
-    const weekCount = softwareEngineering ? 13 : 11;
-    const assessmentWeeks = softwareEngineering ? new Set([5, 9, 12, 13]) : new Set();
+    const weekCount = softwareEngineering ? 12 : 11;
+    const assessmentWeeks = softwareEngineering ? new Set([5, 9, 12]) : new Set();
+    const builtLabs = fs.readdirSync(`dist/${locale}/${course}`)
+      .filter(name => /^laboratorno-uprazhnenie-\d+$/.test(name))
+      .map(name => Number(name.match(/\d+$/)[0])).sort((a, b) => a - b);
+    assert.deepEqual(builtLabs, Array.from({ length: weekCount }, (_, index) => index + 1), `Unexpected published labs: ${url}`);
     for (let number = 1; number <= weekCount; number++) {
       const labUrl = `${url}laboratorno-uprazhnenie-${number}/`;
       assert.ok(overview(`a[href="${labUrl}"]`).length, `Missing lab link: ${labUrl}`);

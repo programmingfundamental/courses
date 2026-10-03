@@ -1,0 +1,9 @@
+flowchart LR
+    %% file: composite-structure.mmd
+    IN["Входен порт: suggest"]
+    subgraph F["CategoryFacade — съставна структура"]
+        V["validator:Validator"]
+        P["predictor:Predictor"]
+        V ---|text| P
+    end
+    IN --- V
