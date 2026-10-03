@@ -21,7 +21,7 @@ const diamond = (x, y) => `<polygon points="${x},${y - 22} ${x + 28},${y} ${x},$
 const ref = (x, y, w, label) => rect(x, y, w, 50) + poly(`${x},${y + 19} ${x + 39},${y + 19} ${x + 49},${y + 9} ${x + 49},${y}`) + text(x + 6, y + 14, 'ref', 'font-size="12"') + text(x + w / 2, y + 35, label, 'text-anchor="middle"');
 const save = (name, title, body, h = 420) => {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="900" height="${h}" viewBox="0 0 900 ${h}" role="img" aria-labelledby="title desc">
-<title id="title">${esc(title)} — Task Manager</title><desc id="desc">Учебен UML пример на планираната система; обяснение и нотация в тема 2.</desc>
+<title id="title">${esc(title)} — Task Manager</title><desc id="desc">Учебен UML пример на планираната система; обяснение и нотация в упражнение 3.</desc>
 <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#17324d" stroke-width="1.5"/></marker><marker id="solid" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M1 1 L10 6 L1 11 Z" fill="#17324d"/></marker></defs>
 <style>text{font-family:Arial,sans-serif;font-size:16px;fill:#17324d;stroke:none}rect,ellipse,circle,polygon{fill:#fff;stroke:#17324d;stroke-width:1.6}line,polyline,path{stroke:#17324d;stroke-width:1.6} .note{font-size:14px;fill:#425b73}</style>
 <rect width="900" height="${h}" fill="#f5f8fc" stroke="none"/>
@@ -37,7 +37,7 @@ save('class', 'Class — типове и асоциация',
   line(60, 242, 370, 242) + text(74, 278, '+ changeStatus(next): void') +
   box(575, 120, 250, 125, 'Report', ['- id: Long']) +
   line(370, 185, 575, 185) + text(389, 173, '1') + text(530, 173, '0..*') + text(444, 208, 'reports') +
-  text(60, 356, 'status и confirmedCategory се добавят в седмица 4.', 'class="note"'));
+  text(60, 356, 'status и confirmedCategory се добавят в упражнение 4.', 'class="note"'));
 
 save('object', 'Object — моментна снимка',
   box(60, 95, 320, 190, '', ['id = 42', 'summary = "Fix login validation"', 'status = IN_PROGRESS', 'confirmedCategory = BUG']) +

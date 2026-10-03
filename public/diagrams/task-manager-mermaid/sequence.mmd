@@ -1,0 +1,14 @@
+sequenceDiagram
+    %% file: sequence.mmd
+    participant UI as client:UI
+    participant API as api:TaskAPI
+    participant AI as ai:CategoryService
+    UI->>API: suggest(taskId)
+    activate API
+    API->>AI: suggest(text)
+    activate AI
+    AI-->>API: category, modelVersion
+    deactivate AI
+    Note over API: confirmedCategory остава непроменена
+    API-->>UI: Suggestion
+    deactivate API

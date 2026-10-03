@@ -1,0 +1,8 @@
+flowchart TD
+    %% file: activity.mmd
+    START(("Начало")) --> CHECK["Проверка на входа"]
+    CHECK --> VALID{"Валиден вход?"}
+    VALID -->|да| SAVE["Записване на задача"]
+    VALID -->|не| ERROR["Показване на грешки"]
+    SAVE --> FINISH(("Край"))
+    ERROR --> FINISH

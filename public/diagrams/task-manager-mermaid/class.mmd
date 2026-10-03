@@ -1,0 +1,13 @@
+classDiagram
+    %% file: class.mmd
+    class Task {
+        -Long id
+        -String summary
+        -TaskStatus status
+        -Category confirmedCategory
+        +changeStatus(TaskStatus next) void
+    }
+    class Report {
+        -Long id
+    }
+    Task "1" -- "0..*" Report : reports

@@ -1,0 +1,9 @@
+flowchart TD
+    %% file: story-lifecycle.mmd
+    Backlog["Backlog / Уточняване"] -->|"Ясни критерии и зависимости"| Ready["Ready / Готова за избор"]
+    Ready -->|"Избрана за спринта и започната"| Active["In Progress / В изпълнение"]
+    Active -->|"Реализиран общ сценарий"| Verify["Validation / Проверка"]
+    Verify -->|"Критерии и DoD са изпълнени"| Done["Done / Завършена"]
+    Verify -->|"Открит дефект"| Active
+    Ready -->|"Променени изисквания"| Backlog
+    Backlog -->|"Отпаднала потребност"| Removed["Removed / Отпаднала"]

@@ -112,8 +112,10 @@ references to unpublished supporting resources become text. Instructor notes are
 published as site pages. `npm run check` verifies that generated pages are current.
 
 Software Engineering uses `course-materials/software-engineering-ai/semester/schedule.json`
-as its active source map. Editable SVG examples are generated with
-`node scripts/generate-task-manager-uml.mjs`. Instructor guidance and the source
+as its active source map. Mermaid examples live in the lesson source; the course
+sync script also exports named blocks as downloadable `.mmd` files. UML notation
+reference SVGs are generated with `node scripts/generate-task-manager-uml.mjs`.
+Instructor guidance and the source
 organization are documented in `course-materials/software-engineering-ai/hint.md`
 and `course-materials/software-engineering-ai/semester/hint.md`.
 

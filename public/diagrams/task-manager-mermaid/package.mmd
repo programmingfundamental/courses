@@ -1,0 +1,5 @@
+flowchart LR
+    %% file: package.mmd
+    C["package: controller"] -.-> S["package: service"]
+    S -.-> D["package: domain"]
+    A["package: ai.adapter"] -.-> S

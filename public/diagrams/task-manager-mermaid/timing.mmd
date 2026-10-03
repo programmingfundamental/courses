@@ -1,0 +1,9 @@
+sequenceDiagram
+    %% file: timing.mmd
+    participant API as api:TaskAPI
+    participant AI as ai:CategoryService
+    Note over API: t = 0 ms, Idle → Waiting
+    API->>AI: suggest(text)
+    Note over API,AI: Няма отговор в общия бюджет 1500 ms
+    Note over API: t ≤ 1500 ms, Waiting → Fallback
+    Note over API: category = null, source = UNAVAILABLE

@@ -49,6 +49,29 @@ for (const [index, course] of courses.entries()) {
     return { number, file: path.join(sourceRoot, folder, `lab${String(number).padStart(2, '0')}.md`), route: `${course.id}/laboratorno-uprazhnenie-${number}` };
   });
   if (labs.length !== course.topics.length) throw new Error(`Expected ${course.topics.length} labs in ${course.id}`);
+  // The schedule also defines which generated lab pages must no longer exist.
+  if (schedule) {
+    const activeFolders = new Set(labs.map(lab => path.basename(lab.route)));
+    for (const locale of ['bg', 'en']) {
+      const catalog = path.join(root, 'src/content/docs', locale, course.id);
+      if (!fs.existsSync(catalog)) continue;
+      for (const entry of fs.readdirSync(catalog, { withFileTypes: true })) {
+        if (!entry.isDirectory() || !/^laboratorno-uprazhnenie-\d+$/.test(entry.name) || activeFolders.has(entry.name)) continue;
+        const target = path.join(catalog, entry.name);
+        const files = fs.readdirSync(target, { withFileTypes: true });
+        if (files.some(file => !file.isFile() || !['index.md', 'zadachi.md'].includes(file.name))) {
+          throw new Error(`Unexpected content in retired lab: ${target}`);
+        }
+        if (check) {
+          console.error(`Retired student lab still published: ${locale}/${course.id}/${entry.name}`);
+          stale++;
+        } else {
+          for (const file of files) fs.unlinkSync(path.join(target, file.name));
+          fs.rmdirSync(target);
+        }
+      }
+    }
+  }
   const routes = new Map(labs.map(lab => [lab.file, `/courses/bg/${lab.route}/`]));
   for (const lab of labs) {
     for (const alias of lab.aliases || []) routes.set(path.join(sourceRoot, alias), `/courses/bg/${lab.route}/`);
@@ -93,10 +116,29 @@ for (const [index, course] of courses.entries()) {
 
   write(`bg/${course.id}/index.md`, document(course.title, 16 + index, readStudentFile(path.join(sourceRoot, 'README.md'))));
   const englishLinks = labs.map(lab => `- [Lab ${lab.number} — ${course.topics[lab.number - 1]}](/courses/en/${lab.route}/)`).join('\n');
-  const overview = schedule ? 'This course covers the design, development, testing, and maintenance of software with AI components. In the labs, you will extend Task Manager using UML models, automated tests, and model versioning.' : `The course contains ${labs.length} labs on applied web security.`;
+  const overview = schedule ? 'This course covers the software lifecycle and Scrum teamwork for systems with AI components. As an AI engineer, you will extend Task Manager through requirements analysis, UML modeling, data preparation, model evaluation, deployment, and maintenance.' : `The course contains ${labs.length} labs on applied web security.`;
   write(`en/${course.id}/index.md`, document(course.english, 16 + index, `${overview} The teaching materials are available in Bulgarian via the language selector.\n\n## Labs\n\n${englishLinks}`));
   for (const lab of labs) {
     const body = readStudentFile(lab.file);
+    // Publish downloadable Mermaid source from the same blocks that the lesson renders.
+    // Only explicitly named examples are exported; teacher files are never scanned.
+    if (course.id === 'software-engineering-ai') {
+      for (const block of parse(body).children.filter(node => node.type === 'code' && node.lang === 'mermaid')) {
+        const name = block.value.match(/^\s*%% file: ([a-z0-9-]+\.mmd)\s*$/m)?.[1];
+        if (!name) continue;
+        const target = path.join(root, 'public/diagrams/task-manager-mermaid', name);
+        const expected = block.value.trim() + '\n';
+        const existing = fs.existsSync(target) ? fs.readFileSync(target, 'utf8').replaceAll('\r\n', '\n') : '';
+        if (existing === expected) continue;
+        if (check) {
+          console.error(`Outdated Mermaid source: ${name}`);
+          stale++;
+        } else {
+          fs.mkdirSync(path.dirname(target), { recursive: true });
+          fs.writeFileSync(target, expected);
+        }
+      }
+    }
     const headings = parse(body).children.filter(node => node.type === 'heading');
     const title = plainText(headings[0]).replace(/^1\. /, '');
     const boundary = headings.find(node => node.depth === 2 && plainText(node) === 'Самостоятелни задачи');
