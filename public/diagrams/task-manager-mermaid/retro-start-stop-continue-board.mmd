@@ -1,0 +1,17 @@
+flowchart TD
+    %% file: retro-start-stop-continue-board.mmd
+    subgraph Start["ЗАПОЧНИ"]
+        S["Запис с ID, правило,<br/>обосновка и версия"]
+    end
+    subgraph Stop["СПРИ"]
+        X["Решения за етикети<br/>само в чат"]
+    end
+    subgraph Continue["ПРОДЪЛЖИ"]
+        C["Съвместен преглед<br/>на спорните текстове"]
+    end
+    S --> Action["ДОГОВОРЕНО ДЕЙСТВИЕ<br/>Решението от прегледа се записва<br/>и влиза във версията на данните"]
+    X --> Action
+    C --> Action
+    style Start fill:#dcfce7,stroke:#15803d,color:#14532d
+    style Stop fill:#fee2e2,stroke:#b91c1c,color:#7f1d1d
+    style Continue fill:#dbeafe,stroke:#1d4ed8,color:#1e3a8a

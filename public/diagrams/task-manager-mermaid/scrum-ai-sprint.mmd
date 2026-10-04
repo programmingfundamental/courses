@@ -1,0 +1,15 @@
+flowchart TD
+    %% file: scrum-ai-sprint.mmd
+    Goal["Product Goal"] --> Backlog["Product Backlog<br/>Подреждане и refinement"]
+    Backlog --> Planning
+    subgraph Sprint["Един Sprint"]
+        Planning["Sprint Planning<br/>Цел и избор на работа"] --> Plan["Sprint Backlog<br/>Sprint Goal и план"]
+        Plan --> Work["Работа на Developers<br/>Анализ, проект, код и тестове<br/>в малки прирасти"]
+        Work <--> Daily["Daily Scrum<br/>Проверка и адаптация"]
+        AI["Принос на AI инженера<br/>Данни, модел и интеграция"] -.-> Work
+        Work --> Increment["Използваем Increment<br/>Покрива DoD"]
+        Increment --> Review["Sprint Review<br/>Обратна връзка"]
+        Review --> Retro["Sprint Retrospective<br/>Подобряване на работата"]
+    end
+    Review -.->|"Адаптация"| Backlog
+    Retro --> Next["Следващ Sprint<br/>Прилагане на подобрението"]

@@ -25,3 +25,26 @@
 „Платноходка“ и „Започни / Спри / Продължи“ са алтернативни формати; не изисквайте провеждане и на двете в едно ретро. Примерите са учебни модели на договорени действия, а не доказателство за реална промяна в работата. При задача 8 търсете връзка между наблюдение, избрана промяна, отговорник и проверка на ефекта, включително честно отчитане на частичен резултат или липса на случай за проверка.
 
 Не оценявайте студентите по броя положителни бележки или по липсата на критика. Насочвайте разговора към условия и работни практики, с участие на целия Scrum Team. Приносът на AI инженера трябва да се свързва с общата работа по данни, договори и проверим продукт. Гласуването избира теми за обсъждане и не отменя необходимостта да се разгледа сериозен риск.
+
+## Допълнителни диаграми
+
+Осемте допълнителни визуализации показват SDLC с обратна връзка, Waterfall и Scrum, спринта и AI приноса, проследимостта на изискванията, Planning Poker, оценките с плодове и двете ретро табла. С четирите съществуващи схеми за Epic/Story/Task упражнението съдържа общо 12 диаграми. Това са учебни схеми и графика за относителни оценки; формалното UML моделиране остава в упражнение 3. При графиката двете стойности за тиквата са алтернативни условия за една задача.
+
+## Редакционни източници
+
+Външните позовавания са преместени от студентската страница тук. Публичните връзки към редактора, редактируемите файлове и другите упражнения остават достъпни.
+
+В раздел 2.1 е добавена изрично поисканата връзка към [българския превод на Agile Manifesto](https://agilemanifesto.org/iso/bg/manifesto.html). Портретите представят трима от 17-те автори, без да задават класация по значимост. Приносът към срещите е проверен по [официалната история](https://agilemanifesto.org/history.html); авторството и книгите — по [страницата за авторите](https://agilemanifesto.org/authors.html) и [сайта на Кент Бек](https://kentbeck.com/).
+
+Снимките се съхраняват като статични ресурси в `public/images/agile-manifesto/` и са копирани без допълнителна промяна от Wikimedia Commons. Публичните надписи съдържат фотограф, налично изрязване от Commons и връзка към лиценза: Робърт Мартин — Angelacleancoder / PhotographyEdits, CC BY-SA 4.0; Мартин Фаулър — Ade Oshineye, CC BY 2.0; Кент Бек — Mulling it Over / Edward, CC BY-SA 2.0. Запазвайте тези обозначения при повторно използване.
+
+- [Agile принципи](https://agilemanifesto.org/principles.html)
+- [Scrum Guide — refinement и Sprint Planning](https://scrumguides.org/scrum-guide.html)
+- [Kanban Guide](https://kanbanguides.org/the-kanban-guide/)
+- [Scrum Guide — Sprint Retrospective](https://scrumguides.org/scrum-guide.html#sprint-retrospective)
+- [Примери за Epic и Story](https://www.atlassian.com/agile/project-management/epics-stories-themes)
+- [Azure Boards показва пример за процес със собствени статуси и преходи](https://learn.microsoft.com/en-us/azure/devops/boards/work-items/guidance/agile-process-workflow?view=azure-devops)
+- [Story points и относително оценяване — Atlassian](https://www.atlassian.com/agile/project-management/estimation)
+- [Planning Poker — Mountain Goat Software](https://www.mountaingoatsoftware.com/agile/story-points/planning-poker)
+- [Sailboat retrospective](https://www.atlassian.com/software/confluence/templates/sailboat-retrospective)
+- [Start / Stop / Continue](https://www.atlassian.com/software/confluence/templates/start-stop-continue)
