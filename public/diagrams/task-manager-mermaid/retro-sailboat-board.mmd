@@ -1,0 +1,14 @@
+flowchart TD
+    %% file: retro-sailboat-board.mmd
+    Wind["ВЯТЪР — помощ<br/>Общи синтетични<br/>примери и проверки"] -->|"Подпомага"| Boat["ЛОДКА — Scrum екип<br/>AI инженер, backend,<br/>Product Owner, Scrum Master"]
+    Anchor["КОТВА — пречка<br/>Две промени на API<br/>без общ пример"] -.->|"Забавя"| Boat
+    Boat -->|"Посока"| Island["ОСТРОВ — цел<br/>Предложение с отделно<br/>ръчно потвърждение"]
+    Rocks["СКАЛИ — риск<br/>Български текстове<br/>без проверени етикети"] -.->|"Застрашава напредъка"| Island
+    classDef help fill:#dcfce7,stroke:#15803d,color:#14532d
+    classDef obstacle fill:#fef3c7,stroke:#b45309,color:#78350f
+    classDef risk fill:#fee2e2,stroke:#b91c1c,color:#7f1d1d
+    classDef goal fill:#dbeafe,stroke:#1d4ed8,color:#1e3a8a
+    class Wind help
+    class Anchor obstacle
+    class Rocks risk
+    class Island goal

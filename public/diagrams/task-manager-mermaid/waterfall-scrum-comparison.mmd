@@ -1,0 +1,17 @@
+flowchart LR
+    %% file: waterfall-scrum-comparison.mmd
+    subgraph Waterfall["Waterfall — етапи"]
+        direction TB
+        W1["Изисквания"] --> W2["Проектиране"]
+        W2 --> W3["Реализация"]
+        W3 --> W4["Проверка"]
+        W4 --> W5["Внедряване"]
+    end
+    subgraph Scrum["Scrum — малки прирасти"]
+        direction TB
+        S1["Спринт 1<br/>Анализ, проект, код и тестове"] --> I1["Прираст 1<br/>Обратна връзка"]
+        I1 --> S2["Спринт 2<br/>Анализ, проект, код и тестове"]
+        S2 --> I2["Прираст 2<br/>Обратна връзка"]
+        I2 --> S3["Следващ спринт<br/>Адаптиран обхват"]
+    end
+    Waterfall ~~~ Scrum
