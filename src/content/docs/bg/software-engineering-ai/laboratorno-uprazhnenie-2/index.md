@@ -40,8 +40,6 @@ flowchart TD
     Operate -->|"Отпаднала потребност"| Retire["Извеждане от употреба<br/>Спиране и правила за данните"]
 ```
 
-[Редактируем файл — sdlc-feedback.mmd](/courses/diagrams/task-manager-mermaid/sdlc-feedback.mmd)
-
 Стрелките назад показват обратна връзка. Дейностите се повтарят при нова функционалност или проблем; една проверка може да върне екипа към реализацията или към уточняване на изискванията.
 
 ### 2. Методологии и подходи за управление на проект
@@ -59,7 +57,7 @@ Agile е подход, Scrum е рамка, а Waterfall е модел на пр
 
 #### 2.1. Agile Manifesto и трима от неговите автори
 
-Прочетете [Манифеста за Agile разработка на софтуер на български](https://agilemanifesto.org/iso/bg/manifesto.html). Той е създаден през февруари 2001 г. в Snowbird, САЩ, от 17 участници. Сред авторите и подписалите го са Робърт Сесил Мартин, Мартин Фаулър и Кент Бек.
+[Манифестът за Agile разработка на софтуер](https://agilemanifesto.org/iso/bg/manifesto.html) е създаден през февруари 2001 г. в Snowbird, САЩ, от 17 участници. Сред авторите и подписалите го са Робърт Сесил Мартин, Мартин Фаулър и Кент Бек.
 
 <div class="agile-authors">
   <figure>
@@ -115,8 +113,6 @@ flowchart LR
     Waterfall ~~~ Scrum
 ```
 
-[Редактируем файл — waterfall-scrum-comparison.mmd](/courses/diagrams/task-manager-mermaid/waterfall-scrum-comparison.mmd)
-
 Схемата е опростено сравнение. Преработка е възможна и при Waterfall; при Scrum обратната връзка редовно влияе на следващия избор на работа.
 
 ### 3. Scrum и AI инженерът в екипа
@@ -148,8 +144,6 @@ flowchart TD
     Review -.->|"Адаптация"| Backlog
     Retro --> Next["Следващ Sprint<br/>Прилагане на подобрението"]
 ```
-
-[Редактируем файл — scrum-ai-sprint.mmd](/courses/diagrams/task-manager-mermaid/scrum-ai-sprint.mmd)
 
 AI инженерът работи сред Developers през целия спринт. Анализът, реализацията и тестовете се повтарят за избраната работа. Може да има повече от един Increment; доставката не изчаква задължително Review. Refinement продължава според нуждите на екипа.
 
@@ -197,8 +191,6 @@ flowchart TD
     S1 --> T3
 ```
 
-[Редактируем файл — backlog-hierarchy.mmd](/courses/diagrams/task-manager-mermaid/backlog-hierarchy.mmd)
-
 Стрелките означават **разбиване на работа**, а не ред на изпълнение. Показани са част от задачите на AI-01; зависимостите се записват отделно в backlog. „Обучи модела“ е Task с технически резултат. Полезната Story е „Като автор искам предложение от оценен модел, за да категоризирам и текстове без предварително зададените ключови думи“.
 
 #### 4.3. Жизнен цикъл на Epic
@@ -218,8 +210,6 @@ flowchart TD
     Active -->|"Отпаднала<br/>цел"| Cancelled
 ```
 
-[Редактируем файл — epic-lifecycle.mmd](/courses/diagrams/task-manager-mermaid/epic-lifecycle.mmd)
-
 **Пример:** AI-01 е Done, но обучената версия от AI-02 още няма валиден оценъчен отчет. E-AI-01 остава „В изпълнение“, ако AI-02 е част от договорения му обхват. Ако екипът установи, че правилата са достатъчни, Product Owner може да договори по-малък обхват с нова обосновка. Не изтривайте неудобна история само за да отчетете завършен епик. „Отменен“ означава съзнателно прекратена работа и не е успешно завършване.
 
 #### 4.4. Жизнен цикъл на User Story
@@ -237,8 +227,6 @@ flowchart TD
     Ready -->|"Променени изисквания"| Backlog
     Backlog -->|"Отпаднала потребност"| Removed["Removed / Отпаднала"]
 ```
-
-[Редактируем файл — story-lifecycle.mmd](/courses/diagrams/task-manager-mermaid/story-lifecycle.mmd)
 
 **Пример за критерий:** при записана задача с потвърдена категория DOCUMENTATION заявка за ново предложение връща BUG, а прочитането на задачата продължава да връща DOCUMENTATION. Ако предложеният BUG се запише автоматично, AI-01 се връща от Validation към In Progress независимо колко подзадачи са отбелязани Done.
 
@@ -261,8 +249,6 @@ flowchart TD
     Todo -->|"Отпаднала<br/>работа"| Cancelled["Cancelled<br/>Отменена"]
 ```
 
-[Редактируем файл — task-lifecycle.mmd](/courses/diagrams/task-manager-mermaid/task-lifecycle.mmd)
-
 **Пример:** AI-01c е Blocked, защото договорът AI-01b още не определя допустимите категории. AI инженерът записва въпроса и го изяснява с backend разработчика, след което продължава работата. Review тук е преглед на конкретния резултат, например code review, и е различен от Sprint Review.
 
 При повторно отваряне проверете влиянието върху Story и Epic; предишното отбелязване Done не отменя откритото несъответствие. Нова потребност извън договорения обхват се описва с нов запис и връзка към стария. Някои екипи използват флаг Blocked вместо отделен статус. Избраният модел трябва да е изричен и еднакво разбран.
@@ -278,7 +264,7 @@ flowchart TD
 
 Статусът е твърдение, което трябва да бъде подкрепено с резултат. „5 от 5 задачи Done“ не доказва, че моделът е полезен, че историята работи през API или че епикът е изпълнен.
 
-Диаграмите са схеми на работния процес с Mermaid `flowchart`. За собствен вариант копирайте `.mmd` източника в [Mermaid Live Editor](https://mermaid.live/), променете надпис или преход и експортирайте SVG. Запазете и изходния файл в UTF-8. Формалните UML модели на софтуерната система се разглеждат в [упражнение 3](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-3/).
+Диаграмите са схеми на работния процес с Mermaid `flowchart`. За собствен вариант създайте схема в [Mermaid Live Editor](https://mermaid.live/) и експортирайте SVG. Запазете и изходния файл в UTF-8. Формалните UML модели на софтуерната система се разглеждат в [упражнение 3](/courses/bg/software-engineering-ai/laboratorno-uprazhnenie-3/).
 
 ### 5. Анализ, функционални и нефункционални изисквания
 
@@ -313,8 +299,6 @@ flowchart TD
     TestNFR --> Evidence
     Evidence --> Decision["Оценка на историята<br/>Критерии и DoD"]
 ```
-
-[Редактируем файл — requirements-traceability.mmd](/courses/diagrams/task-manager-mermaid/requirements-traceability.mmd)
 
 Двата клона свързват поведение и качество с отделни проверки. Диаграмата е план за проследимост; полето за действителен резултат се попълва след изпълнение на проверката.
 
@@ -365,8 +349,6 @@ flowchart TD
     Discuss --> Enough
     Shared -->|"Да"| Record["Запишете оценката<br/>и допусканията"]
 ```
-
-[Редактируем файл — planning-poker-flow.mmd](/courses/diagrams/task-manager-mermaid/planning-poker-flow.mmd)
 
 Приемането означава договорена обосновка; картите не е задължително да съвпадат. Ако разговорът открие липсваща информация, първо я изяснете и след това направете ново гласуване.
 
@@ -441,8 +423,6 @@ xychart-beta horizontal
     y-axis "Story points" 0 --> 8
     bar [1, 2, 5, 8, 3]
 ```
-
-[Редактируем файл — fruit-estimation.mmd](/courses/diagrams/task-manager-mermaid/fruit-estimation.mmd)
 
 Последните два стълба са **два варианта на една и съща задача**: тиквата преди и след промяната на входните условия. Стълбовете сравняват усилието при договорения обхват; те не измерват масата на плодовете или време в часове.
 
@@ -589,8 +569,6 @@ flowchart TD
     class Island goal
 ```
 
-[Редактируем файл — retro-sailboat-board.mmd](/courses/diagrams/task-manager-mermaid/retro-sailboat-board.mmd)
-
 | Зона | Въпрос | Бележка от екипа |
 | --- | --- | --- |
 | Остров — цел | Накъде пътуваме? | Потребителят получава предложение и запазва контрола чрез отделно потвърждение |
@@ -637,8 +615,6 @@ flowchart TD
     style Stop fill:#fee2e2,stroke:#b91c1c,color:#7f1d1d
     style Continue fill:#dbeafe,stroke:#1d4ed8,color:#1e3a8a
 ```
-
-[Редактируем файл — retro-start-stop-continue-board.mmd](/courses/diagrams/task-manager-mermaid/retro-start-stop-continue-board.mmd)
 
 | Започни | Спри | Продължи |
 | --- | --- | --- |

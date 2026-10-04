@@ -39,7 +39,7 @@ ADR (Architecture Decision Record) записва контекст, допуск
 
 ### 4. UML — различни гледни точки към една система
 
-Диаграмата отговаря на конкретен въпрос и допълва текстовите изисквания. Нормативен източник: [OMG UML 2.5.1](https://www.omg.org/spec/UML/2.5.1/About-UML). Следващите изображения са наши учебни модели на Task Manager.
+Диаграмата отговаря на конкретен въпрос и допълва текстовите изисквания. Нормативен източник: [OMG UML 2.5.1](https://www.omg.org/spec/UML/2.5.1/About-UML). Следващите диаграми моделират Task Manager.
 
 Седемте структурни диаграми описват организацията; трите основни поведенчески — функционалност и поведение; четирите диаграми на взаимодействие са подгрупа на поведенческите.
 
@@ -77,7 +77,7 @@ classDiagram
 ```
 ````
 
-Markdown визуализатор без Mermaid поддръжка ще покаже кода като текст. Използвайте Live Editor за преглед и приложете SVG експорт към предаването. Под всеки пример по-долу има връзка към готов `.mmd` източник: отворете я, запазете файла или копирайте текста в редактора.
+Markdown визуализатор без Mermaid поддръжка ще покаже кода като текст. Използвайте Live Editor за преглед и приложете SVG експорт към предаването.
 
 ### 4.2. Синтаксис, който ще използвате
 
@@ -133,8 +133,6 @@ classDiagram
     Task "1" -- "0..*" Report : reports
 ```
 
-[Mermaid източник — class.mmd](/courses/diagrams/task-manager-mermaid/class.mmd)
-
 #### 5.2. Object — диаграма на обектите
 
 Показва екземпляри и стойности в определен момент. `task42:Task` е подчертано; слотовете съдържат стойности, а линиите са конкретни връзки.
@@ -148,8 +146,6 @@ flowchart LR
     R["report7:Report<br/>id = 7"]
     T ---|reports| R
 ```
-
-[Mermaid източник — object.mmd](/courses/diagrams/task-manager-mermaid/object.mmd)
 
 Условно представяне: кутията е екземпляр със слотове; линията е връзка. Името не е подчертано автоматично, както изисква UML Object нотацията.
 
@@ -169,8 +165,6 @@ flowchart LR
     A["package: ai.adapter"] -.-> S
 ```
 
-[Mermaid източник — package.mmd](/courses/diagrams/task-manager-mermaid/package.mmd)
-
 Условно представяне: кутиите са пакети; прекъснатата стрелка сочи зависимостта. Символът на папка не се възпроизвежда.
 
 [Еталон за UML нотацията](/courses/diagrams/task-manager-uml/package.svg)
@@ -188,8 +182,6 @@ flowchart LR
     AI["component: Category Service"]
     API -.->|CategorySuggester| AI
 ```
-
-[Mermaid източник — component.mmd](/courses/diagrams/task-manager-mermaid/component.mmd)
 
 Условно представяне: кутиите са компоненти; надписът на зависимостта обозначава договора. UML портове и предоставени/изисквани интерфейси се описват допълнително.
 
@@ -212,8 +204,6 @@ flowchart LR
     end
     IN --- V
 ```
-
-[Mermaid източник — composite-structure.mmd](/courses/diagrams/task-manager-mermaid/composite-structure.mmd)
 
 Условно представяне: групата е структурираният класификатор; вътрешните кутии са части, а линиите — конектори. Входният порт е означен с текст вместо UML квадратче.
 
@@ -241,8 +231,6 @@ flowchart LR
     APP ---|JDBC| DB
 ```
 
-[Mermaid източник — deployment.mmd](/courses/diagrams/task-manager-mermaid/deployment.mmd)
-
 Условно представяне: групите са среди, вътрешните елементи — артефакти, а линиите — комуникационни пътища. Това не е тримерната UML нотация за възел.
 
 [Еталон за UML нотацията](/courses/diagrams/task-manager-uml/deployment.svg)
@@ -264,8 +252,6 @@ flowchart LR
         RULE -.- S
     end
 ```
-
-[Mermaid източник — profile.mmd](/courses/diagrams/task-manager-mermaid/profile.mmd)
 
 Условно представяне: extension сочи разширявания метаклас. Обикновената стрелка на flowchart не е специалната UML extension стрелка; ограничението е записано изрично.
 
@@ -293,8 +279,6 @@ flowchart LR
     USER --- CONFIRM
 ```
 
-[Mermaid източник — use-case.mmd](/courses/diagrams/task-manager-mermaid/use-case.mmd)
-
 Условно представяне: заоблените възли са цели, външният правоъгълник — актьор, групата — граница на системата. Mermaid flowchart няма семантика на UML include/extend; при нужда я опишете изрично.
 
 [Еталон за UML нотацията](/courses/diagrams/task-manager-uml/use-case.svg)
@@ -316,8 +300,6 @@ flowchart TD
     ERROR --> FINISH
 ```
 
-[Mermaid източник — activity.mmd](/courses/diagrams/task-manager-mermaid/activity.mmd)
-
 Условно представяне: правоъгълниците са действия, ромбът е решение, а означените кръгове — начало и край. За fork/join добавете изрична легенда; разклонение на flowchart само по себе си не задава UML паралелност.
 
 [Еталон за UML нотацията](/courses/diagrams/task-manager-uml/activity.svg)
@@ -336,8 +318,6 @@ stateDiagram-v2
     IN_PROGRESS --> DONE: complete
     DONE --> OPEN: reopen
 ```
-
-[Mermaid източник — state-machine.mmd](/courses/diagrams/task-manager-mermaid/state-machine.mmd)
 
 ### 7. Диаграми на взаимодействие
 
@@ -364,8 +344,6 @@ sequenceDiagram
     deactivate API
 ```
 
-[Mermaid източник — sequence.mmd](/courses/diagrams/task-manager-mermaid/sequence.mmd)
-
 #### 7.2. Communication — диаграма на комуникацията
 
 Акцентира върху връзките между участниците. Номера `1`, `1.1`, `1.2` задават ред и вложеност; стрелките — посока.
@@ -378,8 +356,6 @@ flowchart LR
     UI[":UI"] -->|"1: suggest(taskId)"| API[":TaskAPI"]
     API -->|"1.1: suggest(text)"| AI[":CategoryService"]
 ```
-
-[Mermaid източник — communication.mmd](/courses/diagrams/task-manager-mermaid/communication.mmd)
 
 Условно представяне: етикетите 1 и 1.1 задават реда и вложеността. Стрелките показват посоката на съобщенията между участниците.
 
@@ -403,8 +379,6 @@ flowchart TD
     CONFIRM --> FINISH(("Край"))
 ```
 
-[Mermaid източник — interaction-overview.mmd](/courses/diagrams/task-manager-mermaid/interaction-overview.mmd)
-
 Условно представяне: ref възлите препращат към отделни взаимодействия. Ромбът за сливане събира алтернативни потоци, без да ги синхронизира като join.
 
 [Еталон за UML нотацията](/courses/diagrams/task-manager-uml/interaction-overview.svg)
@@ -426,8 +400,6 @@ sequenceDiagram
     Note over API: t ≤ 1500 ms, Waiting → Fallback
     Note over API: category = null, source = UNAVAILABLE
 ```
-
-[Mermaid източник — timing.mmd](/courses/diagrams/task-manager-mermaid/timing.mmd)
 
 Условно представяне чрез sequenceDiagram с времеви бележки. Вертикалното разстояние не е времева скала и това не е истинска UML Timing диаграма; състоянията, моментите и бюджетът са записани като текст.
 
