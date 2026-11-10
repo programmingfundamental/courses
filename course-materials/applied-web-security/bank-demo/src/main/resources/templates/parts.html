@@ -1,0 +1,7 @@
+<!doctype html><html lang="bg" xmlns:th="http://www.thymeleaf.org"><head th:fragment="head(title)">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title th:text="${title + ' · БанкЛаб'}">БанкЛаб</title><link rel="stylesheet" th:href="@{/bank.css}"></head><body>
+<header th:fragment="nav"><div class="bar"><a class="brand" th:href="@{/accounts}"><span class="seal">Б</span> БанкЛаб</a>
+<nav aria-label="Основна навигация"><a th:href="@{/accounts}">Регистър</a><a th:href="@{/accounts/new}">Нова сметка</a>
+<form method="post" th:action="@{/logout}"><button class="link">Изход</button></form></nav></div></header>
+<footer th:fragment="foot"><span>БанкЛаб</span> · Учебни сметки · Данните се нулират при рестарт.</footer></body></html>

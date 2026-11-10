@@ -10,12 +10,14 @@ const courses = [
     id: 'applied-web-security',
     title: 'Уеб сигурност (Приложна)',
     english: 'Applied Web Security',
+    resourcesDir: '.',
     topics: ['Introduction to Web Security', 'Lab Environment and Threat Modeling', 'Authentication with Spring Security', 'Authorization, Broken Access Control, and IDOR', 'Brute-Force Attacks and Authentication Protection', 'SQL Injection', 'Cross-Site Scripting (XSS)', 'CSRF, Cookies, and Browser Security', 'Cryptography and Sensitive Data Protection', 'JWT Security and Token Manipulation', 'Security Testing and Integrated Protection'],
   },
   {
     id: 'software-engineering-ai',
     title: 'Софтуерно инженерство за AI системи',
     english: 'Software Engineering for AI Systems',
+    resourcesDir: 'semester',
     schedule: 'semester/schedule.json',
   },
 ];
@@ -77,6 +79,12 @@ for (const [index, course] of courses.entries()) {
     for (const alias of lab.aliases || []) routes.set(path.join(sourceRoot, alias), `/courses/bg/${lab.route}/`);
   }
   routes.set(path.join(sourceRoot, 'README.md'), `/courses/bg/${course.id}/`);
+  const resourcePage = `${course.id}/resources`;
+  const resourceDir = path.join(sourceRoot, course.resourcesDir);
+  const bgFile = path.join(resourceDir, 'resources.md');
+  routes.set(bgFile, `/courses/bg/${resourcePage}/`);
+  write(`bg/${resourcePage}.md`, document('Помощни материали', 0, readStudentFile(bgFile)));
+  write(`en/${resourcePage}.md`, document('Study resources', 0, readStudentFile(path.join(resourceDir, 'resources.en.md'))));
 
   function readStudentFile(file) {
     const body = fs.readFileSync(file, 'utf8').replaceAll('\r\n', '\n');
@@ -116,7 +124,7 @@ for (const [index, course] of courses.entries()) {
 
   write(`bg/${course.id}/index.md`, document(course.title, 16 + index, readStudentFile(path.join(sourceRoot, 'README.md'))));
   const englishLinks = labs.map(lab => `- [Lab ${lab.number} — ${course.topics[lab.number - 1]}](/courses/en/${lab.route}/)`).join('\n');
-  const overview = schedule ? 'This course covers the software lifecycle and Scrum teamwork for systems with AI components. As an AI engineer, you will extend Task Manager through requirements analysis, UML modeling, data preparation, model evaluation, deployment, and maintenance.' : `The course contains ${labs.length} labs on applied web security.`;
+  const overview = schedule ? 'This course covers the software lifecycle and Scrum teamwork for systems with AI components. As an AI engineer, you will extend Task Manager through requirements analysis, UML modeling, data preparation, model evaluation, deployment, and maintenance.' : `The course contains ${labs.length} labs on applied web security. In [Study resources](/courses/en/${resourcePage}/), you can download Bank Lab to explore SQL injection, stored XSS, and weak encryption.`;
   write(`en/${course.id}/index.md`, document(course.english, 16 + index, `${overview} The teaching materials are available in Bulgarian via the language selector.\n\n## Labs\n\n${englishLinks}`));
   for (const lab of labs) {
     const body = readStudentFile(lab.file);

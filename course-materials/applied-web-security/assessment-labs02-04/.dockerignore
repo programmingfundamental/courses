@@ -1,0 +1,7 @@
+target
+data
+test-results
+hint.md
+*.log
+.git
+src/test

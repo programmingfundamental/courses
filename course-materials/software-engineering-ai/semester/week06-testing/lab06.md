@@ -69,7 +69,7 @@ Path("reports/evaluation.json").write_text(json.dumps(report, indent=2), encodin
 
 #### Стъпка 1. Подготовка на Java тестовете
 
-Продължете версията от [тема 4](../week04-design/lab04.md). Началният архив няма тестови зависимости. Добавете `spring-boot-starter-test`, `spring-security-test` и H2 с scope=test; версиите се управляват от Spring Boot parent. Създайте `src/test/resources/application-test.properties` с отделна H2 база и `spring.jpa.hibernate.ddl-auto=create-drop`; активирайте профил test. За PostgreSQL специфично поведение използвайте отделна тестова PostgreSQL база, никога работната.
+Продължете версията от [тема 4](../week04-design/lab04.md). Стартовият проект от [Помощни материали](../resources.md) включва JUnit 5, MockMvc и H2. Профилът `test` се активира автоматично и създава схемата в паметта при стартиране. Ако работите с по-старо копие, пренесете липсващите тестови зависимости и файловете от `src/test` в своето решение. За PostgreSQL специфично поведение използвайте отделна тестова PostgreSQL база, никога работната.
 
 Unit тестовете не стартират целия Spring контекст. При integration тест задайте тестов JWT secret с необходимата за приложението дължина; не копирайте работния `.env`. Изпълнете `./mvnw.cmd test` в PowerShell или `./mvnw test` в Bash от Java проекта.
 

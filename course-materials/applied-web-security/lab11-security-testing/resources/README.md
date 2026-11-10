@@ -19,11 +19,11 @@
 След подготовката по-долу изпълнете от task-manager: mvn test; след стартиране на compose.test.yml — mvn -Ppostgres-tests test.
 
 
-## Добавяне на тестовата среда за първи път
+## Подготовка на проекта
 
-Пакетът task-manager-testing.zip съдържа тази инструкция, src/test и compose.test.yml. Разархивирайте го отделно и копирайте src/test и compose.test.yml в своя task-manager от упражнение 10. Не заменяйте приложния код и pom.xml с начална версия.
+Разархивирайте `task-manager-testing.zip` отделно. Копирайте `compose.test.yml` и `src/test/resources/application-postgres-test.properties` на същите пътища в проекта си. Ако вече работите с JUnit стартера, запазете своите тестове и H2 конфигурацията. При по-стар проект добавете и липсващите файлове от `src/test` в пакета.
 
-Добавете в съществуващия раздел dependencies на pom.xml:
+Само ако липсват в по-стар проект, добавете следните зависимости в `pom.xml`:
 
 ```xml
 <dependency>

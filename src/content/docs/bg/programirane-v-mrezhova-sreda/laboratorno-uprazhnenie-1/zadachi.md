@@ -6,6 +6,8 @@ sidebar:
   order: 100
 ---
 
+[Общ проект — чат, етап 1](../../obsht-proekt-chat/#lab-1)
+
 ## 6. Начален експеримент
 
 1. Направете временен sender с две byte arrays с различим текст и два последователни `out.write(message1); out.write(message2);`. Receiver печата само `read count` и hex bytes, без да ги интерпретира като съобщения.

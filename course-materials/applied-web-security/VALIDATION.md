@@ -2,7 +2,7 @@
 
 ## Историческа проверка на началното копие — 28.09.2026
 
-- Източник: tasks-manager/lab11; измененията са описани в task-manager/SOURCE.md.
+- Източник: tasks-manager/lab11; измененията са описани в task-manager/hint.md.
 - `mvn test`: 5 теста, 0 failures, 0 errors, 0 skipped, H2.
 - `mvn -Ppostgres-tests test`: същите 5 теста, 0 failures, 0 errors, 0 skipped, PostgreSQL 17.6 в отделен Compose проект.
 - Проверяват се регистрация/BCrypt/USER, реален login/tokens/session, task/report поток със сбор PT31H и отказ за anonymous и logout с реално премахване на refresh записите.

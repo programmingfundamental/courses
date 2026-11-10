@@ -6,6 +6,8 @@ sidebar:
   order: 100
 ---
 
+[Общ проект — чат, етап 6](../../obsht-proekt-chat/#lab-6)
+
 ## 6. Начален експеримент
 
 Capture-нете ECHO с отличим тестов текст през plain TCP и намерете текста във Follow TCP Stream. После изпълнете същата заявка върху TLS, без да експортирате session keys, и проверете, че wire payload не се вижда като plain LabNet bytes. Все още се наблюдават адреси, ports, packet sizes и timings — TLS не скрива целия traffic pattern.

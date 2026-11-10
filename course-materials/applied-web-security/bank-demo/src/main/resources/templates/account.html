@@ -1,0 +1,14 @@
+<!doctype html><html lang="bg" xmlns:th="http://www.thymeleaf.org"><head th:replace="~{parts :: head('Досие на сметка')}"></head><body><header th:replace="~{parts :: nav}"></header><main><div class="intro"><a th:href="@{/accounts}">← Регистър</a><p class="eyebrow" th:text="|Досие / Сметка №${row.id}|"></p><h1 th:text="${row.alias}"></h1></div>
+<p class="notice" th:if="${created}">Сметката е създадена. По-долу виждате запазения запис.</p>
+<section class="card"><span class="eyebrow">02 / Stored XSS</span><h2>Един запис, два изгледа</h2>
+<div class="compare"><div><small>Действителен изглед · обикновен текст</small><p class="sample" th:text="${row.note.isEmpty()?'(без бележка)':row.note}"></p></div>
+<div><small>Симулация · интерпретирано съдържание</small><p class="sample" th:if="${boldModel}"><strong th:text="${modelText}"></strong></p>
+<p class="sample" th:unless="${boldModel}" th:text="${modelText.isEmpty()?'(без бележка)':modelText}"></p>
+<span class="flag" th:if="${marker}">Модел: заглавието е сменено</span></div></div>
+<p>Рискът възниква при показването на запазената бележка. Десният панел моделира само удебеляване и учебния маркер; останалият вход остава текст. В приложението не се изпълнява въведен JavaScript.</p></section>
+<section class="card vault"><span class="eyebrow">03 / Слаб шифър</span><h2>Възстановете данните от базата</h2><p>Буквите се въртят в A–Z, цифрите в 0–9. И за двете е използвано едно постоянно отместване от 0 до 9. Известното начало на всеки учебен IBAN е <code>BG00DEMO</code>.</p>
+<div class="compare"><div><small>IBAN · запазен шифротекст</small><code th:text="${row.iban}"></code></div><div><small>ЕГН · запазен шифротекст</small><code th:text="${row.egn}"></code></div></div>
+<form class="guess" method="get" th:action="@{/accounts/{id}(id=${row.id})}"><label for="shift">Обратно отместване</label><div class="search"><select id="shift" name="shift"><option th:each="k:${#numbers.sequence(0,9)}" th:value="${k}" th:selected="${k==shift}" th:text="${k}"></option></select><button class="primary">Провери</button></div></form>
+<div class="compare"><div><small>Разчетен IBAN</small><code th:text="${guessIban}"></code></div><div><small>Разчетено ЕГН</small><code th:text="${guessEgn}"></code></div></div>
+<p class="notice" th:if="${match}">Префиксът съвпада. Същото отместване възстановява и ЕГН. Потърсете равни шифротекстове на ЕГН в други сметки.</p>
+<p class="muted" th:unless="${match}">Сравнете началото с BG00DEMO и опитайте друго отместване.</p></section></main><footer th:replace="~{parts :: foot}"></footer></body></html>

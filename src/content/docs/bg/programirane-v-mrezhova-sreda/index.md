@@ -4,14 +4,12 @@ sidebar:
   order: 13
 ---
 
-Курсът разглежда разработването на мрежови приложения с Java: TCP и UDP комуникация, конкурентна обработка и Java NIO. Упражненията включват управление на натоварването, TLS защита и измерване на производителността.
+В [общия проект за многопотребителски чат](./obsht-proekt-chat/) ще изградите Java сървър, през който всеки участник получава съобщенията на цялата стая. Ще работите с TCP, UDP и Java NIO, ще защитите разговора чрез TLS и ще измерите как броят на клиентите влияе върху времето за доставка.
 
-## Лабораторни упражнения
-
-- [Лабораторно упражнение 1 — TCP sockets, byte streams и приложен протокол](/courses/bg/programirane-v-mrezhova-sreda/laboratorno-uprazhnenie-1/)
-- [Лабораторно упражнение 2 — Concurrent TCP Server — обслужване на множество клиенти](/courses/bg/programirane-v-mrezhova-sreda/laboratorno-uprazhnenie-2/)
-- [Лабораторно упражнение 3 — UDP и надеждност](/courses/bg/programirane-v-mrezhova-sreda/laboratorno-uprazhnenie-3/)
-- [Лабораторно упражнение 4 — Java NIO и event-driven networking](/courses/bg/programirane-v-mrezhova-sreda/laboratorno-uprazhnenie-4/)
-- [Лабораторно упражнение 5 — Асинхронна обработка, queues и backpressure](/courses/bg/programirane-v-mrezhova-sreda/laboratorno-uprazhnenie-5/)
-- [Лабораторно упражнение 6 — TLS и defensive network programming](/courses/bg/programirane-v-mrezhova-sreda/laboratorno-uprazhnenie-6/)
-- [Лабораторно упражнение 7 — Performance engineering и сравнителен анализ](/courses/bg/programirane-v-mrezhova-sreda/laboratorno-uprazhnenie-7/)
+- [Упражнение 1 — TCP сокети, потоци от байтове и приложен протокол](./laboratorno-uprazhnenie-1/)
+- [Упражнение 2 — Конкурентен TCP сървър за множество клиенти](./laboratorno-uprazhnenie-2/)
+- [Упражнение 3 — UDP и надеждна доставка](./laboratorno-uprazhnenie-3/)
+- [Упражнение 4 — Java NIO и обработка на събития](./laboratorno-uprazhnenie-4/)
+- [Упражнение 5 — Асинхронна обработка, опашки и управление на натоварването](./laboratorno-uprazhnenie-5/)
+- [Упражнение 6 — TLS и защитено мрежово програмиране](./laboratorno-uprazhnenie-6/)
+- [Упражнение 7 — Измерване и сравнение на производителността](./laboratorno-uprazhnenie-7/)

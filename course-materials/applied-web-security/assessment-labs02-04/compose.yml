@@ -1,0 +1,16 @@
+services:
+  assessment:
+    build: .
+    ports:
+      - "127.0.0.1:${ASSESSMENT_PORT:-9010}:9010"
+    volumes:
+      - assessment-data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:9010/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 30s
+volumes:
+  assessment-data:
