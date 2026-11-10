@@ -1,0 +1,17 @@
+<!doctype html><html lang="bg" xmlns:th="http://www.thymeleaf.org"><head th:replace="~{parts :: head('Вход')}"></head><body><header><div class="bar"><span class="brand"><span class="seal">Б</span> БанкЛаб</span><span class="badge">Учебна банка</span></div></header>
+<main><div class="intro"><span class="eyebrow">Операторски портал</span><h1>Вход в банката</h1><p>Влезте в регистъра или сравнете две решения за достъп в модела вдясно.</p></div>
+<div class="grid login-grid"><section class="card"><h2>Вход за оператор</h2><p>Учебен потребител: <code>admin</code><br>Учебна парола: <code>admin</code></p>
+<p class="alert" role="alert" th:if="${param.error != null}">Името или паролата са грешни.</p><p class="notice" th:if="${param.logout != null}">Сесията приключи.</p>
+<form method="post" th:action="@{/login}"><label for="username">Потребител</label><input id="username" name="username" autocomplete="username" required>
+<label for="password">Парола</label><input id="password" name="password" type="password" autocomplete="current-password" required>
+<button class="primary">Вход в регистъра</button></form></section>
+<section class="card accent"><span class="eyebrow">01 / SQL injection</span><h2>Кога грешната парола изглежда вярна?</h2>
+<p>Изберете случай. Името съвпада и в трите. Сравнете очакваната проверка с модел, в който въведени данни са променили условието на заявката.</p>
+<div class="tabs"><a th:classappend="${scenario=='match'?'on':''}" th:href="@{/login(case='match')}">Валидна парола</a>
+<a th:classappend="${scenario=='mistake'?'on':''}" th:href="@{/login(case='mistake')}">Грешна парола</a>
+<a th:classappend="${scenario=='altered'?'on':''}" th:href="@{/login(case='altered')}">Променено условие</a></div>
+<dl class="metrics"><div><dt>Паролата съвпада</dt><dd th:text="${correct?'Да':'Не'}"></dd></div><div><dt>Добавен винаги верен клон</dt><dd th:text="${altered?'Да':'Не'}"></dd></div></dl>
+<div class="compare"><div><small>Уязвим модел</small><strong th:text="${weakResult?'ДОПУСКА':'ОТКАЗВА'}"></strong></div>
+<div><small>Проверка на данните</small><strong th:text="${correct?'ДОПУСКА':'ОТКАЗВА'}"></strong></div></div>
+<p th:if="${altered}" class="notice">Моделът допуска оператор без вярна парола: достатъчен се оказва вторият, винаги верен клон. При реалния вход името е SQL параметър, а паролата се проверява отделно.</p>
+<p class="muted">Резултатът тук е симулация. За достъп до регистъра използвайте формата за вход.</p></section></div></main><footer th:replace="~{parts :: foot}"></footer></body></html>

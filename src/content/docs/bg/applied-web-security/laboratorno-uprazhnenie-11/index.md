@@ -58,7 +58,7 @@ JDK 17+, Maven 3.9+ или Maven Wrapper, Docker Compose и браузър са 
 
 ### Първи автоматизирани тестове
 
-1. [Изтеглете пакета за упражнение 11 (ZIP)](/courses/downloads/task-manager-testing.zip). Той съдържа src/test, compose.test.yml и README с точните Maven настройки. Добавете ги към собственото си решение, без да заменяте src/main или целия pom.xml. Подробностите са в ресурсите.
+1. [Изтеглете пакета за упражнение 11 (ZIP)](/courses/downloads/task-manager-testing.zip). Добавете тестовия Compose файл и профила за PostgreSQL към своето решение. Следвайте Maven настройките в README на пакета. Ако ползвате по-стар стартов проект, добавете и липсващите тестови зависимости и файлове от пакета.
 2. Започнете с anonymousCannotReadTasks от TaskManagerBaselineTest: Postman сценарият GET /tasks без сесия → 401 става mvc.perform(get("/tasks")).andExpect(status().isUnauthorized()). Сравнете заявката, очакването и резултата с ръчния протокол.
 3. Примерният клас е писан за първоначалния Task Manager. Преди изпълнение на целия клас добавете регистрирани users за owner, актуалните CSRF стъпки и refresh digest проверката от своето решение. Старият findByTokenAndRevokedFalse може вече да не съществува: заменете го с актуалния repository метод и digest. Не премахвайте защитите, за да преминат старите примери.
 4. Създайте нови тестове за собствен/чужд ресурс, отказ без DB промяна, search и HTML encoding, CSRF и private note. За login, CSRF rotation и JWT използвайте истинския поток; with(user(...)) не доказва credentials или подпис. MockMvc не изпълнява JavaScript, затова браузърните проверки остават отделни.

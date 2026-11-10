@@ -6,6 +6,8 @@ sidebar:
   order: 100
 ---
 
+[Общ проект — чат, етап 4](../../obsht-proekt-chat/#lab-4)
+
 ## 6. Начален експеримент
 
 Направете non-blocking connection и изпратете само първите 2 bytes от header. При readable event опитайте временния грешен подход „прочети веднъж и parse-ни целия header“. Документирайте missing bytes/underflow, после отстранете този код.

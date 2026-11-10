@@ -1,6 +1,6 @@
 # Технически източници
 
-- Началният код и версиите: [Task Manager](../task-manager/README.md), [pom.xml](../task-manager/pom.xml), [произход](../task-manager/SOURCE.md).
+- Началният код и версиите са в [Task Manager](../task-manager/README.md) и [pom.xml](../task-manager/pom.xml).
 - Spring Security: https://docs.spring.io/spring-security/reference/ — authentication, authorization, sessions, CSRF и тестове.
 - Spring Data JPA: https://docs.spring.io/spring-data/jpa/reference/ — @Query, binding, transactions и locking.
 - JJWT: https://github.com/jwtk/jjwt — API за подпис и проверка; проектът използва 0.12.5.

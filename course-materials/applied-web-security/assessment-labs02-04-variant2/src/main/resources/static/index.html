@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Практическо контролно по уеб сигурност — пет проверки, доказателства и изводи.">
+  <title>Уеб сигурност · Вариант 2</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Към съдържанието</a>
+  <header class="topbar">
+    <a class="brand" href="#lab"><span class="brand-icon" aria-hidden="true">W<span>_</span></span><span>Уеб сигурност<small>КОНТРОЛНО · ВАРИАНТ 2</small></span></a>
+    <nav aria-label="Основна навигация"><button data-view="lab" class="active">Лаборатория</button><button data-view="prep">Подготовка</button><button data-view="report">Протокол</button></nav>
+    <div class="workspace"><span class="dot"></span><span>Работно място <strong id="workspace-code">…</strong></span></div>
+  </header>
+  <div id="notice" class="notice" role="status" hidden></div>
+  <div class="shell">
+    <aside class="sidebar" aria-label="Проверки">
+      <div class="eyebrow">ВАШЕТО ИЗСЛЕДВАНЕ</div>
+      <h2>Пет проверки.<br>Пет извода.</h2>
+      <p class="muted">Изпълнете действията.<br>Подкрепете отговора с данни.</p>
+      <div id="case-nav" class="case-nav"></div>
+      <div class="completion"><div><span>Попълнени отговори</span><strong id="progress-text">0 / 5</strong></div><progress id="progress" max="5" value="0">0 от 5</progress></div>
+      <div class="sidebar-note"><span class="eyebrow">ПОЛЕЗНО</span><p>Всяка проверка има своя сесия и данни. Дневникът се съхранява автоматично.</p><button class="text-button" data-view="prep">Как да започна ↗</button></div>
+    </aside>
+    <main id="main" tabindex="-1">
+      <section id="lab-view">
+        <div class="page-heading"><div><div class="eyebrow" id="case-source"></div><h1 id="case-title">Зареждане на лабораторията…</h1><p id="case-description" class="lead"></p></div><button id="reset" class="button quiet">Начални данни ↺</button></div>
+        <div class="lab-grid">
+          <div class="work-column">
+            <details class="card instructions" open><summary>Задание <span>Стъпки на проверката</span></summary><ol id="case-steps"></ol></details>
+            <section class="card identity-panel" aria-labelledby="identity-title">
+              <div class="card-heading"><h2 id="identity-title">01 <span>Потребител и сесия</span></h2><span id="identity" class="pill">anonymous</span></div>
+              <div id="account-shortcuts" class="account-shortcuts"></div>
+              <form id="login-form"><div class="login-fields"><label>Потребител<input id="login-user" name="username" autocomplete="off" required maxlength="32" value="alice"></label><label>Учебна парола<input id="login-password" name="password" type="password" autocomplete="off" required maxlength="128" value="Alice-lab-2026!"></label></div><div class="toolbar"><button class="button primary" type="submit">Вход →</button><button id="logout" class="button quiet" type="button">Изход</button><button id="inspect-session" class="text-button" type="button">Провери сесията</button></div></form>
+              <p class="session-line">Текуща сесия <code id="session-label">—</code><span>Съкратено обозначение; стойността на cookie е скрита.</span></p>
+            </section>
+            <section class="card request-panel" aria-labelledby="request-title">
+              <div class="card-heading"><h2 id="request-title">02 <span>Изпрати и наблюдавай</span></h2><span class="tiny-tag">HTTP / JSON</span></div>
+              <form id="request-form">
+                <label>Шаблон на заявка<select id="preset"></select></label>
+                <div class="request-line"><label>Метод<select id="method"><option>GET</option><option>POST</option><option>PATCH</option><option>DELETE</option></select></label><label>Път в текущата проверка<input id="request-path" autocomplete="off" spellcheck="false" required></label></div>
+                <label id="body-label">JSON тяло<textarea id="request-body" rows="5" spellcheck="false" aria-describedby="request-help"></textarea></label>
+                <div class="toolbar"><button id="send" class="button primary" type="submit">Изпрати заявката →</button><span id="request-help" class="muted small">Session cookie се изпраща автоматично.</span></div>
+              </form>
+              <div class="response-heading"><h3>Отговор от сървъра</h3><span id="response-status" class="status">Няма заявка</span></div><pre id="response" tabindex="0">Изпратете заявка, за да видите резултата тук.</pre><p id="response-meta" class="muted small"></p>
+            </section>
+          </div>
+          <div class="evidence-column">
+            <section class="card answer-panel" aria-labelledby="answer-title"><div class="card-heading"><h2 id="answer-title">03 <span>Вашият извод</span></h2><span id="save-status" class="save-status" role="status">Запазено</span></div><p id="question"></p><label for="answer">Наблюдения, доказателства и отговор</label><textarea id="answer" rows="9" maxlength="5000" placeholder="Действие → резултат → извод. Посочете номерата на записите от дневника, например #12 и #15."></textarea><div class="answer-footer"><span id="answer-count">0 / 5000</span><button data-view="report" class="text-button">Към протокола ↗</button></div></section>
+            <section class="card journal-panel" aria-labelledby="journal-title"><div class="card-heading"><h2 id="journal-title">Дневник</h2><span id="journal-count" class="tiny-tag">0 записа</span></div><p class="muted small">Заявките и отговорите са доказателства за Вашия извод. Натиснете запис за подробности.</p><div id="journal" class="journal"></div></section>
+          </div>
+        </div>
+      </section>
+      <section id="prep-view" hidden><div class="page-heading"><div><div class="eyebrow">ПРЕДИ ДА ЗАПОЧНЕТЕ</div><h1>Подготовка</h1><p class="lead" id="prep-intro"></p></div></div><div class="card prose"><h2 id="prep-title"></h2><p id="prep-text"></p><ol id="prep-steps"></ol><h2>Учебни профили</h2><div class="table-scroll"><table><thead><tr><th>Потребител</th><th>Парола</th><th>Роля</th></tr></thead><tbody id="accounts-table"></tbody></table></div><h2>Предаване</h2><p id="submission"></p><p>Отговорите се запазват на сървъра, а cookie свързва браузъра с Вашето работно място. Използвайте един и същ браузърен профил. При друг профил или изтриване на cookies се създава ново работно място.</p><button class="button primary" data-view="lab">Към проверките →</button></div></section>
+      <section id="report-view" hidden><div class="page-heading"><div><div class="eyebrow">ДЕЙСТВИЯ → ДОКАЗАТЕЛСТВА → ИЗВОДИ</div><h1>Вашият протокол · вариант 2</h1><p class="lead">Прегледайте отговорите и изтеглете файла за предаване.</p></div><div class="toolbar"><button id="export" class="button primary">Подготви протокола ↓</button><button id="print" class="button quiet">Печат</button></div></div><div class="card participant-card"><label>Име или факултетен номер<input id="participant" maxlength="120" autocomplete="off" placeholder="Например: факултетен номер"></label><p id="report-summary" class="muted"></p><p class="small muted">JSON файлът съдържа отговорите и целия дневник. Изтеглянето не го изпраща на преподавателя.</p></div><div id="report-answers"></div><details class="card report-log"><summary>Всички доказателства</summary><div id="report-evidence"></div></details></section>
+    </main>
+  </div>
+  <dialog id="reset-dialog"><form method="dialog"><h2>Възстановяване на проверката</h2><p>Профилите, задачите и сесията на текущата проверка ще се върнат в началното състояние. Вашият отговор и предишните записи в дневника се запазват.</p><div class="toolbar"><button class="button quiet" value="cancel">Отказ</button><button class="button primary" value="reset">Възстанови</button></div></form></dialog>
+  <footer>Технически университет – Варна <span>Уеб сигурност · упражнения 2–4</span></footer>
+</body>
+</html>

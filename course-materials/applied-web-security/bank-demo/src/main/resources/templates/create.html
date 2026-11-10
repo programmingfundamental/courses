@@ -1,0 +1,11 @@
+<!doctype html><html lang="bg" xmlns:th="http://www.thymeleaf.org"><head th:replace="~{parts :: head('Нова сметка')}"></head><body><header th:replace="~{parts :: nav}"></header><main><div class="intro"><span class="eyebrow">Операции / Регистрация</span><h1>Нова учебна сметка</h1><p>Използвайте само фиктивен псевдоним и учебните формати по-долу.</p></div><div class="grid"><section class="card"><h2>Данни за сметката</h2>
+<p class="alert" role="alert" th:if="${!error.isEmpty()}" th:text="${error}"></p><form method="post" th:action="@{/accounts}">
+<label for="alias">Учебен псевдоним</label><input id="alias" name="alias" maxlength="60" required th:value="${alias}" placeholder="Ателие Делта">
+<label for="iban">Учебен IBAN</label><input class="mono" id="iban" name="iban" required maxlength="22" pattern="BG00DEMO[0-9]{14}" th:value="${iban}" placeholder="BG00DEMO00000000000004"><small>BG00DEMO и точно 14 цифри.</small>
+<label for="egn">Учебно ЕГН</label><input class="mono" id="egn" name="egn" inputmode="numeric" maxlength="10" required pattern="000000[0-9]{4}" th:value="${egn}" placeholder="0000001004"><small>Шест нули и четири избрани цифри.</small>
+<label for="note">Бележка</label><textarea id="note" name="note" maxlength="300" rows="3" th:text="${note}"></textarea>
+<button class="primary">Създай сметката</button></form></section>
+<aside class="card accent"><span class="eyebrow">02 / Stored XSS</span><h2>Проследете бележката</h2><p>Изберете готов пример, създайте сметката и сравнете как една и съща запазена стойност изглежда като текст и като инструкция за визуализация.</p>
+<a class="example" th:href="@{/accounts/new(example='bold')}"><b>01 · Форматиране</b><span>Бележка с буквални знаци &lt;b&gt; … &lt;/b&gt;.</span></a>
+<a class="example" th:href="@{/accounts/new(example='marker')}"><b>02 · Условен маркер</b><span>Символичен ефект само в панела на модела.</span></a>
+<p class="muted">Примерът попълва формата с учебни стойности. Запис се създава едва след натискане на бутона.</p></aside></div></main><footer th:replace="~{parts :: foot}"></footer></body></html>

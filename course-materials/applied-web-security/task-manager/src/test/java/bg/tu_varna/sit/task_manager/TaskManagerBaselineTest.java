@@ -26,10 +26,14 @@ class TaskManagerBaselineTest {
     @Autowired PasswordEncoder encoder;
     @Autowired bg.tu_varna.sit.task_manager.repository.RefreshTokenRepository refreshTokens;
 
-    @Test void registrationStoresUserWithHashedPassword() throws Exception {
+    private void registerAlice() throws Exception {
         mvc.perform(post("/auth/register").with(csrf()).contentType("application/json")
             .content("{\"username\":\"alice\",\"password\":\"Alice-password-2026!\",\"role\":\"ADMIN\"}"))
             .andExpect(status().isOk());
+    }
+
+    @Test void registrationStoresUserWithHashedPassword() throws Exception {
+        registerAlice();
         var user = users.findByUsername("alice").orElseThrow();
         assertThat(user.getRole()).isEqualTo(Role.USER);
         assertThat(user.getPassword()).isNotEqualTo("Alice-password-2026!");
@@ -37,7 +41,7 @@ class TaskManagerBaselineTest {
     }
 
     @Test void realLoginReturnsTokensAndSession() throws Exception {
-        registrationStoresUserWithHashedPassword();
+        registerAlice();
         var login = mvc.perform(post("/auth/login").with(csrf()).contentType("application/json")
             .content("{\"username\":\"alice\",\"password\":\"Alice-password-2026!\"}"))
             .andExpect(status().isOk()).andExpect(jsonPath("$.username").value("alice"))

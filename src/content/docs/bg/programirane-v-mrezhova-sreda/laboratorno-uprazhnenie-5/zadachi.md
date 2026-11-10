@@ -6,6 +6,8 @@ sidebar:
   order: 100
 ---
 
+[Общ проект — чат, етап 5](../../obsht-proekt-chat/#lab-5)
+
 ## 6. Начален експеримент
 
 Добавете временно 20 ms delay директно в NIO dispatcher. Пускайте WORK от client A и измерете PING latency от B: independent connection чака заради event-loop blocking. После преместете delay в 4-worker pool с **bounded** queue от 64 и подайте 400 requests/s за 10 s. Предскажете кога queue ще достигне cap и сравнете с наблюдението.

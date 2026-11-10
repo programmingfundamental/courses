@@ -11,12 +11,12 @@ $entries = @{}
 $rootFiles = @(
     '.dockerignore', '.gitattributes', '.gitignore', 'pom.xml', 'mvnw', 'mvnw.cmd',
     'Dockerfile', 'compose.yml', 'init-environment.ps1',
-    'init-environment.sh', 'README.md', 'SOURCE.md'
+    'init-environment.sh', 'README.md'
 )
 foreach ($name in $rootFiles) {
     $entries["task-manager/$name"] = Join-Path $projectRoot $name
 }
-foreach ($directory in @('src/main', '.mvn')) {
+foreach ($directory in @('src/main', 'src/test', '.mvn')) {
     Get-ChildItem -LiteralPath (Join-Path $projectRoot $directory) -File -Recurse -Force |
         Where-Object { $_.Extension -in @('.java', '.properties') } |
         ForEach-Object {
@@ -43,12 +43,18 @@ try {
 finally { $archive.Dispose(); $stream.Dispose() }
 Write-Output "Created $outputPath ($($entries.Count) files)."
 
-# Testing is introduced separately in lab 11, never in the starter archive.
+# The lab 11 supplement also supports students who began with an older starter.
 $testingRoot = Join-Path $materialRoot 'lab11-security-testing/resources'
 $testingPath = Join-Path $outputDirectory 'task-manager-testing.zip'
 $testingEntries = @{
     'README.md' = Join-Path $testingRoot 'README.md'
     'compose.test.yml' = Join-Path $testingRoot 'compose.test.yml'
+}
+foreach ($name in @(
+    'src/test/java/bg/tu_varna/sit/task_manager/TaskManagerBaselineTest.java',
+    'src/test/resources/application-test.properties'
+)) {
+    $testingEntries[$name] = Join-Path $projectRoot $name
 }
 Get-ChildItem -LiteralPath (Join-Path $testingRoot 'src/test') -File -Recurse |
     ForEach-Object {

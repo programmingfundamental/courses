@@ -4,7 +4,7 @@ sidebar:
   order: 16
 ---
 
-The course contains 11 labs on applied web security. The teaching materials are available in Bulgarian via the language selector.
+The course contains 11 labs on applied web security. In [Study resources](/courses/en/applied-web-security/resources/), you can download Bank Lab to explore SQL injection, stored XSS, and weak encryption. The teaching materials are available in Bulgarian via the language selector.
 
 ## Labs
 

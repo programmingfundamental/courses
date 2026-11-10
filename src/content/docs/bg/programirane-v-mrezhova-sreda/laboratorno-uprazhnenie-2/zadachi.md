@@ -6,6 +6,8 @@ sidebar:
   order: 100
 ---
 
+[Общ проект — чат, етап 2](../../obsht-proekt-chat/#lab-2)
+
 ## 6. Начален експеримент
 
 Отворете client A към baseline от Lab 1 и го оставете idle. Client B изпраща PING. Измерете connect time и response timeout отделно. После добавете thread-per-client и повторете с 10 clients. Сравнете active handler count и thread dump. Запишете защо successful connect не означава available application capacity.
