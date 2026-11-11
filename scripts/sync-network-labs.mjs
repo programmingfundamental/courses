@@ -36,10 +36,20 @@ let project = fs.readFileSync(path.join(sourceRoot, 'chat-project.md'), 'utf8').
 const projectTitle = project.match(/^# (.+)\n/)?.[1];
 if (!projectTitle) throw new Error('Missing H1 in chat-project.md');
 
-// Keep every listing in the worked example identical to its compilable Java file.
-project = project.replace(/^\[Пълен код\]\(chat-solution\/((?:src|test)\/(?:\w+\/)+\w+\.java)\)$/gm, (_, file) => {
+// Use the compilable sources for both whole files and the excerpts discussed line by line.
+const listing = /^\[(?:Пълен код|Откъс)\]\(chat-solution\/((?:src|test)\/(?:\w+\/)+\w+\.java)(?:#L(\d+)-L(\d+))?\)$/gm;
+project = project.replace(listing, (_, file, first, last) => {
   const code = fs.readFileSync(path.join(sourceRoot, 'chat-solution', file), 'utf8').replaceAll('\r\n', '\n').trimEnd();
-  return [`\`\`\`java title="${file}"`, code, '```'].join('\n');
+  let title = file;
+  let body = code;
+  if (first !== undefined) {
+    const lines = code.split('\n');
+    const start = Number(first), end = Number(last);
+    if (start < 1 || end < start || end > lines.length) throw new Error(`Invalid excerpt: ${file}#L${first}-L${last}`);
+    title += start === end ? ` · ред ${start}` : ` · редове ${start}–${end}`;
+    body = lines.slice(start - 1, end).join('\n');
+  }
+  return [`\`\`\`java title="${title}"`, body, '```'].join('\n');
 });
 
 for (const [index, folder] of folders.entries()) {
@@ -60,7 +70,7 @@ for (const [index, folder] of folders.entries()) {
 }
 
 syncPage(path.join(targetRoot, projectRoute, 'index.md'),
-  `---\ntitle: ${JSON.stringify(projectTitle)}\nsidebar:\n  label: Общ проект — чат\n---\n\n${project}\n`);
+  `---\ntitle: ${JSON.stringify(projectTitle)}\nsidebar:\n  label: Общ проект — чат\ntableOfContents:\n  maxHeadingLevel: 2\n---\n\n${project}\n`);
 
 if (stale) {
   console.error('Run node scripts/sync-network-labs.mjs and commit the updated student pages.');
