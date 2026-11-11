@@ -39,16 +39,7 @@ if (!projectTitle) throw new Error('Missing H1 in chat-project.md');
 // Keep every listing in the worked example identical to its compilable Java file.
 project = project.replace(/^\[Пълен код\]\(chat-solution\/((?:src|test)\/(?:\w+\/)+\w+\.java)\)$/gm, (_, file) => {
   const code = fs.readFileSync(path.join(sourceRoot, 'chat-solution', file), 'utf8').replaceAll('\r\n', '\n').trimEnd();
-  return [
-    '<details>',
-    `<summary>Пълен код на <code>${file}</code></summary>`,
-    '',
-    `\`\`\`java title="${file}"`,
-    code,
-    '```',
-    '',
-    '</details>',
-  ].join('\n');
+  return [`\`\`\`java title="${file}"`, code, '```'].join('\n');
 });
 
 for (const [index, folder] of folders.entries()) {

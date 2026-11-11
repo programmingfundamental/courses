@@ -10,6 +10,8 @@ sidebar:
 
 За да изпълните решението, започнете от [създаването на проекта в IntelliJ](#chat-setup), добавете [класовете в посочения ред](#chat-code) и направете [демонстрацията с три клиента](#chat-demo). За да проследите какво добавя всяко от седемте упражнения, започнете с [първия TCP кадър](#lab-1).
 
+**Към Java кода:** [първият файл Frame.java](#code-frame) · [сървърът ChatServer.java](#code-server) · [клиентът ChatClient.java](#code-client)
+
 ## Договор на стаята
 
 - **Влизане.** Клиентът отваря TCP връзка и подава `LOGIN` с уникално име по правилата на LabNet (`[A-Za-z0-9_-]{1,24}`). След успешен вход участва във всички следващи публикации. Заето име получава `NAME_IN_USE`. Запазете името `server` за конзолата на сървъра.
@@ -27,7 +29,7 @@ sidebar:
 1. Изберете **File → New → Project**, **Java**, име `chat-solution`, система за изграждане **IntelliJ** и **JDK 21**. Ако е включена опцията **Add sample code**, изключете я. Натиснете **Create**.
 2. В прозореца **Project** намерете папката `src`. Ако липсва, създайте я чрез **New → Directory** в корена на проекта. С десен бутон върху `src` изберете **Mark Directory as → Sources Root**, ако още не е маркирана. До нея създайте `test` и я маркирайте като **Test Sources Root**.
 3. В `src` използвайте **New → Package**, за да създадете `labnet`. След това създайте пакетите `labnet.blocking`, `labnet.udp`, `labnet.tls`, `labnet.transport` и `labnet.demo`. В `test` създайте отделен пакет `labnet.demo` за автоматичната проверка.
-4. За всеки файл по-долу изберете **New → Java Class** в посочения пакет и въведете името без `.java`. Разгънете **Пълен код** и заменете цялото автоматично създадено съдържание с показания код, включително първия ред `package`. Така можете да създадете и `Frame`, чиято декларация в примера е `record`. Оставете вътрешните класове и записи във файла, в който ги виждате.
+4. За всеки файл по-долу изберете **New → Java Class** в посочения пакет и въведете името без `.java`. Заменете автоматично създаденото съдържание с целия код под съответната стъпка, включително първия ред `package`. Така можете да създадете и `Frame`, чиято декларация в примера е `record`. Оставете вътрешните класове и записи във файла, в който ги виждате.
 5. След последния файл изберете **Build → Build Project**. За вече изтеглено копие на курса можете да започнете направо от тази стъпка. В **File → Open** изберете папката `course-materials/network-programming-java/chat-solution` и задайте JDK 21 като **Project SDK**.
 
 <a id="chat-code"></a>
@@ -50,8 +52,7 @@ sidebar:
 
 В `src`, пакет `labnet`, създайте `Frame`. Записът съдържа типа на командата, идентификатора на заявката и тялото. Проследете реда на операциите в `encode()`. `putInt(length)` записва размера на идентификатора и тялото, `putLong(id)` записва номера на заявката, а `flip()` подготвя буфера за четене. В обратната посока `readFully(body)` изчаква всички байтове на тялото. Вътрешният запис `Named` добавя име към текста на събитието. За „Чат“ трябва да получите 6 байта текст и 20 байта за целия кадър.
 
-<details>
-<summary>Пълен код на <code>src/labnet/Frame.java</code></summary>
+<a id="code-frame"></a>
 
 ```java title="src/labnet/Frame.java"
 package labnet;
@@ -121,14 +122,9 @@ public record Frame(int type, long id, byte[] body) {
 }
 ```
 
-</details>
-
 ### 2. Options — прочетете адреса и портовете
 
 В `src`, пакет `labnet`, създайте `Options`. Конструкторът обхожда аргументите по двойки. При `--port 9000` той запомня ключа `port` и стойността `9000`. Методът `number()` преобразува текста в число и проверява диапазона. По-късно и двата метода `main()` ще използват този клас.
-
-<details>
-<summary>Пълен код на <code>src/labnet/Options.java</code></summary>
 
 ```java title="src/labnet/Options.java"
 package labnet;
@@ -153,14 +149,9 @@ public final class Options {
 }
 ```
 
-</details>
-
 ### 3. ConsoleIO — въведете и покажете ред на кирилица
 
 В `src`, пакет `labnet`, създайте `ConsoleIO`. Методът `input()` предоставя четец за цели редове. В конзолата на IntelliJ, когато `System.console()` е `null`, той чете от `System.in` с UTF-8. Съответният клон на `line()` отпечатва в UTF-8. По-късно същите два метода ще показват „Здравейте!“ и в двете приложения.
-
-<details>
-<summary>Пълен код на <code>src/labnet/ConsoleIO.java</code></summary>
 
 ```java title="src/labnet/ConsoleIO.java"
 package labnet;
@@ -182,14 +173,9 @@ public final class ConsoleIO {
 }
 ```
 
-</details>
-
 ### 4. Room — определете кой получава публикацията
 
 В `src`, пакет `labnet`, създайте `Room`. Вътрешният тип `Peer` дава на стаята операция `send()` за връзка с участник. При `login()` името се записва в `members`. При `publish()` проследете три поредни действия: създаване на `EVENT` с идентификатор 0, вземане на текущия списък чрез `snapshot()` и извикване на `send(event)` за всеки участник. Ана е в същия списък като Борис и Ива. Когато всички записи приключат, стаята изчислява `delivered` и `failed`. Методът `handle()` връща този резултат на подателя с номера на неговата заявка.
-
-<details>
-<summary>Пълен код на <code>src/labnet/Room.java</code></summary>
 
 ```java title="src/labnet/Room.java"
 package labnet;
@@ -347,14 +333,9 @@ public final class Room implements AutoCloseable {
 }
 ```
 
-</details>
-
 ### 5. ChatConnection — изпращайте и слушайте едновременно
 
 В `src`, пакет `labnet.blocking`, създайте `ChatConnection`. Конструкторът отваря сокета и стартира нишка за `receive()`. Методът `submit()` избира следващия номер, записва очаквания отговор в `pending` и изпраща кадъра. В `receive()` проследете двете възможности. При `EVENT` с номер 0 клиентът извежда получената публикация чрез `events.accept(...)`. При `DATA`, `OK` или `ERROR` той намира чакащата заявка по номера ѝ. Това позволява Борис да чете съобщенията на Ана, без да натиска Enter.
-
-<details>
-<summary>Пълен код на <code>src/labnet/blocking/ChatConnection.java</code></summary>
 
 ```java title="src/labnet/blocking/ChatConnection.java"
 package labnet.blocking;
@@ -450,14 +431,9 @@ public final class ChatConnection implements AutoCloseable {
 }
 ```
 
-</details>
-
 ### 6. Counter — отчетете показаното съобщение по UDP
 
 В `src`, пакет `labnet.udp`, създайте `Counter`. Вложените `Sender` и `Receiver` са двете страни на UDP обмена. В `Sender.increment()` вижте къде се увеличава `seq`: пакетът се подготвя преди цикъла за повторение. При изгубен отговор подателят изпраща пак същия номер. `Receiver` пази последния номер и общия брой за сесията, затова второто изпращане връща същия брой. `Monitor.displayed()` подава работа към отделна нишка, така че повторението по UDP да не забавя получаването на следващия ред по TCP.
-
-<details>
-<summary>Пълен код на <code>src/labnet/udp/Counter.java</code></summary>
 
 ```java title="src/labnet/udp/Counter.java"
 package labnet.udp;
@@ -596,14 +572,9 @@ public final class Counter {
 }
 ```
 
-</details>
-
 ### 7. DemoKeys — подгответе учебните TLS данни
 
 В `src`, пакет `labnet.tls`, създайте `DemoKeys`. При първо стартиране `prepare()` използва програмата `keytool` от JDK и създава сертификат за `localhost`, хранилище за доверие и отделни случайни токени за `ana`, `boris` и `iva`. Методът `serverContext()` зарежда ключа на сървъра, а `clientContext(true)` зарежда доверието на клиента. Генерираните файлове остават локално в `.local/tls` под работната директория. Затова при стартиране на двете програми използвайте една и съща директория.
-
-<details>
-<summary>Пълен код на <code>src/labnet/tls/DemoKeys.java</code></summary>
 
 ```java title="src/labnet/tls/DemoKeys.java"
 package labnet.tls;
@@ -715,14 +686,9 @@ public final class DemoKeys {
 }
 ```
 
-</details>
-
 ### 8. Session — дайте на всеки получател собствена опашка
 
 В `src`, пакет `labnet.transport`, създайте `Session`. Той наследява `Room.Peer`. В `send()` всеки кадър получава място в опашката на конкретната връзка и обект, който по-късно ще отчете успех или отказ. Проследете как `written()` премахва първия елемент и го отбелязва като записан. При препълване `close()` освобождава сесията и отчита незавършените записи като неуспешни. Двата транспорта в следващите стъпки споделят тази логика.
-
-<details>
-<summary>Пълен код на <code>src/labnet/transport/Session.java</code></summary>
 
 ```java title="src/labnet/transport/Session.java"
 package labnet.transport;
@@ -825,14 +791,9 @@ public abstract class Session extends Room.Peer {
 }
 ```
 
-</details>
-
 ### 9. BlockingSession — обслужете връзка с блокиращи операции
 
 В `src`, пакет `labnet.transport`, създайте `BlockingSession`. В `run()` сървърът договаря TLS, стартира отделна нишка за писане и чете цели кадри чрез `Frame.read()`. Прочетеният кадър отива в `dispatch()`. В `write()` другата нишка чака следващия елемент от опашката, записва го в потока и извиква `written()`. Така съобщение може да стигне до Ива, докато сървърът още чака нейния следващ вход.
-
-<details>
-<summary>Пълен код на <code>src/labnet/transport/BlockingSession.java</code></summary>
 
 ```java title="src/labnet/transport/BlockingSession.java"
 package labnet.transport;
@@ -888,14 +849,9 @@ public final class BlockingSession extends Session implements Runnable {
 }
 ```
 
-</details>
-
 ### 10. SelectorSession — обработете частично четене и запис
 
 В `src`, пакет `labnet.transport`, създайте `SelectorSession`. `read()` приема наличните мрежови байтове, `unwrap()` ги дешифрира, а `decode()` предава към стаята само цял кадър. Ако тялото още не е пристигнало, `reset()` и `compact()` запазват началото му за следващото четене. В обратната посока `pump()` извиква `wrap()` и записва шифрованите байтове в канала. При частичен запис запазва позицията в буфера. Завършването на последния запис позволява на `Room` да отчете доставката.
-
-<details>
-<summary>Пълен код на <code>src/labnet/transport/SelectorSession.java</code></summary>
 
 ```java title="src/labnet/transport/SelectorSession.java"
 package labnet.transport;
@@ -1034,14 +990,11 @@ public final class SelectorSession extends Session {
 }
 ```
 
-</details>
-
 ### 11. ChatServer — стартирайте общата стая и приемайте връзки
 
 В `src`, пакет `labnet`, създайте `ChatServer`. Това е първата входна точка на приложението. `main()` взема портовете от `Options`. Конструкторът създава една стая, TCP слушател и UDP приемник. `accept()` избира транспорт за новата връзка и предава същия обект `room` на всяка сесия. Обикновен ред от сървърната конзола извиква `room.publish("server", ...)`. Вече можете да пуснете `ChatServer.main()`, да изчакате `ChatServer ready` и да въведете `/stats`. Без свързани клиенти резултатът започва с `active=0;loggedIn=0`. Завършете тази проверка с `/quit`.
 
-<details>
-<summary>Пълен код на <code>src/labnet/ChatServer.java</code></summary>
+<a id="code-server"></a>
 
 ```java title="src/labnet/ChatServer.java"
 package labnet;
@@ -1206,14 +1159,9 @@ public final class ChatServer implements AutoCloseable {
 }
 ```
 
-</details>
-
 ### 12. Benchmark — измерете доставките с реални клиенти
 
 В `src`, пакет `labnet.demo`, създайте `Benchmark`. Този клас ще бъде извикан от клиентската команда `/bench`. В `run()` всяка измервателна връзка има собствено множество от получени двойки (автор, текст). При три клиента с по десет публикации трябва да има 30 различни двойки при всеки получател и 90 събития общо. Сравнете `missing` и `duplicates` с нула. Накрая `append()` добавя ред в CSV файла.
-
-<details>
-<summary>Пълен код на <code>src/labnet/demo/Benchmark.java</code></summary>
 
 ```java title="src/labnet/demo/Benchmark.java"
 package labnet.demo;
@@ -1343,14 +1291,11 @@ public final class Benchmark {
 }
 ```
 
-</details>
-
 ### 13. ChatClient — управлявайте трима участници от една конзола
 
 В `src`, пакет `labnet`, създайте `ChatClient`. Това е втората входна точка. В `open()` всяко име получава собствена `ChatConnection` и UDP монитор. След успешни `AUTH` и `LOGIN` връзката влиза в `clients`. В `command()` командата `/use ana` избира коя връзка ще изпрати следващия ред. Обикновен текст става `BROADCAST`. Когато сървърът го върне като `EVENT`, обработчикът в `open()` отпечатва името на получателя и текста с автора. Затова `boris < [ana] Здравейте!` означава, че Борис е получил съобщението на Ана.
 
-<details>
-<summary>Пълен код на <code>src/labnet/ChatClient.java</code></summary>
+<a id="code-client"></a>
 
 ```java title="src/labnet/ChatClient.java"
 package labnet;
@@ -1501,14 +1446,9 @@ public final class ChatClient implements AutoCloseable {
 }
 ```
 
-</details>
-
 ### 14. Demo — проверете седемте упражнения
 
 В папката **test**, пакет `labnet.demo`, създайте `Demo`. Неговият `main()` стартира сървър на свободни локални портове. Вътрешният `Participant` чете от реална клиентска връзка и сравнява събитията с очакванията. Без аргументи тестът преминава през седемте упражнения. За да повторите само разговора с трима участници, задайте `2` в **Program arguments** на конфигурацията за `Demo`. За всички упражнения очаквайте по един ред от `PASS lab01` до `PASS lab07`.
-
-<details>
-<summary>Пълен код на <code>test/labnet/demo/Demo.java</code></summary>
 
 ```java title="test/labnet/demo/Demo.java"
 package labnet.demo;
@@ -1793,8 +1733,6 @@ public final class Demo {
     }
 }
 ```
-
-</details>
 
 <a id="chat-demo"></a>
 
