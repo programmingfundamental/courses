@@ -179,3 +179,100 @@
 
 Word файлът е преподавателско копие с ред ANSWER след всеки въпрос. След импорт като Quiz сверете отговорите с ключа: 1–4 са с единичен избор, 5–8 с Multiple answers, 9–10 са кратък Text. Ако ANSWER е видим като част от въпрос или опция, пренесете верния отговор в ключа на Forms и премахнете реда от видимия текст. Не включвайте преподавателското копие или този ключ в сайта или студентски архиви.
 
+## Решение на задача 4. Unit тестове за Task Manager
+
+Първият метод използва фиксирани дати. Вторият проверява двете страни на границата с `@CsvSource`. В последните два метода Mockito подава задача и отчети на реалната услуга. Проверката е върху `Duration`, така че загуба на цяло денонощие би довела до неуспешен тест.
+
+Запишете класа като `src/test/java/bg/tu_varna/sit/task_manager/TaskManagerUnitExamplesTest.java`. Изпълнете командата от условието. Очакваният резултат е `Tests run: 5, Failures: 0, Errors: 0, Skipped: 0`.
+
+```java
+package bg.tu_varna.sit.task_manager;
+
+import bg.tu_varna.sit.task_manager.exception.ResourceNotFoundException;
+import bg.tu_varna.sit.task_manager.model.dto.request.FilterReportDto;
+import bg.tu_varna.sit.task_manager.model.dto.response.TaskResponseDto;
+import bg.tu_varna.sit.task_manager.model.entity.Report;
+import bg.tu_varna.sit.task_manager.model.entity.Task;
+import bg.tu_varna.sit.task_manager.model.validator.AfterMidnightValidator;
+import bg.tu_varna.sit.task_manager.model.validator.DateRangeValidator;
+import bg.tu_varna.sit.task_manager.repository.ReportRepository;
+import bg.tu_varna.sit.task_manager.repository.TaskRepository;
+import bg.tu_varna.sit.task_manager.service.ReportServiceImp;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.modelmapper.ModelMapper;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+class TaskManagerUnitExamplesTest {
+
+    @Test
+    void rejectsEndBeforeStart() {
+        var start = LocalDateTime.of(2030, 5, 10, 9, 0);
+        var filter = new FilterReportDto();
+        filter.setFrom(start);
+        filter.setTo(start.minusMinutes(1));
+
+        assertFalse(new DateRangeValidator().isValid(filter, null));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"00:00:00, false", "00:00:01, true"})
+    void checksLowerTimeBoundary(LocalTime time, boolean expected) {
+        assertEquals(expected, new AfterMidnightValidator().isValid(time, null));
+    }
+
+    @Nested
+    class WorkedTime {
+        private final long taskId = 42L;
+        private final ReportRepository reports = mock(ReportRepository.class);
+        private final TaskRepository tasks = mock(TaskRepository.class);
+        private final ModelMapper mapper = mock(ModelMapper.class);
+        private final ReportServiceImp service = new ReportServiceImp(reports, tasks, mapper);
+
+        @BeforeEach
+        void givenExistingTask() {
+            var task = new Task();
+            when(tasks.findById(taskId)).thenReturn(Optional.of(task));
+            when(mapper.map(task, TaskResponseDto.class)).thenReturn(new TaskResponseDto());
+        }
+
+        @Test
+        void addsWorkedTimeBeyond24Hours() throws ResourceNotFoundException {
+            when(reports.findByTaskId(taskId)).thenReturn(List.of(
+                    reportWithTime(16, 45), reportWithTime(9, 30)));
+
+            var summary = service.getTaskWithTotalWorkedTime(taskId);
+
+            assertEquals(Duration.ofHours(26).plusMinutes(15), summary.getTotalWorkedTime());
+        }
+
+        @Test
+        void returnsZeroForTaskWithoutReports() throws ResourceNotFoundException {
+            when(reports.findByTaskId(taskId)).thenReturn(List.of());
+
+            var summary = service.getTaskWithTotalWorkedTime(taskId);
+
+            assertEquals(Duration.ZERO, summary.getTotalWorkedTime());
+        }
+
+        private Report reportWithTime(int hours, int minutes) {
+            var report = new Report();
+            report.setWorkedTime(LocalTime.of(hours, minutes));
+            return report;
+        }
+    }
+}
+```
+
