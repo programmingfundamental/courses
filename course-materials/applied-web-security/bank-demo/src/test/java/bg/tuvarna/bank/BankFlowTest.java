@@ -2,6 +2,7 @@ package bg.tuvarna.bank;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.not;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -31,12 +32,31 @@ class BankFlowTest {
     @Test void simulationNeverAuthenticates() throws Exception {
         var viewer=new MockHttpSession();
         mvc.perform(get("/login").param("case","altered").session(viewer))
-           .andExpect(status().isOk()).andExpect(content().string(containsString("ДОПУСКА")))
-           .andExpect(content().string(containsString("ОТКАЗВА")));
-        mvc.perform(get("/accounts").session(viewer)).andExpect(status().is3xxRedirection());
+           .andExpect(status().isOk())
+           .andExpect(model().attribute("altered", true))
+           .andExpect(content().string(containsString("ДОПУСКА")))
+           .andExpect(content().string(containsString("ОТКАЗВА")))
+           .andExpect(content().string(containsString("name=\"case\" value=\"altered\"")));
         mvc.perform(post("/login").with(csrf()).session(viewer).param("username","admin").param("password","wrong"))
            .andExpect(redirectedUrl("/login?error"));
+        mvc.perform(post("/login").with(csrf()).session(viewer)
+                .param("username","other").param("password","wrong").param("case","altered"))
+           .andExpect(redirectedUrl("/login?error"));
+        mvc.perform(post("/login").with(csrf()).session(viewer)
+                .param("username","admin").param("password","wrong").param("case","altered"))
+           .andExpect(redirectedUrl("/demo/accounts"));
+        mvc.perform(get("/demo/accounts").session(viewer))
+           .andExpect(status().isOk())
+           .andExpect(model().attribute("samples", hasSize(3)))
+           .andExpect(content().string(containsString("Ателие Орбита")))
+           .andExpect(content().string(containsString("Студио Маяк")))
+           .andExpect(content().string(containsString("Фонд Хоризонт")));
+        mvc.perform(get("/accounts").session(viewer)).andExpect(status().is3xxRedirection());
+        mvc.perform(get("/accounts/1").session(viewer)).andExpect(status().is3xxRedirection());
         mvc.perform(get("/accounts/new").session(viewer)).andExpect(status().is3xxRedirection());
+        mvc.perform(post("/login").with(csrf()).session(viewer)
+                .param("username","admin").param("password","admin").param("case","altered"))
+           .andExpect(redirectedUrl("/accounts"));
         assertThat(db.queryForList("select login from bank_users",String.class)).containsExactly("admin");
         assertThat(db.queryForObject("select password_hash from bank_users",String.class)).startsWith("$2");
     }
@@ -49,6 +69,9 @@ class BankFlowTest {
            .param("alias","Тест Кедър").param("iban",iban).param("egn",egn).param("note","<b>Отчет & печат</b>"))
            .andExpect(status().is3xxRedirection()).andReturn();
         var path=res.getResponse().getRedirectedUrl(); long id=Long.parseLong(path.substring(path.lastIndexOf('/')+1));
+        mvc.perform(get("/demo/accounts")).andExpect(status().isOk())
+           .andExpect(model().attribute("samples", hasSize(3)))
+           .andExpect(content().string(not(containsString("Тест Кедър"))));
         var stored=db.queryForMap("select iban_cipher,egn_cipher,note from accounts where id=?",id);
         assertThat(stored.get("IBAN_CIPHER")).isEqualTo(ShiftCipher.encrypt(iban)).isNotEqualTo(iban);
         assertThat(stored.get("EGN_CIPHER")).isEqualTo(ShiftCipher.encrypt(egn)).isNotEqualTo(egn);
