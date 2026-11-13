@@ -17,13 +17,18 @@ public class BankController {
     @GetMapping("/") String home() { return "redirect:/accounts"; }
 
     @GetMapping("/login") String login(@RequestParam(name="case", defaultValue="mistake") String scenario, Model m) {
-        // Fixed truth-table model. It neither queries users nor modifies the security context.
-        boolean correct = scenario.equals("match");
-        boolean altered = scenario.equals("altered");
-        m.addAttribute("scenario",correct?"match":altered?"altered":"mistake");
-        m.addAttribute("correct",correct); m.addAttribute("altered",altered);
-        m.addAttribute("weakResult",correct || altered);
+        boolean correct = "match".equals(scenario);
+        boolean altered = "altered".equals(scenario);
+        m.addAttribute("correct", correct);
+        m.addAttribute("altered", altered);
+        m.addAttribute("weakResult", correct || altered);
         return "login";
+    }
+
+    @GetMapping("/demo/accounts")
+    String demoAccounts(Model model) {
+        model.addAttribute("samples", SampleAccount.EXAMPLES);
+        return "demo-accounts";
     }
     @GetMapping("/accounts") String list(@RequestParam(defaultValue="") String q,Model m) {
         if(q.length()>100) throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
