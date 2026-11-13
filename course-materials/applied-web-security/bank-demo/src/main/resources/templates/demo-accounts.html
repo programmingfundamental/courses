@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{parts :: head('Учебен регистър')}"></head>
+<body>
+<header th:replace="~{parts :: demoHeader}"></header>
+<main>
+  <div class="intro">
+    <a th:href="@{/login}">← Обратно към входа</a>
+    <h1>Учебен регистър</h1>
+    <p>При грешна парола и променено условие моделът показва какви данни биха станали видими. Тук разглеждате три фиктивни сметки само за четене.</p>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th scope="col">Псевдоним</th><th scope="col">Учебен IBAN</th><th scope="col">Учебно ЕГН</th></tr></thead>
+      <tbody>
+        <tr th:each="sample : ${samples}">
+          <td th:text="${sample.alias}"></td>
+          <td class="mono" th:text="${sample.iban}"></td>
+          <td class="mono" th:text="${sample.egn}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+<footer th:replace="~{parts :: foot}"></footer>
+</body>
+</html>
