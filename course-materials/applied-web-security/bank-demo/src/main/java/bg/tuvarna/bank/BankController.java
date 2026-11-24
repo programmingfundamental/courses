@@ -1,7 +1,11 @@
 package bg.tuvarna.bank;
 
-import java.util.Locale;
-import org.springframework.dao.DuplicateKeyException;
+import java.security.Principal;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.List;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,67 +16,92 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class BankController {
     private final Accounts accounts;
-    BankController(Accounts accounts) { this.accounts=accounts; }
 
-    @GetMapping("/") String home() { return "redirect:/accounts"; }
+    BankController(Accounts accounts) {
+        this.accounts = accounts;
+    }
 
-    @GetMapping("/login") String login(@RequestParam(name="case", defaultValue="mistake") String scenario, Model m) {
-        boolean correct = "match".equals(scenario);
-        boolean altered = "altered".equals(scenario);
-        m.addAttribute("correct", correct);
-        m.addAttribute("altered", altered);
-        m.addAttribute("weakResult", correct || altered);
+    @ModelAttribute("accountTypes")
+    List<String> accountTypes() {
+        return Accounts.TYPES;
+    }
+
+    @GetMapping("/")
+    String home() {
+        return "redirect:/accounts";
+    }
+
+    @GetMapping("/login")
+    String login() {
         return "login";
     }
 
     @GetMapping("/demo/accounts")
-    String demoAccounts(Model model) {
-        model.addAttribute("samples", SampleAccount.EXAMPLES);
-        return "demo-accounts";
+    String oldRegister() {
+        return "redirect:/accounts";
     }
-    @GetMapping("/accounts") String list(@RequestParam(defaultValue="") String q,Model m) {
-        if(q.length()>100) throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        m.addAttribute("q",q);m.addAttribute("rows",accounts.find(q));return "accounts";
-    }
-    @GetMapping("/accounts/new") String form(@RequestParam(defaultValue="") String example, Model m) {
-        if(example.equals("bold") || example.equals("marker")) {
-            var rnd=java.util.concurrent.ThreadLocalRandom.current();
-            return formValues(m,"Учебно ателие",String.format(Locale.ROOT,"BG00DEMO%014d",rnd.nextLong(100000000000000L)),
-                String.format(Locale.ROOT,"000000%04d",rnd.nextInt(10000)),
-                example.equals("bold")?"<b>Месечен отчет</b>":"Преглед: [[МАРКЕР]]","");
+
+    @GetMapping("/accounts")
+    String list(@RequestParam(defaultValue = "") String type, Principal principal,
+                Model model, HttpServletResponse response) {
+        if (type.length() > 500) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-        return formValues(m,"","","","","");
-    }
-    private String formValues(Model m,String alias,String iban,String egn,String note,String error) {
-        m.addAttribute("alias",alias);m.addAttribute("iban",iban);m.addAttribute("egn",egn);
-        m.addAttribute("note",note);m.addAttribute("error",error);return "create";
-    }
-    @PostMapping("/accounts") String create(@RequestParam String alias,@RequestParam String iban,@RequestParam String egn,
-        @RequestParam(defaultValue="") String note,Model m,RedirectAttributes flash,jakarta.servlet.http.HttpServletResponse response) {
-        iban=iban.strip().toUpperCase(Locale.ROOT);egn=egn.strip();
-        String err=null;
-        if(alias.isBlank() || alias.length()>60) err="Въведете учебен псевдоним от 1 до 60 знака.";
-        else if(!iban.matches("BG00DEMO[0-9]{14}")) err="Учебният IBAN трябва да е BG00DEMO, последвано от точно 14 цифри.";
-        else if(!egn.matches("000000[0-9]{4}")) err="Учебното ЕГН трябва да започва с 000000 и да съдържа още 4 цифри.";
-        else if(note.length()>300) err="Бележката може да е до 300 знака.";
-        if(err!=null) { response.setStatus(400); return formValues(m,alias,iban,egn,note,err); }
+        model.addAttribute("type", type);
         try {
-            long id=accounts.add(alias,iban,egn,note);flash.addFlashAttribute("created",true);
-            return "redirect:/accounts/"+id;
-        } catch (DuplicateKeyException e) {
-            response.setStatus(409);return formValues(m,alias,iban,egn,note,"Този учебен IBAN вече съществува.");
+            model.addAttribute("rows", accounts.find(principal.getName(), type));
+        } catch (DataAccessException exception) {
+            response.setStatus(400);
+            model.addAttribute("rows", List.of());
+            model.addAttribute("error", "Филтърът образува невалидна SQL заявка. Коригирайте вида сметка.");
         }
+        return "accounts";
     }
-    @GetMapping("/accounts/{id}") String account(@PathVariable long id,@RequestParam(defaultValue="0") int shift,Model m) {
-        if(shift<0 || shift>9) throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        var a=accounts.one(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
-        m.addAttribute("row",a);m.addAttribute("shift",shift);
-        m.addAttribute("guessIban",ShiftCipher.guess(a.iban(),shift));m.addAttribute("guessEgn",ShiftCipher.guess(a.egn(),shift));
-        m.addAttribute("match",shift==ShiftCipher.KEY);
-        // Only a fixed, inert presentation vocabulary is recognized. Never evaluate supplied markup.
-        String n=a.note();boolean bold=n.startsWith("<b>") && n.endsWith("</b>") && n.length()>=7;
-        m.addAttribute("boldModel",bold);m.addAttribute("modelText",bold?n.substring(3,n.length()-4):n);
-        m.addAttribute("marker",n.contains("[[МАРКЕР]]"));
+
+    @GetMapping("/accounts/new")
+    String form(Model model) {
+        return formValues(model, "", "", "", Accounts.TYPES.get(0), LocalDate.now().toString(), "", "", "");
+    }
+
+    private String formValues(Model model, String firstName, String middleName, String lastName,
+                              String type, String openedOn, String egn, String reason, String error) {
+        model.addAttribute("firstName", firstName);
+        model.addAttribute("middleName", middleName);
+        model.addAttribute("lastName", lastName);
+        model.addAttribute("type", type);
+        model.addAttribute("openedOn", openedOn);
+        model.addAttribute("egn", egn);
+        model.addAttribute("reason", reason);
+        model.addAttribute("error", error);
+        return "create";
+    }
+
+    @PostMapping("/accounts")
+    String create(@RequestParam String firstName, @RequestParam String middleName,
+                  @RequestParam String lastName, @RequestParam String type,
+                  @RequestParam String openedOn, @RequestParam String egn,
+                  @RequestParam String reason, Principal principal, Model model,
+                  RedirectAttributes flash, HttpServletResponse response) {
+        try {
+            LocalDate date = LocalDate.parse(openedOn);
+            accounts.add(principal.getName(), firstName, middleName, lastName, type, date, egn.strip(), reason);
+        } catch (DateTimeParseException exception) {
+            response.setStatus(400);
+            return formValues(model, firstName, middleName, lastName, type, openedOn, egn, reason,
+                "Попълнете валидна дата на откриване.");
+        } catch (IllegalArgumentException exception) {
+            response.setStatus(400);
+            return formValues(model, firstName, middleName, lastName, type, openedOn, egn, reason,
+                exception.getMessage());
+        }
+        flash.addFlashAttribute("created", true);
+        return "redirect:/accounts";
+    }
+
+    @GetMapping("/accounts/{id}")
+    String account(@PathVariable long id, Principal principal, Model model) {
+        model.addAttribute("row", accounts.one(id, principal.getName())
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
         return "account";
     }
 }

@@ -11,7 +11,7 @@ goto run
 :bundled
 set "BANK_JAR=app\bank-demo.jar"
 :run
-echo Bank Lab: http://127.0.0.1:8087/login  -  admin / admin
+echo Bank Lab: http://127.0.0.1:8087/login  -  user / 123456
 echo Stop with Ctrl+C. Restart to reset the demo data.
 java -jar "%BANK_JAR%" --server.address=127.0.0.1 --server.port=8087
 set "BANK_RESULT=%ERRORLEVEL%"

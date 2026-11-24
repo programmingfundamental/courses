@@ -2,6 +2,8 @@
 
 The Maven project includes two unit tests for a date-range validator and five REST API integration tests using MockMvc and an in-memory H2 database. Use JDK 17 or 21. The first run needs access to the Maven repository to download dependencies.
 
+[Go to the five independent unit testing tasks](#independent-unit-testing-tasks).
+
 ## Run the seven tests
 
 Extract the ZIP into an empty directory. Open a terminal in the `task-manager` folder containing `pom.xml` and the Maven Wrapper.
@@ -81,3 +83,99 @@ void acceptsIntervalAcrossMidnight() {
 Run the class with `.\mvnw.cmd -Dtest=DateRangeValidatorTest test` in PowerShell or `sh ./mvnw -Dtest=DateRangeValidatorTest test` in Bash. All three tests should pass. Put additional classes under `src/test/java` and give them names ending in `Test`. To run a test from your IDE, import `pom.xml` as a Maven project and run the method from the class.
 
 If you have already extended Task Manager in a previous lab, keep your changes. Merge the missing test-scoped dependencies from `pom.xml` and the files you need from `src/test`. Update the integration test expectations if your API contract has changed.
+
+## Independent unit testing tasks
+
+Write tests for the following five methods in the Task Manager starter project. Create `TaskManagerFiveUnitTest` under `src/test/java/bg/tu_varna/sit/task_manager/` with package `bg.tu_varna.sit.task_manager`. Check the supplied data against the returned result or thrown exception.
+
+Use JUnit 5 and call the real methods directly. The tests must run without HTTP communication, MockMvc, a Spring context, `@SpringBootTest`, or a database. Pass Mockito mocks of only the required repositories through the constructors. Use a real `new CustomMapper()` to map tasks. Do not mock the service or the method under test.
+
+Each described test case must run independently. Use the fixed data from the tasks. You may use `ReflectionTestUtils.setField(...)` to prepare fields in `Task` and `TaskRequestDto`, which do not have setters; this does not start a Spring context.
+
+### Task 1. Convert a role to an authority
+
+Write a parameterized test for `Role.asAuthority()` with two cases:
+
+| Role | Expected result |
+| --- | --- |
+| `Role.USER` | `"ROLE_USER"` |
+| `Role.ADMIN` | `"ROLE_ADMIN"` |
+
+Check the exact returned string, including the prefix and uppercase letters. This task needs no mocks.
+
+### Task 2. Load user details
+
+Test `AppUserDetailsService.loadUserByUsername("alice")`. Arrange for `UserRepository.findByUsername("alice")` to return a user with username `alice`, stored password `stored-password-hash`, role `USER`, and `enabled = true`.
+
+Write three tests:
+
+| Repository result | Expected result |
+| --- | --- |
+| The active user described above | `UserDetails` with username `alice`, password `stored-password-hash`, `isEnabled() = true`, and exactly one authority: `ROLE_USER` |
+| The same data with `enabled = false` | The returned `UserDetails` has `isEnabled() = false` |
+| `Optional.empty()` | `UsernameNotFoundException` |
+
+Test the conversion to `UserDetails` by calling the method directly. Do not log in to the application.
+
+### Task 3. Find a task by ID
+
+Test `TaskServiceImp.findById(42L)`. For the successful case, arrange for `TaskRepository.findById(42L)` to return an `Optional` containing a task with these values:
+
+| Field | Value |
+| --- | --- |
+| `id` | `42` |
+| `summary` | `Prepare unit tests` |
+| `description` | `Write tests for task lookup` |
+| `deadline` | `2030-05-10T17:00:00` |
+
+Check that the returned `TaskResponseDto` contains all four values. Use `LocalDateTime` for the deadline.
+
+In a separate test, arrange for the repository to return `Optional.empty()`. Expect `java.lang.module.ResolutionException`, which the current implementation of this method uses.
+
+### Task 4. Update a task while preserving its ID
+
+Test `TaskServiceImp.update(42L, request)`. Prepare an existing task with ID `42`, summary `Original task title`, description `Original task description`, and deadline `2030-05-10T17:00:00`. The repository must return this task when looked up by ID, and its mocked `save(...)` must return the object passed as the argument.
+
+For the first test, supply a `TaskRequestDto` with these values:
+
+| Field | New value |
+| --- | --- |
+| `summary` | `Updated task title` |
+| `description` | `Updated task description` |
+| `deadline` | `2030-05-12T18:30:00` |
+
+Check that the returned `TaskResponseDto` contains the new values and still has ID `42`.
+
+For the second test, prepare the original task again. Supply the same new summary and deadline, but set `description = null`. Expect the new summary and deadline, the original description `Original task description`, and unchanged ID `42`. `CustomMapper` skips null values. This tests a direct service call; the DTO's `@NotNull` annotation is not automatically evaluated during this call.
+
+### Task 5. Validate a refresh token
+
+Test `RefreshTokenService.validateRefreshToken("test-token")`. Arrange the mock of `RefreshTokenRepository.findByTokenAndRevokedFalse("test-token")` for three cases:
+
+| Repository result | Expected result |
+| --- | --- |
+| An `Optional` containing a token with `expiryDate` of `2099-01-01T00:00:00Z` | Returns the same `RefreshToken` object |
+| An `Optional` containing a token with `expiryDate` of `2000-01-01T00:00:00Z` | `RuntimeException` with message `Refresh token е изтекъл` |
+| `Optional.empty()` | `RuntimeException` with message `Невалиден refresh token` |
+
+Set `token = "test-token"`, `username = "alice"`, and `revoked = false` for both token objects. Use `Instant` for the expiry dates. Check object identity for the successful case, and the exception type and message for the failures. The messages above are the literal Bulgarian strings returned by the application. `test-token` is an ordinary test string; you do not need to generate a JWT.
+
+### Run and submit your tests
+
+From the directory containing `pom.xml`, run only your new class:
+
+**Windows PowerShell**
+
+```powershell
+.\mvnw.cmd -Dtest=TaskManagerFiveUnitTest test
+```
+
+**Linux and macOS**
+
+```bash
+sh ./mvnw -Dtest=TaskManagerFiveUnitTest test
+```
+
+Expect 12 executions: 2 for task 1, 3 for task 2, 2 for task 3, 2 for task 4, and 3 for task 5. The summary for this class should read `Tests run: 12, Failures: 0, Errors: 0, Skipped: 0` and `BUILD SUCCESS`.
+
+Submit `TaskManagerFiveUnitTest.java` with all required imports and helper methods, the Maven summary, and a short explanation for each task: which data you prepare and which result you check.

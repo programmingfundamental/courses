@@ -1,6 +1,47 @@
-<!doctype html><html lang="bg" xmlns:th="http://www.thymeleaf.org"><head th:replace="~{parts :: head('Регистър на сметките')}"></head><body><header th:replace="~{parts :: nav}"></header><main><div class="intro title-row"><div><span class="eyebrow">Операции / Регистър</span><h1>Банкови сметки</h1><p>Намерете учебна сметка и разгледайте записа ѝ.</p></div><a class="primary" th:href="@{/accounts/new}">+ Нова сметка</a></div>
-<section class="card"><form method="get" th:action="@{/accounts}"><label for="q">Търсене по псевдоним, учебен IBAN или ЕГН</label><div class="search"><input type="search" id="q" name="q" maxlength="100" placeholder="Например: Орбита или 1001" th:value="${q}"><button class="primary">Търси</button><a class="quiet" th:href="@{/accounts}">Изчисти</a></div></form></section>
-<section class="ledger"><div class="title-row"><h2>Резултати</h2><span class="badge" th:text="|Брой: ${rows.size()}|"></span></div>
-<div class="table-wrap" th:unless="${rows.isEmpty()}"><table><thead><tr><th>№</th><th>Псевдоним</th><th>Край на IBAN</th><th>Досие</th></tr></thead>
-<tbody><tr th:each="a : ${rows}"><td th:text="${a.id}"></td><td th:text="${a.alias}"></td><td class="mono" th:text="|•••• ${a.ibanTail}|"></td><td><a th:href="@{/accounts/{id}(id=${a.id})}">Отвори →</a></td></tr></tbody></table></div>
-<p class="card" th:if="${rows.isEmpty()}">Няма съвпадения. Опитайте с по-кратък фрагмент или изчистете търсенето.</p></section></main><footer th:replace="~{parts :: foot}"></footer></body></html>
+<!doctype html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{parts :: head('Сметките ми')}"></head>
+<body>
+<header th:replace="~{parts :: nav}"></header>
+<main class="accounts-page">
+  <div class="intro title-row">
+    <div><h1>Сметките ми</h1><p>Изберете вид сметка или оставете филтъра празен за всички ваши сметки.</p></div>
+    <a class="primary" th:href="@{/accounts/new}">Откриване на сметка</a>
+  </div>
+  <p class="notice" role="status" th:if="${created}">Сметката е открита. IBAN е генериран автоматично.</p>
+  <section class="card">
+    <form method="get" th:action="@{/accounts}">
+      <label for="type">Вид сметка</label>
+      <div class="search">
+        <input id="type" name="type" list="account-types" maxlength="500" th:value="${type}" placeholder="Всички мои сметки">
+        <datalist id="account-types"><option th:each="item : ${accountTypes}" th:value="${item}"></option></datalist>
+        <button class="primary">Изведи сметките ми</button>
+        <a th:href="@{/accounts}">Изчисти</a>
+      </div>
+    </form>
+  </section>
+  <p class="alert" role="alert" th:if="${error}" th:text="${error}"></p>
+  <section class="ledger">
+    <p th:text="|Намерени сметки — ${rows.size()}|"></p>
+    <div class="table-wrap" th:unless="${rows.isEmpty()}">
+      <table>
+        <thead><tr>
+          <th scope="col">Три имена на титуляря</th><th scope="col">Вид сметка</th>
+          <th scope="col">IBAN</th><th scope="col">Дата на откриване</th>
+          <th scope="col">Криптирано ЕГН</th><th scope="col">Основание за откриване</th>
+        </tr></thead>
+        <tbody><tr th:each="account : ${rows}">
+          <td th:text="${account.holderName}"></td><td th:text="${account.accountType}"></td>
+          <td class="mono iban" th:text="${account.iban}"></td>
+          <td th:text="${account.openedOn}"></td><td class="mono" th:text="${account.egn}"></td>
+          <!-- Intentional stored XSS for the local exercise. -->
+          <td class="reason" th:utext="${account.reason}"></td>
+        </tr></tbody>
+      </table>
+    </div>
+    <p class="card" th:if="${rows.isEmpty() and error == null}">Няма сметки за избрания вид.</p>
+  </section>
+</main>
+<footer th:replace="~{parts :: foot}"></footer>
+</body>
+</html>

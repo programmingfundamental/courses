@@ -86,6 +86,14 @@ for (const [index, course] of courses.entries()) {
   write(`bg/${resourcePage}.md`, document('Помощни материали', 0, readStudentFile(bgFile)));
   write(`en/${resourcePage}.md`, document('Study resources', 0, readStudentFile(path.join(resourceDir, 'resources.en.md'))));
 
+  if (course.id === 'applied-web-security') {
+    for (const locale of ['bg', 'en']) {
+      const source = locale === 'bg' ? 'tasks.md' : 'tasks.en.md';
+      write(`${locale}/${resourcePage}/zadachi.md`, taskDocument(
+        readStudentFile(path.join(sourceRoot, 'bank-demo', source)), locale));
+    }
+  }
+
   function readStudentFile(file) {
     const body = fs.readFileSync(file, 'utf8').replaceAll('\r\n', '\n');
     const edits = [];

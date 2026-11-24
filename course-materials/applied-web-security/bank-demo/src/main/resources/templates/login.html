@@ -4,43 +4,19 @@
 <body>
 <header th:replace="~{parts :: demoHeader}"></header>
 <main>
-  <div class="intro"><h1>Вход в банката</h1></div>
-  <div class="grid login-grid">
-    <section class="card">
-      <h2>Вход за оператор</h2>
-      <p>Учебен потребител и парола <code>admin</code> / <code>admin</code>.</p>
-      <p class="alert" role="alert" th:if="${param.error != null}">Името или паролата са грешни.</p>
-      <p class="notice" th:if="${param.logout != null}">Сесията приключи.</p>
-      <form method="post" th:action="@{/login}">
-        <label for="username">Потребител</label>
-        <input id="username" name="username" autocomplete="username" required>
-        <label for="password">Парола</label>
-        <input id="password" name="password" type="password" autocomplete="current-password" required>
-        <label class="demo-option" for="altered">
-          <input id="altered" type="checkbox" name="case" value="altered" th:checked="${altered}">
-          Променено условие
-        </label>
-        <button class="primary">Вход в регистъра</button>
-      </form>
-    </section>
-    <section class="card accent">
-      <h2>Демонстрация на SQL инжекция</h2>
-      <p>Въведете потребител <code>admin</code> и грешна парола, например <code>demo</code>. Натиснете <strong>Вход в регистъра</strong>. Ще видите отказ.</p>
-      <p>Повторете със същите данни, като отметнете <strong>Променено условие</strong>. Моделът приема условието за вярно и показва трите фиктивни сметки, които биха станали видими при такъв пропуск.</p>
-      <details th:open="${param.case != null}">
-        <summary>Сравнете решенията за достъп</summary>
-        <div class="tabs">
-          <a th:href="@{/login(case='match')}" th:classappend="${correct ? 'on' : ''}">Валидна парола</a>
-          <a th:href="@{/login(case='mistake')}" th:classappend="${!correct and !altered ? 'on' : ''}">Грешна парола</a>
-          <a th:href="@{/login(case='altered')}" th:classappend="${altered ? 'on' : ''}">Променено условие</a>
-        </div>
-        <div class="compare">
-          <div><small>Уязвим модел</small><strong th:text="${weakResult ? 'ДОПУСКА' : 'ОТКАЗВА'}"></strong></div>
-          <div><small>Проверка на данните</small><strong th:text="${correct ? 'ДОПУСКА' : 'ОТКАЗВА'}"></strong></div>
-        </div>
-      </details>
-    </section>
-  </div>
+  <div class="intro"><h1>Вход в БанкЛаб</h1><p>Учебна банка с фиктивни сметки.</p></div>
+  <section class="card login-card">
+    <p>Влезте с <code>user</code> и парола <code>123456</code>.</p>
+    <p class="alert" role="alert" th:if="${param.error != null}">Името или паролата са грешни.</p>
+    <p class="notice" th:if="${param.logout != null}">Сесията приключи.</p>
+    <form method="post" th:action="@{/login}">
+      <label for="username">Потребител</label>
+      <input id="username" name="username" autocomplete="username" required>
+      <label for="password">Парола</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+      <button class="primary">Вход</button>
+    </form>
+  </section>
 </main>
 <footer th:replace="~{parts :: foot}"></footer>
 </body>
