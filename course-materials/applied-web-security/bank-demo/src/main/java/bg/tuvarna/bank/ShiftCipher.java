@@ -1,18 +1,30 @@
 package bg.tuvarna.bank;
 
-/** Teaching cipher only: independent rotations of Latin letters and decimal digits. */
+/** Deliberately weak teaching cipher. The prefix identifies the digit rotation. */
 public final class ShiftCipher {
+    private static final String PREFIX = "ROT5:";
+
     private ShiftCipher() {}
-    static final int KEY = 3;
-    public static String rotate(String value, int shift) {
-        StringBuilder out = new StringBuilder(value.length());
-        for (char c : value.toCharArray()) {
-            if (c >= 'A' && c <= 'Z') out.append((char) ('A' + Math.floorMod(c - 'A' + shift, 26)));
-            else if (c >= '0' && c <= '9') out.append((char) ('0' + Math.floorMod(c - '0' + shift, 10)));
-            else out.append(c);
+
+    private static String rotate(String digits) {
+        StringBuilder result = new StringBuilder(digits.length());
+        for (char digit : digits.toCharArray()) {
+            result.append((char) ('0' + (digit - '0' + 5) % 10));
         }
-        return out.toString();
+        return result.toString();
     }
-    public static String encrypt(String value) { return rotate(value, KEY); }
-    public static String guess(String value, int shift) { return rotate(value, -shift); }
+
+    public static String encrypt(String egn) {
+        if (egn == null || !egn.matches("[0-9]{10}")) {
+            throw new IllegalArgumentException("ЕГН трябва да съдържа точно 10 цифри.");
+        }
+        return PREFIX + rotate(egn);
+    }
+
+    public static String decrypt(String ciphertext) {
+        if (ciphertext == null || !ciphertext.matches("ROT5:[0-9]{10}")) {
+            throw new IllegalArgumentException("Очаква се ROT5: и 10 цифри.");
+        }
+        return rotate(ciphertext.substring(PREFIX.length()));
+    }
 }

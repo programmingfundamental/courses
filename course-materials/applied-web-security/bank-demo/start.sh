@@ -8,6 +8,6 @@ else
     sh ./mvnw -q package
     bank_jar=target/bank-demo.jar
 fi
-echo 'Bank Lab: http://127.0.0.1:8087/login  -  admin / admin'
+echo 'Bank Lab: http://127.0.0.1:8087/login  -  user / 123456'
 echo 'Stop with Ctrl+C. Restart to reset the demo data.'
 exec java -jar "$bank_jar" --server.address=127.0.0.1 --server.port=8087
