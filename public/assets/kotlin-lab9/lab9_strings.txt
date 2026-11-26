@@ -1,0 +1,11 @@
+   
+    <string name="place1">I am strong.</string>
+    <string name="place2">I believe in myself.</string>
+    <string name="place3">Each day is a new opportunity to grow and be a better version of myself.</string>
+    <string name="place4">Every challenge in my life is an opportunity to learn from.</string>
+    <string name="place5">I have so much to be grateful for.</string>
+    <string name="place6">Good things are always coming into my life.</string>
+    <string name="place7">New opportunities await me at every turn.</string>
+    <string name="place8">I have the courage to follow my heart.</string>
+    <string name="place9">Things will unfold at precisely the right time.</string>
+    <string name="place10">I will be present in all the moments that this day brings.</string>

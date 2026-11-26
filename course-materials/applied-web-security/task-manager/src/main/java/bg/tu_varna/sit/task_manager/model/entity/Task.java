@@ -1,7 +1,10 @@
 package bg.tu_varna.sit.task_manager.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -12,6 +15,9 @@ import java.util.Set;
 @Getter
 @Entity
 @Table(name = "tasks")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

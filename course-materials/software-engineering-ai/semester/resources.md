@@ -4,6 +4,44 @@
 
 [Преминете към петте самостоятелни задачи за unit тестове](#самостоятелни-задачи-за-unit-тестове).
 
+## Създаване на тестови данни с Builder
+
+В обновения ZIP всички конкретни entity, request и response модели имат Lombok `builder()`. Използвайте го в тестовете за задаване на частните полета:
+
+```java
+var request = TaskRequestDto.builder()
+        .summary("Example task title")
+        .description("Example task description")
+        .deadline(LocalDateTime.of(2035, 5, 10, 17, 0))
+        .build();
+var task = Task.builder()
+        .id(7L)
+        .summary(request.getSummary())
+        .description(request.getDescription())
+        .deadline(request.getDeadline())
+        .build();
+var response = TaskResponseDto.builder()
+        .id(task.getId())
+        .summary(task.getSummary())
+        .description(task.getDescription())
+        .deadline(task.getDeadline())
+        .build();
+System.out.println(response.getSummary()); // Example task title
+```
+
+Поставете кода в тестов метод и импортирайте `LocalDateTime` от `java.time`, `Task` от `model.entity`, `TaskRequestDto` от `model.dto.request` и `TaskResponseDto` от `model.dto.response` на пакета `bg.tu_varna.sit.task_manager`. Проверете, че се извежда `Example task title`.
+
+| Група | Класове с `builder()` |
+| --- | --- |
+| Entity | `Task`, `Report`, `User`, `RefreshToken` |
+| Request | `TaskRequestDto`, `ReportRequestDto`, `FilterReportDto`, `LoginRequest`, `RegisterRequest`, `RefreshRequest` |
+| Response | `TaskResponseDto`, `ReportResponseDto`, `TaskReportResponse`, `AuthResponse` |
+| Модел за грешка | `ErrorDetail` |
+
+За всеки тест създавайте нови обекти. Builder-ът не изпълнява Bean Validation: непосочените референтни полета остават `null`, числовите примитиви — `0`, а булевите — `false`. При активен потребител задайте `enabled(true)`. `Role` е enum и се използва като `Role.USER` или `Role.ADMIN`. В `Report` полето е `workedTime`, а в request и response DTO за отчет — `workTime`; общото време в `TaskReportResponse` е `Duration`.
+
+Импортирайте проекта като Maven проект. Ако IDE не разпознава `builder()`, включете annotation processing и презаредете Maven зависимостите.
+
 ## Стартирайте седемте теста
 
 Разархивирайте ZIP файла в празна папка. Отворете терминал в подпапката `task-manager`, където се намират `pom.xml` и Maven Wrapper.
@@ -72,9 +110,10 @@ sh ./mvnw test
 @Test
 void acceptsIntervalAcrossMidnight() {
     var startOfInterval = LocalDateTime.of(2030, 5, 10, 23, 59);
-    var range = new FilterReportDto();
-    range.setFrom(startOfInterval);
-    range.setTo(startOfInterval.plusMinutes(2));
+    var range = FilterReportDto.builder()
+            .from(startOfInterval)
+            .to(startOfInterval.plusMinutes(2))
+            .build();
 
     assertTrue(validator.isValid(range, null));
 }
@@ -90,7 +129,7 @@ void acceptsIntervalAcrossMidnight() {
 
 Използвайте JUnit 5 и извиквайте реалните методи директно. Тестовете трябва да работят без HTTP комуникация, `MockMvc`, Spring контекст, `@SpringBootTest` и база данни. Подайте чрез конструкторите Mockito заместители само на необходимите хранилища. За преобразуването на задачи използвайте реален `new CustomMapper()`. Не замествайте услугата или метода, който проверявате.
 
-Всеки от описаните тестови случаи трябва да се изпълнява самостоятелно. Използвайте фиксираните данни от условията. За подготовка на полетата на `Task` и `TaskRequestDto`, които нямат setters, можете да използвате `ReflectionTestUtils.setField(...)`; това не стартира Spring контекст.
+Всеки от описаните тестови случаи трябва да се изпълнява самостоятелно. Използвайте фиксираните данни от условията. Създавайте entity, request и response обектите чрез `builder()...build()`, както в примера по-горе. Не използвайте reflection или `ReflectionTestUtils.setField(...)`.
 
 ### Задача 1. Преобразуване на роля в право за достъп
 

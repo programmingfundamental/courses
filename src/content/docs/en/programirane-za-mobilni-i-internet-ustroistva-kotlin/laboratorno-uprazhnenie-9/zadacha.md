@@ -7,10 +7,10 @@ taskPage: true
 ---
 Create an application that displays images and text using different lists and grids in Jetpack Compose.
 
-1. Add the text resources from the supplied `lab9_strings` file to `app/src/main/res/values/strings.xml`.
-2. Extract the images from the supplied `lab9_images.zip` archive and add them to `app/src/main/res/drawable`.
+1. Download [lab9_strings.txt](/courses/assets/kotlin-lab9/lab9_strings.txt) and add its `<string>` elements inside the existing `<resources>` element in `app/src/main/res/values/strings.xml`. Keep the other resources in the file.
+2. Download [lab9_images.zip](/courses/assets/kotlin-lab9/lab9_images.zip), extract it, and add `image1.jpg`–`image10.jpg` to `app/src/main/res/drawable`.
 
-The repository does not contain `lab9_strings` or `lab9_images.zip`, and no download link is provided. To complete the exercise with these specific teaching resources, obtain them from the instructor. Do not assume their names or contents.
+The resources contain 10 text entries named `place1`–`place10` and 10 images. Build the project and check that `R.string.place1`–`R.string.place10` and `R.drawable.image1`–`R.drawable.image10` are available. Pair each text with the image bearing the same number.
 
 ## Model and data
 

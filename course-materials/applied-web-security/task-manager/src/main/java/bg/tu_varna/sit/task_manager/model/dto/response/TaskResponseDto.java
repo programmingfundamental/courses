@@ -1,6 +1,7 @@
 package bg.tu_varna.sit.task_manager.model.dto.response;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Builder
 public class TaskResponseDto {
     private long id;
     private String summary;

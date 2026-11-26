@@ -4,6 +4,44 @@ The Maven project includes two unit tests for a date-range validator and five RE
 
 [Go to the five independent unit testing tasks](#independent-unit-testing-tasks).
 
+## Create test data with Builder
+
+In the updated ZIP, all concrete entity, request, and response models provide Lombok `builder()`. Use it to set private fields when preparing test data:
+
+```java
+var request = TaskRequestDto.builder()
+        .summary("Example task title")
+        .description("Example task description")
+        .deadline(LocalDateTime.of(2035, 5, 10, 17, 0))
+        .build();
+var task = Task.builder()
+        .id(7L)
+        .summary(request.getSummary())
+        .description(request.getDescription())
+        .deadline(request.getDeadline())
+        .build();
+var response = TaskResponseDto.builder()
+        .id(task.getId())
+        .summary(task.getSummary())
+        .description(task.getDescription())
+        .deadline(task.getDeadline())
+        .build();
+System.out.println(response.getSummary()); // Example task title
+```
+
+Place this code in a test method. Import `LocalDateTime` from `java.time`, and `Task`, `TaskRequestDto`, and `TaskResponseDto` from the `model.entity`, `model.dto.request`, and `model.dto.response` subpackages of `bg.tu_varna.sit.task_manager`. Check that the output is `Example task title`.
+
+| Group | Classes with `builder()` |
+| --- | --- |
+| Entity | `Task`, `Report`, `User`, `RefreshToken` |
+| Request | `TaskRequestDto`, `ReportRequestDto`, `FilterReportDto`, `LoginRequest`, `RegisterRequest`, `RefreshRequest` |
+| Response | `TaskResponseDto`, `ReportResponseDto`, `TaskReportResponse`, `AuthResponse` |
+| Error model | `ErrorDetail` |
+
+Create fresh objects for each test. Builders do not run Bean Validation: omitted reference fields stay `null`, numeric primitives stay `0`, and booleans stay `false`. Set `enabled(true)` for an active user. `Role` is an enum; use `Role.USER` or `Role.ADMIN`. A `Report` has `workedTime`, while report request and response DTOs have `workTime`; the total in `TaskReportResponse` is a `Duration`.
+
+Import the project as a Maven project. If your IDE does not recognize `builder()`, enable annotation processing and reload the Maven dependencies.
+
 ## Run the seven tests
 
 Extract the ZIP into an empty directory. Open a terminal in the `task-manager` folder containing `pom.xml` and the Maven Wrapper.
@@ -72,9 +110,10 @@ A report starts at 23:59 and ends two minutes later at 00:01 the next day. This 
 @Test
 void acceptsIntervalAcrossMidnight() {
     var startOfInterval = LocalDateTime.of(2030, 5, 10, 23, 59);
-    var range = new FilterReportDto();
-    range.setFrom(startOfInterval);
-    range.setTo(startOfInterval.plusMinutes(2));
+    var range = FilterReportDto.builder()
+            .from(startOfInterval)
+            .to(startOfInterval.plusMinutes(2))
+            .build();
 
     assertTrue(validator.isValid(range, null));
 }
@@ -90,7 +129,7 @@ Write tests for the following five methods in the Task Manager starter project. 
 
 Use JUnit 5 and call the real methods directly. The tests must run without HTTP communication, MockMvc, a Spring context, `@SpringBootTest`, or a database. Pass Mockito mocks of only the required repositories through the constructors. Use a real `new CustomMapper()` to map tasks. Do not mock the service or the method under test.
 
-Each described test case must run independently. Use the fixed data from the tasks. You may use `ReflectionTestUtils.setField(...)` to prepare fields in `Task` and `TaskRequestDto`, which do not have setters; this does not start a Spring context.
+Each described test case must run independently. Use the fixed data from the tasks. Create entity, request, and response objects with `builder()...build()`, as shown above. Do not use reflection or `ReflectionTestUtils.setField(...)`.
 
 ### Task 1. Convert a role to an authority
 

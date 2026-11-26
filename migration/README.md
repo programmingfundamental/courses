@@ -101,8 +101,6 @@ No exhaustive compatibility claim is made for every historical heading fragment.
   `android_components_diagram.png`. Captions and descriptions remain; visible
   missing-file notices replace broken image tags. The original screenshots are
   still needed to restore the illustrations.
-- Kotlin Lab 9 refers to `lab9_strings` and `lab9_images.zip`, neither present in
-  the local repository. The existing warning remains; no resource was invented.
 - At migration time, partial translations remained in English OOP I's project-link caption,
   Internet Technologies `model-mapper.md` and `repository-sloi.md`, OOP I Collections,
   Kotlin Lab 4's image captions, and Training Practice II Lab 13. English course pages
