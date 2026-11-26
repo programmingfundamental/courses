@@ -4,6 +4,8 @@ import bg.tu_varna.sit.task_manager.model.validator.AfterMidnight;
 import bg.tu_varna.sit.task_manager.model.validator.ValidDateRange;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,6 +20,8 @@ import java.time.LocalTime;
 @Getter
 @Setter
 @ValidDateRange
+@Builder
+@AllArgsConstructor
 public class FilterReportDto {
     @NotNull(message = "Time is required")
     @AfterMidnight

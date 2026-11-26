@@ -22,9 +22,6 @@ class DateRangeValidatorTest {
     }
 
     private FilterReportDto rangeEndingAt(LocalDateTime end) {
-        var range = new FilterReportDto();
-        range.setFrom(start);
-        range.setTo(end);
-        return range;
+        return FilterReportDto.builder().from(start).to(end).build();
     }
 }

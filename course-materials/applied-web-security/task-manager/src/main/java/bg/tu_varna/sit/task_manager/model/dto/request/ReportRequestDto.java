@@ -4,6 +4,8 @@ import bg.tu_varna.sit.task_manager.model.validator.AfterMidnight;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.NonNull;
@@ -16,6 +18,8 @@ import java.time.LocalTime;
  */
 @NoArgsConstructor
 @Getter
+@Builder
+@AllArgsConstructor
 public class ReportRequestDto {
     @NotBlank(message = "Content is required") //Добавено в лабораторно упражнение 9
     @Size(min = 10, max = 2500, message = "Content must be at least 10 characters and no more than 2500") //Добавено в лабораторно упражнение 9

@@ -4,6 +4,8 @@ import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +16,8 @@ import java.time.LocalDateTime;
  */
 @NoArgsConstructor
 @Getter
+@Builder
+@AllArgsConstructor
 public class TaskRequestDto {
     @NotBlank(message = "Summary is required") //Добавено в лабораторно упражнение 9
     @Size(min = 10, max = 255, message = "The summary cannot be more than 255 characters and less than 10") //Добавено в лабораторно упражнение 9
