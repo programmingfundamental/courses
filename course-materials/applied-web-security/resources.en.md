@@ -1,8 +1,8 @@
 ## Bank Lab — a practice bank
 
-[Download Bank Lab (ZIP)](/courses/downloads/bank-demo.zip?v=2026-11-24)
+[Download Bank Lab (ZIP)](/courses/downloads/bank-demo.zip?v=2026-11-27)
 
-**Package version: 2026-11-24.** The archive includes a runnable Spring Boot application, source code, tests, instructions, and assignments in `tasks.md` and `tasks.en.md`. Run it locally with Java 17 or later and use fictional data for the SQL injection, stored XSS, and ROT5 demonstrations. The application interface is in Bulgarian.
+**Package version: 2026-11-27.** The archive includes a runnable Spring Boot application, source code, tests, instructions, and assignments in `tasks.md` and `tasks.en.md`. Run it locally with Java 17 or later and use fictional data for the SQL injection, stored XSS, and ROT5 demonstrations. The application interface is in Bulgarian.
 
 [Open Tasks — Bank Lab](/courses/en/applied-web-security/resources/zadachi/)
 
