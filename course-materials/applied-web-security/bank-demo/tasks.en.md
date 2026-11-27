@@ -30,6 +30,15 @@ Create a fictional `Спестовна` account. Adapt the worked script so that
 
 Choose two different ciphertexts from the initial records, using task 2 for access to other owners' accounts. Identify the algorithm from its visible format. Write a small Java program or script that accepts `ROT5:` followed by ten digits and recovers the fictional identity number. Reject an invalid prefix or length.
 
+Also verify decryption with [CyberChef online](https://gchq.github.io/CyberChef/), where you can select operations and configure their arguments:
+
+1. Search for `ROT13` in **Operations** and double-click it to add it to **Recipe**.
+2. Disable **Rotate lower case chars** and **Rotate upper case chars**. Enable **Rotate numbers** and set **Amount = 5**. CyberChef names the operation `ROT13`, but these settings apply ROT5 to digits.
+3. Paste only the ten ciphertext digits into **Input**, without the `ROT5:` prefix or spaces. Use fictional Bank Lab data.
+4. Click **BAKE!**, or leave **Auto Bake** enabled. Read the recovered identity number in **Output**, including leading zeros, and compare it with your own program's result.
+
+You can also open [CyberChef with ROT5 already configured](https://gchq.github.io/CyberChef/#recipe=ROT13(false,false,true,5)) and enter your chosen ciphertext in **Input**. Record the operation and settings in your report.
+
 Create two accounts with the same fictional identity number and compare their ciphertexts. Explain what equality reveals before decryption and whether hiding the prefix would provide reliable protection.
 
 **Expected:** decryption returns ten digits, preserves leading zeros, and rejects invalid formats. Identical input identity numbers have identical ciphertexts.
